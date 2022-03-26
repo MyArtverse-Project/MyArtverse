@@ -9,7 +9,10 @@
     "dev": "rimraf dist && tsc && node dist/index.js"
   },
   "dependencies": {
-    "fastify": "^3.27.4"
+    "@typegoose/typegoose": "^9.7.1",
+    "dotenv": "^16.0.0",
+    "fastify": "^3.27.4",
+    "mongoose": "^6.2.8"
   },
   "devDependencies": {
     "@faker-js/faker": "^6.0.0",
