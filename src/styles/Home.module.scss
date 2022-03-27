@@ -9,7 +9,7 @@
   column-gap: 2rem;
 } 
 
-#searchBoxWrapper {
+#search-box-wrapper {
   display: flex;
   align-items: center;
   column-gap: 1.75rem;
@@ -24,23 +24,31 @@
   font-size: 160%;
 }
 
-#searchBox {
+#search-box {
   padding: 1.2ex;
   border: none;
   border-radius: 7px;
   font-size: 105%;
-  background: rgba(#8f8f8f, 55%);
-  color: #fff;
+  background: rgba(#8f8f8f, 26%);
   font-weight: 700;
   transition: background 270ms ease-in-out;
   width: 100%;
 
+  &::placeholder {
+    color: rgba(#fff, 25%);
+    transition: color 270ms ease-in-out;
+  }
+
   &:focus-within {
-    background: rgba(#8f8f8f, 90%);
+    background: rgba(#8f8f8f, 44%);
+
+    &::placeholder {
+      color: #fff;
+    }
   }
 }
 
-#userActions {
+#user-actions {
   button {
     font-size: 105%;
     background: linear-gradient(256.61deg, #9F03FF -2.77%, #C05AFF 107.69%);
@@ -51,9 +59,8 @@
 
 /* Main content */
 
-#sonaMainShowcase {
+#fursona-main-showcase {
   max-width: 1400px;
   margin: 0 auto;
   padding: 0 1.5rem;
-
 }

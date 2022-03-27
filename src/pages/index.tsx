@@ -12,13 +12,13 @@ export default function Home() {
 
       <header>
         <div id={styles.wrapper}>
-          <div id={styles.searchBoxWrapper}>
+          <div id={styles["search-box-wrapper"]}>
             <strong className={styles.logo}>
               MyFursona
             </strong>
-            <input type="text" placeholder='Search Fursonas...' id={styles.searchBox} />
+            <input type="text" placeholder='Search for any fursonas...' id={styles["search-box"]} />
           </div>
-          <div id={styles.userActions}>
+          <div id={styles["user-actions"]}>
             {/* SVG logos here for logged in users */}
 
             {/* Display somemthing here for logged out users */}
@@ -28,25 +28,25 @@ export default function Home() {
       </header>
 
       <main>
-        <div id={styles.sonaMainShowcase}>
+        <div id={styles["fursona-main-showcase"]}>
           <section>
             <h2>🔥 Popular Fursonas</h2>
-            <div className="sonaGrid">
-              <div className="sonaItem"></div>
-              <div className="sonaItem"></div>
-              <div className="sonaItem"></div>
-              <div className="sonaItem"></div>
-              <div className="sonaItem"></div>
+            <div className="fursona-gallery-grid">
+              <div className="fursona-gallery-item"></div>
+              <div className="fursona-gallery-item"></div>
+              <div className="fursona-gallery-item"></div>
+              <div className="fursona-gallery-item"></div>
+              <div className="fursona-gallery-item"></div>
             </div>
           </section>
           <section>
             <h2>✨ New Fursonas</h2>
-            <div className="sonaGrid">
-              <div className="sonaItem"></div>
-              <div className="sonaItem"></div>
-              <div className="sonaItem"></div>
-              <div className="sonaItem"></div>
-              <div className="sonaItem"></div>
+            <div className="fursona-gallery-grid">
+              <div className="fursona-gallery-item"></div>
+              <div className="fursona-gallery-item"></div>
+              <div className="fursona-gallery-item"></div>
+              <div className="fursona-gallery-item"></div>
+              <div className="fursona-gallery-item"></div>
             </div>
           </section>
         </div>
