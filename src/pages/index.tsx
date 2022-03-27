@@ -16,7 +16,9 @@ export default function Home() {
             <strong className={styles.logo}>
               MyFursona
             </strong>
-            <input type="text" placeholder='Search for any fursonas...' id={styles["search-box"]} />
+            <div id={styles["search-box"]}>
+              <input type="text" placeholder='Search for any fursonas...'  />
+            </div>
           </div>
           <div id={styles["user-actions"]}>
             {/* SVG logos here for logged in users */}
@@ -30,7 +32,7 @@ export default function Home() {
       <main>
         <div id={styles["fursona-main-showcase"]}>
           <section>
-            <h2>🔥 Popular Fursonas</h2>
+            <h2 id={styles['label-popular']}>Popular Fursonas</h2>
             <div className="fursona-gallery-grid">
               <div className="fursona-gallery-item"></div>
               <div className="fursona-gallery-item"></div>
@@ -40,7 +42,7 @@ export default function Home() {
             </div>
           </section>
           <section>
-            <h2>✨ New Fursonas</h2>
+            <h2 id={styles['label-new']}>New Fursonas</h2>
             <div className="fursona-gallery-grid">
               <div className="fursona-gallery-item"></div>
               <div className="fursona-gallery-item"></div>
