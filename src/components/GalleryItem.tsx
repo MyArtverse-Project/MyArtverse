@@ -14,7 +14,7 @@ export default function GalleryItem({
   gradientCSS,
   name,
   species,
-  primaryColor
+  primaryColor = black
 }: IGalleryItemProps) {
   return (
     <div
