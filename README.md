@@ -4,7 +4,7 @@
 
 ## About this project
 
-*MyFursona* is an open source project where users can manage their artworks, info (such as biography and interests), and lore about their sona. This is being built using Fastify, Next.js, TypeScript, Plain o' CSS (No Frameworks, Using SCSS) and MongoDB.
+_MyFursona_ is an open source project where users can manage their artworks, info (such as biography and interests), and lore about their sona. This is being built using Fastify, Next.js, TypeScript, Plain o' CSS (No Frameworks, Using SCSS) and MongoDB.
 
 ## Design
 
@@ -16,6 +16,6 @@ Here's our **Work In Progress** design of the website: https://www.figma.com/fil
 
 **Mozza (Also Known as Solixity)**: Back-end Dev/Co-Founder
 
-**Skepfusky**: Front-end Contributor 
+**Skepfusky**: Front-end Contributor
 
 **Your name could be here: Our future contributor!**
