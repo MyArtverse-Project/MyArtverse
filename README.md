@@ -16,4 +16,6 @@ Here's our **Work In Progress** design of the website: https://www.figma.com/fil
 
 **Mozza (Also Known as Solixity)**: Back-end Dev/Co-Founder
 
+**Skepfusky**: Front-end Contributor 
+
 **Your name could be here: Our future contributor!**
