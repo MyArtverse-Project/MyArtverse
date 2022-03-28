@@ -1,7 +1,5 @@
 /* Header stuff */
 #wrapper {
-  max-width: 1400px;
-  margin: 0 auto;
   display: flex;
   align-items: center;
   justify-content: space-between;
@@ -17,6 +15,7 @@
 }
 
 .logo {
+  // TODO: Based on Fursona colors when logged in and have a registered fursona
   background: linear-gradient(145deg, #AD00FF, #FF00F5, #FF5C00);
   background-clip: text;
   -webkit-background-clip: text;
@@ -47,7 +46,6 @@
 
   input {
     border-radius: 9px;
-
     width: 100%;
     padding: 1.2ex;
     border: none;
@@ -77,10 +75,11 @@
     background: linear-gradient(256.61deg, #9F03FF -2.77%, #C05AFF 107.69%);
     border-radius: 6px;
     padding: 1.2ex 4ex;
-    transition: filter 150ms ease-in-out;    
-    
+    transition: all 200ms ease-in-out;    
     &:hover {
-      filter: brightness(125%);
+      // Adds cool glow effect to the button
+     box-shadow: 0px 0px 12px #AD00FF;
+      // filter: brightness(125%);
     }
   }
 }
@@ -88,9 +87,7 @@
 /* Main content */
 
 #fursona-main-showcase {
-  max-width: 1400px;
-  margin: 0 auto;
-  padding: 0 1.5rem;
+ margin: 4rem 0 0 0; 
 }
 
 #label {
