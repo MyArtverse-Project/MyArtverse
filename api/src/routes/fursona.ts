@@ -6,7 +6,7 @@ const fursonaRoute = (app: FastifyInstance, _opts: any, done: () => void) => {
   app.get("/hot", async (_request, reply) => {
     const sona = generateFursona();
     reply.send({
-      hotSonas: sona,
+      hotSonas: sona
     });
     done();
   });
@@ -25,7 +25,7 @@ const generateFursona = () => {
       id: i,
       name: faker.name.firstName(),
       likes: randomInt(10000),
-      profilePic: faker.image.avatar(),
+      profilePic: faker.image.avatar()
     });
   }
   return fursona;
