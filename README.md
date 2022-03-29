@@ -1,6 +1,7 @@
 # MyFursona
 
-![Design of the project](https://cdn.discordapp.com/attachments/928630858934530128/957364494147928084/Group_11.png)
+![Redesign by Jaker](https://user-images.githubusercontent.com/86149507/160653487-3b7b162a-8f1d-4d1e-8ddf-bd4eeec04189.png)
+
 
 ## About this project
 
