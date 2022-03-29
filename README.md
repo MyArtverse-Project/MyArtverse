@@ -18,4 +18,6 @@ Here's our **Work In Progress** design of the website: https://www.figma.com/fil
 
 **Skepfusky**: Front-end Contributor
 
+**Jaker**: Designer
+
 **Your name could be here: Our future contributor!**
