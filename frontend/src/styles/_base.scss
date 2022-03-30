@@ -27,21 +27,26 @@ input[type="text"] {
   max-width: 1400px;
   margin: 0 auto;
   padding: 0 1.5rem;
+
   @media only screen and (max-width: 1280px) {
     max-width: 1024px;
     width: 100%;
     margin: 0 auto;
   }
+
   @media only screen and (max-width: 1024px) {
     max-width: 768px;
     width: 100%;
     margin: 0 auto;
   }
+
   @media only screen and (max-width: 640px) {
     width: 100vw;
+
     h1 {
       font-size: 32px !important;
     }
+    
     p {
       font-size: 16px !important;
     }

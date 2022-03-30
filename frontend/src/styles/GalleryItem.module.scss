@@ -1,4 +1,3 @@
-// 
 #galleryItem {
     display: flex;
     border-radius: 15px;
@@ -7,10 +6,12 @@
     justify-content: center;
     width: 100%;
     height: 200px;
+
     img {
         width:110px;
         border-radius: 20px;
     }
+    
     h2 {
         font-size: 1.5rem;
         font-weight: 800;

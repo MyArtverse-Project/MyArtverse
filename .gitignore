@@ -31,5 +31,8 @@ dist
 # local env files
 .env*.local
 
+# next
+*/.next
+
 # vercel
 .vercel
