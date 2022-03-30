@@ -1,4 +1,4 @@
-import Head from "next/head";
+import Link from "next/link";
 import Container from "../components/Container";
 import GalleryItem from "../components/GalleryItem";
 import styles from "../styles/Home.module.scss";
@@ -10,7 +10,9 @@ export default function Home() {
         <header>
           <div id={styles.wrapper}>
             <div id={styles["search-box-wrapper"]}>
-              <strong className={styles.logo}>MyFursona</strong>
+              <strong className={styles.logo}>
+                <Link href="/">MyFursona</Link>
+              </strong>
               <div id={styles["search-box"]}>
                 <input type="text" placeholder="Search for any fursonas..." />
               </div>
