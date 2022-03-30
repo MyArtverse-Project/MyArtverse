@@ -5,18 +5,18 @@
 /.pnp
 .pnp.js
 
-dist
-.env
+*/dist
+*/.env
 
 # testing
 /coverage
 
 # next.js
-/.next/
-/out/
+*/.next/
+*/out/
 
 # production
-/build
+*/build
 
 # misc
 .DS_Store
@@ -31,8 +31,5 @@ dist
 # local env files
 .env*.local
 
-# next
-*/.next
-
 # vercel
-.vercel
+*/.vercel
