@@ -1,6 +1,7 @@
 # MyFursona
 
-![Design of the project](https://cdn.discordapp.com/attachments/928630858934530128/957364494147928084/Group_11.png)
+![Redesign by Jaker](https://user-images.githubusercontent.com/86149507/160653487-3b7b162a-8f1d-4d1e-8ddf-bd4eeec04189.png)
+
 
 ## About this project
 
@@ -17,5 +18,7 @@ Here's our **Work In Progress** design of the website: https://www.figma.com/fil
 **Mozza (Also Known as Solixity)**: Back-end Dev/Co-Founder
 
 **Skepfusky**: Front-end Contributor
+
+**Jaker**: Designer
 
 **Your name could be here: Our future contributor!**
