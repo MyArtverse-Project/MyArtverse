@@ -1,0 +1,13 @@
+.fursona-gallery-grid {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 20px;
+}
+
+.fursona-gallery-item {
+  background: rgba(gray, 24%);
+  border-radius: 15px;
+  height: 200px;
+  width: auto;
+}
+
