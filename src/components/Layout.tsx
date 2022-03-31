@@ -9,7 +9,7 @@ export default function Layout({ children }) {
         <title>MyFursona</title>
         <meta
           name="description"
-          content="A Place where user's can manage their fursonas!"
+          content="A place where users can manage their fursonas!"
         />
         <link rel="icon" href="/favicon.ico" />
       </Head>

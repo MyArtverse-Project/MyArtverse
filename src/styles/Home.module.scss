@@ -1,23 +1,113 @@
 /* Header stuff */
+#wrapper {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 1.5rem 1.6rem;
+  column-gap: 2rem;
+}
 
+#search-box-wrapper {
+  display: flex;
+  align-items: center;
+  column-gap: 1.75rem;
+  width: 100%;
+}
+
+.logo {
+  // TODO: Based on Fursona colors when logged in and have a registered fursona
+  // background: linear-gradient(145deg, #ad00ff, #ff00f5, #ff5c00);
+
+  // Show a blank white color when a user is not logged in
+  background-color: white;
+  background-clip: text;
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: #0000;
+  font-size: 160%;
+}
+
+#search-box {
+  width: 100%;
+  position: relative;
+  border-radius: 9px;
+  overflow: hidden;
+
+  &::before {
+    content: "";
+    display: block;
+    position: absolute;
+    height: 2px;
+    bottom: 0;
+    left: 50%;
+    width: 0%;
+    background: linear-gradient(145deg, #ff00f5, #ff5c00);
+    transition: width 270ms ease, left 270ms ease;
+  }
+
+  &:focus-within::before {
+    width: 100%;
+    left: 0%;
+  }
+
+  input {
+    border-radius: 9px;
+    width: 100%;
+    padding: 1.2ex;
+    border: none;
+    font-size: 105%;
+    background: rgba(#8f8f8f, 26%);
+    font-weight: 700;
+    transition: background 270ms ease-in-out;
+
+    &::placeholder {
+      color: rgba(#fff, 25%);
+      transition: color 270ms ease-in-out;
+    }
+
+    &:focus-within {
+      background: rgba(#8f8f8f, 44%);
+
+      &::placeholder {
+        color: #fff;
+      }
+    }
+  }
+}
+
+#user-actions {
+  button {
+    font-size: 105%;
+    background: linear-gradient(256.61deg, #9f03ff -2.77%, #c05aff 107.69%);
+    border-radius: 6px;
+    padding: 1.2ex 4ex;
+    transition: all 200ms ease-in-out;
+    
+    &:hover {
+      // Adds cool glow effect to the button
+      box-shadow: 0px 0px 12px #ad00ff;
+    }
+  }
+}
 
 /* Main content */
 
 #fursona-main-showcase {
-  margin: 4rem 0 0 0;
+  margin-top: 4rem;
 }
 
 #label {
-  &-popular::before {
-    content: "🔥";
+  &Popular::before {
+    content: "💖";
+    padding-right: 5px;
   }
 
-  &-new::before {
+  &New::before {
     content: "✨";
+    padding-right: 5px;
   }
 
-  &-popular,
-  &-new {
+  &Popular,
+  &New {
     position: relative;
     width: max-content;
     z-index: 1;
@@ -31,7 +121,7 @@
       left: 0;
       bottom: 0;
       right: -6px;
-      background: linear-gradient(145deg, #ff00f5, #ff5c00);
+      background: linear-gradient(145deg, rgb(255, 0, 245, 0.55), rgb(255, 92, 0, 0.55));
       height: 12px;
       border-radius: 7px;
     }

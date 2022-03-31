@@ -1,3 +1,9 @@
+*, *::before, *::after {
+  box-sizing: border-box;
+  padding: 0;
+  margin: 0;
+}
+
 html,
 body {
   font-family: -apple-system, BlinkMacSystemFont, Segoe UI, Roboto, Oxygen,
@@ -11,12 +17,6 @@ a {
   text-decoration: none;
 }
 
-* {
-  box-sizing: border-box;
-  padding: 0;
-  margin: 0;
-}
-
 button,
 input[type="text"] {
   border: none;
@@ -27,27 +27,28 @@ input[type="text"] {
   max-width: 1400px;
   margin: 0 auto;
   padding: 0 1.5rem;
+
   @media only screen and (max-width: 1280px) {
     max-width: 1024px;
     width: 100%;
     margin: 0 auto;
   }
+
   @media only screen and (max-width: 1024px) {
     max-width: 768px;
     width: 100%;
     margin: 0 auto;
   }
+
   @media only screen and (max-width: 640px) {
     width: 100vw;
+
     h1 {
       font-size: 32px !important;
-    }
-    p {
-      font-size: 16px !important;
     }
   }
 
   p {
-    font-size: 16px !important;
+    font-size: 15px;
   }
 }
