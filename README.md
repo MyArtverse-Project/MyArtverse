@@ -1,21 +1,20 @@
 # MyFursona
 
-![Design of the project](https://cdn.discordapp.com/attachments/928630858934530128/957364494147928084/Group_11.png)
+![UI Redesign by Jaker](https://user-images.githubusercontent.com/86149507/160653487-3b7b162a-8f1d-4d1e-8ddf-bd4eeec04189.png)
 
 ## About this project
 
-_MyFursona_ is an open source project where users can manage their artworks, info (such as biography and interests), and lore about their sona. This is being built using Fastify, Next.js, TypeScript, Plain o' CSS (No Frameworks, Using SCSS) and MongoDB.
+_MyFursona_ is an open source project where users can manage their artworks, info (such as biography and interests), and lore about their sona. This is being built using Fastify, Next.js with TypeScript, Plain o' CSS (No Frameworks, using SCSS) and MongoDB.
 
 ## Design
 
-Here's our **Work In Progress** design of the website: https://www.figma.com/file/3dd2FKkSSNCbPBYwhOLhTo/Untitled?node-id=40%3A20
+The website's design was initally designed by Ozzy, but it was improved by Skep & Jaker;
+it's still work in progress and the Figma design can be seen [here](https://www.figma.com/file/3dd2FKkSSNCbPBYwhOLhTo/MyFursona?node-id=0%3A1)!
 
 ## Our Devs
 
-**Ozzy (Also Known as Renzo or Vulpo)**: Front-end Dev/Co-Founder
-
-**Mozza (Also Known as Solixity)**: Back-end Dev/Co-Founder
-
-**Skepfusky**: Front-end Contributor
-
-**Your name could be here: Our future contributor!**
+- **Ozzy (Also Known as Renzo or Vulpo)**: Front-end Dev/Co-Founder
+- **Mozza (Also Known as Solixity)**: Back-end Dev/Co-Founder
+- **skepfusky**: Front-end Contributor & Designer
+- **Jaker**: Designer
+- **Your name could be here: Our future contributor!**

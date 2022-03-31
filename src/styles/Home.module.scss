@@ -16,7 +16,10 @@
 
 .logo {
   // TODO: Based on Fursona colors when logged in and have a registered fursona
-  background: linear-gradient(145deg, #ad00ff, #ff00f5, #ff5c00);
+  // background: linear-gradient(145deg, #ad00ff, #ff00f5, #ff5c00);
+
+  // Show a blank white color when a user is not logged in
+  background-color: white;
   background-clip: text;
   -webkit-background-clip: text;
   -webkit-text-fill-color: #0000;
@@ -33,15 +36,17 @@
     content: "";
     display: block;
     position: absolute;
-    bottom: 0;
     height: 2px;
+    bottom: 0;
+    left: 50%;
     width: 0%;
     background: linear-gradient(145deg, #ff00f5, #ff5c00);
-    transition: width 270ms ease;
+    transition: width 270ms ease, left 270ms ease;
   }
 
   &:focus-within::before {
     width: 100%;
+    left: 0%;
   }
 
   input {
@@ -76,10 +81,10 @@
     border-radius: 6px;
     padding: 1.2ex 4ex;
     transition: all 200ms ease-in-out;
+    
     &:hover {
       // Adds cool glow effect to the button
       box-shadow: 0px 0px 12px #ad00ff;
-      // filter: brightness(125%);
     }
   }
 }
@@ -87,24 +92,27 @@
 /* Main content */
 
 #fursona-main-showcase {
-  margin: 4rem 0 0 0;
+  margin-top: 4rem;
 }
 
 #label {
-  &-popular::before {
-    content: "🔥";
+  &Popular::before {
+    content: "💖";
+    padding-right: 5px;
   }
 
-  &-new::before {
+  &New::before {
     content: "✨";
+    padding-right: 5px;
   }
 
-  &-popular,
-  &-new {
+  &Popular,
+  &New {
     position: relative;
     width: max-content;
     z-index: 1;
     margin: 3.5rem 0 2rem 0;
+
     &::after {
       content: "";
       display: block;
@@ -113,7 +121,7 @@
       left: 0;
       bottom: 0;
       right: -6px;
-      background: linear-gradient(145deg, #ff00f5, #ff5c00);
+      background: linear-gradient(145deg, rgb(255, 0, 245, 0.55), rgb(255, 92, 0, 0.55));
       height: 12px;
       border-radius: 7px;
     }

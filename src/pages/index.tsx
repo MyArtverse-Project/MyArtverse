@@ -1,4 +1,4 @@
-import Head from "next/head";
+import Link from "next/link";
 import Container from "../components/Container";
 import GalleryItem from "../components/GalleryItem";
 import styles from "../styles/Home.module.scss";
@@ -16,7 +16,9 @@ export default function Home() {
         <header>
           <div id={styles.wrapper}>
             <div id={styles["search-box-wrapper"]}>
-              <strong className={styles.logo}>MyFursona</strong>
+              <strong className={styles.logo}>
+                <Link href="/">MyFursona</Link>
+              </strong>
               <div id={styles["search-box"]}>
                 <input type="text" placeholder="Search for any fursonas..." />
               </div>
@@ -33,7 +35,7 @@ export default function Home() {
         <main>
           <div id={styles["fursona-main-showcase"]}>
             <section>
-              <h2 id={styles["label-popular"]}>Popular Fursonas</h2>
+              <h1 id={styles.labelPopular}>Popular Fursonas</h1>
               <div className="fursona-gallery-grid">
                 {/*{data.map(sona => (*/}
                 {/*    <GalleryItem*/}
@@ -45,7 +47,6 @@ export default function Home() {
                 {/*    />*/}
                 {/*))}*/}
                 {/* TODO: Convert gallery items into components */}
-
                 <div className="fursona-gallery-item"></div>
                 <div className="fursona-gallery-item"></div>
                 <div className="fursona-gallery-item"></div>
@@ -54,7 +55,7 @@ export default function Home() {
               </div>
             </section>
             <section>
-              <h2 id={styles["label-new"]}>New Fursonas</h2>
+              <h1 id={styles.labelNew}>New Fursonas</h1>
               <div className="fursona-gallery-grid">
                 {/* TODO: Convert gallery items into components */}
                 <div className="fursona-gallery-item"></div>
@@ -69,5 +70,5 @@ export default function Home() {
         <footer></footer>
       </Container>
     </div>
-  );
+  )
 }
