@@ -40,11 +40,11 @@ export default function GalleryItem({
 
 export function LoadingGalleryItem() {
     return (
-      <div id={styles["loadingGalleryItem"]}>
-        <div id={styles["loadingImage"]} style={{ background: `` }}></div>
-        <div id={styles["text"]}></div>
-        <div id={styles["textSpecies"]}></div>
-      </div>
+        <div id={styles["loadingGalleryItem"]}>
+            <div id={styles["loadingImage"]} style={{background: ``}}></div>
+            <div id={styles["text"]}></div>
+            <div id={styles["textSpecies"]}></div>
+        </div>
     )
 }
 

@@ -40,11 +40,14 @@ export default function Home() {
                             <h2 id={styles["label-new"]}>New Fursonas</h2>
                             <div className="fursona-gallery-grid">
                                 {/* TODO: Convert gallery items into components */}
-                                <div id={styles["loadingGalleryItem"]}></div>
-                                <div id={styles["loadingGalleryItem"]}></div>
-                                <div id={styles["loadingGalleryItem"]}></div>
-                                <div id={styles["loadingGalleryItem"]}></div>
-                                <div id={styles["loadingGalleryItem"]}></div>
+                                <LoadingGalleryItem/>
+                                <LoadingGalleryItem/>
+                                <LoadingGalleryItem/>
+                                <LoadingGalleryItem/>
+                                <LoadingGalleryItem/>
+                                <LoadingGalleryItem/>
+                                <LoadingGalleryItem/>
+                                <LoadingGalleryItem/>
                             </div>
                         </section>
                     </div>
