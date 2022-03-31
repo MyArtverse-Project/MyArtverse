@@ -1,7 +1,7 @@
 .fursona-gallery-grid {
-  display: grid;
-  grid-template-columns: repeat(auto-fill, minmax(240px, 1fr));
-  gap: 1rem;
+  display: flex;
+  flex-wrap: wrap;
+  gap: 20px;
 }
 
 .fursona-gallery-item {
@@ -10,3 +10,4 @@
   height: 200px;
   width: auto;
 }
+
