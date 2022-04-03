@@ -1,8 +1,8 @@
-import Link from "next/link"
-import Container from "../components/Container"
-import GalleryItem, { LoadingGalleryItem } from "../components/GalleryItem"
-import styles from "../styles/Home.module.scss"
-import { useEffect, useState } from "react"
+import Link from "next/link";
+import Container from "../components/Container";
+import GalleryItem, { LoadingGalleryItem } from "../components/GalleryItem";
+import styles from "../styles/Home.module.scss";
+import { useEffect, useState } from "react";
 
 export default function Home() {
   const [data, setData] = useState(null)
@@ -56,9 +56,6 @@ export default function Home() {
           </section>
         </div>
       </main>
-      <footer>
-        &copy; 2022 MyFursona
-      </footer>
     </Container>
   )
 }

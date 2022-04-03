@@ -1,4 +1,5 @@
-import React from "react"
+import { FontAwesomeIcon } from "@fortawesome/react-fontawesome"
+import { faMagnifyingGlass } from "@fortawesome/free-solid-svg-icons"
 import styles from "../styles/Header.module.scss"
 
 export default function Header() {
@@ -8,6 +9,7 @@ export default function Header() {
         <strong id={styles["logo"]}>MyFursona</strong>
         <div id={styles["search-box-wrapper"]}>
           <div id={styles["search-box"]}>
+            <FontAwesomeIcon icon={faMagnifyingGlass} />
             <input type="search" placeholder="Search fursonas..." />
           </div>
         </div>
