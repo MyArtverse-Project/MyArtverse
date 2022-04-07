@@ -18,3 +18,7 @@ it's still work in progress and the Figma design can be seen [here](https://www.
 - **skepfusky**: Front-end Contributor & Designer
 - **Jaker**: Designer
 - **Your name could be here: Our future contributor!**
+
+## Contributing
+
+Your contributions are very appreciated. Before you make changes contact Ozzy/Rezno/Vulpo via Revolt (@OzzyTheDev), Email(vulpothedev@gmail.com), Discord(OzzyTheDev#1312)
