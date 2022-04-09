@@ -11,7 +11,7 @@ export default async function handler(req: NextApiRequest, res: NextApiResponse)
         fursonaUUID: "123456789",
         name: faker.name.firstName(),
         bio: "I give cuddles and stuffies",
-        info: "I cuddled vulpo last night. He is very floofy :3",
+        info: "I cuddled Vulpo last night... He is very, very floofy :3",
         artworksCDNLinks: [faker.image.avatar()]
     })
     res.send(newFursona)

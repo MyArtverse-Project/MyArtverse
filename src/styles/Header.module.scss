@@ -1,10 +1,4 @@
-#wrapper {
-  display: flex;
-  align-items: center;
-  justify-content: space-evenly;
-  padding: 1.5rem 1.6rem;
-  column-gap: 2rem;
-}
+@use '../styles/mixins' as *;
 
 #search-box-wrapper {
   display: flex;
@@ -78,23 +72,11 @@
     &:focus-within::placeholder {
       color: #fff;
     }
-
-    
   }
 }
 
 #user-actions {
   button {
-    font-size: 105%;
-    background: linear-gradient(256.61deg, #9f03ff -2.77%, #c05aff 107.69%);
-    border-radius: 6px;
-    padding: 1.2ex 4ex;
-    transition: all 200ms ease-in-out;
-
-    &:hover {
-      // Adds cool glow effect to the button
-      box-shadow: 0px 0px 12px #ad00ff;
-      // filter: brightness(125%);
-    }
+    @include appButtonStyles();
   }
 }

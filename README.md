@@ -4,7 +4,7 @@
 
 ## About this project
 
-_MyFursona_ is an open source project where users can manage their artworks, info (such as biography and interests), and lore about their sona. This is being built using Fastify, Next.js with TypeScript, Plain o' CSS (No Frameworks, using SCSS) and MongoDB.
+_MyFursona_ is an open source project where users can manage their artworks, info (such as biography and interests), and lore about their sona. This is being built using Fastify, Next.js with TypeScript, SCSS, and MongoDB.
 
 ## Design
 

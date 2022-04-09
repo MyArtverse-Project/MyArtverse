@@ -1,13 +1,17 @@
+@use 'mixins' as *;
+
 .fursona-gallery-grid {
-  display: flex;
-  flex-wrap: wrap;
-  gap: 20px;
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(240px, 1fr));
+  gap: 14px;
 }
 
-.fursona-gallery-item {
-  background: rgba(gray, 24%);
-  border-radius: 15px;
-  height: 200px;
-  width: auto;
+header #wrapper {
+  @include headerFooterLayout();
+  justify-content: space-evenly;
+  column-gap: 2rem;
 }
 
+footer #wrapper {
+  @include headerFooterLayout();
+}

@@ -1,0 +1,26 @@
+@mixin headerFooterLayout {
+  display: flex;
+  align-items: center;
+  margin: 0 auto;
+  max-width: 1400px;
+  padding: 1.5rem 1.6rem;
+}
+
+// Purple buttons and links
+@mixin appButtonStyles {
+  font-size: 105%;
+  background: linear-gradient(256.61deg, #9f03ff -2.77%, #c05aff 107.69%);
+  border-radius: 6px;
+  padding: 1.2ex 4ex;
+  transition: all 200ms ease-in-out;
+
+  &:hover {
+    box-shadow: 0 0 12px #ad00ff;
+  }
+}
+
+@mixin appLinkStyles {
+  background: linear-gradient(256.61deg, #9f03ff -2.77%, #c05aff 107.69%);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: #0000;
+}

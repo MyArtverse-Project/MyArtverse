@@ -1,12 +1,17 @@
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome"
 import { faMagnifyingGlass } from "@fortawesome/free-solid-svg-icons"
 import styles from "../styles/Header.module.scss"
+import Link from "next/link"
 
 export default function Header() {
   return (
     <header>
-      <div id={styles["wrapper"]}>
-        <strong id={styles["logo"]}>MyFursona</strong>
+      <div id="wrapper">
+        <Link href="/">
+          <a>
+            <strong id={styles["logo"]}>MyFursona</strong>
+          </a>
+        </Link>
         <div id={styles["search-box-wrapper"]}>
           <div id={styles["search-box"]}>
             <FontAwesomeIcon icon={faMagnifyingGlass} />
@@ -14,10 +19,10 @@ export default function Header() {
           </div>
         </div>
         <div id={styles["user-actions"]}>
-          {/* SVG logos here for logged in users */}
-
-          {/* Display somemthing here for logged out users */}
+          {/* Display a log in button for logged out users */}
           <button>Login</button>
+
+          {/* Otherwise, display SVG logos here for logged in users */}
         </div>
       </div>
     </header>

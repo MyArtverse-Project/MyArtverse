@@ -1,3 +1,9 @@
 export default function Footer() {
-  return <footer>&copy; 2022 MyFursona</footer>
+  return (
+    <footer>
+      <div id="wrapper">
+        &copy; 2022 MyFursona
+      </div>
+    </footer>
+  )
 }
