@@ -1,3 +1,5 @@
+@use '../styles/mixins' as *;
+
 #galleryItem {
   display: flex;
   border-radius: var(--gallery-r-item);
@@ -34,14 +36,6 @@
 
 // loading
 #loadingGalleryItem {
-  --bg-skeleton: linear-gradient(
-    110deg,
-    rgba(54, 54, 54, 0.52) 0%,
-    rgba(54, 54, 54, 0.52) 35%,
-    rgba(120, 120, 120, 0.52) 50%,
-    rgba(54, 54, 54, 0.52) 65%,
-    rgba(54, 54, 54, 0.52) 100%
-  );
   display: flex;
   margin: 0 auto;
   flex-direction: column;
@@ -50,8 +44,7 @@
   border-radius: var(--gallery-r-item);
   height: 225px;
   width: 240px;
-  animation: skeletonBg 1.3s ease-in-out infinite alternate;
-  background: rgba(gray, 50%);
+  @include skeletonPulse();
 
   #loadingImage,
   #text,
@@ -63,9 +56,8 @@
     width: 100px;
     max-height: 100px;
     height: 100px;
-    border-radius: var(--gallery-r-img);
-    background-size: 550%;
-    animation: skeletionSwipe 1.3s linear infinite;
+    @include skeletonSwipe(550px);
+    border-radius: var(--gallery-r-item);
   }
 
   #text {
@@ -74,10 +66,8 @@
     width: 100px;
     font-weight: 700;
     margin: 10px 0;
-    background: var(--bg-skeleton);
     border-radius: var(--gallery-r-item);
-    background-size: 400%;
-    animation: skeletionSwipe 1.3s linear infinite;
+    @include skeletonSwipe(400px);
   }
 
   #textSpecies {
@@ -85,27 +75,9 @@
     height: 20px;
     width: 75px;
     font-weight: 700;
-    background: var(--bg-skeleton);
     border-radius: var(--gallery-r-item);
-    background-size: 400%;
-    animation: skeletionSwipe 1.3s linear infinite;
+    @include skeletonSwipe(400px);
   }
 }
 
-@keyframes skeletonBg {
-  0% {
-    background: rgba(gray, 40%);
-  }
-  100% {
-    background: rgba(gray, 75%);
-  }
-}
 
-@keyframes skeletionSwipe {
-  0% {
-    background-position: left;
-  }
-  100% {
-    background-position: right;
-  }
-}

@@ -15,7 +15,12 @@ export default function Header() {
         <div id={styles["search-box-wrapper"]}>
           <div id={styles["search-box"]}>
             <FontAwesomeIcon icon={faMagnifyingGlass} />
-            <input type="search" placeholder="Search fursonas..." />
+            <input 
+              type="search"
+              placeholder="Search fursonas..."
+              // TODO: Execute some function here
+              onKeyDown={(e) => e.key === "Enter" && e.preventDefault()}
+            />
           </div>
         </div>
         <div id={styles["user-actions"]}>

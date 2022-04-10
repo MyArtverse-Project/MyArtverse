@@ -14,6 +14,10 @@
   -webkit-text-fill-color: #0000;
   font-size: 160%;
   font-weight: 800;
+
+  @media only screen and (max-width: 768px) {
+    display: none;
+  }
 }
 
 #search-box {

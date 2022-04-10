@@ -10,6 +10,9 @@ header #wrapper {
   @include headerFooterLayout();
   justify-content: space-evenly;
   column-gap: 2rem;
+  @media only screen and (max-width: 768px) {
+    justify-content: space-between;
+  }
 }
 
 footer #wrapper {

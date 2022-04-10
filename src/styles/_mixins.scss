@@ -24,3 +24,33 @@
   -webkit-background-clip: text;
   -webkit-text-fill-color: #0000;
 }
+
+// Skeleton styles
+@mixin skeletonPulse {
+  animation: skeletonPulse 1.3s ease-in-out infinite alternate;
+  background: rgba(gray, 50%);
+
+  @keyframes skeletonPulse {
+    0% {
+      background: rgba(gray, 40%);
+    }
+    100% {
+      background: rgba(gray, 75%);
+    }
+  }
+}
+
+@mixin skeletonSwipe($bg-size: 400px) {
+  background: var(--bg-skeleton);
+  animation: skeletionSwipe 1.3s linear infinite;
+  background-size: $bg-size;
+
+  @keyframes skeletionSwipe {
+    0% {
+      background-position: left;
+    }
+    100% {
+      background-position: right;
+    }
+  }
+}
