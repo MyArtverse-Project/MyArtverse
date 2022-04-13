@@ -1,4 +1,12 @@
 :root {
   --gallery-r-item: 15px;
   --gallery-r-img: 20px;
+  --bg-skeleton: linear-gradient(
+    110deg,
+    rgba(54, 54, 54, 0.52) 0%,
+    rgba(54, 54, 54, 0.52) 35%,
+    rgba(120, 120, 120, 0.52) 50%,
+    rgba(54, 54, 54, 0.52) 65%,
+    rgba(54, 54, 54, 0.52) 100%
+  );
 }

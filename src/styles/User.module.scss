@@ -1,0 +1,59 @@
+@use '../styles/mixins' as *;
+
+#user-container {
+  display: flex;
+  padding: 2ex;
+  border-radius: 6px;
+  column-gap: 1.25rem;
+  @include skeletonPulse();
+}
+
+#user-profile {
+  display: flex;
+  flex-direction: column;
+  row-gap: 1rem;
+}
+
+#user-info {
+  width: 100%;
+  display: flex;
+  flex-direction: column;
+  row-gap: 0.66rem;
+}
+
+#skeleton {
+  &-avatar {
+    width: 200px;
+    height: 200px;
+    border-radius: 7px;
+    @include skeletonSwipe(1300px);
+  }
+
+  &-social {
+    width: 200px;
+    height: 35px;
+    border-radius: 7px;
+    @include skeletonSwipe(1300px);
+  }
+
+  &-name {
+    width: 200px;
+    height: 50px;
+    border-radius: 7px;
+    @include skeletonSwipe(800px);
+  }
+
+  &-species {
+    width: 400px;
+    height: 25px;
+    border-radius: 7px;
+    @include skeletonSwipe(1100px);
+  }
+
+  &-bio {
+    width: 500px;
+    height: 70px;
+    border-radius: 7px;
+    @include skeletonSwipe(1300px);
+  }
+}

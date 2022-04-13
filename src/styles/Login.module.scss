@@ -1,0 +1,55 @@
+@use '../styles/mixins' as *;
+
+.login-form-wrapper {
+  display: flex;
+  align-items: center;
+  flex-direction: column;
+  row-gap: 1.5rem;
+  user-select: none;
+}
+
+.login-form {
+  display: flex;
+  flex-direction: column;
+  row-gap: 0.44rem;
+  width: clamp(15rem, 100%, 40rem);
+
+  input[type="email"],
+  input[type="password"] {
+    width: 100%;
+    background: rgba(255, 255, 255, 0.1);
+    color: #f5f5f5;
+    border: none;
+    padding: 1.5ex;
+    border-radius: 6px;
+  }
+
+  button {
+    @include appButtonStyles();
+  }
+}
+
+.login-form-links a {
+  @include appLinkStyles();
+}
+
+.login-ext {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  row-gap: 0.66rem;
+
+  a {
+    border-radius: 4px;
+    color: #202020;
+    background: #f5f5f5;
+    text-align: center;
+    padding: 1.2ex 4ex;
+    transition: color 200ms ease-in-out;
+  }
+}
+
+.login-signup a {
+  @include appLinkStyles();
+  font-weight: 900;
+}

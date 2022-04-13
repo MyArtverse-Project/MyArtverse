@@ -23,15 +23,19 @@ export default function Home() {
           <section>
             <h2 id={styles.labelPopular}>Popular Fursonas</h2>
             <div className="fursona-gallery-grid">
-              <GalleryItem
-                avatar={"/images/ozzy.png"}
-                name={"Ozzy"}
-                species={"Otter"}
-                gradientCSS={
-                  "linear-gradient(228.09deg, #AB41FF 0%, #FF248D 100%)"
-                }
-                primaryColor={"black"}
-              />
+              <Link href="/user" passHref>
+                <a>
+                  <GalleryItem
+                    avatar={"/images/ozzy.png"}
+                    name={"Ozzy"}
+                    species={"Otter"}
+                    gradientCSS={
+                      "linear-gradient(228.09deg, #AB41FF 0%, #FF248D 100%)"
+                    }
+                    primaryColor={"black"}
+                    />
+                </a>
+              </Link>
 
               {/*TODO: Convert gallery items into components */}
               <LoadingGalleryItem />

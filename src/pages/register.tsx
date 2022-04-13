@@ -1,7 +1,9 @@
-import React from 'react'
+import Container from '../components/Container'
 
 export default function register() {
   return (
-    <div>register</div>
+    <Container>
+      Registration page
+    </Container>
   )
 }
