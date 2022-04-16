@@ -6,7 +6,7 @@ import Link from "next/link"
 export default function Header() {
   return (
     <header>
-      <div id="wrapper">
+      <div id="wrapper-desktop">
         <Link href="/">
           <a>
             <strong id={styles["logo"]}>MyFursona</strong>
@@ -30,6 +30,7 @@ export default function Header() {
           {/* Otherwise, display SVG logos here for logged in users */}
         </div>
       </div>
+      <div id="wrapper-mobile">epic</div>
     </header>
   )
 }

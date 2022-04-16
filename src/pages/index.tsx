@@ -8,13 +8,14 @@ export default function Home() {
   const [data, setData] = useState(null)
   const [loading, setLoading] = useState(true)
   useEffect(() => {
-    const fetchFursona = async () => {
-      const res = await fetch(`api/fursona/popular`)
-      const fursonas = await res.json()
-      setLoading(false)
-      return setData(fursonas)
-    }
-    fetchFursona()
+    // ! Disabled temporarily for debugging front-end stuff
+    // const fetchFursona = async () => {
+    //   const res = await fetch(`api/fursona/popular`)
+    //   const fursonas = await res.json()
+    //   setLoading(false)
+    //   return setData(fursonas)
+    // }
+    // fetchFursona()
   }, [])
   return (
     <Container>
@@ -36,8 +37,6 @@ export default function Home() {
                     />
                 </a>
               </Link>
-
-              {/*TODO: Convert gallery items into components */}
               <LoadingGalleryItem />
               <LoadingGalleryItem />
               <LoadingGalleryItem />
@@ -47,7 +46,6 @@ export default function Home() {
           <section>
             <h2 id={styles.labelNew}>New Fursonas</h2>
             <div className="fursona-gallery-grid">
-              {/* TODO: Convert gallery items into components */}
               <LoadingGalleryItem />
               <LoadingGalleryItem />
               <LoadingGalleryItem />
