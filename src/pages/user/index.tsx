@@ -1,5 +1,5 @@
-import Container from '../components/Container';
-import styles from '../styles/User.module.scss';
+import Container from '../../components/Container';
+import styles from '../../styles/User.module.scss';
 
 export default function User() {
   return (

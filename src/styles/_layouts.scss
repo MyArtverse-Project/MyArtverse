@@ -6,15 +6,27 @@
   gap: 14px;
 }
 
-header #wrapper {
-  @include headerFooterLayout();
-  justify-content: space-evenly;
-  column-gap: 2rem;
-  @media only screen and (max-width: 768px) {
-    justify-content: space-between;
+header {
+
+  #wrapper-desktop {
+    @include headerFooterLayout();
+    justify-content: space-evenly;
+    column-gap: 2rem;
+    @media only screen and (max-width: 768px) {
+      display: none;
+    }
+  }
+
+  #wrapper-mobile {
+    @include headerFooterLayout();
+    justify-content: space-evenly;
+    column-gap: 2rem;
+    @media only screen and (min-width: 768px) {
+      display: none;
+    }
   }
 }
 
-footer #wrapper {
+footer #wrapper-desktop {
   @include headerFooterLayout();
 }
