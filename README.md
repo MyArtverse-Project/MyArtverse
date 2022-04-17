@@ -15,7 +15,6 @@ it's still work in progress and the Figma design can be seen [here](https://www.
 
 - **Ozzy (Also Known as Renzo or Vulpo)**: Front-end Dev/Co-Founder
 - **Mozza (Also Known as Solixity)**: Back-end Dev/Co-Founder
-- **skepfusky**: Front-end Contributor & Designer
 - **Jaker**: Designer
 - **Your name could be here: Our future contributor!**
 
