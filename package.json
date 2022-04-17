@@ -15,6 +15,7 @@
     "@types/react": "^17.0.43",
     "mongoose": "^6.2.8",
     "next": "12.1.1",
+    "next-pwa": "^5.5.2",
     "react": "17.0.2",
     "react-dom": "17.0.2",
     "sass": "^1.49.9",
