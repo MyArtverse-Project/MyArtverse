@@ -1,10 +1,14 @@
-# MyFursona
+<h1 align="center">MyFursona</h1>
+
+_MyFursona_ is an open source project where users can manage their artworks, info (such as biography and interests), and lore about their fursona.
 
 ![UI Redesign by Jaker](https://user-images.githubusercontent.com/86149507/160653487-3b7b162a-8f1d-4d1e-8ddf-bd4eeec04189.png)
 
-## About this project
+## Stack
 
-_MyFursona_ is an open source project where users can manage their artworks, info (such as biography and interests), and lore about their sona. This is being built using Fastify, Next.js with TypeScript, SCSS, and MongoDB.
+![](https://skillicons.dev/icons?i=nextjs,ts,sass,mongodb,fastify)
+
+_MyFursona_ is built using Next.js with TypeScript, Sass, Fastify, and MongoDB.
 
 ## Design
 
@@ -13,12 +17,12 @@ it's still work in progress and the Figma design can be seen [here](https://www.
 
 ## Our Devs
 
-- **Ozzy (Also Known as Renzo or Vulpo)**: Front-end Dev/Co-Founder
-- **Mozza (Also Known as Solixity)**: Back-end Dev/Co-Founder
+- **Ozzy (Also known as Renzo or Vulpo)**: Front-end Dev/Co-Founder
+- **Mozza (Also known as Solixity)**: Back-end Dev/Co-Founder
 - **skepfusky**: Front-end Contributor & Designer
 - **Jaker**: Designer
 - **Your name could be here: Our future contributor!**
 
 ## Contributing
 
-Your contributions are very appreciated. Before you make changes contact Ozzy/Rezno/Vulpo via Revolt (@OzzyTheDev), Email(vulpothedev@gmail.com), Discord(OzzyTheDev#1312)
+Your contributions are very appreciated! Before you make changes, contact Ozzy/Renzo/Vulpo via Revolt (@OzzyTheDev), Email(vulpothedev@gmail.com), Discord(OzzyTheDev#1312)
