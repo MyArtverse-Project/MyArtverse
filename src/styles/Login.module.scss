@@ -1,16 +1,13 @@
 @use '../styles/mixins' as *;
 
 .login-form-wrapper {
-  display: flex;
-  align-items: center;
-  flex-direction: column;
+  @include flexbox(column, null, center);
   row-gap: 1.5rem;
   user-select: none;
 }
 
 .login-form {
-  display: flex;
-  flex-direction: column;
+  @include flexbox(column);
   row-gap: 0.44rem;
   width: clamp(15rem, 100%, 40rem);
 
@@ -34,9 +31,7 @@
 }
 
 .login-ext {
-  display: flex;
-  flex-direction: column;
-  justify-content: center;
+  @include flexbox(column, center);
   row-gap: 0.66rem;
 
   a {
