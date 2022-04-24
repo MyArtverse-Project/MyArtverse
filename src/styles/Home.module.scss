@@ -1,15 +1,14 @@
+@use '../styles/mixins' as *;
+
 /* Header stuff */
 #wrapper {
-  display: flex;
-  align-items: center;
-  justify-content: space-between;
+  @include flexbox(null, space-between, center);
   padding: 1.5rem 1.6rem;
   column-gap: 2rem;
 }
 
 #search-box-wrapper {
-  display: flex;
-  align-items: center;
+  @include flexbox(null, null, center);
   column-gap: 1.75rem;
   width: 100%;
 }

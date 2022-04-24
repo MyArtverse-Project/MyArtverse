@@ -9,15 +9,13 @@
 }
 
 #user-profile {
-  display: flex;
-  flex-direction: column;
+  @include flexbox(column);
   row-gap: 1rem;
 }
 
 #user-info {
+  @include flexbox(column);
   width: 100%;
-  display: flex;
-  flex-direction: column;
   row-gap: 0.66rem;
 }
 
