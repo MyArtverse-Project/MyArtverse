@@ -3,6 +3,7 @@ import Container from "../components/Container";
 import GalleryItem, { LoadingGalleryItem } from "../components/GalleryItem";
 import styles from "../styles/Home.module.scss";
 import { useEffect, useState } from "react";
+import UnderConstruction from "../components/UnderConstruction";
 
 export default function Home() {
   const [data, setData] = useState(null)
@@ -20,6 +21,7 @@ export default function Home() {
   return (
     <Container>
       <main>
+        <UnderConstruction />
         <div id={styles["fursona-main-showcase"]}>
           <section>
             <h2 id={styles.labelPopular}>Popular Fursonas</h2>
