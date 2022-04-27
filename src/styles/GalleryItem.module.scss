@@ -1,13 +1,10 @@
 @use '../styles/mixins' as *;
 
 #galleryItem {
-  display: flex;
+  @include flexbox(column, center, center);
   border-radius: var(--gallery-r-item);
-  flex-direction: column;
-  align-items: center;
-  justify-content: center;
-  width: 240px;
   transition: transform 300ms ease;
+  width: 240px;
   height: 225px;
   margin: 0 auto;
 

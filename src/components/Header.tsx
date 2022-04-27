@@ -1,5 +1,5 @@
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome"
-import { faMagnifyingGlass } from "@fortawesome/free-solid-svg-icons"
+import { faBars, faBarsProgress, faMagnifyingGlass, faSearch } from "@fortawesome/free-solid-svg-icons"
 import styles from "../styles/Header.module.scss"
 import Link from "next/link"
 
@@ -15,7 +15,7 @@ export default function Header() {
         <div id={styles["search-box-wrapper"]}>
           <div id={styles["search-box"]}>
             <FontAwesomeIcon icon={faMagnifyingGlass} />
-            <input 
+            <input
               type="search"
               placeholder="Search fursonas..."
               // TODO: Execute some function here
@@ -30,7 +30,23 @@ export default function Header() {
           {/* Otherwise, display SVG logos here for logged in users */}
         </div>
       </div>
-      <div id="wrapper-mobile">epic</div>
+      <div id="wrapper-mobile">
+        <nav>
+          <div id={styles["logo-nav"]}>
+            <button>
+              <FontAwesomeIcon icon={faBars} size="lg" />
+            </button>
+            <Link href="/">
+              <a>
+                <strong id={styles["logo"]}>MyFursona</strong>
+              </a>
+            </Link>
+          </div>
+          <button>
+            <FontAwesomeIcon icon={faSearch} size="lg" />
+          </button>
+        </nav>
+      </div>
     </header>
   )
 }
