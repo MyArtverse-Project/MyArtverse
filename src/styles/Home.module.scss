@@ -108,22 +108,22 @@
   position: relative;
   top: 5rem;
 
-  --folder-plane-static: rotateY(325deg) rotateZ(14deg) rotateX(77deg) translateX(-2.498rem) ;
-  --folder-plant-pos-a: translateZ(-5.6rem);
-  --folder-plant-pos-b: translateZ(-0.6rem);
-  --folder-plane-height: 26rem;
-  --folder-plane-width: 17rem;
-  --folder-item-size: 12.5rem;
-  --folder-stacked-items: translateX(0);
+  --hero-plane-static: rotateY(325deg) rotateZ(14deg) rotateX(77deg) translateX(-2.498rem) ;
+  --hero-plane-pos-a: -5.6rem;
+  --hero-plane-pos-b: -0.6rem;
+  --hero-plane-height: 26rem;
+  --hero-plane-width: 17rem;
+  --hero-item-size: 12.5rem;
+  --hero-stacked-items: 0;
 
   @media only screen and (max-width: 1280px) {
-    --folder-plane-static: rotateY(328deg) rotateZ(16deg) rotateX(76deg) translateX(-0.798rem);
-    --folder-plant-pos-a: translateZ(-4.6rem);
-    --folder-plant-pos-b: translateZ(-0.6rem);
-    --folder-plane-height: 24rem;
-    --folder-plane-width: 16rem;
-    --folder-item-size: 11.4rem;
-    --folder-stacked-items: translateX(1.75rem);
+    --hero-plane-static: rotateY(328deg) rotateZ(16deg) rotateX(76deg) translateX(-0.798rem);
+    --hero-plane-pos-a: -4.6rem;
+    --hero-plane-pos-b: -0.6rem;
+    --hero-plane-height: 24rem;
+    --hero-plane-width: 16rem;
+    --hero-item-size: 11.4rem;
+    --hero-stacked-items: 1.75rem;
   }
 }
 
@@ -136,9 +136,9 @@
     top: 0;
     display: block;
     background: gray;
-    transform: var(--folder-plant-pos-b);
-    height: var(--folder-plane-height);
-    width: var(--folder-plane-width);
+    transform: translateZ(var(--hero-plane-pos-b));
+    height: var(--hero-plane-height);
+    width: var(--hero-plane-width);
     opacity: 0;
     animation: planeAppear 1s 300ms ease forwards;
     border-radius: 2rem;
@@ -146,25 +146,25 @@
 
   .image-folder-item {
     img {
-      width: var(--folder-item-size);
+      width: var(--hero-item-size);
       border-radius: 12px;
       box-shadow: 0 0 24px rgba(black, 75%);
     }
 
-    --folder-item: 0;
+    --hero-item: 0;
     opacity: 0;
     height: 350px;
     transform-style: preserve-3d;
     position: relative;
     user-select: none;
     margin-left: -6.5rem;
-    transform: var(--folder-stacked-items) translateY(var(--folder-item)) rotateY(35deg) skewY(14deg);
+    transform: translateX(var(--hero-stacked-items)) translateY(var(--hero-item)) rotateY(35deg) skewY(14deg);
     transition: transform 300ms ease;
     animation: imageDrop 1s ease forwards;
     animation-delay: calc(var(--stagger) * 250ms);
 
     &:hover {
-      --folder-item: -6.5rem;
+      --hero-item: -6.5rem;
     }
 
     &:first-child {
@@ -183,11 +183,11 @@
 
 @keyframes planeAppear {
   0% {
-    transform: var(--folder-plane-static) var(--folder-plant-pos-a);
+    transform: var(--hero-plane-static) translateZ(var(--hero-plane-pos-a));
     opacity: 0;
   }
   100% {
-    transform: var(--folder-plane-static) var(--folder-plant-pos-b);
+    transform: var(--hero-plane-static) translateZ(var(--hero-plane-pos-b));
     opacity: 1;
   }
 }
