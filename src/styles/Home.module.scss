@@ -88,6 +88,122 @@
   }
 }
 
+/* Cool header thing wihout the use of third-party animation stuff
+ * and entirely in plain CSS
+ * -- UI by skepfusky
+ */
+
+#header-hero {
+  @include flexbox(row, space-between);
+  padding-inline: 4.3rem;
+  column-gap: 9rem;
+  @media only screen and (max-width: 1024px) {
+    flex-direction: column-reverse;
+    text-align: center;
+    row-gap: 2rem;
+  }
+}
+
+#hero-animation {
+  position: relative;
+  top: 5rem;
+
+  --hero-plane-static: rotateY(325deg) rotateZ(14deg) rotateX(77deg) translateX(-2.498rem) ;
+  --hero-plane-pos-a: -5.6rem;
+  --hero-plane-pos-b: -0.6rem;
+  --hero-plane-height: 26rem;
+  --hero-plane-width: 17rem;
+  --hero-item-size: 12.5rem;
+  --hero-stacked-items: 0;
+
+  @media only screen and (max-width: 1280px) {
+    --hero-plane-static: rotateY(328deg) rotateZ(16deg) rotateX(76deg) translateX(-0.798rem);
+    --hero-plane-pos-a: -4.6rem;
+    --hero-plane-pos-b: -0.6rem;
+    --hero-plane-height: 24rem;
+    --hero-plane-width: 16rem;
+    --hero-item-size: 11.4rem;
+    --hero-stacked-items: 1.75rem;
+  }
+}
+
+.image-folder-overlay {
+  @include flexbox();
+  position: relative;
+  &::after {
+    content: '';
+    position: absolute;
+    top: 0;
+    display: block;
+    background: gray;
+    transform: translateZ(var(--hero-plane-pos-b));
+    height: var(--hero-plane-height);
+    width: var(--hero-plane-width);
+    opacity: 0;
+    animation: planeAppear 1s 300ms ease forwards;
+    border-radius: 2rem;
+  }
+
+  .image-folder-item {
+    img {
+      width: var(--hero-item-size);
+      border-radius: 12px;
+      box-shadow: 0 0 24px rgba(black, 75%);
+    }
+
+    --hero-item: 0;
+    opacity: 0;
+    height: 350px;
+    transform-style: preserve-3d;
+    position: relative;
+    user-select: none;
+    margin-left: -6.5rem;
+    transform: translateX(var(--hero-stacked-items)) translateY(var(--hero-item)) rotateY(35deg) skewY(14deg);
+    transition: transform 300ms ease;
+    animation: imageDrop 1s ease forwards;
+    animation-delay: calc(var(--stagger) * 250ms);
+
+    &:hover {
+      --hero-item: -6.5rem;
+    }
+
+    &:first-child {
+      z-index: 5;
+    }
+
+    &:nth-child(2) {
+      z-index: 4;
+    }
+
+    &:nth-child(3) {
+      z-index: 3;
+    }
+  }
+}
+
+@keyframes planeAppear {
+  0% {
+    transform: var(--hero-plane-static) translateZ(var(--hero-plane-pos-a));
+    opacity: 0;
+  }
+  100% {
+    transform: var(--hero-plane-static) translateZ(var(--hero-plane-pos-b));
+    opacity: 1;
+  }
+}
+
+@keyframes imageDrop {
+  0% {
+    top: -12rem;
+    opacity: 0;
+
+  }
+  100% {
+    top: 0;
+    opacity: 1;
+  }
+}
+
 /* Main content */
 
 #fursona-main-showcase {
@@ -121,8 +237,7 @@
       bottom: 0;
       right: -6px;
       background: linear-gradient(145deg, rgb(255, 0, 245, 0.55), rgb(255, 92, 0, 0.55));
-      height: 12px;
-      border-radius: 7px;
+      height: 16px;
     }
   }
 }
