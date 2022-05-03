@@ -9,11 +9,11 @@ interface IGalleryItemProps {
 }
 
 export default function GalleryItem({
-                                      avatar,
-                                      gradientCSS,
-                                      name,
-                                      species,
-                                      primaryColor = "black"
+  avatar,
+  gradientCSS,
+  name,
+  species,
+  primaryColor = "black"
 }: IGalleryItemProps) {
   return (
     <div

@@ -33,3 +33,10 @@ node_modules
 
 # vercel
 */.vercel
+
+# Default ignored files from .idea
+.idea/shelf/
+.idea/workspace.xml
+
+# Editor-based HTTP Client requests
+.idea/httpRequests/
