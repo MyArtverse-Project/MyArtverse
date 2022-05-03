@@ -30,15 +30,15 @@ export default function Home() {
               your fluffy characters and show them off to your friends!
             </p>
           </article>
-          <div id={styles["hero-animation"]}>
-            <div className={styles["image-folder-overlay"]}>
-              <div className={styles['image-folder-item']} style={{'--stagger': '1'} as React.CSSProperties }>
+          <div id={styles["hero-card-container"]}>
+            <div id={styles["hero-card-wrapper"]}>
+              <div id={styles['hero-card-item']} style={{'--stagger': '1'} as React.CSSProperties }>
                 <img src="/images/ozzy.png" alt="Ozzy Fursona" />
               </div>
-              <div className={styles['image-folder-item']} style={{'--stagger': '2'} as React.CSSProperties }>
+              <div id={styles['hero-card-item']} style={{'--stagger': '2'} as React.CSSProperties }>
                 <img src="/images/ozzy.png" alt="Ozzy Fursona" />
               </div>
-              <div className={styles['image-folder-item']} style={{'--stagger': '3'} as React.CSSProperties }>
+              <div id={styles['hero-card-item']} style={{'--stagger': '3'} as React.CSSProperties }>
                 <img src="/images/ozzy.png" alt="Ozzy Fursona" />
               </div>
             </div>
