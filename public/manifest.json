@@ -1,5 +1,12 @@
 {
+  "theme_color": "#000000",
+  "background_color": "#FFFFFF",
+  "start_url": "/",
+  "scope": "/",
+  "display": "standalone",
+  "orientation": "portrait",
   "name": "MyFursona App",
+  "description": "MyFursona is a platform where you can show off your fluffy characters and show them off to your friends!",
   "short_name": "MyFursona",
   "icons": [
     {
@@ -12,10 +19,5 @@
       "sizes": "512x512",
       "type": "image/png"
     }
-  ],
-  "theme_color": "#FFFFFF",
-  "background_color": "#FFFFFF",
-  "start_url": "/",
-  "display": "standalone",
-  "orientation": "portrait"
+  ]
 }
