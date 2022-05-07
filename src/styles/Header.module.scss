@@ -3,7 +3,7 @@
 #search-box-wrapper {
   @include flexbox(null, null, center);
   column-gap: 1.75rem;
-  width: 660px;
+  width: 825px;
 }
 
 #logo-nav {
@@ -14,9 +14,9 @@
 #logo {
   // TODO: Based on Fursona colors when logged in and have a registered fursona
   background: linear-gradient(145deg, #ad00ff, #ff00f5, #ff5c00);
-  -webkit-background-clip: text;
+  background-clip: text;
   -webkit-text-fill-color: #0000;
-  font-size: 160%;
+  font-size: 1.7rem;
   font-weight: 800;
 
   @media only screen and (max-width: 768px) {

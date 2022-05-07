@@ -1,4 +1,4 @@
-@use '../styles/mixins' as *;
+@use "../styles/mixins" as *;
 
 /* Header stuff */
 #wrapper {
@@ -80,7 +80,7 @@
     border-radius: 6px;
     padding: 1.2ex 4ex;
     transition: all 200ms ease-in-out;
-    
+
     &:hover {
       // Adds cool glow effect to the button
       box-shadow: 0px 0px 12px #ad00ff;
@@ -114,17 +114,19 @@
   position: relative;
   top: 7rem;
 
-  --card-plane: rotateY(325deg) rotateZ(14deg) rotateX(77deg) translateX(-2.498rem) ;
-	--card-plane-a: -10rem;
-	--card-plane-b: -1rem;
-	--card-plane-height: 26rem;
-	--card-plane-width: 17rem;
-	--card-item-size: 12.5rem;
-	--card-item-x: 0;
-	--card-item-prespective: rotateY(35deg) skewY(14deg);
+  --card-plane: rotateY(325deg) rotateZ(14deg) rotateX(77deg)
+    translateX(-2.498rem);
+  --card-plane-a: -10rem;
+  --card-plane-b: -1rem;
+  --card-plane-height: 26rem;
+  --card-plane-width: 17rem;
+  --card-item-size: 12.5rem;
+  --card-item-x: 0;
+  --card-item-prespective: rotateY(35deg) skewY(14deg);
 
   @media only screen and (max-width: 1280px) {
-    --card-plane: rotateY(328deg) rotateZ(16deg) rotateX(76deg) translateX(-0.798rem);
+    --card-plane: rotateY(328deg) rotateZ(16deg) rotateX(76deg)
+      translateX(-0.798rem);
     --card-plane-a: -4.6rem;
     --card-plane-b: -0.6rem;
     --card-plane-height: 24rem;
@@ -141,99 +143,99 @@
 }
 
 #hero-card-wrapper {
-	display: flex;
+  display: flex;
 
-	&::after {
-		content: "";
-		position: absolute;
-		opacity: 0;
-		top: 0;
-		display: block;
-		background-image: linear-gradient(
-			rgb(101, 101, 101) 0%,
-			rgb(75, 75, 75) 33%,
-			rgb(30, 30, 30) 66%,
-			#0000 100%
-		);
-		background-size: 100% 300%;
-		animation: gradientScroll 3s ease, planeAppear 1600ms ease forwards;
-		transform: translateZ(var(--card-plane-b));
-		height: var(--card-plane-height);
-		width: var(--card-plane-width);
-		border-radius: 2rem;
-	}
+  &::after {
+    content: "";
+    position: absolute;
+    opacity: 0;
+    top: 0;
+    display: block;
+    background-image: linear-gradient(
+      rgb(101, 101, 101) 0%,
+      rgb(75, 75, 75) 33%,
+      rgb(30, 30, 30) 66%,
+      #0000 100%
+    );
+    background-size: 100% 300%;
+    animation: gradientScroll 3s ease, planeAppear 1600ms ease forwards;
+    transform: translateZ(var(--card-plane-b));
+    height: var(--card-plane-height);
+    width: var(--card-plane-width);
+    border-radius: 2rem;
+  }
 }
 
 #hero-card-item {
-	--card-item: 0;
-	--card-item-hover: -6.5rem;
-	opacity: 0;
-	height: 350px;
-	position: relative;
-	user-select: none;
-	margin-left: -6.5rem;
-	transform: translateX(var(--card-item-x)) translateY(var(--card-item))
-		var(--card-item-prespective);
-	transition: transform 300ms ease;
-	animation: imageDrop 1s ease-out forwards;
-	animation-delay: calc(var(--stagger) * 350ms);
+  --card-item: 0;
+  --card-item-hover: -6.5rem;
+  opacity: 0;
+  height: 350px;
+  position: relative;
+  user-select: none;
+  margin-left: -6.5rem;
+  transform: translateX(var(--card-item-x)) translateY(var(--card-item))
+    var(--card-item-prespective);
+  transition: transform 300ms ease;
+  animation: imageDrop 1s ease-out forwards;
+  animation-delay: calc(var(--stagger) * 350ms);
 
-	img {
-		width: var(--card-item-size);
-		border-radius: 12px;
-		box-shadow: 0 0 24px rgba(black, 75%);
-	}
+  img {
+    width: var(--card-item-size);
+    border-radius: 12px;
+    box-shadow: 0 0 24px rgba(black, 75%);
+  }
 
-	&:hover {
-		--card-item: var(--card-item-hover) !important;
-	}
+  &:hover {
+    --card-item: var(--card-item-hover) !important;
+  }
 
-	&:first-child {
-		z-index: 5;
-	}
+  &:first-child {
+    z-index: 5;
+  }
 
-	&:nth-child(2) {
-		z-index: 4;
-		--card-item: -1rem;
-		--card-item-hover: -7.5rem;
-	}
+  &:nth-child(2) {
+    z-index: 4;
+    --card-item: -1rem;
+    --card-item-hover: -7.5rem;
+  }
 
-	&:nth-child(3) {
-		z-index: 3;
-		--card-item: -2rem;
-		--card-item-hover: -8.5rem;
-	}
+  &:nth-child(3) {
+    z-index: 3;
+    --card-item: -2rem;
+    --card-item-hover: -8.5rem;
+  }
 }
 
 @keyframes planeAppear {
-	0% {
-		transform: var(--card-plane) translateZ(var(--card-plane-a));
-		opacity: 0;
-	}
-	100% {
-		transform: var(--card-plane) translateZ(var(--card-plane-b));
-		opacity: 1;
-	}
+  0% {
+    transform: var(--card-plane) translateZ(var(--card-plane-a));
+    opacity: 0;
+  }
+  100% {
+    transform: var(--card-plane) translateZ(var(--card-plane-b));
+    opacity: 1;
+  }
 }
 
 @keyframes imageDrop {
-	0% {
-		top: -12rem;
-		opacity: 0;
-	}
-	100% {
-		top: 0;
-		opacity: 1;
-	}
+  0% {
+    top: -12rem;
+    opacity: 0;
+  }
+  100% {
+    top: 0;
+    opacity: 1;
+  }
 }
 
 @keyframes gradientScroll {
-	0% {
-		background-position-y: 100%;
-	}
-	100% {
-		background-position-y: 0%;
-	}
+  0% {
+    background-position-y: 100%;
+  }
+  100% {
+    background-position-y: 0%;
+  }
 }
 
 /* Main content */
@@ -242,34 +244,22 @@
   margin-top: 4rem;
 }
 
-#label {
-  &Popular::before {
-    content: "💖";
-    padding-right: 5px;
-  }
-
-  &New::before {
-    content: "✨";
-    padding-right: 5px;
-  }
-
-  &Popular,
-  &New {
-    position: relative;
-    width: max-content;
-    z-index: 1;
-    margin: 3.5rem 0 2rem 0;
-
-    &::after {
-      content: "";
-      display: block;
-      position: absolute;
-      z-index: -1;
-      left: 0;
-      bottom: 0;
-      right: -6px;
-      background: linear-gradient(145deg, rgb(255, 0, 245, 0.55), rgb(255, 92, 0, 0.55));
-      height: 16px;
+#card-previews {
+  display: flex;
+  position: relative;
+  flex-direction: row;
+  justify-content: center;
+  align-items: center;
+  #control {
+    font-size: 2rem;
+    border-radius: 12px;
+    padding: 15px;
+    height: 100px;
+    color: rgba($color: white, $alpha: 0.5);
+    background: rgba($color: white, $alpha: 0.05);
+    transition: all 0.2s ease;
+    &:hover {
+      background: rgba($color: white, $alpha: 0.1);
     }
   }
 }

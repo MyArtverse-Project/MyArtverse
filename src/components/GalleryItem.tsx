@@ -1,4 +1,5 @@
 import styles from "../styles/GalleryItem.module.scss"
+import Link from 'next/link'
 
 interface IGalleryItemProps {
   avatar: string
@@ -6,6 +7,7 @@ interface IGalleryItemProps {
   species: string
   gradientCSS: string
   primaryColor: string
+  link: string
 }
 
 export default function GalleryItem({
@@ -13,26 +15,31 @@ export default function GalleryItem({
   gradientCSS,
   name,
   species,
-  primaryColor = "black"
+  primaryColor = "black",
+  link
 }: IGalleryItemProps) {
   return (
-    <div
-      id={styles["galleryItem"]}
-      style={{
-        background: `${gradientCSS}`
-      }}
-    >
-      <img
-        src={avatar}
-        style={{
-          border: `${primaryColor} solid 3px`,
-          background: `${primaryColor}`
-        }}
-        alt={`${name}'s avatar`}
-      />
-      <h2>{name}</h2>
-      <h3>{species}</h3>
-    </div>
+    <Link href={link} passHref>
+      <a>
+        <div
+          id={styles["galleryItem"]}
+          style={{
+            background: `${gradientCSS}`
+          }}
+        >
+          <img
+            src={avatar}
+            style={{
+              border: `${primaryColor} solid 3px`,
+              background: `${primaryColor}`
+            }}
+            alt={`${name}'s avatar`}
+          />
+          <h2>{name}</h2>
+          <h3>{species}</h3>
+        </div>
+      </a>
+    </Link>
   )
 }
 

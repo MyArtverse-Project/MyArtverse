@@ -1,13 +1,12 @@
-@use '../styles/mixins' as *;
+@use "../styles/mixins" as *;
 
 #galleryItem {
   @include flexbox(column, center, center);
   border-radius: var(--gallery-r-item);
   transition: transform 300ms ease;
-  width: 240px;
-  height: 225px;
-  margin: 0 auto;
-
+  flex-basis: 20%;
+  height: 250px;
+  width: 285px;
   img {
     width: 110px;
     height: 110px;
@@ -35,12 +34,14 @@
 #loadingGalleryItem {
   display: flex;
   margin: 0 auto;
+  flex-basis: 20%;
   flex-direction: column;
   align-items: center;
   justify-content: center;
   border-radius: var(--gallery-r-item);
-  height: 225px;
-  width: 240px;
+  height: 270px;
+  width: 295px;
+  margin: 0 10px;
   @include skeletonPulse();
 
   #loadingImage,
@@ -68,7 +69,6 @@
   }
 
   #textSpecies {
-    --gallery-r-item: 6px;
     height: 20px;
     width: 75px;
     font-weight: 700;
@@ -76,5 +76,3 @@
     @include skeletonSwipe(400px);
   }
 }
-
-

@@ -1,0 +1,53 @@
+#carousel {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  position: relative;
+  // TODO
+  overflow-x: hidden;
+  flex-wrap: nowrap;
+}
+
+#label {
+  &Popular::before {
+    content: "💖";
+    padding-right: 5px;
+  }
+
+  &New::before {
+    content: "✨";
+    padding-right: 5px;
+  }
+
+  &Popular,
+  &New {
+    position: relative;
+    width: max-content;
+    z-index: 1;
+    margin: 3.5rem 0 2rem 10px;
+
+    &::after {
+      content: "";
+      display: block;
+      position: absolute;
+      z-index: -1;
+      left: 0;
+      bottom: 0;
+      right: -6px;
+      background: linear-gradient(
+        145deg,
+        rgb(255, 0, 245, 0.55),
+        rgb(255, 92, 0, 0.55)
+      );
+      height: 16px;
+    }
+  }
+}
+
+#cards {
+  display: flex;
+  flex-direction: row;
+  overflow-x: hidden;
+  overflow-y: hidden;
+  width: max-content;
+}
