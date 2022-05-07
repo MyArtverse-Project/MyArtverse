@@ -4,10 +4,9 @@
   @include flexbox(column, center, center);
   border-radius: var(--gallery-r-item);
   transition: transform 300ms ease;
-  flex-basis: 20%;
-  height: 250px;
-  width: 285px;
-
+  height: 295px;
+  width: 295px;
+  margin: 0 7px;
   img {
     width: 110px;
     height: 110px;
@@ -27,7 +26,7 @@
   }
 
   &:hover {
-    transform: translateY(-3px);
+    transform: translateY(-10px);
   }
 }
 
@@ -39,8 +38,8 @@
   align-items: center;
   justify-content: center;
   border-radius: var(--gallery-r-item);
-  height: 280px;
-  width: 280px;
+  height: 295px;
+  width: 295px;
   margin: 0 7px;
   @include skeletonPulse();
 

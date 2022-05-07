@@ -7,10 +7,12 @@ import { useEffect, useState } from "react"
 import UnderConstruction from "../components/UnderConstruction"
 import Carousel from "../components/Carousel"
 import styles2 from "../styles/Carousel.module.scss"
+import { Fursona } from "../utils/types"
 
 export default function Home() {
-  const [data, setData] = useState(null)
+  const [data, setData] = useState<Fursona[]>([])
   const [loading, setLoading] = useState(true)
+  
   useEffect(() => {
     // ! Disabled temporarily for debugging front-end stuff
     // const fetchFursona = (async () => {
@@ -19,6 +21,16 @@ export default function Home() {
     //   setLoading(false)
     //   return setData(fursonas)
     // })();
+    setData([
+      {
+        avatar: "/images/ozzy.png",
+        name: "Ozzy",
+        gradientCSS: "linear-gradient(to bottom, #f8b195 0%, #f67280 100%)",
+        link: "/user/2342349824",
+        primaryColor: "#f8b195",
+        species: "Otter"
+      }
+    ])
   }, [])
   return (
     <Container>
@@ -58,24 +70,7 @@ export default function Home() {
         </div>
         <div className={styles["fursona-main-showcase"]}>
           <section>
-            <h2 id={styles.labelPopular}>Popular Fursonas</h2>
-            <div className={"fursona-gallery-grid"}>
-              <GalleryItem
-                avatar={"/images/ozzy.png"}
-                name={"Ozzy"}
-                species={"Otter"}
-                gradientCSS={
-                  "linear-gradient(228.09deg, #AB41FF 0%, #FF248D 100%)"
-                }
-                primaryColor={"black"}
-                link={"/user"}
-              />
-
-              <LoadingGalleryItem />
-              <LoadingGalleryItem />
-              <LoadingGalleryItem />
-              <LoadingGalleryItem />
-            </div>
+           <Carousel title="Popular Fursonas" type="popular" items={data} />
           </section>
           <section id={styles["card-previews"]}>
             <Carousel title={"New Fursonas"} type="new" />

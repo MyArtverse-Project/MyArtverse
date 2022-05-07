@@ -89,4 +89,10 @@
   overflow-x: hidden;
   // overflow-y: hidden;
   width: max-content;
+  padding: 15px 0;
+}
+
+#card-wrapper {
+  overflow-x: scroll;
+  margin: 0 10px; 
 }
