@@ -1,14 +1,40 @@
 import GalleryItem, { LoadingGalleryItem } from "./GalleryItem"
 import styles from "../styles/Carousel.module.scss"
 import { Fursona } from "../utils/types"
+import { useRef } from "react"
 
 interface ICarouselProps {
   title: string
   type: "normal" | "popular" | "new"
-  items?: Fursona[];
+  items?: Fursona[]
 }
 
 const Carousel = ({ title, type, items = [] }: ICarouselProps) => {
+  const carouselRef = useRef(null)
+
+  const scrollLeft = () => {
+    const node = carouselRef.current
+    if (node) {
+      console.log("LEFT")
+      node.scrollBy({
+        top: 0,
+        left: -480,
+        behavior: "smooth"
+      })
+    }
+  }
+  const scrollRight = () => {
+    const node = carouselRef.current
+    if (node) {
+      console.log("RIGHT")
+      carouselRef.current.scrollBy({
+        top: 0,
+        left: 480,
+        behavior: "smooth"
+      })
+    }
+  }
+
   return (
     <div id={styles.carousel}>
       <h2
@@ -24,11 +50,11 @@ const Carousel = ({ title, type, items = [] }: ICarouselProps) => {
       </h2>
       <div id={styles["carousel-container"]}>
         <div id={styles["control-wrapper"]}>
-          <button id={styles.control}>
+          <button id={styles.control} onClick={() => scrollLeft()}>
             <i className="fa-solid fa-angle-left" />
           </button>
         </div>
-        <div id={styles["card-wrapper"]}>
+        <div id={styles["card-wrapper"]} ref={carouselRef}>
           <div id={styles["cards"]}>
             {items.length >= 5
               ? items.map((item, index) => (
@@ -45,7 +71,7 @@ const Carousel = ({ title, type, items = [] }: ICarouselProps) => {
           </div>
         </div>
         <div id={styles["control-wrapper"]}>
-          <button id={styles.control}>
+          <button id={styles.control} onClick={() => scrollRight()}>
             <i className="fa-solid fa-angle-right" />
           </button>
         </div>
@@ -53,5 +79,4 @@ const Carousel = ({ title, type, items = [] }: ICarouselProps) => {
     </div>
   )
 }
-
 export default Carousel
