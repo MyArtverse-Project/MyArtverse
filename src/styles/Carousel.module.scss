@@ -6,7 +6,45 @@
   // TODO
   overflow-x: hidden;
   flex-wrap: nowrap;
+  width: 100%;
 }
+
+#carousel-container {
+  display: flex;
+  align-items: center;
+  position: relative;
+
+  &::before,
+  &::after {
+    content: "";
+  }
+
+  #control {
+    font-size: 2rem;
+    border-radius: 12px;
+    padding: 15px;
+    height: 100px;
+    color: rgba($color: white, $alpha: 0.5);
+    background: rgba($color: white, $alpha: 0.05);
+    transition: all 0.2s ease;
+
+    &:hover {
+      background: rgba($color: white, $alpha: 0.1);
+    }
+  }
+}
+
+// #control-wrapper {
+//   position: absolute;
+//   height: 100%;
+//   display: flex;
+//   align-items: center;
+//   right: 0;
+
+//   &:first-child {
+//     left: 0;
+//   }
+// }
 
 #label {
   &Popular::before {
@@ -24,7 +62,7 @@
     position: relative;
     width: max-content;
     z-index: 1;
-    margin: 3.5rem 0 2rem 10px;
+    margin: 3.5rem 0 2rem 2.3em;
 
     &::after {
       content: "";
@@ -47,7 +85,8 @@
 #cards {
   display: flex;
   flex-direction: row;
+  width: 100vh;
   overflow-x: hidden;
-  overflow-y: hidden;
+  // overflow-y: hidden;
   width: max-content;
 }

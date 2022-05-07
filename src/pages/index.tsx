@@ -6,6 +6,7 @@ import styles from "../styles/Home.module.scss"
 import { useEffect, useState } from "react"
 import UnderConstruction from "../components/UnderConstruction"
 import Carousel from "../components/Carousel"
+import styles2 from "../styles/Carousel.module.scss"
 
 export default function Home() {
   const [data, setData] = useState(null)
@@ -77,16 +78,10 @@ export default function Home() {
             </div>
           </section>
           <section id={styles["card-previews"]}>
-            <button id={styles["control"]}>
-              <i className="fa-solid fa-angle-left" />
-            </button>
-            <Carousel title={"New Fursona"} type="new" />
-            <button id={styles["control"]}>
-              <i className="fa-solid fa-angle-right" />
-            </button>
+            <Carousel title={"New Fursonas"} type="new" />
           </section>
         </div>
-      </main>
+      </main> 
     </Container>
   )
 }

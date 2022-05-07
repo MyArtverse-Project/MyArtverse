@@ -7,6 +7,7 @@
   flex-basis: 20%;
   height: 250px;
   width: 285px;
+
   img {
     width: 110px;
     height: 110px;
@@ -33,15 +34,14 @@
 // loading
 #loadingGalleryItem {
   display: flex;
-  margin: 0 auto;
   flex-basis: 20%;
   flex-direction: column;
   align-items: center;
   justify-content: center;
   border-radius: var(--gallery-r-item);
-  height: 270px;
-  width: 295px;
-  margin: 0 10px;
+  height: 280px;
+  width: 280px;
+  margin: 0 7px;
   @include skeletonPulse();
 
   #loadingImage,

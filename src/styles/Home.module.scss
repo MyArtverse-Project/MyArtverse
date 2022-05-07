@@ -250,16 +250,4 @@
   flex-direction: row;
   justify-content: center;
   align-items: center;
-  #control {
-    font-size: 2rem;
-    border-radius: 12px;
-    padding: 15px;
-    height: 100px;
-    color: rgba($color: white, $alpha: 0.5);
-    background: rgba($color: white, $alpha: 0.05);
-    transition: all 0.2s ease;
-    &:hover {
-      background: rgba($color: white, $alpha: 0.1);
-    }
-  }
 }
