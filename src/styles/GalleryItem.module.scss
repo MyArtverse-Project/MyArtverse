@@ -1,16 +1,15 @@
-@use '../styles/mixins' as *;
+@use "../styles/mixins" as *;
 
 #galleryItem {
   @include flexbox(column, center, center);
   border-radius: var(--gallery-r-item);
   transition: transform 300ms ease;
-  width: 240px;
-  height: 225px;
-  margin: 0 auto;
-
+  height: 295px;
+  width: 295px;
+  margin: 0 7px;
   img {
-    width: 110px;
-    height: 110px;
+    width: 135px;
+    height: 135px;
     border-radius: 16px;
     object-fit: cover;
   }
@@ -27,20 +26,21 @@
   }
 
   &:hover {
-    transform: translateY(-3px);
+    transform: translateY(-10px);
   }
 }
 
 // loading
 #loadingGalleryItem {
   display: flex;
-  margin: 0 auto;
+  flex-basis: 20%;
   flex-direction: column;
   align-items: center;
   justify-content: center;
   border-radius: var(--gallery-r-item);
-  height: 225px;
-  width: 240px;
+  height: 295px;
+  width: 295px;
+  margin: 0 7px;
   @include skeletonPulse();
 
   #loadingImage,
@@ -50,9 +50,9 @@
   }
 
   #loadingImage {
-    width: 100px;
-    max-height: 100px;
-    height: 100px;
+    width: 135px;
+    max-height: 135px;
+    height: 135px;
     @include skeletonSwipe(550px);
     border-radius: var(--gallery-r-item);
   }
@@ -68,7 +68,6 @@
   }
 
   #textSpecies {
-    --gallery-r-item: 6px;
     height: 20px;
     width: 75px;
     font-weight: 700;
@@ -76,5 +75,3 @@
     @include skeletonSwipe(400px);
   }
 }
-
-
