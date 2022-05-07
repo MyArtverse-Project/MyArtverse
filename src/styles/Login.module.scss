@@ -1,46 +1,77 @@
-@use '../styles/mixins' as *;
+@use "../styles/mixins" as *;
 
 .login-form-wrapper {
   @include flexbox(column, null, center);
   row-gap: 1.5rem;
   user-select: none;
+  margin-top: 2rem;
+  position: relative;
+  h1 {
+    font-weight: 900;
+  }
 }
 
 .login-form {
   @include flexbox(column);
   row-gap: 0.44rem;
   width: clamp(15rem, 100%, 40rem);
-
+  margin: 2 rem 0;
+  text-align: left;
   input[type="email"],
   input[type="password"] {
-    width: 100%;
+    width: 75%;
     background: rgba(255, 255, 255, 0.1);
     color: #f5f5f5;
     border: none;
     padding: 1.5ex;
+    margin: 1ex 0;
+    font-size: 16px;
+    font-weight: 700;
     border-radius: 6px;
+  }
+
+  label {
+    text-align: left
   }
 
   button {
     @include appButtonStyles();
+    margin: 2ex 0 0 0;
+    width: 75%;
   }
 }
 
-.login-form-links a {
-  @include appLinkStyles();
+#divider {
+  width: 47%;
+  height: 1px;
+  border-bottom: #f5f5f5 solid 1px;
+  text-align: center
+
+}
+
+.login-form-links {
+  text-align: right;
+  a {
+    @include appLinkStyles();
+  }
 }
 
 .login-ext {
   @include flexbox(column, center);
   row-gap: 0.66rem;
+  width: 75%;
 
-  a {
+  button {
     border-radius: 4px;
     color: #202020;
     background: #f5f5f5;
+    width: 47%;
     text-align: center;
-    padding: 1.2ex 4ex;
+    padding: 1.5ex 4ex;
     transition: color 200ms ease-in-out;
+    cursor: pointer;
+    font-weight: 700;
+    font-size: 16px;
   }
 }
 
