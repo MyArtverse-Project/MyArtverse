@@ -1,14 +1,24 @@
 import { useEffect, useState } from "react"
+import { FontAwesomeIcon } from "@fortawesome/react-fontawesome"
+import {
+  faGithub,
+  faInstagram,
+  faPatreon,
+  faTwitter
+} from "@fortawesome/free-brands-svg-icons"
+import { faCheck } from "@fortawesome/free-solid-svg-icons"
 import Container from "../../components/Container"
 import styles from "../../styles/User.module.scss"
 
 export default function User() {
   const [loading, setLoading] = useState(true)
   const [verified, setVerified] = useState(false)
+  
   useEffect(() => {
     setLoading(false)
     setVerified(true)
   }, [])
+
   console.log(verified)
   if (loading) {
     return (
@@ -34,17 +44,31 @@ export default function User() {
         <div id={styles["user-profile"]}>
           <img src="/images/ozzy.png" alt="Ozzy Avatar" id={styles["avatar"]} />
           <div id={styles["user-social"]}>
-            <i id={styles["social"]} className="fab fa-discord" />
-            <i id={styles["social"]} className="fab fa-twitter" />
-            <i id={styles["social"]} className="fab fa-instagram" />
-            <i id={styles["social"]} className="fab fa-patreon" />
+            <span id={styles["social-icon"]}>
+              <FontAwesomeIcon icon={faTwitter} />
+            </span>
+            <span id={styles["social-icon"]}>
+              <FontAwesomeIcon icon={faGithub} />
+            </span>
+            <span id={styles["social-icon"]}>
+              <FontAwesomeIcon icon={faTwitter} />
+            </span>
+            <span id={styles["social-icon"]}>
+              <FontAwesomeIcon icon={faPatreon} />
+            </span>
+            <span id={styles["social-icon"]}>
+              <FontAwesomeIcon icon={faInstagram} />
+            </span>
           </div>
         </div>
         <div id={styles["user-info"]}>
           <div>
             <h1 id={styles["name"]}>Ozzy</h1>
-            {verified ??   (
-              <i id={styles["verified"]} className="fas fa-check fa-2x" />
+            {verified ?? (
+              // <i id={styles["verified"]} className="fas fa-check fa-2x" />
+              <span id={styles["verified"]}>
+                <FontAwesomeIcon icon={faCheck} size="2x" />
+              </span>
             )}
           </div>
           <h2 id={styles["species"]}>Species: Otter</h2>

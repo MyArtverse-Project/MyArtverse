@@ -1,7 +1,9 @@
+import { useRef } from "react"
 import GalleryItem, { LoadingGalleryItem } from "./GalleryItem"
 import styles from "../styles/Carousel.module.scss"
 import { Fursona } from "../utils/types"
-import { useRef } from "react"
+import { FontAwesomeIcon } from "@fortawesome/react-fontawesome"
+import { faAngleLeft, faAngleRight } from "@fortawesome/free-solid-svg-icons"
 
 interface ICarouselProps {
   title: string
@@ -23,6 +25,7 @@ const Carousel = ({ title, type, items = [] }: ICarouselProps) => {
       })
     }
   }
+
   const scrollRight = () => {
     const node = carouselRef.current
     if (node) {
@@ -51,7 +54,7 @@ const Carousel = ({ title, type, items = [] }: ICarouselProps) => {
       <div id={styles["carousel-container"]}>
         <div id={styles["control-wrapper"]}>
           <button id={styles.control} onClick={() => scrollLeft()}>
-            <i className="fa-solid fa-angle-left" />
+            <FontAwesomeIcon icon={faAngleLeft} />
           </button>
         </div>
         <div id={styles["card-wrapper"]} ref={carouselRef}>
@@ -72,7 +75,7 @@ const Carousel = ({ title, type, items = [] }: ICarouselProps) => {
         </div>
         <div id={styles["control-wrapper"]}>
           <button id={styles.control} onClick={() => scrollRight()}>
-            <i className="fa-solid fa-angle-right" />
+            <FontAwesomeIcon icon={faAngleRight} />
           </button>
         </div>
       </div>

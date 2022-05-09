@@ -26,7 +26,7 @@ export default function Header() {
         <div id={styles["user-actions"]}>
           {/* Display a log in button for logged out users */}
           <Link href="/login">
-            <a>
+            <a id={styles["login-button"]}>
               <img src="/images/login.svg" alt="Login" />
             </a>
           </Link>

@@ -21,17 +21,15 @@
 }
 
 #user-social {
-  display: flex;
-  flex-direction: row;
-  align-items: center;
-  justify-content: space-around;
-  #social {
-    font-size: 2rem;
-    margin: 0 15px;
-    width: 25px;
-    height: 25px;
-    padding: 5px;
-  }
+  @include flexbox(row, space-around, center);
+}
+
+#social-icon {
+  font-size: 1.75rem;
+  margin: 0 15px;
+  // width: 25px;
+  // height: 25px;
+  // padding: 5px;
 }
 
 #user-profile {
@@ -42,11 +40,10 @@
 #user-info {
   @include flexbox(column);
   width: 100%;
-  align-items: flex-start;
   row-gap: 0.2rem;
   h1 {
     font-weight: 900;
-    font-size: 36px;
+    // font-size: 1.2rem;
   }
 
   h2 {
@@ -55,7 +52,6 @@
 
   p {
     font-weight: 600;
-    font-size: 20px;
   }
 }
 

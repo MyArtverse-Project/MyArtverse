@@ -1,18 +1,14 @@
-import React from "react"
-import Link from "next/link"
+import React, { useEffect, useState } from "react"
 import Container from "../components/Container"
-import GalleryItem, { LoadingGalleryItem } from "../components/GalleryItem"
 import styles from "../styles/Home.module.scss"
-import { useEffect, useState } from "react"
 import UnderConstruction from "../components/UnderConstruction"
-import Carousel from "../components/Carousel"
-import styles2 from "../styles/Carousel.module.scss"
+import Carousel from "../components/CarouselMenu"
 import { Fursona } from "../utils/types"
 
 export default function Home() {
   const [data, setData] = useState<Fursona[]>([])
   const [loading, setLoading] = useState(true)
-  
+
   useEffect(() => {
     // ! Disabled temporarily for debugging front-end stuff
     // const fetchFursona = (async () => {
@@ -70,13 +66,13 @@ export default function Home() {
         </div>
         <div className={styles["fursona-main-showcase"]}>
           <section>
-           <Carousel title="Popular Fursonas" type="popular" items={data} />
+            <Carousel title="Popular Fursonas" type="popular" items={data} />
           </section>
           <section id={styles["card-previews"]}>
             <Carousel title={"New Fursonas"} type="new" />
           </section>
         </div>
-      </main> 
+      </main>
     </Container>
   )
 }

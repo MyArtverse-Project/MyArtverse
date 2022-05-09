@@ -1,7 +1,7 @@
+@use 'mixins' as *;
+
 #carousel {
-  display: flex;
-  flex-direction: column;
-  justify-content: center;
+  @include flexbox(column, center);
   position: relative;
   // TODO
   overflow-x: hidden;
@@ -27,6 +27,7 @@
     color: rgba($color: white, $alpha: 0.5);
     background: rgba($color: white, $alpha: 0.05);
     transition: all 0.2s ease;
+    cursor: pointer;
 
     &:hover {
       background: rgba($color: white, $alpha: 0.1);
@@ -84,10 +85,8 @@
 
 #cards {
   display: flex;
-  flex-direction: row;
   width: 100vh;
   overflow-x: hidden;
-  // overflow-y: hidden;
   width: max-content;
   padding: 15px 0;
 }

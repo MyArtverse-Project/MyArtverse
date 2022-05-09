@@ -1,8 +1,7 @@
 @use 'mixins' as *;
 
 .fursona-gallery-grid {
-  display: flex;
-  flex-direction: row;
+  @include flexbox(row, null, null);
   // display: grid;
   // grid-template-columns: repeat(5, minmax(240px, 1fr));
   gap: 14px;

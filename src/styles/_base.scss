@@ -1,4 +1,6 @@
-*, ::before, ::after {
+*,
+::before,
+::after {
   box-sizing: border-box;
   padding: 0;
   margin: 0;
@@ -15,8 +17,8 @@
 
 html,
 body {
-  font-family: 'Open Sans', -apple-system, BlinkMacSystemFont, Segoe UI, Roboto, Oxygen,
-    Ubuntu, Cantarell, Fira Sans, Droid Sans, Helvetica Neue, sans-serif;
+  font-family: "Open Sans", -apple-system, BlinkMacSystemFont, Segoe UI, Roboto, Oxygen, Ubuntu, Cantarell, Fira Sans,
+    Droid Sans, Helvetica Neue, sans-serif;
   background-color: #131313;
   color: #fff;
   overflow-x: hidden;
@@ -33,6 +35,26 @@ input[type="text"] {
   color: inherit;
 }
 
+h1 {
+  font-size: 2.2rem;
+}
+
+h2 {
+  font-size: 1.5rem;
+}
+
+h3 {
+  font-size: 1.2rem;
+}
+
+h4 {
+  font-size: 1rem;
+}
+
+p {
+  font-size: 1.25rem;
+}
+
 .container {
   max-width: 1400px;
   margin: 0 auto;
@@ -45,7 +67,6 @@ input[type="text"] {
   }
 
   @media only screen and (max-width: 1024px) {
-    
     max-width: 768px;
     width: 100%;
     margin: 0 auto;

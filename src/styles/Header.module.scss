@@ -82,3 +82,13 @@
     @include appButtonStyles();
   }
 }
+
+#login-button {
+  @include flexbox(null, center, center);
+  padding: 1.3ex;
+  border-radius: 6px;
+  transition: background 150ms ease;
+  &:hover {
+    background-color: rgba(white, 20%);
+  }
+}

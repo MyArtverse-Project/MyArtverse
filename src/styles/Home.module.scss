@@ -91,7 +91,7 @@
 /* Cards animation by skepfusky */
 
 #header-hero {
-  @include flexbox(row, space-between);
+  @include flexbox(row, space-between, center);
   column-gap: 9rem;
 
   @media only screen and (max-width: 1024px) {
