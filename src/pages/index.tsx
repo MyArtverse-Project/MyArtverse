@@ -5,14 +5,14 @@ import GalleryItem, { LoadingGalleryItem } from "../components/GalleryItem"
 import styles from "../styles/Home.module.scss"
 import { useEffect, useState } from "react"
 import UnderConstruction from "../components/UnderConstruction"
-import Carousel from "../components/Carousel"
+import CardCarousel from "../components/CardCarousel"
 import styles2 from "../styles/Carousel.module.scss"
 import { Fursona } from "../utils/types"
 
 export default function Home() {
   const [data, setData] = useState<Fursona[]>([])
   const [loading, setLoading] = useState(true)
-  
+
   useEffect(() => {
     // ! Disabled temporarily for debugging front-end stuff
     // const fetchFursona = (async () => {
@@ -70,13 +70,17 @@ export default function Home() {
         </div>
         <div className={styles["fursona-main-showcase"]}>
           <section>
-           <Carousel title="Popular Fursonas" type="popular" items={data} />
+            <CardCarousel
+              title="Popular Fursonas"
+              type="popular"
+              items={data}
+            />
           </section>
           <section id={styles["card-previews"]}>
-            <Carousel title={"New Fursonas"} type="new" />
+            <CardCarousel title={"New Fursonas"} type="new" />
           </section>
         </div>
-      </main> 
+      </main>
     </Container>
   )
 }

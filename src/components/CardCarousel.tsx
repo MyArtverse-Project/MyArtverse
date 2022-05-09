@@ -9,7 +9,7 @@ interface ICarouselProps {
   items?: Fursona[]
 }
 
-const Carousel = ({ title, type, items = [] }: ICarouselProps) => {
+const CardCarousel = ({ title, type, items = [] }: ICarouselProps) => {
   const carouselRef = useRef(null)
 
   const scrollLeft = () => {
@@ -79,4 +79,4 @@ const Carousel = ({ title, type, items = [] }: ICarouselProps) => {
     </div>
   )
 }
-export default Carousel
+export default CardCarousel

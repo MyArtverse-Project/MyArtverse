@@ -78,7 +78,20 @@
 }
 
 #user-actions {
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  a {
+    margin: 0 5px;
+  }
   button {
     @include appButtonStyles();
+  }
+
+  #avatar {
+    width: 3.5rem;
+    height: 3.5rem;
+    border-radius: 50%;
+    border: white solid 3px;
   }
 }
