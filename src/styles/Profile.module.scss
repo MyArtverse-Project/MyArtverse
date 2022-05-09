@@ -1,0 +1,99 @@
+@use "../styles/mixins" as *;
+
+#user-container-loading {
+  display: flex;
+  padding: 2ex;
+  border-radius: 6px;
+  column-gap: 1.25rem;
+  @include skeletonPulse();
+}
+
+#user-container {
+  display: flex;
+  padding: 2ex;
+  border-radius: 6px;
+  column-gap: 1.25rem;
+}
+
+#avatar {
+  max-height: 750px;
+  max-width: 500px;
+  width: 100%;
+  height: 100%;
+}
+
+#user-social {
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  justify-content: space-around;
+  #social {
+    font-size: 2rem;
+    margin: 0 15px;
+    width: 25px;
+    height: 25px;
+    padding: 5px;
+  }
+}
+
+#user-profile {
+  @include flexbox(column);
+  row-gap: 0.5rem;
+}
+
+#user-info {
+  @include flexbox(column);
+  width: 100%;
+  align-items: flex-start;
+  row-gap: 0.5rem;
+  h1 {
+    font-weight: 900;
+    font-size: 36px;
+  }
+
+  h2 {
+    font-size: 24px;
+  }
+
+  p {
+    font-weight: 600;
+    font-size: 20px;
+  }
+}
+
+#skeleton {
+  &-avatar {
+    width: 200px;
+    height: 200px;
+    border-radius: 7px;
+    @include skeletonSwipe(1300px);
+  }
+
+  &-social {
+    width: 200px;
+    height: 35px;
+    border-radius: 7px;
+    @include skeletonSwipe(1300px);
+  }
+
+  &-name {
+    width: 200px;
+    height: 50px;
+    border-radius: 7px;
+    @include skeletonSwipe(800px);
+  }
+
+  &-species {
+    width: 400px;
+    height: 25px;
+    border-radius: 7px;
+    @include skeletonSwipe(1100px);
+  }
+
+  &-bio {
+    width: 1000px;
+    height: 170px;
+    border-radius: 7px;
+    @include skeletonSwipe(2600px);
+  }
+}

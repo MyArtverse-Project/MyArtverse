@@ -1,27 +1,56 @@
+import { signIn, useSession } from "next-auth/react"
 import Link from "next/link"
+import Router, { useRouter } from "next/router"
+import { useState } from "react"
 import Container from "../components/Container"
 import styles from "../styles/Login.module.scss"
 
-export default function login() {
+export default function Login() {
+  const [email, setEmail] = useState("")
+  const session = useSession()
+  if (session.data && session.status !== "loading") {
+    return Router.push("/profile")
+  }
+
   return (
     <Container>
       <div className={styles["login-form-wrapper"]}>
         <h1>Welcome Back!</h1>
-        <form className={styles["login-form"]}>
+        <form className={styles["login-form"]} onSubmit={(e) => signIn(email)}>
           <div></div>
           <label htmlFor="email">Email</label>
-          <input type="email" id="email" placeholder="Email" />
-          <button type="submit">Login with Email</button>
+          <input
+            type="email"
+            disabled
+            onChange={(e) => setEmail(e.currentTarget.value)}
+            id="email"
+            placeholder="Email only login coming soon"
+          />
+          <button type="submit" disabled>
+            Continue with Email
+          </button>
         </form>
         <div id={styles["divider"]} />
-        <span>or login with these...</span>
+        <span>or continue with these...</span>
         <div className={styles["login-ext"]}>
-          {/* TODO */}
-          <button>Sign in with Google</button>
-          <button>Sign in with Twitter</button>
-        </div>
-        <div className={styles["login-signup"]}>
-          Don&#39;t have an account? <a href="/signup">Sign up</a>
+          <button
+            onClick={() =>
+              signIn("google", {
+                redirect: true
+              })
+            }
+          >
+            Continue with Google
+          </button>
+          <button
+            onClick={() =>
+              signIn("twitter", {
+                redirect: true
+              })
+            }
+          >
+            Continue with Twitter
+          </button>
         </div>
       </div>
     </Container>

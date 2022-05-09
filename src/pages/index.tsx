@@ -69,7 +69,7 @@ export default function Home() {
             <Carousel title="Popular Fursonas" type="popular" items={data} />
           </section>
           <section id={styles["card-previews"]}>
-            <Carousel title={"New Fursonas"} type="new" />
+            <CardCarousel title={"New Fursonas"} type="new" />
           </section>
         </div>
       </main>

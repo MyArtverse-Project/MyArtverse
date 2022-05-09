@@ -2,8 +2,10 @@ import { FontAwesomeIcon } from "@fortawesome/react-fontawesome"
 import { faBars, faBarsProgress, faMagnifyingGlass, faSearch } from "@fortawesome/free-solid-svg-icons"
 import styles from "../styles/Header.module.scss"
 import Link from "next/link"
+import { useSession, signOut } from "next-auth/react"
 
 export default function Header() {
+  const stuff: { data; status } = useSession()
   return (
     <header>
       <div id="wrapper-desktop">
@@ -24,13 +26,26 @@ export default function Header() {
           </div>
         </div>
         <div id={styles["user-actions"]}>
-          {/* Display a log in button for logged out users */}
-          <Link href="/login">
-            <a id={styles["login-button"]}>
-              <img src="/images/login.svg" alt="Login" />
-            </a>
-          </Link>
-          {/* Otherwise, display SVG logos here for logged in users */}
+          {stuff.data && stuff.status !== "loading" ? (
+            <>
+              <a onClick={() => signOut()}>
+                <img src="/images/logout.svg" alt="Logout" />
+              </a>
+              <Link href="/profile">
+                <a>
+                  {console.log(stuff)}
+                  <img src={stuff.data.user!.image} alt="User avatar" id={styles["avatar"]} />
+                  <span>{stuff.data.name}</span>
+                </a>
+              </Link>
+            </>
+          ) : (
+            <Link href="/login">
+              <a>
+                <img src="/images/login.svg" alt="Login" />
+              </a>
+            </Link>
+          )}
         </div>
       </div>
       <div id="wrapper-mobile">
