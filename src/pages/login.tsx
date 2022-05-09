@@ -1,13 +1,16 @@
-import { signIn, useSession } from "next-auth/react"
-import Link from "next/link"
-import Router, { useRouter } from "next/router"
 import { useState } from "react"
+import Link from "next/link"
+import { signIn, useSession } from "next-auth/react"
+import Router, { useRouter } from "next/router"
+import { FontAwesomeIcon } from "@fortawesome/react-fontawesome"
+import { faTwitter } from "@fortawesome/free-brands-svg-icons"
 import Container from "../components/Container"
 import styles from "../styles/Login.module.scss"
 
 export default function Login() {
   const [email, setEmail] = useState("")
   const session = useSession()
+
   if (session.data && session.status !== "loading") {
     return Router.push("/profile")
   }
@@ -30,8 +33,9 @@ export default function Login() {
             Continue with Email
           </button>
         </form>
-        <div id={styles["divider"]} />
-        <span>or continue with these...</span>
+        <div id={styles["divider"]}>
+          <span>or continue with these...</span>
+        </div>
         <div className={styles["login-ext"]}>
           <button
             onClick={() =>
@@ -40,6 +44,7 @@ export default function Login() {
               })
             }
           >
+            <img src="/images/google_g_logo.svg" alt="Google logo" width="15" />
             Continue with Google
           </button>
           <button
@@ -49,6 +54,7 @@ export default function Login() {
               })
             }
           >
+            <FontAwesomeIcon icon={faTwitter} style={{ color: "#1d9bf0" }} />
             Continue with Twitter
           </button>
         </div>

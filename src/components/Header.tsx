@@ -1,5 +1,9 @@
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome"
-import { faBars, faBarsProgress, faMagnifyingGlass, faSearch } from "@fortawesome/free-solid-svg-icons"
+import {
+  faBars,
+  faMagnifyingGlass,
+  faSearch
+} from "@fortawesome/free-solid-svg-icons"
 import styles from "../styles/Header.module.scss"
 import Link from "next/link"
 import { useSession, signOut } from "next-auth/react"
@@ -34,14 +38,18 @@ export default function Header() {
               <Link href="/profile">
                 <a>
                   {console.log(stuff)}
-                  <img src={stuff.data.user!.image} alt="User avatar" id={styles["avatar"]} />
+                  <img
+                    src={stuff.data.user!.image}
+                    alt="User avatar"
+                    id={styles["avatar"]}
+                  />
                   <span>{stuff.data.name}</span>
                 </a>
               </Link>
             </>
           ) : (
             <Link href="/login">
-              <a>
+              <a id={styles["login-button"]}>
                 <img src="/images/login.svg" alt="Login" />
               </a>
             </Link>

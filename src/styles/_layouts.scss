@@ -21,7 +21,7 @@ header {
   #wrapper-mobile {
     @include headerFooterLayout();
     column-gap: 2rem;
-    @media only screen and (min-width: 768px) {
+    @media only screen and (min-width: 769px) {
       display: none;
     }
 

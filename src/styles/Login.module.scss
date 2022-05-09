@@ -6,17 +6,20 @@
   user-select: none;
   margin-top: 2rem;
   position: relative;
+  height: calc(100vh - 12.3rem);
+
   h1 {
     font-weight: 900;
   }
 }
 
 .login-form {
-  @include flexbox(column);
+  @include flexbox(column, null, center);
   row-gap: 0.44rem;
   width: clamp(15rem, 100%, 40rem);
   margin: 2 rem 0;
   text-align: left;
+
   input[type="email"],
   input[type="password"] {
     width: 75%;
@@ -31,7 +34,7 @@
   }
 
   label {
-    text-align: left
+    text-align: left;
   }
 
   button {
@@ -42,11 +45,26 @@
 }
 
 #divider {
-  width: 47%;
+  width: 49%;
+
+  @media only screen and (max-width: 1024px) {
+    width: 90%;
+  }
+
+  @media only screen and (max-width: 768px) {
+    width: 100%;
+  }
+
   height: 1px;
   border-bottom: #f5f5f5 solid 1px;
-  text-align: center
+  text-align: center;
 
+  span {
+    position: relative;
+    top: -1.3ex;
+    background: #131313;
+    padding-inline: 2rem;
+  }
 }
 
 .login-form-links {
@@ -57,11 +75,13 @@
 }
 
 .login-ext {
-  @include flexbox(column, center);
+  @include flexbox(column, null, center);
   row-gap: 0.66rem;
   width: 75%;
 
   button {
+    @include flexbox(null, center, center);
+    column-gap: 0.45rem;
     border-radius: 4px;
     color: #202020;
     background: #f5f5f5;
@@ -72,6 +92,10 @@
     cursor: pointer;
     font-weight: 700;
     font-size: 16px;
+
+    @media only screen and (max-width: 768px) {
+      width: 100%;
+    }
   }
 }
 

@@ -1,4 +1,4 @@
-@use '../styles/mixins' as *;
+@use "../styles/mixins" as *;
 
 #search-box-wrapper {
   @include flexbox(null, null, center);
@@ -94,6 +94,7 @@
   padding: 1.3ex;
   border-radius: 6px;
   transition: background 150ms ease;
+
   &:hover {
     background-color: rgba(white, 20%);
   }
