@@ -42,10 +42,13 @@ node_modules
 .idea/httpRequests/
 
 # PWA files
+service-worker.js
+workbox-*.js
+
 /sw.js
 /sw.js.map
-/workbox-*.js
 /workbox-*.js.map
 /worker-*.js
 /worker-*.js.map
+
 .vercel
