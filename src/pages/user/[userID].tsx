@@ -13,7 +13,7 @@ import styles from "../../styles/User.module.scss"
 export default function User() {
   const [loading, setLoading] = useState(true)
   const [verified, setVerified] = useState(false)
-  
+
   useEffect(() => {
     setLoading(false)
     setVerified(true)
@@ -44,31 +44,22 @@ export default function User() {
         <div id={styles["user-profile"]}>
           <img src="/images/ozzy.png" alt="Ozzy Avatar" id={styles["avatar"]} />
           <div id={styles["user-social"]}>
-            <span id={styles["social-icon"]}>
-              <FontAwesomeIcon icon={faTwitter} />
-            </span>
-            <span id={styles["social-icon"]}>
-              <FontAwesomeIcon icon={faGithub} />
-            </span>
-            <span id={styles["social-icon"]}>
-              <FontAwesomeIcon icon={faTwitter} />
-            </span>
-            <span id={styles["social-icon"]}>
-              <FontAwesomeIcon icon={faPatreon} />
-            </span>
-            <span id={styles["social-icon"]}>
-              <FontAwesomeIcon icon={faInstagram} />
-            </span>
+            <FontAwesomeIcon id={styles["social-icon"]} icon={faTwitter} />
+            <FontAwesomeIcon id={styles["social-icon"]} icon={faGithub} />
+            <FontAwesomeIcon id={styles["social-icon"]} icon={faTwitter} />
+            <FontAwesomeIcon id={styles["social-icon"]} icon={faPatreon} />
+            <FontAwesomeIcon id={styles["social-icon"]} icon={faInstagram} />
           </div>
         </div>
         <div id={styles["user-info"]}>
           <div>
             <h1 id={styles["name"]}>Ozzy</h1>
             {verified ?? (
-              // <i id={styles["verified"]} className="fas fa-check fa-2x" />
-              <span id={styles["verified"]}>
-                <FontAwesomeIcon icon={faCheck} size="2x" />
-              </span>
+              <FontAwesomeIcon
+                id={styles["verified"]}
+                icon={faCheck}
+                size="2x"
+              />
             )}
           </div>
           <h2 id={styles["species"]}>Species: Otter</h2>
