@@ -37,7 +37,6 @@ export default function Header() {
               </a>
               <Link href="/profile">
                 <a>
-                  {console.log(stuff)}
                   <img
                     src={stuff.data.user!.image}
                     alt="User avatar"

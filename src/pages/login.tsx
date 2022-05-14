@@ -10,9 +10,10 @@ import styles from "../styles/Login.module.scss"
 export default function Login() {
   const [email, setEmail] = useState("")
   const session = useSession()
+  const router = useRouter()
 
   if (session.data && session.status !== "loading") {
-    return Router.push("/profile")
+    return router.push("/")
   }
 
   return (
@@ -40,7 +41,7 @@ export default function Login() {
           <button
             onClick={() =>
               signIn("google", {
-                redirect: true
+                callbackUrl: "/profile"
               })
             }
           >
@@ -50,7 +51,7 @@ export default function Login() {
           <button
             onClick={() =>
               signIn("twitter", {
-                redirect: true
+                callbackUrl: "/profile"
               })
             }
           >

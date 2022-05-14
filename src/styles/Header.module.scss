@@ -83,10 +83,17 @@
   align-items: center;
   a {
     margin: 0 5px;
+    #avatar {
+      width: 50px;
+      height: 50px;
+      border-radius: 50%;
+      border: white 3px solid;
+    }
   }
   button {
     @include appButtonStyles();
   }
+
 }
 
 #login-button {

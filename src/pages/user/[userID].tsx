@@ -19,7 +19,6 @@ export default function User() {
     setVerified(true)
   }, [])
 
-  console.log(verified)
   if (loading) {
     return (
       <Container>
