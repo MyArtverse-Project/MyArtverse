@@ -48,10 +48,10 @@ export default function Profile() {
             id={styles["avatar"]}
           />
           <div id={styles["user-social"]}>
-            <FontAwesomeIcon id={styles["social-icon"]} icon={faTwitter} />
-            <FontAwesomeIcon id={styles["social-icon"]} icon={faTwitter} />
-            <FontAwesomeIcon id={styles["social-icon"]} icon={faPatreon} />
-            <FontAwesomeIcon id={styles["social-icon"]} icon={faInstagram} />
+            <FontAwesomeIcon id={styles["social-icon"]} size={"2x"} icon={faTwitter} />
+            <FontAwesomeIcon id={styles["social-icon"]} size={"2x"} icon={faTwitter} />
+            <FontAwesomeIcon id={styles["social-icon"]} size={"2x"} icon={faPatreon} />
+            <FontAwesomeIcon id={styles["social-icon"]} size={"2x"} icon={faInstagram} />
           </div>
         </div>
         <div id={styles["user-info"]}>

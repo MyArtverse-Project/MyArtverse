@@ -9,7 +9,7 @@ import Link from "next/link"
 import { useSession, signOut } from "next-auth/react"
 
 export default function Header() {
-  const stuff: { data; status } = useSession()
+  const { data, status } = useSession()
   return (
     <header>
       <div id="wrapper-desktop">
@@ -29,8 +29,9 @@ export default function Header() {
             />
           </div>
         </div>
+        {console.log(data)}
         <div id={styles["user-actions"]}>
-          {stuff.data && stuff.status !== "loading" ? (
+          {data && status !== "loading" ? (
             <>
               <a onClick={() => signOut()}>
                 <img src="/images/logout.svg" alt="Logout" />
@@ -38,11 +39,11 @@ export default function Header() {
               <Link href="/profile">
                 <a>
                   <img
-                    src={stuff.data.user!.image}
+                    src={data.user.image}
                     alt="User avatar"
                     id={styles["avatar"]}
                   />
-                  <span>{stuff.data.name}</span>
+                  <span>{data.name}</span>
                 </a>
               </Link>
             </>
