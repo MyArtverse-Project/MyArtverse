@@ -20,7 +20,6 @@ it's still work in progress and the Figma design can be seen [here][figma]!
 - **Ozzy (also known as Renzo or Vulpo)**: Full-stack developer/Co-founder
 - **Mozza (also known as Solixity)**: Back-end developer/Co-founder
 - **Jaker**: UI/UX designer
-- **skepfusky**: Front-end developer & UI/UX designer
 - **Your name could be here: Our future contributor!**
 
 ### Contributions
