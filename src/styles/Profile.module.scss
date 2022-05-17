@@ -1,4 +1,4 @@
-@use "../styles/mixins" as *;
+@use "partials/mixins" as *;
 
 #user-container-loading {
   display: flex;
@@ -21,10 +21,8 @@
 }
 
 #user-social {
-  display: flex;
-  flex-direction: row;
-  align-items: center;
-  justify-content: space-around;
+  @include flexbox(row, space-around, center);
+
   #social {
     font-size: 2rem;
     margin: 0 15px;

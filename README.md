@@ -13,15 +13,18 @@ _MyFursona_ is built using Next.js with TypeScript, Sass, Fastify, and MongoDB.
 ## Design
 
 The website's design was initally designed by Ozzy, but it was improved by Skep & Jaker;
-it's still work in progress and the Figma design can be seen [here](https://www.figma.com/file/3dd2FKkSSNCbPBYwhOLhTo/MyFursona?node-id=0%3A1)!
+it's still work in progress and the Figma design can be seen [here][figma]!
 
 ## Our Devs
 
-- **Ozzy (Also known as Renzo or Vulpo)**: Front-end Dev/Co-Founder
-- **Mozza (Also known as Solixity)**: Back-end Dev/Co-Founder
-- **Jaker**: Designer
+- **Ozzy (also known as Renzo or Vulpo)**: Full-stack developer/Co-founder
+- **Mozza (also known as Solixity)**: Back-end developer/Co-founder
+- **Jaker**: UI/UX designer
+- **skepfusky**: Front-end developer & UI/UX designer
 - **Your name could be here: Our future contributor!**
 
-## Contributing
+### Contributions
 
 Your contributions are very appreciated! Before you make changes, contact Ozzy/Renzo/Vulpo via Revolt (@OzzyTheDev), Email(vulpothedev@gmail.com), Discord(OzzyTheDev#1312)
+
+[figma]: https://www.figma.com/file/3dd2FKkSSNCbPBYwhOLhTo/MyFursona?node-id=0%3A1

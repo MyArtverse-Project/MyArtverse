@@ -20,7 +20,7 @@ export default function Header() {
         </Link>
         <div id={styles["search-box-wrapper"]}>
           <div id={styles["search-box"]}>
-            <FontAwesomeIcon icon={faMagnifyingGlass} />
+              <FontAwesomeIcon icon={faMagnifyingGlass} />
             <input
               type="search"
               placeholder="Search fursonas..."

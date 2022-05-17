@@ -1,8 +1,6 @@
-@use "../styles/mixins" as *;
-
+@use "partials/mixins" as *;
 
 #galleryItem {
-
   @include flexbox(column, center, center);
   border-radius: var(--gallery-r-item);
   transition: transform 300ms ease;

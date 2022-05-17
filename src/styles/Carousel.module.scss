@@ -1,4 +1,4 @@
-@use 'mixins' as *;
+@use "partials/mixins" as *;
 
 #carousel {
   @include flexbox(column, center);
@@ -10,8 +10,7 @@
 }
 
 #carousel-container {
-  display: flex;
-  align-items: center;
+  @include flexbox(null, null, center);
   position: relative;
 
   &::before,
@@ -50,16 +49,18 @@
 #label {
   &Popular::before {
     content: "💖";
-    padding-right: 5px;
   }
 
   &New::before {
     content: "✨";
-    padding-right: 5px;
   }
 
   &Popular,
   &New {
+    &::before {
+      padding-right: 5px;
+    }
+    
     position: relative;
     width: max-content;
     z-index: 1;

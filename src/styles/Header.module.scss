@@ -1,4 +1,4 @@
-@use "../styles/mixins" as *;
+@use "partials/mixins" as *;
 
 #search-box-wrapper {
   @include flexbox(null, null, center);
@@ -81,6 +81,7 @@
   display: flex;
   flex-direction: row;
   align-items: center;
+
   a {
     margin: 0 5px;
     #avatar {
@@ -90,10 +91,10 @@
       border: white 3px solid;
     }
   }
+
   button {
     @include appButtonStyles();
   }
-
 }
 
 #login-button {

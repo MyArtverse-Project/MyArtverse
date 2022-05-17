@@ -1,4 +1,4 @@
-@use "../styles/mixins" as *;
+@use "partials/mixins" as *;
 
 .login-form-wrapper {
   @include flexbox(column, null, center);
