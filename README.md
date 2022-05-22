@@ -6,7 +6,7 @@ _MyFursona_ is an open source project where users can manage their artworks, inf
 
 ## Stack
 
-![](https://skillicons.dev/icons?i=nextjs,ts,sass,mongodb,fastify)
+![MF Stack](https://skillicons.dev/icons?i=nextjs,ts,sass,mongodb,fastify)
 
 _MyFursona_ is built using Next.js with TypeScript, Sass, Fastify, and MongoDB.
 

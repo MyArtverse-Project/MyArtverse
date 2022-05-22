@@ -4,7 +4,7 @@ import {
   faMagnifyingGlass,
   faSearch
 } from "@fortawesome/free-solid-svg-icons"
-import styles from "../styles/Header.module.scss"
+import styles from "@/styles/Header.module.scss"
 import Link from "next/link"
 import { useSession, signOut } from "next-auth/react"
 
@@ -20,7 +20,7 @@ export default function Header() {
         </Link>
         <div id={styles["search-box-wrapper"]}>
           <div id={styles["search-box"]}>
-              <FontAwesomeIcon icon={faMagnifyingGlass} />
+            <FontAwesomeIcon icon={faMagnifyingGlass} />
             <input
               type="search"
               placeholder="Search fursonas..."

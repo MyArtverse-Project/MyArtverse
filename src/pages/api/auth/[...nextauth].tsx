@@ -2,7 +2,7 @@ import NextAuth from "next-auth"
 import GoogleProvider from "next-auth/providers/google"
 import EmailProvider from "next-auth/providers/email"
 import TwitterProvider from "next-auth/providers/twitter"
-import clientPromise from "../../../utils/connectMongo"
+import clientPromise from "@/utils/connectMongo"
 import { MongoDBAdapter } from "@next-auth/mongodb-adapter"
 
 export default NextAuth({

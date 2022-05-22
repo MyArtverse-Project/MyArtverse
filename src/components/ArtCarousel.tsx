@@ -1,6 +1,6 @@
 import GalleryItem, { LoadingGalleryItem } from "./GalleryItem"
-import styles from "../styles/Carousel.module.scss"
-import { Fursona } from "../utils/types"
+import styles from "@/styles/Carousel.module.scss"
+import { Fursona } from "@/utils/types"
 import { useRef } from "react"
 
 interface IArtCarouselProps {

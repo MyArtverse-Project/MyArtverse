@@ -4,8 +4,8 @@ import { signIn, useSession } from "next-auth/react"
 import Router, { useRouter } from "next/router"
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome"
 import { faTwitter } from "@fortawesome/free-brands-svg-icons"
-import Container from "../components/Container"
-import styles from "../styles/Login.module.scss"
+import Container from "@/components/Container"
+import styles from "@/styles/Login.module.scss"
 
 export default function Login() {
   const [email, setEmail] = useState("")

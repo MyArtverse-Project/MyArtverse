@@ -1,9 +1,9 @@
 import React, { useEffect, useState } from "react"
-import Container from "../components/Container"
-import styles from "../styles/Home.module.scss"
-import UnderConstruction from "../components/UnderConstruction"
-import Carousel from "../components/CarouselMenu"
-import { Fursona } from "../utils/types"
+import Container from "@/components/Container"
+import styles from "@/styles/Home.module.scss"
+import UnderConstruction from "@/components/UnderConstruction"
+import Carousel from "@/components/CarouselMenu"
+import { Fursona } from "@/utils/types"
 
 export default function Home() {
   const [data, setData] = useState<Fursona[]>([])

@@ -7,8 +7,8 @@ import {
   faTwitter
 } from "@fortawesome/free-brands-svg-icons"
 import { faCheck } from "@fortawesome/free-solid-svg-icons"
-import Container from "../../components/Container"
-import styles from "../../styles/User.module.scss"
+import Container from "@/components/Container"
+import styles from "@/styles/User.module.scss"
 
 export default function User() {
   const [loading, setLoading] = useState(true)

@@ -1,6 +1,6 @@
 import Document, { Html, Head, Main, NextScript } from "next/document";
 
-export default class MyFursonaPWA extends Document {
+export default class MyFursonaApp extends Document {
   render() {
     return (
       <Html>

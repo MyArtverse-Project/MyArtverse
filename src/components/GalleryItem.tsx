@@ -1,5 +1,5 @@
-import styles from "../styles/GalleryItem.module.scss"
-import Link from 'next/link'
+import styles from "@/styles/GalleryItem.module.scss"
+import Link from "next/link"
 
 interface IGalleryItemProps {
   avatar: string

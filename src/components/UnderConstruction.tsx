@@ -1,7 +1,10 @@
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome"
-import { faExclamation, faExclamationTriangle } from "@fortawesome/free-solid-svg-icons"
+import {
+  faExclamation,
+  faExclamationTriangle
+} from "@fortawesome/free-solid-svg-icons"
 import Link from "next/link"
-import styles from "../styles/WIP.module.scss"
+import styles from "@/styles/WIP.module.scss"
 
 export default function UnderConstruction() {
   return (
