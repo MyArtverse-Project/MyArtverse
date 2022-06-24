@@ -9,10 +9,10 @@ import styles from "@/styles/Login.module.scss"
 
 export default function Login() {
   const [email, setEmail] = useState("")
-  const session = useSession()
+  const { status } = useSession()
   const router = useRouter()
 
-  if (session.data && session.status !== "loading") {
+  if (status === "authenticated") {
     return router.push("/")
   }
 

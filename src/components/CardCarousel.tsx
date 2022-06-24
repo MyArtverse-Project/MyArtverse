@@ -11,7 +11,7 @@ interface ICarouselProps {
 }
 
 const CardCarousel = ({ title, type, items = [] }: ICarouselProps) => {
-  const carouselRef = useRef(null)
+  const carouselRef = useRef<HTMLDivElement>(null)
 
   const scrollLeft = () => {
     const node = carouselRef.current
