@@ -21,7 +21,7 @@ export default function Home() {
         avatar: "/images/ozzy.png",
         name: "Ozzy",
         gradientCSS: "linear-gradient(228.09deg, #AB41FF 0%, #FF248D 100%)",
-        link: "/user/2342349824",
+        link: "/fursonas/2342349824",
         primaryColor: "#9F02FF",
         species: "Otter"
       }

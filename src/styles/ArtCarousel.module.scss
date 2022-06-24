@@ -1,0 +1,16 @@
+@use "partials/mixins" as *;
+
+#carousel-container {
+  display: flex;
+  flex-direction: column;
+  justify-content: left;
+  width: 100%;
+  h2 {
+    font-size: 2rem;
+  }
+  #carousel {
+    display: flex;
+    flex-direction: column;
+    
+  }
+}
