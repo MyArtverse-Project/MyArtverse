@@ -1,7 +1,6 @@
 import { useRef } from "react"
 import GalleryItem, { LoadingGalleryItem } from "./GalleryItem"
 import styles from "../styles/Carousel.module.scss"
-import { Fursona } from "@/utils/types"
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome"
 import { faAngleLeft, faAngleRight } from "@fortawesome/free-solid-svg-icons"
 

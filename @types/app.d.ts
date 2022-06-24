@@ -1,4 +1,4 @@
-export interface Fursona {
+declare interface Fursona {
   avatar: string
   name: string
   species: string
