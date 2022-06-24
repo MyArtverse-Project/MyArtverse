@@ -7,7 +7,7 @@
     "build": "next build",
     "start": "next start",
     "lint": "next lint",
-    "typescript:check": "./node_modules/.bin/tsc --noEmit --project ./tsconfig.json"
+    "typescript:check": "./node_modules/.bin/tsc --noEmit"
   },
   "dependencies": {
     "@faker-js/faker": "^6.0.0",
