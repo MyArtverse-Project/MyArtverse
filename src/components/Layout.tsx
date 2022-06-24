@@ -1,8 +1,13 @@
+import { ReactChild } from "react"
 import Head from "next/head"
 import Header from "./Header"
 // import Footer from "./Footer"
 
-export default function Layout({ children }) {
+interface Props {
+  children: ReactChild
+}
+
+export default function Layout({ children }: Props) {
   return (
     <>
       <Head>

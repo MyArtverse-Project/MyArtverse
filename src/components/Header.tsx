@@ -10,6 +10,7 @@ import { useSession, signOut } from "next-auth/react"
 
 export default function Header() {
   const { data, status } = useSession()
+
   return (
     <header>
       <div id="wrapper-desktop">
@@ -29,9 +30,8 @@ export default function Header() {
             />
           </div>
         </div>
-        {console.log(data)}
         <div id={styles["user-actions"]}>
-          {data && status !== "loading" ? (
+          {status === "authenticated" && data.user ? (
             <>
               <a onClick={() => signOut()}>
                 <img src="/images/logout.svg" alt="Logout" />
@@ -39,11 +39,11 @@ export default function Header() {
               <Link href="/profile">
                 <a>
                   <img
-                    src={data.user.image}
+                    src={data.user?.image ?? ""}
                     alt="User avatar"
                     id={styles["avatar"]}
                   />
-                  <span>{data.name}</span>
+                  <span>{data.user.name}</span>
                 </a>
               </Link>
             </>

@@ -21,7 +21,9 @@
     "isolatedModules": true,
     "experimentalDecorators": true,
     "emitDecoratorMetadata": true,
-    "jsx": "preserve"
+    "jsx": "preserve",
+    "typeRoots": ["./@types"],
+    "strictPropertyInitialization": false
   },
   "include": ["next-env.d.ts", "**/*.ts", "**/*.tsx"],
   "exclude": ["node_modules"]

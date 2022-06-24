@@ -13,14 +13,10 @@ import styles from "@/styles/Profile.module.scss"
 
 export default function Profile() {
   const [verified, setVerified] = useState(false)
-  const session: { data; status } = useSession()
+  const { data, status } = useSession()
   const router = useRouter()
-  console.log(verified)
-  if (session.status === "unauthenticated") {
-    return router.push("/login")
-  }
 
-  if (session.status === "loading") {
+  if (status === "loading") {
     return (
       <Container>
         <div id={styles["user-container"]}>
@@ -38,25 +34,45 @@ export default function Profile() {
     )
   }
 
+  if (status === "unauthenticated" || !data?.user) {
+    return router.push("/login")
+  }
+
   return (
     <Container>
       <div id={styles["user-container"]}>
         <div id={styles["user-profile"]}>
           <img
-            src={session.data.user.image}
-            alt={`${session.data.user.name} Avatar`}
+            src={data.user?.image ?? ""}
+            alt={`${data.user.name} Avatar`}
             id={styles["avatar"]}
           />
           <div id={styles["user-social"]}>
-            <FontAwesomeIcon id={styles["social-icon"]} size={"2x"} icon={faTwitter} />
-            <FontAwesomeIcon id={styles["social-icon"]} size={"2x"} icon={faTwitter} />
-            <FontAwesomeIcon id={styles["social-icon"]} size={"2x"} icon={faPatreon} />
-            <FontAwesomeIcon id={styles["social-icon"]} size={"2x"} icon={faInstagram} />
+            <FontAwesomeIcon
+              id={styles["social-icon"]}
+              size={"2x"}
+              icon={faTwitter}
+            />
+            <FontAwesomeIcon
+              id={styles["social-icon"]}
+              size={"2x"}
+              icon={faTwitter}
+            />
+            <FontAwesomeIcon
+              id={styles["social-icon"]}
+              size={"2x"}
+              icon={faPatreon}
+            />
+            <FontAwesomeIcon
+              id={styles["social-icon"]}
+              size={"2x"}
+              icon={faInstagram}
+            />
           </div>
         </div>
         <div id={styles["user-info"]}>
           <div>
-            <h1 id={styles["name"]}>{session.data.user.name}</h1>
+            <h1 id={styles["name"]}>{data.user.name}</h1>
             {verified ?? (
               <FontAwesomeIcon id={styles.social} icon={faCheck} size="2x" />
             )}

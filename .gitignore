@@ -52,3 +52,6 @@ workbox-*.js
 /worker-*.js.map
 
 .vercel
+
+# tsc
+*.tsbuildinfo

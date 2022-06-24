@@ -1,7 +1,6 @@
 import { useRef } from "react"
 import GalleryItem, { LoadingGalleryItem } from "./GalleryItem"
 import styles from "@/styles/Carousel.module.scss"
-import { Fursona } from "@/utils/types"
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome"
 import { faAngleLeft, faAngleRight } from "@fortawesome/free-solid-svg-icons"
 
@@ -12,7 +11,7 @@ interface ICarouselProps {
 }
 
 const CardCarousel = ({ title, type, items = [] }: ICarouselProps) => {
-  const carouselRef = useRef(null)
+  const carouselRef = useRef<HTMLDivElement>(null)
 
   const scrollLeft = () => {
     const node = carouselRef.current
