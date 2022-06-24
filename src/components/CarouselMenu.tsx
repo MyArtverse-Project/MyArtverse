@@ -60,11 +60,9 @@ const CardCarousel = ({ title, type, items = [] }: ICarouselProps) => {
         <div id={styles["card-wrapper"]} ref={carouselRef}>
           <div id={styles["cards"]}>
             {items.length >= 5
-              ? items.map((item, index) => (
-                  <GalleryItem key={index} {...item} />
-                ))
+              ? items.map((item) => <GalleryItem key={item.link} {...item} />)
               : items.map((item, index) => (
-                  <GalleryItem key={index} {...item} />
+                  <GalleryItem key={item.link} {...item} />
                 ))}
             {Array(5 - items.length)
               .fill(0)
