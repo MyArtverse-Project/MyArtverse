@@ -1,4 +1,8 @@
-<h1 align="center">MyFursona</h1>
+<h1 align="center">
+  <img src="https://user-images.githubusercontent.com/94678583/178055907-c0318ec0-ea39-4c0c-b8fe-ec010b778764.png" width="127" />
+  <br>
+  <span>MyFursona</span>
+</h1>
 
 _MyFursona_ is an open source project where users can manage their artworks, info (such as biography and interests), and lore about their fursona.
 
