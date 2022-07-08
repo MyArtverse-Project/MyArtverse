@@ -1,8 +1,8 @@
 import React, { useEffect, useState } from "react"
 import Container from "@/components/Container"
 import styles from "@/styles/Home.module.scss"
-import UnderConstruction from "@/components/UnderConstruction"
 import Carousel from "@/components/CarouselMenu"
+import SEOTags from "@/components/SEOTags"
 
 export default function Home() {
   const [data, setData] = useState<Fursona[]>([])
@@ -29,6 +29,7 @@ export default function Home() {
   }, [])
   return (
     <Container>
+      <SEOTags />
       <main>
         <div id={styles["header-hero"]}>
           <article>
@@ -39,6 +40,28 @@ export default function Home() {
               friends!
             </p>
           </article>
+          <div id={styles["hero-card-container"]}>
+            <div id={styles["hero-card-wrapper"]}>
+              <div
+                id={styles["hero-card-item"]}
+                style={{ "--stagger": "1" } as React.CSSProperties}
+              >
+                <img src="/images/ozzy.png" alt="Ozzy Fursona" />
+              </div>
+              <div
+                id={styles["hero-card-item"]}
+                style={{ "--stagger": "2" } as React.CSSProperties}
+              >
+                <img src="/images/ozzy.png" alt="Ozzy Fursona" />
+              </div>
+              <div
+                id={styles["hero-card-item"]}
+                style={{ "--stagger": "3" } as React.CSSProperties}
+              >
+                <img src="/images/ozzy.png" alt="Ozzy Fursona" />
+              </div>
+            </div>
+          </div>
         </div>
         <div className={styles["fursona-main-showcase"]}>
           <section>

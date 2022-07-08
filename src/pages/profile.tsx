@@ -10,6 +10,7 @@ import { Router, useRouter } from "next/router"
 import { useEffect, useState } from "react"
 import Container from "@/components/Container"
 import styles from "@/styles/Profile.module.scss"
+import SEOTags from "@/components/SEOTags"
 
 export default function Profile() {
   const [verified, setVerified] = useState(false)
@@ -19,6 +20,8 @@ export default function Profile() {
   if (status === "loading") {
     return (
       <Container>
+        <SEOTags />
+
         <div id={styles["user-container"]}>
           <div id={styles["user-profile"]}>
             <div id={styles["skeleton-avatar"]}></div>
