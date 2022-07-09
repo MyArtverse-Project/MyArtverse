@@ -11,6 +11,7 @@ config.autoAddCss = false
 type AppPropsWithLayout = AppProps & {
   Component: NextPage
 }
+
 export default function MyApp({
   Component,
   pageProps: { session, ...pageProps }

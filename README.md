@@ -1,4 +1,8 @@
-<h1 align="center">MyFursona</h1>
+<h1 align="center">
+  <img src="https://user-images.githubusercontent.com/94678583/178055907-c0318ec0-ea39-4c0c-b8fe-ec010b778764.png" width="127" />
+  <br>
+  <span>MyFursona</span>
+</h1>
 
 _MyFursona_ is an open source project where users can manage their artworks, info (such as biography and interests), and lore about their fursona.
 
@@ -15,11 +19,12 @@ _MyFursona_ is built using Next.js with TypeScript, Sass, Fastify, and MongoDB.
 The website's design was initally designed by Ozzy, but it was improved by Skep & Jaker;
 it's still work in progress and the Figma design can be seen [here][figma]!
 
-## Our Devs
+## Contributors
 
 - **Ozzy (also known as Renzo or Vulpo)**: Full-stack developer/Co-founder
 - **Mozza (also known as Solixity)**: Back-end developer/Co-founder
 - **Jaker**: UI/UX designer
+- **skepfusky**: Front-end design; UI/UX designer
 - **Your name could be here: Our future contributor!**
 
 ### Contributions

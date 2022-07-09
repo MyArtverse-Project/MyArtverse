@@ -1,11 +1,12 @@
 import { useState } from "react"
 import Link from "next/link"
 import { signIn, useSession } from "next-auth/react"
-import Router, { useRouter } from "next/router"
+import { useRouter } from "next/router"
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome"
 import { faTwitter } from "@fortawesome/free-brands-svg-icons"
 import Container from "@/components/Container"
 import styles from "@/styles/Login.module.scss"
+import SEOTags from "@/components/SEOTags"
 
 export default function Login() {
   const [email, setEmail] = useState("")
@@ -18,6 +19,8 @@ export default function Login() {
 
   return (
     <Container>
+      <SEOTags />
+
       <div className={styles["login-form-wrapper"]}>
         <h1>Welcome Back!</h1>
         <form className={styles["login-form"]} onSubmit={(e) => signIn(email)}>
