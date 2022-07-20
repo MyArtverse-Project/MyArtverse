@@ -2,7 +2,7 @@ import React, { useEffect, useState } from "react"
 import Container from "@/components/Container"
 import styles from "@/styles/Home.module.scss"
 import Carousel from "@/components/CarouselMenu"
-import SEOTags from "@/components/SEOTags"
+import MetaTags from "@/components/MetaTags"
 
 export default function Home() {
   const [data, setData] = useState<Fursona[]>([])
@@ -29,7 +29,7 @@ export default function Home() {
   }, [])
   return (
     <Container>
-      <SEOTags />
+      <MetaTags />
       <main>
         <div id={styles["header-hero"]}>
           <article>

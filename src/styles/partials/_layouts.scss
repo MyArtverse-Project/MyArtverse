@@ -31,7 +31,7 @@ header {
     }
 
     button {
-      padding: 1.5ex;
+      padding: 2ex;
       background: #0000;
       border: 1px solid #fff;
       border-radius: 6px;
@@ -39,6 +39,28 @@ header {
   }
 }
 
-footer #wrapper-desktop {
+footer {
   @include headerFooterLayout();
+  padding-block: 1.25rem;
+
+  .container {
+    @include flexbox(row, space-between);
+    width: 100% !important;
+
+    @media only screen and (max-width: 768px) {
+      @include flexbox(column-reverse, null, center);
+      row-gap: 0.5rem;
+    }
+  }
+
+  ul {
+    list-style: none;
+    @include flexbox(row);
+    column-gap: 2rem;
+
+    @media only screen and (max-width: 768px) {
+      @include flexbox(column, null, center);
+      row-gap: 1rem;
+    }
+  }
 }

@@ -15,6 +15,7 @@
     "@typegoose/typegoose": "^9.7.1",
     "@types/node": "^17.0.23",
     "@types/react": "^17.0.43",
+    "cypress": "^10.3.1",
     "mongodb": "^4.5.0",
     "mongoose": "^6.2.8",
     "next": "12.1.1",

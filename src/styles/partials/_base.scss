@@ -85,3 +85,57 @@ p {
     font-size: 15px;
   }
 }
+
+// WIP notice
+.wip-notice {
+  user-select: none;
+  background-color: hsla(0, 65%, 21%, 0.75); 
+  background-size: 56.57px 56.57px;
+  border-radius: 6px;
+  box-shadow: 0 0.25rem 0.5rem rgba(0, 0, 0, 0.1);
+  color: #f5f5f5;
+  font-size: 0.95rem;
+  display: flex;
+  column-gap: 0.75rem;
+  align-items: center;
+  justify-content: center;
+  padding-inline: 5rem;
+  line-height: 1.5;
+  text-align: center;
+  overflow: hidden;
+  height: 3rem;
+  transition: all 420ms cubic-bezier(0,.9,.25,1);
+
+  @media only screen and (max-width: 1270px) {
+    flex-direction: column;
+    row-gap: 0.35rem;
+    height: 7.5rem;
+  }
+
+  @media only screen and (max-width: 640px) {
+    height: 10rem;
+  }
+
+  a {
+    color: #f5f5f5;
+    text-decoration: underline;
+  }
+
+  &.hidden {
+    height: 0;
+    opacity: 0;
+  }
+
+  #dismiss-btn {
+    padding: 0.35rem 1rem;
+    display: flex;
+    column-gap: 0.75rem;
+    background-color: rgb(156, 16, 16);
+    transition: background-color 0.2s ease;
+    border-radius: 6px;
+
+    &:hover {
+      background-color: rgb(193, 27, 27);
+    }
+  }
+}

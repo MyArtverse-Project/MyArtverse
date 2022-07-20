@@ -4,7 +4,7 @@
   <span>MyFursona</span>
 </h1>
 
-_MyFursona_ is an open source project where users can manage their artworks, info (such as biography and interests), and lore about their fursona.
+_MyFursona_ is an open source web app where users can manage their artworks, various info (such as biography, literature, socials, interests, etc.), and lore about their fursona. The project is still in the works, so a lot of breaking changes are bound to happen!
 
 ![UI Redesign by Jaker](https://user-images.githubusercontent.com/86149507/160653487-3b7b162a-8f1d-4d1e-8ddf-bd4eeec04189.png)
 
@@ -12,7 +12,7 @@ _MyFursona_ is an open source project where users can manage their artworks, inf
 
 ![MF Stack](https://skillicons.dev/icons?i=nextjs,ts,sass,mongodb,fastify)
 
-_MyFursona_ is built using Next.js with TypeScript, Sass, Fastify, and MongoDB.
+_MyFursona_ is built using Next.js with TypeScript, Sass, Fastify, and MongoDB. With the backend written in Go.
 
 ## Design
 
