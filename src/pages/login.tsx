@@ -6,7 +6,7 @@ import { FontAwesomeIcon } from "@fortawesome/react-fontawesome"
 import { faTwitter } from "@fortawesome/free-brands-svg-icons"
 import Container from "@/components/Container"
 import styles from "@/styles/Login.module.scss"
-import SEOTags from "@/components/SEOTags"
+import MetaTags from "@/components/MetaTags"
 
 export default function Login() {
   const [email, setEmail] = useState("")
@@ -19,7 +19,7 @@ export default function Login() {
 
   return (
     <Container>
-      <SEOTags />
+      <MetaTags />
 
       <div className={styles["login-form-wrapper"]}>
         <h1>Welcome Back!</h1>

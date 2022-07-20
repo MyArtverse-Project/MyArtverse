@@ -7,29 +7,35 @@ interface ISEOProps {
   image?: string
 }
 
-export default function SEOTags({ title, description, image }: ISEOProps) {
+export default function MetaTags({ title, description, image }: ISEOProps) {
   const router = useRouter()
 
   const SITE_TITLE = "MyFursona"
-  const MAIN_DESCRIPTION = "A place where users can manage their fursonas!"
+  const MAIN_DESCRIPTION = "A place where users can manage their fursonas! The project is currently under construction."
 
   const url = `https://myfursona.art${router.asPath}`
   const dynamicTitle =
-    router.pathname === "/" ? SITE_TITLE : `${title || router.pathname} - ${SITE_TITLE}`
+    router.pathname === "/" ? SITE_TITLE : `${title ? title : router.pathname} - ${SITE_TITLE}`
+
+  const dynamicDescription =
+    router.pathname === "/" ? MAIN_DESCRIPTION : description
 
   return (
     <Head>
       <title>{dynamicTitle}</title>
       <meta name="description" content={description && MAIN_DESCRIPTION} />
-      <meta name="keywords" content="furry, fursona, furry fandom, MyFursona, ref sheet" />
+      <meta
+        name="keywords"
+        content="furry, fursona, furry fandom, MyFursona, ref sheet"
+      />
       {/* Open Graph */}
       <meta property="og:title" content={dynamicTitle} />
-      <meta property="og:description" content={description && MAIN_DESCRIPTION} />
+      <meta property="og:description" content={dynamicDescription} />
       <meta property="og:type" content="website" />
       <meta property="og:url" content={url} />
       {/* Twitter Tags */}
       <meta name="twitter:title" content={dynamicTitle} />
-      <meta name="twitter:description" content={description && MAIN_DESCRIPTION} />
+      <meta name="twitter:description" content={dynamicDescription} />
       <meta name="twitter:card" content="summary" />
       <meta name="twitter:url" content={url} />
       {/* Canonical URL */}
