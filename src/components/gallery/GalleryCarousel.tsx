@@ -6,7 +6,7 @@ type Props = {
   items: typeof IGalleryItemProps[] | any[]
 }
 
-export default function GalleryCarousel({ items }: Props) {
+const GalleryCarousel = ({ items }: Props) => {
   return (
     <div>
       <button>{"<"}</button>
@@ -17,3 +17,5 @@ export default function GalleryCarousel({ items }: Props) {
     </div>
   )
 }
+
+export default GalleryCarousel

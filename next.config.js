@@ -3,9 +3,6 @@ const nextConfig = {
   reactStrictMode: true,
   compress: true,
   swcMinify: true,
-  webpack: {
-    optimizeCSS: true,
-  },
 };
 
 module.exports = nextConfig;

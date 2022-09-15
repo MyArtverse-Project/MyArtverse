@@ -7,7 +7,7 @@ interface ISEOProps {
   image?: string
 }
 
-export default function MetaTags({ title, description, image }: ISEOProps) {
+const MetaTags = ({ title, description, image }: ISEOProps) => {
   const router = useRouter()
 
   const SITE_TITLE = "MyFursona"
@@ -44,3 +44,5 @@ export default function MetaTags({ title, description, image }: ISEOProps) {
     </Head>
   )
 }
+
+export default MetaTags

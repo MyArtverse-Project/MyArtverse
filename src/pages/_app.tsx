@@ -1,5 +1,6 @@
-import { AppProps } from "next/app"
+import type { AppProps } from "next/app"
 import { NextPage } from "next"
+import { Session } from "next-auth"
 import { SessionProvider } from "next-auth/react"
 import { config } from "@fortawesome/fontawesome-svg-core"
 import Layout from "@/components/Layout"
@@ -8,14 +9,14 @@ import "@fortawesome/fontawesome-svg-core/styles.css"
 
 config.autoAddCss = false
 
-type AppPropsWithLayout = AppProps & {
+type AppPropsWithLayout = AppProps<{ session: Session }> & {
   Component: NextPage
 }
 
-export default function MyFursonaApp({
+const MyFursonaApp = ({
   Component,
   pageProps: { session, ...pageProps }
-}: AppPropsWithLayout) {
+}: AppPropsWithLayout) => {
   return (
     <SessionProvider session={session}>
       <Layout>
@@ -24,3 +25,5 @@ export default function MyFursonaApp({
     </SessionProvider>
   )
 }
+
+export default MyFursonaApp

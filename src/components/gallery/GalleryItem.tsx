@@ -1,4 +1,4 @@
-import styles from "@/styles/GalleryItem.module.scss"
+import styles from "./GalleryItem.module.scss"
 import Link from "next/link"
 
 interface IGalleryItemProps {
@@ -10,14 +10,14 @@ interface IGalleryItemProps {
   link: string
 }
 
-export default function GalleryItem({
+const GalleryItem = ({
   avatar,
   gradientCSS,
   name,
   species,
   primaryColor = "black",
   link
-}: IGalleryItemProps) {
+}: IGalleryItemProps) => {
   return (
     <Link href={link} passHref>
       <a>
@@ -43,12 +43,15 @@ export default function GalleryItem({
   )
 }
 
-export function LoadingGalleryItem() {
+const LoadingGalleryItem = () => {
   return (
     <div id={styles["loadingGalleryItem"]}>
-      <div id={styles["loadingImage"]} style={{ background: `` }}></div>
+      <div id={styles["loadingImage"]} style={{ background: null }}></div>
       <div id={styles["text"]}></div>
       <div id={styles["textSpecies"]}></div>
     </div>
   )
 }
+
+export { LoadingGalleryItem }
+export default GalleryItem

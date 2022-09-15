@@ -7,10 +7,10 @@ import {
   faTwitter
 } from "@fortawesome/free-brands-svg-icons"
 import { faCheck } from "@fortawesome/free-solid-svg-icons"
-import Container from "@/components/Container"
+import Container from "@/components/layouts/Container"
 import styles from "@/styles/User.module.scss"
-import Carousel from "@/components/ArtCarousel"
-import ArtCarousel from "@/components/ArtCarousel"
+import Carousel from "@/components/carousel/ArtCarousel"
+import ArtCarousel from "@/components/carousel/ArtCarousel"
 
 export default function User() {
   const [loading, setLoading] = useState(true)

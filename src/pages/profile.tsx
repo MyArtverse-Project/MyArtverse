@@ -8,9 +8,9 @@ import { FontAwesomeIcon } from "@fortawesome/react-fontawesome"
 import { useSession } from "next-auth/react"
 import { Router, useRouter } from "next/router"
 import { useEffect, useState } from "react"
-import Container from "@/components/Container"
+import Container from "@/components/layouts/Container"
 import styles from "@/styles/Profile.module.scss"
-import MetaTags from "@/components/MetaTags"
+import MetaTags from "@/components/layouts/MetaTags"
 
 export default function Profile() {
   const [verified, setVerified] = useState(false)

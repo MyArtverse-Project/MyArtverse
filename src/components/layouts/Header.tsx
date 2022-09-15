@@ -8,7 +8,7 @@ import styles from "@/styles/Header.module.scss"
 import Link from "next/link"
 import { useSession, signOut } from "next-auth/react"
 
-export default function Header() {
+const Header = () => {
   const { data, status } = useSession()
 
   return (
@@ -76,3 +76,5 @@ export default function Header() {
     </header>
   )
 }
+
+export default Header

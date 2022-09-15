@@ -1,16 +1,16 @@
 import { useRef } from "react"
-import GalleryItem, { LoadingGalleryItem } from "./GalleryItem"
-import styles from "../styles/Carousel.module.scss"
+import GalleryItem, { LoadingGalleryItem } from "../gallery/GalleryItem"
+import styles from "./Carousel.module.scss"
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome"
 import { faAngleLeft, faAngleRight } from "@fortawesome/free-solid-svg-icons"
 
-interface ICarouselProps {
+interface CarouselProps {
   title: string
   type: "normal" | "popular" | "new"
   items?: Fursona[]
 }
 
-const CardCarousel = ({ title, type, items = [] }: ICarouselProps) => {
+const CardCarousel = ({ title, type, items = [] }: CarouselProps) => {
   const carouselRef = useRef<HTMLDivElement>(null)
 
   const scrollLeft = () => {

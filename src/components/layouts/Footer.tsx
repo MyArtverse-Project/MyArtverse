@@ -2,7 +2,7 @@ import { faGithub } from "@fortawesome/free-brands-svg-icons"
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome"
 import Link from "next/link"
 
-export default function Footer() {
+const Footer = () => {
   return (
     <footer id="wrapper-desktop">
       <div className="container">
@@ -25,3 +25,5 @@ export default function Footer() {
     </footer>
   )
 }
+
+export default Footer
