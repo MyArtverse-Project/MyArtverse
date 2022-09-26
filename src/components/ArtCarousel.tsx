@@ -11,15 +11,18 @@ interface IArtCarouselProps {
 
 const ArtCarousel = ({ title, images = [] }: IArtCarouselProps) => {
   return (
-    <div id={styles["carousel-container"]}>
+    <div id={styles["carousel-comp"]}>
       <h2>{title}</h2>
-      <div id={styles["carousel"]}>
-        <Artwork image={"/images/examples/ozzy/1.jpg"} />
-        <Artwork image={"/images/examples/ozzy/2.png"} />
-        <Artwork image={"/images/examples/ozzy/3.png"} />
-        <Artwork image={"/images/examples/ozzy/4.png"} />
-        <Artwork image={"/images/examples/ozzy/5.png"} />
-        <Artwork image={"/images/examples/ozzy/6.png"} />
+      <div id={styles["carousel-container"]}>
+        <div id={styles["carousel"]}>
+          <Artwork image={"/images/examples/ozzy/1.jpg"} />
+          <Artwork image={"/images/examples/ozzy/2.png"} />
+          <Artwork image={"/images/examples/ozzy/3.png"} />
+          <Artwork image={"/images/examples/ozzy/4.png"} />
+          <Artwork image={"/images/examples/ozzy/5.png"} />
+          <Artwork image={"/images/examples/ozzy/6.png"} />
+          <Artwork image={"/images/examples/ozzy/6.png"} />
+        </div>
       </div>
     </div>
   )

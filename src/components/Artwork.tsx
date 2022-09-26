@@ -8,7 +8,7 @@ export default function Artwork({ image }) {
   // TODO: Make a Popup modal of the image
   return (
     <div id={styles["artwork"]}>
-      <img src={image} />
+      <img src={image} alt={"Artwork"}  />
     </div>
   )
 }

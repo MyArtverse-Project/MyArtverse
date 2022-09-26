@@ -1,3 +1,14 @@
 #artwork {
-  transform: scale(0.2);
+  margin: 0.5rem 1rem 0.5rem 0;
+  img {
+    height: 250px;
+    width: 100%;
+    object-fit: cover;
+    border-radius: 7px;
+    transition: transform 0.2s ease-in-out;
+    &:hover {
+      cursor: pointer;
+      transform: scale(1.05);
+    }
+  }
 }
