@@ -28,12 +28,12 @@ export default function Login() {
           <label htmlFor="email">Email</label>
           <input
             type="email"
-            disabled
+            // disabled
             onChange={(e) => setEmail(e.currentTarget.value)}
             id="email"
             placeholder="Email only login coming soon"
           />
-          <button type="submit" disabled>
+          <button type="submit">
             Continue with Email
           </button>
         </form>
