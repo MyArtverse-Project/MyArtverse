@@ -6,8 +6,9 @@ import {
 } from "@fortawesome/free-solid-svg-icons"
 import styles from "@/styles/Header.module.scss"
 import Link from "next/link"
-import {useSession, signOut} from "next-auth/react"
+import {useSession, signOut, signIn} from "next-auth/react"
 import {useState} from "react";
+import {useRouter} from "next/router";
 
 export default function Header() {
 	const {data, status} = useSession()
@@ -58,7 +59,7 @@ export default function Header() {
 								)}
 							</div>
 						</div>
-						{popup && <UserPopup data={data}/>}
+						{popup && <UserPopup data={data} setPopup={setPopup}/>}
 					</div>
 				</div>
 
@@ -84,9 +85,10 @@ export default function Header() {
 }
 
 
-const UserPopup = ({data}) => {
+const UserPopup = ({data, setPopup}) => {
+	const router = useRouter()
 	return (
-			<div id={styles["user-menu"]}>
+			<div id={styles["user-menu"]} onClick={() => setPopup(false)}>
 				<div id={styles["user-menu-header"]}>
 					<div id={styles["user-menu-account"]}>
 						<img src={data.user.image} alt="User avatar"/>
@@ -97,9 +99,12 @@ const UserPopup = ({data}) => {
 					</div>
 				</div>
 				<div id={styles["user-menu-body"]}>
-					<hr />
+					<hr/>
 					<button>
 						NSFW Filter Toggle (ON)
+					</button>
+					<button>
+						Theme Toggle (Dark)
 					</button>
 					<hr/>
 					<button>
@@ -115,10 +120,13 @@ const UserPopup = ({data}) => {
 						Language
 					</button>
 					<hr/>
-					<button>
+					<button onClick={() => router.push("/profile")}>
+						View Profile
+					</button>
+					<button onClick={() => router.push("/settings")}>
 						Settings
 					</button>
-					<button>
+					<button onClick={() => router.push("/login")}>
 						Sign Out
 					</button>
 				</div>
