@@ -1,4 +1,4 @@
-import styles from "../styles/Artworks.module.scss"
+import styles from "./Artwork.module.scss"
 
 interface ArtworkProps {
   image: string
