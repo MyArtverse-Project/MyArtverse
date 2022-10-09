@@ -1,11 +1,9 @@
 import { ReactNode } from "react"
 
-interface Props {
+interface ContainerProps {
   children: ReactNode
 }
 
-const Container = ({ children }: Props) => {
+export default function Container({ children }: ContainerProps) {
   return <div className="container">{children}</div>
 }
-
-export default Container

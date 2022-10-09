@@ -2,11 +2,11 @@ import Header from "./layouts/Header"
 import Footer from "./layouts/Footer"
 import UnderConstruction from "./UnderConstruction"
 
-interface Props {
+interface LayoutProps {
   children: React.ReactNode
 }
 
-const Layout = ({ children }: Props) => {
+export default function Layout({ children }: LayoutProps) {
   return (
     <>
       <UnderConstruction />
@@ -16,5 +16,3 @@ const Layout = ({ children }: Props) => {
     </>
   )
 }
-
-export default Layout

@@ -4,7 +4,7 @@ interface ArtworkProps {
   image: string
 }
 
-const Artwork = ({ image }: ArtworkProps) => {
+export default function Artwork({ image }: ArtworkProps) {
   // TODO: Make a Popup modal of the image
   return (
     <div id={styles["artwork"]}>
@@ -12,5 +12,3 @@ const Artwork = ({ image }: ArtworkProps) => {
     </div>
   )
 }
-
-export default Artwork

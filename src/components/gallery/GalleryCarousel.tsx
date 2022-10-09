@@ -7,7 +7,7 @@ type Props = {
   items: typeof IGalleryItemProps[] | any[]
 }
 
-const GalleryCarousel = ({ items }: Props) => {
+export default function GalleryCarousel({ items }: Props) {
   return (
     <div id={styles["galleryCarousel"]}>
       <button>{"<"}</button>
@@ -18,5 +18,3 @@ const GalleryCarousel = ({ items }: Props) => {
     </div>
   )
 }
-
-export default GalleryCarousel

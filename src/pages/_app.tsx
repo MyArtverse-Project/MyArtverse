@@ -13,10 +13,10 @@ type AppPropsWithLayout = AppProps<{ session: Session }> & {
   Component: NextPage
 }
 
-const MyFursonaApp = ({
+export default function MyFursonaApp({
   Component,
   pageProps: { session, ...pageProps }
-}: AppPropsWithLayout) => {
+}: AppPropsWithLayout) {
   return (
     <SessionProvider session={session}>
       <Layout>
@@ -25,5 +25,3 @@ const MyFursonaApp = ({
     </SessionProvider>
   )
 }
-
-export default MyFursonaApp

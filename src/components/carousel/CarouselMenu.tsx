@@ -10,7 +10,11 @@ interface CarouselProps {
   items?: Fursona[]
 }
 
-const CardCarousel = ({ title, type, items = [] }: CarouselProps) => {
+export default function CardCarousel({
+  title,
+  type,
+  items = []
+}: CarouselProps) {
   const carouselRef = useRef<HTMLDivElement>(null)
 
   const scrollLeft = () => {
@@ -79,4 +83,3 @@ const CardCarousel = ({ title, type, items = [] }: CarouselProps) => {
     </div>
   )
 }
-export default CardCarousel

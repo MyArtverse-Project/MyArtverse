@@ -40,7 +40,7 @@ export default function Home() {
               your fluffy characters and show them off to your friends!
             </p>
           </article>
-					<StackedCards />
+          <StackedCards />
         </div>
         <div className={styles["fursona-main-showcase"]}>
           <section aria-label="Popular Fursonas">

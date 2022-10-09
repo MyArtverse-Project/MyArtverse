@@ -1,6 +1,6 @@
 import styles from "./StackedCards.module.scss"
 
-const StackedCards = () => {
+export default function StackedCards() {
   return (
     <div id={styles["hero-card-container"]}>
       <div className={styles["hero-blur-gradient-overlay"]}></div>
@@ -30,4 +30,3 @@ const StackedCards = () => {
     </div>
   )
 }
-export default StackedCards

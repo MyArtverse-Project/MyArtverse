@@ -33,9 +33,7 @@ export default function Login() {
             id="email"
             placeholder="Email only login coming soon"
           />
-          <button type="submit">
-            Continue with Email
-          </button>
+          <button type="submit">Continue with Email</button>
         </form>
         <div id={styles["divider"]}>
           <span>or continue with these...</span>

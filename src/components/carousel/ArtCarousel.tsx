@@ -9,7 +9,7 @@ interface IArtCarouselProps {
   images?: Fursona[]
 }
 
-const ArtCarousel = ({ title, images = [] }: IArtCarouselProps) => {
+export default function ArtCarousel({ title, images = [] }: IArtCarouselProps) {
   return (
     <div id={styles["carousel-comp"]}>
       <h2>{title}</h2>
@@ -27,4 +27,3 @@ const ArtCarousel = ({ title, images = [] }: IArtCarouselProps) => {
     </div>
   )
 }
-export default ArtCarousel
