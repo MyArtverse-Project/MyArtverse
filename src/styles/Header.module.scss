@@ -84,11 +84,11 @@
 
   a {
     margin: 0 5px;
+
     #avatar {
       width: 50px;
       height: 50px;
       border-radius: 50%;
-      border: white 3px solid;
     }
   }
 
@@ -106,4 +106,122 @@
   &:hover {
     background-color: rgba(white, 20%);
   }
+}
+
+#avatar {
+  width: 50px;
+  height: 50px;
+  border-radius: 50%;
+  border: white 3px solid;
+
+}
+
+#header {
+  display: flex;
+  flex-direction: column;
+}
+
+#user-actions {
+  //background: white;
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+
+  #user-options {
+    display: flex;
+    flex-direction: column;
+
+    #user-menu {
+      display: flex;
+      flex-direction: column;
+      border-radius: 6px;
+      max-width: 1400px;
+      padding: 1.5ex;
+      // Offset the menu from the button
+      margin-top: 3.5rem;
+      z-index: 5;
+      position: absolute;
+      float: right;
+
+    }
+  }
+}
+
+#heading {
+  display: flex;
+  flex-direction: column;
+  position: relative;
+  width: 100%;
+  justify-content: space-between;
+  align-items: center;
+  //padding: 1.5ex 0;
+
+  #left-hand {
+    width: 100%;
+    display: flex;
+    justify-content: space-between;
+    //margin: 25px 0;
+  }
+}
+
+#user-menu {
+  background: #242424;
+  position: absolute;
+  border-radius: 6px;
+  right: 0;
+  z-index: 621; // OwO
+  top: 4rem;
+
+  #user-menu-header {
+    margin: 1rem;
+    display: flex;
+    flex-direction: column;
+
+    #user-menu-account {
+      display: flex;
+      flex-direction: row;
+      align-items: center;
+      column-gap: 1rem;
+
+      #username {
+        display: flex;
+        flex-direction: column;
+      }
+    }
+
+    img {
+      width: 100px;
+      height: 100px;
+      border-radius: 50%;
+      border: white 3px solid;
+    }
+  }
+
+  #user-menu-body {
+    display: flex;
+    flex-direction: column;
+    color: white;
+    margin-top: 1rem;
+
+    button {
+      width: 450px;
+      background: #242424;
+      border: none;
+      padding: 1rem 2rem;
+      cursor: pointer;
+      font-weight: bold;
+      font-size: 16px;
+      text-align: left;
+
+      &:hover {
+        background: #3a3a3a;
+      }
+    }
+  }
+
+}
+
+
+#page {
+  position: relative;
 }

@@ -9,8 +9,10 @@ import {
 import { faCheck } from "@fortawesome/free-solid-svg-icons"
 import Container from "@/components/layouts/Container"
 import styles from "@/styles/User.module.scss"
-import Carousel from "@/components/carousel/ArtCarousel"
+import Carousel from "@/components/carousel/CarouselMenu"
 import ArtCarousel from "@/components/carousel/ArtCarousel"
+import GalleryCarousel from "@/components/gallery/GalleryCarousel"
+import GalleryItem from "@/components/gallery/GalleryItem"
 
 export default function User() {
   const [loading, setLoading] = useState(true)
@@ -74,9 +76,26 @@ export default function User() {
         </div>
       </div>
       <div id={styles["artworks-container"]}>
-        {/* !: TO BE REMOVED */}
         <div id={styles["artworks"]}>
           <ArtCarousel title="Recent Artworks" />
+        </div>
+        <div>
+          <Carousel
+            title={"Sonas Related"}
+            type={"normal"}
+            items={[
+              {
+                avatar: "/images/examples/ozzy/6.png",
+                gradientCSS:
+                  "linear-gradient(90deg, rgba(2,0,36,1) 0%, rgba(9,9,121,1) 0%, rgba(0,212,255,1) 100%)",
+                name: "Renzo",
+                species: "Dragon/Fox Hybrid",
+                primaryColor: "pink",
+                link: "/fursonas/1"
+              }
+            ]}
+          />
+          <div></div>
         </div>
       </div>
     </Container>

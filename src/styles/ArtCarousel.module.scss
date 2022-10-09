@@ -1,16 +1,24 @@
 @use "partials/mixins" as *;
 
+#carousel-comp {
+  padding-top: 25px;
 #carousel-container {
   display: flex;
-  flex-direction: column;
+  padding: 25px 0 100px 0;
+  flex-direction: row;
   justify-content: left;
-  width: 100%;
   h2 {
     font-size: 2rem;
   }
   #carousel {
     display: flex;
-    flex-direction: column;
+    flex-wrap: wrap;
+    flex-direction: row;
+    // Two rows per page
+    overflow-x: hidden;
+
     
+
   }
+}
 }

@@ -13,6 +13,11 @@
   padding: 2ex;
   border-radius: 6px;
   column-gap: 1.25rem;
+  align-items: center;
+  justify-content: center;
+  margin-bottom: 75px;
+
+
 }
 
 #avatar {
@@ -34,14 +39,18 @@
 
 #user-profile {
   @include flexbox(column);
+  justify-content: center;
   row-gap: 0.5rem;
 }
 
 #user-info {
-  @include flexbox(column);
+  @include flexbox(column, center);
   width: 100%;
   align-items: flex-start;
+
+  justify-content: space-between;
   row-gap: 0.5rem;
+
   h1 {
     font-weight: 900;
     font-size: 36px;
@@ -93,3 +102,4 @@
     @include skeletonSwipe(2600px);
   }
 }
+
