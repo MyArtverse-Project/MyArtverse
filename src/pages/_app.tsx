@@ -1,5 +1,6 @@
-import { AppProps } from "next/app"
+import type { AppProps } from "next/app"
 import { NextPage } from "next"
+import { Session } from "next-auth"
 import { SessionProvider } from "next-auth/react"
 import { config } from "@fortawesome/fontawesome-svg-core"
 import Layout from "@/components/Layout"
@@ -8,7 +9,7 @@ import "@fortawesome/fontawesome-svg-core/styles.css"
 
 config.autoAddCss = false
 
-type AppPropsWithLayout = AppProps & {
+type AppPropsWithLayout = AppProps<{ session: Session }> & {
   Component: NextPage
 }
 

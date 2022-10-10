@@ -7,7 +7,7 @@ import {
   faTwitter
 } from "@fortawesome/free-brands-svg-icons"
 import { faCheck } from "@fortawesome/free-solid-svg-icons"
-import Container from "@/components/Container"
+import Container from "@/components/layouts/Container"
 import styles from "@/styles/User.module.scss"
 
 export default function User() {

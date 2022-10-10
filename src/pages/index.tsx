@@ -1,8 +1,9 @@
 import React, { useEffect, useState } from "react"
-import Container from "@/components/Container"
+import Container from "@/components/layouts/Container"
 import styles from "@/styles/Home.module.scss"
-import Carousel from "@/components/CarouselMenu"
-import MetaTags from "@/components/MetaTags"
+import Carousel from "@/components/carousel/CarouselMenu"
+import MetaTags from "@/components/layouts/MetaTags"
+import StackedCards from "../components/home/StackedCards"
 
 export default function Home() {
   const [data, setData] = useState<Fursona[]>([])
@@ -35,39 +36,17 @@ export default function Home() {
           <article>
             <h1>Manage, store, and show your fursonas in one place</h1>
             <p>
-              <strong>MyFursona</strong> is an open-source platform where you
-              can show off your fluffy characters and show them off to your
-              friends!
+              <strong>MyFursona</strong> is a platform where you can show off
+              your fluffy characters and show them off to your friends!
             </p>
           </article>
-          <div id={styles["hero-card-container"]}>
-            <div id={styles["hero-card-wrapper"]}>
-              <div
-                id={styles["hero-card-item"]}
-                style={{ "--stagger": "1" } as React.CSSProperties}
-              >
-                <img src="/images/ozzy.png" alt="Ozzy Fursona" />
-              </div>
-              <div
-                id={styles["hero-card-item"]}
-                style={{ "--stagger": "2" } as React.CSSProperties}
-              >
-                <img src="/images/ozzy.png" alt="Ozzy Fursona" />
-              </div>
-              <div
-                id={styles["hero-card-item"]}
-                style={{ "--stagger": "3" } as React.CSSProperties}
-              >
-                <img src="/images/ozzy.png" alt="Ozzy Fursona" />
-              </div>
-            </div>
-          </div>
+          <StackedCards />
         </div>
         <div className={styles["fursona-main-showcase"]}>
-          <section>
+          <section aria-label="Popular Fursonas">
             <Carousel title="Popular Fursonas" type="popular" items={data} />
           </section>
-          <section id={styles["card-previews"]}>
+          <section aria-label="New Fursonas" id={styles["card-previews"]}>
             <Carousel title={"New Fursonas"} type="new" />
           </section>
         </div>

@@ -1,0 +1,153 @@
+@use "@/styles/partials/mixins" as *;
+
+/* Cards animation by skepfusky */
+.hero-blur-gradient-overlay {
+  $blurAmount: 10rem;
+  position: absolute;
+  width: 50rem;
+  height: 10rem;
+  background: linear-gradient(90deg, #ad00ff, #ff00f5);
+  transform: translateX(-22rem) rotate(9deg);
+  opacity: 0;
+  animation: blurFadeIn 1s ease forwards;
+
+  @supports (filter: blur($blurAmount)) {
+    filter: blur($blurAmount);
+  }
+}
+
+@keyframes blurFadeIn {
+  100% {
+    opacity: 0.5;
+  }
+}
+
+#hero-card-container {
+  position: relative;
+  top: 7rem;
+
+  --card-plane: rotateY(325deg) rotateZ(14deg) rotateX(77deg)
+    translateX(-2.498rem);
+  --card-plane-a: -10rem;
+  --card-plane-b: -1rem;
+  --card-plane-height: 26rem;
+  --card-plane-width: 17rem;
+  --card-item-size: 12.5rem;
+  --card-item-x: 0;
+  --card-item-prespective: rotateY(35deg) skewY(14deg);
+
+  @media only screen and (max-width: 1280px) {
+    --card-plane: rotateY(328deg) rotateZ(16deg) rotateX(76deg)
+      translateX(-0.798rem);
+    --card-plane-a: -4.6rem;
+    --card-plane-b: -0.6rem;
+    --card-plane-height: 24rem;
+    --card-plane-width: 16rem;
+    --card-item-size: 11.4rem;
+    --card-item-x: 2.75rem;
+
+    left: -4rem;
+  }
+
+  @media only screen and (max-width: 1024px) {
+    left: 0.75rem;
+  }
+}
+
+#hero-card-wrapper {
+  display: flex;
+
+  &::after {
+    content: "";
+    position: absolute;
+    opacity: 0;
+    top: 0;
+    display: block;
+    background-image: linear-gradient(
+      rgb(101, 101, 101) 0%,
+      rgb(75, 75, 75) 33%,
+      rgb(30, 30, 30) 66%,
+      #0000 100%
+    );
+    background-size: 100% 300%;
+    animation: gradientScroll 3s ease, planeAppear 1600ms ease forwards;
+    transform: translateZ(var(--card-plane-b));
+    height: var(--card-plane-height);
+    width: var(--card-plane-width);
+    border-radius: 1.5rem;
+  }
+}
+
+#hero-card-item {
+  --card-item: 0;
+  --card-item-hover: -6.5rem;
+  --card-raise-behind: -9.5rem;
+  opacity: 0;
+  height: 350px;
+  position: relative;
+  user-select: none;
+  margin-left: -6.5rem;
+  transform: translateX(var(--card-item-x)) translateY(var(--card-item))
+    var(--card-item-prespective);
+  transition: transform 300ms ease;
+  animation: imageDrop 1s ease-out forwards;
+  animation-delay: calc(var(--stagger) * 350ms);
+
+  img {
+    width: var(--card-item-size);
+    border-radius: 12px;
+    box-shadow: 0 0 24px rgba(black, 75%);
+  }
+
+  &:hover {
+    --card-item: var(--card-item-hover) !important;
+  }
+
+  &:first-child {
+    z-index: 5;
+    --card-item-hover: -3.5rem;
+  }
+
+  &:nth-child(2) {
+    z-index: 4;
+    --card-item: -1rem;
+    --card-item-hover: var(--card-raise-behind);
+  }
+
+  &:nth-child(3) {
+    z-index: 3;
+    --card-item: -2rem;
+    --card-item-hover: var(--card-raise-behind);
+  }
+}
+
+@keyframes planeAppear {
+  0% {
+    transform: var(--card-plane) translateZ(var(--card-plane-a));
+    opacity: 0;
+  }
+  100% {
+    transform: var(--card-plane) translateZ(var(--card-plane-b));
+    opacity: 1;
+  }
+}
+
+@keyframes imageDrop {
+  0% {
+    top: -12rem;
+    opacity: 0;
+  }
+  100% {
+    top: 0;
+    opacity: 1;
+  }
+}
+
+@keyframes gradientScroll {
+  0% {
+    background-position-y: 100%;
+  }
+  100% {
+    background-position-y: 0%;
+  }
+}

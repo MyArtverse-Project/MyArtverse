@@ -11,11 +11,14 @@ export default function MetaTags({ title, description, image }: ISEOProps) {
   const router = useRouter()
 
   const SITE_TITLE = "MyFursona"
-  const MAIN_DESCRIPTION = "A place where users can manage their fursonas! The project is currently under construction."
+  const MAIN_DESCRIPTION =
+    "A place where users can manage their fursonas! The project is currently under construction."
 
   const url = `https://myfursona.art${router.asPath}`
   const dynamicTitle =
-    router.pathname === "/" ? SITE_TITLE : `${title ? title : router.pathname} - ${SITE_TITLE}`
+    router.pathname === "/"
+      ? SITE_TITLE
+      : `${title ? title : router.pathname} - ${SITE_TITLE}`
 
   const dynamicDescription =
     router.pathname === "/" ? MAIN_DESCRIPTION : description

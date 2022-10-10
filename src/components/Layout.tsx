@@ -1,13 +1,12 @@
-import { ReactChild } from "react"
-import Header from "./Header"
-import Footer from "./Footer"
+import Header from "./layouts/Header"
+import Footer from "./layouts/Footer"
 import UnderConstruction from "./UnderConstruction"
 
-interface Props {
-  children: ReactChild
+interface LayoutProps {
+  children: React.ReactNode
 }
 
-export default function Layout({ children }: Props) {
+export default function Layout({ children }: LayoutProps) {
   return (
     <>
       <UnderConstruction />

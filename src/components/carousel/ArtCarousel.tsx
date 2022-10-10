@@ -1,7 +1,7 @@
-import GalleryItem, { LoadingGalleryItem } from "./GalleryItem"
+import GalleryItem, { LoadingGalleryItem } from "../gallery/GalleryItem"
 import styles from "@/styles/ArtCarousel.module.scss"
 import { useRef } from "react"
-import Artwork from "./Artwork"
+import Artwork from "../gallery/Artwork"
 import { readdir } from "fs"
 
 interface IArtCarouselProps {
@@ -9,7 +9,7 @@ interface IArtCarouselProps {
   images?: Fursona[]
 }
 
-const ArtCarousel = ({ title, images = [] }: IArtCarouselProps) => {
+export default function ArtCarousel({ title, images = [] }: IArtCarouselProps) {
   return (
     <div id={styles["carousel-comp"]}>
       <h2>{title}</h2>
@@ -27,4 +27,3 @@ const ArtCarousel = ({ title, images = [] }: IArtCarouselProps) => {
     </div>
   )
 }
-export default ArtCarousel

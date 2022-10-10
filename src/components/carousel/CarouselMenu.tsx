@@ -1,16 +1,20 @@
 import { useRef } from "react"
-import GalleryItem, { LoadingGalleryItem } from "./GalleryItem"
-import styles from "@/styles/Carousel.module.scss"
+import GalleryItem, { LoadingGalleryItem } from "../gallery/GalleryItem"
+import styles from "./Carousel.module.scss"
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome"
 import { faAngleLeft, faAngleRight } from "@fortawesome/free-solid-svg-icons"
 
-interface ICarouselProps {
+interface CarouselProps {
   title: string
   type: "normal" | "popular" | "new"
   items?: Fursona[]
 }
 
-const CardCarousel = ({ title, type, items = [] }: ICarouselProps) => {
+export default function CardCarousel({
+  title,
+  type,
+  items = []
+}: CarouselProps) {
   const carouselRef = useRef<HTMLDivElement>(null)
 
   const scrollLeft = () => {
@@ -60,7 +64,9 @@ const CardCarousel = ({ title, type, items = [] }: ICarouselProps) => {
           <div id={styles["cards"]}>
             {items.length >= 5
               ? items.map((item) => <GalleryItem key={item.link} {...item} />)
-              : items.map((item) => <GalleryItem key={item.link} {...item} />)}
+              : items.map((item, index) => (
+                  <GalleryItem key={item.link} {...item} />
+                ))}
             {Array(5 - items.length)
               .fill(0)
               .map((_, index) => (
@@ -77,4 +83,3 @@ const CardCarousel = ({ title, type, items = [] }: ICarouselProps) => {
     </div>
   )
 }
-export default CardCarousel
