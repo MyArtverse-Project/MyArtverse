@@ -3,7 +3,7 @@ import { FontAwesomeIcon } from "@fortawesome/react-fontawesome"
 import { faExclamationTriangle } from "@fortawesome/free-solid-svg-icons"
 import Link from "next/link"
 
-const UnderConstruction = () => {
+export default function UnderConstruction() {
   const [showWIP, setShowWIP] = useState(false)
 
   useEffect(() => {
@@ -35,5 +35,3 @@ const UnderConstruction = () => {
     </div>
   )
 }
-
-export default UnderConstruction

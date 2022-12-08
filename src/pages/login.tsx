@@ -13,9 +13,7 @@ export default function Login() {
   const { status } = useSession()
   const router = useRouter()
 
-  if (status === "authenticated") {
-    return router.push("/")
-  }
+  if (status === "authenticated") return router.push("/")
 
   return (
     <Container>
