@@ -4,7 +4,7 @@ import { FontAwesomeIcon } from "@fortawesome/react-fontawesome"
 import { faAngleLeft, faAngleRight } from "@fortawesome/free-solid-svg-icons"
 import GalleryItem, { LoadingGalleryItem } from "../Gallery/GalleryItem"
 
-interface CarouselProps {
+interface CarouselMenuProps {
   title: string
   type: "normal" | "popular" | "new"
   items?: Fursona[]
@@ -14,7 +14,7 @@ export default function CarouselMenu({
   title,
   type,
   items = []
-}: CarouselProps) {
+}: CarouselMenuProps) {
   const carouselRef = useRef<HTMLDivElement>(null)
 
   const scrollLeft = () => {

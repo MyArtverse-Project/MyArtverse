@@ -6,7 +6,7 @@
 		"dev": "next dev",
 		"build": "next build",
 		"start": "next start",
-		"lint": "next lint && npm run prettier:write",
+		"lint": "next lint",
 		"ts:check": "./node_modules/.bin/tsc --noEmit",
 		"prettier:check": "prettier --check \"**/*.{ts,tsx}\"",
 		"prettier:write": "prettier --write \"**/*.{ts,tsx}\""

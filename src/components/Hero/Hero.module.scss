@@ -1,8 +1,9 @@
 @use "@/styles/partials/mixins" as *;
 
 /* Cards animation by Kuroji Fusky */
+$blurAmount: 10rem;
+
 .hero-blur-gradient-overlay {
-  $blurAmount: 10rem;
   position: absolute;
   width: 50rem;
   height: 10rem;

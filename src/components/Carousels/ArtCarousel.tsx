@@ -7,10 +7,10 @@ interface IArtCarouselProps {
   images?: Fursona[]
 }
 
-export default function ArtCarousel({ title, images = [] }: IArtCarouselProps) {
+export default function ArtCarousel(props: IArtCarouselProps) {
   return (
     <div id={styles["carousel-comp"]}>
-      <h2>{title}</h2>
+      <h2>{props.title}</h2>
       <div id={styles["carousel-container"]}>
         <div id={styles["carousel"]}>
           <Artwork image={"/images/examples/ozzy/1.jpg"} />

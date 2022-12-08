@@ -8,12 +8,7 @@ interface ContainerProps {
   image?: string
 }
 
-export default function Container({
-  children,
-  title,
-  description,
-  image
-}: ContainerProps) {
+export default function Container(props: ContainerProps) {
   const router = useRouter()
 
   const SITE_TITLE = "MyFursona"
@@ -24,35 +19,38 @@ export default function Container({
   const dynamicTitle =
     router.pathname === "/"
       ? SITE_TITLE
-      : `${title ? title : router.pathname} - ${SITE_TITLE}`
+      : `${props.title ? props.title : router.pathname} - ${SITE_TITLE}`
 
-  const dynamicDescription =
-    router.pathname === "/" ? MAIN_DESCRIPTION : description
+  const dynamicDesc =
+    router.pathname === "/" ? MAIN_DESCRIPTION : props.description
 
   return (
     <>
       <Head>
         <title>{dynamicTitle}</title>
-        <meta name="description" content={description && MAIN_DESCRIPTION} />
+        <meta
+          name="description"
+          content={props.description && MAIN_DESCRIPTION}
+        />
         <meta
           name="keywords"
           content="furry, fursona, furry fandom, MyFursona, ref sheet"
         />
         {/* Open Graph */}
         <meta property="og:title" content={dynamicTitle} />
-        <meta property="og:description" content={dynamicDescription} />
+        <meta property="og:description" content={dynamicDesc} />
         <meta property="og:type" content="website" />
         <meta property="og:url" content={url} />
         {/* Twitter Tags */}
         <meta name="twitter:title" content={dynamicTitle} />
-        <meta name="twitter:description" content={dynamicDescription} />
+        <meta name="twitter:description" content={dynamicDesc} />
         <meta name="twitter:card" content="summary" />
         <meta name="twitter:url" content={url} />
         {/* Canonical URL */}
         <link rel="canonical" href={url} />
         <link rel="icon" href="/favicon.ico" />
       </Head>
-      <main className="container">{children}</main>
+      <main className="container">{props.children}</main>
     </>
   )
 }

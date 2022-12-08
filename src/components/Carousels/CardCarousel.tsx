@@ -10,11 +10,7 @@ interface CarouselProps {
   items?: Fursona[]
 }
 
-export default function CardCarousel({
-  title,
-  type,
-  items = []
-}: CarouselProps) {
+export default function CardCarousel(props: CarouselProps) {
   const carouselRef = useRef<HTMLDivElement>(null)
 
   const scrollLeft = () => {
@@ -45,14 +41,14 @@ export default function CardCarousel({
     <div id={styles.carousel}>
       <h2
         id={
-          type === "new"
+          props.type === "new"
             ? styles.labelNew
-            : type === "popular"
+            : props.type === "popular"
             ? styles.labelPopular
             : styles.label
         }
       >
-        {title}
+        {props.title}
       </h2>
       <div id={styles["carousel-container"]}>
         <div id={styles["control-wrapper"]}>
@@ -62,10 +58,10 @@ export default function CardCarousel({
         </div>
         <div id={styles["card-wrapper"]} ref={carouselRef}>
           <div id={styles["cards"]}>
-            {items.length >= 5
-              ? items.map((item) => <GalleryItem key={item.link} {...item} />)
-              : items.map((item) => <GalleryItem key={item.link} {...item} />)}
-            {Array(5 - items.length)
+            {props.items!.length >= 5
+              ? props.items!.map((item) => <GalleryItem key={item.link} {...item} />)
+              : props.items!.map((item) => <GalleryItem key={item.link} {...item} />)}
+            {Array(5 - props.items!.length)
               .fill(0)
               .map((_, index) => (
                 <LoadingGalleryItem key={index} />
