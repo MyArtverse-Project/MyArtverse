@@ -30,4 +30,4 @@ jobs:
         run: yarn lint
 
       - name: TypeScript Check
-        run: yarn typescript:check
+        run: yarn ts:check

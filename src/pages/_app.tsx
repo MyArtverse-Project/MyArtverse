@@ -9,9 +9,7 @@ import "@fortawesome/fontawesome-svg-core/styles.css"
 
 config.autoAddCss = false
 
-type AppPropsWithLayout = AppProps<{ session: Session }> & {
-  Component: NextPage
-}
+type AppPropsWithLayout = AppProps<{ session: Session }> & { Component: NextPage }
 
 export default function MyFursonaApp({
   Component,

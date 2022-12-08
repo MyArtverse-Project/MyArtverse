@@ -1,12 +1,12 @@
 /** @type {import('next').NextConfig} */
-module.exports = async (phase) => {
-	const withPlugins = require("next-compose-plugins")
+const withPlugins = require("next-compose-plugins")
+const runtimeCaching = require("next-pwa/cache")
 
-	const runtimeCaching = require("next-pwa/cache")
+module.exports = async (phase) => {
 	runtimeCaching[0].handler = "StaleWhileRevalidate"
 
 	const withPWA = require("next-pwa")({
-		disable: process.env.NODE_ENV === 'development', // disable PWA for development, compiling takes ages
+		disable: process.env.NODE_ENV === 'development', // Disable PWA for development
 		dest: "public",
 		register: true,
 		skipWaiting: true,
