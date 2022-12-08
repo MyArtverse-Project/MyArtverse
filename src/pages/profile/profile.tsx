@@ -2,7 +2,6 @@ import { useEffect, useState } from "react"
 import { useSession } from "next-auth/react"
 import { Router, useRouter } from "next/router"
 import Container from "@/components/Layouts/Container"
-import MetaTags from "@/components/layouts/MetaTags"
 import CarouselMenu from "@/components/Carousels/CarouselMenu"
 import {
   faInstagram,
@@ -21,7 +20,6 @@ export default function Profile() {
   if (status === "loading") {
     return (
       <Container>
-        <MetaTags />
         <div id={styles["user-container"]}>
           <div id={styles["user-profile"]}>
             <div id={styles["skeleton-avatar"]}></div>
@@ -42,7 +40,7 @@ export default function Profile() {
   }
 
   return (
-    <Container>
+    <Container title="Profile name">
       <div id={styles["user-container"]}>
         <div id={styles["user-profile"]}>
           <img
