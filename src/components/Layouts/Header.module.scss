@@ -1,4 +1,4 @@
-@use "partials/mixins" as *;
+@use "@/styles/partials/mixins" as *;
 
 #search-box-wrapper {
   @include flexbox(null, null, center);

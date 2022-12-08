@@ -24,8 +24,11 @@ export default function UnderConstruction() {
       <span>
         <em>MyFursona</em> is an open-source project — help us out by
         contributing the project on{" "}
-        <Link href="https://github.com/MyFursona-Project/MyFursona" passHref>
-          <a target="_blank">GitHub</a>
+        <Link
+          href="https://github.com/MyFursona-Project/MyFursona"
+          target="_blank"
+        >
+          GitHub
         </Link>
         !
       </span>

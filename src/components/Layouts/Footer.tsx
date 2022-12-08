@@ -12,10 +12,7 @@ export default function Footer() {
             <li>Copyright</li>
             <li>Contact</li>
             <li>
-              <Link
-                href="https://github.com/MyFursona-Project/MyFursona"
-                passHref
-              >
+              <Link href="https://github.com/MyFursona-Project/MyFursona">
                 <FontAwesomeIcon icon={faGithub} />
               </Link>
             </li>

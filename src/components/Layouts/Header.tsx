@@ -4,7 +4,7 @@ import {
   faMagnifyingGlass,
   faSearch
 } from "@fortawesome/free-solid-svg-icons"
-import styles from "@/styles/Header.module.scss"
+import styles from "./Header.module.scss"
 import Link from "next/link"
 import { useSession, signOut, signIn } from "next-auth/react"
 import { useState } from "react"
@@ -20,9 +20,7 @@ export default function Header() {
         <div id={styles["heading"]}>
           <div id={styles["left-hand"]}>
             <Link href="/">
-              <a>
-                <strong id={styles["logo"]}>MyFursona</strong>
-              </a>
+              <strong id={styles["logo"]}>MyFursona</strong>
             </Link>
             <div id={styles["search-box-wrapper"]}>
               <div id={styles["search-box"]}>
@@ -51,10 +49,8 @@ export default function Header() {
                   </div>
                 </>
               ) : (
-                <Link href="/login">
-                  <a id={styles["login-button"]}>
-                    <img src="/images/login.svg" alt="Login" />
-                  </a>
+                <Link href="/login" id={styles["login-button"]}>
+                  <img src="/images/login.svg" alt="Login" />
                 </Link>
               )}
             </div>
@@ -70,9 +66,7 @@ export default function Header() {
               <FontAwesomeIcon icon={faBars} size="lg" />
             </button>
             <Link href="/">
-              <a>
-                <strong id={styles["logo"]}>MyFursona</strong>
-              </a>
+              <strong id={styles["logo"]}>MyFursona</strong>
             </Link>
           </div>
           <button>
@@ -84,7 +78,7 @@ export default function Header() {
   )
 }
 
-const UserPopup = ({ data, setPopup }) => {
+const UserPopup = ({ data, setPopup }: any) => {
   const router = useRouter()
   return (
     <div id={styles["user-menu"]} onClick={() => setPopup(false)}>

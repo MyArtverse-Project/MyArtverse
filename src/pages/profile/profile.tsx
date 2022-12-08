@@ -1,9 +1,9 @@
 import { useEffect, useState } from "react"
 import { useSession } from "next-auth/react"
 import { Router, useRouter } from "next/router"
-import Container from "@/components/layouts/Container"
+import Container from "@/components/Layouts/Container"
 import MetaTags from "@/components/layouts/MetaTags"
-import CarouselMenu from "@/components/carousel/CarouselMenu"
+import CarouselMenu from "@/components/Carousels/CarouselMenu"
 import {
   faInstagram,
   faPatreon,
@@ -11,7 +11,7 @@ import {
 } from "@fortawesome/free-brands-svg-icons"
 import { faCheck } from "@fortawesome/free-solid-svg-icons"
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome"
-import styles from "@/styles/Profile.module.scss"
+import styles from "./Profile.module.scss"
 
 export default function Profile() {
   const [verified, setVerified] = useState(false)

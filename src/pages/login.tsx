@@ -4,9 +4,8 @@ import { signIn, useSession } from "next-auth/react"
 import { useRouter } from "next/router"
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome"
 import { faTwitter } from "@fortawesome/free-brands-svg-icons"
-import Container from "@/components/layouts/Container"
+import Container from "@/components/Layouts/Container"
 import styles from "@/styles/Login.module.scss"
-import MetaTags from "@/components/layouts/MetaTags"
 
 export default function Login() {
   const [email, setEmail] = useState("")
@@ -17,10 +16,8 @@ export default function Login() {
 
   return (
     <Container>
-      <MetaTags />
-
       <div className={styles["login-form-wrapper"]}>
-        <h1>Welcome Back!</h1>
+        <h1>Welcome back!</h1>
         <form className={styles["login-form"]} onSubmit={(e) => signIn(email)}>
           <div></div>
           <label htmlFor="email">Email</label>

@@ -1,4 +1,4 @@
-import NextAuth from "next-auth"
+import NextAuth, { CallbacksOptions } from "next-auth"
 import GoogleProvider from "next-auth/providers/google"
 import EmailProvider from "next-auth/providers/email"
 import TwitterProvider from "next-auth/providers/twitter"
@@ -21,12 +21,12 @@ export default NextAuth({
   callbacks: {
     async signIn({ user, account, profile }) {
       // @ts-ignore
-      user.avatar = profile.image || (profile.picture as string)
+      user.avatar = profile?.image || (profile?.picture as string)
       // @ts-ignore
-      user.name = `${profile.username} # ${profile.discriminator}`
+      user.name = `${profile?.username} # ${profile?.discriminator as string}`
       // @ts-expect-error
       user.id = profile.id
-      user.email = profile.email
+      user.email = profile?.email
       return true
     },
     async redirect({ url, baseUrl }) {

@@ -1,5 +1,5 @@
-import Header from "./layouts/Header"
-import Footer from "./layouts/Footer"
+import Header from "./Layouts/Header"
+import Footer from "./Layouts/Footer"
 import UnderConstruction from "./UnderConstruction"
 
 interface LayoutProps {

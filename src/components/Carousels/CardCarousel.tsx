@@ -1,8 +1,8 @@
 import { useRef } from "react"
-import GalleryItem, { LoadingGalleryItem } from "../gallery/GalleryItem"
 import styles from "@/styles/Carousel.module.scss"
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome"
 import { faAngleLeft, faAngleRight } from "@fortawesome/free-solid-svg-icons"
+import GalleryItem, { LoadingGalleryItem } from "../Gallery/GalleryItem"
 
 interface CarouselProps {
   title: string

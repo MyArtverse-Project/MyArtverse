@@ -1,9 +1,9 @@
-import styles from "./StackedCards.module.scss"
+import styles from "./Hero.module.scss"
 
-export default function StackedCards() {
+export default function Hero() {
   return (
     <div id={styles["hero-card-container"]}>
-      <div className={styles["hero-blur-gradient-overlay"]}></div>
+      <div className={styles["hero-blur-gradient-overlay"]} aria-hidden></div>
       <div id={styles["hero-card-wrapper"]}>
         <div
           id={styles["hero-card-item"]}

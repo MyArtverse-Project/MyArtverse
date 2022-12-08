@@ -1,8 +1,8 @@
 import { useRef } from "react"
-import GalleryItem, { LoadingGalleryItem } from "../gallery/GalleryItem"
 import styles from "./Carousel.module.scss"
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome"
 import { faAngleLeft, faAngleRight } from "@fortawesome/free-solid-svg-icons"
+import GalleryItem, { LoadingGalleryItem } from "../Gallery/GalleryItem"
 
 interface CarouselProps {
   title: string
@@ -10,7 +10,7 @@ interface CarouselProps {
   items?: Fursona[]
 }
 
-export default function CardCarousel({
+export default function CarouselMenu({
   title,
   type,
   items = []
@@ -65,7 +65,7 @@ export default function CardCarousel({
             {items.length >= 5
               ? items.map((item) => <GalleryItem key={item.link} {...item} />)
               : items.map((item, index) => (
-                  <GalleryItem key={item.link} {...item} />
+                  <GalleryItem key={index} {...item} />
                 ))}
             {Array(5 - items.length)
               .fill(0)

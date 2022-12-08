@@ -1,7 +1,5 @@
-import GalleryItem, { LoadingGalleryItem } from "../gallery/GalleryItem"
-import styles from "@/styles/ArtCarousel.module.scss"
-import { useRef } from "react"
-import Artwork from "../gallery/Artwork"
+import styles from "./ArtCarousel.module.scss"
+import Artwork from "../Gallery/Artwork"
 import { readdir } from "fs"
 
 interface IArtCarouselProps {

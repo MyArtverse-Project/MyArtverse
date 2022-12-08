@@ -1,6 +1,5 @@
-import Container from "@/components/layouts/Container"
-import MetaTags from "@/components/layouts/MetaTags"
-import styles from "@/styles/Settings.module.scss"
+import Container from "@/components/Layouts/Container"
+import styles from "./Settings.module.scss"
 import { useState } from "react"
 
 export default function SettingsPage() {
@@ -8,7 +7,6 @@ export default function SettingsPage() {
   return (
     <Container>
       <div id={styles["settings"]}>
-        <MetaTags />
         <div id={styles["sidemenu"]}>
           <button>Account Info</button>
           <button>Linked Accounts</button>
