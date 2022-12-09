@@ -19,10 +19,10 @@ export default class MyFursonaApp extends Document {
     return (
       <Html>
         <Head>
-          <link rel="icon" href="/favicon.ico" />
-          <link rel="manifest" href="/manifest.json" />
-          <link rel="apple-touch-icon" href="/icon.png" />
           <meta name="theme-color" content="#9f03ff" />
+          <link rel="icon" href="/favicon.ico" />
+          <link rel="manifest" href="/manifest.webmanifest" />
+          <link rel="apple-touch-icon" href="/icon.png" />
         </Head>
         <body>
           <Main />
