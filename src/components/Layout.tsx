@@ -1,12 +1,12 @@
-import Header from "./Layouts/Header"
 import Footer from "./Layouts/Footer"
+import Navbar from "./Layouts/Navbar/Navbar"
 import UnderConstruction from "./UnderConstruction"
 
 export default function Layout(props: { children: React.ReactNode }) {
   return (
     <>
       <UnderConstruction />
-      <Header />
+      <Navbar />
       {props.children}
       <Footer />
     </>

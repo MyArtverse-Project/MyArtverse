@@ -1,0 +1,22 @@
+.wrapper {
+  width: 100%;
+  padding-block: 1.25rem;
+}
+
+.contents {
+  margin-inline: auto;
+  max-width: 1536px;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.logo {
+  font-family: "Inter";
+	background-clip: text;
+	color: #0000;
+  background-image: linear-gradient(100deg, #ad00ff, #fc19f5, #ff5c00);
+  font-weight: 700;
+  font-size: var(--spacing-7);
+	user-select: none;
+}

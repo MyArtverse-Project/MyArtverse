@@ -2,7 +2,8 @@ import React, { useEffect, useState } from "react"
 import Container from "@/components/Layouts/Container"
 import styles from "@/styles/Home.module.scss"
 import Carousel from "@/components/Carousels/CarouselMenu"
-import StackedCards from "../components/Hero/Hero"
+import StackedCards from "../components/Hero/HeroOld"
+import Hero from "@/components/Hero"
 
 export default function Home() {
   const [data, setData] = useState<Fursona[]>([])
@@ -29,16 +30,7 @@ export default function Home() {
   }, [])
   return (
     <Container>
-      <div id={styles["header-hero"]}>
-        <article>
-          <h1>Manage, store, and show your fursonas in one place</h1>
-          <p>
-            <strong>MyFursona</strong> is a platform where you can show off your
-            fluffy characters and show them off to your friends!
-          </p>
-        </article>
-        <StackedCards />
-      </div>
+      <Hero />
       <div className={styles["fursona-main-showcase"]}>
         <section aria-label="Popular Fursonas">
           <Carousel title="Popular Fursonas" type="popular" items={data} />

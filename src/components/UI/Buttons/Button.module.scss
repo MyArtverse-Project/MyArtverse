@@ -1,0 +1,11 @@
+#transparent-button {
+  padding: var(--spacing-3);
+  border-radius: var(--spacing-1);
+	display: grid;
+	place-items: center;
+	transition: background 250ms ease;
+
+	&:hover {
+		background: rgba(gray, 50%);
+	}
+}

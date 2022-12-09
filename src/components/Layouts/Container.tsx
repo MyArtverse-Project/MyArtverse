@@ -1,5 +1,6 @@
 import Head from "next/head"
 import { useRouter } from "next/router"
+import styles from "./Container.module.scss"
 
 interface ContainerProps {
   children: React.ReactNode
@@ -22,7 +23,7 @@ export default function Container(props: ContainerProps) {
       : `${props.title ? props.title : router.pathname} - ${SITE_TITLE}`
 
   const dynamicDesc =
-    router.pathname === "/" ? MAIN_DESCRIPTION : props.description
+    router.pathname !== "/" ? MAIN_DESCRIPTION : props.description
 
   return (
     <>
@@ -36,21 +37,18 @@ export default function Container(props: ContainerProps) {
           name="keywords"
           content="furry, fursona, furry fandom, MyFursona, ref sheet"
         />
-        {/* Open Graph */}
         <meta property="og:title" content={dynamicTitle} />
         <meta property="og:description" content={dynamicDesc} />
         <meta property="og:type" content="website" />
         <meta property="og:url" content={url} />
-        {/* Twitter Tags */}
         <meta name="twitter:title" content={dynamicTitle} />
         <meta name="twitter:description" content={dynamicDesc} />
         <meta name="twitter:card" content="summary" />
         <meta name="twitter:url" content={url} />
-        {/* Canonical URL */}
         <link rel="canonical" href={url} />
         <link rel="icon" href="/favicon.ico" />
       </Head>
-      <main className="container">{props.children}</main>
+      <main className={styles["content-wrap"]}>{props.children}</main>
     </>
   )
 }
