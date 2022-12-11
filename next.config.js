@@ -10,7 +10,7 @@ module.exports = async (phase) => {
 		dest: "public",
 		register: true,
 		skipWaiting: true,
-		sw: "./public/service-worker.js",
+		sw: "./service-worker.js",
 	})
 
 	const nextConfig = {
