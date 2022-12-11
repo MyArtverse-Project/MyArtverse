@@ -2,7 +2,6 @@ import React, { useEffect, useState } from "react"
 import Container from "@/components/Layouts/Container"
 import styles from "@/styles/Home.module.scss"
 import Carousel from "@/components/Carousels/CarouselMenu"
-import StackedCards from "../components/Hero/HeroOld"
 import Hero from "@/components/Hero"
 
 export default function Home() {
@@ -28,6 +27,7 @@ export default function Home() {
       }
     ])
   }, [])
+
   return (
     <Container>
       <Hero />
