@@ -48,6 +48,7 @@ workbox-*.js
 /worker-*.js.map
 
 .vercel
+next-env.d.ts
 
 # tsc
 *.tsbuildinfo
