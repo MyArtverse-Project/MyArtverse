@@ -1,42 +1,32 @@
-# Nuxt 3 Minimal Starter
+<h1 align="center">
+  <img src="https://user-images.githubusercontent.com/94678583/178055907-c0318ec0-ea39-4c0c-b8fe-ec010b778764.png" width="127" />
+  <br>
+  <span>MyFursona</span>
+</h1>
 
-Look at the [Nuxt 3 documentation](https://nuxt.com/docs/getting-started/introduction) to learn more.
+_MyFursona_ is an open source web app where users can manage their artworks, various info (such as biography, literature, socials, interests, etc.), and lore about their fursona. The project is still in the works, so a lot of breaking changes are bound to happen!
 
-## Setup
+![UI Redesign by Jaker](https://user-images.githubusercontent.com/86149507/160653487-3b7b162a-8f1d-4d1e-8ddf-bd4eeec04189.png)
 
-Make sure to install the dependencies:
+## Stack
 
-```bash
-# yarn
-yarn install
+![MF Stack](https://skillicons.dev/icons?i=nuxtjs,ts,sass,tailwindcss,mongodb)
 
-# npm
-npm install
+## Design
 
-# pnpm
-pnpm install --shamefully-hoist
-```
+The website's design was initally designed by Ozzy, but it was improved by Skep & Jaker;
+it's still work in progress and the Figma design can be seen [here][figma]!
 
-## Development Server
+## Contributors
 
-Start the development server on http://localhost:3000
+- **Ozzy (also known as Renzo or Vulpo)**: Full-stack developer/Co-founder
+- **Mozza (also known as Solixity)**: Back-end developer/Co-founder
+- **Jaker**: UI/UX designer
+- **Kuroji Fusky**: Front-end design; UI/UX designer
+- **Your name could be here: Our future contributor!**
 
-```bash
-npm run dev
-```
+### Contributions
 
-## Production
+Your contributions are very appreciated! Before you make changes, contact Ozzy/Renzo/Vulpo via Revolt (@OzzyTheDev), Email(vulpothedev@gmail.com), Discord(OzzyTheDev#1312)
 
-Build the application for production:
-
-```bash
-npm run build
-```
-
-Locally preview production build:
-
-```bash
-npm run preview
-```
-
-Check out the [deployment documentation](https://nuxt.com/docs/getting-started/deployment) for more information.
+[figma]: https://www.figma.com/file/3dd2FKkSSNCbPBYwhOLhTo/MyFursona?node-id=0%3A1
