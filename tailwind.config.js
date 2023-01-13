@@ -1,5 +1,6 @@
 /** @type {import('tailwindcss').Config} */
 const defaultTheme = require("tailwindcss/defaultTheme");
+const plugin = require("tailwindcss/plugin");
 
 module.exports = {
   content: [
@@ -10,6 +11,22 @@ module.exports = {
     "./nuxt.config.{js,ts}",
     "./app.vue",
   ],
+  plugins: [
+    plugin(({ addBase, theme }) => {
+      addBase({
+        html: {
+          scrollBehavior: "smooth",
+          overflowX: "hidden",
+          "@media (prefers-reduced-motion)": {
+            scrollBehavior: "auto",
+          },
+        },
+				body: {
+					fontFamily: theme("fontFamily.open-sans")
+				}
+      });
+    }),
+  ],
   theme: {
     extend: {
       fontFamily: {
@@ -18,5 +35,4 @@ module.exports = {
       },
     },
   },
-  plugins: [],
 };
