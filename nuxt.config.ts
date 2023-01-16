@@ -1,6 +1,25 @@
 // https://nuxt.com/docs/api/configuration/nuxt-config
 export default defineNuxtConfig({
-  modules: ["@nuxtjs/color-mode"],
+  modules: [
+    "@nuxtjs/color-mode",
+    [
+      "@pinia/nuxt",
+      {
+        autoImports: ["defineStore", ["defineStore", "definePiniaStore"]],
+      },
+    ],
+  ],
+  css: ["~/assets/css/main.scss"],
+  postcss: {
+    plugins: {
+      tailwindcss: {},
+      autoprefixer: {},
+    },
+  },
+  typescript: {
+    shim: false,
+    strict: true,
+  },
   app: {
     head: {
       link: [
@@ -23,14 +42,4 @@ export default defineNuxtConfig({
       ],
     },
   },
-  css: ["~/assets/css/main.scss"],
-  postcss: {
-    plugins: {
-      tailwindcss: {},
-      autoprefixer: {},
-    },
-  },
-  typescript: {
-    shim: false,
-  },
-});
+})

@@ -1,6 +1,6 @@
 /** @type {import('tailwindcss').Config} */
 const defaultTheme = require("tailwindcss/defaultTheme");
-const plugin = require("tailwindcss/plugin");
+const pluginBaseStyles = require("tailwindcss/plugin");
 
 module.exports = {
   content: [
@@ -12,7 +12,7 @@ module.exports = {
     "./app.vue",
   ],
   plugins: [
-    plugin(({ addBase, theme }) => {
+    pluginBaseStyles(({ addBase, theme }) => {
       addBase({
         html: {
           scrollBehavior: "smooth",
