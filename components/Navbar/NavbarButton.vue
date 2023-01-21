@@ -3,7 +3,7 @@ const props = defineProps<{ onClick?: () => void }>()
 </script>
 
 <template>
-	<button @click="props.onClick" class="border-2 px-3.5 py-2">
+	<button @click="props.onClick" class="p-2.5">
 		<slot />
 	</button>
 </template>

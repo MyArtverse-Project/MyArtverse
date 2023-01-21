@@ -9,7 +9,20 @@ export default defineNuxtConfig({
       },
     ],
   ],
-  css: ["~/assets/css/main.scss"],
+  css: [
+    "@fontsource/inter/400.css",
+    "@fontsource/inter/600.css",
+    "@fontsource/inter/700.css",
+    "@fontsource/inter/800.css",
+    "@fontsource/inter/900.css",
+    "@fontsource/open-sans/400.css",
+    "@fontsource/open-sans/400-italic.css",
+    "@fontsource/open-sans/600.css",
+    "@fontsource/open-sans/600-italic.css",
+    "@fontsource/open-sans/800.css",
+    "@fontsource/open-sans/800-italic.css",
+    "~/assets/css/main.scss",
+  ],
   postcss: {
     plugins: {
       tailwindcss: {},
@@ -23,18 +36,6 @@ export default defineNuxtConfig({
   app: {
     head: {
       link: [
-        {
-          rel: "preconnect",
-          href: "https://fonts.googleapis.com",
-        },
-        {
-          rel: "preconnect",
-          href: "https://fonts.gstatic.com",
-        },
-        {
-          rel: "stylesheet",
-          href: "https://fonts.googleapis.com/css2?family=Inter:wght@100;200;300;400;500;600;700;800;900&family=Open+Sans:ital,wght@0,300;0,400;0,500;0,600;0,700;0,800;1,300;1,400;1,500;1,600;1,700;1,800&display=swap",
-        },
         {
           rel: "stylesheet",
           href: "https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.2.1/css/all.min.css",

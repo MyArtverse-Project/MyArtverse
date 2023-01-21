@@ -1,9 +1,10 @@
 import { defineStore } from "pinia"
 
 interface UserSettingsStore {
-	theme: "light" | "dark" | "system"
-	colorProfile: string
-	nsfwEnabled: boolean
+  theme: "light" | "dark" | "system"
+  colorProfile: string
+  nsfwEnabled: boolean
+  status: string
 }
 
 export const useUserSettingsStore = defineStore("settings", () => {
@@ -11,7 +12,8 @@ export const useUserSettingsStore = defineStore("settings", () => {
     return {
       theme: "system",
       colorProfile: "#fff",
-			nsfwEnabled: true,
+      nsfwEnabled: false,
+      status: "",
     }
   }
 })
