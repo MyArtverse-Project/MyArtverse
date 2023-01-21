@@ -4,11 +4,11 @@
   <div class="flex items-center gap-x-3">
     <NavbarButton class="aspect-square">
       <span class="sr-only">Options</span>
-      <i class="fas fa-ellipsis-vertical fa-fw fa-lg"></i>
+      <i class="fas fa-ellipsis-vertical fa-fw fa-xl"></i>
     </NavbarButton>
     <NavbarButton class="aspect-square">
       <span class="sr-only">Notifications</span>
-      <i class="far fa-bell fa-fw fa-lg"></i>
+      <i class="far fa-bell fa-fw fa-xl"></i>
     </NavbarButton>
     <button
       aria-label="Profile"

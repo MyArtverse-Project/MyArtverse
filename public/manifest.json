@@ -1,13 +1,13 @@
 {
+  "$schema": "https://json.schemastore.org/web-manifest-combined.json",
+  "name": "MyFursona",
+  "short_name": "MyFursona",
   "theme_color": "#000000",
   "background_color": "#FFFFFF",
-  "start_url": "/",
   "scope": "/",
-  "display": "standalone",
+  "start_url": "/",
   "orientation": "portrait",
-  "name": "MyFursona",
-  "description": "MyFursona is a platform where you can show off your fluffy characters and show them off to your friends!",
-  "short_name": "MyFursona",
+  "display": "minimal-ui",
   "icons": [
     {
       "src": "/icon.png",
