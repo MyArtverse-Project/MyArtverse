@@ -1,24 +1,10 @@
-<script lang="ts" setup>
-import { ref } from "vue"
-const root = ref<HTMLDivElement | null>(null)
-const inputVal = ref("")
-
-const focusInput = () => {
-  root.value?.classList.toggle("toggled")
-}
-
-const clearInput = () => {
-  //   console.log(root.value)
-  inputVal.value = ""
-}
-</script>
-
 <template>
-  <div ref="root" class="search-box-container">
+  <div ref="searchBoxRef" class="search-box-container">
     <input
       type="text"
-      :value="inputVal"
-      @focus="focusInput"
+      v-model="inputVal"
+      @focusin="focusInput"
+			@focusout="focusInput"
       placeholder="Search"
     />
     <div class="absolute top-0 bottom-0 right-0 flex items-center pr-4 gap-x-3">
@@ -31,6 +17,20 @@ const clearInput = () => {
     </div>
   </div>
 </template>
+
+<script lang="ts" setup>
+import { ref } from "vue"
+const searchBoxRef = ref<HTMLDivElement | null>(null)
+const inputVal = ref("")
+
+const focusInput = () => {
+  searchBoxRef.value?.classList.toggle("toggled")
+}
+
+const clearInput = () => {
+	inputVal.value = ""
+}
+</script>
 
 <style lang="scss">
 .search-box-container {
@@ -57,7 +57,7 @@ const clearInput = () => {
   }
 
   .clear-btn {
-    @apply pointer-events-none opacity-0;
+    // @apply pointer-events-none opacity-0;
   }
 }
 </style>
