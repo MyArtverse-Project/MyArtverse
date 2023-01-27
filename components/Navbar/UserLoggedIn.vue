@@ -16,7 +16,7 @@
     >
       <span class="sr-only">Profile</span>
       <img
-        src="https://res.cloudinary.com/skepfusky-dookie/image/upload/q_75/projects/misc/ozzy-fp-banner.png"
+        src="https://res.cloudinary.com/kuroji-fusky-s3/image/upload/q_75/projects/misc/ozzy-fp-banner.png"
         alt="Profile"
       />
     </button>
