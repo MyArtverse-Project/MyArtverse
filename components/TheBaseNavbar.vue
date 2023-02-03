@@ -4,7 +4,7 @@
       <div class="flex items-center gap-x-6">
         <NuxtLink to="/" class="flex items-center gap-x-2.5 logo-wordmark">
           <span class="sr-only">MyFursona</span>
-          <IconMono class="w-[3.25rem] h-[3.25rem] text-purple-500"/>
+          <IconMono class="w-[3.25rem] h-[3.25rem] text-purple-500" />
           <span>MyFursona</span>
         </NuxtLink>
         <NavbarSearchBox />

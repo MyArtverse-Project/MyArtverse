@@ -29,8 +29,8 @@ module.exports = {
   theme: {
     extend: {
       fontFamily: {
-        inter: ["Inter"],
-        "open-sans": ["Open Sans"],
+        inter: ["Inter", 'sans-serif'],
+        "open-sans": ["Open Sans", 'sans-serif'],
       },
     },
   },
