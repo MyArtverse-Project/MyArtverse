@@ -1,17 +1,11 @@
 // https://nuxt.com/docs/api/configuration/nuxt-config
 export default defineNuxtConfig({
-  modules: [
-    "@nuxtjs/color-mode",
-    [
-      "@pinia/nuxt",
-      {
-        autoImports: ["defineStore", ["defineStore", "definePiniaStore"]],
-      },
-    ],
-  ],
   app: {
     head: {
       link: [
+        {
+          href: ",/favicon.ico",
+        },
         {
           rel: "manifest",
           href: "./manifest.json",
@@ -23,6 +17,17 @@ export default defineNuxtConfig({
       ],
     },
   },
+  // @ts-ignore
+  modules: [
+    "@nuxt/image-edge",
+    "@nuxtjs/color-mode",
+    [
+      "@pinia/nuxt",
+      {
+        autoImports: ["defineStore", ["defineStore", "definePiniaStore"]],
+      },
+    ],
+  ],
   build: {
     transpile: ["gsap"],
   },
@@ -39,5 +44,11 @@ export default defineNuxtConfig({
   typescript: {
     shim: false,
     strict: true,
+  },
+  // @nuxt/image-edge config
+  image: {
+    cloudinary: {
+      baseURL: "https://res.cloudinary.com/kuroji-fusky-s3/image/upload/",
+    },
   },
 })

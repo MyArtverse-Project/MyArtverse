@@ -15,9 +15,12 @@
       class="grid w-12 h-12 overflow-hidden border rounded-full aspect-square place-items-center"
     >
       <span class="sr-only">Profile</span>
-      <img
-        src="https://res.cloudinary.com/kuroji-fusky-s3/image/upload/q_75/projects/misc/ozzy-fp-banner.png"
+      <nuxt-img
+        provider="cloudinary"
+        src="/projects/misc/ozzy-fp-banner.png"
         alt="Profile"
+        width="50"
+        height="50"
       />
     </button>
   </div>
