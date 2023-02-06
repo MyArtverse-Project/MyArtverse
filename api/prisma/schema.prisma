@@ -1,0 +1,52 @@
+// This is your Prisma schema file,
+// learn more about it in the docs: https://pris.ly/d/prisma-schema
+
+generator client {
+  provider = "prisma-client-js"
+}
+
+datasource db {
+  provider = "postgresql"
+  url      = env("DATABASE_URL")
+}
+
+model Fursona {
+  id        Int       @id @default(autoincrement())
+  createdAt DateTime  @default(now())
+  updatedAt DateTime  @updatedAt
+  name      String    @db.VarChar(255)
+  biography String?   @default("I do not have a biography set at this time") @db.VarChar(2000)
+  sexuality String?   @default("None") @db.VarChar(100)
+  gender    String?   @default("None") @db.VarChar(100)
+  owner     Profile   @relation(fields: [ownerId], references: [id])
+  ownerId   Int
+  artworks  Artwork[]
+}
+
+model Profile {
+  id        Int       @id @default(autoincrement())
+  bio       String?   @default("I have not created a bio")
+  fursonas  Fursona[] 
+  createdAt DateTime  @default(now())
+  updatedAt DateTime  @updatedAt
+  artwork   Artwork[]
+  username  String   @unique
+  email     String   @unique
+  password  String   @unique @default(cuid())
+}
+
+model Flags {
+  flagName  String
+  flagImage String
+  flagID    Int    @id @default(autoincrement())
+}
+
+model Artwork {
+  artworkID Int     @id @default(autoincrement())
+  artist    String
+  nsfw      Boolean @default(false)
+  fursona   Fursona @relation(fields: [fursonaId], references: [id])
+  fursonaId Int
+  owner     Profile @relation(fields: [ownerId], references: [id])
+  ownerId   Int
+}

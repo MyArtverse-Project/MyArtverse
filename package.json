@@ -1,25 +1,28 @@
 {
-  "private": true,
-  "scripts": {
-    "build": "nuxt build",
-    "dev": "nuxt dev",
-    "generate": "nuxt generate",
-    "preview": "nuxt preview",
-    "postinstall": "nuxt prepare"
-  },
-  "devDependencies": {
-    "@fontsource/inter": "^4.5.14",
-    "@fontsource/open-sans": "^4.5.14",
-    "@iconify-prerendered/vue-fa6-brands": "^0.18.1662097805",
-    "@nuxt/image-edge": "^1.0.0-27919678.2f5b64b",
-    "@nuxtjs/color-mode": "^3.2.0",
-    "@pinia/nuxt": "^0.4.6",
-    "autoprefixer": "^10.4.13",
-    "gsap": "^3.11.4",
-    "nuxt": "^3.0.0",
-    "pinia": "^2.0.29",
-    "postcss": "^8.4.20",
-    "sass": "^1.57.1",
-    "tailwindcss": "^3.2.4"
-  }
+	"name": "myfursona",
+	"private": true,
+	"version": "0.0.0",
+	"license": "MIT",
+	"workspaces": [
+		"website",
+		"api"
+	],
+	"scripts": {
+		"postinstall": "cd website && nuxt prepare",
+		"dev:web": "yarn workspace @myfursona/website dev",
+		"build:web": "yarn workspace @myfursona/website build",
+		"preview:web": "yarn workspace @myfursona/website preview",
+		"dev:api": "yarn workspace @myfursona/api dev",
+		"build:api": "yarn workspace @myfursona/api build",
+		"start:api": "yarn workspace @myfursona/api start",
+		"prettier:check": "prettier --check .",
+		"prettier:write": "prettier --write ."
+	},
+	"engines": {
+		"node": ">= 16.0.0",
+		"npm": ">= 8.0.0"
+	},
+	"devDependencies": {
+		"prettier": "^2.8.3"
+	}
 }
