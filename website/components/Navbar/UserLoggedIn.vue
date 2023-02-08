@@ -17,7 +17,7 @@
 			<span class="sr-only">Profile</span>
 			<nuxt-img
 				provider="cloudinary"
-				src="/projects/misc/ozzy-fp-banner.png"
+				src="/projects/myfursona/ozzy-fp-banner.png"
 				alt="Profile"
 				width="50"
 				height="50"

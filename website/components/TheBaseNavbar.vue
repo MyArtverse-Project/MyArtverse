@@ -9,7 +9,7 @@
 				</NuxtLink>
 				<NavbarSearchBox />
 			</div>
-			<NavbarUserLoggedIn />
+			<NavbarUserLoggedOut />
 		</div>
 	</header>
 </template>

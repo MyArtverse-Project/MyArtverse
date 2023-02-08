@@ -10,73 +10,73 @@
 	"display": "minimal-ui",
 	"icons": [
 		{
-			"src": "/icon-orig-32.png",
+			"src": "/icons/icon-orig-32.png",
 			"sizes": "32x32",
 			"type": "image/png",
 			"purpose": "any"
 		},
 		{
-			"src": "/icon-orig-64.png",
+			"src": "/icons/icon-orig-64.png",
 			"sizes": "64x64",
 			"type": "image/png",
 			"purpose": "any"
 		},
 		{
-			"src": "/icon-orig-128.png",
+			"src": "/icons/icon-orig-128.png",
 			"sizes": "128x128",
 			"type": "image/png",
 			"purpose": "any"
 		},
 		{
-			"src": "/icon-orig-256.png",
+			"src": "/icons/icon-orig-256.png",
 			"sizes": "256x256",
 			"type": "image/png",
 			"purpose": "any"
 		},
 		{
-			"src": "/icon-orig-512.png",
+			"src": "/icons/icon-orig-512.png",
 			"sizes": "512x512",
 			"type": "image/png",
 			"purpose": "any"
 		},
 		{
-			"src": "/icon-orig-1024.png",
+			"src": "/icons/icon-orig-1024.png",
 			"sizes": "1024x1024",
 			"type": "image/png",
 			"purpose": "any"
 		},
 		{
-			"src": "/icon-mono-32.png",
+			"src": "/icons/icon-mono-32.png",
 			"sizes": "32x32",
 			"type": "image/png",
 			"purpose": "monochrome"
 		},
 		{
-			"src": "/icon-mono-64.png",
+			"src": "/icons/icon-mono-64.png",
 			"sizes": "64x64",
 			"type": "image/png",
 			"purpose": "monochrome"
 		},
 		{
-			"src": "/icon-mono-128.png",
+			"src": "/icons/icon-mono-128.png",
 			"sizes": "128x128",
 			"type": "image/png",
 			"purpose": "monochrome"
 		},
 		{
-			"src": "/icon-mono-256.png",
+			"src": "/icons/icon-mono-256.png",
 			"sizes": "256x256",
 			"type": "image/png",
 			"purpose": "monochrome"
 		},
 		{
-			"src": "/icon-mono-512.png",
+			"src": "/icons/icon-mono-512.png",
 			"sizes": "512x512",
 			"type": "image/png",
 			"purpose": "monochrome"
 		},
 		{
-			"src": "/icon-mono-1024.png",
+			"src": "/icons/icon-mono-1024.png",
 			"sizes": "1024x1024",
 			"type": "image/png",
 			"purpose": "monochrome"

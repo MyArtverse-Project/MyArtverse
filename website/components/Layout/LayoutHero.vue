@@ -1,12 +1,16 @@
+<script setup lang="ts">
+</script>
+
 <template>
-	<div id="hero">
-		<article>
-			<h1>MyFursona</h1>
-			<p>
-				MyFursona is an open-source platform where you can show off your fluffy
-				characters and show them off to your friends! Manage, store, and show
-				your fursonas in one place
-			</p>
-		</article>
+	<div class="bg-slate-800 h-screen">
+		<ClientOnly>
+			<Lottie
+				animationLink="/lottie-ae/myfursona-hero.json"
+				:height="500"
+				:width="500"
+        :loop="false"
+        :delay="800"
+			/>
+		</ClientOnly>
 	</div>
 </template>
