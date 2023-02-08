@@ -1,5 +1,5 @@
 <template>
 	<Container title="Home">
-		<LayoutHero />
+		<LandingHero />
 	</Container>
 </template>

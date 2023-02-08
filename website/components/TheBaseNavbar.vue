@@ -1,22 +1,33 @@
 <template>
-	<header>
-		<div class="flex items-center justify-between py-6 px-9">
+	<header class="fixed top-0 left-0 right-0 z-[9999]">
+		<nav class="flex items-center justify-between px-8 py-3">
 			<div class="flex items-center gap-x-6">
-				<NuxtLink to="/" class="flex items-center gap-x-2.5 logo-wordmark">
-					<span class="sr-only">MyFursona</span>
-					<IconMono class="w-[3.25rem] h-[3.25rem] text-purple-500" />
-					<span>MyFursona</span>
+				<NuxtLink to="/" class="logo">
+					<div
+						role="img"
+						aria-label="MyFursona"
+						class="flex items-center gap-x-2.5"
+					>
+						<IconMono class="w-[3.25rem] h-[3.25rem] text-white" />
+						<span>MyFursona</span>
+					</div>
 				</NuxtLink>
-				<NavbarSearchBox />
 			</div>
-			<NavbarUserLoggedOut />
-		</div>
+			<ul>
+				<li class="font-inter">
+					<button
+						class="px-4 py-1.5 rounded-md hover:bg-purple-900 border-zinc-700 border"
+					>
+						Sign In
+					</button>
+				</li>
+			</ul>
+		</nav>
 	</header>
 </template>
 
 <style lang="scss">
-.logo-wordmark {
-	@apply text-3xl font-bold font-inter select-none
-	bg-gradient-to-br from-orange-500 via-purple-500 to-pink-400 bg-clip-text text-transparent;
+.logo {
+	@apply text-3xl font-bold text-white select-none font-inter;
 }
 </style>
