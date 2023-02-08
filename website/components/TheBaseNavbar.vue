@@ -1,6 +1,18 @@
+<script setup lang="ts">
+const isScrolled = ref(false)
+
+function handleScroll() {
+	isScrolled.value = window.scrollY < 10 ? false : true
+}
+
+onBeforeMount(() => window.addEventListener("scroll", handleScroll))
+onMounted(() => window.addEventListener("scroll", handleScroll))
+onUnmounted(() => window.removeEventListener("scroll", handleScroll))
+</script>
+
 <template>
-	<header class="fixed top-0 left-0 right-0 z-[9999]">
-		<nav class="flex items-center justify-between px-8 py-3">
+	<header :class="['navbar-sticky', isScrolled ? 'scrolled' : '']">
+		<nav class="flex items-center justify-between px-8 py-4">
 			<div class="flex items-center gap-x-6">
 				<NuxtLink to="/" class="logo">
 					<div
@@ -15,11 +27,12 @@
 			</div>
 			<ul>
 				<li class="font-inter">
-					<button
+					<NuxtLink
+          to="/login"
 						class="px-4 py-1.5 rounded-md hover:bg-purple-900 border-zinc-700 border"
 					>
 						Sign In
-					</button>
+					</NuxtLink>
 				</li>
 			</ul>
 		</nav>
@@ -27,6 +40,17 @@
 </template>
 
 <style lang="scss">
+.navbar-sticky {
+	@apply fixed top-0 left-0 right-0 z-[9999] border-0 border-b border-transparent;
+	transition-property: backdrop-filter, background, border;
+	transition-duration: 300ms;
+
+	&.scrolled {
+		@apply backdrop-blur-md border-zinc-500;
+    background-color: rgba(24, 5, 72, 0.775);
+	}
+}
+
 .logo {
 	@apply text-3xl font-bold text-white select-none font-inter;
 }
