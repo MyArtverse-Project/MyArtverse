@@ -9,11 +9,6 @@ const props = defineProps<{
 	nowrap?: boolean
 }>()
 
-const detectWrap = !props.nowrap ? "wrap-contents" : ""
-const detectClass = !props.className
-	? detectWrap
-	: `${detectWrap} ${props.className}`
-
 useHead({
 	title: props.title,
 	meta: [
@@ -32,13 +27,9 @@ useHead({
 </script>
 
 <template>
-	<main id="page-container" :class="detectClass">
+	<main>
 		<slot />
 	</main>
 </template>
 
-<style>
-.wrap-contents {
-	@apply mx-auto max-w-screen-2xl px-6;
-}
-</style>
+<style lang="scss"></style>
