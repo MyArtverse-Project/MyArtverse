@@ -29,7 +29,7 @@ onUnmounted(() => window.removeEventListener("scroll", handleScroll))
 				<li class="font-inter">
 					<NuxtLink
           to="/login"
-						class="px-4 py-1.5 rounded-md hover:bg-purple-900 border-zinc-700 border"
+						class="px-4 py-2.5 rounded-md hover:bg-purple-900 border-zinc-700 border"
 					>
 						Sign In
 					</NuxtLink>

@@ -15,7 +15,7 @@ export default defineNuxtConfig({
 			link: [
 				{
 					rel: "shortcut icon",
-					href: ",/favicon.ico",
+					href: "./favicon.ico",
 				},
 				{
 					rel: "manifest",

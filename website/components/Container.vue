@@ -5,8 +5,6 @@ const urlPath = `https://www.myfursona.art${route.fullPath}`
 const props = defineProps<{
 	title: string
 	description?: string
-	className?: string
-	nowrap?: boolean
 }>()
 
 useHead({

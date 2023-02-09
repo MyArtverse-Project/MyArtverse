@@ -16,8 +16,8 @@ onMounted(() => {
 		tl.value = gsap
 			.timeline()
 			.fromTo(item[0], { opacity: 0, y: 120 }, { ...ease, opacity: 1, y: 0 })
-			.fromTo(item[1], { opacity: 0, y: 80 }, { ...ease, opacity: 1, y: 0 })
-			.fromTo(item[2], { opacity: 0, y: 60 }, { ...ease, opacity: 1, y: 0 })
+			.fromTo(item[1], { opacity: 0, y: 80 }, { ...ease, opacity: 1, y: 0 }, "-=0.69")
+			.fromTo(item[2], { opacity: 0, y: 60 }, { ...ease, opacity: 1, y: 0 }, "-=0.69")
 	}, profileContainer.value)
 })
 
