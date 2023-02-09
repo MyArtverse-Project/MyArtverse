@@ -14,9 +14,9 @@ onUnmounted(() => ctx.value.revert())
 <template>
 	<section class="h-[90vh] grid place-items-center">
 		<article class="px-8 relative z-[2] text-center flex flex-col items-center">
-			<h1 class="my-6 text-5xl font-bold font-inter">
+			<h2 class="my-6 text-5xl font-bold font-inter">
 				Keep 'em all in one place
-			</h1>
+			</h2>
 			<p class="w-2/4 text-xl 2xl:w-2/3">
 				If you have multiple characters, you can have them all in one account
 				and you're free to change them as you wish!
