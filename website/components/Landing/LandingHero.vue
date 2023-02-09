@@ -1,23 +1,34 @@
 <script setup lang="ts">
 import gsap from "gsap"
 
+const DEBS = "@ozzydevs"
+
 const ctx = ref()
 const profileContainer = ref<HTMLDivElement>()
 const tl = ref()
 
 onMounted(() => {
 	ctx.value = gsap.context((self) => {
-		const item = self.selector!(".art-item")
+		const artItems = self.selector!(".art-item")
 
 		const ease: gsap.TweenVars = {
 			ease: "elastic.out(1, 0.75)",
 			duration: 0.75,
 		}
-		tl.value = gsap
-			.timeline()
-			.fromTo(item[0], { opacity: 0, y: 120 }, { ...ease, opacity: 1, y: 0 })
-			.fromTo(item[1], { opacity: 0, y: 80 }, { ...ease, opacity: 1, y: 0 }, "-=0.69")
-			.fromTo(item[2], { opacity: 0, y: 60 }, { ...ease, opacity: 1, y: 0 }, "-=0.69")
+
+		artItems.forEach((item: HTMLElement | any, i: number) => {
+			gsap
+				.timeline()
+				.from(item, { ...ease, opacity: 0, y: -75 })
+				.to(item, { opacity: 1, y: 0 })
+				.delay(i * 0.11)
+		})
+
+		// tl.value = gsap
+		// 	.timeline()
+		// 	.fromTo(item[0], { opacity: 0, y: 120 }, { ...ease, opacity: 1, y: 0 })
+		// 	.fromTo(item[1], { opacity: 0, y: 80 }, { ...ease, opacity: 1, y: 0 }, "-=0.69")
+		// 	.fromTo(item[2], { opacity: 0, y: 60 }, { ...ease, opacity: 1, y: 0 }, "-=0.69")
 	}, profileContainer.value)
 })
 
@@ -36,27 +47,36 @@ onUnmounted(() => ctx.value.revert())
 		</article>
 		<div class="profile-container" ref="profileContainer">
 			<div class="relative">
-				<NuxtImg
-					class="art-item"
-					style="top: 9rem; right: 29vw"
-					src="/images/hero/vulpo.jpg"
-					sizes="lg:375px"
-					quality="75"
-				/>
-				<NuxtImg
-					class="art-item"
-					style="bottom: 12rem; right: 8vw"
-					src="/images/hero/ivo.png"
-					sizes="lg:330px"
-					quality="75"
-				/>
-				<NuxtImg
-					class="art-item"
-					style="bottom: 15rem; right: 21vw"
-					src="/images/hero/renzo.jpg"
-					sizes="lg:330px"
-					quality="75"
-				/>
+				<figure class="art-item" style="top: 9rem; right: 25vw">
+					<NuxtPicture
+						src="/images/hero/vulpo.jpg"
+						sizes="lg:375px"
+						quality="75"
+					/>
+					<figcaption class="label -bottom-7">
+						Vulpo | <strong>{{ DEBS }}</strong>
+					</figcaption>
+				</figure>
+				<figure class="art-item" id="sona-subcaption" style="bottom: 6rem; right: 8vw">
+					<NuxtPicture
+						src="/images/hero/ivo.png"
+						sizes="lg:330px"
+						quality="75"
+					/>
+					<figcaption id="sona-subcaption" class="text-right right-12 label -bottom-7">
+						Ivo | <strong>{{ DEBS }}</strong>
+					</figcaption>
+				</figure>
+				<figure class="art-item" style="bottom: 15rem; right: 21vw">
+					<NuxtPicture
+						src="/images/hero/renzo.jpg"
+						sizes="lg:330px"
+						quality="75"
+					/>
+					<figcaption id="sona-subcaption" class="text-left -right-[6.25rem] bottom-1 label">
+						Renzo | <strong>{{ DEBS }}</strong>
+					</figcaption>
+				</figure>
 			</div>
 		</div>
 	</section>
@@ -72,6 +92,14 @@ onUnmounted(() => ctx.value.revert())
 }
 
 .art-item {
-	@apply relative rounded-xl shadow-lg;
+	@apply relative;
+
+	img {
+		@apply rounded-2xl;
+	}
+
+	.label {
+		@apply absolute text-sm opacity-50;
+	}
 }
 </style>
