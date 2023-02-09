@@ -55,42 +55,20 @@ onUnmounted(() => ctx.value.revert())
 		<div class="profile-container" ref="profileContainer">
 			<div id="wrapper" class="relative top-5">
 				<figure class="art-item" style="top: 5.5rem; right: 25vw">
-					<NuxtPicture
-						src="/images/hero/vulpo.jpg"
-						sizes="lg:375px"
-						quality="75"
-					/>
+					<NuxtImg src="/images/hero/vulpo.jpg" sizes="lg:375px" quality="75" />
 					<figcaption class="label -bottom-7">
 						Vulpo | <strong>{{ author }}</strong>
 					</figcaption>
 				</figure>
-				<figure
-					class="art-item"
-					id="sona-subcaption"
-					style="bottom: 10rem; right: 8vw"
-				>
-					<NuxtPicture
-						src="/images/hero/ivo.png"
-						sizes="lg:330px"
-						quality="75"
-					/>
-					<figcaption
-						id="sona-subcaption"
-						class="text-right right-12 label -bottom-7"
-					>
+				<figure class="art-item" style="bottom: 10rem; right: 8vw">
+					<NuxtImg src="/images/hero/ivo.png" sizes="lg:375px" quality="75" />
+					<figcaption class="right-0 text-right label -bottom-7">
 						Ivo | <strong>{{ author }}</strong>
 					</figcaption>
 				</figure>
 				<figure class="art-item" style="bottom: 18rem; right: 21vw">
-					<NuxtPicture
-						src="/images/hero/renzo.jpg"
-						sizes="lg:330px"
-						quality="75"
-					/>
-					<figcaption
-						id="sona-subcaption"
-						class="text-left -right-[6.25rem] bottom-1 label"
-					>
+					<NuxtImg src="/images/hero/renzo.jpg" sizes="lg:375px" quality="75" />
+					<figcaption class="text-left -right-[9.25rem] bottom-1 label">
 						Renzo | <strong>{{ author }}</strong>
 					</figcaption>
 				</figure>
@@ -118,6 +96,7 @@ onUnmounted(() => ctx.value.revert())
 
 .art-item {
 	@apply relative;
+	width: 350px !important;
 
 	img {
 		@apply rounded-2xl;

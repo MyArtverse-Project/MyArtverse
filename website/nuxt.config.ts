@@ -41,10 +41,7 @@ export default defineNuxtConfig({
 	webpack: {
 		optimizeCSS: true,
 	},
+
 	// @nuxt/image-edge config
-	image: {
-		cloudinary: {
-			baseURL: "https://res.cloudinary.com/kuroji-fusky-s3/image/upload/",
-		},
-	},
+	image: {},
 })
