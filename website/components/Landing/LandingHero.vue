@@ -21,20 +21,20 @@ onMounted(() => {
 				.timeline()
 				.fromTo(item, { opacity: 0, y: -75 }, { ...ease, opacity: 1, y: 0 })
 				.delay(i * 0.15)
-      })
+		})
 
-			gsap
-				.timeline({
-					scrollTrigger: {
-						trigger: relContainer,
-						start: "top top",
-						end: "bottom center",
-						scrub: 0.75,
-					},
-				})
-				.to(artItems[0], { y: -75 })
-				.to(artItems[1], { y: -75 * 2 }, "<")
-				.to(artItems[2], { y: -75 * 3 }, "<")
+		gsap
+			.timeline({
+				scrollTrigger: {
+					trigger: relContainer,
+					start: "top top",
+					end: "bottom center",
+					scrub: 0.75,
+				},
+			})
+			.to(artItems[2], { y: -150 })
+			.to(artItems[1], { y: -125 * 2 }, "<")
+			.to(artItems[0], { y: -125 * 3 }, "<")
 	}, profileContainer.value)
 })
 
@@ -47,14 +47,14 @@ onUnmounted(() => ctx.value.revert())
 			<IconMono class="w-[12rem] h-[12rem] -translate-x-5 text-white" />
 			<h1 class="my-6 text-5xl font-bold font-inter">MyFursona</h1>
 			<p class="w-2/4 text-xl">
-				An open-source platform where you can manage and share your
-				amazing, adorable, and fluffy characters and show them off to your
-				friends and family!
+				An open-source platform where you can manage and share your amazing,
+				adorable, and fluffy characters and show them off to your friends and
+				family!
 			</p>
 		</article>
 		<div class="profile-container" ref="profileContainer">
 			<div id="wrapper" class="relative top-5">
-				<figure class="art-item" style="top: 9rem; right: 25vw">
+				<figure class="art-item" style="top: 5.5rem; right: 25vw">
 					<NuxtPicture
 						src="/images/hero/vulpo.jpg"
 						sizes="lg:375px"
@@ -67,7 +67,7 @@ onUnmounted(() => ctx.value.revert())
 				<figure
 					class="art-item"
 					id="sona-subcaption"
-					style="bottom: 6rem; right: 8vw"
+					style="bottom: 10rem; right: 8vw"
 				>
 					<NuxtPicture
 						src="/images/hero/ivo.png"
@@ -81,7 +81,7 @@ onUnmounted(() => ctx.value.revert())
 						Ivo | <strong>{{ author }}</strong>
 					</figcaption>
 				</figure>
-				<figure class="art-item" style="bottom: 15rem; right: 21vw">
+				<figure class="art-item" style="bottom: 18rem; right: 21vw">
 					<NuxtPicture
 						src="/images/hero/renzo.jpg"
 						sizes="lg:330px"
@@ -102,6 +102,14 @@ onUnmounted(() => ctx.value.revert())
 <style lang="scss">
 .gradient-hero {
 	@apply relative;
+	background: linear-gradient(
+		173.6deg,
+		rgba(33, 218, 255, 0.65) 0%,
+		rgba(154, 33, 255, 0.65) 10%,
+		rgba(255, 33, 222, 0.1) 50%,
+		rgba(225, 33, 255, 0) 80%
+	);
+	background-position: top top;
 }
 
 .profile-container {

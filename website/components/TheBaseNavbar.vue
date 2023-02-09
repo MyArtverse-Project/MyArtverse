@@ -13,7 +13,7 @@ onUnmounted(() => window.removeEventListener("scroll", handleScroll))
 <template>
 	<header :class="['navbar-sticky', isScrolled ? 'scrolled' : '']">
 		<nav class="flex items-center justify-between px-8 py-4">
-			<div class="flex items-center gap-x-6">
+			<div class="flex items-center">
 				<NuxtLink to="/" class="logo">
 					<div
 						role="img"
@@ -25,11 +25,17 @@ onUnmounted(() => window.removeEventListener("scroll", handleScroll))
 					</div>
 				</NuxtLink>
 			</div>
-			<ul>
+			<ul class="flex items-center gap-x-8">
+        <li>
+          <NuxtLink to="/browse">Browse</NuxtLink>
+        </li>
+        <li>
+          <NuxtLink to="/about">About</NuxtLink>
+        </li>
 				<li class="font-inter">
 					<NuxtLink
           to="/login"
-						class="px-4 py-2.5 rounded-md hover:bg-purple-900 border-zinc-700 border"
+						class="px-5 py-2.5 rounded-3xl hover:bg-purple-700 border-zinc-200 border font-bold"
 					>
 						Sign In
 					</NuxtLink>
