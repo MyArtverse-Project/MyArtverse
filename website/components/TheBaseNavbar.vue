@@ -13,7 +13,7 @@ onUnmounted(() => window.removeEventListener("scroll", handleScroll))
 <template>
 	<header :class="['navbar-sticky', isScrolled ? 'scrolled' : '']">
 		<nav class="flex items-center justify-between px-8 py-4">
-			<div class="flex items-center">
+			<div class="left-side">
 				<NuxtLink to="/" class="logo">
 					<div
 						role="img"
@@ -25,16 +25,16 @@ onUnmounted(() => window.removeEventListener("scroll", handleScroll))
 					</div>
 				</NuxtLink>
 			</div>
-			<ul class="flex items-center gap-x-8">
+			<ul class="right-side">
         <li>
-          <NuxtLink to="/browse">Browse</NuxtLink>
-        </li>
-        <li>
-          <NuxtLink to="/about">About</NuxtLink>
-        </li>
+          <NuxtLink to="/upload">Upload</NuxtLink>
+				</li>
+				<li>
+					<NuxtLink to="/about">About</NuxtLink>
+				</li>
 				<li class="font-inter">
 					<NuxtLink
-          to="/login"
+						to="/login"
 						class="px-5 py-2.5 rounded-3xl hover:bg-purple-700 border-zinc-200 border font-bold"
 					>
 						Sign In
@@ -53,8 +53,16 @@ onUnmounted(() => window.removeEventListener("scroll", handleScroll))
 
 	&.scrolled {
 		@apply backdrop-blur-md border-zinc-500;
-    background-color: rgba(24, 5, 72, 0.775);
+		background-color: rgba(24, 5, 72, 0.775);
 	}
+}
+
+.left-side {
+	@apply flex items-center;
+}
+
+.right-side {
+	@apply flex items-center gap-x-10;
 }
 
 .logo {

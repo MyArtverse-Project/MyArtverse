@@ -1,5 +1,6 @@
 <script setup lang="ts">
 import gsap from "gsap"
+import { secondSectImages } from "./Images"
 
 const ctx = ref()
 const animationRoot = ref<HTMLElement>()
@@ -22,16 +23,37 @@ onUnmounted(() => ctx.value.revert())
 				and you're free to change them as you wish!
 			</p>
 		</article>
-    <div id="box-animation" ref="animationRoot">
-      <div class="sonas-box">
-        <IconMono class="w-[8rem] h-[8rem] text-white" />
-      </div>
-    </div>
+		<div aria-hidden id="box-animation" ref="animationRoot">
+			<div class="mf-box">
+				<IconMono class="w-[8rem] h-[8rem] text-white" />
+			</div>
+			<NuxtImg
+				class="character-item"
+				sizes="md:150px lg:250px"
+				alt=""
+				v-for="item in secondSectImages"
+				:src="`/images/hero/${item.file}`"
+				:style="{
+					bottom: item?.bottom ?? undefined,
+					left: item?.left ?? undefined,
+					top: item?.top ?? undefined,
+					right: item?.right ?? undefined,
+				}"
+			/>
+		</div>
 	</section>
 </template>
 
-<style lang="scss">
-.sonas-box {
-	@apply flex justify-center items-center mx-auto w-[12rem] h-[12rem] rounded-xl bg-orange-400;
+<style lang="scss" scoped>
+#box-animation {
+	@apply relative w-full h-full flex items-center;
+}
+
+.character-item {
+	@apply absolute rounded-xl w-[150px] lg:w-[255px];
+}
+
+.mf-box {
+	@apply flex justify-center items-center mx-auto w-[12rem] h-[12rem] rounded-xl bg-zinc-600;
 }
 </style>

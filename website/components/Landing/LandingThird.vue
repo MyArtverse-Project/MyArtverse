@@ -1,7 +1,12 @@
 <script setup lang="ts">
 const gridItems = [
 	{
-		heading: "Manage your ref sheets",
+		heading: "A separate and unique profile for each of your own characters",
+		description:
+			"Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat.",
+	},
+	{
+		heading: "Manage and share your ref sheets easily",
 		description:
 			"Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed in sapien dictum, maximus mi et, convallis dui. In vitae cursus elit.",
 	},
@@ -9,11 +14,6 @@ const gridItems = [
 		heading: "Organize your commissions and photos",
 		description:
 			"Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.",
-	},
-	{
-		heading: "Maybe open commissions and stuff",
-		description:
-			"Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat.",
 	},
 ]
 
@@ -73,7 +73,7 @@ onMounted(() => {
 <style lang="scss" scoped>
 .card {
 	&-container {
-		@apply py-16 grid grid-cols-3 gap-6 mx-auto max-w-[1440px];
+		@apply my-16 grid grid-cols-3 gap-6 mx-auto max-w-[1440px];
 
 		&.active > .card-item::before {
 			opacity: 1;
@@ -86,8 +86,8 @@ onMounted(() => {
 
 	&-item {
 		@apply rounded-md relative;
-		background: rgb(50, 2, 86);
-    height: 30rem;
+		background: rgba(55, 3, 157, 0.5);
+		height: 30rem;
 
 		&::before {
 			content: "";
@@ -95,9 +95,9 @@ onMounted(() => {
 			border-radius: inherit;
 			transition: opacity 300ms ease;
 			background: radial-gradient(
-				450px circle at var(--pos-x) var(--pos-y),
+				600px circle at var(--pos-x) var(--pos-y),
 				rgb(211, 100, 254),
-				#0000 100%
+				#0000 75%
 			);
 		}
 	}
