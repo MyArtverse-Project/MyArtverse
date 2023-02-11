@@ -32,6 +32,12 @@ class Profile {
 	username: string
 	@Field()
 	bio: string
+	@Field(() => Int)
+	age: number
+	@Field(() => Int)
+	likes: number
+	@Field()
+	status: string
 	@Field()
 	createdAt: Date
 	@Field()
@@ -52,7 +58,8 @@ export class ProfileResolver {
 
 	@Query(() => Profile)
 	async getProfileByUsername(@Arg("username", () => String) username: string) {
-		const profile = prisma.profile.findFirst({
+		username = username.toLowerCase()
+		const profile = await prisma.profile.findFirst({
 			where: {
 				username: username,
 			},
@@ -64,7 +71,8 @@ export class ProfileResolver {
 	async register(
 		@Arg("username", () => String) username: string,
 		@Arg("email", () => String) email: string,
-		@Arg("password", () => String) password: string
+		@Arg("password", () => String) password: string,
+		@Arg("age", () => Int) age: number
 	) {
 		const hashedPassword = await bcrypt.hash(password, 12)
 		const profile = await prisma.profile.create({
@@ -72,6 +80,7 @@ export class ProfileResolver {
 				email,
 				username,
 				password: hashedPassword,
+				age: age,
 				id: randomInt(999999),
 			},
 		})

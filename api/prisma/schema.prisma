@@ -15,6 +15,8 @@ model Fursona {
   createdAt DateTime  @default(now())
   updatedAt DateTime  @updatedAt
   name      String    @db.VarChar(255)
+  species   String
+  colors    String[]
   biography String?   @default("I do not have a biography set at this time") @db.VarChar(2000)
   sexuality String?   @default("None") @db.VarChar(100)
   gender    String?   @default("None") @db.VarChar(100)
@@ -25,14 +27,17 @@ model Fursona {
 
 model Profile {
   id        Int       @id @default(autoincrement())
-  bio       String?   @default("I have not created a bio")
-  fursonas  Fursona[] 
+  biography String?   @default("I have not created a bio")
+  fursonas  Fursona[]
   createdAt DateTime  @default(now())
   updatedAt DateTime  @updatedAt
   artwork   Artwork[]
-  username  String   @unique
-  email     String   @unique
-  password  String   @unique @default(cuid())
+  username  String    @unique
+  likes     Int       @default(0)
+  status    String?   @default("No Status")
+  email     String    @unique
+  password  String    @unique @default(cuid())
+  age       Int
 }
 
 model Flags {
