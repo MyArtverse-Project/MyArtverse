@@ -6,16 +6,16 @@ const password = ref("")
 <template>
   <form class="form-container">
     <div class="field f-username">
-      <label for="username" :class="`form-label ${username.length > 0 ? 'block' : 'invisible'}`">Username/Email</label>
+      <label for="username" :class="['form-label', username.length > 0 ? 'block' : 'invisible']">Username/Email</label>
       <input name="username" type="username" class="form-textbox" v-model="username" placeholder="Username/Email" />
     </div>
     <div class="field f-password">
       <label for="password" class="form-label">Password</label>
       <input name="password" class="form-textbox" type="password" placeholder="Password" v-model="password" />
-      <NuxtLink to="#">Forgot Password?</NuxtLink>
+      <NuxtLink to="#">Forgot password?</NuxtLink>
     </div>
-    <div class="buttons flex flex-col w-full text-center items-center">
-      <NuxtLink to="#" class="submit-button ">Submit</NuxtLink>
+    <div class="flex flex-col items-center w-full text-center buttons">
+      <NuxtLink to="#" class="submit-button">Submit</NuxtLink>
     </div>
   </form>
 </template>
@@ -37,11 +37,6 @@ const password = ref("")
   &-password {
     grid-area: password;
   }
-}
-
-.forgot-pswd {
-  grid-area: forgot-pswd;
-  @apply py-3 flex w-full px-4;
 }
 
 .submit-button {
