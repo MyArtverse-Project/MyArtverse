@@ -4,12 +4,9 @@ const password = ref("")
 </script>
 
 <template>
-  <div>
-
-  </div>
 	<form class="form-container">
-		<div class="field">
-			<label for="username" class="form-label">Username</label>
+		<div class="field f-username">
+			<label for="username" class="form-label">Username/Email</label>
 			<input
 				name="username"
 				type="username"
@@ -18,9 +15,7 @@ const password = ref("")
 				placeholder="Username"
 			/>
 		</div>
-		<div
-			class="field"
-		>
+		<div class="field f-password">
 			<label for="password" class="form-label">Password</label>
 			<input
 				name="password"
@@ -30,24 +25,48 @@ const password = ref("")
 				v-model="password"
 			/>
 		</div>
+		<NuxtLink to="#" class="forgot-pswd">Forgot password?</NuxtLink>
+		<NuxtLink to="#" class="submit-button">Submit</NuxtLink>
 	</form>
 </template>
 
 <style lang="scss" scoped>
 .form-container {
-  @apply flex flex-col justify-center w-3/6 h-screen m-auto gap-y-3;
+	@apply grid w-3/6 h-1/6 place-items-center m-auto gap-y-1;
+	grid-template-areas:
+		"username username username username username"
+		"password password password password password"
+		"forgot-pswd . . . submit";
+}
+
+.f {
+	&-username {
+		grid-area: username;
+	}
+	&-password {
+		grid-area: password;
+	}
+}
+
+.forgot-pswd {
+	grid-area: forgot-pswd;
+  @apply py-3 flex w-full px-4;
+}
+
+.submit-button {
+	grid-area: submit;
+  @apply w-full py-3 bg-blue-400 flex px-4;
 }
 
 .field {
-  @apply flex flex-col relative py-4;
+	@apply w-full flex flex-col relative pt-4;
 }
 
 .form-label {
-  @apply absolute -top-4 text-white font-inter uppercase font-bold;
+	@apply absolute -top-4 text-zinc-500 font-inter uppercase font-bold opacity-75;
 }
 
 .form-textbox {
-	@apply px-3 py-2 text-black border-none outline-none rounded-md bg-zinc-800;
+	@apply px-4 py-3 text-white border-none outline-none rounded-md bg-zinc-800;
 }
-
 </style>
