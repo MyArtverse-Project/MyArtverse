@@ -45,7 +45,7 @@ onMounted(() => {
 </script>
 
 <template>
-	<section class="h-screen px-12">
+	<section class="px-12">
 		<h1 class="my-6 mt-[6.5rem] text-5xl font-bold text-center font-inter">
 			You're in control
 		</h1>

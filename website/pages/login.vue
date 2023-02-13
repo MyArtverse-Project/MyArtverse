@@ -1,7 +1,3 @@
-<script setup lang="ts">
-import Form from '~~/components/Landing/Login/Form.vue';
-</script>
-
 <template>
   <Container title="MyFursona | Login" class="login-wrapper">
     <LoginForm />
