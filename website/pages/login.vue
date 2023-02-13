@@ -4,7 +4,7 @@ import Form from '~~/components/Landing/Login/Form.vue';
 
 <template>
   <Container title="MyFursona | Login" class="login-wrapper">
-      <Form />
+    <LoginForm />
   </Container>
 </template>
 
