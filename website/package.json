@@ -13,6 +13,7 @@
 		"@fontsource/open-sans": "^4.5.14",
 		"@iconify-prerendered/vue-fa6-brands": "^0.18.1662097805",
 		"@nuxt/image-edge": "^1.0.0-27919678.2f5b64b",
+		"@nuxtjs/apollo": "^5.0.0-alpha.5",
 		"@nuxtjs/color-mode": "^3.2.0",
 		"@pinia/nuxt": "^0.4.6",
 		"autoprefixer": "^10.4.13",
