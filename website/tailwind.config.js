@@ -23,6 +23,9 @@ module.exports = {
 				body: {
 					fontFamily: theme("fontFamily.open-sans"),
 				},
+        "#__nuxt": {
+          minHeight: '100vh',
+        }
 			})
 		}),
 	],
