@@ -1,6 +1,6 @@
 <template>
 	<footer>
-		<div class="flex justify-between px-10 py-6 mx-auto max-w-screen-2xl">
+		<div class="mt-[2rem] flex justify-between px-10 py-6 mx-auto max-w-screen-2xl">
 			<span id="copyright">
 				&copy; 2022-{{ new Date().getFullYear() }} MyFursona
 			</span>
