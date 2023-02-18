@@ -15,6 +15,7 @@
 		"dev:api": "yarn workspace @myfursona/api dev",
 		"build:api": "yarn workspace @myfursona/api build",
 		"start:api": "yarn workspace @myfursona/api start",
+    "build": "turbo build",
 		"prettier:check": "prettier --check .",
 		"prettier:write": "prettier --write ."
 	},

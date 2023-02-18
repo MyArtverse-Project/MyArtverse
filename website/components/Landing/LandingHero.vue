@@ -10,27 +10,15 @@ onMounted(() => {
 		const artItems = self.selector!(".art-item")
 		const scrollWrapper = self.selector!(".profile-container #wrapper")
 
-		const ease: gsap.TweenVars = {
-			ease: "elastic.out(1, 0.75)",
-			duration: 0.75,
-		}
-
-		// Trigger onload
-		artItems.forEach((item: HTMLElement | any, i: number) => {
-			gsap
-				.timeline()
-				.fromTo(item, { opacity: 0, y: -75 }, { ...ease, opacity: 1, y: 0 })
-				.delay(i * 0.15)
-		})
-
 		// Trigger on-scroll
 		gsap
 			.timeline({
 				scrollTrigger: {
 					trigger: scrollWrapper,
 					start: "top top",
-					end: "bottom center",
+					end: "+=1000",
 					scrub: 0.75,
+          markers: true
 				},
 			})
 			.to(artItems[2], { y: -145 })
@@ -45,7 +33,7 @@ onUnmounted(() => ctx.value.revert())
 <template>
 	<section class="flex items-center h-screen gradient-hero">
 		<article
-			class="flex flex-col items-start gap-6 px-8 ml-[7.5vw] mr-auto max-w-[1640px] relative z-[2]"
+			class="flex flex-col items-center gap-6 px-8 mx-auto max-w-[1640px] relative z-[2]"
 		>
 			<IconMono class="w-[12rem] h-[12rem] -translate-x-5 text-white" />
 			<h1 class="text-5xl font-bold font-inter">MyFursona</h1>

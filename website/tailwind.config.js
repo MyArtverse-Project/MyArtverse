@@ -1,6 +1,7 @@
-/** @type {import('tailwindcss').Config} */
 const pluginBaseStyles = require("tailwindcss/plugin")
+const defaultTheme = require("tailwindcss/defaultTheme")
 
+/** @type {import('tailwindcss').Config} */
 module.exports = {
 	content: [
 		"./components/**/*.{js,vue,ts}",
@@ -32,8 +33,8 @@ module.exports = {
 	theme: {
 		extend: {
 			fontFamily: {
-				inter: ["Inter", "sans-serif"],
-				"open-sans": ["Open Sans", "sans-serif"],
+				inter: ["Inter", ...defaultTheme.fontFamily.sans],
+				"open-sans": ["Open Sans", ...defaultTheme.fontFamily.sans],
 			},
 		},
 	},

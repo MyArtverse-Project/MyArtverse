@@ -1,8 +1,10 @@
 <template>
 	<footer>
-		<div class="mt-[2rem] flex justify-between px-10 py-6 mx-auto max-w-screen-2xl">
-			<span id="copyright">
-				&copy; 2022-{{ new Date().getFullYear() }} MyFursona
+		<div
+			class="mt-[2rem] flex justify-between px-10 py-6 mx-auto max-w-screen-2xl"
+		>
+			<span id="copyright" class="text-sm">
+				Copyright &copy; 2022-{{ new Date().getFullYear() }} MyFursona
 			</span>
 			<div class="flex items-center gap-x-5">
 				<NuxtLink to="/contact">Contact</NuxtLink>
