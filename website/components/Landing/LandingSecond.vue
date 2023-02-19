@@ -54,6 +54,6 @@ onUnmounted(() => ctx.value.revert())
 }
 
 .mf-box {
-	@apply flex justify-center items-center mx-auto w-[12rem] h-[12rem] rounded-xl bg-zinc-600;
+	@apply flex justify-center items-center mx-auto w-[12rem] h-[12rem] rounded-xl bg-base-600;
 }
 </style>

@@ -73,7 +73,7 @@ onMounted(() => {
 <style lang="scss" scoped>
 .card {
 	&-container {
-		@apply my-16 grid grid-cols-3 gap-6 mx-auto max-w-[1440px];
+		@apply my-16 grid grid-cols-1 lg:grid-cols-2 gap-6 mx-auto max-w-[1440px];
 
 		&.active > .card-item::before {
 			opacity: 1;
@@ -104,7 +104,7 @@ onMounted(() => {
 }
 
 #card-contents {
-	@apply bg-zinc-900 p-5 absolute inset-0.5 bottom-10 z-[1] m-[0.01rem];
+	@apply bg-base-900 p-5 absolute inset-0.5 bottom-10 z-[1] m-[0.01rem];
 	height: 99.125%;
 	border-radius: inherit;
 }

@@ -7,7 +7,7 @@ const profileContainer = ref<HTMLDivElement>()
 
 onMounted(() => {
 	ctx.value = gsap.context((self) => {
-		const artItems = self.selector!(".art-item")
+		const artItems = self.selector!(".art-item-right")
 		const scrollWrapper = self.selector!(".profile-container #wrapper")
 
 		// Trigger on-scroll
@@ -16,9 +16,8 @@ onMounted(() => {
 				scrollTrigger: {
 					trigger: scrollWrapper,
 					start: "top top",
-					end: "+=1000",
-					scrub: 0.75,
-          markers: true
+					end: "+=900",
+					scrub: 0.65,
 				},
 			})
 			.to(artItems[2], { y: -145 })
@@ -43,27 +42,37 @@ onUnmounted(() => ctx.value.revert())
 			</div>
 		</article>
 		<div class="profile-container" ref="profileContainer" aria-hidden="true">
-			<div id="wrapper" class="relative top-5">
-				<figure
-					v-for="item in heroImages"
-					class="art-item"
-					:style="{
-						top: item.top ?? undefined,
-						bottom: item.bottom ?? undefined,
-						right: item.right ?? undefined,
-					}"
-				>
-					<NuxtImg
-						:src="`/images/hero/${item.file}`"
-						sizes="lg:400px"
-						quality="75"
-						preload
-					/>
-					<figcaption class="label">
-						{{ item.characterName }} |
-						<strong>{{ item.characterAuthor }}</strong>
-					</figcaption>
-				</figure>
+			<div
+				v-for="item in heroImages.left"
+				class="art-item-left"
+				:style="{
+					top: item.top ?? undefined,
+					bottom: item.bottom ?? undefined,
+					left: item.left ?? undefined,
+				}"
+			>
+				<NuxtImg
+					:src="`/images/hero/${item.file}`"
+					sizes="lg:275px xl:400px"
+					quality="75"
+					preload
+				/>
+			</div>
+			<div
+				v-for="item in heroImages.right"
+				class="art-item-right"
+				:style="{
+					top: item.top ?? undefined,
+					bottom: item.bottom ?? undefined,
+					right: item.right ?? undefined,
+				}"
+			>
+				<NuxtImg
+					:src="`/images/hero/${item.file}`"
+					sizes="lg:275px xl:400px"
+					quality="75"
+					preload
+				/>
 			</div>
 		</div>
 	</section>
@@ -74,7 +83,7 @@ onUnmounted(() => ctx.value.revert())
 	@apply relative;
 	background: linear-gradient(
 		173.6deg,
-		rgba(33, 218, 255, 0.65) 0%,
+		rgba(2, 237, 254, 0.65) 0%,
 		rgba(154, 33, 255, 0.65) 10%,
 		rgba(255, 33, 222, 0.1) 50%,
 		rgba(225, 33, 255, 0) 80%
@@ -83,7 +92,7 @@ onUnmounted(() => ctx.value.revert())
 }
 
 .login-button {
-	@apply text-lg px-6 py-2 rounded-full border-2 border-zinc-300 duration-200;
+	@apply text-lg px-6 py-2 rounded-full border-2 border-base-300 duration-200;
 	transition-property: border;
 
 	&:hover {
@@ -92,19 +101,18 @@ onUnmounted(() => ctx.value.revert())
 }
 
 .profile-container {
-	@apply absolute top-0 right-0;
+	@apply absolute inset-0 scale-[0.9] top-5 select-none;
 }
 
 .art-item {
-	@apply relative;
-	width: 400px !important;
+	&-left,
+	&-right {
+		@apply absolute;
+		width: 400px !important;
 
-	img {
-		@apply rounded-2xl;
-	}
-
-	.label {
-		@apply absolute text-sm top-0 px-5 py-2.5 bg-opacity-10 backdrop-blur-md bg-black rounded-tl-2xl rounded-tr-2xl w-full;
+		img {
+			@apply rounded-2xl pointer-events-none;
+		}
 	}
 }
 </style>

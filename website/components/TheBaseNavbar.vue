@@ -39,7 +39,7 @@ onUnmounted(() => window.removeEventListener("scroll", handleScroll))
 				<li class="font-inter">
 					<NuxtLink
 						to="/login"
-						class="px-5 py-2.5 rounded-3xl hover:bg-purple-700 border-zinc-200 border font-bold"
+						class="px-5 py-2.5 rounded-3xl hover:bg-purple-700 border-base-200 border font-bold"
 					>
 						Sign In
 					</NuxtLink>
@@ -56,7 +56,7 @@ onUnmounted(() => window.removeEventListener("scroll", handleScroll))
 	transition-duration: 300ms;
 
 	&.scrolled {
-		@apply backdrop-blur-md border-zinc-500;
+		@apply backdrop-blur-md border-base-500;
 		background-color: rgba(24, 5, 72, 0.775);
 	}
 }

@@ -24,9 +24,9 @@ module.exports = {
 				body: {
 					fontFamily: theme("fontFamily.open-sans"),
 				},
-        "#__nuxt": {
-          minHeight: '100vh',
-        }
+				"#__nuxt": {
+					minHeight: "100vh",
+				},
 			})
 		}),
 	],
@@ -35,6 +35,21 @@ module.exports = {
 			fontFamily: {
 				inter: ["Inter", ...defaultTheme.fontFamily.sans],
 				"open-sans": ["Open Sans", ...defaultTheme.fontFamily.sans],
+			},
+			colors: {
+				"base": {
+					DEFAULT: "#634E97",
+					50: "#FCFBFD",
+					100: "#EBE7F3",
+					200: "#C9BFDE",
+					300: "#A696C9",
+					400: "#836EB4",
+					500: "#634E97",
+					600: "#4D3D75",
+					700: "#362B54",
+					800: "#201A32",
+					900: "#0B0911",
+				},
 			},
 		},
 	},

@@ -49,10 +49,10 @@ const password = ref("")
 }
 
 .form-label {
-  @apply absolute -top-4 text-zinc-500 font-inter uppercase font-bold opacity-75;
+  @apply absolute -top-4 text-base-500 font-inter uppercase font-bold opacity-75;
 }
 
 .form-textbox {
-  @apply px-4 py-3 text-white border-none outline-none rounded-md bg-zinc-800;
+  @apply px-4 py-3 text-white border-none outline-none rounded-md bg-base-800;
 }
 </style>

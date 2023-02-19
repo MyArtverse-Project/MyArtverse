@@ -5,33 +5,38 @@ interface Images {
 	left?: string
 	right?: string
 	scale?: number
-	characterName?: string
-	characterAuthor?: string
 }
 
-export const heroImages: Images[] = [
-	{
-		file: "renzo.jpg",
-		top: "5.5rem",
-		right: "25vw",
-		characterName: "Renzo",
-		characterAuthor: "@ozzydevs",
-	},
-	{
-		file: "ivo.png",
-		bottom: "5rem",
-		right: "8vw",
-		characterName: "Ivo",
-		characterAuthor: "@ozzydevs",
-	},
-	{
-		file: "vulpo.jpg",
-		bottom: "15rem",
-		right: "22vw",
-		characterName: "Vulpo",
-		characterAuthor: "@ozzydevs",
-	},
-]
+export const heroImages: { left: Images[]; right: Images[] } = {
+	left: [
+		{
+			file: "renzo.jpg",
+			left: "25vw",
+		},
+		{
+			file: "ivo.png",
+			left: "8vw",
+		},
+		{
+			file: "vulpo.jpg",
+			left: "22vw",
+		},
+	],
+	right: [
+		{
+			file: "renzo.jpg",
+			right: "25vw",
+		},
+		{
+			file: "ivo.png",
+			right: "8vw",
+		},
+		{
+			file: "vulpo.jpg",
+			right: "22vw",
+		},
+	],
+}
 
 export const secondSectImages: Images[] = [
 	{ file: "ozzy-sniff.png", bottom: "2rem", left: "12vw" },

@@ -17,6 +17,6 @@ useCalcViewport()
 @import "vue3-lottie/dist/style.css";
 
 body {
-  @apply bg-zinc-900 text-zinc-50;
+  @apply bg-base-900 text-base-50;
 }
 </style>
