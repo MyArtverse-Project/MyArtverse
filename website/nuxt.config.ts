@@ -51,5 +51,10 @@ export default defineNuxtConfig({
 	},
 
 	// @nuxt/image-edge config
-	image: {},
+	image: {
+		cloudinary: {
+			baseURL:
+				"https://res.cloudinary.com/kuroji-fusky-s3/image/upload/projects/myfursona/",
+		},
+	},
 })
