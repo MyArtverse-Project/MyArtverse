@@ -6,11 +6,14 @@ const ctx = ref()
 const profileContainer = ref<HTMLDivElement>()
 
 onMounted(() => {
+
+  let gsapMedia = gsap.matchMedia("(min-width: 1024px)")
+
 	ctx.value = gsap.context((self) => {
-		const artItems = self.selector!(".art-item-right")
+		const artItemsRight = self.selector!(".art-item-right")
+		const artItemsLeft = self.selector!(".art-item-left")
 		const scrollWrapper = self.selector!(".profile-container #wrapper")
 
-		// Trigger on-scroll
 		gsap
 			.timeline({
 				scrollTrigger: {
@@ -18,11 +21,15 @@ onMounted(() => {
 					start: "top top",
 					end: "+=900",
 					scrub: 0.65,
+					markers: true,
 				},
 			})
-			.to(artItems[2], { y: -145 })
-			.to(artItems[1], { y: -125 * 2 }, "<")
-			.to(artItems[0], { y: -125 * 3 }, "<")
+			.to(artItemsRight[2], { y: -145 })
+			.to(artItemsRight[1], { y: -125 * 2 }, "<")
+			.to(artItemsRight[0], { y: -125 * 3 }, "<")
+			.to(artItemsLeft[2], { y: -145 }, "<")
+			.to(artItemsLeft[1], { y: -125 * 2 }, "<")
+			.to(artItemsLeft[0], { y: -125 * 3 }, "<")
 	}, profileContainer.value)
 })
 
@@ -41,7 +48,7 @@ onUnmounted(() => ctx.value.revert())
 				<NuxtLink to="/login" class="login-button"> Sign up </NuxtLink>
 			</div>
 		</article>
-		<div class="profile-container" ref="profileContainer" aria-hidden="true">
+		<div ref="profileContainer" class="profile-container" aria-hidden="true">
 			<div
 				v-for="item in heroImages.left"
 				class="art-item-left"

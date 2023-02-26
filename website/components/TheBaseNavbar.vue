@@ -29,7 +29,9 @@ onUnmounted(() => window.removeEventListener("scroll", handleScroll))
 					>ALPHA</span
 				>
 			</div>
-			<ul class="right-side">
+			<ul class="actions">
+        <button>
+        </button>
 				<li>
 					<NuxtLink to="/upload">Upload</NuxtLink>
 				</li>
@@ -65,7 +67,7 @@ onUnmounted(() => window.removeEventListener("scroll", handleScroll))
 	@apply flex items-center;
 }
 
-.right-side {
+.actions {
 	@apply flex items-center gap-x-10;
 }
 
