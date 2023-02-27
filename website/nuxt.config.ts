@@ -31,8 +31,11 @@ export default defineNuxtConfig({
 				{
 					rel: "manifest",
 					href: "./manifest.json",
-					crossorigin: "use-credentials",
 				},
+			],
+			meta: [
+				{ "http-equiv": "X-UA-Compatible", content: "IE=edge" },
+				{ property: "og:site:name", content: "MyFursona" },
 			],
 		},
 	},
