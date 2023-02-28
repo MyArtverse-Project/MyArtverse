@@ -82,7 +82,7 @@ onMounted(() => {
 	transition-duration: 300ms;
 
 	&.scrolled {
-		@apply backdrop-blur-md bg-opacity-75  border-base-500 bg-base-800;
+		@apply backdrop-blur-md bg-opacity-50  border-base-500 bg-base-800;
 	}
 }
 
@@ -99,7 +99,7 @@ onMounted(() => {
 }
 
 .navbar-sticky.scrolled input {
-  @apply border-base-600;
+	@apply border-base-600;
 }
 
 .search-input {

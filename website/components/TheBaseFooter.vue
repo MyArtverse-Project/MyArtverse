@@ -1,7 +1,6 @@
 <script setup lang="ts">
 const links = [
 	{ link: "/about", text: "About" },
-	{ link: "#", text: "Terms" },
 	{ link: "#", text: "Legal" },
 	{ link: "#", text: "Privacy" },
 	{ link: "#", text: "API" },
@@ -21,23 +20,21 @@ const copyrightText = `© 2022-${currentYear} The MyFursona Project - MIT Licens
 			</NuxtLink>
 		</div>
 		<div
-			class="flex items-center gap-8 pt-10 pb-12 mx-auto mt-12 text-sm px-14 max-w-screen-2xl"
+			class="flex items-center flex-shrink-0 gap-8 pt-10 pb-12 mx-auto mt-12 text-sm px-14 max-w-screen-2xl"
 		>
-			<ul class="grid w-full grid-flow-col border-r border-base-500">
+			<ul
+				class="grid w-full grid-flow-col text-center border-r border-base-500"
+			>
 				<li v-for="items in links">
 					<NuxtLink
 						:to="items.link"
-						class="flex-shrink-0 text-opacity-50 transition-colors whitespace-nowrap hover:text-opacity-100 text-base-50 hover:text-base-100"
+						class="text-opacity-50 transition-colors whitespace-nowrap hover:text-opacity-100 text-base-50 hover:text-base-100"
 					>
 						{{ items.text }}
 					</NuxtLink>
 				</li>
 			</ul>
-			<div id="copyright">
-				<span class="text-opacity-50 text-base-50">
-					{{ copyrightText }}
-				</span>
-			</div>
+			<div id="copyright">{{ copyrightText }}</div>
 		</div>
 	</footer>
 </template>
@@ -62,6 +59,6 @@ const copyrightText = `© 2022-${currentYear} The MyFursona Project - MIT Licens
 }
 
 #copyright {
-	@apply flex gap-2.5 items-center flex-shrink-0;
+	@apply flex gap-2.5 items-center flex-shrink-0 text-opacity-50 text-base-50;
 }
 </style>
