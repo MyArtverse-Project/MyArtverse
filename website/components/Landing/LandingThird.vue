@@ -15,6 +15,11 @@ const gridItems = [
 		description:
 			"Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.",
 	},
+	{
+		heading: "Change profile type",
+		description:
+			"Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.",
+	},
 ]
 
 const cardContainer = ref<HTMLDivElement>()
@@ -59,7 +64,7 @@ onMounted(() => {
 				<div id="card-contents">
 					<div class="border h-[14rem] rounded-md border-dashed"></div>
 					<article>
-						<h2 class="my-3 text-2xl font-bold font-inter">
+						<h2 class="my-3 text-3xl font-bold font-inter">
 							{{ item.heading }}
 						</h2>
 						<p>{{ item.description }}</p>
@@ -86,7 +91,7 @@ onMounted(() => {
 
 	&-item {
 		@apply rounded-md relative;
-		background: rgba(55, 3, 157, 0.5);
+		background: rgba(51, 3, 106, 0.5);
 		height: 30rem;
 
 		&::before {

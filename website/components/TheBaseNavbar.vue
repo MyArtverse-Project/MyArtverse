@@ -82,8 +82,7 @@ onMounted(() => {
 	transition-duration: 300ms;
 
 	&.scrolled {
-		@apply backdrop-blur-md border-base-500;
-		background-color: rgba(24, 5, 72, 0.775);
+		@apply backdrop-blur-md bg-opacity-75  border-base-500 bg-base-800;
 	}
 }
 
@@ -99,11 +98,15 @@ onMounted(() => {
 	@apply text-3xl font-bold text-white select-none font-inter;
 }
 
+.navbar-sticky.scrolled input {
+  @apply border-base-600;
+}
+
 .search-input {
 	@apply ml-5 w-[18.5vw] relative text-sm;
 
 	input {
-		@apply relative z-[1] px-4 py-2.5 rounded-md bg-opacity-75 bg-base-800 focus:outline-base-600 w-full transition-colors;
+		@apply border-2 border-transparent relative z-[1] px-4 py-2.5 rounded-md bg-opacity-75 bg-base-800 focus:outline-base-600 w-full transition-colors;
 	}
 
 	&[data-focused="true"] input {
@@ -112,7 +115,7 @@ onMounted(() => {
 }
 
 .search-suggestions {
-	@apply absolute -left-2 -right-2 -top-2 py-3 pt-14 px-4 bg-base-600 transition-all pointer-events-none opacity-0 rounded-md;
+	@apply absolute -left-2 -right-2 -top-2 py-3 pt-14 px-4 bg-base-700 transition-all pointer-events-none opacity-0 rounded-md;
 
 	&[aria-hidden="false"] {
 		@apply opacity-100 pointer-events-auto;

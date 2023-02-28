@@ -9,12 +9,10 @@
 	],
 	"scripts": {
 		"postinstall": "cd website && nuxt prepare",
-		"dev:web": "yarn workspace @myfursona/website dev",
-		"build:web": "yarn workspace @myfursona/website build",
-		"preview:web": "yarn workspace @myfursona/website preview",
-		"dev:api": "yarn workspace @myfursona/api dev",
-		"build:api": "yarn workspace @myfursona/api build",
-		"start:api": "yarn workspace @myfursona/api start",
+		"dev:web": "turbo dev --filter=website",
+		"build:web": "turbo build --filter=website",
+		"dev:api": "turbo dev --filter=api",
+		"build:api": "turbo build",
     "build": "turbo build",
 		"prettier:check": "prettier --check .",
 		"prettier:write": "prettier --write ."
@@ -25,6 +23,6 @@
 	},
 	"devDependencies": {
 		"prettier": "^2.8.3",
-		"turbo": "^1.7.4"
+		"turbo": "latest"
 	}
 }

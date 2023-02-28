@@ -20,8 +20,7 @@ onMounted(() => {
 					trigger: scrollWrapper,
 					start: "top top",
 					end: "+=900",
-					scrub: 0.65,
-					markers: true,
+					scrub: 1,
 				},
 			})
 			.to(artItemsRight[2], { y: -145 })
