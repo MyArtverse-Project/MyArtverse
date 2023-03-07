@@ -1,6 +1,5 @@
 {
   "framework": "nextjs",
-  "outputDirectory": ".",
   "github": {
     "silent": true
   }
