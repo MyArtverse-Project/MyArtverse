@@ -29,11 +29,11 @@ onMounted(() => {
 	const container = cardContainer.value!
 
 	container.onmouseenter = () => {
-		container.classList.add("active")
+		container.classList.add("hover")
 	}
 
 	container.onmouseleave = () => {
-		container.classList.remove("active")
+		container.classList.remove("hover")
 	}
 
 	container.onmousemove = ({ clientX, clientY }: MouseEvent) => {
@@ -80,7 +80,7 @@ onMounted(() => {
 	&-container {
 		@apply my-16 grid grid-cols-1 lg:grid-cols-2 gap-6 mx-auto max-w-[1440px];
 
-		&.active > .card-item::before {
+		&.hover > .card-item::before {
 			opacity: 1;
 		}
 

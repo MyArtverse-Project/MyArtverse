@@ -3,9 +3,9 @@ const d = "MyFursona is a platform where you create and manage characters"
 </script>
 
 <template>
-	<Container title="MyFursona | A place where every fur belongs!" :description="d">
+	<Container title="" :description="d">
 		<LandingHero />
-    <LandingSecond />
-    <LandingThird />
+		<LandingSecond />
+		<LandingThird />
 	</Container>
 </template>

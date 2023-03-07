@@ -1,5 +1,5 @@
 <template>
-  <Container title="MyFursona | Login" class="login-wrapper">
+  <Container title="Login" class="login-wrapper">
     <LoginForm />
   </Container>
 </template>
