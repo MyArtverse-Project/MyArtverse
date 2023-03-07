@@ -20,7 +20,9 @@ export default NextAuth({
   ],
   callbacks: {
     async signIn({ user, account, profile }) {
+      // @ts-ignore
       user.avatar = profile.image || profile.picture
+      // @ts-ignore
       user.name = (profile.username as string) + "#" + profile.discriminator
       // @ts-expect-error
       user.id = profile.id
