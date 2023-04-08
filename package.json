@@ -13,7 +13,7 @@
 		"build:web": "turbo build --filter=website",
 		"dev:api": "turbo dev --filter=api",
 		"build:api": "turbo build",
-    "build": "turbo build",
+		"build": "turbo build",
 		"prettier:check": "prettier --check .",
 		"prettier:write": "prettier --write ."
 	},
@@ -23,6 +23,6 @@
 	},
 	"devDependencies": {
 		"prettier": "^2.8.3",
-		"turbo": "latest"
+		"turbo": "^1.8.8"
 	}
 }
