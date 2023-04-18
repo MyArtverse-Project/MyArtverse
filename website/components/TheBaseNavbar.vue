@@ -106,7 +106,7 @@ onMounted(() => {
 	@apply ml-5 w-[18.5vw] relative text-sm;
 
 	input {
-		@apply border-2 border-transparent relative z-[1] px-4 py-2.5 rounded-md bg-opacity-75 bg-base-800 focus:outline-base-600 w-full transition-colors;
+		@apply border-2 border-transparent relative z-[1] px-4 py-2.5 rounded-md bg-opacity-75 bg-base-800 focus:outline-base-600 w-full transition-colors float-right;
 	}
 
 	&[data-focused="true"] input {
@@ -123,6 +123,6 @@ onMounted(() => {
 }
 
 .login-btn {
-	@apply px-5 py-2.5 rounded-3xl hover:bg-purple-700 border-base-200 border font-bold transition-colors;
+	@apply px-5 py-2.5 rounded-xl hover:bg-purple-700 border-base-200 border font-bold transition-colors;
 }
 </style>

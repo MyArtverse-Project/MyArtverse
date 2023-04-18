@@ -1,6 +1,8 @@
 <script lang="tsx" setup>
 const username = ref("")
 const password = ref("")
+const email = ref("")
+const confirmPassword = ref("")
 </script>
 
 <template>
@@ -16,7 +18,21 @@ const password = ref("")
 				type="username"
 				class="form-textbox"
 				v-model="username"
-				placeholder="Username/Email"
+				placeholder="Username"
+			/>
+		</div>
+        <div :class="[email.length > 0 ? 'field-filled' : 'field']">
+			<label
+				for="email"
+				:class="['form-label', email.length > 0 ? 'block' : 'invisible']"
+				>Email</label
+			>
+			<input
+				name="email"
+				type="email"
+				class="form-textbox"
+				v-model="email"
+				placeholder="Email"
 			/>
 		</div>
 		<div :class="[password.length > 0 ? 'field-filled' : 'field']">
@@ -30,11 +46,22 @@ const password = ref("")
 				placeholder="Password"
 				v-model="password"
 			/>
-			<NuxtLink class="mt-3" to="#">Forgot password?</NuxtLink>
+		</div>
+        <div :class="[confirmPassword.length > 0 ? 'field-filled' : 'field']">
+			<label for="confirmPassword" 
+			:class="['form-label', password.length > 0 ? 'block' : 'invisible']"
+			class="form-label">Confirm Password</label>
+			<input
+				name="confirmPassword"
+				class="form-textbox"
+				type="password"
+				placeholder="Confirm Password"
+				v-model="confirmPassword"
+			/>
 		</div>
 		<div class="flex flex-col items-center w-full text-center buttons">
-			<NuxtLink to="#" class="submit-button">Login</NuxtLink>
-			<NuxtLink to="/signup" class="signup-button">Sign Up</NuxtLink>
+			<NuxtLink to="#" class="submit-button">Create Account</NuxtLink>
+			<NuxtLink to="/signup" class="signup-button">Login</NuxtLink>
 		</div>
 	</form>
 </template>

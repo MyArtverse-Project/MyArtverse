@@ -38,6 +38,7 @@ module.exports = {
 				"open-sans": ["Open Sans", ...defaultTheme.fontFamily.sans],
 			},
 			colors: {
+				
 				base: {
 					DEFAULT: "#634E97",
 					50: "#FCFBFD",
@@ -103,6 +104,7 @@ module.exports = {
 					800: "#5E1233",
 					900: "#2F0919",
 				},
+				
 			},
 		},
 	},
