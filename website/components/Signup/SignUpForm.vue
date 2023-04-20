@@ -3,6 +3,13 @@ const username = ref("")
 const password = ref("")
 const email = ref("")
 const confirmPassword = ref("")
+const birthday = ref("")
+const onSubmit = async () => {
+	if (password.value !== confirmPassword.value) {
+		alert("Passwords do not match.")
+	}
+	const { data } = await useAsyncQuery(REGISTER_USER, { username, password, email })
+}
 </script>
 
 <template>
@@ -57,6 +64,18 @@ const confirmPassword = ref("")
 				type="password"
 				placeholder="Confirm Password"
 				v-model="confirmPassword"
+			/>
+		</div>
+		<div :class="[confirmPassword.length > 0 ? 'field-filled' : 'field']">
+			<label for="confirmPassword" 
+			:class="['form-label', password.length > 0 ? 'block' : 'invisible']"
+			class="form-label">Birthday</label>
+			<input
+				name="birthday"
+				class="form-textbox"
+				type="date"
+				placeholder="Birthday"
+				v-model="birthday"
 			/>
 		</div>
 		<div class="flex flex-col items-center w-full text-center buttons">
