@@ -8,18 +8,19 @@ useCalcViewport()
 </script>
 
 <template>
-  <NuxtLoadingIndicator />
-	<NuxtLayout>
+	<div>
+		<TheBaseNavbar />
 		<NuxtPage />
-	</NuxtLayout>
+		<TheBaseFooter />
+	</div>
 </template>
 
 <style lang="scss">
 body {
-  @apply bg-base-900 text-base-50;
+	@apply bg-base-900 text-base-50;
 }
 
 ::selection {
-  @apply bg-pink-500;
+	@apply bg-purple-500;
 }
 </style>

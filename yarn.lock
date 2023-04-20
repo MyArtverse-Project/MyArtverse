@@ -613,11 +613,6 @@
   resolved "https://registry.yarnpkg.com/@iconify-prerendered/vue-fa6-brands/-/vue-fa6-brands-0.22.1680070484.tgz#28f5c9542cee1e6485955ad0f1d24e28876ec4bb"
   integrity sha512-DYVREDEt+Mr9uKY7ttS91mEj0A+7175aQX6u5MlizrGcVWCtJW9rNyzvJWH6OZnr1n4Aa3rMFVvqc0VB5RHHlg==
 
-"@iconify-prerendered/vue-fa6-solid@^0.22.1680070530":
-  version "0.22.1680070530"
-  resolved "https://registry.yarnpkg.com/@iconify-prerendered/vue-fa6-solid/-/vue-fa6-solid-0.22.1680070530.tgz#3772f53002960bc99351500c9cc258ad2b8b2039"
-  integrity sha512-/c373TIgcY32tYOAQUJC8yNLgujpOwLytKO5kXtKoMcMbtI/8KTAE8aCTx4ZUT29qWXuZE8VFLTbEiVgS67pXQ==
-
 "@ioredis/commands@^1.1.1":
   version "1.2.0"
   resolved "https://registry.yarnpkg.com/@ioredis/commands/-/commands-1.2.0.tgz#6d61b3097470af1fdbbe622795b8921d42018e11"
@@ -3638,10 +3633,10 @@ lru-cache@^7.18.3:
   resolved "https://registry.yarnpkg.com/lru-cache/-/lru-cache-7.18.3.tgz#f793896e0fd0e954a59dfdd82f0773808df6aa89"
   integrity sha512-jumlc0BIUrS3qJGgIkWZsyfAM7NCWiBcCDhnd+3NNM5KbBmLTgHVfWBcg6W+rLUsIpzpERPsvwUP7CckAQSOoA==
 
-lucide-vue-next@^0.130.1:
-  version "0.130.1"
-  resolved "https://registry.yarnpkg.com/lucide-vue-next/-/lucide-vue-next-0.130.1.tgz#24a748dce6cd7c855150c01ad12ff0e18244d969"
-  integrity sha512-9lZlNNyAM159dhvvYJjzC1X25dIIzXZokFZ7IBJAuxjBCjhbM2QwH36Rxc3rlwq6iIwpX8cHwsg4aix86NtUhg==
+lucide-vue-next@^0.170.0:
+  version "0.170.0"
+  resolved "https://registry.yarnpkg.com/lucide-vue-next/-/lucide-vue-next-0.170.0.tgz#91296de59ba375fe3269818732fff18dac60bcfa"
+  integrity sha512-Lb6C0fABlFij/9oWLXaJPKwsE5pOqb8zubPGnAeRkOC2zs3cvW5Qkc7Xr3aR9inS/jqqO4UH+cGR2rDCbngQpQ==
 
 magic-string@^0.25.7:
   version "0.25.9"
