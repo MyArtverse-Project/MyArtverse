@@ -20,7 +20,7 @@ onUnmounted(() => ctx.value.revert())
 		<article
 			class="flex flex-col items-center gap-6 px-8 mx-auto max-w-[1640px] relative z-[2]"
 		>
-			<IconMono class="w-[12rem] h-[12rem] -translate-x-5 text-white" />
+			<IconMono class="w-[12rem] h-[12rem] text-white" />
 			<h1 class="text-5xl font-bold font-inter">MyFursona</h1>
 			<p class="text-2xl">A place where everyone belongs!</p>
 			<div>

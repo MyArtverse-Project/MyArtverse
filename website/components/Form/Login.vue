@@ -4,7 +4,7 @@ const password = ref("")
 </script>
 
 <template>
-	<form class="grid w-1/2 gap-3">
+	<form class="grid w-4/12 gap-3">
 		<FormFieldContainer
 			v-model="username"
 			input-name="Username"

@@ -10,7 +10,7 @@ useCalcViewport()
 <template>
 	<div>
 		<TheBaseNavbar />
-		<main class="h-screen">
+		<main class="min-h-screen">
 			<NuxtPage />
 		</main>
 		<TheBaseFooter />
