@@ -26,7 +26,6 @@ export default defineNuxtConfig({
 			link: [
 				{
 					rel: "shortcut icon",
-					type: "image/vnd.microsoft.icon",
 					href: "/favicon.ico",
 				},
 				{
@@ -36,7 +35,7 @@ export default defineNuxtConfig({
 			],
 			meta: [
 				{ "http-equiv": "X-UA-Compatible", content: "IE=edge" },
-				{ property: "og:site:name", content: "MyFursona" },
+				{ property: "og:site_name", content: "MyFursona" },
 				// !!! This is temporary, remove this when ready for production deployment
 				{ name: "robots", content: "noindex,nofollow" },
 				// !!! This is temporary, remove this when ready for production deployment

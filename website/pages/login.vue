@@ -1,11 +1,10 @@
-<template>
-  <Container title="Login" class="login-wrapper">
-    <LoginForm />
-  </Container>
-</template>
+<script setup lang="ts">
+usePageMeta({
+	title: "Login",
+	description: "",
+})
+</script>
 
-<style lang="scss">
-.login-wrapper {
-  @apply grid place-items-center h-screen;
-}
-</style>
+<template>
+	<LoginForm />
+</template>

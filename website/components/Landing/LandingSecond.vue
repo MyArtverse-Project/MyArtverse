@@ -1,6 +1,5 @@
 <script setup lang="ts">
 import gsap from "gsap"
-import { secondSectImages } from "./Images"
 
 const ctx = ref()
 const animationRoot = ref<HTMLElement>()
@@ -27,19 +26,6 @@ onUnmounted(() => ctx.value.revert())
 			<div class="mf-box">
 				<IconMono class="w-[8rem] h-[8rem] text-white" />
 			</div>
-			<NuxtImg
-				class="character-item"
-				sizes="md:150px lg:250px"
-				alt=""
-				v-for="item in secondSectImages"
-				:src="`/images/hero/${item.file}`"
-				:style="{
-					bottom: item?.bottom ?? undefined,
-					left: item?.left ?? undefined,
-					top: item?.top ?? undefined,
-					right: item?.right ?? undefined,
-				}"
-			/>
 		</div>
 	</section>
 </template>
