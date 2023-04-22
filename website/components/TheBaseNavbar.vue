@@ -45,7 +45,7 @@ onMounted(() => {
 				</NuxtLink>
 				<nav class="flex items-center pl-5">
 					<button
-						class="relative px-6 py-2 mr-2 font-bold bg-opacity-50 border rounded-lg font-inter border-base-500 bg-base-800"
+						class="relative hidden px-6 py-2 mr-2 font-bold bg-opacity-50 border rounded-lg font-inter border-base-500 bg-base-800 md:block"
 						aria-label="Search"
 					>
 						<Search
@@ -57,24 +57,31 @@ onMounted(() => {
 					<NuxtLink
 						href="/browse"
 						role="listitem"
-						class="px-4 py-4 font-bold font-inter"
+						class="hidden px-4 py-4 font-bold font-inter md:block"
 					>
 						Browse</NuxtLink
 					>
 					<NuxtLink
 						href="/plus"
 						role="listitem"
-						class="px-4 py-4 font-bold font-inter"
+						class="hidden px-4 py-4 font-bold font-inter md:block"
 					>
 						MyFursona+</NuxtLink
 					>
 				</nav>
 			</div>
-			<ul class="flex items-center gap-x-2.5 select-none">
-				<li class="relative">
+			<ul class="flex gap-x-2.5 items-center">
+				<li class="relative flex items-center gap-x-2.5">
+					<BaseButton
+						class="!px-3 !border-none md:hidden block"
+						aria-label="Search"
+						title="Search"
+					>
+						<Search :size="21" />
+					</BaseButton>
 					<BaseButton
 						ref="toggleDropdownBtn"
-						class="!px-3 !border-none"
+						class="!px-3 !border-none block"
 						aria-label="Settings"
 						title="Settings"
 					>
@@ -82,8 +89,8 @@ onMounted(() => {
 					</BaseButton>
 					<div
 						id="dropdown-contents"
-						class="absolute p-2 -right-2 top-10"
-						:class="[!isDropdownOpen ? 'opacity-0' : 'opacity-100']"
+						class="absolute hidden p-2 -right-2 top-10 md:block"
+						:class="[!isDropdownOpen ? 'opacity-0 pointer-events-none' : 'opacity-100 pointer-events-auto']"
 					>
 						<ul
 							class="flex flex-col overflow-hidden rounded-md w-max bg-base-800"
@@ -104,7 +111,7 @@ onMounted(() => {
 						</ul>
 					</div>
 				</li>
-				<li class="font-inter">
+				<li class="hidden font-bold font-inter md:block">
 					<BaseButton link="/login">Sign In</BaseButton>
 				</li>
 			</ul>
