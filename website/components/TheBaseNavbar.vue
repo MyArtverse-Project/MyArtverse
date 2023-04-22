@@ -10,12 +10,23 @@ const handleScroll = () => {
 onBeforeMount(() => window.addEventListener("scroll", handleScroll))
 onMounted(() => window.addEventListener("scroll", handleScroll))
 onUnmounted(() => window.removeEventListener("scroll", handleScroll))
+
+const isDropdownOpen = ref(false)
+const toggleDropdownBtn = ref()
+
+onMounted(() => {
+	const buttonElement: HTMLButtonElement = toggleDropdownBtn.value.$.ctx.$el
+
+	buttonElement.onmousedown = () => {
+		isDropdownOpen.value = !isDropdownOpen.value
+	}
+})
 </script>
 
 <template>
 	<header
 		:class="[
-			'fixed top-0 left-0 right-0 z-[9999] border-0 border-b border-transparent transition-[backdrop-filter,background,border] duration-300',
+			'fixed top-0 left-0 right-0 z-[3] border-0 border-b border-transparent transition-[backdrop-filter,background,border] duration-300',
 			isScrolled
 				? 'backdrop-blur-md !bg-opacity-50 !border-base-500 !bg-base-800'
 				: '',
@@ -61,10 +72,19 @@ onUnmounted(() => window.removeEventListener("scroll", handleScroll))
 			</div>
 			<ul class="flex items-center gap-x-2.5 select-none">
 				<li class="relative">
-					<BaseButton class="!px-3" aria-label="Settings" title="Settings">
+					<BaseButton
+						ref="toggleDropdownBtn"
+						class="!px-3 !border-none"
+						aria-label="Settings"
+						title="Settings"
+					>
 						<Menu :size="21" />
 					</BaseButton>
-					<div class="absolute p-2 -right-2 top-10">
+					<div
+						id="dropdown-contents"
+						class="absolute p-2 -right-2 top-10"
+						:class="[!isDropdownOpen ? 'opacity-0' : 'opacity-100']"
+					>
 						<ul
 							class="flex flex-col overflow-hidden rounded-md w-max bg-base-800"
 						>

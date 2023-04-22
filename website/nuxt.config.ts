@@ -39,6 +39,7 @@ export default defineNuxtConfig({
 				// !!! This is temporary, remove this when ready for production deployment
 				{ name: "robots", content: "noindex,nofollow" },
 				// !!! This is temporary, remove this when ready for production deployment
+				{ name: "theme-color", content: "#fff" },
 			],
 		},
 	},
