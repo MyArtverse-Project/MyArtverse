@@ -1,9 +1,12 @@
 <script setup lang="ts">
+import { ButtonHTMLAttributes } from 'nuxt/dist/app/compat/capi'
+
 const props = defineProps<{
 	link?: string
 	external?: boolean
 	layout?: "default" | "headless" | "clear"
 	disabled?: boolean
+	type?: "button" | "submit" | "reset" | undefined
 }>()
 </script>
 
@@ -12,6 +15,7 @@ const props = defineProps<{
 		v-if="!props.link"
 		:class="`bui-${layout ?? 'default'}`"
 		:disabled="disabled"
+		:type="type"
 	>
 		<slot />
 	</button>
