@@ -12,7 +12,7 @@
 		"dev:web": "turbo dev --filter=website",
 		"build:web": "turbo build --filter=website",
 		"dev:api": "turbo dev --filter=api",
-		"build:api": "turbo build",
+		"build:api": "turbo build --filter=api",
 		"build": "turbo build",
 		"prettier:check": "prettier --check .",
 		"prettier:write": "prettier --write ."
