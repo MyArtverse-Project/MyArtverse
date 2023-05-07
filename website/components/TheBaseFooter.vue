@@ -1,64 +1,58 @@
 <script setup lang="ts">
-const links = [
-	{ link: "/about", text: "About" },
-	{ link: "#", text: "Legal" },
-	{ link: "#", text: "Privacy" },
-	{ link: "#", text: "API" },
-	{ link: "#", text: "Sitemap" },
-	{ link: "#", text: "Feedback" },
-]
+const links = {
+	Explore: ["Browse", "MyFursona+", "Developers", "Report an issue"],
+	About: ["Team", "FAQ", "Open Source", "Changelog", "Design", "Contact us"],
+	Legal: [
+		"Community Guidelines",
+		"Terms of Service",
+		"Privacy Policy",
+		"DMCA Policy",
+		"Code of Conduct",
+	],
+}
 
 const currentYear = new Date().getFullYear()
-const copyrightText = `© 2022-${currentYear} The MyFursona Project - MIT License`
+const copyrightText = `© 2022-${currentYear} The MyFursona Project`
 </script>
 
 <template>
-	<footer class="relative bui-gradient-mix">
-		<div class="footer-branding">
-			<NuxtLink to="/">
-				<IconMono class="flex-shrink-0 w-12 h-12" />
-			</NuxtLink>
-		</div>
+	<footer class="bg-base-800">
 		<div
-			class="flex items-center flex-shrink-0 gap-8 pt-10 pb-12 mx-auto mt-12 text-sm px-14 max-w-screen-2xl"
+			class="grid grid-cols-1 grid-rows-1 gap-6 px-12 py-10 mx-auto lg:grid-rows-2 lg:grid-cols-12 lg:grid-flow-col max-w-screen-2xl"
 		>
-			<ul
-				class="grid w-full grid-flow-col text-center border-r border-base-500"
+			<NuxtLink
+				to="/"
+				class="flex items-center lg:text-4xl text-3xl font-bold text-white select-none font-inter gap-x-2.5 w-fit place-self-start lg:col-span-4"
+				aria-label="MyFursona"
+				title="MyFursona"
+				role="img"
 			>
-				<li v-for="items in links">
+				<IconMono
+					class="lg:w-[4.5rem] lg:h-[4.5rem] w-[3.25rem] h-[3.25rem] text-white"
+				/>
+				<span>MyFursona</span>
+			</NuxtLink>
+			<span
+				class="order-last col-span-1 text-center lg:order-none lg:mr-auto lg:col-span-4 lg:place-self-end"
+				>{{ copyrightText }}</span
+			>
+			<div
+				class="grid w-full row-span-2 md:grid-flow-col gap-y-10 lg:col-span-8 gap-x-12"
+			>
+				<ul
+					v-for="[heading, listItems] in Object.entries(links)"
+					class="flex flex-col gap-y-3"
+				>
+					<h2 class="text-base-200">{{ heading }}</h2>
 					<NuxtLink
-						:to="items.link"
-						class="text-opacity-50 transition-colors whitespace-nowrap hover:text-opacity-100 text-base-50 hover:text-base-100"
+						v-for="item in listItems"
+						to="#"
+						class="hover:text-base-200 hover:underline"
 					>
-						{{ items.text }}
+						{{ item }}
 					</NuxtLink>
-				</li>
-			</ul>
-			<div id="copyright">{{ copyrightText }}</div>
+				</ul>
+			</div>
 		</div>
 	</footer>
 </template>
-
-<style lang="scss">
-.bui-gradient-mix {
-	background: linear-gradient(
-		to bottom,
-		rgba(116, 72, 209, 0) 0%,
-		rgba(116, 72, 209, 0.1) 54%,
-		rgba(116, 72, 209, 0.2) 100%
-	);
-}
-
-.footer-branding {
-	@apply absolute left-0 right-0 inline-flex items-center gap-5 -top-12;
-	&::before,
-	&::after {
-		content: "";
-		@apply h-[0.75px] bg-base-500 w-full;
-	}
-}
-
-#copyright {
-	@apply flex gap-2.5 items-center flex-shrink-0 text-opacity-50 text-base-50;
-}
-</style>

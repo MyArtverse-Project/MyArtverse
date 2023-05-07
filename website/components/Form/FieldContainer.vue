@@ -14,7 +14,7 @@ defineEmits<{ (e: "update:modelValue", value: string): void }>()
 </script>
 
 <template>
-	<div id="field-container">
+	<div biro-ui-field>
 		<label
 			:for="inputName"
 			class="font-bold uppercase select-none font-inter text-base-600"
@@ -22,6 +22,7 @@ defineEmits<{ (e: "update:modelValue", value: string): void }>()
 		>
 		<input
 			:name="inputName"
+			:id="inputName"
 			:type="type ?? 'text'"
 			class="px-4 py-3 text-white border rounded-md outline-none border-base-700 bg-base-800 focus:border-base-400"
 			:class="[!fullWidth ? 'w-full' : '']"
@@ -36,7 +37,7 @@ defineEmits<{ (e: "update:modelValue", value: string): void }>()
 </template>
 
 <style lang="scss">
-#field-container {
+[biro-ui-field] {
 	@apply flex flex-col gap-y-2;
 }
 </style>

@@ -23,6 +23,6 @@ body {
 }
 
 ::selection {
-	@apply bg-purple-500;
+	@apply bg-purple-800;
 }
 </style>
