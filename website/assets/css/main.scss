@@ -1,10 +1,9 @@
+@use "theme" as *;
+
 @import "@fontsource/inter/400";
 @import "@fontsource/inter/600";
 @import "@fontsource/inter/700";
 @import "@fontsource/inter/800";
-@import "@fontsource/inter/900";
-@import "@fontsource/open-sans/400";
-@import "@fontsource/open-sans/400-italic";
 @import "@fontsource/open-sans/600";
 @import "@fontsource/open-sans/600-italic";
 @import "@fontsource/open-sans/800";
@@ -13,3 +12,18 @@
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
+
+@layer base {
+	html {
+		overflow-x: "hidden";
+		scroll-behavior: "smooth";
+		@media (prefers-reduced-motion) {
+			scroll-behavior: "auto";
+		}
+	}
+
+	body {
+		background-color: var(--global--background);
+		color: var(--global--text);
+	}
+}

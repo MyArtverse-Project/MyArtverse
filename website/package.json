@@ -24,6 +24,7 @@
     "gsap": "^3.11.4",
     "lucide-vue-next": "^0.170.0",
     "nuxt": "^3.0.0",
+    "nuxt-security": "^0.13.0",
     "pinia": "^2.0.29",
     "postcss": "^8.4.20",
     "sass": "^1.57.1",

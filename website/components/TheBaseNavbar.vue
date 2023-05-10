@@ -32,44 +32,8 @@ onMounted(() => {
 				: '',
 		]"
 	>
-		<nav class="flex items-center justify-between px-8 py-2.5">
-			<div class="flex items-center">
-				<NuxtLink
-					to="/"
-					class="text-3xl font-bold text-white select-none font-inter"
-					aria-label="MyFursona"
-					title="MyFursona"
-					role="img"
-				>
-					<IconMono class="w-[3.25rem] h-[3.25rem] text-white" />
-				</NuxtLink>
-				<nav class="flex items-center pl-5">
-					<button
-						class="relative hidden px-6 py-2 mr-2 font-bold bg-opacity-50 border rounded-lg font-inter border-base-500 bg-base-800 md:block"
-						aria-label="Search"
-					>
-						<Search
-							class="absolute z-[100] pointer-events-none top-[25%] left-3"
-							:size="20"
-						/>
-						<span class="pl-3.5">Search</span>
-					</button>
-					<NuxtLink
-						href="/browse"
-						role="listitem"
-						class="hidden px-4 py-4 font-bold font-inter md:block"
-					>
-						Browse</NuxtLink
-					>
-					<NuxtLink
-						href="/plus"
-						role="listitem"
-						class="hidden px-4 py-4 font-bold font-inter md:block"
-					>
-						MyFursona+</NuxtLink
-					>
-				</nav>
-			</div>
+		<nav class="flex items-center justify-between px-8 py-2">
+			<NavbarMenus />
 			<ul class="flex gap-x-2.5 items-center">
 				<li class="relative flex items-center gap-x-2.5">
 					<BaseButton
@@ -90,7 +54,11 @@ onMounted(() => {
 					<div
 						id="dropdown-contents"
 						class="absolute hidden p-2 -right-2 top-10 md:block"
-						:class="[!isDropdownOpen ? 'opacity-0 pointer-events-none' : 'opacity-100 pointer-events-auto']"
+						:class="[
+							!isDropdownOpen
+								? 'opacity-0 pointer-events-none'
+								: 'opacity-100 pointer-events-auto',
+						]"
 					>
 						<ul
 							class="flex flex-col overflow-hidden rounded-md w-max bg-base-800"
@@ -111,7 +79,7 @@ onMounted(() => {
 						</ul>
 					</div>
 				</li>
-				<li class="hidden font-bold font-inter md:block">
+				<li class="hidden font-inter md:block">
 					<BaseButton link="/login">Sign In</BaseButton>
 				</li>
 			</ul>

@@ -1,4 +1,6 @@
 <script setup lang="ts">
+import { Search } from "lucide-vue-next"
+
 const searchValue = ref("")
 const searchWrapperRef = ref<DefNullable<HTMLDivElement>>()
 const isSuggestionsFocused = ref(false)
