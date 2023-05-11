@@ -32,6 +32,12 @@ onMounted(() => {
 				: '',
 		]"
 	>
+		<a
+			class="absolute z-[999] bg-[var(--selection)] py-3.5 px-5 -translate-y-full focus:translate-y-0 transition-transform"
+			href="#skip-to-main"
+		>
+			Skip to main content
+		</a>
 		<nav class="flex items-center justify-between px-8 py-2">
 			<NavbarMenus />
 			<ul class="flex gap-x-2.5 items-center">

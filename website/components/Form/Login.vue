@@ -18,7 +18,7 @@ const  onSubmit = async () => {
 </script>
 
 <template>
-	<form class="grid w-4/12 gap-3" @submit.prevent="onSubmit">
+	<form class="grid w-8/12 gap-3" @submit.prevent="onSubmit">
 		<FormFieldContainer
 			v-model="username"
 			input-name="Username"

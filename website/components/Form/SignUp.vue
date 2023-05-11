@@ -1,9 +1,12 @@
 <script setup lang="ts">
-const username = ref("")
-const password = ref("")
-const email = ref("")
-const confirmPassword = ref("")
-const birthday = ref("")
+const [username, email, password, confirmPassword, birthday] = [
+	ref(""),
+	ref(""),
+	ref(""),
+	ref(""),
+	ref(""),
+	ref(""),
+]
 
 const emailRegex =
 	/^[a-zA-Z0-9.!#$%&'*+/=?^_`{|}~-]+@[a-zA-Z0-9-]+(?:\.[a-zA-Z0-9-]+)*$/

@@ -6,9 +6,9 @@ gsap.registerPlugin(ScrollTrigger)
 </script>
 
 <template>
-	<div class="contents">
+	<div>
 		<TheBaseNavbar />
-		<main class="min-h-screen">
+		<main id="skip-to-main" class="min-h-screen">
 			<NuxtPage />
 		</main>
 		<TheBaseFooter />
