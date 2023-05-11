@@ -2,37 +2,45 @@
 const props = defineProps<{
 	link?: string
 	external?: boolean
-	layout?: "default" | "ghost"
+	layout?: "default" | "ghost" | "base"
 	disabled?: boolean
 	type?: "button" | "submit" | "reset" | undefined
 }>()
 </script>
 
 <template>
-	<button
+	<component
 		biro-ui-button
-		:bui-ghost="layout !== 'ghost' ? undefined : ''"
-		:button-type="layout ?? 'default'"
-		v-if="!props.link"
+		:is="type === 'reset' || type === 'submit' ? 'input' : 'button'"
+		:id="`bui-${layout ?? 'default'}`"
 		:disabled="disabled"
 		:type="type"
+		v-if="!props.link"
 	>
 		<slot />
-	</button>
-	<NuxtLink
-		biro-ui-button
-		:bui-ghost="layout !== 'ghost' ? undefined : ''"
-		v-else
-		:to="link"
-		:disabled="disabled"
-		role="button"
-	>
+	</component>
+	<NuxtLink biro-ui-button v-else :id="`bui-${layout ?? 'default'}`" :to="link">
 		<slot />
 	</NuxtLink>
 </template>
 
-<style scoped>
+<style lang="scss">
 [biro-ui-button] {
-	@apply px-5 py-2.5 rounded-md bg-[var(--button)] hover:bg-[var(--button-hover)] font-open-sans;
+	@apply cursor-pointer px-5 py-2.5 rounded-md transition-colors;
+}
+
+#bui {
+	&-default {
+		@apply bg-[var(--button)] hover:bg-[var(--button-hover)] border border-[var(--separator)];
+	}
+
+	&-ghost,
+	&-base {
+		@apply bg-transparent;
+	}
+
+	&-ghost:hover {
+		@apply bg-[var(--button-hover)];
+	}
 }
 </style>

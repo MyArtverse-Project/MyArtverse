@@ -52,8 +52,9 @@ onMounted(() => {
 					<BaseButton
 						ref="toggleDropdownBtn"
 						class="!px-3 !border-none block"
-						aria-label="Settings"
-						title="Settings"
+						aria-label="Menu"
+						title="Menu"
+            layout="ghost"
 					>
 						<Menu :size="21" />
 					</BaseButton>
@@ -67,6 +68,7 @@ onMounted(() => {
 						]"
 					>
 						<ul
+							:aria-hidden="!isDropdownOpen ? 'true' : undefined"
 							class="flex flex-col overflow-hidden rounded-md w-max bg-base-800"
 						>
 							<li class="flex items-center gap-1.5 px-4 py-3">
