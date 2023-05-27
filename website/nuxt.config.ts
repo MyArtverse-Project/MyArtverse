@@ -2,7 +2,7 @@
 let icons: { rel: string; type?: string; href: string; sizes?: string }[] = [
 	{
 		rel: "shortcut icon",
-		type: "img/x-icon",
+		type: "image/x-icon",
 		href: "/favicon.ico",
 	},
 	{
@@ -11,8 +11,8 @@ let icons: { rel: string; type?: string; href: string; sizes?: string }[] = [
 	},
 ]
 
-const pwaIcons = (_sizes: number[]) => {
-	_sizes.forEach((size) => {
+const pwaIcons = (sizesArr: number[]) => {
+	sizesArr.forEach((size) => {
 		icons.push({
 			rel: "icon",
 			href: `/img/icon_${size}x${size}.png`,
@@ -47,14 +47,29 @@ export default defineNuxtConfig({
 			htmlAttrs: {
 				lang: "en",
 			},
-			link: [...icons],
 			meta: [
+				{ name: "viewport", content: "width=device-width, initial-scale=1.0" },
 				{ "http-equiv": "X-UA-Compatible", content: "IE=edge" },
 				{ property: "og:site_name", content: "MyFursona" },
 				// !!! This is temporary, remove this when ready for production deployment
 				{ name: "robots", content: "noindex,nofollow" },
 				// !!! This is temporary, remove this when ready for production deployment
 				{ name: "theme-color", content: "#fff" },
+			],
+			link: [...icons],
+			script: [
+				{ src: "https://cdn.onesignal.com/sdks/OneSignalSDK.js", defer: true },
+				{
+					innerHTML: `
+            window.OneSignal = window.OneSignal || [];
+            OneSignal.push(() => {
+              OneSignal.init({
+                appId: "REDACTED",
+                safari_web_id: "REDACTED",
+              })
+            })
+        `,
+				},
 			],
 		},
 	},
