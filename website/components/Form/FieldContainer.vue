@@ -12,7 +12,7 @@ defineEmits<{ (e: "update:modelValue", value: string): void }>()
 </script>
 
 <template>
-	<div biro-ui-field>
+	<div data-biroui-field-container>
 		<label :for="inputName" class="font-bold uppercase select-none font-inter"
 			>{{ inputName }}
 		</label>

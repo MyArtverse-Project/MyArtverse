@@ -61,7 +61,7 @@ export default defineNuxtConfig({
 				{ src: "https://cdn.onesignal.com/sdks/OneSignalSDK.js", defer: true },
 				{
 					innerHTML: `
-            window.OneSignal = window.OneSignal || [];
+            window.OneSignal=window.OneSignal||[];
             OneSignal.push(() => {
               OneSignal.init({
                 appId: "REDACTED",

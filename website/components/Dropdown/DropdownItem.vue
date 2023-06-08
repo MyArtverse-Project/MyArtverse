@@ -12,7 +12,7 @@ const slots = useSlots()
 
 <template>
 	<div
-		biro-ui-menu-item
+		data-biroui-dropdown
 		:data-accordion="!slots.default ? undefined : ''"
 		:aria-label="text"
 	>

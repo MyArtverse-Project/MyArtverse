@@ -10,7 +10,7 @@ const props = defineProps<{
 
 <template>
 	<component
-		biro-ui-button
+    data-biroui-button
 		:is="type === 'reset' || type === 'submit' ? 'input' : 'button'"
 		:id="`bui-${layout ?? 'default'}`"
 		:disabled="disabled"
@@ -19,13 +19,13 @@ const props = defineProps<{
 	>
 		<slot />
 	</component>
-	<NuxtLink biro-ui-button v-else :id="`bui-${layout ?? 'default'}`" :to="link">
+	<NuxtLink data-biroui-button v-else :id="`bui-${layout ?? 'default'}`" :to="link">
 		<slot />
 	</NuxtLink>
 </template>
 
 <style lang="scss">
-[biro-ui-button] {
+[data-biroui-button] {
 	@apply cursor-pointer px-5 py-2.5 rounded-md transition-colors;
 }
 
