@@ -84,7 +84,7 @@ export default defineNuxtConfig({
 		},
 	},
 	webpack: {
-		optimizeCSS: true,
+		extractCSS: true,
 	},
 
 	// @nuxt/image-edge config
