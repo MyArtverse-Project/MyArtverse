@@ -12,7 +12,7 @@ defineEmits<{ (e: "update:modelValue", value: string): void }>()
 </script>
 
 <template>
-	<div data-biroui-field-container>
+	<div data-biroui-form-field>
 		<label :for="inputName" class="font-bold uppercase select-none font-inter"
 			>{{ inputName }}
 		</label>
@@ -33,7 +33,7 @@ defineEmits<{ (e: "update:modelValue", value: string): void }>()
 </template>
 
 <style lang="scss">
-div[biro-ui-field] {
+[data-biroui-form-field] {
 	@apply flex flex-col gap-y-2;
 }
 </style>

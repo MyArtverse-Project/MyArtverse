@@ -1,9 +1,9 @@
 // https://nuxt.com/docs/api/configuration/nuxt-config
-let icons: { rel: string; type?: string; href: string; sizes?: string }[] = [
+let icons: { [whatever: string]: string }[] = [
 	{
 		rel: "shortcut icon",
-		type: "image/x-icon",
 		href: "/favicon.ico",
+		fetchpriority: "high",
 	},
 	{
 		rel: "manifest",
@@ -57,25 +57,17 @@ export default defineNuxtConfig({
 				{ name: "theme-color", content: "#fff" },
 			],
 			link: [...icons],
-			script: [
-				{ src: "https://cdn.onesignal.com/sdks/OneSignalSDK.js", defer: true },
-				{
-					innerHTML: `
-            window.OneSignal=window.OneSignal||[];
-            OneSignal.push(() => {
-              OneSignal.init({
-                appId: "REDACTED",
-                safari_web_id: "REDACTED",
-              })
-            })
-        `,
-				},
-			],
 		},
 	},
 	build: {
 		transpile: ["gsap"],
 	},
+	components: [
+		{
+			path: "~/components",
+			pathPrefix: false,
+		},
+	],
 	css: ["~/assets/css/main.scss"],
 	postcss: {
 		plugins: {

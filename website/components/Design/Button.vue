@@ -9,17 +9,21 @@ const props = defineProps<{
 </script>
 
 <template>
-	<component
-    data-biroui-button
-		:is="type === 'reset' || type === 'submit' ? 'input' : 'button'"
+  <button
+		data-biroui-button
 		:id="`bui-${layout ?? 'default'}`"
 		:disabled="disabled"
-		:type="type"
+		:type="type ?? 'button'"
 		v-if="!props.link"
 	>
 		<slot />
-	</component>
-	<NuxtLink data-biroui-button v-else :id="`bui-${layout ?? 'default'}`" :to="link">
+	</button>
+	<NuxtLink
+		data-biroui-button
+		v-else
+		:id="`bui-${layout ?? 'default'}`"
+		:to="link"
+	>
 		<slot />
 	</NuxtLink>
 </template>
