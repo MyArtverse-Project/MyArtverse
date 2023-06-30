@@ -1,31 +1,37 @@
-![MF banner variant 2](https://user-images.githubusercontent.com/94678583/217444477-14639857-511f-4f85-bb6b-5660da9499d6.png)
-
 <h1 align="center">MyFursona</h1>
 
-_MyFursona_ is an open source platform where users can manage their artworks, various types of media about their fursona. The project is still in the works, so a lot of breaking changes are bound to happen!
+> **Note**
+> The project is still work-in-progress and not ready for production yet, so a lot of breaking changes are bound to happen!
+
+_MyFursona_ is an open-source platform where users can keep track of their characters/fursonas, commissions, and adoptables. 
+
+![MyFursona design prototype](https://github.com/MyFursona-Project/MyFursona/assets/94678583/86098e7a-3d4b-414c-8953-931c95e34034)
+
+## Tech stack
+
+- **Nuxt.js** for the user interface
+- **Fastify** powering its REST and GraphQL API
+- **Python** for advanced image and data processing (e.g. profile views, favorites, etc.)
 
 ## Contributing
 
-### Prerequisites
+### Requirements
 
-- Node.js versions 16 or higher (LTS recommended)
+- Node.js 18 or higher (LTS recommended)
+- Postgres
+- Redis
 - Yarn package manager
 - (Optional) WSL/Git Bash
 
 ### Installation
 
-Fork and clone the repository
+Clone the repository and install dependencies
 
-```console
-git clone https://github.com/MyFursona-Project/MyFursona.git
-```
-
-Install its dependencies
 ```console
 yarn install
 ```
 
-To run the website; you can start a local dev server
+Start a local dev server
 ```console
 yarn dev:web
 ```
