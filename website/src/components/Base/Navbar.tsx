@@ -1,48 +1,53 @@
-import dynamic from "next/dynamic"
+"use client"
 
-import { MenuIcon, BellIcon, SearchIcon, LogInIcon } from "lucide-react"
+import {
+  MenuIcon,
+  BellIcon,
+  SearchIcon,
+  ChevronDown,
+  PlusIcon
+} from "lucide-react"
 import Link from "next/link"
-import { Button } from "../ui"
 
-const SidebarClient = dynamic(
-  () => import("../Sidebar").then((c) => c.Sidebar),
-  { ssr: false }
-)
+import { Avatar, Button } from "../ui"
 
 export default function Navbar() {
   return (
     <>
-      {/* Skip to content accessibility */}
-      <a
-        href="#skip-to-main-content"
-        className="fixed top-0 left-0"
-        aria-label="Skip to content"
-      >
-        Skip to content
-      </a>
-      {/* Header */}
-      <header className="flex items-center justify-between px-10 py-5">
-        <div className="flex items-center gap-x-3">
-          <button>
-            <MenuIcon />
-          </button>
+      <nav className="flex items-center justify-between px-4 py-3 text-sm font-medium select-none">
+        <div className="flex items-center gap-x-2.5">
+          {/* Skip nav accessibility */}
+          <a
+            href="#skip-navigation"
+            className="rounded-2xl bg-white fixed top-2 left-2 px-3.5 py-1.5 opacity-0 pointer-events-none focus:pointer-events-auto focus:opacity-100"
+            aria-label="Skip to content"
+          >
+            Skip to content
+          </a>
+          <Button iconOnly>
+            <MenuIcon size={20} />
+          </Button>
           <Link href="/" aria-label="Home" title="Home">
             MyFursona
           </Link>
         </div>
-        <div className="flex items-center gap-x-4">
-          <button className="flex items-center relative gap-x-2 px-4 py-1.5 border border-red-200 rounded-md">
-            <SearchIcon size={20} />
-            <span className="font-medium">Search</span>
-          </button>
-          <button>
-            <BellIcon />
-          </button>
-          <button>Avatar</button>
-          <Button prefixIcon={<LogInIcon />}>Log in</Button>
+        <div className="flex items-center gap-x-2.5">
+          <Button prefixIcon={<SearchIcon size={20} />}>Search</Button>
+          <Button iconOnly variant="secondary" aria-label="Notifications">
+            <BellIcon size={20} />
+          </Button>
+          <Button
+            iconOnly
+            variant="secondary"
+            aria-label="Add or create item"
+            suffixIcon={<ChevronDown size={19} />}
+          >
+            <PlusIcon size={20} />
+          </Button>
+          <Avatar name="cutie" src="/img/hero/vulpo.jpg" />
+          <Button>Sign in</Button>
         </div>
-      </header>
-      <SidebarClient />
+      </nav>
     </>
   )
 }

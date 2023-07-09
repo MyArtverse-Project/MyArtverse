@@ -1,15 +1,22 @@
 import { ButtonHTMLAttributes, ReactElement } from "react"
 import type { LucideIcon } from "lucide-react"
-import { ChildrenNode, ComponentRecord } from "@/types"
+import type { ChildrenNode, ComponentRecord } from "@/types"
 
 interface ButtonProps extends ChildrenNode {
-  variant?: "primary" | "secondary" | "error" | "warning" | "custom"
-  type?: ButtonHTMLAttributes<HTMLButtonElement>["type"]
+  iconOnly?: boolean
   disabled?: boolean
+  type?: ButtonHTMLAttributes<HTMLButtonElement>["type"]
+  variant?: "primary" | "secondary" | "error" | "warning" | "custom"
   size?: "small" | "big"
+  className?: string
+  /**
+   * Accepts a Lucide Icon on the left side
+   */
   prefixIcon?: ReactElement<LucideIcon>
+  /**
+   * Accepts a Lucide Icon on the right side
+   */
   suffixIcon?: ReactElement<LucideIcon>
-  ariaLabel?: string
 }
 
 // prettier-ignore
@@ -17,32 +24,47 @@ type ButtonRecord<P extends keyof ButtonProps, T = string> = ComponentRecord<But
 
 export default function Button({
   children,
+  iconOnly,
+  disabled,
   type,
   variant,
   size,
   prefixIcon,
   suffixIcon,
-  ariaLabel
-}: ButtonProps) {
+  className,
+  ...others
+}: ButtonProps & ButtonHTMLAttributes<HTMLButtonElement>) {
   const sizes: ButtonRecord<"size"> = {
-    small: "px-2",
-    big: "px-5"
+    small: !iconOnly ? "py-1.5 py-2 " : "p-1.5",
+    big: !iconOnly ? "px-4 py-2" : "p-2"
   }
 
-  const yes = sizes["small"]
-
   const variants: ButtonRecord<"variant", string | undefined> = {
-    primary: "",
-    secondary: "",
+    primary: "bg-red-100 hover:bg-red-200 focus:bg-red-200",
+    secondary: "bg-transparent hover:bg-red-200 focus:bg-red-200",
     warning: "",
     error: "",
     custom: undefined
   }
 
+  const sizeDynamic = sizes[size ?? "big"]
+  const variantsDynamic = variants[variant ?? "primary"]
+
+  const baseStyles = "flex items-center gap-x-1.5 rounded-md"
+
+  const mergeClass = !className
+    ? [baseStyles, sizeDynamic, variantsDynamic]
+    : [baseStyles, className]
+
   return (
-    <button type={type ?? "button"} aria-label={ariaLabel}>
+    <button
+      data-mf-button=""
+      type={type ?? "button"}
+      className={mergeClass.join(" ")}
+      {...others}
+    >
       {prefixIcon}
-      <span id="children-slot">{children}</span>
+      {children}
       {suffixIcon}
     </button>
   )

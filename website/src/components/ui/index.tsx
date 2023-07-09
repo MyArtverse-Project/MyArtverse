@@ -1,4 +1,5 @@
 import Button from "./Button"
 import Chip from "./Chip"
+import Avatar from "./Avatar"
 
-export { Button, Chip }
+export { Avatar, Button, Chip }
