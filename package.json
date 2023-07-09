@@ -1,27 +1,28 @@
 {
-	"name": "myfursona",
-	"private": true,
-	"version": "0.0.0",
-	"license": "MIT",
-	"workspaces": [
-		"website",
-		"api"
-	],
-	"scripts": {
-		"dev:web": "turbo dev --filter=website",
-		"build:web": "turbo build --filter=website",
-		"dev:api": "turbo dev --filter=api",
-		"build:api": "turbo build --filter=api",
-		"build": "turbo build",
-		"prettier:check": "prettier --check .",
-		"prettier:write": "prettier --write ."
-	},
-	"devDependencies": {
-		"prettier": "^2.8.3",
-		"turbo": "^1.8.8"
-	},
-	"engines": {
-		"node": ">= 18.0.0",
-		"npm": ">= 8.0.0"
-	}
+  "name": "myfursona",
+  "private": true,
+  "version": "0.0.0",
+  "license": "MIT",
+  "workspaces": [
+    "website",
+    "api",
+    "config/*"
+  ],
+  "scripts": {
+    "dev:web": "turbo dev --filter=website",
+    "build:web": "turbo build --filter=website",
+    "dev:api": "turbo dev --filter=api",
+    "build:api": "turbo build --filter=api",
+    "build": "turbo build",
+    "prettier:check": "prettier --check .",
+    "prettier:write": "prettier --write ."
+  },
+  "devDependencies": {
+    "prettier": "^2.8.3",
+    "turbo": "^1.8.8"
+  },
+  "engines": {
+    "node": ">= 18.0.0",
+    "npm": ">= 8.0.0"
+  }
 }

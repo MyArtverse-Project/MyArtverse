@@ -1,3 +1,3 @@
 export default function Sidebar() {
-	return <nav></nav>
+  return <nav></nav>
 }
