@@ -2,7 +2,7 @@ import "reflect-metadata"
 import express from "express"
 import routes from "./routes/index"
 import { PrismaClient } from "@prisma/client"
-const prisma = new PrismaClient
+const prisma = new PrismaClient()
 import { ApolloServer } from "apollo-server-express"
 import { buildSchema } from "type-graphql"
 import { HelloResolver, ProfileResolver } from "./resolvers/"
