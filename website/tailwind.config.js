@@ -6,7 +6,12 @@ module.exports = {
     "./src/app/**/*.{js,ts,jsx,tsx,mdx}"
   ],
   theme: {
-    extend: {}
+    extend: {
+      fontFamily: {
+        inter: "var(--font-inter)",
+        "open-sans": "var(--font-open-sans)"
+      }
+    }
   },
   plugins: [require("@tailwindcss/forms")]
 }

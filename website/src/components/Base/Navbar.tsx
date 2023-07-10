@@ -1,5 +1,8 @@
 "use client"
 
+import { useContext } from "react"
+import Link from "next/link"
+
 import {
   MenuIcon,
   BellIcon,
@@ -7,24 +10,30 @@ import {
   ChevronDown,
   PlusIcon
 } from "lucide-react"
-import Link from "next/link"
 
-import { Avatar, Button } from "../ui"
+import { NavbarContext } from "@/contexts"
+import { Avatar, Button, Separator } from "../ui"
 
 export default function Navbar() {
+  const { isSidebarOpen, setSidebarState } = useContext(NavbarContext)
+
   return (
     <>
-      <nav className="flex items-center justify-between px-4 py-3 text-sm font-medium select-none">
+      {/* Skip nav accessibility */}
+      <a
+        href="#skip-navigation"
+        className="z-[999] rounded-2xl bg-white fixed top-3 left-2 px-5 py-1.5 opacity-0 pointer-events-none focus:pointer-events-auto focus:opacity-100"
+        aria-label="Skip to content"
+      >
+        Skip to content
+      </a>
+      <nav className="sticky top-0 flex items-center justify-between px-4 py-3 text-sm font-medium select-none font-inter">
         <div className="flex items-center gap-x-2.5">
-          {/* Skip nav accessibility */}
-          <a
-            href="#skip-navigation"
-            className="rounded-2xl bg-white fixed top-2 left-2 px-3.5 py-1.5 opacity-0 pointer-events-none focus:pointer-events-auto focus:opacity-100"
-            aria-label="Skip to content"
+          <Button
+            iconOnly
+            variant="secondary"
+            onClick={() => setSidebarState(!isSidebarOpen)}
           >
-            Skip to content
-          </a>
-          <Button iconOnly>
             <MenuIcon size={20} />
           </Button>
           <Link href="/" aria-label="Home" title="Home">
@@ -32,19 +41,27 @@ export default function Navbar() {
           </Link>
         </div>
         <div className="flex items-center gap-x-2.5">
-          <Button prefixIcon={<SearchIcon size={20} />}>Search</Button>
-          <Button iconOnly variant="secondary" aria-label="Notifications">
-            <BellIcon size={20} />
+          <Button
+            className="flex items-center gap-x-1.5 pl-3 pr-24 lg:pr-32 xl:pr-48 py-2 border border-red-200 hover:border-red-500 focus:border-red-500"
+            prefixIcon={<SearchIcon size={20} />}
+          >
+            Search
           </Button>
+          <Separator dir="horizontal" size="2.125rem" />
+          {/* Signed in */}
           <Button
             iconOnly
             variant="secondary"
             aria-label="Add or create item"
-            suffixIcon={<ChevronDown size={19} />}
+            suffixIcon={<ChevronDown size={20} />}
           >
             <PlusIcon size={20} />
           </Button>
-          <Avatar name="cutie" src="/img/hero/vulpo.jpg" />
+          <Button iconOnly variant="secondary" aria-label="Notifications">
+            <BellIcon size={20} />
+          </Button>
+          <Avatar name="VulpoTheDev" src="/img/hero/vulpo.jpg" />
+          {/* Signed out */}
           <Button>Sign in</Button>
         </div>
       </nav>

@@ -6,7 +6,7 @@ interface AvatarProps {
   size?: number
 }
 
-export default function Avatar({ name, src, size = 32 }: AvatarProps) {
+export default function Avatar({ name, src, size = 31 }: AvatarProps) {
   return (
     <button
       data-mf-avatar-item=""

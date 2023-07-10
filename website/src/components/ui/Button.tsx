@@ -6,7 +6,7 @@ interface ButtonProps extends ChildrenNode {
   iconOnly?: boolean
   disabled?: boolean
   type?: ButtonHTMLAttributes<HTMLButtonElement>["type"]
-  variant?: "primary" | "secondary" | "error" | "warning" | "custom"
+  variant?: "primary" | "secondary" | "error" | "warning"
   size?: "small" | "big"
   className?: string
   /**
@@ -32,19 +32,18 @@ export default function Button({
   prefixIcon,
   suffixIcon,
   className,
-  ...others
+  ...attributes
 }: ButtonProps & ButtonHTMLAttributes<HTMLButtonElement>) {
   const sizes: ButtonRecord<"size"> = {
     small: !iconOnly ? "py-1.5 py-2 " : "p-1.5",
     big: !iconOnly ? "px-4 py-2" : "p-2"
   }
 
-  const variants: ButtonRecord<"variant", string | undefined> = {
+  const variants: ButtonRecord<"variant"> = {
     primary: "bg-red-100 hover:bg-red-200 focus:bg-red-200",
     secondary: "bg-transparent hover:bg-red-200 focus:bg-red-200",
     warning: "",
-    error: "",
-    custom: undefined
+    error: ""
   }
 
   const sizeDynamic = sizes[size ?? "big"]
@@ -61,7 +60,7 @@ export default function Button({
       data-mf-button=""
       type={type ?? "button"}
       className={mergeClass.join(" ")}
-      {...others}
+      {...attributes}
     >
       {prefixIcon}
       {children}

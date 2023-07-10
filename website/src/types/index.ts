@@ -1,7 +1,7 @@
 /**
  * Theme type literal
  */
-type Theme = "system" | "light" | "dark"
+export type Theme = "system" | "light" | "dark"
 
 /**
  * A generic that merges custom interface with ReactNode
@@ -13,19 +13,21 @@ export type ChildrenNode<T extends object = {}> = {
 /**
  * Removes undefined when defining keys from an interface
  */
-export type NonNullKeyFromInterface<I, K extends keyof I> = NonNullable<I[K]>
+export type NonNullKeyFromInterface<Type, Key extends keyof Type> = NonNullable<
+  Type[Key]
+>
 
 /**
  * A custom Record generic for components
  */
 export type ComponentRecord<
-  Interface,
-  Key extends keyof Interface,
+  Type,
+  Key extends keyof Type,
   RecordPropertyType extends PropertyKey = string,
   RecordType = string
 > = {
-  [P in NonNullKeyFromInterface<Interface, Key> as Extract<
+  [P in NonNullKeyFromInterface<Type, Key> as Extract<
     P,
-    keyof Interface
+    keyof Type
   >]: RecordType
 } & Record<RecordPropertyType, RecordType>
