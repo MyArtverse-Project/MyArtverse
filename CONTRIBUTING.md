@@ -1,17 +1,18 @@
 > **Note**
 > Contributing guidelines still under construction
 
-## Prerequisties
+# Contributing to the MyFursona Website
 
-You must have familar knowledge of the React or Next.js framework.
+## Basic coding conventions
 
-## Contributing to the MyFursona Website
+- Space out variables and conditions; function returns are spaced out above everything else
 
 ### Organized Imports
 
 Imports are organized by the following:
 
 - **Primary level**
+
   - Bulit-in React hooks and Next.js components
   - Global CSS stylesheets
 
@@ -42,6 +43,7 @@ import { LucideIcon } from "lucide-react"
 ### Components
 
 Creating a component needs to have a following structure:
+
 - Imports
 - Custom type (if any; optional)
 - Interface
@@ -69,8 +71,6 @@ export const metadata = setPageMeta({
 })
 
 export default function MyAwesomePage() {
-  return (
-    <div>My Awesome Page</div>
-  )
+  return <div>My Awesome Page</div>
 }
 ```

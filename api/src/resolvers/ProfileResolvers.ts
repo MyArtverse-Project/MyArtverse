@@ -53,17 +53,20 @@ export class ProfileResolver {
         id: userID
       }
     })
+
     return profile
   }
 
   @Query(() => Profile)
   async getProfileByUsername(@Arg("username", () => String) username: string) {
     username = username.toLowerCase()
+
     const profile = await prisma.profile.findFirst({
       where: {
         username: username
       }
     })
+
     return profile
   }
 
@@ -84,6 +87,7 @@ export class ProfileResolver {
         id: randomInt(999999)
       }
     })
+
     return profile
   }
 
@@ -98,10 +102,15 @@ export class ProfileResolver {
         username: username
       }
     })
+
     if (!user) throw new Error("User not found")
+
     const valid = await bcrypt.compare(password, user.password)
+
     if (!valid) throw new Error("Incorrect password")
+
     res.cookie("jid", generateRefreshToken(user), { httpOnly: true })
+
     return {
       accessToken: generateAccessToken(user)
     }
@@ -111,12 +120,15 @@ export class ProfileResolver {
   @UseMiddleware(isAuth)
   async me(@Ctx() { payload }: Context) {
     if (!payload) throw new Error("Not authenticated")
+
     const user = await prisma.profile.findFirst({
       where: {
         id: payload.userId
       }
     })
+
     if (!user) throw new Error("User not found idk how you fucked that up")
+
     return user
   }
 }
