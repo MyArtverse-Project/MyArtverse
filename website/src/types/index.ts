@@ -23,11 +23,10 @@ export type NonNullKeyFromInterface<Type, Key extends keyof Type> = NonNullable<
 export type ComponentRecord<
   Type,
   Key extends keyof Type,
-  RecordPropertyType extends PropertyKey = string,
   RecordType = string
 > = {
   [P in NonNullKeyFromInterface<Type, Key> as Extract<
     P,
     keyof Type
   >]: RecordType
-} & Record<RecordPropertyType, RecordType>
+} & Record<PropertyKey, RecordType>

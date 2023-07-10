@@ -1,6 +1,6 @@
 "use client"
 
-import { useContext } from "react"
+import React, { useCallback, useContext, useEffect } from "react"
 import { Button, MenuContainer, MenuItem, Overlay, Separator } from "../ui"
 import { NavbarContext } from "@/contexts"
 import {
@@ -18,6 +18,10 @@ import {
 export default function Sidebar() {
   const SIDEBAR_WIDTH = 340
   const SIDEBAR_ITEMS = [
+    {
+      heading: "",
+      items: [{ name: "Home", icon: HomeIcon }]
+    },
     {
       heading: "Explore",
       items: [
@@ -37,12 +41,29 @@ export default function Sidebar() {
   ]
 
   const { isSidebarOpen, setSidebarState } = useContext(NavbarContext)
-  const toggleSidebar = () => setSidebarState(!isSidebarOpen)
+
+  const toggleSidebar = useCallback(() => {
+    setSidebarState(!isSidebarOpen)
+  }, [setSidebarState, isSidebarOpen])
+
+  useEffect(() => {
+    const handleKeyDown = ({ key }: globalThis.KeyboardEvent) => {
+      if (isSidebarOpen && key === "Escape") {
+        toggleSidebar()
+      }
+    }
+
+    window.addEventListener("keydown", handleKeyDown)
+
+    return () => {
+      window.removeEventListener("keydown", handleKeyDown)
+    }
+  }, [toggleSidebar, isSidebarOpen])
 
   return (
     <Overlay state={isSidebarOpen} toggler={toggleSidebar}>
       <aside
-        className="font-semibold flex flex-col fixed inset-0 right-[unset] bg-white transition-transform duration-[250ms]"
+        className="flex flex-col fixed inset-0 right-[unset] bg-white transition-transform duration-[250ms]"
         style={{
           transform: isSidebarOpen
             ? "translate3d(0,0,0)"
@@ -56,21 +77,29 @@ export default function Sidebar() {
           </Button>
           <span>MyFursona</span>
         </div>
-        <div className="p-2.5 pt-0">
+        <div className="px-2.5">
           {SIDEBAR_ITEMS.map((root, index) => {
             return (
-              <>
-                <MenuContainer key={index} heading={root.heading ?? undefined}>
-                  {root.items.map((item) => {
-                    return <MenuItem name={item.name} />
+              <React.Fragment key={index}>
+                <MenuContainer heading={root.heading ?? undefined}>
+                  {root.items.map((item, index) => {
+                    const Icon = item.icon
+                    return (
+                      <MenuItem
+                        key={index}
+                        name={item.name}
+                        prefix={<Icon size={20} />}
+                        href="/"
+                      />
+                    )
                   })}
                 </MenuContainer>
                 <Separator dir="horizontal" padding="0.525rem" />
-              </>
+              </React.Fragment>
             )
           })}
-          <div className="px-4 text-sm">
-            Copyright 2023 The MyFursona Project
+          <div className="px-4 py-2.5 text-sm">
+            Copyright &copy; 2022-2023 The MyFursona Project
           </div>
         </div>
       </aside>

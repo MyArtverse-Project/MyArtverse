@@ -13,7 +13,7 @@ interface MenuItem {
 export default function MenuItem({ prefix, suffix, name, href }: MenuItem) {
   return (
     <Link
-      className="select-none px-4 py-2.5 font-semibold flex items-center justify-between hover:bg-red-200 rounded-md"
+      className="select-none px-4 py-2.5 font-medium flex items-center justify-between hover:bg-red-200 rounded-md"
       href={href as unknown as UrlObject}
     >
       <span className="flex items-center text-sm gap-x-3">

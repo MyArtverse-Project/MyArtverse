@@ -20,7 +20,7 @@ interface ButtonProps extends ChildrenNode {
 }
 
 // prettier-ignore
-type ButtonRecord<P extends keyof ButtonProps, T = string> = ComponentRecord<ButtonProps, P, string, T>
+type ButtonRecord<P extends keyof ButtonProps, T = string> = ComponentRecord<ButtonProps, P, T>
 
 export default function Button({
   children,

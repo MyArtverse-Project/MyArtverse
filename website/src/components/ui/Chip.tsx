@@ -1,6 +1,6 @@
 import { ReactElement } from "react"
 import { LucideIcon } from "lucide-react"
-import { ChildrenNode } from "@/types"
+import type { ChildrenNode } from "@/types"
 
 interface ChipProps extends ChildrenNode {
   prefixIcon?: ReactElement<LucideIcon>

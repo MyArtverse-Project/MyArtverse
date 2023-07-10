@@ -47,7 +47,7 @@ export default function Navbar() {
           >
             Search
           </Button>
-          <Separator dir="horizontal" size="2.125rem" />
+          <Separator dir="vertical" size="2.125rem" />
           {/* Signed in */}
           <Button
             iconOnly

@@ -12,8 +12,8 @@ export default function Separator({
   padding?: string | number
 }) {
   const directionMapSize: Record<DirectionType, CSSProperties> = {
-    horizontal: { height: size },
-    vertical: { width: size }
+    horizontal: { width: size },
+    vertical: { height: size }
   }
 
   const directionMapPadding: Record<DirectionType, CSSProperties> = {
@@ -24,7 +24,8 @@ export default function Separator({
   return (
     <span
       className="block border border-red-100"
-      style={(directionMapSize[dir], directionMapPadding[dir])}
+      style={{ ...directionMapSize[dir], ...directionMapPadding[dir] }}
+      aria-hidden
     />
   )
 }
