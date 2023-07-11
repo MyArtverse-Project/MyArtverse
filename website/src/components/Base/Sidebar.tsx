@@ -1,7 +1,9 @@
 "use client"
 
 import React, { useCallback, useContext, useEffect } from "react"
-import { Button, MenuContainer, MenuItem, Overlay, Separator } from "../ui"
+import Link from "next/link"
+
+import { Button, Menu, MenuItem, Overlay, Separator } from "../ui"
 import { NavbarContext } from "@/contexts"
 import {
   HomeIcon,
@@ -14,6 +16,7 @@ import {
   AlertTriangleIcon,
   BoxIcon
 } from "lucide-react"
+import Logo from "../Logo"
 
 export default function Sidebar() {
   const SIDEBAR_WIDTH = 320
@@ -72,36 +75,34 @@ export default function Sidebar() {
           width: SIDEBAR_WIDTH
         }}
       >
-        <div className="w-full px-4 py-3 flex items-center gap-x-1.5">
+        <div className="w-full px-5 py-4 flex items-center gap-x-2.5">
           <Button variant="secondary" iconOnly onClick={toggleSidebar}>
             <XIcon size={20} />
           </Button>
-          <span>MyFursona</span>
+          <Link href="/" aria-label="Home" title="Home">
+            <Logo />
+          </Link>
         </div>
         <div className="px-2.5" role="menu">
-          {SIDEBAR_ITEMS.map((root, index) => {
+          {SIDEBAR_ITEMS.map(({ heading, items }, index) => {
             return (
               <React.Fragment key={index}>
-                <MenuContainer heading={root.heading ?? undefined}>
-                  {root.items.map((item, index) => {
-                    const Icon = item.icon
+                <Menu heading={heading ?? undefined}>
+                  {items.map((item, index) => {
                     return (
                       <MenuItem
                         key={index}
                         name={item.name}
-                        prefix={<Icon size={20} />}
+                        prefix={<item.icon size={20} />}
                         href="/"
                       />
                     )
                   })}
-                </MenuContainer>
+                </Menu>
                 <Separator dir="horizontal" padding="0.525rem" />
               </React.Fragment>
             )
           })}
-          <div className="px-4 py-2.5 text-[0.825rem]">
-            &copy;2023 The MyFursona Project
-          </div>
         </div>
       </aside>
     </Overlay>

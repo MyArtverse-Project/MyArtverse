@@ -1,7 +1,14 @@
 /** @type {import('next').NextConfig} */
-// const withPWA = require("next-pwa")({
-//   dest: "public",
-//   disable: process.env.NODE_ENV === "development"
+
+// ! PWA package won't resolve something about webpack
+// const withPWA = require("@ducanh2912/next-pwa").default({
+//   dest: "public"
+// })
+
+// module.exports = withPWA({
+//   experimental: {
+//     typedRoutes: true
+//   }
 // })
 
 const nextConfig = {
@@ -9,9 +16,5 @@ const nextConfig = {
     typedRoutes: true
   }
 }
-
-// module.exports = withPWA({
-//   ...nextConfig
-// })
 
 module.exports = nextConfig

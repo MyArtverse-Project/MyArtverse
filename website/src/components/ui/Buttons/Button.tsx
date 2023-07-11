@@ -1,14 +1,17 @@
-import { ButtonHTMLAttributes, ReactElement } from "react"
+import type { ButtonHTMLAttributes, ReactElement } from "react"
 import type { LucideIcon } from "lucide-react"
 import type { ChildrenNode, ComponentRecord } from "@/types"
 
-interface ButtonProps extends ChildrenNode {
+interface ButtonProps
+  extends ChildrenNode,
+    ButtonHTMLAttributes<HTMLButtonElement> {
   iconOnly?: boolean
   disabled?: boolean
   type?: ButtonHTMLAttributes<HTMLButtonElement>["type"]
   variant?: "primary" | "secondary" | "error" | "warning"
   size?: "small" | "big"
   className?: string
+  ["aria-label"]?: string
   /**
    * Accepts a Lucide Icon on the left side
    */
@@ -22,18 +25,21 @@ interface ButtonProps extends ChildrenNode {
 // prettier-ignore
 type ButtonRecord<P extends keyof ButtonProps, T = string> = ComponentRecord<ButtonProps, P, T>
 
-export default function Button({
-  children,
-  iconOnly,
-  disabled,
-  type,
-  variant,
-  size,
-  prefixIcon,
-  suffixIcon,
-  className,
-  ...attributes
-}: ButtonProps & ButtonHTMLAttributes<HTMLButtonElement>) {
+export default function Button(props: ButtonProps) {
+  const {
+    children,
+    iconOnly,
+    disabled,
+    type,
+    variant,
+    size,
+    prefixIcon,
+    suffixIcon,
+    className,
+    "aria-label": ariaLabel,
+    ...attributes
+  } = props
+
   const sizes: ButtonRecord<"size"> = {
     small: !iconOnly ? "py-1.5 py-2 " : "p-1.5",
     big: !iconOnly ? "px-4 py-2" : "p-2"
@@ -49,7 +55,8 @@ export default function Button({
   const sizeDynamic = sizes[size ?? "big"]
   const variantsDynamic = variants[variant ?? "primary"]
 
-  const baseStyles = "flex items-center gap-x-1.5 rounded-md"
+  const baseStyles =
+    "flex items-center gap-x-1.5 rounded-md transition-[border,background-color]"
 
   const mergeClass = !className
     ? [baseStyles, sizeDynamic, variantsDynamic]
@@ -57,9 +64,9 @@ export default function Button({
 
   return (
     <button
-      data-mf-button=""
-      type={type ?? "button"}
+      type={type ?? undefined}
       className={mergeClass.join(" ")}
+      aria-label={ariaLabel}
       {...attributes}
     >
       {prefixIcon}

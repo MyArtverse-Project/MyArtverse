@@ -12,10 +12,11 @@ export default function Avatar({ username, src, size = 36 }: AvatarProps) {
       data-mf-avatar-item=""
       aria-label={username}
       style={{ height: `${size}px`, width: `${size}px` }}
+      className="overflow-hidden rounded-full"
     >
       <Image
         src={src}
-        className="object-cover overflow-hidden rounded-full aspect-square"
+        className="object-cover aspect-square"
         alt={`Avatar of ${username}`}
         decoding="async"
         loading="eager"

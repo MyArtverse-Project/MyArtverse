@@ -7,7 +7,7 @@
 
 - Space out variables and conditions; function returns are spaced out above everything else
 
-### Organized Imports
+### Imports
 
 Imports are organized by the following:
 
@@ -23,7 +23,7 @@ Imports are organized by the following:
 Example:
 
 ```ts
-import { useState, useEffect } from "react"
+import { useState, useEffect, type ReactElement } from "react"
 import Link from "next/link"
 
 import { LucideIcon } from "lucide-react"
@@ -33,7 +33,7 @@ import type { ChildrenNode } from "@/types"
 Both levels can have imports be in any order as long as they honor it's corresponding level. So this example also checks out:
 
 ```ts
-import { useState, useEffect } from "react"
+import { useState, useEffect, type ReactElement } from "react"
 import Link from "next/link"
 
 import type { ChildrenNode } from "@/types"
@@ -63,7 +63,7 @@ my-awesome-page/
 Export its page metadata:
 
 ```tsx
-import setPageMeta from "@/utils/setPageMeta"
+import { setPageMeta } from "@/utils"
 
 export const metadata = setPageMeta({
   title: "My awesome page",

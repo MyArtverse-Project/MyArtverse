@@ -15,17 +15,15 @@ export default function Overlay({ children, state, toggler }: OverlayProps) {
   return (
     <div
       className="contents fixed z-[20] inset-0"
-      data-overlay-container=""
+      overlay-container=""
       tabIndex={-1}
     >
       <div
-        data-overlay=""
-        className={`duration-[150ms] fixed z-[19] transition-all bg-black inset-0 ${overlayState}`}
+        overlay-screen=""
+        className={`duration-[350ms] fixed z-[19] transition-all bg-black inset-0 ${overlayState}`}
         onClick={toggler}
       />
-      <div className="fixed z-[20]" aria-hidden={!state ? "true" : undefined}>
-        {children}
-      </div>
+      <div className="fixed z-[20]">{children}</div>
     </div>
   )
 }

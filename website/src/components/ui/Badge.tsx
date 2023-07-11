@@ -9,7 +9,7 @@ interface ChipProps extends ChildrenNode {
   className?: string
 }
 
-export default function Chip({
+export default function Badge({
   prefixIcon,
   text,
   variants,

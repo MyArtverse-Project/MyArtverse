@@ -24,7 +24,7 @@ export default function RootLayout({ children }: ChildrenNode) {
       dir="ltr"
       className={`${inter.variable} ${open_sans.variable}`}
     >
-      <body className="font-open-sans">
+      <body className="antialiased font-open-sans">
         <div id="__next">
           <NavbarProvider>
             <Navbar />
@@ -33,7 +33,7 @@ export default function RootLayout({ children }: ChildrenNode) {
           <main id="skip-navigation">{children}</main>
           <Footer />
         </div>
-        <div id="modal-portal" />
+        <div portal-container="" />
       </body>
     </html>
   )

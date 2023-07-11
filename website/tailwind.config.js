@@ -10,6 +10,12 @@ module.exports = {
       fontFamily: {
         inter: "var(--font-inter)",
         "open-sans": "var(--font-open-sans)"
+      },
+      theme: {
+        warning: "var(--warning)",
+        info: "var(--info)",
+        error: "var(--error)",
+        success: "var(--success)"
       }
     }
   },

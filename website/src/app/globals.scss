@@ -59,4 +59,19 @@
     --dark-warning-background: hsl(46, 100%, 15.2%);
     --dark-info-background: hsl(212, 100%, 15.2%);
   }
+
+  .desktop-only-lg {
+    @apply hidden lg:block;
+  }
+  .desktop-only-md {
+    @apply hidden md:block;
+  }
+
+  .mobile-only-lg {
+    @apply block lg:hidden;
+  }
+  
+  .mobile-only-md {
+    @apply block md:hidden;
+  }
 }
