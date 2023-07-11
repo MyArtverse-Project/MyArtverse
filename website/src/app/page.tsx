@@ -1,6 +1,6 @@
-import setPageMeta from "@/utils/setPageMeta"
+import { pageMeta } from "@/utils"
 
-export const metadata = setPageMeta({
+export const metadata = pageMeta({
   title: "Home - MyFursona",
   description:
     "MyFursona is a place to keep track of your fursonas, adopts, and commissions!"
