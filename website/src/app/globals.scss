@@ -3,6 +3,10 @@
 @tailwind utilities;
 
 @layer base {
+  .lucide {
+    pointer-events: none;
+  }
+
   :root {
     // Global variants
     --warning: hsl(46, 99.3%, 54.6%);

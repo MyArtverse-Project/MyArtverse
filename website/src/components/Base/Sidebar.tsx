@@ -4,7 +4,6 @@ import React, { useCallback, useContext, useEffect } from "react"
 import { Button, MenuContainer, MenuItem, Overlay, Separator } from "../ui"
 import { NavbarContext } from "@/contexts"
 import {
-  CatIcon,
   HomeIcon,
   SparklesIcon,
   XIcon,
@@ -12,11 +11,12 @@ import {
   SettingsIcon,
   HelpCircleIcon,
   MessageSquarePlusIcon,
-  AlertTriangleIcon
+  AlertTriangleIcon,
+  BoxIcon
 } from "lucide-react"
 
 export default function Sidebar() {
-  const SIDEBAR_WIDTH = 340
+  const SIDEBAR_WIDTH = 320
   const SIDEBAR_ITEMS = [
     {
       heading: "",
@@ -26,7 +26,8 @@ export default function Sidebar() {
       heading: "Explore",
       items: [
         { name: "Available Adoptables", icon: SparklesIcon },
-        { name: "Open for Commissions", icon: BrushIcon }
+        { name: "Open for Commissions", icon: BrushIcon },
+        { name: "3D Models", icon: BoxIcon }
       ]
     },
     {
@@ -34,7 +35,7 @@ export default function Sidebar() {
       items: [
         { name: "Settings", icon: SettingsIcon },
         { name: "Help", icon: HelpCircleIcon },
-        { name: "Feedback", icon: MessageSquarePlusIcon },
+        { name: "Send feedback", icon: MessageSquarePlusIcon },
         { name: "Report Issue", icon: AlertTriangleIcon }
       ]
     }
@@ -77,7 +78,7 @@ export default function Sidebar() {
           </Button>
           <span>MyFursona</span>
         </div>
-        <div className="px-2.5">
+        <div className="px-2.5" role="menu">
           {SIDEBAR_ITEMS.map((root, index) => {
             return (
               <React.Fragment key={index}>
@@ -98,8 +99,8 @@ export default function Sidebar() {
               </React.Fragment>
             )
           })}
-          <div className="px-4 py-2.5 text-sm">
-            Copyright &copy; 2022-2023 The MyFursona Project
+          <div className="px-4 py-2.5 text-[0.825rem]">
+            &copy;2023 The MyFursona Project
           </div>
         </div>
       </aside>

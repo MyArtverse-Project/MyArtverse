@@ -33,6 +33,7 @@ export default function RootLayout({ children }: ChildrenNode) {
           <main id="skip-navigation">{children}</main>
           <Footer />
         </div>
+        <div id="modal-portal" />
       </body>
     </html>
   )

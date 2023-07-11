@@ -8,9 +8,9 @@ import {
   BellIcon,
   SearchIcon,
   ChevronDown,
-  PlusIcon
+  PlusIcon,
+  MoreVerticalIcon
 } from "lucide-react"
-
 import { NavbarContext } from "@/contexts"
 import { Avatar, Button, Separator } from "../ui"
 
@@ -33,6 +33,7 @@ export default function Navbar() {
             iconOnly
             variant="secondary"
             onClick={() => setSidebarState(!isSidebarOpen)}
+            aria-label="Toggle sidebar"
           >
             <MenuIcon size={20} />
           </Button>
@@ -60,8 +61,11 @@ export default function Navbar() {
           <Button iconOnly variant="secondary" aria-label="Notifications">
             <BellIcon size={20} />
           </Button>
-          <Avatar name="VulpoTheDev" src="/img/hero/vulpo.jpg" />
+          <Avatar username="VulpoTheDev" src="/img/hero/vulpo.jpg" />
           {/* Signed out */}
+          <Button iconOnly variant="secondary" aria-label="Site options">
+            <MoreVerticalIcon size={20} />
+          </Button>
           <Button>Sign in</Button>
         </div>
       </nav>

@@ -9,7 +9,7 @@ export default function MenuContainer({
   children
 }: MenuContainerProps) {
   return (
-    <div role="menu">
+    <div role="group">
       {heading && (
         <h2 className="px-4 py-1 font-semibold text-black uppercase text-[0.915rem]">
           {heading}
