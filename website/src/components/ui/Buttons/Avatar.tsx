@@ -10,7 +10,7 @@ export default function Avatar(props: AvatarProps) {
   const { username, src, size = 36 } = props
 
   return (
-    <button
+    <div
       avatar-item=""
       aria-label={username}
       style={{ height: `${size}px`, width: `${size}px` }}
@@ -26,7 +26,8 @@ export default function Avatar(props: AvatarProps) {
         fetchPriority="high"
         width={size}
         height={size}
+        draggable={false}
       />
-    </button>
+    </div>
   )
 }

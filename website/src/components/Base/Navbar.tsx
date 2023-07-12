@@ -15,6 +15,7 @@ import {
 import { NavbarContext } from "@/contexts"
 import { Avatar, Button, MenuDropdown, MenuItem, Separator } from "../ui"
 import Logo from "../Logo"
+import MenuDropdownButton from "../ui/Menu/MenuDropdownButton"
 
 export default function Navbar() {
   const { isSidebarOpen, setSidebarState } = useContext(NavbarContext)
@@ -69,7 +70,9 @@ export default function Navbar() {
         </Button>
         <MenuDropdown
           buttonChild={
-            <Avatar username="VulpoTheDev" src="/img/hero/vulpo.jpg" />
+            <MenuDropdownButton>
+              <Avatar username="VulpoTheDev" src="/img/hero/vulpo.jpg" />
+            </MenuDropdownButton>
           }
         >
           <MenuItem
