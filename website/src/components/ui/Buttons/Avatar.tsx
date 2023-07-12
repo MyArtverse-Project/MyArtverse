@@ -6,10 +6,12 @@ interface AvatarProps {
   size?: number
 }
 
-export default function Avatar({ username, src, size = 36 }: AvatarProps) {
+export default function Avatar(props: AvatarProps) {
+  const { username, src, size = 36 } = props
+
   return (
     <button
-      data-mf-avatar-item=""
+      avatar-item=""
       aria-label={username}
       style={{ height: `${size}px`, width: `${size}px` }}
       className="overflow-hidden rounded-full"

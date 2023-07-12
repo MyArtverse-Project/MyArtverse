@@ -3,7 +3,9 @@ interface LogoProps {
   size?: number
 }
 
-export default function Logo({ logoOnly = false, size = 0.7 }: LogoProps) {
+export default function Logo(props: LogoProps) {
+  const { logoOnly = false, size = 0.7 } = props
+
   const WIDTH = 237 * size
   const HEIGHT = 55 * size
 

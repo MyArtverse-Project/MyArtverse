@@ -9,12 +9,9 @@ interface ChipProps extends ChildrenNode {
   className?: string
 }
 
-export default function Badge({
-  prefixIcon,
-  text,
-  variants,
-  className
-}: ChipProps) {
+export default function Badge(props: ChipProps) {
+  const { prefixIcon, text, variants, className } = props
+
   return (
     <div data-chip-component className="">
       {prefixIcon}

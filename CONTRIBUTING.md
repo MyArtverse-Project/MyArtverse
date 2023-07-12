@@ -47,9 +47,28 @@ Creating a component needs to have a following structure:
 - Imports
 - Custom type (if any; optional)
 - Interface
-- Export default function
+- Export function
 
 If a component is from a sub-folder (i.e. `ui`, `Base` directories), always export components from the index file for a cleaner import.
+
+#### Destructuring props
+
+Destructuring component props from its own variable instead of destructuring directly from the function:
+
+```ts
+// ❌ Nah, this ain't it
+export default function Component({ name, age, children }: Props) {
+  /* ... */
+}
+
+// ✅ Yes
+export default function Component(props: Props) {
+  const { name, age, children } = props
+  /* ... */
+}
+```
+
+This way, when there's a lot of props from a component, it won't be overwhelming and long when formatted with Prettier.
 
 ### Creating a page in the `app/` directory
 

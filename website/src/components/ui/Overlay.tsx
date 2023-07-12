@@ -7,7 +7,9 @@ interface OverlayProps extends ChildrenNode {
   toggler?: () => void
 }
 
-export default function Overlay({ children, state, toggler }: OverlayProps) {
+export default function Overlay(props: OverlayProps) {
+  const { children, state, toggler } = props
+
   const overlayState = state
     ? "bg-opacity-40"
     : "bg-opacity-0 pointer-events-none"
