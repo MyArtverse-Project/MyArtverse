@@ -1,6 +1,6 @@
 import type { ButtonHTMLAttributes, ReactElement } from "react"
 import type { LucideIcon } from "lucide-react"
-import type { ChildrenNode, ComponentRecord } from "@/types"
+import type { ChildrenNode, ComponentRecord, Variants } from "@/types"
 
 interface ButtonProps
   extends ChildrenNode,
@@ -8,7 +8,7 @@ interface ButtonProps
   iconOnly?: boolean
   disabled?: boolean
   type?: ButtonHTMLAttributes<HTMLButtonElement>["type"]
-  variant?: "primary" | "secondary" | "error" | "warning"
+  variant?: Variants
   size?: "small" | "big"
   className?: string
   ["aria-label"]?: string

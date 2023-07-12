@@ -1,9 +1,12 @@
+"use client"
+
+import { useEffect } from "react"
 import type { ChildrenNode } from "@/types"
 import "./globals.scss"
-
 import { Inter, Open_Sans } from "next/font/google"
-import { Footer, Navbar, Sidebar } from "@/components/Base"
+
 import { NavbarProvider } from "@/contexts"
+import { Footer, Navbar, Sidebar } from "@/components/Base"
 
 const inter = Inter({
   subsets: ["latin", "cyrillic-ext"],
@@ -18,6 +21,16 @@ const open_sans = Open_Sans({
 })
 
 export default function RootLayout({ children }: ChildrenNode) {
+  useEffect(() => {
+    console.log(
+      "%c✨ Are you looking to improve MyFursona?",
+      "color: orchid; font-size: 1.5rem"
+    )
+    console.log(
+      "🦊 The code, including this website, is open-source! https://github.com/MyFursona-Project"
+    )
+  }, [])
+
   return (
     <html
       lang="en"
