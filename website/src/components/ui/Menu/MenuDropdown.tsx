@@ -1,3 +1,5 @@
+'use client';
+
 import { useState, useEffect, type ReactElement } from "react"
 
 import type { ChildrenNode } from "@/types"
