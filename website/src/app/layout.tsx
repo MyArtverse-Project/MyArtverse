@@ -1,12 +1,19 @@
 "use client"
 
-import { useEffect } from "react"
-import type { ChildrenNode } from "@/types"
 import "./globals.scss"
+import { useEffect } from "react"
 import { Inter, Open_Sans } from "next/font/google"
+import dynamic from "next/dynamic"
 
+import type { ChildrenNode } from "@/types"
 import { NavbarProvider } from "@/contexts"
-import { Footer, Navbar, Sidebar } from "@/components/Base"
+import { Navbar } from "@/components/Base"
+
+const Sidebar = dynamic(() =>
+  import("@/components/Base").then((c) => c.Sidebar)
+)
+
+const Footer = dynamic(() => import("@/components/Base").then((c) => c.Footer))
 
 const inter = Inter({
   subsets: ["latin", "cyrillic-ext"],
@@ -22,10 +29,7 @@ const open_sans = Open_Sans({
 
 export default function RootLayout({ children }: ChildrenNode) {
   useEffect(() => {
-    console.log(
-      "%c✨ Are you looking to improve MyFursona?",
-      "color: orchid; font-size: 1.5rem"
-    )
+    console.log("%c✨ Are you looking to improve MyFursona?", "color: orchid")
     console.log(
       "🦊 The code, including this website, is open-source! https://github.com/MyFursona-Project"
     )
@@ -46,7 +50,6 @@ export default function RootLayout({ children }: ChildrenNode) {
           <main id="skip-navigation">{children}</main>
           <Footer />
         </div>
-        <div portal-container="" />
       </body>
     </html>
   )

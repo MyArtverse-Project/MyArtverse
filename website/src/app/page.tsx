@@ -16,7 +16,7 @@ export default function Home() {
         commodo turpis luctus morbi.
       </p>
       <div className="flex flex-row mx-4 my-4">
-        <Button variant="primary">I{"'"}ll look around</Button>
+        <Button variant="primary">I'll look around</Button>
         <Button variant="primary">Sign Up</Button>
       </div>
     </div>

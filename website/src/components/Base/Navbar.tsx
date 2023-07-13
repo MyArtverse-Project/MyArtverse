@@ -57,34 +57,53 @@ export default function Navbar() {
         </Button>
         <Separator dir="vertical" size="2.125rem" />
         {/* Signed in */}
-        <Button
-          iconOnly
-          variant="secondary"
-          aria-label="Add or create item"
-          suffixIcon={<ChevronDown size={18} />}
-        >
-          <PlusIcon size={20} />
-        </Button>
-        <Button iconOnly variant="secondary" aria-label="Notifications">
-          <BellIcon size={20} />
-        </Button>
         <MenuDropdown
           buttonChild={
-            <MenuDropdownButton>
-              <Avatar username="VulpoTheDev" src="/img/hero/vulpo.jpg" />
+            <MenuDropdownButton
+              iconOnly
+              variant="secondary"
+              aria-label="Add or create item"
+              suffixIcon={<ChevronDown size={18} />}
+            >
+              <PlusIcon size={20} />
             </MenuDropdownButton>
           }
         >
           <MenuItem
             prefix={<CatIcon size={20} />}
-            name="Placeholder"
+            name="New character"
             href="/"
           />
           <MenuItem
             prefix={<CatIcon size={20} />}
-            name="Placeholder"
+            name="Upload photo(s)"
             href="/"
           />
+          <Separator dir="horizontal" padding={8} />
+          <MenuItem
+            prefix={<CatIcon size={20} />}
+            name="New collection"
+            href="/"
+          />
+          <MenuItem
+            prefix={<CatIcon size={20} />}
+            name="New private note"
+            href="/"
+          />
+        </MenuDropdown>
+        <Button iconOnly variant="secondary" aria-label="Notifications">
+          <BellIcon size={20} />
+        </Button>
+        <MenuDropdown
+          buttonChild={
+            <MenuDropdownButton className="p-0 rounded-full">
+              <Avatar username="VulpoTheDev" src="/img/hero/vulpo.jpg" />
+            </MenuDropdownButton>
+          }
+        >
+          <MenuItem prefix={<CatIcon size={20} />} name="1" href="/" />
+          <MenuItem prefix={<CatIcon size={20} />} name="3" href="/" />
+          <MenuItem prefix={<CatIcon size={20} />} name="5" href="/" />
         </MenuDropdown>
         {/* Signed out */}
         <Button iconOnly variant="secondary" aria-label="Site options">

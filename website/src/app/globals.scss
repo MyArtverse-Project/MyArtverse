@@ -3,8 +3,8 @@
 @tailwind utilities;
 
 @layer base {
-  .lucide {
-    pointer-events: none;
+  mf-portal {
+    @apply block absolute top-0 left-0;
   }
 
   :root {
@@ -63,6 +63,7 @@
   .desktop-only-lg {
     @apply hidden lg:block;
   }
+
   .desktop-only-md {
     @apply hidden md:block;
   }
@@ -70,8 +71,13 @@
   .mobile-only-lg {
     @apply block lg:hidden;
   }
-  
+
   .mobile-only-md {
     @apply block md:hidden;
+  }
+
+  svg.lucide,
+  .lucide {
+    @apply pointer-events-none;
   }
 }

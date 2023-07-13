@@ -1,8 +1,10 @@
 import Link from "next/link"
 
 import Logo from "../Logo"
-import { version } from "../../../package.json"
+import project from "../../../package.json"
 import { CircleDotIcon } from "lucide-react"
+
+const version = project.version
 
 export default function Footer() {
   return (
