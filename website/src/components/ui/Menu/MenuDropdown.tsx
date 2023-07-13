@@ -1,9 +1,12 @@
+'use client';
+
 import { useState, useEffect, createContext, type ReactElement } from "react"
 
 import type { ChildrenNode } from "@/types"
 
 interface MenuDropdownProps extends Required<ChildrenNode> {
   buttonChild: ReactElement<HTMLButtonElement>
+  state?: boolean
 }
 
 export const MenuDropdownContext = createContext<{

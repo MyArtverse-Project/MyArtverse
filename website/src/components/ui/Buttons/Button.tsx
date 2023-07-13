@@ -22,8 +22,7 @@ interface ButtonProps
   suffixIcon?: ReactElement<LucideIcon>
 }
 
-// prettier-ignore
-type ButtonRecord<P extends keyof ButtonProps, T = string> = ComponentRecord<ButtonProps, P, T>
+type ButtonRecord<K extends keyof ButtonProps> = ComponentRecord<ButtonProps, K>
 
 export default function Button(props: ButtonProps) {
   const {
