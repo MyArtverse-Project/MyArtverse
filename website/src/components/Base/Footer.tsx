@@ -8,11 +8,11 @@ const version = project.version
 
 export default function Footer() {
   return (
-    <footer className="mx-40">
+    <footer className="mx-12">
       <div className="flex flex-row justify-around">
         <div className="flex flex-col justify-between w-fit">
-          <div className="flex flex-col ">
-            <Logo />
+          <div className="flex flex-col">
+            <Logo size={1.2} />
             <Link
               href={"/"}
               className="flex flex-row px-2 py-1 my-3 border border-red-200 rounded-md w-fit"
@@ -23,13 +23,12 @@ export default function Footer() {
               </span>
             </Link>
           </div>
-
           <div>
             <p>Copyright &copy; 2022-2023 The MyFursona Project</p>
             <p>MyFursona v{version}</p>
           </div>
         </div>
-        <div className="flex flex-row ">
+        <div className="flex flex-row">
           <div className="flex flex-col mx-16">
             <p className="my-2 font-semibold text-red-200">Explore</p>
             <Link className="my-2 font-bold" href="/" passHref>

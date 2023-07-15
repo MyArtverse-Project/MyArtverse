@@ -9,7 +9,10 @@ import Overlay from "./Overlay"
 
 import Menu from "./Menu/Menu"
 import MenuItem from "./Menu/MenuItem"
-import MenuDropdown from "./Menu/MenuDropdown"
+
+import Dropdown from "./Dropdown/Dropdown"
+import DropdownButton from "./Dropdown/DropdownButton"
+import Notifications from "./Dropdown/Notifications"
 
 export {
   Avatar,
@@ -19,5 +22,7 @@ export {
   Badge,
   Menu,
   MenuItem,
-  MenuDropdown
+  Dropdown,
+  DropdownButton,
+  Notifications
 }

@@ -16,15 +16,16 @@ export default function setPageMeta({
   return {
     title: title,
     description: description,
+    keywords: ["fur", "furries", "furry", "fursona", "mascot", "furry fandom"],
     openGraph: {
       title: title,
       description: description,
-      type: isProfile ? "profile" : "website"
+      type: isProfile ? "profile" : "website",
+      siteName: "MyFursona"
     },
     twitter: {
-      title: title,
-      description: description,
       card: isProfile ? "summary" : "summary_large_image"
-    }
+    },
+    robots: "noai, noimageai"
   }
 }

@@ -3,10 +3,6 @@
 @tailwind utilities;
 
 @layer base {
-  mf-portal {
-    @apply block absolute top-0 left-0;
-  }
-
   :root {
     // Global variants
     --warning: hsl(46, 99.3%, 54.6%);
@@ -75,9 +71,8 @@
   .mobile-only-md {
     @apply block md:hidden;
   }
+}
 
-  svg.lucide,
-  .lucide {
-    @apply pointer-events-none;
-  }
+svg.lucide {
+  pointer-events: none;
 }

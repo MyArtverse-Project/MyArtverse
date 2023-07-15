@@ -1,5 +1,6 @@
 "use client"
 
+import { useEffect } from "react"
 import type { ChildrenNode } from "@/types"
 
 interface OverlayProps extends ChildrenNode {
@@ -13,6 +14,12 @@ export default function Overlay(props: OverlayProps) {
   const overlayState = state
     ? "bg-opacity-40"
     : "bg-opacity-0 pointer-events-none"
+
+  useEffect(() => {
+    const bodyStyle = document.body.style
+
+    state ? (bodyStyle.overflowY = "hidden") : (bodyStyle.overflowY = "auto")
+  }, [state])
 
   return (
     <div

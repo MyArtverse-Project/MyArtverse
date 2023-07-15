@@ -19,7 +19,6 @@ import {
 import Logo from "../Logo"
 
 export default function Sidebar() {
-  const SIDEBAR_WIDTH = 320
   const SIDEBAR_ITEMS = [
     {
       heading: "",
@@ -51,8 +50,8 @@ export default function Sidebar() {
   }, [setSidebarState, isSidebarOpen])
 
   useEffect(() => {
-    const handleKeyDown = ({ key }: globalThis.KeyboardEvent) => {
-      if (isSidebarOpen && key === "Escape") {
+    const handleKeyDown = (e: KeyboardEvent) => {
+      if (isSidebarOpen && e.key === "Escape") {
         toggleSidebar()
       }
     }
@@ -67,12 +66,11 @@ export default function Sidebar() {
   return (
     <Overlay state={isSidebarOpen} toggler={toggleSidebar}>
       <aside
-        className="flex flex-col fixed inset-0 right-[unset] bg-white transition-transform duration-[250ms]"
+        className="flex flex-col fixed inset-0 right-[unset] bg-white transition-none md:transition-transform duration-300 w-full md:w-[325px]"
         style={{
           transform: isSidebarOpen
             ? "translate3d(0,0,0)"
-            : "translate3d(-100%,0,0)",
-          width: SIDEBAR_WIDTH
+            : "translate3d(-100%,0,0)"
         }}
       >
         <div className="w-full px-5 py-4 flex items-center gap-x-2.5">
@@ -83,7 +81,7 @@ export default function Sidebar() {
             <Logo />
           </Link>
         </div>
-        <div className="px-2.5" role="menu">
+        <div className="px-2.5 h-full overflow-y-scroll" role="menu">
           {SIDEBAR_ITEMS.map(({ heading, items }, index) => {
             return (
               <React.Fragment key={index}>

@@ -4,9 +4,9 @@ import { ReactElement, useContext } from "react"
 
 import Button from "../Buttons/Button"
 import type { ChildrenNode, Variants } from "@/types"
-import { MenuDropdownContext } from "./MenuDropdown"
+import { DropdownContext } from "./Dropdown"
 
-interface MenuDropdownButtonProps extends ChildrenNode {
+interface DropdownButtonProps extends ChildrenNode {
   iconOnly?: boolean
   variant?: Variants
   ["aria-label"]?: string
@@ -14,7 +14,7 @@ interface MenuDropdownButtonProps extends ChildrenNode {
   className?: string
 }
 
-export default function MenuDropdownButton(props: MenuDropdownButtonProps) {
+export default function DropdownButton(props: DropdownButtonProps) {
   const {
     children,
     variant,
@@ -23,7 +23,7 @@ export default function MenuDropdownButton(props: MenuDropdownButtonProps) {
     suffixIcon,
     className
   } = props
-  const { dropdownToggle, setDropdownToggle } = useContext(MenuDropdownContext)
+  const { dropdownToggle, setDropdownToggle } = useContext(DropdownContext)
 
   return (
     <Button

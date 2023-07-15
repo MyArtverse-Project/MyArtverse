@@ -22,10 +22,9 @@ export default function Separator(props: SeparatorProps) {
   }
 
   return (
-    <span
+    <div
       className="block border border-red-100"
       style={{ ...directionMapSize[dir], ...directionMapPadding[dir] }}
-      aria-hidden
     />
   )
 }
