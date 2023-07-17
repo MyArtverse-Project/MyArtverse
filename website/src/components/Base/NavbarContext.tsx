@@ -1,5 +1,5 @@
 "use client"
-import type { ChildrenNode, Theme } from "@/types"
+import type { IncludeReactNode, Theme } from "@/types"
 import { createContext, useState } from "react"
 
 export const NavbarContext = createContext<{
@@ -14,7 +14,7 @@ export const NavbarContext = createContext<{
   setTheme: () => {}
 })
 
-export function NavbarProvider({ children }: ChildrenNode) {
+export function NavbarProvider({ children }: IncludeReactNode) {
   const [sidebarState, setSidebarState] = useState(false)
   const [theme, setTheme] = useState<Theme>("system")
 

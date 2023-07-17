@@ -2,15 +2,15 @@ import { CSSProperties } from "react"
 
 type DirectionType = "horizontal" | "vertical"
 
-interface SeparatorProps {
+export default function Separator({
+  dir,
+  size,
+  padding
+}: {
   dir: DirectionType
   size?: string | number
   padding?: string | number
-}
-
-export default function Separator(props: SeparatorProps) {
-  const { dir, size, padding } = props
-
+}) {
   const directionMapSize: Record<DirectionType, CSSProperties> = {
     horizontal: { width: size },
     vertical: { height: size }

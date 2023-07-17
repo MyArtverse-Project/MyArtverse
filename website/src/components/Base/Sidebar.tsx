@@ -2,9 +2,7 @@
 
 import React, { useCallback, useContext, useEffect } from "react"
 import Link from "next/link"
-
-import { Button, Menu, MenuItem, Overlay, Separator } from "../ui"
-import { NavbarContext } from "@/contexts"
+import { NavbarContext } from "./NavbarContext"
 import {
   HomeIcon,
   SparklesIcon,
@@ -17,6 +15,10 @@ import {
   BoxIcon
 } from "lucide-react"
 import Logo from "../Logo"
+import Overlay from "../ui/Overlay"
+import { Button } from "../ui/Buttons"
+import { MenuGroup, MenuItem } from "../ui/Menu"
+import Separator from "../ui/Separator"
 
 export default function Sidebar() {
   const SIDEBAR_ITEMS = [
@@ -85,7 +87,7 @@ export default function Sidebar() {
           {SIDEBAR_ITEMS.map(({ heading, items }, index) => {
             return (
               <React.Fragment key={index}>
-                <Menu heading={heading ?? undefined}>
+                <MenuGroup heading={heading ?? undefined}>
                   {items.map((item, index) => {
                     return (
                       <MenuItem
@@ -96,7 +98,7 @@ export default function Sidebar() {
                       />
                     )
                   })}
-                </Menu>
+                </MenuGroup>
                 <Separator dir="horizontal" padding="0.525rem" />
               </React.Fragment>
             )

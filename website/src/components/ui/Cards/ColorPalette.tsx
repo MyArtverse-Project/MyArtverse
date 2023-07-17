@@ -1,15 +1,14 @@
-import { ColorPalette } from "@/types"
+import type { ColorPalette } from "@/types"
 
-interface ColorPaletteProps {
+export default function ColorPalette({
+  palette,
+  width = 100
+}: {
   palette: ColorPalette[]
   width?: number | string
-}
-
-export default function ColorPalette(props: ColorPaletteProps) {
-  const { palette, width = 100 } = props
-
+}) {
   return (
-    <ul className="grid grid-flow-col" style={{ width }}>
+    <ul data-palette="" className="grid grid-flow-col" style={{ width }}>
       {palette.map(({ color, name }, index) => {
         return (
           <li key={index}>

@@ -1,13 +1,9 @@
-import type { ChildrenNode } from "@/types"
+import type { IncludeReactNode } from "@/types"
 
-interface MenuContainerProps extends ChildrenNode {
-  heading?: string
-}
-
-export default function MenuContainer({
-  heading,
-  children
-}: MenuContainerProps) {
+export default function MenuGroup({
+  children,
+  heading
+}: IncludeReactNode<{ heading?: string }>) {
   return (
     <div role="group">
       {heading && (

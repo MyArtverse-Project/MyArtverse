@@ -1,16 +1,16 @@
 "use client"
 
 import { useEffect } from "react"
-import type { ChildrenNode } from "@/types"
+import type { IncludeReactNode } from "@/types"
 
-interface OverlayProps extends ChildrenNode {
+export default function Overlay({
+  children,
+  state,
+  toggler
+}: IncludeReactNode<{
   state?: unknown
   toggler?: () => void
-}
-
-export default function Overlay(props: OverlayProps) {
-  const { children, state, toggler } = props
-
+}>) {
   const overlayState = state
     ? "bg-opacity-40"
     : "bg-opacity-0 pointer-events-none"
@@ -24,11 +24,11 @@ export default function Overlay(props: OverlayProps) {
   return (
     <div
       className="contents fixed z-[20] inset-0"
-      overlay-container=""
+      data-overlay-container=""
       tabIndex={-1}
     >
       <div
-        overlay-screen=""
+        data-overlay-screen=""
         className={`duration-[350ms] fixed z-[19] transition-all bg-black inset-0 ${overlayState}`}
         onClick={toggler}
       />

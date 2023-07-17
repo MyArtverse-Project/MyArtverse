@@ -2,6 +2,10 @@
 @tailwind components;
 @tailwind utilities;
 
+svg.lucide {
+  pointer-events: none;
+}
+
 @layer base {
   :root {
     // Global variants
@@ -55,7 +59,9 @@
     --dark-warning-background: hsl(46, 100%, 15.2%);
     --dark-info-background: hsl(212, 100%, 15.2%);
   }
+}
 
+@layer components {
   .desktop-only-lg {
     @apply hidden lg:block;
   }
@@ -71,8 +77,4 @@
   .mobile-only-md {
     @apply block md:hidden;
   }
-}
-
-svg.lucide {
-  pointer-events: none;
 }

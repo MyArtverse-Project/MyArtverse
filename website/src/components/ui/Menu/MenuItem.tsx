@@ -3,14 +3,17 @@ import type { UrlObject } from "url"
 import type { ReactElement } from "react"
 import type { LucideIcon } from "lucide-react"
 
-interface MenuItem {
+export default function MenuItem({
+  prefix,
+  suffix,
+  name,
+  href
+}: {
   prefix: ReactElement<LucideIcon> | ReactElement
   suffix?: ReactElement<LucideIcon> | ReactElement
   name: string
   href: string
-}
-
-export default function MenuItem({ prefix, suffix, name, href }: MenuItem) {
+}) {
   return (
     <Link
       className="transition-colors select-none px-4 py-2.5 font-medium flex items-center justify-between hover:bg-red-200 rounded-md"

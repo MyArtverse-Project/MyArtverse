@@ -2,14 +2,13 @@ import "./globals.scss"
 import { Inter, Open_Sans } from "next/font/google"
 import dynamic from "next/dynamic"
 
-import type { ChildrenNode } from "@/types"
-import { NavbarProvider } from "@/contexts"
+import type { IncludeReactNode } from "@/types"
 import { Navbar } from "@/components/Base"
+import { NavbarProvider } from "@/components/Base/NavbarContext"
 
 const Sidebar = dynamic(() =>
   import("@/components/Base").then((c) => c.Sidebar)
 )
-
 const Footer = dynamic(() => import("@/components/Base").then((c) => c.Footer))
 
 const inter = Inter({
@@ -24,7 +23,7 @@ const open_sans = Open_Sans({
   variable: "--font-open-sans"
 })
 
-export default function RootLayout({ children }: ChildrenNode) {
+export default function RootLayout({ children }: IncludeReactNode) {
   const CONTRIB_MSG = `
     console.log("%c✨ Are you looking to improve MyFursona? If you're a developer, you can help!", "color: hsl(250, 95.5%, 75%)")
     console.log("🦊 The code, including this website, is open-source! https://github.com/MyFursona-Project")

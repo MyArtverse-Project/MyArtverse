@@ -1,17 +1,17 @@
 import Image from "next/image"
 
-interface AvatarProps {
+export default function Avatar({
+  username,
+  src,
+  size = 36
+}: {
   username: string
   src: string
   size?: number
-}
-
-export default function Avatar(props: AvatarProps) {
-  const { username, src, size = 36 } = props
-
+}) {
   return (
     <div
-      avatar-item=""
+      data-avatar-item=""
       aria-label={username}
       style={{ height: `${size}px`, width: `${size}px` }}
       className="overflow-hidden rounded-full"

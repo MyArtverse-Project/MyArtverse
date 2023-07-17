@@ -9,19 +9,13 @@ import {
   ChevronDown,
   PlusIcon,
   MoreVerticalIcon,
-  CatIcon
+  CatIcon,
+  BellIcon
 } from "lucide-react"
-import {
-  Avatar,
-  Button,
-  Dropdown,
-  DropdownButton,
-  MenuItem,
-  Notifications,
-  Separator
-} from "../ui"
-import { NavbarContext } from "@/contexts"
 import Logo from "../Logo"
+import { NavbarContext } from "./NavbarContext"
+import { Avatar, Button } from "../ui/Buttons"
+import Separator from "../ui/Separator"
 
 export default function Navbar() {
   const { isSidebarOpen, setSidebarState } = useContext(NavbarContext)
@@ -57,71 +51,24 @@ export default function Navbar() {
         </div>
         <Separator dir="vertical" size="2.125rem" />
         {/* Signed in */}
-        <Dropdown
-          id="add-item"
-          buttonChild={
-            <DropdownButton
-              iconOnly
-              variant="secondary"
-              aria-label="Add or create item"
-              suffixIcon={<ChevronDown size={18} />}
-            >
-              <PlusIcon size={20} />
-            </DropdownButton>
-          }
+        <Button
+          iconOnly
+          variant="secondary"
+          aria-label="Add or create item"
+          suffixIcon={<ChevronDown size={18} />}
         >
-          <MenuItem
-            prefix={<CatIcon size={20} />}
-            name="New character"
-            href="/"
-          />
-          <MenuItem
-            prefix={<CatIcon size={20} />}
-            name="Upload photo(s)"
-            href="/"
-          />
-          <Separator dir="horizontal" padding={8} />
-          <MenuItem
-            prefix={<CatIcon size={20} />}
-            name="New collection"
-            href="/"
-          />
-          <MenuItem
-            prefix={<CatIcon size={20} />}
-            name="New private note"
-            href="/"
-          />
-        </Dropdown>
-        <Notifications />
-        <Dropdown
-          right
-          id="avatar"
-          buttonChild={
-            <DropdownButton className="p-0 rounded-full">
-              <Avatar username="VulpoTheDev" src="/img/hero/vulpo.jpg" />
-            </DropdownButton>
-          }
-        >
-          <MenuItem prefix={<CatIcon size={20} />} name="1" href="/" />
-          <MenuItem prefix={<CatIcon size={20} />} name="3" href="/" />
-          <MenuItem prefix={<CatIcon size={20} />} name="5" href="/" />
-        </Dropdown>
+          <PlusIcon size={20} />
+        </Button>
+        <Button iconOnly variant="secondary" aria-label="Notifications">
+          <BellIcon size={20} />
+        </Button>
+        <Button className="p-0 rounded-full">
+          <Avatar username="VulpoTheDev" src="/img/hero/vulpo.jpg" />
+        </Button>
         {/* Signed out */}
-        <Dropdown
-          right
-          id="site-options"
-          buttonChild={
-            <DropdownButton
-              iconOnly
-              variant="secondary"
-              aria-label="Site options"
-            >
-              <MoreVerticalIcon size={20} />
-            </DropdownButton>
-          }
-        >
-          lol
-        </Dropdown>
+        <Button iconOnly variant="secondary" aria-label="Site options">
+          <MoreVerticalIcon size={20} />
+        </Button>
         <Button>Sign in</Button>
       </div>
     </nav>

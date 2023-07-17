@@ -1,4 +1,4 @@
-import { Button } from "@/components/ui"
+import { Button } from "@/components/ui/Buttons"
 import { pageMeta } from "@/utils"
 
 export const metadata = pageMeta({

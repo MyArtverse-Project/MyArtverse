@@ -1,7 +1,6 @@
 import { createPortal } from "react-dom"
+import type { IncludeReactNode } from "@/types"
 
-import type { ChildrenNode } from "@/types"
-
-export default function Portal(props: ChildrenNode) {
-  return createPortal(<mf-portal>{props.children}</mf-portal>, document.body)
+export default function Portal({ children }: IncludeReactNode) {
+  return createPortal(<div data-portal-root="">{children}</div>, document.body)
 }
