@@ -68,7 +68,7 @@ export default function Sidebar() {
   return (
     <Overlay state={isSidebarOpen} toggler={toggleSidebar}>
       <aside
-        className="flex flex-col fixed inset-0 right-[unset] bg-white transition-none md:transition-transform duration-300 w-full md:w-[325px]"
+        className="flex flex-col fixed inset-0 right-[unset] bg-white transition-none md:transition-transform md:duration-300 ease-out w-full md:w-[325px]"
         style={{
           transform: isSidebarOpen
             ? "translate3d(0,0,0)"

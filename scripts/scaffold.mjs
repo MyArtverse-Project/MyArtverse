@@ -69,9 +69,7 @@ const scaffoldComponent = (fileName, withChildren) => {
   return <div>${fileName} component</div>
 }`
   // prettier-ignore
-  const withChildTemplate = `import type { ChildrenNode } from "@/types"
-  
-  interface ${fileName}Props extends ChildrenNode {}
+  const withChildTemplate = `import type { IncludeReactNode } from "@/types"
   
   ${functionBody}
   `
