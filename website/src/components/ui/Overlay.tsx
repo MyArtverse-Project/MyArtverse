@@ -1,7 +1,8 @@
-"use client"
-
 import { useEffect } from "react"
+import dynamic from "next/dynamic"
 import type { IncludeReactNode } from "@/types"
+
+const Portal = dynamic(() => import("./Portal"), { ssr: false })
 
 export default function Overlay({
   children,
@@ -11,9 +12,7 @@ export default function Overlay({
   state?: unknown
   toggler?: () => void
 }>) {
-  const overlayState = state
-    ? "bg-opacity-40"
-    : "bg-opacity-0 pointer-events-none"
+  const overlayState = state ? "opacity-100" : "opacity-0 pointer-events-none"
 
   useEffect(() => {
     const bodyStyle = document.body.style
@@ -22,17 +21,15 @@ export default function Overlay({
   }, [state])
 
   return (
-    <div
-      className="contents fixed z-[20] inset-0"
-      data-overlay-container=""
-      tabIndex={-1}
-    >
+    <Portal>
       <div
         data-overlay-screen=""
-        className={`duration-[350ms] fixed z-[19] transition-all bg-black inset-0 ${overlayState}`}
+        className={`duration-[350ms] fixed z-[19] transition-all bg-black/40 inset-0 ${overlayState}`}
         onClick={toggler}
       />
-      <div className="fixed z-[20]">{children}</div>
-    </div>
+      <div data-overlay-wrapper="" className="fixed z-[20]">
+        {children}
+      </div>
+    </Portal>
   )
 }

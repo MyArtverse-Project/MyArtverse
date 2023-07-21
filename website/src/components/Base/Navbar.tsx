@@ -1,6 +1,6 @@
 "use client"
 
-import { useContext } from "react"
+import React, { useContext } from "react"
 import Link from "next/link"
 
 import {
@@ -10,15 +10,30 @@ import {
   PlusIcon,
   MoreVerticalIcon,
   CatIcon,
-  BellIcon
+  BellIcon,
+  ShareIcon,
+  AlbumIcon,
+  FileLockIcon
 } from "lucide-react"
-import Logo from "../Logo"
 import { NavbarContext } from "./NavbarContext"
+
+import Logo from "../Logo"
 import { Avatar, Button } from "../ui/Buttons"
 import Separator from "../ui/Separator"
+import { Dropdown, DropdownItem } from "../ui/Dropdown"
 
 export default function Navbar() {
   const { isSidebarOpen, setSidebarState } = useContext(NavbarContext)
+
+  const USER_PLACEHOLDER = "VulpoTheDev"
+  const HANDLE_PLACEHOLDER = "@vulpothedev"
+
+  const createNewItems = [
+    { icon: CatIcon, name: "New fursona", link: "/" },
+    { icon: ShareIcon, name: "Upload image(s)", link: "/" },
+    { icon: AlbumIcon, name: "New collection", link: "/" },
+    { icon: FileLockIcon, name: "New private note", link: "/" }
+  ]
 
   return (
     <nav className="sticky top-0 flex items-center justify-between px-5 py-4 text-sm font-medium select-none font-inter">
@@ -51,20 +66,60 @@ export default function Navbar() {
         </div>
         <Separator dir="vertical" size="2.125rem" />
         {/* Signed in */}
-        <Button
-          iconOnly
-          variant="secondary"
-          aria-label="Add or create item"
-          suffixIcon={<ChevronDown size={18} />}
-        >
-          <PlusIcon size={20} />
-        </Button>
+        <Dropdown
+          button={
+            <Button
+              iconOnly
+              variant="secondary"
+              aria-label="Add or create item"
+              suffixIcon={<ChevronDown size={18} />}
+            >
+              <PlusIcon size={20} />
+            </Button>
+          }
+          items={
+            <>
+              {createNewItems.map((item, index) => {
+                const Icon = item.icon
+                return (
+                  <DropdownItem prefix={<Icon size={20} />} key={index}>
+                    {item.name}
+                  </DropdownItem>
+                )
+              })}
+            </>
+          }
+        />
         <Button iconOnly variant="secondary" aria-label="Notifications">
           <BellIcon size={20} />
         </Button>
-        <Button className="p-0 rounded-full">
-          <Avatar username="VulpoTheDev" src="/img/hero/vulpo.jpg" />
-        </Button>
+        <Dropdown
+          button={
+            <Button className="p-0 rounded-full">
+              <Avatar username={USER_PLACEHOLDER} src="/img/hero/vulpo.jpg" />
+            </Button>
+          }
+          items={
+            <>
+              <div className="flex items-center px-4 py-1.5 gap-x-3">
+                <Avatar
+                  username={USER_PLACEHOLDER}
+                  size={69}
+                  src="/img/hero/vulpo.jpg"
+                />
+                <div>
+                  <h1 className="text-lg font-bold leading-6">
+                    {USER_PLACEHOLDER}
+                  </h1>
+                  <span className="text-sm opacity-50">
+                    {HANDLE_PLACEHOLDER}
+                  </span>
+                </div>
+              </div>
+              <Separator dir="horizontal" padding="0.66rem" />
+            </>
+          }
+        />
         {/* Signed out */}
         <Button iconOnly variant="secondary" aria-label="Site options">
           <MoreVerticalIcon size={20} />
