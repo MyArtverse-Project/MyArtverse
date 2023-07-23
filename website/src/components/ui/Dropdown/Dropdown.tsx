@@ -20,7 +20,7 @@ export default function Dropdown({
           leaveFrom="transform scale-100 opacity-100"
           leaveTo="transform opacity-0"
         >
-          <Menu.Items className="absolute border border-red-300 rounded-md top-2.5 p-2 right-0 grid shadow-md">
+          <Menu.Items className="absolute border bg-white border-red-300 rounded-md top-2.5 p-2 right-0 grid shadow-md">
             {items}
           </Menu.Items>
         </Transition>

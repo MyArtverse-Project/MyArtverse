@@ -88,16 +88,14 @@ export default function Sidebar() {
             return (
               <React.Fragment key={index}>
                 <MenuGroup heading={heading ?? undefined}>
-                  {items.map((item, index) => {
-                    return (
-                      <MenuItem
-                        key={index}
-                        name={item.name}
-                        prefix={<item.icon size={20} />}
-                        href="/"
-                      />
-                    )
-                  })}
+                  {items.map((item, index) => (
+                    <MenuItem
+                      key={index}
+                      name={item.name}
+                      prefix={<item.icon size={20} />}
+                      href="/"
+                    />
+                  ))}
                 </MenuGroup>
                 <Separator dir="horizontal" padding="0.525rem" />
               </React.Fragment>

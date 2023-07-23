@@ -36,7 +36,7 @@ export default function Navbar() {
   ]
 
   return (
-    <nav className="sticky top-0 flex items-center justify-between px-5 py-4 text-sm font-medium select-none font-inter">
+    <nav className="flex items-center justify-between px-5 py-4 text-sm font-medium select-none font-inter">
       <div className="flex items-center gap-x-2.5">
         <Button
           iconOnly

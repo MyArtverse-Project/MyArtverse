@@ -3,13 +3,13 @@ import { Inter, Open_Sans } from "next/font/google"
 import dynamic from "next/dynamic"
 
 import type { IncludeReactNode } from "@/types"
-import { Navbar } from "@/components/Base"
+import { Footer, Navbar } from "@/components/Base"
 import { NavbarProvider } from "@/components/Base/NavbarContext"
+import NoJSReminder from "@/components/NoJSReminder"
 
 const Sidebar = dynamic(() =>
   import("@/components/Base").then((c) => c.Sidebar)
 )
-const Footer = dynamic(() => import("@/components/Base").then((c) => c.Footer))
 
 const inter = Inter({
   subsets: ["latin", "cyrillic-ext"],
@@ -36,13 +36,12 @@ export default function RootLayout({ children }: IncludeReactNode) {
       className={`${inter.variable} ${open_sans.variable}`}
     >
       <head>
-        <script
-          id="contrib-msg"
-          dangerouslySetInnerHTML={{ __html: CONTRIB_MSG }}
-        />
+        <script dangerouslySetInnerHTML={{ __html: CONTRIB_MSG }} />
       </head>
       <body className="!overflow-x-hidden font-open-sans text-sm font-medium">
-        <div id="__next">
+        <NoJSReminder />
+        <div id="announcement-wrapper"></div>
+        <header className="sticky top-0">
           {/* Skip nav accessibility */}
           <a
             href="#skip-navigation"
@@ -55,9 +54,11 @@ export default function RootLayout({ children }: IncludeReactNode) {
             <Navbar />
             <Sidebar />
           </NavbarProvider>
+        </header>
+        <div id="myfursona">
           <main id="skip-navigation">{children}</main>
-          <Footer />
         </div>
+        <Footer />
       </body>
     </html>
   )

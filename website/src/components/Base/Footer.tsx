@@ -7,83 +7,86 @@ import { CircleDotIcon } from "lucide-react"
 const version = project.version
 
 export default function Footer() {
+  const parseTextToLink = (input: string) => {
+    const output = input.toLowerCase().replace(/\s/g, "-").replace(/\+/g, "")
+
+    return output
+  }
+
+  /* NOTE: in the links array, you can override the links with the "link" key */
+  const FOOTER_ITEMS = [
+    {
+      heading: "Explore",
+      links: [
+        { text: "MyFursona+", link: "/plus" },
+        { text: "Developers" },
+        { text: "Beta testing" }
+      ]
+    },
+    {
+      heading: "About MyFursona",
+      links: [
+        { text: "Team" },
+        { text: "FAQ" },
+        { text: "Open Source", link: "https://github.com/MyFursona-Project" },
+        { text: "Changelog" },
+        { text: "Design" },
+        { text: "Contact Us" }
+      ]
+    },
+    {
+      heading: "Legal",
+      links: [
+        { text: "Community Guidelines" },
+        { text: "Terms of Service" },
+        { text: "Privacy Policy" },
+        { text: "DMCA Policy" },
+        { text: "Code of Conduct" }
+      ]
+    }
+  ]
+
   return (
-    <footer className="mx-12">
-      <div className="flex flex-row justify-around">
+    <footer className="relative">
+      <div className="flex flex-row justify-around px-12 py-6">
         <div className="flex flex-col justify-between w-fit">
           <div className="flex flex-col">
-            <Logo size={1.2} />
+            <Logo size={1.1} />
             <Link
               href={"/"}
               className="flex flex-row px-2 py-1 my-3 border border-red-200 rounded-md w-fit"
             >
-              <span>Status:</span>{" "}
+              <span>Status:</span>
               <span className="flex flex-row text-green-500">
                 <CircleDotIcon className="mx-2" /> <p>All systems normal</p>
               </span>
             </Link>
           </div>
-          <div>
-            <p>Copyright &copy; 2022-2023 The MyFursona Project</p>
-            <p>MyFursona v{version}</p>
-          </div>
+          <span>MyFursona v{version}</span>
         </div>
         <div className="flex flex-row">
-          <div className="flex flex-col mx-16">
-            <p className="my-2 font-semibold text-red-200">Explore</p>
-            <Link className="my-2 font-bold" href="/" passHref>
-              MyFursona+
-            </Link>
-            <Link className="my-2 font-bold" href="/" passHref>
-              Developers
-            </Link>
-            <Link className="my-2 font-bold" href="/" passHref>
-              Beta Testing
-            </Link>
-            <Link className="my-2 font-bold" href="/" passHref>
-              Report an issue
-            </Link>
-          </div>
-          <div className="flex flex-col mx-16">
-            <p className="my-2 font-semibold text-red-200">About</p>
-            <Link href="/" className="my-2 font-bold" passHref>
-              Team
-            </Link>
-            <Link href="/" className="my-2 font-bold" passHref>
-              FAQ
-            </Link>
-            <Link href="/" className="my-2 font-bold" passHref>
-              Open Source
-            </Link>
-            <Link href="/" className="my-2 font-bold" passHref>
-              Changelog
-            </Link>
-            <Link href="/" className="my-2 font-bold" passHref>
-              Design
-            </Link>
-            <Link href="/" className="my-2 font-bold" passHref>
-              Contact Us
-            </Link>
-          </div>
-          <div className="flex flex-col mx-16">
-            <p className="my-2 font-semibold text-red-200">Legal</p>
-            <Link className="my-2 font-bold" href="/" passHref>
-              Community Guidelines
-            </Link>
-            <Link className="my-2 font-bold" href="/" passHref>
-              Terms of Service
-            </Link>
-            <Link className="my-2 font-bold" href="/" passHref>
-              Privacy Policy
-            </Link>
-            <Link className="my-2 font-bold" href="/" passHref>
-              DMCA Policy
-            </Link>
-            <Link className="my-2 font-bold" href="/" passHref>
-              Code of Conduct
-            </Link>
-          </div>
+          {FOOTER_ITEMS.map(({ heading, links }, index) => (
+            <div className="flex flex-col mx-16" key={index}>
+              <h2 className="mb-3 font-semibold text-red-400">{heading}</h2>
+              <ul className="grid gap-y-3">
+                {links.map(({ text, link }, index) => (
+                  <li key={index}>
+                    <Link
+                      className="my-2 font-semibold"
+                      href={!link ? parseTextToLink(text) : link}
+                    >
+                      {text}
+                    </Link>
+                  </li>
+                ))}
+              </ul>
+            </div>
+          ))}
         </div>
+      </div>
+      <div id="copyright" className="px-12 py-4 text-center">
+        Copyright &copy; 2022-2023 MyFursona Project, and contributors; licensed
+        under MIT.
       </div>
     </footer>
   )
