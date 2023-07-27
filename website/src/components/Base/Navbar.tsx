@@ -21,6 +21,7 @@ import Logo from "../Logo"
 import { Avatar, Button } from "../ui/Buttons"
 import Separator from "../ui/Separator"
 import { Dropdown, DropdownItem } from "../ui/Dropdown"
+import NotificationPopup from "../ui/Notification"
 
 export default function Navbar() {
   const { isSidebarOpen, setSidebarState } = useContext(NavbarContext)
@@ -90,9 +91,7 @@ export default function Navbar() {
             </>
           }
         />
-        <Button iconOnly variant="secondary" aria-label="Notifications">
-          <BellIcon size={20} />
-        </Button>
+        <NotificationPopup />
         <Dropdown
           button={
             <Button className="p-0 rounded-full">

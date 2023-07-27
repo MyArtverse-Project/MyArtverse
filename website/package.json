@@ -9,23 +9,31 @@
     "lint": "next lint"
   },
   "dependencies": {
-    "@ducanh2912/next-pwa": "^9.3.0",
+    "@fortawesome/fontawesome-svg-core": "^6.4.0",
+    "@fortawesome/free-brands-svg-icons": "^6.4.0",
+    "@fortawesome/react-fontawesome": "^0.2.0",
     "@headlessui/react": "^1.7.15",
     "@tailwindcss/forms": "^0.5.3",
+    "@tailwindcss/typography": "^0.5.9",
     "@types/node": "20.4.0",
     "@types/react": "^18.2.15",
     "@types/react-dom": "^18.2.7",
     "autoprefixer": "10.4.14",
     "eslint": "8.44.0",
-    "eslint-config-next": "13.4.9",
+    "eslint-config-next": "^13.4.12",
     "framer-motion": "^10.12.18",
+    "lodash": "^4.17.21",
     "lucide-react": "^0.259.0",
     "next": "^13.4.12",
     "postcss": "8.4.25",
     "react": "^18.2.0",
     "react-dom": "^18.2.0",
-    "sass": "^1.63.6",
+    "react-quill": "^2.0.0",
+    "sass": "^1.64.1",
     "tailwindcss": "3.3.2",
     "typescript": "5.1.6"
+  },
+  "devDependencies": {
+    "@types/lodash": "^4.14.195"
   }
 }

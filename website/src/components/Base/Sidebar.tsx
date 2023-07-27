@@ -84,23 +84,21 @@ export default function Sidebar() {
           </Link>
         </div>
         <div className="px-2.5 h-full overflow-y-scroll" role="menu">
-          {SIDEBAR_ITEMS.map(({ heading, items }, index) => {
-            return (
-              <React.Fragment key={index}>
-                <MenuGroup heading={heading ?? undefined}>
-                  {items.map((item, index) => (
-                    <MenuItem
-                      key={index}
-                      name={item.name}
-                      prefix={<item.icon size={20} />}
-                      href="/"
-                    />
-                  ))}
-                </MenuGroup>
-                <Separator dir="horizontal" padding="0.525rem" />
-              </React.Fragment>
-            )
-          })}
+          {SIDEBAR_ITEMS.map(({ heading, items }, index) => (
+            <React.Fragment key={index}>
+              <MenuGroup heading={heading ?? undefined}>
+                {items.map((item, index) => (
+                  <MenuItem
+                    key={index}
+                    name={item.name}
+                    prefix={<item.icon size={20} />}
+                    href="/"
+                  />
+                ))}
+              </MenuGroup>
+              <Separator dir="horizontal" padding="0.525rem" />
+            </React.Fragment>
+          ))}
         </div>
       </aside>
     </Overlay>
