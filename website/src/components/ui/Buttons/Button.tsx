@@ -32,8 +32,8 @@ export default function Button({
   }
 
   const variants: Partial<Record<Variants, string>> = {
-    primary: "bg-red-100 hover:bg-red-200 focus:bg-red-200",
-    secondary: "bg-transparent hover:bg-red-200 focus:bg-red-200",
+    primary: "bg-color-3 hover:bg-color-4 focus:bg-color-4",
+    secondary: "bg-transparent border border-color-3 hover:border-color-3 focus:border-color-3",
     tritery: "",
     warning: "",
     error: ""

@@ -3,7 +3,7 @@ import { AlertTriangleIcon } from "lucide-react"
 export default function NoJSReminder() {
   return (
     <noscript>
-      <div className="px-8 py-4 text-white bg-red-500 prose-p:text-sm">
+      <div className="px-8 py-4 text-white bg-color-5 prose-p:text-sm">
         <h1 className="flex pb-2 text-xl font-bold font-inter gap-x-1.5 items-center">
           <AlertTriangleIcon />
           <span>JavaScript disabled</span>

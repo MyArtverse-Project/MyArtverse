@@ -20,7 +20,7 @@ export default function DropdownItem({
         <Link
           href="/"
           className={`rounded-md w-full transition-colors ${
-            active && "bg-red-200"
+            active && "bg-color-2"
           }`}
         >
           <span className="flex items-center justify-between px-3 py-2 font-medium select-none w-max gap-x-2">

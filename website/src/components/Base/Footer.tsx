@@ -54,7 +54,7 @@ export default function Footer() {
             <Logo size={1.1} />
             <Link
               href={"/"}
-              className="flex flex-row px-2 py-1 my-3 border border-red-200 rounded-md w-fit"
+              className="flex flex-row px-2 py-1 my-3 border border-color-2 rounded-md w-fit"
             >
               <span>Status:</span>
               <span className="flex flex-row text-green-500">
@@ -67,7 +67,7 @@ export default function Footer() {
         <div className="flex flex-row">
           {FOOTER_ITEMS.map(({ heading, links }, index) => (
             <div className="flex flex-col mx-16" key={index}>
-              <h2 className="mb-3 font-semibold text-red-400">{heading}</h2>
+              <h2 className="mb-3 font-semibold text-color-4">{heading}</h2>
               <ul className="grid gap-y-3">
                 {links.map(({ text, link }, index) => (
                   <li key={index}>

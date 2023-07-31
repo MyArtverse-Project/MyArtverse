@@ -16,7 +16,7 @@ export default function NotificationPopup() {
       </Popover.Button>
       <TransitionWrapper>
         <Popover.Panel
-          className="absolute border bg-white border-red-300 rounded-md top-2.5 right-0 shadow-md flex flex-col"
+          className="absolute border bg-white border-color-3 rounded-md top-2.5 right-0 shadow-md flex flex-col"
           style={{ width: 400, height: 400 }}
         >
           <div className="px-3 py-2">

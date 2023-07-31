@@ -21,7 +21,7 @@ import Logo from "../Logo"
 import { Avatar, Button } from "../ui/Buttons"
 import Separator from "../ui/Separator"
 import { Dropdown, DropdownItem } from "../ui/Dropdown"
-import NotificationPopup from "../ui/Notification"
+import NotificationPopup from "../ui/NotificationPopup"
 
 export default function Navbar() {
   const { isSidebarOpen, setSidebarState } = useContext(NavbarContext)
@@ -37,7 +37,7 @@ export default function Navbar() {
   ]
 
   return (
-    <nav className="flex items-center justify-between px-5 py-4 text-sm font-medium select-none font-inter">
+    <nav className="flex items-center justify-between px-5 py-4 text-sm font-medium select-none font-inter bg-white">
       <div className="flex items-center gap-x-2.5">
         <Button
           iconOnly
@@ -59,7 +59,7 @@ export default function Navbar() {
       <div className="flex items-center gap-x-2.5">
         <div className="desktop-only-md">
           <Button
-            className="flex items-center gap-x-1.5 pl-3 pr-24 lg:pr-32 xl:pr-48 py-2 border border-red-200 hover:border-red-500 focus:border-red-500"
+            className="flex items-center gap-x-1.5 pl-3 pr-24 lg:pr-32 xl:pr-48 py-2 border border-button-idle-chips hover:border-dropdowns-text-field border:border-dropdowns-text-field"
             prefixIcon={<SearchIcon size={20} />}
           >
             Search
@@ -123,7 +123,7 @@ export default function Navbar() {
         <Button iconOnly variant="secondary" aria-label="Site options">
           <MoreVerticalIcon size={20} />
         </Button>
-        <Button>Sign in</Button>
+        <Button >Sign in</Button>
       </div>
     </nav>
   )

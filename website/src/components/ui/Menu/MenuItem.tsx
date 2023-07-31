@@ -16,7 +16,7 @@ export default function MenuItem({
 }) {
   return (
     <Link
-      className="transition-colors select-none px-4 py-2.5 font-medium flex items-center justify-between hover:bg-red-200 rounded-md"
+      className="transition-colors select-none px-4 py-2.5 font-medium flex items-center justify-between hover:bg-color-2 rounded-md"
       href={href as unknown as UrlObject}
     >
       <span className="flex items-center text-sm gap-x-3">
