@@ -30,7 +30,6 @@ svg.lucide {
     --error-background: hsl(0, 100%, 87.4%);
   }
 
-
   .dark {
     /* Dark colors */
     --text-icons: hsl(260, 100%, 97.5%);
@@ -47,68 +46,11 @@ svg.lucide {
     --warning-background: hsl(46.80000000000001, 100%, 15.2%);
     --info-background: hsl(212.39999999999998, 100%, 15.2%);
   }
-}
 
-//   :root {
-//     // Global variants
-//     --warning: hsl(46, 99.3%, 54.6%);
-//     --info: hsl(212, 95.4%, 46.3%);
-//     --error: hsl(0, 100%, 61.2%);
-//     --success: hsl(136.8, 87.7%, 40.4%);
-//     --hyperlink: hsl(219, 100%, 50%);
-
-//     // Light variants
-//     --light-active: hsl(256.6, 100%, 99%);
-
-//     --light-text: hsl(260, 81.8%, 5.5%);
-//     --light-text-active: var(--light-active);
-//     --light-text-emphasis: hsl(260, 81.8%, 16.5%);
-//     --light-subtext: hsl(265, 5.7%, 52.2%);
-
-//     --light-separator: hsl(255, 27.6%, 59.7%);
-
-//     --light-mute: hsl(260, 34.7%, 83.4%);
-//     --light-modal: hsl(248, 88.8%, 94.6%);
-//     --light-background: var(--light-active);
-
-//     --light-button-idle-chips: hsl(251, 96.4%, 85.9%);
-//     --light-dropdowns-text-field: hsl(250, 95.5%, 75%);
-//     --light-active-state: hsl(266, 100%, 40.6%);
-
-//     --light-error-background: hsl(0, 100%, 87.4%);
-//     --light-warning-background: hsl(46, 100%, 87.6%);
-//     --light-info-background: hsl(212, 100%, 87.5%);
-
-//     // Dark variants
-//     --dark-active: hsl(260, 100%, 97.5%);
-
-//     --dark-text: var(--dark-active);
-//     --dark-text-active: var(--dark-active);
-//     --dark-text-emphasis: hsl(250, 100%, 85.1%);
-//     --dark-subtext: hsla(260, 40.8%, 86.5%, 0.68);
-
-//     --dark-separator: hsl(247, 27.8%, 42.1%);
-
-//     --dark-mute: hsl(252, 27.4%, 18.7%);
-//     --dark-modal: hsl(260, 86.4%, 7.5%);
-//     --dark-background: hsl(260, 76.5%, 4.3%);
-
-//     --dark-button-idle-chips: hsl(260, 83.4%, 18.2%);
-//     --dark-dropdowns-text-field: hsl(253, 65.7%, 36.7%);
-//     --dark-active-state: hsl(267, 100%, 50%);
-
-//     --dark-error-background: hsl(0, 100%, 15%);
-//     --dark-warning-background: hsl(46, 100%, 15.2%);
-//     --dark-info-background: hsl(212, 100%, 15.2%);
-//   }
-// }
-
-@layer base {
   body {
     @apply bg-background text-text;
   }
 }
-
 
 @layer components {
   .desktop-only-lg {
@@ -124,6 +66,6 @@ svg.lucide {
   }
 
   .mobile-only-md {
-    @apply block md: hidden;
+    @apply block md:hidden;
   }
 }

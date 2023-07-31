@@ -3,16 +3,11 @@ import Link from "next/link"
 import Logo from "../Logo"
 import project from "../../../package.json"
 import { CircleDotIcon } from "lucide-react"
+import { kebabCase } from "lodash"
 
 const version = project.version
 
 export default function Footer() {
-  const parseTextToLink = (input: string) => {
-    const output = input.toLowerCase().replace(/\s/g, "-").replace(/\+/g, "")
-
-    return output
-  }
-
   /* NOTE: in the links array, you can override the links with the "link" key */
   const FOOTER_ITEMS = [
     {
@@ -54,7 +49,7 @@ export default function Footer() {
             <Logo size={1.1} />
             <Link
               href={"/"}
-              className="flex flex-row px-2 py-1 my-3 border border-color-2 rounded-md w-fit"
+              className="flex flex-row px-2 py-1 my-3 border rounded-md border-color-2 w-fit"
             >
               <span>Status:</span>
               <span className="flex flex-row text-green-500">
@@ -73,7 +68,7 @@ export default function Footer() {
                   <li key={index}>
                     <Link
                       className="my-2 font-semibold"
-                      href={!link ? parseTextToLink(text) : link}
+                      href={!link ? kebabCase(text) : link}
                     >
                       {text}
                     </Link>

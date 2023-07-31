@@ -1,3 +1,1 @@
-module.exports = {
-  ...require("@myfursona/prettier-config")
-}
+module.exports = { ...require("@myfursona/prettier-config") }

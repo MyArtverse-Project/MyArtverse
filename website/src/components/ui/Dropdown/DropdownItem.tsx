@@ -7,18 +7,23 @@ export default function DropdownItem({
   link,
   prefix,
   suffix,
-  disabled
+  disabled,
+  ...attributes
 }: IncludeReactNode<{
   link?: string
   disabled?: boolean
   prefix?: React.ReactElement
   suffix?: React.ReactElement
-}>) {
+}> &
+  Pick<
+    React.ButtonHTMLAttributes<HTMLButtonElement>,
+    "onClick" | "onKeyDown" | "aria-label"
+  >) {
   return (
     <Menu.Item>
       {({ active }) => (
         <Link
-          href="/"
+          href={link as string}
           className={`rounded-md w-full transition-colors ${
             active && "bg-color-2"
           }`}

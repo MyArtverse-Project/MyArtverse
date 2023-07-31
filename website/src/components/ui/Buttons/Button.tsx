@@ -1,4 +1,3 @@
-import type { ButtonHTMLAttributes, ReactElement } from "react"
 import type { LucideIcon } from "lucide-react"
 import type { IncludeReactNode, Variants } from "@/types"
 
@@ -18,14 +17,17 @@ export default function Button({
 }: IncludeReactNode<{
   iconOnly?: boolean
   disabled?: boolean
-  type?: ButtonHTMLAttributes<HTMLButtonElement>["type"]
+  type?: React.ButtonHTMLAttributes<HTMLButtonElement>["type"]
   variant?: Variants
   size?: ButtonSizes
   className?: string
-  prefixIcon?: ReactElement<LucideIcon>
-  suffixIcon?: ReactElement<LucideIcon>
+  prefixIcon?: React.ReactElement<LucideIcon>
+  suffixIcon?: React.ReactElement<LucideIcon>
 }> &
-  ButtonHTMLAttributes<HTMLButtonElement>) {
+  Pick<
+    React.ButtonHTMLAttributes<HTMLButtonElement>,
+    "onClick" | "onContextMenu" | "onKeyDown" | "onMouseDown" | "onMouseOver"
+  >) {
   const sizes: Record<ButtonSizes, string> = {
     small: !iconOnly ? "py-1.5 py-2 " : "p-1.5",
     big: !iconOnly ? "px-4 py-2" : "p-2"
@@ -33,7 +35,8 @@ export default function Button({
 
   const variants: Partial<Record<Variants, string>> = {
     primary: "bg-color-3 hover:bg-color-4 focus:bg-color-4",
-    secondary: "bg-transparent border border-color-3 hover:border-color-3 focus:border-color-3",
+    secondary:
+      "bg-transparent border border-color-3 hover:border-color-3 focus:border-color-3",
     tritery: "",
     warning: "",
     error: ""
@@ -51,8 +54,8 @@ export default function Button({
 
   return (
     <button
-      type={type ?? undefined}
       className={mergeClass.join(" ")}
+      type={type ?? undefined}
       {...attributes}
     >
       {prefixIcon}

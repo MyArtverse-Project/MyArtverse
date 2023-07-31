@@ -9,9 +9,8 @@ _MyFursona_ is an open-source platform where users can keep track of their chara
 
 ## Tech stack
 
-- **Nuxt.js** for the user interface
+- **Next.js** for the user interface
 - **Fastify** powering its REST and GraphQL API
-- **Python** for advanced image and data processing (e.g. profile views, favorites, etc.)
 
 ## Contributing
 

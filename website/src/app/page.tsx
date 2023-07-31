@@ -10,17 +10,26 @@ export const metadata = pageMeta({
 
 export default function Home() {
   return (
-    <div className="w-4/5 mx-auto my-20 flex flex-row justify-between items-center ">
+    <div className="flex flex-row items-center justify-between w-4/5 mx-auto my-20 ">
       <div>
-
         <h1 className="text-5xl">A place where everyone belongs!</h1>
         <p>
-          Tincidunt praesent pellentesque auctor a a feugiat sed. Ultrices in cras
-          commodo turpis luctus morbi.
+          Tincidunt praesent pellentesque auctor a a feugiat sed. Ultrices in
+          cras commodo turpis luctus morbi.
         </p>
         <div className="flex flex-row my-4">
-          <Button variant="secondary" className="mr-4 bg-transparent border-2 border-color-3 hover:bg-color-3 px-4 py-2  ">I{"'"}ll look around</Button>
-          <Button variant="primary" className="mr-4 bg-color-3 hover:bg-dropdowns-text-field hover:bg-color-4 px-4 py-2  ">Sign Up</Button>
+          <Button
+            variant="secondary"
+            className="px-4 py-2 mr-4 bg-transparent border-2 border-color-3 hover:bg-color-3 "
+          >
+            I'll look around
+          </Button>
+          <Button
+            variant="primary"
+            className="px-4 py-2 mr-4 bg-color-3 hover:bg-dropdowns-text-field hover:bg-color-4 "
+          >
+            Sign Up
+          </Button>
         </div>
       </div>
       <Image src="/img/hero/sona-render.png" alt="" width={300} height={500} />

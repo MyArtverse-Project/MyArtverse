@@ -22,22 +22,24 @@ import { Avatar, Button } from "../ui/Buttons"
 import Separator from "../ui/Separator"
 import { Dropdown, DropdownItem } from "../ui/Dropdown"
 import NotificationPopup from "../ui/NotificationPopup"
+import { toLower } from "lodash"
 
 export default function Navbar() {
   const { isSidebarOpen, setSidebarState } = useContext(NavbarContext)
 
   const USER_PLACEHOLDER = "VulpoTheDev"
-  const HANDLE_PLACEHOLDER = "@vulpothedev"
+  const HANDLE_PLACEHOLDER = `@${toLower(USER_PLACEHOLDER)}`
 
   const createNewItems = [
     { icon: CatIcon, name: "New fursona", link: "/" },
     { icon: ShareIcon, name: "Upload image(s)", link: "/" },
+    // TODO: Invoke a modal event here (i.e. "event: () => openModal(newCollectionModal)")
     { icon: AlbumIcon, name: "New collection", link: "/" },
     { icon: FileLockIcon, name: "New private note", link: "/" }
   ]
 
   return (
-    <nav className="flex items-center justify-between px-5 py-4 text-sm font-medium select-none font-inter bg-white">
+    <nav className="flex items-center justify-between px-5 py-4 text-sm font-medium bg-white select-none font-inter">
       <div className="flex items-center gap-x-2.5">
         <Button
           iconOnly
@@ -81,9 +83,12 @@ export default function Navbar() {
           items={
             <>
               {createNewItems.map((item, index) => {
-                const Icon = item.icon
                 return (
-                  <DropdownItem prefix={<Icon size={20} />} key={index}>
+                  <DropdownItem
+                    prefix={<item.icon size={20} />}
+                    key={index}
+                    link={item.link}
+                  >
                     {item.name}
                   </DropdownItem>
                 )
@@ -123,7 +128,7 @@ export default function Navbar() {
         <Button iconOnly variant="secondary" aria-label="Site options">
           <MoreVerticalIcon size={20} />
         </Button>
-        <Button >Sign in</Button>
+        <Button>Sign in</Button>
       </div>
     </nav>
   )
