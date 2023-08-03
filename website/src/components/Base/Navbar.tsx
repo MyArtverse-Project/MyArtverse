@@ -26,6 +26,7 @@ import { toLower } from "lodash"
 
 export default function Navbar() {
   const { isSidebarOpen, setSidebarState } = useContext(NavbarContext)
+  // TODO: Implement User Data onto sidebar
 
   const USER_PLACEHOLDER = "VulpoTheDev"
   const HANDLE_PLACEHOLDER = `@${toLower(USER_PLACEHOLDER)}`

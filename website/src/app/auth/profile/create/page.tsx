@@ -17,8 +17,8 @@ import { FormEvent, FormEventHandler, useState } from "react"
 
 export default function SignUp() {
   const router = useRouter()
-  const [emailEntered, setEmailEntered] = useState(false)
   const [errors, setErrors] = useState<string[]>([])
+  const [username, setUsername] = useState("")
   const [email, setEmail] = useState("")
   const [password, setPassword] = useState("")
 
@@ -64,6 +64,13 @@ export default function SignUp() {
       <div className="relative w-full">
         <form onSubmit={submitRegister}>
           <input
+            type="text"
+            className="w-full px-4 py-2 my-1 border rounded-md border-color-3"
+            placeholder="Username"
+            value={username}
+            onChange={(e) => setUsername(e.target.value)}
+          />
+          <input
             type="email"
             className="w-full px-4 py-2 my-1 border rounded-md border-color-3"
             placeholder="Email"
@@ -79,7 +86,6 @@ export default function SignUp() {
           />
           <Button
             type="submit"
-            onClick={emailChecker}
             className={`bg-color-3 hover:bg-color-4 my-2 w-full flex justify-center items-center py-2 px-4`}
           >
             Sign Up
