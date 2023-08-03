@@ -29,7 +29,7 @@ const authOption: AuthOptions = {
         if (!user) {
           return null
         }
-
+        // @ts-expect-error
         const passwordMatch = await compare(credentials.password, user.password)
         if (!passwordMatch) {
           return null
