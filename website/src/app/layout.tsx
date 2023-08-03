@@ -8,7 +8,7 @@ import { config } from "@fortawesome/fontawesome-svg-core"
 
 import type { IncludeReactNode } from "@/types"
 import { Footer, Navbar } from "@/components/Base"
-import { NavbarProvider } from "@/components/Base/NavbarContext"
+import { NavbarProvider } from "@/context/NavbarContext"
 import NoJSReminder from "@/components/NoJSReminder"
 import { SessionProvider } from "next-auth/react"
 import Provider from "@/context/Provider"
@@ -49,7 +49,10 @@ export default function RootLayout({ children }: IncludeReactNode) {
       <Provider>
         <body className="!overflow-x-hidden">
           {/* SVG defs for complex gradients */}
-          <svg style={{ position: "absolute", height: 0, width: 0 }} aria-hidden>
+          <svg
+            style={{ position: "absolute", height: 0, width: 0 }}
+            aria-hidden
+          >
             <defs></defs>
           </svg>
           {/* Skip nav accessibility */}

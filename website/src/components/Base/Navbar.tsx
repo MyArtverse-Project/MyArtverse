@@ -15,7 +15,7 @@ import {
   AlbumIcon,
   FileLockIcon
 } from "lucide-react"
-import { NavbarContext } from "./NavbarContext"
+import { NavbarContext } from "@/context/NavbarContext"
 
 import Logo from "../Logo"
 import { Avatar, Button } from "../ui/Buttons"
@@ -99,7 +99,7 @@ export default function Navbar() {
         <NotificationPopup />
         <Dropdown
           button={
-            <Button className="p-0 rounded-full">
+            <Button className="grid p-0 border-none rounded-full place-items-center">
               <Avatar username={USER_PLACEHOLDER} src="/img/hero/vulpo.jpg" />
             </Button>
           }
@@ -128,7 +128,7 @@ export default function Navbar() {
         <Button iconOnly variant="secondary" aria-label="Site options">
           <MoreVerticalIcon size={20} />
         </Button>
-        <Button>Sign in</Button>
+        <Button href="/auth/signin">Sign in</Button>
       </div>
     </nav>
   )

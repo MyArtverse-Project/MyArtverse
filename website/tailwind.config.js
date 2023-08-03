@@ -31,11 +31,8 @@ module.exports = {
         "error-bg": "var(--error-background)",
         "warning-bg": "var(--warning-background)",
         "info-bg": "var(--info-background)"
-      },
+      }
     }
   },
-  plugins: [
-    require("@tailwindcss/forms"),
-    require("@tailwindcss/typography")
-  ]
+  plugins: [require("@tailwindcss/forms"), require("@tailwindcss/typography")]
 }

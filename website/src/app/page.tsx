@@ -17,19 +17,9 @@ export default function Home() {
           Tincidunt praesent pellentesque auctor a a feugiat sed. Ultrices in
           cras commodo turpis luctus morbi.
         </p>
-        <div className="flex flex-row my-4">
-          <Button
-            variant="secondary"
-            className="px-4 py-2 mr-4 bg-transparent border-2 border-color-3 hover:bg-color-3 "
-          >
-            I'll look around
-          </Button>
-          <Button
-            variant="primary"
-            className="px-4 py-2 mr-4 bg-color-3 hover:bg-dropdowns-text-field hover:bg-color-4 "
-          >
-            Sign Up
-          </Button>
+        <div className="flex flex-row gap-x-4">
+          <Button variant="secondary">I'll look around</Button>
+          <Button variant="primary">Sign Up</Button>
         </div>
       </div>
       <Image src="/img/hero/sona-render.png" alt="" width={300} height={500} />

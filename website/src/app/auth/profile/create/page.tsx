@@ -25,16 +25,15 @@ export default function SignUp() {
   const submitRegister = async (e: FormEvent<HTMLFormElement>) => {
     e.preventDefault()
     const response = await fetch("/api/register", {
-        method: "POST",
-        headers: {
-            "Content-Type": "application/json"
-        },
-        body: JSON.stringify({ email: email, password: password })
+      method: "POST",
+      headers: {
+        "Content-Type": "application/json"
+      },
+      body: JSON.stringify({ email: email, password: password })
     })
     const user = await response.json()
     console.log(user)
     router.push("/signin")
-
   }
 
   return (

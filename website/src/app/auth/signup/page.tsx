@@ -1,19 +1,18 @@
 "use client"
 
+import { FormEvent, useState } from "react"
+import { useRouter } from "next/navigation"
+
 import { Button } from "@/components/ui/Buttons"
 import Separator from "@/components/ui/Separator"
 import { pageMeta } from "@/utils"
-import { FacebookIcon, TwitterIcon, LogInIcon } from "lucide-react"
-import Image from "next/image"
+import { FacebookIcon, TwitterIcon } from "lucide-react"
+import { emailRegex } from "@/constants"
 
-import { useRouter } from "next/navigation"
-import { FormEvent, FormEventHandler, useState } from "react"
-
-// export const metadata = pageMeta({
-//   title: "Sign In - MyFursona",
-//   description:
-//     "MyFursona is a place to keep track of your fursonas, adopts, and commissions!"
-// })
+export const metadata = pageMeta({
+  title: "Sign In - MyFursona",
+  description: ""
+})
 
 export default function SignUp() {
   const router = useRouter()
@@ -25,9 +24,7 @@ export default function SignUp() {
   const emailChecker = () => {
     if (!email) return
 
-    const EMAIL_REGEX = /^[^\s@]+@[^\s@]+\.[^\s@]+$/
-
-    if (EMAIL_REGEX.exec(email)?.length === 1) {
+    if (emailRegex.exec(email)?.length === 1) {
       setErrors([])
       return setEmailEntered(true)
     }
@@ -38,16 +35,15 @@ export default function SignUp() {
   const submitRegister = async (e: FormEvent<HTMLFormElement>) => {
     e.preventDefault()
     const response = await fetch("/api/register", {
-        method: "POST",
-        headers: {
-            "Content-Type": "application/json"
-        },
-        body: JSON.stringify({ email: email, password: password })
+      method: "POST",
+      headers: {
+        "Content-Type": "application/json"
+      },
+      body: JSON.stringify({ email: email, password: password })
     })
     const user = await response.json()
     console.log(user)
     router.push("/signin")
-
   }
 
   return (
