@@ -12,9 +12,14 @@ export type IncludeReactNode<T extends object = {}> = {
 } & T
 
 /**
- * Works just like the `Omit` generic, but only omits literal union types
+ * Equivalent of the `Pick<T, U>` generic for literal unions
  */
-export type OmitLiterals<T, U extends T> = T extends U ? never : T
+export type PickUnion<T, U extends T> = T extends U ? T : never
+
+/**
+ * Equivalent of the `Omit` generic for literal unions
+ */
+export type OmitUnion<T, U extends T> = T extends U ? never : T
 
 export type Theme = "system" | "light" | "dark"
 

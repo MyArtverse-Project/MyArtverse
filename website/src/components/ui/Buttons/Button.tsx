@@ -4,13 +4,13 @@ import type {
   IncludeReactNode,
   SizeLiterals as ButtonSizes,
   VariantLiterals,
-  OmitLiterals,
+  OmitUnion,
   PartialRecord
 } from "@/types"
 import type { LucideIcon } from "lucide-react"
 import type { UrlObject } from "url"
 
-type ButtonVariants = OmitLiterals<VariantLiterals, "success">
+type ButtonVariants = OmitUnion<VariantLiterals, "success">
 type ButtonVariantsRecord = PartialRecord<ButtonVariants>
 
 type ButtonSizesRecord = PartialRecord<ButtonSizes>

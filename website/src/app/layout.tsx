@@ -12,6 +12,7 @@ import { NavbarProvider } from "@/context/NavbarContext"
 import NoJSReminder from "@/components/NoJSReminder"
 import { SessionProvider } from "next-auth/react"
 import Provider from "@/context/Provider"
+import SkipNav from "@/components/SkipNav"
 
 config.autoAddCss = false
 
@@ -47,7 +48,7 @@ export default function RootLayout({ children }: IncludeReactNode) {
         <script dangerouslySetInnerHTML={{ __html: CONTRIB_MSG }} />
       </head>
       <Provider>
-        <body className="!overflow-x-hidden">
+        <body className="!overflow-x-hidden bg-background">
           {/* SVG defs for complex gradients */}
           <svg
             style={{ position: "absolute", height: 0, width: 0 }}
@@ -56,13 +57,7 @@ export default function RootLayout({ children }: IncludeReactNode) {
             <defs></defs>
           </svg>
           {/* Skip nav accessibility */}
-          <a
-            href="#skip-navigation"
-            className="z-[999] rounded-2xl bg-white fixed top-3 left-2 px-5 py-1.5 opacity-0 pointer-events-none focus:pointer-events-auto focus:opacity-100"
-            aria-label="Skip to content"
-          >
-            Skip to content
-          </a>
+          <SkipNav />
           <NoJSReminder />
           {/* Platform announcements sent through the API goes here */}
           <div id="myfursona-announcements"></div>
