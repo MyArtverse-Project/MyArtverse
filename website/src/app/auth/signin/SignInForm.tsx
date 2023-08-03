@@ -1,9 +1,9 @@
 "use client"
 
-import { FormEvent, useState } from "react"
+import { FormEvent, useEffect, useState } from "react"
 import { useRouter } from "next/navigation"
 
-import { signIn } from "next-auth/react"
+import { signIn, useSession } from "next-auth/react"
 import { FacebookIcon, TwitterIcon } from "lucide-react"
 
 import { emailRegex } from "@/constants"
@@ -16,11 +16,20 @@ export default function SignInForm() {
   // TODO: 2. recommended to create a useClientAuth() custom hook to resolve code dup
   // TODO: and also sharable for signup form too
   // !!!!! code duplication detected !!!!!
+  const { status, data } = useSession()
   const router = useRouter()
   const [emailEntered, setEmailEntered] = useState(false)
   const [errors, setErrors] = useState<string[]>([])
   const [email, setEmail] = useState("")
   const [password, setPassword] = useState("")
+  useEffect(() => {
+    console.log("USE EFFECT ")
+    if (status === 'authenticated' && data) {
+      console.log("LOGGED")
+      router.push('/')
+    }
+    console.log("NOT LOGGED")
+  }, [status, data, router])
 
   const emailChecker = () => {
     if (!email) return
@@ -84,7 +93,7 @@ export default function SignInForm() {
             value={password}
             onChange={(e) => setPassword(e.target.value)}
           />
-          <Button>Login</Button>
+          <Button type="submit">Login</Button>
           <Button onClick={() => setEmailEntered(false)}>Previous</Button>
         </div>
       </form>
