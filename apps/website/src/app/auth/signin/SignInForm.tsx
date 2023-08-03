@@ -24,9 +24,9 @@ export default function SignInForm() {
   const [password, setPassword] = useState("")
   useEffect(() => {
     console.log("USE EFFECT ")
-    if (status === 'authenticated' && data) {
+    if (status === "authenticated" && data) {
       console.log("LOGGED")
-      router.push('/')
+      router.push("/")
     }
     console.log("NOT LOGGED")
   }, [status, data, router])

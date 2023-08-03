@@ -1,4 +1,4 @@
-import { generateAccessToken, generateRefreshToken } from "./../utils/auth"
+import { generateAccessToken, generateRefreshToken } from "../utils/auth"
 import { prisma } from "../index"
 import * as bcrypt from "bcryptjs"
 import {

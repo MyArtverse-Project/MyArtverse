@@ -4,7 +4,7 @@ import routes from "./routes/index"
 import { PrismaClient } from "@prisma/client"
 import { ApolloServer } from "apollo-server-express"
 import { buildSchema } from "type-graphql"
-import { HelloResolver, ProfileResolver } from "./resolvers/"
+import { HelloResolver, ProfileResolver } from "./resolvers"
 import * as dotenv from "dotenv"
 import cookieParser from "cookie-parser"
 

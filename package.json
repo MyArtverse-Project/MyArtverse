@@ -5,8 +5,7 @@
   "license": "MIT",
   "homepage": "https://github.com/MyFursona-Project/MyFursona",
   "workspaces": [
-    "website",
-    "api",
+    "apps/*",
     "config/*"
   ],
   "scripts": {

@@ -1,3 +1,6 @@
 .next
+.turbo
 .output
 dist
+config
+public

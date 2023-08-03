@@ -1,4 +1,4 @@
-import { generateRefreshToken } from "./../utils/auth"
+import { generateRefreshToken } from "../utils/auth"
 import express from "express"
 import { verify } from "jsonwebtoken"
 import { prisma } from "../index"
