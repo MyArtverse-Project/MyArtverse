@@ -9,28 +9,28 @@ import { pageMeta } from "@/utils"
 import { FacebookIcon, TwitterIcon } from "lucide-react"
 import { emailRegex } from "@/constants"
 
-export const metadata = pageMeta({
-  title: "Sign In - MyFursona",
-  description: ""
-})
+// export const metadata = pageMeta({
+//   title: "Sign In - MyFursona",
+//   description: ""
+// })
 
 export default function SignUp() {
   const router = useRouter()
-  const [emailEntered, setEmailEntered] = useState(false)
   const [errors, setErrors] = useState<string[]>([])
+  const [username, setUsername] = useState("")
   const [email, setEmail] = useState("")
   const [password, setPassword] = useState("")
 
-  const emailChecker = () => {
-    if (!email) return
+  // const emailChecker = () => {
+  //   if (!email) return
 
-    if (emailRegex.exec(email)?.length === 1) {
-      setErrors([])
-      return setEmailEntered(true)
-    }
+  //   if (emailRegex.exec(email)?.length === 1) {
+  //     setErrors([])
+  //     return setEmailEntered(true)
+  //   }
 
-    return setErrors(["Email is invalid!"])
-  }
+  //   return setErrors(["Email is invalid!"])
+  // }
 
   const submitRegister = async (e: FormEvent<HTMLFormElement>) => {
     e.preventDefault()
@@ -39,7 +39,7 @@ export default function SignUp() {
       headers: {
         "Content-Type": "application/json"
       },
-      body: JSON.stringify({ email: email, password: password })
+      body: JSON.stringify({ username: username, email: email, password: password })
     })
     const user = await response.json()
     console.log(user)
@@ -74,6 +74,13 @@ export default function SignUp() {
       <div className="relative w-full">
         <form onSubmit={submitRegister}>
           <input
+            type="text"
+            className="w-full px-4 py-2 my-1 border rounded-md border-color-3"
+            placeholder="Username"
+            value={username}
+            onChange={(e) => setUsername(e.target.value)}
+          />
+          <input
             type="email"
             className="w-full px-4 py-2 my-1 border rounded-md border-color-3"
             placeholder="Email"
@@ -89,7 +96,6 @@ export default function SignUp() {
           />
           <Button
             type="submit"
-            onClick={emailChecker}
             className={`bg-color-3 hover:bg-color-4 my-2 w-full flex justify-center items-center py-2 px-4`}
           >
             Sign Up
