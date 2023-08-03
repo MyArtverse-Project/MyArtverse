@@ -10,6 +10,8 @@ import type { IncludeReactNode } from "@/types"
 import { Footer, Navbar } from "@/components/Base"
 import { NavbarProvider } from "@/components/Base/NavbarContext"
 import NoJSReminder from "@/components/NoJSReminder"
+import { SessionProvider } from "next-auth/react"
+import Provider from "@/context/Provider"
 
 config.autoAddCss = false
 
@@ -44,36 +46,38 @@ export default function RootLayout({ children }: IncludeReactNode) {
       <head>
         <script dangerouslySetInnerHTML={{ __html: CONTRIB_MSG }} />
       </head>
-      <body className="!overflow-x-hidden">
-        {/* SVG defs for complex gradients */}
-        <svg style={{ position: "absolute", height: 0, width: 0 }} aria-hidden>
-          <defs></defs>
-        </svg>
-        {/* Skip nav accessibility */}
-        <a
-          href="#skip-navigation"
-          className="z-[999] rounded-2xl bg-white fixed top-3 left-2 px-5 py-1.5 opacity-0 pointer-events-none focus:pointer-events-auto focus:opacity-100"
-          aria-label="Skip to content"
-        >
-          Skip to content
-        </a>
-        <NoJSReminder />
-        {/* Platform announcements sent through the API goes here */}
-        <div id="myfursona-announcements"></div>
-        <div
-          id="myfursona-app"
-          className="text-sm font-medium contents font-open-sans"
-        >
-          <header className="sticky top-0 z-10">
-            <NavbarProvider>
-              <Navbar />
-              <Sidebar />
-            </NavbarProvider>
-          </header>
-          <main id="skip-navigation">{children}</main>
-          <Footer />
-        </div>
-      </body>
+      <Provider>
+        <body className="!overflow-x-hidden">
+          {/* SVG defs for complex gradients */}
+          <svg style={{ position: "absolute", height: 0, width: 0 }} aria-hidden>
+            <defs></defs>
+          </svg>
+          {/* Skip nav accessibility */}
+          <a
+            href="#skip-navigation"
+            className="z-[999] rounded-2xl bg-white fixed top-3 left-2 px-5 py-1.5 opacity-0 pointer-events-none focus:pointer-events-auto focus:opacity-100"
+            aria-label="Skip to content"
+          >
+            Skip to content
+          </a>
+          <NoJSReminder />
+          {/* Platform announcements sent through the API goes here */}
+          <div id="myfursona-announcements"></div>
+          <div
+            id="myfursona-app"
+            className="text-sm font-medium contents font-open-sans"
+          >
+            <header className="sticky top-0 z-10">
+              <NavbarProvider>
+                <Navbar />
+                <Sidebar />
+              </NavbarProvider>
+            </header>
+            <main id="skip-navigation">{children}</main>
+            <Footer />
+          </div>
+        </body>
+      </Provider>
     </html>
   )
 }

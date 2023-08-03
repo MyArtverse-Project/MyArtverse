@@ -9,22 +9,26 @@
     "lint": "next lint"
   },
   "dependencies": {
+    "@auth/prisma-adapter": "^1.0.1",
     "@fortawesome/fontawesome-svg-core": "^6.4.0",
     "@fortawesome/free-brands-svg-icons": "^6.4.0",
     "@fortawesome/react-fontawesome": "^0.2.0",
     "@headlessui/react": "^1.7.15",
+    "@prisma/client": "4.14.1",
     "@tailwindcss/forms": "^0.5.3",
     "@tailwindcss/typography": "^0.5.9",
     "@types/node": "20.4.0",
     "@types/react": "^18.2.15",
     "@types/react-dom": "^18.2.7",
     "autoprefixer": "10.4.14",
+    "bcrypt": "^5.1.0",
     "eslint": "^8.46.0",
     "eslint-config-next": "^13.4.12",
     "framer-motion": "^10.12.18",
     "lodash": "^4.17.21",
     "lucide-react": "^0.263.1",
     "next": "^13.4.12",
+    "next-auth": "^4.22.3",
     "postcss": "8.4.25",
     "react": "^18.2.0",
     "react-dom": "^18.2.0",
@@ -35,6 +39,7 @@
     "typescript": "5.1.6"
   },
   "devDependencies": {
-    "@types/lodash": "^4.14.195"
+    "@types/lodash": "^4.14.195",
+    "prisma": "^5.1.0"
   }
 }

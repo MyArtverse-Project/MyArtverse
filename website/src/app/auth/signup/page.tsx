@@ -5,10 +5,9 @@ import Separator from "@/components/ui/Separator"
 import { pageMeta } from "@/utils"
 import { FacebookIcon, TwitterIcon, LogInIcon } from "lucide-react"
 import Image from "next/image"
-import { signIn } from 'next-auth/react'
 
 import { useRouter } from "next/navigation"
-import { FormEvent, useState } from "react"
+import { FormEvent, FormEventHandler, useState } from "react"
 
 // export const metadata = pageMeta({
 //   title: "Sign In - MyFursona",
@@ -16,7 +15,7 @@ import { FormEvent, useState } from "react"
 //     "MyFursona is a place to keep track of your fursonas, adopts, and commissions!"
 // })
 
-export default function SignIn() {
+export default function SignUp() {
   const router = useRouter()
   const [emailEntered, setEmailEntered] = useState(false)
   const [errors, setErrors] = useState<string[]>([])
@@ -36,14 +35,23 @@ export default function SignIn() {
     return setErrors(["Email is invalid!"])
   }
 
-  const submitLogin = (e: FormEvent<HTMLFormElement>) => {
+  const submitRegister = async (e: FormEvent<HTMLFormElement>) => {
     e.preventDefault()
-    signIn('credentials', { email, password, redirect: false })
-    router.push("/")
+    const response = await fetch("/api/register", {
+        method: "POST",
+        headers: {
+            "Content-Type": "application/json"
+        },
+        body: JSON.stringify({ email: email, password: password })
+    })
+    const user = await response.json()
+    console.log(user)
+    router.push("/signin")
+
   }
 
   return (
-    <div className="flex flex-col w-1/4 mx-auto my-16 mb-40">
+    <div className="flex flex-col w-1/4 mx-auto my-20 ">
       {errors && errors.length !== 0 ? (
         <div>
           {errors.map((err, index) => (
@@ -51,7 +59,7 @@ export default function SignIn() {
           ))}
         </div>
       ) : null}
-      <h2 className="my-4 text-3xl text-center">Sign In</h2>
+      <h2 className="my-4 text-3xl text-center">Sign Up</h2>
       <Button
         variant={"primary"}
         className="flex items-center justify-center w-full p-2 my-1 text-center transition-all ease-in-out border border-color-3 hover:bg-color-3"
@@ -64,41 +72,18 @@ export default function SignIn() {
         className="flex items-center justify-center w-full p-2 my-1 text-center transition-all ease-in-out border border-color-3 hover:bg-color-3"
         prefixIcon={<TwitterIcon />}
       >
-        Continue with Twitter
+        Continue with X/Twitter
       </Button>
       <Separator dir="horizontal" padding="1.25rem" />
-      <form onSubmit={submitLogin} className="relative w-full">
-        <div
-          className={`absolute top-0 left-0 w-full transition-all duration-500 transform ${
-            emailEntered ? "-translate-x-full" : "translate-x-0"
-          } ${emailEntered ? "opacity-0" : "opacity-100"}`}
-        >
+      <div className="relative w-full">
+        <form onSubmit={submitRegister}>
           <input
-            type="text"
+            type="email"
             className="w-full px-4 py-2 my-1 border rounded-md border-color-3"
             placeholder="Email"
             value={email}
             onChange={(e) => setEmail(e.target.value)}
           />
-          <Button
-            onClick={emailChecker}
-            className={`bg-color-3 hover:bg-color-4 my-2 w-full flex justify-center items-center py-2 px-4`}
-          >
-            Next
-          </Button>
-          <Button
-            onClick={() => router.push("/auth/signup")}
-            className={`bg-color-3 hover:bg-color-4 my-2 w-full flex justify-center items-center py-2 px-4`}
-          >
-            Sign Up
-          </Button>
-        </div>
-        <div
-          onSubmit={submitLogin}
-          className={`absolute top-0 left-0 w-full transition-all duration-500 transform ${
-            emailEntered ? "translate-x-0" : "translate-x-full"
-          } ${emailEntered ? "opacity-100" : "opacity-0"}`}
-        >
           <input
             type="password"
             className="w-full px-4 py-2 my-1 border rounded-md border-color-3"
@@ -107,18 +92,20 @@ export default function SignIn() {
             onChange={(e) => setPassword(e.target.value)}
           />
           <Button
-            className={`w-full flex items-center  justify-center py-2 px-4 bg-color-3 my-2 transition-all duration-500 `}
+            type="submit"
+            onClick={emailChecker}
+            className={`bg-color-3 hover:bg-color-4 my-2 w-full flex justify-center items-center py-2 px-4`}
           >
-            Login
+            Sign Up
           </Button>
           <Button
-            onClick={() => setEmailEntered(false)}
-            className={`w-full flex items-center  justify-center py-2 px-4 bg-color-3 my-2 transition-all duration-500`}
+            onClick={() => router.push("/auth/signin")}
+            className={`bg-color-3 hover:bg-color-4 my-2 w-full flex justify-center items-center py-2 px-4`}
           >
-            Previous
+            Already have an account?
           </Button>
-        </div>
-      </form>
+        </form>
+      </div>
     </div>
   )
 }
