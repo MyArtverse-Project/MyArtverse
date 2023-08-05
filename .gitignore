@@ -11,3 +11,6 @@ node_modules
 
 # JetBrains stuff
 .idea
+
+# Prisma
+prisma/migrations

@@ -6,7 +6,8 @@
   "homepage": "https://github.com/MyFursona-Project/MyFursona",
   "workspaces": [
     "apps/*",
-    "config/*"
+    "config/*",
+    "packages/*"
   ],
   "scripts": {
     "dev:web": "turbo dev --filter=website",

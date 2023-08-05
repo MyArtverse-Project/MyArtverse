@@ -1,8 +1,8 @@
 {
+  "extends": "@myfursona-internal/tsconfig/base.json",
   "compilerOptions": {
     "target": "es2017",
-    "module": "commonjs",
-    "lib": ["dom", "es6", "es2017", "esnext.asynciterable"],
+    "module": "esnext",
     "skipLibCheck": true,
     "sourceMap": true,
     "outDir": "./dist",
