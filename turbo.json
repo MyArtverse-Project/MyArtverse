@@ -4,13 +4,16 @@
     "lint": {},
     "build": {
       "dependsOn": ["^build"],
-      "outputs": ["dist/**", ".output/**", ".vercel/output/**"]
+      "outputs": ["dist/**", ".next/**", "!.next/cache/**"]
     },
+    "check-types": {},
     "deploy": {
       "dependsOn": ["lint", "build"]
     },
+    
     "dev": {
-      "cache": false
+      "cache": false,
+      "persistent": true
     }
   }
 }
