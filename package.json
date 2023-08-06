@@ -6,7 +6,6 @@
   "homepage": "https://github.com/MyFursona-Project/MyFursona",
   "workspaces": [
     "apps/*",
-    "config/*",
     "packages/*"
   ],
   "scripts": {
