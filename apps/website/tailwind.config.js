@@ -13,24 +13,28 @@ module.exports = {
         "open-sans": "var(--font-open-sans)"
       },
       colors: {
-        warning: "var(--warning)",
-        info: "var(--info)",
-        error: "var(--error)",
-        success: "var(--success)",
-        text: "var(--text)",
-        background: "var(--background)",
-        "text-icons": "var(--text-icons)",
-        emphasis: "var(--text-emphasis)",
-        "color-active": "var(--active-state)",
-        "color-2": "var(--modal)",
-        "color-3": "var(--button-idle-chips)",
-        "color-4": "var(--dropdowns-text-field)",
-        mute: "var(--mute)",
-        subtext: "var(--subtext)",
-        separator: "var(--menu-separator)",
-        "error-bg": "var(--error-background)",
-        "warning-bg": "var(--warning-background)",
-        "info-bg": "var(--info-background)"
+        // global
+        warning: "var(--bui-warning)",
+        info: "var(--bui-info)",
+        error: "var(--bui-error)",
+        success: "var(--bui-success)",
+        100: "hsla(var(--bui-100), var(--tw-bg-opacity, 1))",
+        200: "hsla(var(--bui-200), var(--tw-bg-opacity, 1))",
+        300: "hsla(var(--bui-300), var(--tw-bg-opacity, 1))",
+        400: "hsla(var(--bui-400), var(--tw-bg-opacity, 1))",
+        500: "hsla(var(--bui-500), var(--tw-bg-opacity, 1))",
+        600: "hsla(var(--bui-600), var(--tw-bg-opacity, 1))",
+        700: "hsla(var(--bui-700), var(--tw-bg-opacity, 1))",
+        mute: "hsla(var(--bui-mute), var(--tw-bg-opacity, 1))",
+        subtext: "hsla(var(--bui-subtext), var(--tw-bg-opacity, 0.65))",
+        skeleton: "hsla(var(--bui-skeleton), var(--tw-bg-opacity, 1))",
+        separator: "hsla(var(--bui-separator), var(--tw-bg-opacity, 1))",
+        "error-hl": "hsla(var(--bui-error-highlight), var(--tw-bg-opacity, 1))",
+        // prettier-ignore
+        "warning-hl": "hsla(var(--bui-warning-highlight), var(--tw-bg-opacity, 1))",
+        "info-hl": "hsla(var(--bui-info-highlight, var(--tw-bg-opacity, 1)))",
+        // ! overrides
+        "context-menu": "var(--bui-context-menu)"
       }
     }
   },

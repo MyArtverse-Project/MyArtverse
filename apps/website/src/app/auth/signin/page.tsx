@@ -1,13 +1,10 @@
-import { pageMeta } from "@/utils"
+import { Metadata } from "next"
 import SignInForm from "./SignInForm"
-import { useState } from "react"
-import { useSession } from "next-auth/react"
-import { useRouter } from "next/navigation"
 
-export const metadata = pageMeta({
-  title: "Sign In - MyFursona",
+export const metadata: Metadata = {
+  title: "Sign In",
   description: "Sign in or register on MyFursona"
-})
+}
 
 export default function SignIn() {
   return <SignInForm />

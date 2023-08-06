@@ -10,14 +10,15 @@ import type { IncludeReactNode } from "@/types"
 import { Footer, Navbar } from "@/components/Base"
 import { NavbarProvider } from "@/context/NavbarContext"
 import NoJSReminder from "@/components/NoJSReminder"
-import { SessionProvider } from "next-auth/react"
 import Provider from "@/context/Provider"
 import SkipNav from "@/components/SkipNav"
+import { Metadata } from "next"
 
 config.autoAddCss = false
 
-const Sidebar = dynamic(() =>
-  import("@/components/Base").then((c) => c.Sidebar)
+const Sidebar = dynamic(
+  () => import("@/components/Base").then((c) => c.Sidebar),
+  { ssr: false }
 )
 
 const inter = Inter({
@@ -32,6 +33,25 @@ const open_sans = Open_Sans({
   variable: "--font-open-sans"
 })
 
+const title = "MyFursona - a place where everyfur belongs"
+const description = "Your mom gay"
+
+export const metadata: Metadata = {
+  title: {
+    template: "%s - MyFursona",
+    default: "MyFursona"
+  },
+  description: description,
+  keywords: ["fur", "furries", "furry", "fursona", "mascot", "furry fandom"],
+  openGraph: {
+    title: title,
+    description: description,
+    type: "website",
+    siteName: "MyFursona"
+  },
+  robots: "noai, noimageai"
+}
+
 export default function RootLayout({ children }: IncludeReactNode) {
   const CONTRIB_MSG = `
     console.log("%c✨ Are you looking to improve MyFursona? If you're a developer, you can help!", "color: hsl(250, 95.5%, 75%)")
@@ -42,20 +62,13 @@ export default function RootLayout({ children }: IncludeReactNode) {
     <html
       lang="en"
       dir="ltr"
-      className={`${inter.variable} ${open_sans.variable}`}
+      className={`${inter.variable} ${open_sans.variable} theme-system`}
     >
       <head>
         <script dangerouslySetInnerHTML={{ __html: CONTRIB_MSG }} />
       </head>
       <Provider>
-        <body className="!overflow-x-hidden bg-background">
-          {/* SVG defs for complex gradients */}
-          <svg
-            style={{ position: "absolute", height: 0, width: 0 }}
-            aria-hidden
-          >
-            <defs></defs>
-          </svg>
+        <body className="bg-100 text-700 !overflow-x-hidden bg-background prose-headings:font-bold prose-headings:font-inter">
           {/* Skip nav accessibility */}
           <SkipNav />
           <NoJSReminder />
@@ -65,14 +78,14 @@ export default function RootLayout({ children }: IncludeReactNode) {
             id="myfursona-app"
             className="text-sm font-medium contents font-open-sans"
           >
-            <header className="sticky top-0 z-10">
-              <NavbarProvider>
+            <NavbarProvider>
+              <header className="sticky top-0 z-10">
                 <Navbar />
                 <Sidebar />
-              </NavbarProvider>
-            </header>
-            <main id="skip-navigation">{children}</main>
-            <Footer />
+              </header>
+              <main id="skip-navigation">{children}</main>
+              <Footer />
+            </NavbarProvider>
           </div>
         </body>
       </Provider>

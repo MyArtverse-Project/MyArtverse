@@ -10,7 +10,6 @@ import {
   PlusIcon,
   MoreVerticalIcon,
   CatIcon,
-  BellIcon,
   ShareIcon,
   AlbumIcon,
   FileLockIcon
@@ -40,7 +39,7 @@ export default function Navbar() {
   ]
 
   return (
-    <nav className="flex items-center justify-between px-5 py-4 text-sm font-medium bg-white select-none font-inter">
+    <nav className="flex items-center justify-between px-5 py-4 text-sm font-medium bg-opacity-50 select-none font-inter bg-100">
       <div className="flex items-center gap-x-2.5">
         <Button
           iconOnly
@@ -52,7 +51,7 @@ export default function Navbar() {
         </Button>
         <Link href="/" aria-label="Home" title="Home">
           <div className="desktop-only-lg">
-            <Logo />
+            <Logo size={0.75} />
           </div>
           <div className="mobile-only-lg">
             <Logo logoOnly />

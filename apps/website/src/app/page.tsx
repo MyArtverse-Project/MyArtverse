@@ -1,13 +1,22 @@
 import { Button } from "@/components/ui/Buttons"
 import Notice from "@/components/ui/Note"
-import { pageMeta } from "@/utils"
+import { Metadata } from "next"
 import Image from "next/image"
 
-export const metadata = pageMeta({
-  title: "Home - MyFursona",
-  description:
-    "MyFursona is a place to keep track of your fursonas, adopts, and commissions!"
-})
+const title = "MyFursona—a place where everyfur belongs!"
+const description =
+  "MyFursona is a place to keep track of your fursonas, adopts, and commissions!"
+
+export const metadata: Metadata = {
+  title: {
+    absolute: title
+  },
+  description: description,
+  openGraph: {
+    title: title,
+    description: description
+  }
+}
 
 export default function Home() {
   return (
@@ -32,10 +41,10 @@ export default function Home() {
         />
       </div>
       <div>
-        <Notice type="error">You alerted the horde</Notice>
-        <Notice type="warning">You startled the witch</Notice>
-        <Notice type="success" heading="Hey bitch">
-          <p>No you didn't lol</p>
+        <Notice type="error">error</Notice>
+        <Notice type="warning">warnin</Notice>
+        <Notice type="success" heading="success modal">
+          <p>paragraph</p>
         </Notice>
       </div>
     </>

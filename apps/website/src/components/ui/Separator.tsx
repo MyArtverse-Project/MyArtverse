@@ -23,7 +23,7 @@ export default function Separator({
 
   return (
     <div
-      className="block border border-color-2"
+      className="block border opacity-70 border-separator"
       style={{ ...directionMapSize[dir], ...directionMapPadding[dir] }}
     />
   )

@@ -42,7 +42,8 @@ export default function Button({
   href?: string | UrlObject
 }> &
   Pick<
-    React.ButtonHTMLAttributes<HTMLButtonElement>,
+    React.ButtonHTMLAttributes<HTMLButtonElement> &
+      React.AnchorHTMLAttributes<HTMLAnchorElement>,
     | "onClick"
     | "onContextMenu"
     | "onKeyDown"
@@ -61,11 +62,11 @@ export default function Button({
     "flex items-center gap-x-1.5 rounded-md transition-[border,background-color] border"
 
   const variants: ButtonVariantsRecord = {
-    primary: "border-transparent bg-color-3 hover:bg-color-4 focus:bg-color-4",
+    primary: "border-transparent bg-300 hover:bg-400 focus:bg-400",
     secondary:
-      "bg-transparent border-color-3 hover:bg-color-4 hover:border-color-4 focus:border-color-4",
+      "bg-transparent border-300 hover:bg-400 hover:border-400 focus:border-400",
     tritery:
-      "border-transparent bg-transparent hover:bg-color-4 focus:bg-color-4",
+      "border-transparent bg-transparent hover:bg-400 focus:bg-400",
     warning: "border-transparent",
     error: "border-transparent"
   }
