@@ -1,6 +1,7 @@
 import "./globals.scss"
 import "@fortawesome/fontawesome-svg-core/styles.css"
 
+import { Metadata } from "next"
 import { Inter, Open_Sans } from "next/font/google"
 import dynamic from "next/dynamic"
 
@@ -12,7 +13,6 @@ import { NavbarProvider } from "@/context/NavbarContext"
 import NoJSReminder from "@/components/NoJSReminder"
 import Provider from "@/context/Provider"
 import SkipNav from "@/components/SkipNav"
-import { Metadata } from "next"
 
 config.autoAddCss = false
 
@@ -33,19 +33,13 @@ const open_sans = Open_Sans({
   variable: "--font-open-sans"
 })
 
-const title = "MyFursona - a place where everyfur belongs"
-const description = "Your mom gay"
-
 export const metadata: Metadata = {
   title: {
     template: "%s - MyFursona",
     default: "MyFursona"
   },
-  description: description,
   keywords: ["fur", "furries", "furry", "fursona", "mascot", "furry fandom"],
   openGraph: {
-    title: title,
-    description: description,
     type: "website",
     siteName: "MyFursona"
   },

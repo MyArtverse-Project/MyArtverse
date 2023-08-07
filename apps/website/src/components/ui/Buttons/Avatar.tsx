@@ -1,10 +1,12 @@
 import Image from "next/image"
 
 export default function Avatar({
+  className,
   username,
   src,
   size = 36
 }: {
+  className?: string
   username: string
   src: string
   size?: number
@@ -14,7 +16,7 @@ export default function Avatar({
       data-avatar-item=""
       aria-label={username}
       style={{ height: `${size}px`, width: `${size}px` }}
-      className="overflow-hidden rounded-full"
+      className={className ?? "overflow-hidden rounded-full"}
     >
       <Image
         src={src}

@@ -3,9 +3,9 @@ import Notice from "@/components/ui/Note"
 import { Metadata } from "next"
 import Image from "next/image"
 
-const title = "MyFursona—a place where everyfur belongs!"
+const title = "MyFursona — a place where everyfur belongs!"
 const description =
-  "MyFursona is a place to keep track of your fursonas, adopts, and commissions!"
+  "MyFursona is a social platform where you manage and keep track of your fursonas, art commissions, trades, and character adoptables!"
 
 export const metadata: Metadata = {
   title: {
