@@ -100,7 +100,7 @@ export default function Navbar() {
         <Dropdown
           button={
             <Button className="grid p-0 border-none rounded-full place-items-center">
-              <Avatar username={USER_PLACEHOLDER} src="/img/hero/vulpo.jpg" />
+              <Avatar username={USER_PLACEHOLDER} src="/img/examples/ozzy/5.png" />
             </Button>
           }
           items={

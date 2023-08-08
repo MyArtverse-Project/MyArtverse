@@ -11,21 +11,45 @@ import {
   faTelegram,
   faLinkedin
 } from "@fortawesome/free-brands-svg-icons"
-import { MoreVerticalIcon, UserPlusIcon } from "lucide-react"
+import {
+  AlertTriangleIcon,
+  BrushIcon,
+  CatIcon,
+  HeartIcon,
+  HomeIcon,
+  LayoutGridIcon,
+  MoreVerticalIcon,
+  UserPlusIcon
+} from "lucide-react"
 import Link from "next/link"
+import Tabs from "@/components/ui/Tabs"
+import { Dropdown, DropdownItem } from "@/components/ui/Dropdown"
+import Socials from "@/components/ui/Socials"
 
-export default function ProfileHero({ handle }: { handle: string }) {
+export default function ProfileHero({
+  handle
+}: {
+  handle: string
+  isNSFW?: boolean
+}) {
   return (
     <div
       data-profile-hero=""
       style={{ "--profile-banner-parallax": 1 } as React.CSSProperties}
     >
-      <div className="relative mx-9" style={{ aspectRatio: "16 / 3" }}>
+      <div className="relative aspect-[15/3]">
+        <div className="absolute inset-0 z-[3]" />
+        <div data-banner-credit="" className="absolute z-[3] bottom-4 right-6">
+          Banner credits:{" "}
+          <Link href="/">
+            <span>Rokento</span>
+          </Link>
+        </div>
         <Image
           src="/img/hero/ozzy-banner.png"
           alt=""
           role="presentation"
-          className="object-cover w-full overflow-hidden rounded-md"
+          className="object-cover w-full overflow-hidden rounded-bl-2xl rounded-br-2xl"
           quality={90}
           draggable="false"
           fill
@@ -34,12 +58,6 @@ export default function ProfileHero({ handle }: { handle: string }) {
             objectPosition: "0 calc(50% * var(--profile-banner-parallax, 1))"
           }}
         />
-        <div data-banner-credit="" className="absolute bottom-4 right-6">
-          Banner credits:{" "}
-          <Link href="/">
-            <span>Rokento</span>
-          </Link>
-        </div>
       </div>
       <div className="px-12 mx-auto max-w-screen-2xl">
         <section className="flex gap-x-2.5 h-fit">
@@ -64,58 +82,68 @@ export default function ProfileHero({ handle }: { handle: string }) {
             </h2>
             <div className="flex gap-x-3.5">
               <span className="font-semibold text-700">{handle}</span>
+              <span className="inline-flex items-center font-semibold gap-x-1 text-error">
+                <AlertTriangleIcon size={19} />
+                <span>NSFW</span>
+              </span>
               <span className="text-700">69 followers</span>
               <span className="text-700">21 following</span>
             </div>
             <div className="flex gap-x-2.5 pt-1.5">
-              <Button
-                className="p-0"
-                prefixIcon={
-                  <FontAwesomeIcon icon={faFacebook} size="xl" fixedWidth />
-                }
-              />
-              <Button
-                className="p-0"
-                prefixIcon={
-                  <FontAwesomeIcon icon={faYoutube} size="xl" fixedWidth />
-                }
-              />
-              <Button
-                className="p-0"
-                prefixIcon={
-                  <FontAwesomeIcon icon={faXTwitter} size="xl" fixedWidth />
-                }
-              />
-              <Button
-                className="p-0"
-                prefixIcon={
-                  <FontAwesomeIcon icon={faTelegram} size="xl" fixedWidth />
-                }
-              />
-              <Button
-                className="p-0"
-                prefixIcon={
-                  <FontAwesomeIcon icon={faLinkedin} size="xl" fixedWidth />
-                }
-              />
+              <Socials />
             </div>
           </div>
           <div className="flex items-start gap-x-2.5 pt-4">
+            <Button
+              prefixIcon={<BrushIcon size={20} />}
+              aria-label="View Username's Commissions"
+              variant="secondary"
+            >
+              Commission ToS
+            </Button>
             <Button
               prefixIcon={<UserPlusIcon size={20} />}
               aria-label="Follow Username"
             >
               Follow
             </Button>
-            <Button
-              iconOnly
-              prefixIcon={<MoreVerticalIcon size={20} />}
-              aria-label="More"
-            ></Button>
+            <Dropdown
+              button={
+                <Button
+                  iconOnly
+                  prefixIcon={<MoreVerticalIcon size={20} />}
+                  aria-label="More"
+                ></Button>
+              }
+              items={
+                <>
+                  <DropdownItem link="/">Manage trades</DropdownItem>
+                  <DropdownItem link="/">Report Username</DropdownItem>
+                </>
+              }
+            />
           </div>
         </section>
-        <div id="tabs" className="flex">
-          Tab container
+        <div id="tabs">
+          <Tabs
+            tabs={[
+              { icon: HomeIcon, text: "Home", link: "/" },
+              {
+                icon: CatIcon,
+                text: "Characters",
+                link: "/",
+                countIndicator: 5
+              },
+              { icon: LayoutGridIcon, text: "Gallery", link: "/" },
+              { icon: BrushIcon, text: "Commissions", link: "/" },
+              {
+                icon: HeartIcon,
+                text: "Favorites",
+                link: "/",
+                countIndicator: 69
+              }
+            ]}
+          />
         </div>
       </div>
     </div>

@@ -59,7 +59,7 @@ export default function Button({
   }
 
   const baseStyles =
-    "flex items-center gap-x-1.5 rounded-md transition-[border,background-color] border"
+    "flex items-center gap-x-1.5 rounded-md transition-[border,background-color] border border-[2px]"
 
   const variants: ButtonVariantsRecord = {
     primary: "border-transparent bg-300 hover:bg-400 focus:bg-400",
@@ -90,7 +90,11 @@ export default function Button({
       {...attributes}
     >
       {prefixIcon}
-      {children && <span className="select-none">{children}</span>}
+      {children && (
+        <span className="inline-block overflow-hidden select-none whitespace-nowrap overflow-ellipsis">
+          {children}
+        </span>
+      )}
       {suffixIcon}
     </DynamicElement>
   )
