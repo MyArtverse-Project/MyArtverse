@@ -1,12 +1,12 @@
 import "./globals.scss"
 import "@fortawesome/fontawesome-svg-core/styles.css"
 
-import { Metadata } from "next"
-import { Inter, Open_Sans } from "next/font/google"
 import dynamic from "next/dynamic"
+import { Metadata } from "next"
+import { headers } from "next/headers"
+import { Inter, Open_Sans } from "next/font/google"
 
 import { config } from "@fortawesome/fontawesome-svg-core"
-
 import type { IncludeReactNode } from "@/types"
 import { Footer, Navbar } from "@/components/Base"
 import { NavbarProvider } from "@/context/NavbarContext"
@@ -48,9 +48,14 @@ export const metadata: Metadata = {
 
 export default function RootLayout({ children }: IncludeReactNode) {
   const CONTRIB_MSG = `
-    console.log("%c✨ Are you looking to improve MyFursona? If you're a developer, you can help!", "color: hsl(250, 95.5%, 75%)")
-    console.log("🦊 The code, including this website, is open-source! https://github.com/MyFursona-Project")
+    console.log(
+      "%c🦊✨ Are you looking to improve MyFursona? If you're a developer, you can help! The code, including this website, is open-source! https://github.com/MyFursona-Project",
+      "color: hsl(250, 95.5%, 75%)"
+    )
   `
+
+  const headersList = headers()
+  const nonce = headersList.get("x-nonce")
 
   return (
     <html
@@ -59,7 +64,10 @@ export default function RootLayout({ children }: IncludeReactNode) {
       className={`${inter.variable} ${open_sans.variable} theme-system`}
     >
       <head>
-        <script dangerouslySetInnerHTML={{ __html: CONTRIB_MSG }} />
+        <script
+          nonce={nonce}
+          dangerouslySetInnerHTML={{ __html: CONTRIB_MSG }}
+        />
       </head>
       <Provider>
         <body className="bg-100 text-700 !overflow-x-hidden bg-background prose-headings:font-bold prose-headings:font-inter">
