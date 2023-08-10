@@ -1,3 +1,5 @@
+import { kebabCase } from "lodash"
+
 type Schemes = "data:" | "https:" | "blob:" | "mediastream:" | "filesystem:"
 
 type CSPDirective<T = {}> = {
@@ -26,7 +28,7 @@ interface SandboxDirectives {
   allowTopNavigationToCustomProtocols: boolean
 }
 
-export interface CSPPolicies {
+interface CSPPolicies {
   defaultSrc?: CSPDirective
   frameSrc?: CSPDirective
   styleSrc?: CSPDirective<{
@@ -53,8 +55,6 @@ export interface CSPPolicies {
   upgradeInsecureRequests?: boolean
   sandbox?: Partial<SandboxDirectives>
 }
-
-import { kebabCase } from "lodash"
 
 export function generateCSPString(policy: CSPPolicies) {
   let directives: string[] = []
