@@ -68,7 +68,7 @@ export default function Footer() {
                   <li key={index}>
                     <Link
                       className="my-2 font-semibold"
-                      href={!link ? kebabCase(text) : link}
+                      href={!link ? kebabCase(text) : (link as any)}
                     >
                       {text}
                     </Link>

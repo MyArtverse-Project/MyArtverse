@@ -52,6 +52,7 @@ export default function Button({
     | "aria-label"
     | "formAction"
     | "className"
+    | "style"
   >) {
   const sizes: ButtonSizesRecord = {
     small: !iconOnly ? "py-1.5 py-2 " : "p-1.5",

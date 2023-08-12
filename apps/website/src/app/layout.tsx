@@ -9,10 +9,11 @@ import { Inter, Open_Sans } from "next/font/google"
 import { config } from "@fortawesome/fontawesome-svg-core"
 import type { IncludeReactNode } from "@/types"
 import { Footer, Navbar } from "@/components/Base"
-import { NavbarProvider } from "@/context/NavbarContext"
+import { NavbarProvider } from "@/context/NavbarProvider"
 import NoJSReminder from "@/components/NoJSReminder"
 import Provider from "@/context/Provider"
 import SkipNav from "@/components/SkipNav"
+import Analytics from "@/components/Base/Analytics"
 
 config.autoAddCss = false
 
@@ -68,6 +69,7 @@ export default function RootLayout({ children }: IncludeReactNode) {
           nonce={nonce}
           dangerouslySetInnerHTML={{ __html: CONTRIB_MSG }}
         />
+        <Analytics nonce={nonce} />
       </head>
       <Provider>
         <body className="bg-100 text-700 !overflow-x-hidden bg-background prose-headings:font-bold prose-headings:font-inter">

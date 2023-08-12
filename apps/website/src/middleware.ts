@@ -9,15 +9,24 @@ export default function middleware(request: NextRequest) {
   const csp = generateCSPString({
     defaultSrc: {},
     scriptSrc: {
+      // TODO only enable 'unsafe-eval' on dev environments only
       unsafeEval: true,
-      domains: ["https://assets.hcaptcha.com"],
+      domains: [
+        "https://assets.hcaptcha.com",
+        "https://www.clarity.ms/",
+        "https://analytics.umami.is/"
+      ],
       nonce: generatedNonce
     },
     styleSrc: {
       unsafeInline: true
     },
     connectSrc: {
-      domains: ["https://assets.hcaptcha.com", "https://api.stripe.com"]
+      domains: [
+        "https://assets.hcaptcha.com",
+        "https://api.stripe.com",
+        "https://analytics.umami.is/"
+      ]
     },
     frameSrc: {
       domains: [
@@ -33,7 +42,6 @@ export default function middleware(request: NextRequest) {
   })
 
   // Set the CSP header so that Next.js can read it and generate tags with the nonce
-  // TODO only enable 'unsafe-eval' on dev environments only
   requestHeaders.set("Content-Security-Policy", csp)
   requestHeaders.set("x-nonce", generatedNonce)
 
@@ -43,8 +51,10 @@ export default function middleware(request: NextRequest) {
     }
   })
 
+  response.headers.set("Content-Encoding", "br")
   response.headers.set("Content-Security-Policy", csp)
   response.headers.set("X-Content-Type-Options", "no-sniff")
+  response.headers.set("X-Frame-Options", "DENY")
   /**
    ** Technically not supported by most browsers as it's a non-standard, but it's here
    ** just for good measure.

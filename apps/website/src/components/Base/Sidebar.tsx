@@ -2,7 +2,8 @@
 
 import React, { useCallback, useContext, useEffect } from "react"
 import Link from "next/link"
-import { NavbarContext } from "@/context/NavbarContext"
+
+import { NavbarContext } from "@/context/NavbarProvider"
 import {
   HomeIcon,
   SparklesIcon,

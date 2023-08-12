@@ -12,9 +12,12 @@ import {
   CatIcon,
   ShareIcon,
   AlbumIcon,
-  FileLockIcon
+  FileLockIcon,
+  ContrastIcon,
+  LucideIcon
 } from "lucide-react"
-import { NavbarContext } from "@/context/NavbarContext"
+
+import { NavbarContext } from "@/context/NavbarProvider"
 
 import Logo from "../Logo"
 import { Avatar, Button } from "../ui/Buttons"
@@ -22,6 +25,14 @@ import Separator from "../ui/Separator"
 import { Dropdown, DropdownItem } from "../ui/Dropdown"
 import NotificationPopup from "../ui/NotificationPopup"
 import { toLower } from "lodash"
+import { Menu } from "@headlessui/react"
+
+type ItemIterator = Array<{
+  icon?: LucideIcon
+  name?: string
+  link?: string
+  event?: boolean
+}>
 
 export default function Navbar() {
   const { isSidebarOpen, setSidebarState } = useContext(NavbarContext)
@@ -30,12 +41,22 @@ export default function Navbar() {
   const USER_PLACEHOLDER = "VulpoTheDev"
   const HANDLE_PLACEHOLDER = `@${toLower(USER_PLACEHOLDER)}`
 
-  const createNewItems = [
+  // TODO: Invoke a modal event here (i.e. "event: () => openModal(newCollectionModal)")
+  const createNewItems: ItemIterator = [
     { icon: CatIcon, name: "New fursona", link: "/" },
     { icon: ShareIcon, name: "Upload image(s)", link: "/" },
-    // TODO: Invoke a modal event here (i.e. "event: () => openModal(newCollectionModal)")
     { icon: AlbumIcon, name: "New collection", link: "/" },
     { icon: FileLockIcon, name: "New private note", link: "/" }
+  ]
+
+  const siteSettingsItems: ItemIterator = [
+    { icon: ContrastIcon, name: "Change theme" },
+    { icon: ContrastIcon, name: "Language" },
+    { icon: ContrastIcon, name: "Filter content settings" },
+    {},
+    { icon: ContrastIcon, name: "Help" },
+    {},
+    { icon: ContrastIcon, name: "Send feedback" }
   ]
 
   return (
@@ -58,10 +79,11 @@ export default function Navbar() {
           </div>
         </Link>
       </div>
+      {/* Navbar right side */}
       <div className="flex items-center gap-x-2.5">
         <div className="desktop-only-md">
           <Button
-            className="flex items-center gap-x-1.5 pl-3 pr-24 lg:pr-32 xl:pr-48 py-2 border border-button-idle-chips hover:border-dropdowns-text-field border:border-dropdowns-text-field"
+            className="rounded-md flex items-center gap-x-1.5 pl-3 pr-24 lg:pr-32 xl:pr-48 py-2 border border-button-idle-chips hover:border-dropdowns-text-field border:border-dropdowns-text-field"
             prefixIcon={<SearchIcon size={20} />}
           >
             Search
@@ -69,7 +91,7 @@ export default function Navbar() {
         </div>
         <Separator dir="vertical" size="2.125rem" />
         {/* Signed in */}
-        <Dropdown
+        {/* <Dropdown
           button={
             <Button
               iconOnly
@@ -123,12 +145,37 @@ export default function Navbar() {
               <Separator dir="horizontal" padding="0.66rem" />
             </>
           }
-        />
+        /> */}
         {/* Signed out */}
-        <Button iconOnly variant="secondary" aria-label="Site options">
-          <MoreVerticalIcon size={20} />
-        </Button>
-        <Button href="/auth/signin">Sign in</Button>
+        <Dropdown
+          button={
+            <Button iconOnly variant="secondary" aria-label="Site options">
+              <MoreVerticalIcon size={20} />
+            </Button>
+          }
+          items={
+            <>
+              {siteSettingsItems.map((item, index) => (
+                <React.Fragment key={index}>
+                  {typeof item.name !== "undefined" ? (
+                    <Menu.Item>
+                      <Button
+                        prefixIcon={<item.icon size={20} />}
+                        variant="tritery"
+                        style={{ width: "100%" }}
+                      >
+                        {item.name}
+                      </Button>
+                    </Menu.Item>
+                  ) : (
+                    <Separator dir="horizontal" padding={6.5} />
+                  )}
+                </React.Fragment>
+              ))}
+            </>
+          }
+        />
+        <Button href="/signin">Sign in</Button>
       </div>
     </nav>
   )
