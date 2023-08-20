@@ -78,11 +78,11 @@ export default function Button({
 
   return (
     <DynamicElement
+      data-bui-variant={className ? "custom" : variant ?? "primary"}
       // @ts-ignore
       href={href ?? undefined}
       type={!href ? type ?? "button" : undefined}
       aria-disabled={disabled ?? undefined}
-      data-variant={className ? "custom" : variant ?? "primary"}
       className={
         className
           ? className

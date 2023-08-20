@@ -1,9 +1,11 @@
+"use client"
+
 import Link from "next/link"
 
 import Logo from "../Logo"
 import project from "../../../package.json"
-import { CircleDotIcon } from "lucide-react"
 import { kebabCase } from "lodash"
+import { Button } from "../ui/Buttons"
 
 const version = project.version
 
@@ -13,20 +15,29 @@ export default function Footer() {
     {
       heading: "Explore",
       links: [
+        { text: "Download client" },
         { text: "MyFursona+", link: "/plus" },
-        { text: "Developers" },
-        { text: "Beta testing" }
+        { text: "Beta testing" },
+        { text: "Contact" }
       ]
     },
     {
-      heading: "About MyFursona",
+      heading: "Resources",
       links: [
-        { text: "Team" },
+        { text: "Blog" },
         { text: "FAQ" },
+        { text: "Brand" },
+        { text: "Developers" },
+        { text: "Report Issue" }
+      ]
+    },
+    {
+      heading: "Company",
+      links: [
+        { text: "About MyFursona" },
+        { text: "Contributing" },
         { text: "Open Source", link: "https://github.com/MyFursona-Project" },
-        { text: "Changelog" },
-        { text: "Design" },
-        { text: "Contact Us" }
+        { text: "Licenses" }
       ]
     },
     {
@@ -34,9 +45,7 @@ export default function Footer() {
       links: [
         { text: "Community Guidelines" },
         { text: "Terms of Service" },
-        { text: "Privacy Policy" },
-        { text: "DMCA Policy" },
-        { text: "Code of Conduct" }
+        { text: "Privacy Policy" }
       ]
     }
   ]
@@ -46,23 +55,26 @@ export default function Footer() {
       <div className="flex flex-row justify-around px-12 py-6">
         <div className="flex flex-col justify-between w-fit">
           <div className="flex flex-col">
-            <Logo size={1.1} />
-            <Link
-              href={"/"}
-              className="flex flex-row px-2 py-1 my-3 border rounded-md border-color-2 w-fit"
-            >
-              <span>Status:</span>
-              <span className="flex flex-row text-green-500">
-                <CircleDotIcon className="mx-2" /> <p>All systems normal</p>
-              </span>
+            <Link href="/">
+              <Logo size={1.1} />
             </Link>
+            <Button href={"/"} variant="secondary">
+              <span id="mf-status" className="flex flex-row text-success">
+                <style jsx>{`
+                  span#mf-status {
+                  }
+                `}</style>
+                <span className="text-700">Status:</span>
+                <span>All systems normal</span>
+              </span>
+            </Button>
           </div>
-          <span>MyFursona v{version}</span>
+          <span>MyFursona v{version} - COMMIT HASH</span>
         </div>
         <div className="flex flex-row">
           {FOOTER_ITEMS.map(({ heading, links }, index) => (
             <div className="flex flex-col mx-16" key={index}>
-              <h2 className="mb-3 font-semibold text-color-4">{heading}</h2>
+              <h2 className="mb-4 font-semibold text-400">{heading}</h2>
               <ul className="grid gap-y-3">
                 {links.map(({ text, link }, index) => (
                   <li key={index}>
@@ -80,8 +92,8 @@ export default function Footer() {
         </div>
       </div>
       <div id="copyright" className="px-12 py-4 text-center">
-        Copyright &copy; 2022-2023 MyFursona Project, and contributors; licensed
-        under MIT.
+        The MyFursona Project is under the Apache-2.0 license. &copy; 2022-2023
+        MyFursona/Fusky Labs Software Ltd.
       </div>
     </footer>
   )

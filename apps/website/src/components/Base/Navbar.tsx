@@ -60,7 +60,7 @@ export default function Navbar() {
   ]
 
   return (
-    <nav className="flex items-center justify-between px-5 py-4 text-sm font-medium bg-opacity-50 select-none font-inter bg-100">
+    <nav className="z-[15] relative flex items-center justify-between px-5 py-4 text-sm font-medium bg-opacity-50 select-none font-inter bg-100">
       <div className="flex items-center gap-x-2.5">
         <Button
           iconOnly

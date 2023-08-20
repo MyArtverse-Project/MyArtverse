@@ -39,9 +39,9 @@ export default function ProfileHero({
     >
       <div className="relative aspect-[15/3]">
         <div className="absolute inset-0 z-[3]" />
-        <div data-banner-credit="" className="absolute z-[3] bottom-4 right-6">
-          Banner credits:{" "}
-          <Link href="/">
+        <div data-banner-credits="" className="absolute z-[3] bottom-4 right-6">
+          <span>Banner credits: </span>
+          <Link href="/" aria-hidden>
             <span>Rokento</span>
           </Link>
         </div>
@@ -61,6 +61,7 @@ export default function ProfileHero({
       </div>
       <div className="px-12 mx-auto max-w-screen-2xl">
         <section className="flex gap-x-2.5 h-fit">
+          {/* Avatar */}
           <div className="relative flex-shrink-0 w-[var(--avatar-size)] h-[calc(var(--avatar-size)/1.25)]">
             <div className="w-[var(--avatar-size)] absolute -top-12 aspect-square overflow-hidden border-4 rounded-full border-100 bg-100">
               <Image
@@ -75,76 +76,86 @@ export default function ProfileHero({
               />
             </div>
           </div>
+          {/* Username details */}
           <div className="flex flex-col w-full pt-4 gap-y-2">
-            <h2 className="text-3xl flex items-center gap-x-1.5">
-              <span>Username</span>
-              <span id="badge-shelf" aria-hidden></span>
-            </h2>
+            {/* layer 1 - username */}
+            <div className="flex justify-between">
+              <h2 className="text-3xl flex items-center gap-x-1.5">
+                <span>Username</span>
+                <span id="badge-shelf" aria-hidden></span>
+              </h2>
+              <div className="flex items-start gap-x-2.5 relative z-0">
+                <Button
+                  prefixIcon={<BrushIcon size={20} />}
+                  aria-label="View Username's Commissions"
+                  variant="secondary"
+                >
+                  Commission ToS
+                </Button>
+                <Button
+                  prefixIcon={<UserPlusIcon size={20} />}
+                  aria-label="Follow Username"
+                >
+                  Follow
+                </Button>
+                <Dropdown
+                  button={
+                    <Button
+                      iconOnly
+                      prefixIcon={<MoreVerticalIcon size={20} />}
+                      aria-label="More"
+                    ></Button>
+                  }
+                  items={
+                    <>
+                      <DropdownItem link="/">Manage trades</DropdownItem>
+                      <DropdownItem link="/">Report Username</DropdownItem>
+                    </>
+                  }
+                />
+              </div>
+            </div>
+            {/* layer 2 - handles and followers */}
             <div className="flex gap-x-3.5">
-              <span className="font-semibold text-700">{handle}</span>
+              <span id="user-handle" className="font-semibold text-700">
+                {handle}
+              </span>
               <span className="inline-flex items-center font-semibold gap-x-1 text-error">
                 <AlertTriangleIcon size={19} />
                 <span>NSFW</span>
               </span>
-              <span className="text-700">69 followers</span>
-              <span className="text-700">21 following</span>
+              <span id="user-followers" className="text-700">
+                69 followers
+              </span>
+              <span id="user-following" className="text-700">
+                21 following
+              </span>
             </div>
+            {/* layer 3 - socials */}
             <div className="flex gap-x-2.5 pt-1.5">
-              <Socials />
+              <Socials items={[{ platform: "Website", link: "baby" }]} />
             </div>
-          </div>
-          <div className="flex items-start gap-x-2.5 pt-4">
-            <Button
-              prefixIcon={<BrushIcon size={20} />}
-              aria-label="View Username's Commissions"
-              variant="secondary"
-            >
-              Commission ToS
-            </Button>
-            <Button
-              prefixIcon={<UserPlusIcon size={20} />}
-              aria-label="Follow Username"
-            >
-              Follow
-            </Button>
-            <Dropdown
-              button={
-                <Button
-                  iconOnly
-                  prefixIcon={<MoreVerticalIcon size={20} />}
-                  aria-label="More"
-                ></Button>
-              }
-              items={
-                <>
-                  <DropdownItem link="/">Manage trades</DropdownItem>
-                  <DropdownItem link="/">Report Username</DropdownItem>
-                </>
-              }
-            />
           </div>
         </section>
-        <div id="tabs">
-          <Tabs
-            tabs={[
-              { icon: HomeIcon, text: "Home", link: "/" },
-              {
-                icon: CatIcon,
-                text: "Characters",
-                link: "/",
-                countIndicator: 5
-              },
-              { icon: LayoutGridIcon, text: "Gallery", link: "/" },
-              { icon: BrushIcon, text: "Commissions", link: "/" },
-              {
-                icon: HeartIcon,
-                text: "Favorites",
-                link: "/",
-                countIndicator: 69
-              }
-            ]}
-          />
-        </div>
+        <Tabs
+          tabs={[
+            { icon: HomeIcon, text: "Home", link: "/" },
+            {
+              icon: CatIcon,
+              text: "Characters",
+              link: "/",
+              countIndicator: 5
+            },
+            { icon: LayoutGridIcon, text: "Gallery", link: "/" },
+            { icon: BrushIcon, text: "Commissions", link: "/" },
+            {
+              icon: HeartIcon,
+              text: "Favorites",
+              link: "/",
+              countIndicator: 69
+            }
+          ]}
+        />
       </div>
     </div>
   )

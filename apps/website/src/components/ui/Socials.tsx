@@ -2,61 +2,31 @@ import { FontAwesomeIcon } from "@fortawesome/react-fontawesome"
 import { Linktree } from "../icons"
 
 import { fab } from "@fortawesome/free-brands-svg-icons"
-import { library } from "@fortawesome/fontawesome-svg-core"
+import { IconName, library } from "@fortawesome/fontawesome-svg-core"
+import type { ResolveToFontAwesome, Socials } from "@/types/Socials"
+import Link from "next/link"
 library.add(fab)
 
-type Socials =
-  // general
-  | "facebook"
-  | "twitter"
-  | "youtube"
-  | "instagram"
-  | "twitch"
-  | "tiktok"
-  | "reddit"
-  | "threads"
-  | "tumblr"
-  | "mastodon"
-  | "bluesky"
-  | "linktree"
-  // gaming
-  | "steam"
-  | "playstation"
-  | "xbox"
-  | "github"
-  // messaging
-  | "telegram"
-  | "discord"
-  | "whatsapp"
-  // Art focused
-  | "pinterest"
-  | "behance"
-  | "deviantart"
-  | "artstation"
-  | "sketchfab"
-  | "artfight"
-  | "furaffinity"
-  | "weasyl"
-  // Fundrasing & e-commerce
-  | "Etsy"
-  | "Ko-fi"
-  | "Patreon"
-  // music
-  | "iTunes"
-  | "Spotify"
-  | "SoundCloud"
-  | "Bandcamp"
+export default function Socials({ items }: { items?: Socials }) {
+  // TODO try and find a way to exchange FA components, Lucide Icons, and local components
+  const resolveToFA: ResolveToFontAwesome = {
+    "Battle.net": "battle-net",
+    "Apple Music": "itunes-note",
+    WhatsApp: "whatsapp"
+  }
 
-export default function Socials({
-  items
-}: {
-  items?: Partial<Record<Lowercase<Socials>, string>>
-}) {
+
   return (
     <div data-social-shelf="">
-      <FontAwesomeIcon icon={["fab", "youtube"]} size="lg" fixedWidth />
-      <FontAwesomeIcon icon={["fab", "x-twitter"]} size="lg" fixedWidth />
-      <FontAwesomeIcon icon={["fab", "github"]} size="lg" fixedWidth />
+      {items.map(({ link, platform }, index) => (
+        <Link href={link} key={index}>
+          {/* <FontAwesomeIcon
+            icon={["fab", resolveToFA[platform] as IconName]}
+            size="lg"
+            fixedWidth
+          /> */}
+        </Link>
+      ))}
     </div>
   )
 }

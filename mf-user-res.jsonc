@@ -1,0 +1,42 @@
+{
+  // Response url: api.myfursona.art/user/kuroji-fusky
+  "uuid": "c0330cde-3772-11ee-be56-0242ac120002",
+  "commissions_url": "api.myfursona.art/user/kuroji-fusky/commissions",
+  "characters_url": "api.myfursona.art/user/kuroji-fusky/characters",
+  "events_url": "api.myfursona.art/user/kuroji-fusky/recent-events",
+  "followers_url": "api.myfursona.art/user/kuroji-fusky/followers",
+  "email_verified": true,
+  "has_2fa": true,
+  "name": "Kuroji Fusky",
+  "handle": "@kurojifusky",
+  "user_url": "myfursona.art/@kurojifusky",
+  "followers": 127,
+  "following": 21,
+  "created_at": "2021-11-19T08:48:40Z",
+  "updated_at": "2023-08-05T04:11:28Z",
+  "banner_url": "aws-s3-cdn.myfursona.art/img/banner/banner-c0330cde-3772-11ee-be56-0242ac120002.png",
+  "avatar_url": "aws-s3-cdn.myfursona.art/img/avatar/avatar-beec16e4-3773-11ee-be56-0242ac120002.png",
+  "roles": {
+    "is_staff": true,
+    "is_contributor": true,
+    "is_artist": false,
+    "has_membership": true
+  },
+  "links": [
+    { "platform": "github", "url": "https://github.com/kurojifusky" },
+    { "platform": "twitter", "url": "https://twitter.com/@kurojifusky" },
+    { "platform": "youtube", "url": "https://youtube.com/@kurojifusky" },
+    { "platform": "others", "url": "https://kurojifusky.com" }
+  ],
+  //////////////////////////////////
+  "characters": [
+    {
+      "name": "Kuroji",
+      "full_name": "Kuroji Fusky",
+      "nicknames": ["Kuro", "Dummy"],
+      "ref_sheet": "aws-s3-cdn.myfursona.art/img/beec16e4-3773-11ee-be56-0242ac120002.png",
+      "description": "A nerdy boi",
+      "details": {}
+    }
+  ]
+}

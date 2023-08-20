@@ -1,16 +1,19 @@
+import Script from "next/script"
+
 export default function Analytics({ nonce }: { nonce: string }) {
   return (
     <>
       {/* Site analytics - Umami */}
-      <script
-        nonce={nonce}
+      <Script
+        id="umami"
         async
         defer
         src="https://analytics.umami.is/script.js"
         data-website-id="XXXXXX"
       />
       {/* Behavior analytics - Microsoft Clarity */}
-      <script
+      <Script
+        id="microsoft-clarity"
         nonce={nonce}
         dangerouslySetInnerHTML={{
           __html: `
