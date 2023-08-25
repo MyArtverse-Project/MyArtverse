@@ -19,7 +19,7 @@ export default function Tabs({
         return (
           <Link
             data-bui-tab=""
-            href={link}
+            href={link as any}
             key={i}
             tabIndex={0}
             className="flex items-center px-4 py-2 transition-colors rounded-md gap-x-2 hover:bg-300 focus:bg-300 group hover:bg-opacity-60 focus:bg-opacity-60"

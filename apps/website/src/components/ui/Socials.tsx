@@ -19,7 +19,7 @@ export default function Socials({ items }: { items?: Socials }) {
   return (
     <div data-social-shelf="">
       {items.map(({ link, platform }, index) => (
-        <Link href={link} key={index}>
+        <Link href={link as any} key={index}>
           {/* <FontAwesomeIcon
             icon={["fab", resolveToFA[platform] as IconName]}
             size="lg"

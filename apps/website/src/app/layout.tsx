@@ -7,13 +7,11 @@ import { headers } from "next/headers"
 import { Inter, Open_Sans } from "next/font/google"
 
 import { config } from "@fortawesome/fontawesome-svg-core"
-import type { IncludeReactNode } from "@/types"
 import { Footer, Navbar } from "@/components/Base"
-import { NavbarProvider } from "@/context/NavbarProvider"
 import NoJSReminder from "@/components/NoJSReminder"
-import Provider from "@/context/Provider"
 import SkipNav from "@/components/SkipNav"
 import Analytics from "@/components/Base/Analytics"
+import Providers from "@/context/Providers"
 
 config.autoAddCss = false
 
@@ -47,7 +45,11 @@ export const metadata: Metadata = {
   robots: "noai, noimageai"
 }
 
-export default function RootLayout({ children }: IncludeReactNode) {
+export default function RootLayout({
+  children
+}: {
+  children: React.ReactNode
+}) {
   const CONTRIB_MSG = `
     console.log(
       "%c🦊✨ Are you looking to improve MyFursona? If you're a developer, you can help! The code, including this website, is open-source! https://github.com/MyFursona-Project",
@@ -71,7 +73,7 @@ export default function RootLayout({ children }: IncludeReactNode) {
         />
         <Analytics nonce={nonce} />
       </head>
-      <Provider>
+      <Providers>
         <body className="bg-100 text-700 !overflow-x-hidden bg-background prose-headings:font-bold prose-headings:font-inter">
           {/* Skip nav accessibility */}
           <SkipNav />
@@ -82,17 +84,15 @@ export default function RootLayout({ children }: IncludeReactNode) {
             id="myfursona-app"
             className="text-sm font-medium contents font-open-sans"
           >
-            <NavbarProvider>
-              <header className="sticky top-0 z-10">
-                <Navbar />
-                <Sidebar />
-              </header>
-              <main id="skip-navigation">{children}</main>
-              <Footer />
-            </NavbarProvider>
+            <header className="sticky top-0 z-10">
+              <Navbar />
+              <Sidebar />
+            </header>
+            <main id="skip-navigation">{children}</main>
+            <Footer />
           </div>
         </body>
-      </Provider>
+      </Providers>
     </html>
   )
 }

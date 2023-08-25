@@ -1,6 +1,5 @@
 import { useEffect } from "react"
 import dynamic from "next/dynamic"
-import type { IncludeReactNode } from "@/types"
 
 const Portal = dynamic(() => import("./Portal"), { ssr: false })
 
@@ -8,10 +7,11 @@ export default function Overlay({
   children,
   state,
   toggler
-}: IncludeReactNode<{
+}: {
+  children?: React.ReactNode
   state?: unknown
   toggler?: () => void
-}>) {
+}) {
   const overlayState = state ? "opacity-100" : "opacity-0 pointer-events-none"
 
   useEffect(() => {

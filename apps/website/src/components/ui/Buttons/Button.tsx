@@ -1,16 +1,15 @@
 import Link from "next/link"
 
 import type {
-  IncludeReactNode,
-  SizeLiterals as ButtonSizes,
-  VariantLiterals,
+  Sizes as ButtonSizes,
+  Variants,
   OmitUnion,
   PartialRecord
 } from "@/types"
 import type { LucideIcon } from "lucide-react"
 import type { UrlObject } from "url"
 
-type ButtonVariants = OmitUnion<VariantLiterals, "success">
+type ButtonVariants = OmitUnion<Variants, "success">
 type ButtonVariantsRecord = PartialRecord<ButtonVariants>
 
 type ButtonSizesRecord = PartialRecord<ButtonSizes>
@@ -31,7 +30,8 @@ export default function Button({
    */
   className,
   ...attributes
-}: IncludeReactNode<{
+}: {
+  children?: React.ReactNode
   iconOnly?: boolean
   disabled?: boolean
   type?: React.ButtonHTMLAttributes<HTMLButtonElement>["type"]
@@ -40,20 +40,19 @@ export default function Button({
   prefixIcon?: React.ReactElement<LucideIcon>
   suffixIcon?: React.ReactElement<LucideIcon>
   href?: string | UrlObject
-}> &
-  Pick<
-    React.ButtonHTMLAttributes<HTMLButtonElement> &
-      React.AnchorHTMLAttributes<HTMLAnchorElement>,
-    | "onClick"
-    | "onContextMenu"
-    | "onKeyDown"
-    | "onMouseDown"
-    | "onMouseOver"
-    | "aria-label"
-    | "formAction"
-    | "className"
-    | "style"
-  >) {
+} & Pick<
+  React.ButtonHTMLAttributes<HTMLButtonElement> &
+    React.AnchorHTMLAttributes<HTMLAnchorElement>,
+  | "onClick"
+  | "onContextMenu"
+  | "onKeyDown"
+  | "onMouseDown"
+  | "onMouseOver"
+  | "aria-label"
+  | "formAction"
+  | "className"
+  | "style"
+>) {
   const sizes: ButtonSizesRecord = {
     small: !iconOnly ? "py-1.5 py-2 " : "p-1.5",
     big: !iconOnly ? "px-4 py-2" : "p-2"

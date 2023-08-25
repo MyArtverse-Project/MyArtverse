@@ -52,6 +52,7 @@
     "@storybook/testing-library": "^0.2.0",
     "@types/lodash": "^4.14.195",
     "eslint-plugin-storybook": "^0.6.13",
+    "lodash.kebabcase": "^4.1.1",
     "prisma": "^5.1.0",
     "storybook": "^7.2.3"
   },

@@ -1,7 +1,6 @@
 import type {
-  IncludeReactNode,
   PickUnion,
-  VariantLiterals as NoteVariants,
+  Variants as NoteVariants,
   PartialRecord
 } from "@/types"
 import {
@@ -18,10 +17,11 @@ export default function Notice({
   children,
   type,
   heading
-}: IncludeReactNode<{
+}: {
+  children?: React.ReactNode
   type: NoteStatus
   heading?: string
-}>) {
+}) {
   const status: PartialRecord<NoteStatus, { css: string; icon: LucideIcon }> = {
     warning: {
       icon: AlertTriangleIcon,

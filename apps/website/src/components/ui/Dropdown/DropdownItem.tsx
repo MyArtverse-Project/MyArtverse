@@ -1,4 +1,3 @@
-import type { IncludeReactNode } from "@/types"
 import { Menu } from "@headlessui/react"
 import Link from "next/link"
 
@@ -9,12 +8,13 @@ export default function DropdownItem({
   suffix,
   disabled,
   ...attributes
-}: IncludeReactNode<{
+}: {
+  children?: React.ReactNode
   link?: string
   disabled?: boolean
   prefix?: React.ReactElement
   suffix?: React.ReactElement
-}> &
+} &
   Pick<
     React.ButtonHTMLAttributes<HTMLButtonElement>,
     "onClick" | "onKeyDown" | "aria-label"
@@ -23,7 +23,7 @@ export default function DropdownItem({
     <Menu.Item>
       {({ active }) => (
         <Link
-          href={link as string}
+          href={link as any}
           className={`rounded-md w-full transition-colors ${
             active && "bg-color-2"
           }`}

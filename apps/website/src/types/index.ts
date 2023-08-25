@@ -10,13 +10,6 @@ export type PartialRecord<K extends PropertyKey, T = string> = Partial<
 >
 
 /**
- * A generic that merges custom interface with ReactNode
- */
-export type IncludeReactNode<T extends object = {}> = {
-  children?: React.ReactNode
-} & T
-
-/**
  * Equivalent of the `Pick<T, U>` generic for literal unions
  */
 export type PickUnion<T, U extends T> = T extends U ? T : never
@@ -28,8 +21,8 @@ export type OmitUnion<T, U extends T> = T extends U ? never : T
 
 export type Theme = "system" | "light" | "dark"
 
-export type SizeLiterals = "small" | "big"
-export type VariantLiterals =
+export type Sizes = "small" | "big"
+export type Variants =
   | "primary"
   | "secondary"
   | "tritery"

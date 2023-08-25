@@ -1,6 +1,6 @@
 "use client"
 
-import React, { useCallback, useContext, useEffect } from "react"
+import { useCallback, useContext, useEffect, Fragment } from "react"
 import Link from "next/link"
 
 import { NavbarContext } from "@/context/NavbarProvider"
@@ -86,7 +86,7 @@ export default function Sidebar() {
         </div>
         <div className="px-2.5 h-full overflow-y-scroll" role="menu">
           {SIDEBAR_ITEMS.map(({ heading, items }, index) => (
-            <React.Fragment key={index}>
+            <Fragment key={index}>
               <MenuGroup heading={heading ?? undefined}>
                 {items.map((item, index) => (
                   <MenuItem
@@ -98,7 +98,7 @@ export default function Sidebar() {
                 ))}
               </MenuGroup>
               <Separator dir="horizontal" padding="0.525rem" />
-            </React.Fragment>
+            </Fragment>
           ))}
         </div>
       </aside>
