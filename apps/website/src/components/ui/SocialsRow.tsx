@@ -7,7 +7,7 @@ import type { ResolveToFontAwesome, Socials } from "@/types/Socials"
 import Link from "next/link"
 library.add(fab)
 
-export default function Socials({ items }: { items?: Socials }) {
+export default function SocialsRow({ items }: { items?: Socials }) {
   // TODO try and find a way to exchange FA components, Lucide Icons, and local components
   const resolveToFA: ResolveToFontAwesome = {
     "Battle.net": "battle-net",

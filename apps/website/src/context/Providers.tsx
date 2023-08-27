@@ -1,6 +1,6 @@
 import { Session } from "next-auth"
 import { SessionProvider } from "next-auth/react"
-import { NavbarProvider } from "./NavbarProvider"
+import { SidebarProvider } from "./NavbarProvider"
 import { ThemeProvider } from "./ThemeProvider"
 
 export default function Providers({
@@ -11,10 +11,8 @@ export default function Providers({
   session?: Session
 }) {
   return (
-    <SessionProvider session={session}>
       <ThemeProvider>
-        <NavbarProvider>{children}</NavbarProvider>
+        <SidebarProvider>{children}</SidebarProvider>
       </ThemeProvider>
-    </SessionProvider>
   )
 }

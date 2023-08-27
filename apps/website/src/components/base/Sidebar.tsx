@@ -3,7 +3,8 @@
 import { useCallback, useContext, useEffect, Fragment } from "react"
 import Link from "next/link"
 
-import { NavbarContext } from "@/context/NavbarProvider"
+import { SidebarContext } from "@/context/NavbarProvider"
+
 import {
   HomeIcon,
   SparklesIcon,
@@ -15,7 +16,7 @@ import {
   AlertTriangleIcon,
   BoxIcon
 } from "lucide-react"
-import Logo from "../Logo"
+import MyFursona from "../icons/MyFursona"
 import Overlay from "../ui/Overlay"
 import { Button } from "../ui/Buttons"
 import { MenuGroup, MenuItem } from "../ui/Menu"
@@ -46,7 +47,8 @@ export default function Sidebar() {
     }
   ]
 
-  const { isSidebarOpen, setSidebarState } = useContext(NavbarContext)
+  const { sidebarState: isSidebarOpen, setSidebarState } =
+    useContext(SidebarContext)
 
   const toggleSidebar = useCallback(() => {
     setSidebarState(!isSidebarOpen)
@@ -81,7 +83,7 @@ export default function Sidebar() {
             <XIcon size={20} />
           </Button>
           <Link href="/" aria-label="Home" title="Home">
-            <Logo />
+            <MyFursona />
           </Link>
         </div>
         <div className="px-2.5 h-full overflow-y-scroll" role="menu">

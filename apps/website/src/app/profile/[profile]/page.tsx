@@ -1,10 +1,11 @@
-import { Avatar, Button } from "@/components/ui/Buttons"
 import { Metadata, ResolvingMetadata } from "next"
-import Image from "next/image"
 
-import { useRouter } from "next/navigation"
-import ProfileHero from "./ProfileHero"
+import dynamic from "next/dynamic"
+import ProfileMasthead from "./ProfileMasthead"
 import { AlertOctagon } from "lucide-react"
+import { Fragment } from "react"
+
+const Modal = dynamic(() => import("@/components/ui/Modal"), { ssr: false })
 
 type Props = {
   params: {
@@ -31,10 +32,25 @@ export default function Page({ params }: Props) {
   const decodeUserHandle = `@${params.profile}`
 
   return (
-    <div className="relative -top-[4.6rem] -mb-[4.6rem]">
-      <ProfileHero handle={decodeUserHandle} />
+    <Fragment>
+      <ProfileMasthead handle={decodeUserHandle} />
+      {/*
+      
+      Reimplmenting stuff
+
+      <Masthead>
+        <Masthead.Avatar src="./avatar.png" />
+        <Masthead.Info followers={69} following={21} />
+        <Masthead.Actions>
+          <Button>Follow</Button>
+          <Button>Report</Button>
+          <Button>Block</Button>
+        </Masthead.Actions>
+      </Masthead>
+
+      */}
       <div
-        id="profile-contents"
+        data-profile-contents=""
         className="px-12 py-4 mx-auto max-w-screen-2xl"
       >
         <div className="grid px-4 py-16 text-center border rounded-md place-items-center border-error prose-p:w-2/3 prose-p:mx-auto prose-p:leading-6 prose-p:mt-2">
@@ -54,6 +70,6 @@ export default function Page({ params }: Props) {
           </p>
         </div>
       </div>
-    </div>
+    </Fragment>
   )
 }

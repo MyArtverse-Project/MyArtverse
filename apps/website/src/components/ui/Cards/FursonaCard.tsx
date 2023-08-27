@@ -2,23 +2,25 @@ import Image from "next/image"
 
 import type { AdoptionStatus, ColorPalette } from "@/types"
 
-type Palette =
+type CharacterCardPalette =
   | [ColorPalette]
   | [ColorPalette, ColorPalette]
   | [ColorPalette, ColorPalette, ColorPalette]
 
-interface FursonaCardProps {
+export default function FursonaCard({
+  name,
+  img = "",
+  species,
+  isHybrid,
+  palette
+}: {
   name?: string
   img?: string
   species?: string
   isHybrid?: boolean
   status?: AdoptionStatus
-  palette?: Palette
-}
-
-export default function FursonaCard(props: FursonaCardProps) {
-  const { name, img = "", species, isHybrid, palette } = props
-
+  palette?: CharacterCardPalette
+}) {
   return (
     <div tabIndex={-1} aria-label={`${name}, ${species}`} className="">
       <Image

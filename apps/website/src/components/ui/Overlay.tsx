@@ -1,3 +1,5 @@
+"use client"
+
 import { useEffect } from "react"
 import dynamic from "next/dynamic"
 
@@ -10,7 +12,7 @@ export default function Overlay({
 }: {
   children?: React.ReactNode
   state?: unknown
-  toggler?: () => void
+  toggler?: React.Dispatch<React.SetStateAction<boolean>>
 }) {
   const overlayState = state ? "opacity-100" : "opacity-0 pointer-events-none"
 
@@ -25,7 +27,7 @@ export default function Overlay({
       <div
         data-overlay-screen=""
         className={`duration-[350ms] fixed z-[19] transition-all bg-black/40 inset-0 ${overlayState}`}
-        onClick={toggler}
+        onClick={toggler as () => any}
       />
       <div data-overlay-wrapper="" className="fixed z-[20]">
         {children}

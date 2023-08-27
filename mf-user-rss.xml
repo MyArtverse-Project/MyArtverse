@@ -1,9 +1,0 @@
-<rss version="2.00">
-  <channel>
-    <title>Kuroji Fusky | MyFursona RSS Feed</title>
-    <description>...</description>
-    <link>myfursona.art/@kurojifusky</link>
-    <generator>RSS for Node</generator>
-    <atom:link href="myfursona.art/@kurojifusky/rss.xml" rel="self" type="application/rss+xml" />
-  </channel>
-</rss>

@@ -17,15 +17,14 @@ import {
   LucideIcon
 } from "lucide-react"
 
-import { NavbarContext } from "@/context/NavbarProvider"
-
-import Logo from "../Logo"
+import MyFursona from "../icons/MyFursona"
 import { Avatar, Button } from "../ui/Buttons"
 import Separator from "../ui/Separator"
 import { Dropdown, DropdownItem } from "../ui/Dropdown"
 import NotificationPopup from "../ui/NotificationPopup"
 import { toLower } from "lodash"
 import { Menu } from "@headlessui/react"
+import { SidebarContext } from "@/context/NavbarProvider"
 
 type ItemIterator = Array<{
   icon?: LucideIcon
@@ -35,7 +34,8 @@ type ItemIterator = Array<{
 }>
 
 export default function Navbar() {
-  const { isSidebarOpen, setSidebarState } = useContext(NavbarContext)
+  const { sidebarState: isSidebarOpen, setSidebarState } =
+    useContext(SidebarContext)
   // TODO: Implement User Data onto sidebar
 
   const USER_PLACEHOLDER = "VulpoTheDev"
@@ -72,10 +72,10 @@ export default function Navbar() {
         </Button>
         <Link href="/" aria-label="Home" title="Home">
           <div className="desktop-only-lg">
-            <Logo size={0.75} />
+            <MyFursona size={0.75} />
           </div>
           <div className="mobile-only-lg">
-            <Logo logoOnly />
+            <MyFursona logoOnly />
           </div>
         </Link>
       </div>

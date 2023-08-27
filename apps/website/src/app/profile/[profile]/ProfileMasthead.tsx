@@ -3,14 +3,6 @@
 import Image from "next/image"
 
 import { Button } from "@/components/ui/Buttons"
-import { FontAwesomeIcon } from "@fortawesome/react-fontawesome"
-import {
-  faFacebook,
-  faYoutube,
-  faXTwitter,
-  faTelegram,
-  faLinkedin
-} from "@fortawesome/free-brands-svg-icons"
 import {
   AlertTriangleIcon,
   BrushIcon,
@@ -21,30 +13,47 @@ import {
   MoreVerticalIcon,
   UserPlusIcon
 } from "lucide-react"
-import Link from "next/link"
 import Tabs from "@/components/ui/Tabs"
 import { Dropdown, DropdownItem } from "@/components/ui/Dropdown"
-import Socials from "@/components/ui/Socials"
+import SocialsRow from "@/components/ui/SocialsRow"
+import Separator from "@/components/ui/Separator"
+import { Fragment } from "react"
 
-export default function ProfileHero({
-  handle
+// TODO rewrite this masthead function to be reusable for profiles and character pages
+export default function ProfileMasthead({
+  handle,
+  username,
+  isFollowingUser,
+  followers,
+  following,
+  characterCount,
+  hasCommissions,
+  isNSFW
 }: {
+  type?: "profile" | "character"
   handle: string
+  username?: string
+  isFollowingUser?: boolean
+  followers?: number
+  following?: number
+  characterCount?: number
+  hasCommissions?: boolean
   isNSFW?: boolean
 }) {
   return (
-    <div
-      data-profile-hero=""
-      style={{ "--profile-banner-parallax": 1 } as React.CSSProperties}
-    >
-      <div className="relative aspect-[15/3]">
+    <Fragment>
+      <div
+        className="relative aspect-[15/3]"
+        style={{ "--profile-banner-parallax": 1 } as React.CSSProperties}
+      >
+        {/* Banner */}
+        {/* <div
+          data-edit-banner-layout=""
+          className="absolute inset-0 grid place-items-center z-[4]"
+        >
+          <span>Change banner</span>
+        </div> */}
         <div className="absolute inset-0 z-[3]" />
-        <div data-banner-credits="" className="absolute z-[3] bottom-4 right-6">
-          <span>Banner credits: </span>
-          <Link href="/" aria-hidden>
-            <span>Rokento</span>
-          </Link>
-        </div>
         <Image
           src="/img/hero/ozzy-banner.png"
           alt=""
@@ -63,6 +72,7 @@ export default function ProfileHero({
         <section className="flex gap-x-2.5 h-fit">
           {/* Avatar */}
           <div className="relative flex-shrink-0 w-[var(--avatar-size)] h-[calc(var(--avatar-size)/1.25)]">
+            <div className="absolute inset-0 z-[3] -top-12" />
             <div className="w-[var(--avatar-size)] absolute -top-12 aspect-square overflow-hidden border-4 rounded-full border-100 bg-100">
               <Image
                 fill
@@ -82,7 +92,7 @@ export default function ProfileHero({
             <div className="flex justify-between">
               <h2 className="text-3xl flex items-center gap-x-1.5">
                 <span>Username</span>
-                <span id="badge-shelf" aria-hidden></span>
+                <span data-badge-shelf="" aria-hidden></span>
               </h2>
               <div className="flex items-start gap-x-2.5 relative z-0">
                 <Button
@@ -108,8 +118,10 @@ export default function ProfileHero({
                   }
                   items={
                     <>
+                      <DropdownItem link="/">Share</DropdownItem>
                       <DropdownItem link="/">Manage trades</DropdownItem>
                       <DropdownItem link="/">Report Username</DropdownItem>
+                      <DropdownItem link="/">Block Username</DropdownItem>
                     </>
                   }
                 />
@@ -133,13 +145,13 @@ export default function ProfileHero({
             </div>
             {/* layer 3 - socials */}
             <div className="flex gap-x-2.5 pt-1.5">
-              <Socials items={[{ platform: "Website", link: "baby" }]} />
+              <SocialsRow items={[{ platform: "Website", link: "baby" }]} />
             </div>
           </div>
         </section>
         <Tabs
           tabs={[
-            { icon: HomeIcon, text: "Home", link: "/" },
+            { icon: HomeIcon, text: "Overview", link: "/" },
             {
               icon: CatIcon,
               text: "Characters",
@@ -157,6 +169,7 @@ export default function ProfileHero({
           ]}
         />
       </div>
-    </div>
+      <Separator dir="horizontal" padding={12.5} />
+    </Fragment>
   )
 }

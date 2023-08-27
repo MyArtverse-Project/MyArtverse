@@ -1,4 +1,4 @@
-export default function Logo({
+export default function MyFursona({
   logoOnly = false,
   size = 0.7
 }: {

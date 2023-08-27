@@ -76,12 +76,12 @@ svg.lucide {
   --bui-context-menu: theme("colors.200");
 }
 
-[data-profile-hero] {
+body {
   --avatar-size: 8rem;
 }
 
 @media (min-width: 1024px) {
-  [data-profile-hero] {
+  body {
     --avatar-size: 11rem;
   }
 }

@@ -10,7 +10,7 @@ export const SidebarContext = createContext<{
   setSidebarState: () => {}
 })
 
-export function NavbarProvider({ children }: { children: React.ReactNode }) {
+export function SidebarProvider({ children }: { children: React.ReactNode }) {
   const [sidebarState, setSidebarState] = useState(false)
 
   return (

@@ -13,7 +13,7 @@ export default function Analytics({ nonce }: { nonce: string }) {
       />
       {/* Behavior analytics - Microsoft Clarity */}
       <Script
-        id="microsoft-clarity"
+        id="clarity"
         nonce={nonce}
         dangerouslySetInnerHTML={{
           __html: `
