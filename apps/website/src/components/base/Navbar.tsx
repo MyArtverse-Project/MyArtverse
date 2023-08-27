@@ -17,14 +17,13 @@ import {
   LucideIcon
 } from "lucide-react"
 
-import MyFursona from "../icons/MyFursona"
-import { Avatar, Button } from "../ui/Buttons"
-import Separator from "../ui/Separator"
-import { Dropdown, DropdownItem } from "../ui/Dropdown"
-import NotificationPopup from "../ui/NotificationPopup"
 import { toLower } from "lodash"
 import { Menu } from "@headlessui/react"
 import { SidebarContext } from "@/context/NavbarProvider"
+import { MyFursona } from "../icons"
+import { Button } from "../ui/Buttons"
+import { Separator } from "../ui"
+import { Dropdown } from "../ui/Dropdown"
 
 type ItemIterator = Array<{
   icon?: LucideIcon

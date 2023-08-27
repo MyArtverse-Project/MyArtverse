@@ -2,10 +2,10 @@
 
 import Link from "next/link"
 
-import MyFursona from "../icons/MyFursona"
 import project from "../../../package.json"
 import { kebabCase } from "lodash"
 import { Button } from "../ui/Buttons"
+import { MyFursona } from "../icons"
 
 const version = project.version
 
