@@ -7,18 +7,16 @@ import { headers } from "next/headers"
 import { Inter, Open_Sans } from "next/font/google"
 
 import { config } from "@fortawesome/fontawesome-svg-core"
-import type { IncludeReactNode } from "@/types"
-import { Footer, Navbar } from "@/components/Base"
-import { NavbarProvider } from "@/context/NavbarProvider"
-import NoJSReminder from "@/components/NoJSReminder"
-import Provider from "@/context/Provider"
-import SkipNav from "@/components/SkipNav"
-import Analytics from "@/components/Base/Analytics"
+import { Footer, Navbar } from "@/components/base"
+import SkipNav from "@/components/base/SkipNav"
+import Analytics from "@/components/base/Analytics"
+import Providers from "@/context/Providers"
+import NoJSReminder from "@/components/base/NoJSReminder"
 
 config.autoAddCss = false
 
 const Sidebar = dynamic(
-  () => import("@/components/Base").then((c) => c.Sidebar),
+  () => import("@/components/base").then((c) => c.Sidebar),
   { ssr: false }
 )
 
@@ -47,12 +45,19 @@ export const metadata: Metadata = {
   robots: "noai, noimageai"
 }
 
-export default function RootLayout({ children }: IncludeReactNode) {
-  const CONTRIB_MSG = `
-    console.log(
-      "%c🦊✨ Are you looking to improve MyFursona? If you're a developer, you can help! The code, including this website, is open-source! https://github.com/MyFursona-Project",
-      "color: hsl(250, 95.5%, 75%)"
-    )
+export default function RootLayout({
+  children
+}: {
+  children: React.ReactNode
+}) {
+  const CONSOLE_MSG =
+    "%c🦊✨ Are you looking to improve MyFursona? If you're a developer, you can help! The code, including this website, is open-source! https://github.com/MyFursona-Project"
+  const COMMENT_MSG = "Whatcha lookin at? OwO"
+
+  const DEV_CONVERSION_INLINE_SCRIPT = `
+    (function(m,s,a){
+      const __d=document;__d.insertBefore(__d.createComment(a),__d.childNodes[0]);console.log(m, s)
+    })("${CONSOLE_MSG}","color: hsl(250, 95.5%, 75%)", "${COMMENT_MSG}")
   `
 
   const headersList = headers()
@@ -67,13 +72,12 @@ export default function RootLayout({ children }: IncludeReactNode) {
       <head>
         <script
           nonce={nonce}
-          dangerouslySetInnerHTML={{ __html: CONTRIB_MSG }}
+          dangerouslySetInnerHTML={{ __html: DEV_CONVERSION_INLINE_SCRIPT }}
         />
         <Analytics nonce={nonce} />
       </head>
-      <Provider>
-        <body className="bg-100 text-700 !overflow-x-hidden bg-background prose-headings:font-bold prose-headings:font-inter">
-          {/* Skip nav accessibility */}
+      <body className="bg-100 text-700 !overflow-x-hidden bg-background prose-headings:font-bold prose-headings:font-inter">
+        <Providers>
           <SkipNav />
           <NoJSReminder />
           {/* Platform announcements sent through the API goes here */}
@@ -82,17 +86,15 @@ export default function RootLayout({ children }: IncludeReactNode) {
             id="myfursona-app"
             className="text-sm font-medium contents font-open-sans"
           >
-            <NavbarProvider>
-              <header className="sticky top-0 z-10">
-                <Navbar />
-                <Sidebar />
-              </header>
-              <main id="skip-navigation">{children}</main>
-              <Footer />
-            </NavbarProvider>
+            <header className="sticky top-0 z-10">
+              <Navbar />
+              <Sidebar />
+            </header>
+            <main id="skip-navigation">{children}</main>
+            <Footer />
           </div>
-        </body>
-      </Provider>
+        </Providers>
+      </body>
     </html>
   )
 }

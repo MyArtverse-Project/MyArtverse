@@ -3,7 +3,7 @@
 ## Project authors/maintainers
 
 - [Jason Diaz Jimenez](https://github.com/VulpoTheDev) - project leader
-- [Kerby Keith Aquino](https://github.com/kuroji-fusky) - maintainer, UI/UX design
+- [Kerby Keith Aquino](https://github.com/kuroji-fusky) - project leader, UI/UX design
 
 ## Contributors
 

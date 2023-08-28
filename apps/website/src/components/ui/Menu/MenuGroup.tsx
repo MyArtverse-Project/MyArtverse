@@ -1,9 +1,10 @@
-import type { IncludeReactNode } from "@/types"
-
 export default function MenuGroup({
   children,
   heading
-}: IncludeReactNode<{ heading?: string }>) {
+}: {
+  children?: React.ReactNode
+  heading?: string
+}) {
   return (
     <div role="group">
       {heading && (

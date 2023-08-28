@@ -1,7 +1,10 @@
 import { Transition } from "@headlessui/react"
-import { IncludeReactNode } from "@/types"
 
-export default function TransitionWrapper({ children }: IncludeReactNode) {
+export default function TransitionWrapper({
+  children
+}: {
+  children?: React.ReactNode
+}) {
   return (
     <Transition
       data-transition-wrapper=""

@@ -1,16 +1,17 @@
 {
   "$schema": "https://turbo.build/schema.json",
   "pipeline": {
-    "lint": {},
+    "lint": {
+      "dependsOn": ["^lint"]
+    },
     "build": {
       "dependsOn": ["^build"],
-      "outputs": ["dist/**", ".next/**", "!.next/cache/**"]
+      "outputs": [".next/**", "!.next/cache/**"]
     },
     "check-types": {},
     "deploy": {
       "dependsOn": ["lint", "build"]
     },
-    
     "dev": {
       "cache": false,
       "persistent": true

@@ -1,5 +1,5 @@
 import { Button } from "@/components/ui/Buttons"
-import Notice from "@/components/ui/Note"
+import Notice from "@/components/ui/Notice"
 import { Metadata } from "next"
 import Image from "next/image"
 

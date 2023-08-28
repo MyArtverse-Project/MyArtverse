@@ -2,7 +2,7 @@
 const nextConfig = {
   swcMinify: true,
   poweredByHeader: false,
-  transpilePackages: ["lodash"],
+  transpilePackages: ["lodash-es"],
   experimental: {
     typedRoutes: true
   }
