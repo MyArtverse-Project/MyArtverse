@@ -1,6 +1,10 @@
-import { kebabCase } from "lodash"
+// FIXME
+// lodash packages won't compile since Edge Runtime prohibit it when building the app
+// >> Dynamic Code Evaluation (e. g. 'eval', 'new Function', 'WebAssembly.compile') not allowed in Edge Runtime
+// Kuro, rewrite this shit lol
+import kebabCase from "lodash.kebabcase"
 
-type Schemes = "data:" | "https:" | "blob:" | "mediastream:" | "filesystem:"
+type Schemes = "data:" | "https:" | "blob:" | "mediastream:" | "filesystem:" | "ws://"
 
 type CSPDirective<T = {}> = {
   none?: boolean

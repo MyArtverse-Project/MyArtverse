@@ -21,7 +21,7 @@ const authOption: AuthOptions = {
         if (!credentials || !credentials.email || !credentials.password) {
           return null
         }
-        const user = await prisma.user.findUnique({
+        const user = await (prisma as any).user.findUnique({
           where: {
             email: credentials.email
           }
@@ -29,11 +29,12 @@ const authOption: AuthOptions = {
         if (!user) {
           return null
         }
-        // @ts-expect-error
         const passwordMatch = await compare(credentials.password, user.password)
+
         if (!passwordMatch) {
           return null
         }
+        
         return user
       }
     })

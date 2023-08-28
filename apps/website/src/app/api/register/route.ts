@@ -12,14 +12,14 @@ export async function POST(request: NextRequest) {
     return new NextResponse("Email and password are required", { status: 400 })
   }
 
-  const user = await prisma.user.findUnique({
+  const user = await (prisma as any).user.findUnique({
     where: {
       email: email
     }
   })
 
   const username = (displayName as string).toLowerCase().split(" ").join("-")
-  const usernameTaken = await prisma.user.findUnique({
+  const usernameTaken = await (prisma as any).user.findUnique({
     where: {
       username: username
     }
@@ -36,7 +36,7 @@ export async function POST(request: NextRequest) {
   const hashedPassword = await hash(password, 10)
   console.log({ email, password })
 
-  const createdUser = await prisma.user.create({
+  const createdUser = await (prisma as any).user.create({
     data: {
       displayName: displayName,
       username: username,

@@ -5,7 +5,7 @@ import { useRouter } from "next/navigation"
 
 import { Button } from "@/components/ui/Buttons"
 import Separator from "@/components/ui/Separator"
-import { pageMeta } from "@/utils"
+// import { pageMeta } from "@/utils"
 import { FacebookIcon, TwitterIcon } from "lucide-react"
 import { emailRegex } from "@/constants"
 
@@ -105,7 +105,7 @@ export default function SignUp() {
             Sign Up
           </Button>
           <Button
-            onClick={() => router.push("/auth/signin")}
+            href="/signin"
             className={`bg-color-3 hover:bg-color-4 my-2 w-full flex justify-center items-center py-2 px-4`}
           >
             Already have an account?

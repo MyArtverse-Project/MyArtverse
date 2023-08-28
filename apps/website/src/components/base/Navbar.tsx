@@ -17,7 +17,7 @@ import {
   LucideIcon
 } from "lucide-react"
 
-import { toLower } from "lodash"
+import { toLower } from "lodash-es"
 import { Menu } from "@headlessui/react"
 import { SidebarContext } from "@/context/NavbarProvider"
 import { MyFursona } from "../icons"
