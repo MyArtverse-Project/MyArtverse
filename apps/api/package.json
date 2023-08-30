@@ -5,7 +5,7 @@
   "description": "MyFursona API Written in Typescript",
   "main": "dist/index.js",
   "author": "Jason Diaz Jimenez <developervulpo@outlook.com>",
-  "license": "MIT",
+  "license": "Apache-2.0",
   "scripts": {
     "start": "node .",
     "dev": "yarn clean && yarn build && yarn start",

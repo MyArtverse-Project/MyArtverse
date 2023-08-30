@@ -53,6 +53,7 @@
     "@storybook/react": "^7.2.3",
     "@storybook/testing-library": "^0.2.0",
     "@types/lodash": "^4.14.195",
+    "dedent": "^1.5.1",
     "eslint-plugin-storybook": "^0.6.13",
     "prisma": "^5.1.0",
     "storybook": "^7.2.3"

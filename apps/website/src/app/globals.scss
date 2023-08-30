@@ -7,6 +7,7 @@
 svg.lucide {
   pointer-events: none;
 }
+
 :root {
   --bui-warning: hsla(46, 99.3%, 54.6%, var(--tw-bg-opacity, 1));
   --bui-info: hsla(212, 95.4%, 46.3%, var(--tw-bg-opacity, 1));
@@ -42,14 +43,6 @@ svg.lucide {
 }
 
 @include theme-variable-sets(dark) {
-  // * Color tone reference; can be overwritten
-  // * 100: background
-  // * 200: modal
-  // * 300: button-idle-chips
-  // * 400: dropdowns-text-field
-  // * 500: active-state
-  // * 600: text-emphasis
-  // * 700: text
   --bui-100: 260, 76.5%, 4.3%;
   --bui-200: 260, 86.4%, 7.5%;
   --bui-300: 260, 83.4%, 18.2%;
@@ -75,6 +68,7 @@ svg.lucide {
 @include theme-variable-sets(dark) {
   --bui-context-menu: theme("colors.200");
 }
+// !==== Overrides END ====!
 
 body {
   --avatar-size: 8rem;

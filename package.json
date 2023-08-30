@@ -2,7 +2,7 @@
   "name": "myfursona",
   "private": true,
   "version": "0.0.0",
-  "license": "MIT",
+  "license": "Apache-2.0",
   "homepage": "https://github.com/MyFursona-Project/MyFursona",
   "workspaces": [
     "apps/*",

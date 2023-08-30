@@ -50,10 +50,36 @@ export default function Footer() {
     }
   ]
 
+  const ColumnItems = ({
+    heading,
+    links
+  }: {
+    heading: string
+    links: Array<{ text?: string; link?: string }>
+  }) => {
+    return (
+      <div className="flex flex-col">
+        <h2 className="mb-4 font-semibold text-400">{heading}</h2>
+        <ul className="grid gap-y-3">
+          {links.map(({ text, link }, index) => (
+            <li key={index}>
+              <Link
+                className="my-2 font-semibold"
+                href={!link ? kebabCase(text) : (link as any)}
+              >
+                {text}
+              </Link>
+            </li>
+          ))}
+        </ul>
+      </div>
+    )
+  }
+
   return (
     <div className="relative">
       <footer>
-        <div className="flex justify-between px-12 py-6 mx-auto max-w-screen-2xl">
+        <section className="flex justify-between px-12 py-6 mx-auto max-w-screen-2xl">
           <div className="flex flex-col justify-between w-fit">
             <div className="flex flex-col">
               <Link href="/">
@@ -70,28 +96,14 @@ export default function Footer() {
           </div>
           <div className="grid grid-cols-4 gap-4">
             {FOOTER_ITEMS.map(({ heading, links }, index) => (
-              <div className="flex flex-col" key={index}>
-                <h2 className="mb-4 font-semibold text-400">{heading}</h2>
-                <ul className="grid gap-y-3">
-                  {links.map(({ text, link }, index) => (
-                    <li key={index}>
-                      <Link
-                        className="my-2 font-semibold"
-                        href={!link ? kebabCase(text) : (link as any)}
-                      >
-                        {text}
-                      </Link>
-                    </li>
-                  ))}
-                </ul>
-              </div>
+              <ColumnItems heading={heading} links={links} key={index} />
             ))}
           </div>
-        </div>
-        <div id="copyright" className="px-12 py-4 text-center">
+        </section>
+        <section id="copyright" className="px-12 py-4 text-center">
           The MyFursona Project is under the Apache-2.0 license. &copy;
           2022-2023 MyFursona/Fusky Labs Software Ltd.
-        </div>
+        </section>
       </footer>
       <svg className="absolute top-0 -z-[1]" aria-hidden></svg>
     </div>
