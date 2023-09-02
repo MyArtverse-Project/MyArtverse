@@ -65,6 +65,7 @@ export default function RootLayout({
     >
       <head>
         <script
+          nonce={nonce}
           dangerouslySetInnerHTML={{ __html: DEV_CONVERSION_INLINE_SCRIPT }}
           defer
         />
@@ -73,20 +74,20 @@ export default function RootLayout({
       <body className="bg-100 text-700 !overflow-x-hidden bg-background prose-headings:font-bold prose-headings:font-inter text-sm font-medium font-open-sans">
         <SkipNav />
         <NoJSReminder />
-        {/* Platform announcements sent through the API goes here */}
-        <div id="myfursona-announcements"></div>
-        <div id="myfursona-app">
-          <Providers>
+        <Providers>
+          <div id="myfursona-app">
+            {/* Platform announcements sent through the API goes here */}
+            <div id="announcements"></div>
             <header className="sticky top-0 z-10">
               <Navbar />
               <Sidebar />
             </header>
-            <main id="skip-navigation" className="min-h-[100dvh]">
+            <main id="skip-navigation" className="min-h-[calc(100dvh-6rem)]">
               {children}
             </main>
             <Footer />
-          </Providers>
-        </div>
+          </div>
+        </Providers>
       </body>
     </html>
   )

@@ -1,3 +1,3 @@
-import { generateCSPString } from "./generateCSPString"
+import { generateCSP } from "./generateCSP"
 
-export { generateCSPString }
+export { generateCSP }
