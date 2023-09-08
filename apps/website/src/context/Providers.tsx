@@ -1,6 +1,6 @@
 "use client"
 
-import { SessionProvider } from "next-auth/react"
+// import { SessionProvider } from "next-auth/react"
 import { SidebarProvider } from "./NavbarProvider"
 import { ThemeProvider } from "./ThemeProvider"
 
@@ -10,10 +10,10 @@ export default function Providers({
   children?: React.ReactNode
 }) {
   return (
-    <SessionProvider>
+    // <SessionProvider>
       <ThemeProvider>
         <SidebarProvider>{children}</SidebarProvider>
       </ThemeProvider>
-    </SessionProvider>
+    // </SessionProvider>
   )
 }

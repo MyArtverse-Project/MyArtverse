@@ -79,7 +79,7 @@ export default function Footer() {
   return (
     <div className="relative">
       <footer>
-        <section className="flex justify-between px-12 py-6 mx-auto max-w-screen-2xl">
+        <section className="flex justify-between px-12 pb-6 pt-48 mx-auto max-w-screen-2xl">
           <div className="flex flex-col justify-between w-fit">
             <div className="flex flex-col">
               <Link href="/">
