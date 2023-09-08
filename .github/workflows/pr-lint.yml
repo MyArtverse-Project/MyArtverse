@@ -21,7 +21,7 @@ jobs:
       - name: Install and Run Prettier
         run: |
           npm i -g prettier
-          yarn prettier --check .
+          npx prettier --check .
 
   lint:
     name: Lint project
