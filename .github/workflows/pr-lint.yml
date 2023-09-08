@@ -16,7 +16,7 @@ jobs:
         with:
           node-version: 18
       - run: npm i -g yarn
-      - run: yarn ci
+      - run: yarn install --no-lockfile
       - name: Run Prettier
         run: yarn prettier --check .
       - name: Run lints
