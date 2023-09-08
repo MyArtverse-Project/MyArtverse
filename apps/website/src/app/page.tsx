@@ -25,20 +25,34 @@ export default function Home() {
         <div>
           <h1 className="text-5xl">A place where everyone belongs!</h1>
           <p>
-            Tincidunt praesent pellentesque auctor a a feugiat sed. Ultrices in
-            cras commodo turpis luctus morbi.
+            MyFursona is an open-source platform where you dump your mom lol
           </p>
           <div className="flex flex-row gap-x-4">
-            <Button variant="secondary">I'll look around</Button>
-            <Button variant="primary">Sign Up</Button>
+            <Button variant="secondary" href="/?showdatshit">
+              I'll look around
+            </Button>
+            <Button variant="primary" href="/signup">
+              Sign Up
+            </Button>
           </div>
         </div>
-        <Image
-          src="/img/hero/sona-render.png"
-          alt=""
-          width={300}
-          height={500}
-        />
+        {/* TODO refactor this as its own <Image/> component */}
+        <div
+          data-custom-img-renderer=""
+          className="relative h-[27.5rem] before:absolute before:-inset-4 before:z-[2]"
+          style={{ aspectRatio: "9/15" } as React.CSSProperties}
+        >
+          <Image
+            className="select-none"
+            src="/img/hero/sona-render.png"
+            alt=""
+            loading="eager"
+            fetchPriority="high"
+            fill
+            sizes="(max-width: 1280px) 1000px (max-width: 640px) 500px"
+            priority
+          />
+        </div>
       </div>
       <div>
         <Notice type="error">error</Notice>

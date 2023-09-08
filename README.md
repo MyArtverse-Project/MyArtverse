@@ -3,7 +3,7 @@
 > **Note**
 > The project is still work-in-progress and not ready for production, so many breaking changes are bound to happen!
 
-__MyFursona__ is an open-source platform where users can keep track of their characters/fursonas, commissions, and adoptables.
+**MyFursona** is an open-source platform where users can keep track of their characters/fursonas, commissions, and adoptables.
 
 ![MyFursona design prototype](https://github.com/MyFursona-Project/MyFursona/assets/94678583/86098e7a-3d4b-414c-8953-931c95e34034)
 

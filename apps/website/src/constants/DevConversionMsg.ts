@@ -1,7 +1,7 @@
 import dedent from "dedent"
 
 const CONSOLE_MSG =
-"%c🦊✨ Are you looking to improve MyFursona? If you're a developer, you can help! The code, including this website, is open-source! https://github.com/MyFursona-Project"
+  "%c🦊✨ Are you looking to improve MyFursona? If you're a developer, you can help! The code, including this website, is open-source! https://github.com/MyFursona-Project"
 const COMMENT_MSG = "Whatcha lookin at? OwO"
 
 export const DEV_CONVERSION_INLINE_SCRIPT = dedent`

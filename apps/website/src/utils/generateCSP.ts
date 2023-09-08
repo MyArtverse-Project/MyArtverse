@@ -11,7 +11,6 @@ type CSPDirective =
       | "data:"
       | "mediastream:"
       | "nonce-"
-      | "sha256-"
     )[]
   | string[]
 type CSPDirectiveWithWasm = CSPDirective | "wasm-unsafe-eval"[]
@@ -30,7 +29,7 @@ type CSPPolicies = Partial<{
 }>
 
 export function generateCSP(policy: CSPPolicies): string {
-  let _directives = []
+  let _directivesArr = []
 
   const joinSpaces = (s: string[]) => s.join(" ")
 
@@ -49,14 +48,14 @@ export function generateCSP(policy: CSPPolicies): string {
         })
       )
 
-      _directives.push(`${directive} ${parsedValues};`)
+      _directivesArr.push(`${directive} ${parsedValues};`)
     }
     if (directive == "upgrade-insecure-requests") {
-      _directives.push(`upgrade-insecure-requests;`)
+      _directivesArr.push(`upgrade-insecure-requests;`)
     }
   })
 
-  return joinSpaces(_directives)
+  return joinSpaces(_directivesArr)
     .replace(/(\s;\s)/g, "; ")
     .replace(/\s;/g, ";")
 }

@@ -46,7 +46,7 @@ export default function SignInForm() {
   const submitLogin = (e: FormEvent<HTMLFormElement>) => {
     e.preventDefault()
     // signIn("credentials", { email, password, redirect: false })
-    // router.push("/") 
+    // router.push("/")
   }
 
   return (
@@ -123,7 +123,7 @@ export default function SignInForm() {
               value={password}
               onChange={(e) => setPassword(e.target.value)}
             />
-            <Button  type="submit">Login</Button>
+            <Button type="submit">Login</Button>
             <Button onClick={() => setEmailEntered(false)}>Previous</Button>
           </div>
         </form>

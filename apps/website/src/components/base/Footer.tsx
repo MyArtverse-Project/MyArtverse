@@ -105,7 +105,7 @@ export default function Footer() {
           2022-2023 MyFursona/Fusky Labs Software Ltd.
         </section>
       </footer>
-      <svg className="absolute top-0 -z-[1]" aria-hidden></svg>
+      <svg className="absolute top-0 -z-[1] w-full h-full" aria-hidden></svg>
     </div>
   )
 }

@@ -14,11 +14,10 @@ export default function DropdownItem({
   disabled?: boolean
   prefix?: React.ReactElement
   suffix?: React.ReactElement
-} &
-  Pick<
-    React.ButtonHTMLAttributes<HTMLButtonElement>,
-    "onClick" | "onKeyDown" | "aria-label"
-  >) {
+} & Pick<
+  React.ButtonHTMLAttributes<HTMLButtonElement>,
+  "onClick" | "onKeyDown" | "aria-label"
+>) {
   return (
     <Menu.Item>
       {({ active }) => (

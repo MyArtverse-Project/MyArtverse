@@ -4,3 +4,7 @@
 dist
 config
 public
+out
+
+vercel.json
+turbo.json

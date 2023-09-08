@@ -98,18 +98,8 @@ export default function SignUp() {
             value={password}
             onChange={(e) => setPassword(e.target.value)}
           />
-          <Button
-            type="submit"
-            className={`bg-color-3 hover:bg-color-4 my-2 w-full flex justify-center items-center py-2 px-4`}
-          >
-            Sign Up
-          </Button>
-          <Button
-            href="/signin"
-            className={`bg-color-3 hover:bg-color-4 my-2 w-full flex justify-center items-center py-2 px-4`}
-          >
-            Already have an account?
-          </Button>
+          <Button type="submit">Sign Up</Button>
+          <Button href="/signin">Already have an account?</Button>
         </form>
       </div>
     </div>

@@ -15,7 +15,6 @@ export default function SocialsRow({ items }: { items?: Socials }) {
     WhatsApp: "whatsapp"
   }
 
-
   return (
     <div data-social-shelf="">
       {items.map(({ link, platform }, index) => (

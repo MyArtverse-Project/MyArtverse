@@ -11,9 +11,9 @@ export default function Providers({
 }) {
   return (
     // <SessionProvider>
-      <ThemeProvider>
-        <SidebarProvider>{children}</SidebarProvider>
-      </ThemeProvider>
+    <ThemeProvider>
+      <SidebarProvider>{children}</SidebarProvider>
+    </ThemeProvider>
     // </SessionProvider>
   )
 }
