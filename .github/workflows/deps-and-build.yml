@@ -6,15 +6,21 @@ on:
     - cron: "0 0 * * 0"
 
 jobs:
-  lint:
+  update-and-build:
+    name: Update dependencies and build
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v3
-      - uses: actions/setup-node@v2
+      - uses: actions/setup-node@v3
         with:
           node-version: 18
-      - run: npm i -g yarn
-      - run: yarn install --no-lockfile
+
+      - name: Install initial dependencies
+        run: |
+          npm i -g yarn
+          yarn install --no-lockfile
+
       - name: Run that shit
-        run: node forceUpdateDeps.mjs
-      - run: yarn turbo build
+        run: |
+          node forceUpdateDeps.mjs
+          yarn turbo build
