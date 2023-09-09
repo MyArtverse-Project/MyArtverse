@@ -1,9 +1,7 @@
 "use client"
 
 import { FormEvent, useEffect, useState } from "react"
-import { useRouter } from "next/navigation"
 
-// import { signIn, useSession } from "next-auth/react"
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome"
 
 import { emailRegex } from "@/constants"
@@ -11,25 +9,10 @@ import { Button } from "@/components/ui/Buttons"
 import Separator from "@/components/ui/Separator"
 
 export default function SignInForm() {
-  // !!!!! code duplication detected !!!!!
-  // TODO: 1. use the useReducer() hook to combine all of these useStates
-  // TODO: 2. recommended to create a useClientAuth() custom hook to resolve code dup
-  // TODO: and also sharable for signup form too
-  // !!!!! code duplication detected !!!!!
-  // const { status, data } = useSession()
-  // const router = useRouter()
   const [emailEntered, setEmailEntered] = useState(false)
   const [errors, setErrors] = useState<string[]>([])
   const [email, setEmail] = useState("")
   const [password, setPassword] = useState("")
-  // useEffect(() => {
-  //   console.log("USE EFFECT ")
-  //   if (status === "authenticated" && data) {
-  //     console.log("LOGGED")
-  //     router.push("/")
-  //   }
-  //   console.log("NOT LOGGED")
-  // }, [status, data, router])
 
   // TODO export this function as a custom hook as `useValidateEmail()` so it can be used to the signup page as well
   const validateEmail = () => {
@@ -45,8 +28,6 @@ export default function SignInForm() {
 
   const submitLogin = (e: FormEvent<HTMLFormElement>) => {
     e.preventDefault()
-    // signIn("credentials", { email, password, redirect: false })
-    // router.push("/")
   }
 
   return (
@@ -111,7 +92,12 @@ export default function SignInForm() {
               value={email}
               onChange={(e) => setEmail(e.target.value)}
             />
-            <Button className="flex items-center gap-x-1.5 rounded-md transition-[border,background-color] border border-[2px] px-4 py-2 border-transparent bg-300 hover:bg-400 focus:bg-400 w-full my-2" onClick={validateEmail}>Next</Button>
+            <Button
+              className="flex items-center gap-x-1.5 rounded-md transition-[border,background-color] border border-[2px] px-4 py-2 border-transparent bg-300 hover:bg-400 focus:bg-400 w-full my-2"
+              onClick={validateEmail}
+            >
+              Next
+            </Button>
             <Button href="/auth/signup">Sign Up</Button>
           </div>
           <div
@@ -126,8 +112,18 @@ export default function SignInForm() {
               value={password}
               onChange={(e) => setPassword(e.target.value)}
             />
-            <Button  className="flex items-center gap-x-1.5 rounded-md transition-[border,background-color] border border-[2px] px-4 py-2 border-transparent bg-300 hover:bg-400 focus:bg-400 w-full my-2" type="submit">Login</Button>
-            <Button className="flex items-center gap-x-1.5 rounded-md transition-[border,background-color] border border-[2px] px-4 py-2 border-transparent bg-300 hover:bg-400 focus:bg-400 w-full my-2" onClick={() => setEmailEntered(false)}>Previous</Button>
+            <Button
+              className="flex items-center gap-x-1.5 rounded-md transition-[border,background-color] border border-[2px] px-4 py-2 border-transparent bg-300 hover:bg-400 focus:bg-400 w-full my-2"
+              type="submit"
+            >
+              Login
+            </Button>
+            <Button
+              className="flex items-center gap-x-1.5 rounded-md transition-[border,background-color] border border-[2px] px-4 py-2 border-transparent bg-300 hover:bg-400 focus:bg-400 w-full my-2"
+              onClick={() => setEmailEntered(false)}
+            >
+              Previous
+            </Button>
           </div>
         </form>
       </div>

@@ -46,7 +46,7 @@ export const metadata: Metadata = {
     type: "website",
     siteName: "MyFursona"
   },
-  robots: "noai, noimageai"
+  robots: "noai, noimageai, noindex, nofollow"
 }
 
 export default function RootLayout({

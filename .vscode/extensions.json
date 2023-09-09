@@ -1,6 +1,5 @@
 {
   "recommendations": [
-    "prisma.prisma",
     "bradlc.vscode-tailwindcss",
     "heybourn.headwind",
     "unifiedjs.vscode-mdx"
