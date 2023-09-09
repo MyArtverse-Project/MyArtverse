@@ -21,6 +21,7 @@ export default function Button({
   type,
   variant,
   size,
+  position,
   prefixIcon,
   suffixIcon,
   href,
@@ -36,6 +37,7 @@ export default function Button({
   disabled?: boolean
   type?: React.ButtonHTMLAttributes<HTMLButtonElement>["type"]
   variant?: ButtonVariants
+  position?: "left" | "center" | "right"
   size?: ButtonSizes
   prefixIcon?: React.ReactElement<LucideIcon>
   suffixIcon?: React.ReactElement<LucideIcon>
@@ -70,8 +72,15 @@ export default function Button({
     error: "border-transparent"
   }
 
+  const positions = {
+    left: "text-left",
+    center: "text-center",
+    right: "text-right"
+  }
+
   const sizeDynamic = sizes[size ?? "big"]
   const variantsDynamic = className ? className : variants[variant ?? "primary"]
+  const positionDynamic = positions[position ?? "center"]
 
   const DynamicElement = !href ? "button" : Link
 
@@ -85,7 +94,7 @@ export default function Button({
       className={
         className
           ? className
-          : [baseStyles, sizeDynamic, variantsDynamic].join(" ")
+          : [baseStyles, sizeDynamic, variantsDynamic, positions].join(" ")
       }
       {...attributes}
     >

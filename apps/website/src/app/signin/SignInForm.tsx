@@ -63,6 +63,7 @@ export default function SignInForm() {
         <div className="grid gap-y-1.5 w-full">
           <Button
             variant="secondary"
+            position="center"
             prefixIcon={
               <FontAwesomeIcon icon={["fab", "google"]} fixedWidth size="xl" />
             }
@@ -71,6 +72,7 @@ export default function SignInForm() {
           </Button>
           <Button
             variant="secondary"
+            position="center"
             prefixIcon={
               <FontAwesomeIcon
                 icon={["fab", "facebook"]}
@@ -83,6 +85,7 @@ export default function SignInForm() {
           </Button>
           <Button
             variant="secondary"
+            position="center"
             prefixIcon={
               <FontAwesomeIcon
                 icon={["fab", "x-twitter"]}
@@ -103,12 +106,12 @@ export default function SignInForm() {
           >
             <input
               type="text"
-              className="w-full px-4 py-2 my-1 border rounded-md border-color-3"
+              className="w-full px-4 py-2 my-1 border rounded-md border-color-3 text-black"
               placeholder="Email"
               value={email}
               onChange={(e) => setEmail(e.target.value)}
             />
-            <Button onClick={validateEmail}>Next</Button>
+            <Button className="flex items-center gap-x-1.5 rounded-md transition-[border,background-color] border border-[2px] px-4 py-2 border-transparent bg-300 hover:bg-400 focus:bg-400 w-full my-2" onClick={validateEmail}>Next</Button>
             <Button href="/auth/signup">Sign Up</Button>
           </div>
           <div
@@ -118,13 +121,13 @@ export default function SignInForm() {
           >
             <input
               type="password"
-              className="w-full px-4 py-2 my-1 border rounded-md border-color-3"
+              className="w-full px-4 py-2 my-1 border rounded-md border-color-3 text-black"
               placeholder="Password"
               value={password}
               onChange={(e) => setPassword(e.target.value)}
             />
-            <Button type="submit">Login</Button>
-            <Button onClick={() => setEmailEntered(false)}>Previous</Button>
+            <Button  className="flex items-center gap-x-1.5 rounded-md transition-[border,background-color] border border-[2px] px-4 py-2 border-transparent bg-300 hover:bg-400 focus:bg-400 w-full my-2" type="submit">Login</Button>
+            <Button className="flex items-center gap-x-1.5 rounded-md transition-[border,background-color] border border-[2px] px-4 py-2 border-transparent bg-300 hover:bg-400 focus:bg-400 w-full my-2" onClick={() => setEmailEntered(false)}>Previous</Button>
           </div>
         </form>
       </div>
