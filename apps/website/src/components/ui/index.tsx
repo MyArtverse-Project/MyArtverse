@@ -7,4 +7,13 @@ import Tabs from "./Tabs"
 import SocialsRow from "./SocialsRow"
 import Fieldset from "./Fieldset"
 
-export { Modal, Notice, Overlay, Separator, Tabs, SocialsRow, Fieldset }
+export {
+  Modal,
+  Notice,
+  Overlay,
+  Separator,
+  Separator as Hr,
+  Tabs,
+  SocialsRow,
+  Fieldset
+}

@@ -1,39 +1,43 @@
+<div align="center">
+  <img alt="MyFursona cards" src="https://github.com/MyFursona-Project/MyFursona/assets/94678583/0cc5e73f-3197-4170-906b-30a64063569a">
+</div>
+
 <h1 align="center">MyFursona</h1>
 
+<p align="center">
+  The <strong>MyFursona</strong> web and desktop platform written in Next.js, Tailwind, and
+  Tauri.
+</p>
+
+## Contributing
+
+This repo uses Husky hooks that format your code automatically when you push
+a commit.
+
+### Installation
+
 > **Note**
-> The project is still work-in-progress and not ready for production, so many breaking changes are bound to happen!
+> We recommend that you use the Yarn package manager to install dependencies.
 
-**MyFursona** is an open-source platform where users can keep track of their characters/fursonas, commissions, and adoptables.
-
-![MyFursona design prototype](https://github.com/MyFursona-Project/MyFursona/assets/94678583/86098e7a-3d4b-414c-8953-931c95e34034)
-
-## Project structure
-
-- [`@myfursona/api`][api] - A botched Express REST & GraphQL API
-- [`@myfursona/web`][web] - The main website written in Next.js
-- [`@myfursona/client`][cli] - Deskop client written in Tauri and Next.js
-
-## Prerequisites
-
-- Node.js 18 or higher (LTS recommended)
-- Yarn package manager
-- [Optional] WSL/Git Bash
-- [Optional] Rust (for Tauri development)
-
-## Installation
-
-Clone the repository and install dependencies
+Clone the repository and install dependencies and run the local dev server
+on the root directory:
 
 ```console
+git clone https://github.com/MyFursona-Project/MyFursona.git
 yarn install
+yarn dev
 ```
 
-Start a local dev server
+You can access it on http://localhost:3000.
 
-```console
-yarn dev:web
-```
+## Commands
 
-[api]: https://github.com/MyFursona-Project/MyFursona/tree/next13-rewrite/apps/api
-[cli]: https://github.com/MyFursona-Project/MyFursona/tree/next13-rewrite/apps/client
-[web]: https://github.com/MyFursona-Project/MyFursona/tree/next13-rewrite/apps/website
+- `yarn dev` - Serves a running web app on your local machine
+- `yarn dev:client` - Opens a desktop client, will require Rust
+- `yarn build` - Builds the web app with Turborepo and caches it
+- `yarn build:client` - Builds and bundles the desktop app for production
+- `yarn build:all` - Builds both the web and desktop app
+
+## License
+
+Apache-2.0

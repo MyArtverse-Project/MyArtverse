@@ -9,20 +9,19 @@
     "packages/*"
   ],
   "scripts": {
-    "dev:web": "turbo dev --filter=website",
-    "build:web": "turbo build --filter=website",
-    "dev:api": "turbo dev --filter=api",
-    "build:api": "turbo build --filter=api",
+    "dev": "turbo dev --filter=website --no-daemon",
     "dev:client": "cd apps/client && yarn tauri dev",
+    "build": "turbo build --filter=website",
     "build:client": "cd apps/client && yarn tauri build",
-    "build": "turbo build",
-    "lint": "turbo lint",
+    "build:all": "turbo build",
     "prettier:check": "prettier --check .",
-    "prettier:write": "prettier --write ."
+    "prettier:write": "prettier --write .",
+    "prepare": "husky install"
   },
   "devDependencies": {
     "prettier": "^3.0.2",
-    "turbo": "^1.10.13"
+    "turbo": "^1.10.13",
+    "husky": "^8.0.0"
   },
   "engines": {
     "node": ">= 18.0.0",
