@@ -93,7 +93,7 @@ export default function SignInForm() {
               onChange={(e) => setEmail(e.target.value)}
             />
             <Button
-              className="flex items-center gap-x-1.5 rounded-md transition-[border,background-color] border border-[2px] px-4 py-2 border-transparent bg-300 hover:bg-400 focus:bg-400 w-full my-2"
+              className="flex items-center gap-x-1.5 rounded-md transition-[border,background-color] border-[2px] px-4 py-2 border-transparent bg-300 hover:bg-400 focus:bg-400 w-full my-2"
               onClick={validateEmail}
             >
               Next
@@ -113,13 +113,13 @@ export default function SignInForm() {
               onChange={(e) => setPassword(e.target.value)}
             />
             <Button
-              className="flex items-center gap-x-1.5 rounded-md transition-[border,background-color] border border-[2px] px-4 py-2 border-transparent bg-300 hover:bg-400 focus:bg-400 w-full my-2"
+              className="flex items-center gap-x-1.5 rounded-md transition-[border,background-color] border-[2px] px-4 py-2 border-transparent bg-300 hover:bg-400 focus:bg-400 w-full my-2"
               type="submit"
             >
               Login
             </Button>
             <Button
-              className="flex items-center gap-x-1.5 rounded-md transition-[border,background-color] border border-[2px] px-4 py-2 border-transparent bg-300 hover:bg-400 focus:bg-400 w-full my-2"
+              className="flex items-center gap-x-1.5 rounded-md transition-[border,background-color] border-[2px] px-4 py-2 border-transparent bg-300 hover:bg-400 focus:bg-400 w-full my-2"
               onClick={() => setEmailEntered(false)}
             >
               Previous

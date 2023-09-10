@@ -102,7 +102,7 @@ export default function Footer() {
         </section>
         <section id="copyright" className="px-12 py-4 text-center">
           The MyFursona Project is under the Apache-2.0 license. &copy;
-          2022-2023 MyFursona/Fusky Labs Software Ltd.
+          2022-2023 Fusky Labs Software Ltd.
         </section>
       </footer>
       <svg className="absolute top-0 -z-[1] w-full h-full" aria-hidden></svg>

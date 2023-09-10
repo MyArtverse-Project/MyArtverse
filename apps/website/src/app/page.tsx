@@ -41,6 +41,7 @@ export default function Home() {
           data-custom-img-renderer=""
           className="relative h-[27.5rem] before:absolute before:-inset-4 before:z-[2]"
           style={{ aspectRatio: "9/15" } as React.CSSProperties}
+          draggable="false"
         >
           <Image
             className="select-none"

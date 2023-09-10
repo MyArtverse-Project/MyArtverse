@@ -56,7 +56,7 @@ export default function Button({
   | "style"
 >) {
   const sizes: ButtonSizesRecord = {
-    small: !iconOnly ? "py-1.5 py-2 " : "p-1.5",
+    small: !iconOnly ? "px-1.5 py-1" : "p-1.5",
     big: !iconOnly ? "px-4 py-2" : "p-2"
   }
 
@@ -94,7 +94,9 @@ export default function Button({
       className={
         className
           ? className
-          : [baseStyles, sizeDynamic, variantsDynamic, positions].join(" ")
+          : [baseStyles, sizeDynamic, variantsDynamic, positionDynamic].join(
+              " "
+            )
       }
       {...attributes}
     >

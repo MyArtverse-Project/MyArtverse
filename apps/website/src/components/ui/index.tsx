@@ -5,5 +5,6 @@ import Overlay from "./Overlay"
 import Separator from "./Separator"
 import Tabs from "./Tabs"
 import SocialsRow from "./SocialsRow"
+import Fieldset from "./Fieldset"
 
-export { Modal, Notice, Overlay, Separator, Tabs, SocialsRow }
+export { Modal, Notice, Overlay, Separator, Tabs, SocialsRow, Fieldset }

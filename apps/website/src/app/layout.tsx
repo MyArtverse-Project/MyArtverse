@@ -83,9 +83,9 @@ export default function RootLayout({
               <Navbar />
               <Sidebar />
             </header>
-            <main id="skip-navigation" className="min-h-[calc(100dvh-6rem)]">
+            <div id="skip-navigation" className="min-h-[calc(100dvh-6rem)]">
               {children}
-            </main>
+            </div>
             <Footer />
           </div>
         </Providers>
