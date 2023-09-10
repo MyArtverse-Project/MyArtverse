@@ -1,0 +1,37 @@
+@use "partials";
+
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+svg.lucide {
+  pointer-events: none;
+}
+
+body {
+  --avatar-size: 8rem;
+}
+
+@media (min-width: 1024px) {
+  body {
+    --avatar-size: 11rem;
+  }
+}
+
+@layer components {
+  .desktop-only-lg {
+    @apply hidden lg:block;
+  }
+
+  .desktop-only-md {
+    @apply hidden md:block;
+  }
+
+  .mobile-only-lg {
+    @apply block lg:hidden;
+  }
+
+  .mobile-only-md {
+    @apply block md:hidden;
+  }
+}

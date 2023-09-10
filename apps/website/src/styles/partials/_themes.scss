@@ -1,21 +1,4 @@
-@mixin theme-variable-sets($theme) {
-  .theme-#{$theme} {
-    @content;
-  }
-  .theme-system {
-    @media (prefers-color-scheme: $theme) {
-      @content;
-    }
-  }
-}
-
-@tailwind base;
-@tailwind components;
-@tailwind utilities;
-
-svg.lucide {
-  pointer-events: none;
-}
+@use "mixins" as *;
 
 :root {
   --bui-warning: hsla(46, 99.3%, 54.6%, var(--tw-bg-opacity, 1));
@@ -25,15 +8,16 @@ svg.lucide {
   --bui-success: hsla(136, 87.7%, 40.4%, var(--tw-bg-opacity, 1));
 }
 
+// * Color tone reference; can be overwritten
+// * 100: background-text
+// * 200: modal
+// * 300: button-idle-chips
+// * 400: dropdowns-text-field
+// * 500: active-state
+// * 600: text-emphasis
+// * 700: text
+
 @include theme-variable-sets(light) {
-  // * Color tone reference; can be overwritten
-  // * 100: background-text
-  // * 200: modal
-  // * 300: button-idle-chips
-  // * 400: dropdowns-text-field
-  // * 500: active-state
-  // * 600: text-emphasis
-  // * 700: text
   --bui-100: 256, 100%, 99%;
   --bui-200: 248, 88.8%, 94.6%;
   --bui-300: 251, 96.4%, 85.9%;
@@ -67,42 +51,4 @@ svg.lucide {
   --bui-warning-highlight: 46, 100%, 15.2%;
   --bui-info-highlight: 212, 100%, 15.2%;
   --bui-success-highlight: 136, 100%, 15%;
-}
-
-// !==== Overrides ====!
-@include theme-variable-sets(light) {
-  --bui-context-menu: theme("colors.100");
-}
-
-@include theme-variable-sets(dark) {
-  --bui-context-menu: theme("colors.200");
-}
-// !==== Overrides END ====!
-
-body {
-  --avatar-size: 8rem;
-}
-
-@media (min-width: 1024px) {
-  body {
-    --avatar-size: 11rem;
-  }
-}
-
-@layer components {
-  .desktop-only-lg {
-    @apply hidden lg:block;
-  }
-
-  .desktop-only-md {
-    @apply hidden md:block;
-  }
-
-  .mobile-only-lg {
-    @apply block lg:hidden;
-  }
-
-  .mobile-only-md {
-    @apply block md:hidden;
-  }
 }

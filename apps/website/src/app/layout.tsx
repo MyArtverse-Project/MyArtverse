@@ -1,4 +1,4 @@
-import "./globals.scss"
+import "../styles/globals.scss"
 import "@fortawesome/fontawesome-svg-core/styles.css"
 
 import dynamic from "next/dynamic"
@@ -7,6 +7,7 @@ import { headers } from "next/headers"
 import { Inter, Open_Sans } from "next/font/google"
 
 import { config } from "@fortawesome/fontawesome-svg-core"
+
 import Providers from "@/context/Providers"
 import {
   Analytics,
