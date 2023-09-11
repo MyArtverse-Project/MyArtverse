@@ -16,9 +16,9 @@ export default function CreateProfileForm() {
   // TODO: Check if the user has created an account, if so... redirect them to their profile
   const username = "FluffyJane"
 
-  const [isProfileComplete, setProfileComplete] = useState(true)
+  const [isProfileComplete, setProfileComplete] = useState(false)
   const [isConnectionsComplete, setConnectionsComplete] = useState(false)
-  const [isAuthComplete, setAuthComplete] = useState(true)
+  const [isAuthComplete, setAuthComplete] = useState(false)
   const [isPaymentComplete, setPaymentComplete] = useState(false)
 
   const progress = [
