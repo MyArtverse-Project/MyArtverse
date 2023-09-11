@@ -1,14 +1,14 @@
 "use client"
 
 import { useState } from "react"
+import Link from "next/link"
 
-import { Fieldset, Separator } from "@/components/ui"
+import type { IconName } from "@fortawesome/fontawesome-svg-core"
+import { CreditCardIcon, LockIcon } from "lucide-react"
+import { FontAwesomeIcon } from "@fortawesome/react-fontawesome"
+import { Fieldset, Note, Separator } from "@/components/ui"
 import { Button } from "@/components/ui/Buttons"
 import { FormWithProgress } from "@/components/ui/Forms"
-import { CreditCardIcon, InfoIcon, LockIcon } from "lucide-react"
-import { FontAwesomeIcon } from "@fortawesome/react-fontawesome"
-import type { IconName } from "@fortawesome/fontawesome-svg-core"
-import Link from "next/link"
 
 export default function CreateProfileForm() {
   const [displayName, setDisplayName] = useState("")
@@ -41,18 +41,18 @@ export default function CreateProfileForm() {
 
   // TODO export these lil shits into their own component like lucide icons
   const socialIcons: IconName[] = [
+    "youtube",
     "facebook",
     "x-twitter",
     "instagram",
-    "youtube",
     "twitch",
     "tiktok",
     "github",
     "telegram",
     "discord",
+    "reddit",
     "tumblr",
     "threads",
-    "bilibili",
     "deviantart",
     "artstation",
     "soundcloud",
@@ -72,7 +72,7 @@ export default function CreateProfileForm() {
         className="max-w-screen-xl mt-20 mb-12 mx-auto px-9 text-center"
         data-new-user-onboarding=""
       >
-        <h1 className="!leading-[4.25rem] text-4xl xl:text-5xl bg-gradient-to-tl from-blue-700 via-purple-700 to-pink-500 text-transparent bg-clip-text">
+        <h1 className="not-prose font-bold font-inter !leading-[4.25rem] text-4xl xl:text-5xl bg-gradient-to-tl from-blue-700 via-purple-700 to-pink-500 text-transparent bg-clip-text">
           Welcome to MyFursona
         </h1>
         <p className="xl:text-xl xl:!leading-8 text-lg">
@@ -135,15 +135,12 @@ export default function CreateProfileForm() {
                 ))}
               </div>
               <Separator dir="horizontal" padding="0.75rem" />
-              <div className="inline-flex items-center gap-x-2">
-                <InfoIcon size={18} />
-                <span>
-                  {"Any platforms missing or have a suggestions to add? "}
-                  <Link href="/profile/create#" className="text-info underline">
-                    Let us know!
-                  </Link>
-                </span>
-              </div>
+              <Note type="info" inline>
+                {"Any platforms missing or have a suggestions to add? "}
+                <Link href="/profile/create#" className="text-info underline">
+                  Let us know!
+                </Link>
+              </Note>
             </div>
           </Fieldset>
           {/* Payment field */}

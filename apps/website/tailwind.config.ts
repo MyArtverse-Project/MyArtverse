@@ -21,6 +21,7 @@ const config: Config = {
         info: "var(--bui-info)",
         error: "var(--bui-error)",
         success: "var(--bui-success)",
+        current: "currentColor",
         100: "hsla(var(--bui-100), var(--tw-bg-opacity, 1))",
         200: "hsla(var(--bui-200), var(--tw-bg-opacity, 1))",
         300: "hsla(var(--bui-300), var(--tw-bg-opacity, 1))",

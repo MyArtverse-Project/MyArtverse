@@ -1,7 +1,7 @@
-import { Button } from "@/components/ui/Buttons"
-import Notice from "@/components/ui/Notice"
 import { Metadata } from "next"
 import Image from "next/image"
+
+import { Button } from "@/components/ui/Buttons"
 
 const title = "MyFursona — a place where everyfur belongs!"
 const description =
@@ -22,10 +22,11 @@ export default function Home() {
   return (
     <>
       <div className="flex flex-row items-center justify-between w-4/5 mx-auto my-20 ">
-        <div>
-          <h1 className="text-5xl">A place where everyone belongs!</h1>
-          <p>
-            MyFursona is an open-source platform where you dump your mom lol
+        <div className="flex flex-col gap-y-3">
+          <h1>A place where everyone belongs!</h1>
+          <p className="text-lg">
+            MyFursona is a platform that allows users to track their characters,
+            commissions, and adoptable reference sheets!
           </p>
           <div className="flex flex-row gap-x-4">
             <Button variant="secondary" href="/?showdatshit">
@@ -54,13 +55,6 @@ export default function Home() {
             priority
           />
         </div>
-      </div>
-      <div>
-        <Notice type="error">error</Notice>
-        <Notice type="warning">warnin</Notice>
-        <Notice type="success" heading="success modal">
-          <p>paragraph</p>
-        </Notice>
       </div>
     </>
   )

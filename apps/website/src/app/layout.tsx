@@ -72,7 +72,7 @@ export default function RootLayout({
         />
         <Analytics nonce={nonce} />
       </head>
-      <body className="bg-100 text-700 !overflow-x-hidden bg-background prose-headings:font-bold prose-headings:font-inter text-sm font-medium font-open-sans">
+      <body className="bg-100 text-700 !overflow-x-hidden bg-background prose-headings:font-bold prose-headings:font-inter text-sm font-medium font-open-sans prose-h1:text-5xl prose-h2:text-[2.75rem] prose-h3:text-4xl prose-h4:text-[2rem] prose-h5:text-[1.65rem]">
         <SkipNav />
         <NoJSReminder />
         <Providers>

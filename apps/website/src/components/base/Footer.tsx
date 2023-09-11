@@ -59,7 +59,9 @@ export default function Footer() {
   }) => {
     return (
       <div className="flex flex-col">
-        <h2 className="mb-4 font-semibold text-400">{heading}</h2>
+        <h2 className="not-prose text-lg font-inter mb-2 font-semibold text-500">
+          {heading}
+        </h2>
         <ul className="grid gap-y-3">
           {links.map(({ text, link }, index) => (
             <li key={index}>
@@ -100,9 +102,12 @@ export default function Footer() {
             ))}
           </div>
         </section>
-        <section id="copyright" className="px-12 py-4 text-center">
-          The MyFursona Project is under the Apache-2.0 license. &copy;
-          2022-2023 Fusky Labs Software Ltd.
+        <section
+          id="copyright"
+          className="p-12 text-center text-sm text-subtext"
+        >
+          {`MyFursona is an open source project licensed under Apache-2.0.
+          © 2022-${new Date().getFullYear()} Fusky Labs Software Ltd.`}
         </section>
       </footer>
       <svg className="absolute top-0 -z-[1] w-full h-full" aria-hidden></svg>
