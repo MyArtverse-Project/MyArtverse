@@ -147,23 +147,24 @@ export default function ProfileMasthead({
             <div className="flex gap-x-2.5 pt-1.5">
               <SocialsRow items={[{ platform: "Website", link: "baby" }]} />
             </div>
+        
           </div>
         </section>
         <Tabs
           tabs={[
-            { icon: HomeIcon, text: "Overview", link: "/" },
+            { icon: HomeIcon, text: "Overview", link: `/profile/${handle}/` },
             {
               icon: CatIcon,
               text: "Characters",
-              link: "/",
+              link: `/profile/${handle}/characters`,
               countIndicator: 5
             },
-            { icon: LayoutGridIcon, text: "Gallery", link: "/" },
-            { icon: BrushIcon, text: "Commissions", link: "/" },
+            { icon: LayoutGridIcon, text: "Gallery", link: `/profile/${handle}/gallery` },
+            { icon: BrushIcon, text: "Commissions", link: `/profile/${handle}/commissions` },
             {
               icon: HeartIcon,
               text: "Favorites",
-              link: "/",
+              link: `/${handle}/favorites`,
               countIndicator: 69
             }
           ]}
