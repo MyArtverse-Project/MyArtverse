@@ -8,7 +8,7 @@ import { CreditCardIcon, LockIcon } from "lucide-react"
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome"
 import { Fieldset, Note, Separator } from "@/components/ui"
 import { Button } from "@/components/ui/Buttons"
-import { FormWithProgress } from "@/components/ui/Forms"
+import { FormWithProgress, InputField } from "@/components/ui/Forms"
 import DropZone from "@/components/ui/Drop/DropZone"
 
 export default function CreateProfileForm() {
@@ -76,44 +76,33 @@ export default function CreateProfileForm() {
         <h1 className="not-prose font-bold font-inter !leading-[4.25rem] text-4xl xl:text-5xl bg-gradient-to-tl from-blue-700 via-purple-700 to-pink-500 text-transparent bg-clip-text">
           Welcome to MyFursona
         </h1>
-        <p className="xl:text-xl xl:!leading-8 text-lg">
+        <p className="xl:text-lg xl:!leading-8 text-base">
           {`Hello, ${username}—we're so glad to have you on board! You're almost there,
           all we need is to get some of the nitty-gritty stuff done first. 
           Don't worry, you can change these anytime!`}
         </p>
       </section>
       <FormWithProgress progress={progress}>
-        <div className="w-full flex flex-col gap-y-5">
+        <main className="w-full flex flex-col gap-y-5">
           {/* Profile field */}
           <Fieldset heading="Profile information">
-            <div className="flex flex-row justify-between">
-              <div>
-                <div className="my-3">
-                  <label htmlFor="display" className="my-3 font-bold text-lg">
-                    DISPLAY NAME
-                  </label>
-                  <input
-                    type="display"
-                    className="w-full px-4 py-2 my-1 border rounded-md border-color-3 text-black"
-                    placeholder=""
-                    value={displayName}
-                    onChange={(e) => setDisplayName(e.target.value)}
-                  />
-                </div>
-                <div>
-                  <label htmlFor="user" className="my-3 font-bold text-lg">
-                    USERNAME
-                  </label>
-                  <input
-                    type="user"
-                    className="w-full px-4 py-2 my-1 border rounded-md border-color-3 text-black"
-                    placeholder="@ozzythdev"
-                    value={`@${username}`}
-                    onChange={(e) => setDisplayName(e.target.value)}
-                  />
-                </div>
+            <div className="flex flex-row justify-between gap-6">
+              <div className="w-full">
+                <InputField
+                  type="text"
+                  inputName="Display name"
+                  onChange={(e) => setDisplayName(e.target.value)}
+                  value={displayName}
+                />
+                <InputField
+                  type="text"
+                  inputName="Username"
+                  value={`@${username}`}
+                />
               </div>
-              <DropZone />
+              <div className="flex-shrink-0">
+                <DropZone />
+              </div>
             </div>
           </Fieldset>
           {/* Connections field */}
@@ -157,7 +146,6 @@ export default function CreateProfileForm() {
                   Let us know!
                 </Link>
               </Note>
-              y{" "}
             </div>
           </Fieldset>
           {/* Payment field */}
@@ -218,7 +206,7 @@ export default function CreateProfileForm() {
           <div className="flex justify-end">
             <Button>Okay, I'm all set!</Button>
           </div>
-        </div>
+        </main>
       </FormWithProgress>
     </>
   )

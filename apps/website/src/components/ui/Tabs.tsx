@@ -12,13 +12,13 @@ export default function Tabs({
   }>
 }) {
   return (
-    <div data-bui-tab-list="" className="flex items-center gap-x-0.5">
+    <div data-biro-ui-tab-list="" className="flex items-center gap-x-0.5">
       {tabs.map(({ text, link, icon, countIndicator }, i) => {
         const Icon = icon
 
         return (
           <Link
-            data-bui-tab=""
+            data-biro-ui-tab=""
             href={link as any}
             key={i}
             tabIndex={0}

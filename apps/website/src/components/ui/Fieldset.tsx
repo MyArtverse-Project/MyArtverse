@@ -9,11 +9,11 @@ export default function Fieldset({
 }) {
   return (
     <section
-      data-bui-fieldset=""
+      data-biro-ui-fieldset=""
       className="p-6 rounded-lg border border-300 bg-200"
     >
       <div>
-        {heading ? <h5 className="mb-2">{heading}</h5> : null}
+        {heading ? <h5 className="mb-4">{heading}</h5> : null}
         {description ? <span>{description}</span> : null}
       </div>
       <div className="pt-2">{children}</div>

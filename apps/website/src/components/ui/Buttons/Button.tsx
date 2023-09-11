@@ -86,7 +86,7 @@ export default function Button({
 
   return (
     <DynamicElement
-      data-bui-variant={className ? "custom" : variant ?? "primary"}
+      data-biro-ui-variant={className ? "custom" : variant ?? "primary"}
       // @ts-ignore
       href={href ?? undefined}
       type={!href ? type ?? "button" : undefined}

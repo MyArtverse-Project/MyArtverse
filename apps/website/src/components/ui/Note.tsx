@@ -65,7 +65,7 @@ export default function Note({
 
   return (
     <div
-      data-bui-note=""
+      data-biro-ui-note=""
       className={
         !inline
           ? `flex gap-1.5 px-3.5 py-3 border rounded-md ${statusStyles}`

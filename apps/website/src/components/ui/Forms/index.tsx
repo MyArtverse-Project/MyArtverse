@@ -1,3 +1,4 @@
 import FormWithProgress from "./FormWithProgress"
+import InputField from "./InputField"
 
-export { FormWithProgress }
+export { InputField, FormWithProgress }
