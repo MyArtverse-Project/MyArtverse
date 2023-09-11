@@ -9,6 +9,7 @@ import { FontAwesomeIcon } from "@fortawesome/react-fontawesome"
 import { Fieldset, Note, Separator } from "@/components/ui"
 import { Button } from "@/components/ui/Buttons"
 import { FormWithProgress } from "@/components/ui/Forms"
+import DropZone from "@/components/ui/Drop/DropZone"
 
 export default function CreateProfileForm() {
   const [displayName, setDisplayName] = useState("")
@@ -85,20 +86,35 @@ export default function CreateProfileForm() {
         <div className="w-full flex flex-col gap-y-5">
           {/* Profile field */}
           <Fieldset heading="Profile information">
-            <input
-              type="display"
-              className="w-full px-4 py-2 my-1 border rounded-md border-color-3"
-              placeholder=""
-              value={displayName}
-              onChange={(e) => setDisplayName(e.target.value)}
-            />
-            <input
-              type="user"
-              className="w-full px-4 py-2 my-1 border rounded-md border-color-3"
-              placeholder="@ozzythdev"
-              value={username}
-              onChange={(e) => setDisplayName(e.target.value)}
-            />
+            <div className="flex flex-row justify-between">
+              <div>
+                <div className="my-3">
+                  <label htmlFor="display" className="my-3 font-bold text-lg">
+                    DISPLAY NAME
+                  </label>
+                  <input
+                    type="display"
+                    className="w-full px-4 py-2 my-1 border rounded-md border-color-3 text-black"
+                    placeholder=""
+                    value={displayName}
+                    onChange={(e) => setDisplayName(e.target.value)}
+                  />
+                </div>
+                <div>
+                  <label htmlFor="user" className="my-3 font-bold text-lg">
+                    USERNAME
+                  </label>
+                  <input
+                    type="user"
+                    className="w-full px-4 py-2 my-1 border rounded-md border-color-3 text-black"
+                    placeholder="@ozzythdev"
+                    value={`@${username}`}
+                    onChange={(e) => setDisplayName(e.target.value)}
+                  />
+                </div>
+              </div>
+              <DropZone />
+            </div>
           </Fieldset>
           {/* Connections field */}
           <Fieldset
@@ -141,6 +157,7 @@ export default function CreateProfileForm() {
                   Let us know!
                 </Link>
               </Note>
+              y{" "}
             </div>
           </Fieldset>
           {/* Payment field */}
