@@ -17,7 +17,7 @@ import Tabs from "@/components/ui/Tabs"
 import { Dropdown, DropdownItem } from "@/components/ui/Dropdown"
 import SocialsRow from "@/components/ui/SocialsRow"
 import Separator from "@/components/ui/Separator"
-import { Fragment } from "react"
+import { Fragment, useState } from "react"
 
 // TODO rewrite this masthead function to be reusable for profiles and character pages
 export default function ProfileMasthead({
@@ -164,7 +164,7 @@ export default function ProfileMasthead({
             {
               icon: HeartIcon,
               text: "Favorites",
-              link: `/${handle}/favorites`,
+              link: `/profile/${handle}/favorites`,
               countIndicator: 69
             }
           ]}
