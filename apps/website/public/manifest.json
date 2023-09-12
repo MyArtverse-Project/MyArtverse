@@ -1,9 +1,9 @@
 {
-    "name": "My Fursona",
+    "name": "MyFursona",
     "short_name": "MF",
     "start_url": "/signin",
     "display": "standalone",
-    "description": "An open source platform for your fursonas, commissions, and adopts",
+    "description": "An open source platform for your fursonas, commissions, and adopts!",
     "lang": "en",
     "dir": "auto",
     "theme_color": "#080313",
