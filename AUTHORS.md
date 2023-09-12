@@ -8,3 +8,4 @@
 ## Contributors
 
 - [Beta Folf](https://github.com/Beta-Folf)
+- [LinkTheCoder](https://github.com/LinkTheCoder)
