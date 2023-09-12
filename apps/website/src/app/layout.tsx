@@ -65,6 +65,10 @@ export default function RootLayout({
       className={`${inter.variable} ${open_sans.variable} theme-system`}
     >
       <head>
+      <link rel="manifest" href="/manifest.json" />
+      <meta name="theme-color" content="#080313" />
+      <link rel="apple-touch-icon" href="/logo-96x96.png" />
+      <meta name="apple-mobile-web-app-status-bar" content="#080313" />
         <script
           nonce={nonce}
           dangerouslySetInnerHTML={{ __html: DEV_CONVERSION_INLINE_SCRIPT }}

@@ -1,26 +1,31 @@
 /** @type {import('next').NextConfig} */
-const withMDX = require("@next/mdx")()
+const withMDX = require('@next/mdx')();
+const withPWA = require('next-pwa')({
+  dest: 'public',
+  register: true,
+  skipWaiting: true,
+});
 
 const nextConfig = {
   swcMinify: true,
   poweredByHeader: false,
-  transpilePackages: ["lodash"],
+  transpilePackages: ['lodash'],
   experimental: {
     typedRoutes: true,
-    mdxRs: true
+    mdxRs: true,
   },
   async rewrites() {
     return [
       {
-        source: "/profile/@:username",
-        destination: "/profile/:username"
+        source: '/profile/@:username',
+        destination: '/profile/:username',
       },
       {
-        source: "/profile/@:username/:path*",
-        destination: "/profile/:username/:path*"
-      }
-    ]
-  }
-}
+        source: '/profile/@:username/:path*',
+        destination: '/profile/:username/:path*',
+      },
+    ];
+  },
+};
 
-module.exports = withMDX(nextConfig)
+module.exports = withMDX(withPWA(nextConfig));
