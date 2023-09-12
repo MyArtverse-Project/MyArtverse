@@ -1,5 +1,10 @@
 /** @type {import('next').NextConfig} */
 const withMDX = require("@next/mdx")()
+const withPWA = require("next-pwa")({
+  dest: "public",
+  register: true,
+  skipWaiting: true
+})
 
 const nextConfig = {
   swcMinify: true,
@@ -23,4 +28,4 @@ const nextConfig = {
   }
 }
 
-module.exports = withMDX(nextConfig)
+module.exports = withMDX(withPWA(nextConfig))
