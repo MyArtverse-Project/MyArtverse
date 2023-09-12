@@ -6,6 +6,9 @@ import project from "../../../package.json"
 import { kebabCase } from "lodash-es"
 import { Button } from "../ui/Buttons"
 import { MyFursona } from "../icons"
+import { BuiLink } from "../ui"
+import { HeartIcon } from "lucide-react"
+import FooterGradient from "./FooterGraphics"
 
 const version = project.version
 
@@ -67,7 +70,7 @@ export default function Footer() {
             <li key={index}>
               <Link
                 className="my-2 font-semibold"
-                href={!link ? kebabCase(text) : (link as any)}
+                href={!link ? `/${kebabCase(text)}` : (link as any)}
               >
                 {text}
               </Link>
@@ -78,39 +81,33 @@ export default function Footer() {
     )
   }
 
-  const commitHashEnv =
-    process.env.NEXT_PUBLIC_VERCEL_GIT_COMMIT_SHA || "reserved"
-  const commitHash = commitHashEnv.slice(0, 8)
+  const commitHashEnv = process.env.NEXT_PUBLIC_VERCEL_GIT_COMMIT_SHA || ""
+  const commitHash = commitHashEnv.slice(0, 7)
 
   return (
-    <div className="relative">
+    <div className="relative overflow-y-hidden before:absolute before:inset-0 before:bottom-[unset] before:bg-gradient-to-r before:from-cyan-600 before:to-fuchsia-600 before:h-[1px]">
       <footer>
-        <section className="flex justify-between px-12 pb-6 pt-48 mx-auto max-w-screen-2xl">
+        <section className="flex justify-between px-12 pt-10 pb-2.5 mx-auto max-w-screen-2xl">
           <div className="flex flex-col justify-between w-fit">
-            <div className="flex flex-col">
+            <div className="flex flex-col gap-y-6">
               <Link href="/">
-                <MyFursona size={1.1} />
+                <MyFursona size={1.125} />
               </Link>
-              <Button href={"/"} variant="secondary">
-                <span id="mf-status" className="flex flex-row text-success">
-                  <span className="text-700">Status:</span>
-                  <span>All systems normal</span>
-                </span>
-              </Button>
+              <BuiLink href={"https://status.uptimerobot.com/myfursona"}>
+                MyFursona Status
+              </BuiLink>
             </div>
-            <span>
-              {`MyFursona ${version} `}
-              {commitHashEnv ? (
+            <div className="inline-flex gap-x-2">
+              <span>{version}</span>
+              {!commitHashEnv ? null : (
                 <Link
-                  className="underline text-blue-400 hover:text-blue-500"
+                  className="underline text-subtext hover:text-500"
                   href={`https://github.com/MyFursona-Project/MyFursona/commit/${commitHash}`}
                 >
                   {commitHash}
                 </Link>
-              ) : (
-                "RESERVED"
               )}
-            </span>
+            </div>
           </div>
           <div className="grid grid-cols-4 gap-4">
             {FOOTER_ITEMS.map(({ heading, links }, index) => (
@@ -120,13 +117,26 @@ export default function Footer() {
         </section>
         <section
           id="copyright"
-          className="p-12 text-center text-sm text-subtext"
+          className="px-12 py-8 text-center text-sm text-subtext flex flex-col justify-center gap-y-4"
         >
-          {`MyFursona is an open source project licensed under Apache-2.0.
+          <p>
+            {`MyFursona is an open source project licensed under Apache License 2.0.
           © 2022-${new Date().getFullYear()} Fusky Labs Software Ltd.`}
+          </p>
+          <p
+            className="flex justify-center items-center flex-wrap"
+            aria-label="Made with love by the MyFursona contributors"
+          >
+            {"Made with"}
+            <HeartIcon size={16} className="mx-1 text-500" />
+            by&nbsp;
+            <BuiLink href="https://github.com/MyFursona-Project/MyFursona/graphs/contributors">
+              the MyFursona contributors!
+            </BuiLink>
+          </p>
         </section>
       </footer>
-      <svg className="absolute top-0 -z-[1] w-full h-full" aria-hidden></svg>
+      <FooterGradient />
     </div>
   )
 }
