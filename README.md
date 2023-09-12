@@ -32,7 +32,7 @@ yarn
 yarn dev
 ```
 
-You can now access http://localhost:3000.
+You can now access http://localhost:3000 on your browser.
 
 ## Commands
 

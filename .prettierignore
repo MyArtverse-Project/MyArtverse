@@ -6,5 +6,7 @@ config
 public
 out
 
+target
+
 vercel.json
 turbo.json
