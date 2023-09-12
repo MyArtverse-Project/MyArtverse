@@ -6,6 +6,8 @@ export type PartialRecord<K extends PropertyKey, T = string> = Partial<
   Record<K, T>
 >
 
+export type PartialArray<T> = Array<Partial<T>>
+
 /**
  * Equivalent of the `Pick<T, U>` generic for literal unions
  */

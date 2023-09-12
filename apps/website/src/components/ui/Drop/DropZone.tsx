@@ -13,36 +13,39 @@ export default function DropZone() {
   const handleDragLeave = () => setIsDragging(false)
 
   const handleDrop = (e) => {
-    e.preventDefault();
-    setIsDragging(false);
-    const uploadedFile = e.dataTransfer.files[0];
-    handleFile(uploadedFile);
-  };
+    e.preventDefault()
+    setIsDragging(false)
+    const uploadedFile = e.dataTransfer.files[0]
+    handleFile(uploadedFile)
+  }
 
   const handleFileInputChange = (e) => {
-    setIsDragging(false);
-    const uploadedFile = e.target.files[0];
-    handleFile(uploadedFile);
-  };
+    setIsDragging(false)
+    const uploadedFile = e.target.files[0]
+    handleFile(uploadedFile)
+  }
 
   const handleFile = (uploadedFile) => {
     if (uploadedFile) {
-      const allowedTypes = ["image/png", "image/jpeg", "image/jpg"];
-      const maxFileSize = 25 * 1024 * 1024;
+      const allowedTypes = ["image/png", "image/jpeg", "image/jpg"]
+      const maxFileSize = 25 * 1024 * 1024
 
-      if (allowedTypes.includes(uploadedFile.type) && uploadedFile.size <= maxFileSize) {
-        setFile(uploadedFile);
+      if (
+        allowedTypes.includes(uploadedFile.type) &&
+        uploadedFile.size <= maxFileSize
+      ) {
+        setFile(uploadedFile)
 
-        const reader = new FileReader();
+        const reader = new FileReader()
         reader.onload = () => {
-          setImageUrl(reader.result);
-        };
-        reader.readAsDataURL(uploadedFile);
+          setImageUrl(reader.result)
+        }
+        reader.readAsDataURL(uploadedFile)
       } else {
         setError("This bitch is too big")
       }
     }
-  };
+  }
 
   return (
     <div

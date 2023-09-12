@@ -20,8 +20,8 @@ export async function generateMetadata(
   // !! NOTE: For testing only, actual user data is going to be fetched through the API
   const decodeUserHandle = `@${params.profile}`
   return {
-    title: `User (${decodeUserHandle})`,
-    description: `Follow ${decodeUserHandle} on MyFursona by creating an account!`
+    title: `User's characters`,
+    description: `See User's characters and others on MyFursona by creating an account!`
   }
 }
 
@@ -31,7 +31,6 @@ export default function Page({ params }: Props) {
 
   return (
     <Fragment>
-      
       <p>CHARAVTERS</p>
     </Fragment>
   )

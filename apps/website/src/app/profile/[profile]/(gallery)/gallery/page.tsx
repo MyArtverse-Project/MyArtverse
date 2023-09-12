@@ -18,35 +18,33 @@ export async function generateMetadata(
   { params, searchParams }: Props,
   parent: ResolvingMetadata
 ): Promise<Metadata> {
-  // !! NOTE: For testing only, actual user data is going to be fetched through the API
-  const decodeUserHandle = `@${params.profile}`
   return {
-    title: `User (${decodeUserHandle})`,
-    description: `Follow ${decodeUserHandle} on MyFursona by creating an account!`
+    title: `User's Gallery`,
+    description: `See User's artworks on MyFursona by creating an account!`
   }
 }
 
-export default function Page({ params }: Props) {
-  // !! NOTE: For testing only, actual user data is going to be fetched through the API
-  const decodeUserHandle = `@${params.profile}`
-
+export default function GalleryPage({ params }: Props) {
   return (
-    <Fragment> 
-    <div
-      data-profile-contents=""
-      className="px-12 py-4 mx-auto max-w-screen-2xl"
-    >
-      <div className="grid px-4 py-16 text-center border rounded-md place-items-center border-error prose-p:w-2/3 prose-p:mx-auto prose-p:leading-6 prose-p:mt-2">
-        <div>
-          <img src="/img/hero/ozzy-banner.png" alt="" className="w-4 h-4" />
-          <span>OzzyTheDev</span>
+    <Fragment>
+      <div
+        data-profile-contents=""
+        className="px-12 py-4 mx-auto max-w-screen-2xl"
+      >
+        <div className="grid px-4 py-16 text-center border rounded-md place-items-center border-error prose-p:w-2/3 prose-p:mx-auto prose-p:leading-6 prose-p:mt-2">
           <div>
-            <button>Prices</button>
-            <button><Palette />Queue</button>
+            <img src="/img/hero/ozzy-banner.png" alt="" className="w-4 h-4" />
+            <span>OzzyTheDev</span>
+            <div>
+              <button>Prices</button>
+              <button>
+                <Palette />
+                Queue
+              </button>
+            </div>
           </div>
         </div>
       </div>
-    </div>
-  </Fragment>
+    </Fragment>
   )
 }

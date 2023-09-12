@@ -7,7 +7,10 @@ import Tabs from "./Tabs"
 import SocialsRow from "./SocialsRow"
 import Fieldset from "./Fieldset"
 
+import BuiLink from "./BuiLink"
+
 export {
+  BuiLink,
   Modal,
   Note,
   Overlay,

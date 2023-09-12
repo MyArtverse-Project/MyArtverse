@@ -19,6 +19,10 @@ body {
 }
 
 @layer components {
+  .hyperlink {
+    @apply underline text-blue-400 hover:text-blue-500;
+  }
+
   .desktop-only-lg {
     @apply hidden lg:block;
   }

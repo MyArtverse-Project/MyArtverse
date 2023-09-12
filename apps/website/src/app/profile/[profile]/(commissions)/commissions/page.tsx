@@ -19,11 +19,9 @@ export async function generateMetadata(
   { params, searchParams }: Props,
   parent: ResolvingMetadata
 ): Promise<Metadata> {
-  // !! NOTE: For testing only, actual user data is going to be fetched through the API
-  const decodeUserHandle = `@${params.profile}`
   return {
-    title: `User (${decodeUserHandle})`,
-    description: `Follow ${decodeUserHandle} on MyFursona by creating an account!`
+    title: `User's Commissions`,
+    description: `Follow User on new commission updates on MyFursona by creating an account!`
   }
 }
 

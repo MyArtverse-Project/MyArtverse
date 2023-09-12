@@ -41,7 +41,7 @@ export default function ProfileMasthead({
   isNSFW?: boolean
 }) {
   return (
-    <Fragment>
+    <div data-masthead-root="">
       <div
         className="relative aspect-[15/3]"
         style={{ "--profile-banner-parallax": 1 } as React.CSSProperties}
@@ -90,7 +90,7 @@ export default function ProfileMasthead({
           <div className="flex flex-col w-full pt-4 gap-y-2">
             {/* layer 1 - username */}
             <div className="flex justify-between">
-              <h2 className="text-3xl flex items-center gap-x-1.5">
+              <h2 className="text-3xl not-prose font-inter font-bold flex items-center gap-x-1.5">
                 <span>Username</span>
                 <span data-badge-shelf="" aria-hidden></span>
               </h2>
@@ -130,7 +130,7 @@ export default function ProfileMasthead({
             {/* layer 2 - handles and followers */}
             <div className="flex gap-x-3.5">
               <span id="user-handle" className="font-semibold text-700">
-                {handle}
+                @{handle}
               </span>
               <span className="inline-flex items-center font-semibold gap-x-1 text-error">
                 <AlertTriangleIcon size={19} />
@@ -147,30 +147,37 @@ export default function ProfileMasthead({
             <div className="flex gap-x-2.5 pt-1.5">
               <SocialsRow items={[{ platform: "Website", link: "baby" }]} />
             </div>
-        
           </div>
         </section>
         <Tabs
-          tabs={[
-            { icon: HomeIcon, text: "Overview", link: `/profile/${handle}/` },
+          items={[
+            { icon: HomeIcon, text: "Overview", link: `/profile/@${handle}/` },
             {
               icon: CatIcon,
               text: "Characters",
-              link: `/profile/${handle}/characters`,
+              link: `/profile/@${handle}/characters`,
               countIndicator: 5
             },
-            { icon: LayoutGridIcon, text: "Gallery", link: `/profile/${handle}/gallery` },
-            { icon: BrushIcon, text: "Commissions", link: `/profile/${handle}/commissions` },
+            {
+              icon: LayoutGridIcon,
+              text: "Gallery",
+              link: `/profile/@${handle}/gallery`
+            },
+            {
+              icon: BrushIcon,
+              text: "Commissions",
+              link: `/profile/@${handle}/commissions`
+            },
             {
               icon: HeartIcon,
               text: "Favorites",
-              link: `/profile/${handle}/favorites`,
+              link: `/profile/@${handle}/favorites`,
               countIndicator: 69
             }
           ]}
         />
       </div>
       <Separator dir="horizontal" padding={12.5} />
-    </Fragment>
+    </div>
   )
 }

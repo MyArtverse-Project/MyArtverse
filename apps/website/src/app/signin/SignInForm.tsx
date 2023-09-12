@@ -7,6 +7,7 @@ import { FontAwesomeIcon } from "@fortawesome/react-fontawesome"
 import { emailRegex } from "@/constants"
 import { Button } from "@/components/ui/Buttons"
 import Separator from "@/components/ui/Separator"
+import { InputField } from "@/components/ui/Forms"
 
 export default function SignInForm() {
   const [emailEntered, setEmailEntered] = useState(false)
@@ -85,10 +86,9 @@ export default function SignInForm() {
               emailEntered ? "-translate-x-full" : "translate-x-0"
             } ${emailEntered ? "opacity-0" : "opacity-100"}`}
           >
-            <input
-              type="text"
-              className="w-full px-4 py-2 my-1 border rounded-md border-color-3 text-black"
-              placeholder="Email"
+            <InputField
+              inputName="Email"
+              type="email"
               value={email}
               onChange={(e) => setEmail(e.target.value)}
             />
@@ -98,17 +98,19 @@ export default function SignInForm() {
             >
               Next
             </Button>
-            <Button href="/auth/signup">Sign Up</Button>
+            <Button href="/signup">Sign Up</Button>
           </div>
           <div
-            className={`absolute top-0 left-0 w-full transition-all duration-500 transform ${
-              emailEntered ? "translate-x-0" : "translate-x-full"
-            } ${emailEntered ? "opacity-100" : "opacity-0"}`}
+            className={[
+              "absolute top-0 left-0 w-full transition-all duration-500 transform",
+              emailEntered
+                ? "translate-x-0 opacity-100"
+                : "translate-x-full opacity-0"
+            ].join(" ")}
           >
-            <input
+            <InputField
+              inputName="Password"
               type="password"
-              className="w-full px-4 py-2 my-1 border rounded-md border-color-3 text-black"
-              placeholder="Password"
               value={password}
               onChange={(e) => setPassword(e.target.value)}
             />

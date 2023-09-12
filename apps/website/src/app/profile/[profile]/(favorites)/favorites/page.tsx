@@ -17,21 +17,15 @@ export async function generateMetadata(
   { params, searchParams }: Props,
   parent: ResolvingMetadata
 ): Promise<Metadata> {
-  // !! NOTE: For testing only, actual user data is going to be fetched through the API
-  const decodeUserHandle = `@${params.profile}`
   return {
-    title: `User (${decodeUserHandle})`,
-    description: `Follow ${decodeUserHandle} on MyFursona by creating an account!`
+    title: `User's Favorites`,
+    description: `See User's favorites and more on MyFursona by creating an account!`
   }
 }
 
-export default function Page({ params }: Props) {
-  // !! NOTE: For testing only, actual user data is going to be fetched through the API
-  const decodeUserHandle = `@${params.profile}`
-
+export default function FavoritesPage({ params }: Props) {
   return (
     <Fragment>
-      
       <p>Favoites</p>
     </Fragment>
   )

@@ -17,12 +17,15 @@ export default function InputField({
   "type" | "placeholder" | "required" | "onChange" | "value" | "readOnly"
 >) {
   return (
-    <div data-biro-ui-input-field="" className="flex flex-col gap-y-1.5 w-full">
+    <span
+      data-biro-ui-input-field=""
+      className="flex flex-col gap-y-1.5 w-full"
+    >
       <label htmlFor={inputName} className="uppercase text-600 font-bold">
         {inputName}
       </label>
       <input
-        className="px-3 py-2 border rounded-md text-700 border-400 w-full"
+        className="px-4 py-2 border rounded-md text-700 border-400 w-full bg-100"
         name={inputName}
         id={kebabCase(inputName)}
         type={type}
@@ -33,6 +36,6 @@ export default function InputField({
         value={value}
       />
       <div data-error-boundary=""></div>
-    </div>
+    </span>
   )
 }

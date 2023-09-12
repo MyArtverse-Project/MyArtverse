@@ -1,16 +1,11 @@
 import { Metadata, ResolvingMetadata } from "next"
 
 import dynamic from "next/dynamic"
-import ProfileMasthead from "./(overview)/ProfileMasthead"
-import { AlertOctagon } from "lucide-react"
-import { Fragment } from "react"
-
-const Modal = dynamic(() => import("@/components/ui/Modal"), { ssr: false })
+import ProfileMasthead from "./ProfileMasthead"
 
 type Props = {
   params: {
     profile: string
-    slug: string
   }
   children: React.ReactNode
   searchParams: { [key: string]: string | string[] | undefined }
@@ -21,20 +16,22 @@ export async function generateMetadata(
   parent: ResolvingMetadata
 ): Promise<Metadata> {
   // !! NOTE: For testing only, actual user data is going to be fetched through the API
-  const decodeUserHandle = `@${params.profile}`
+  const decodeUserHandle = `${params.profile}`
   return {
-    title: `User (${decodeUserHandle})`,
-    description: `Follow ${decodeUserHandle} on MyFursona by creating an account!`
+    title: {
+      template: `%s (@${decodeUserHandle}) - MyFursona`,
+      default: "lol"
+    },
+    description: `Follow @${decodeUserHandle} on MyFursona by creating an account!`
   }
 }
 
 export default function Layout({ params, children }: Props) {
-  // !! NOTE: For testing only, actual user data is going to be fetched through the API
-  const decodeUserHandle = `@${params.profile}`
+  const profile = params.profile
 
   return (
-    <Fragment>
-      <ProfileMasthead handle={decodeUserHandle} />
+    <>
+      <ProfileMasthead handle={profile} />
       {/*
       
       Reimplmenting stuff
@@ -50,7 +47,12 @@ export default function Layout({ params, children }: Props) {
       </Masthead>
 
       */}
-      {children}
-    </Fragment>
+      <div
+        data-margin-gutter=""
+        className="px-12 py-4 mx-auto max-w-screen-2xl"
+      >
+        {children}
+      </div>
+    </>
   )
 }

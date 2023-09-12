@@ -78,6 +78,10 @@ export default function Footer() {
     )
   }
 
+  const commitHashEnv =
+    process.env.NEXT_PUBLIC_VERCEL_GIT_COMMIT_SHA || "reserved"
+  const commitHash = commitHashEnv.slice(0, 8)
+
   return (
     <div className="relative">
       <footer>
@@ -94,7 +98,19 @@ export default function Footer() {
                 </span>
               </Button>
             </div>
-            <span>MyFursona v{version} - COMMIT HASH</span>
+            <span>
+              {`MyFursona ${version} `}
+              {commitHashEnv ? (
+                <Link
+                  className="underline text-blue-400 hover:text-blue-500"
+                  href={`https://github.com/MyFursona-Project/MyFursona/commit/${commitHash}`}
+                >
+                  {commitHash}
+                </Link>
+              ) : (
+                "RESERVED"
+              )}
+            </span>
           </div>
           <div className="grid grid-cols-4 gap-4">
             {FOOTER_ITEMS.map(({ heading, links }, index) => (

@@ -4,17 +4,23 @@ const withMDX = require("@next/mdx")()
 const nextConfig = {
   swcMinify: true,
   poweredByHeader: false,
-  transpilePackages: ["lodash-es"],
+  transpilePackages: ["lodash"],
   experimental: {
     typedRoutes: true,
     mdxRs: true
   },
-  rewrites: async () => [
-    {
-      source: "/profile/@:username",
-      destination: "/profile/:username"
-    }
-  ]
+  async rewrites() {
+    return [
+      {
+        source: "/profile/@:username",
+        destination: "/profile/:username"
+      },
+      {
+        source: "/profile/@:username/:path*",
+        destination: "/profile/:username/:path*"
+      }
+    ]
+  }
 }
 
 module.exports = withMDX(nextConfig)
