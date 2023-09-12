@@ -1,3 +1,4 @@
+import { Palette } from "lucide-react"
 import { Metadata, ResolvingMetadata } from "next"
 
 import dynamic from "next/dynamic"
@@ -30,9 +31,22 @@ export default function Page({ params }: Props) {
   const decodeUserHandle = `@${params.profile}`
 
   return (
-    <Fragment>
-      
-      <p>Gallery</p>
-    </Fragment>
+    <Fragment> 
+    <div
+      data-profile-contents=""
+      className="px-12 py-4 mx-auto max-w-screen-2xl"
+    >
+      <div className="grid px-4 py-16 text-center border rounded-md place-items-center border-error prose-p:w-2/3 prose-p:mx-auto prose-p:leading-6 prose-p:mt-2">
+        <div>
+          <img src="/img/hero/ozzy-banner.png" alt="" className="w-4 h-4" />
+          <span>OzzyTheDev</span>
+          <div>
+            <button>Prices</button>
+            <button><Palette />Queue</button>
+          </div>
+        </div>
+      </div>
+    </div>
+  </Fragment>
   )
 }
