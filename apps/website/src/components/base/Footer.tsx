@@ -1,13 +1,12 @@
-"use client"
+"use client";
 
-import Link from "next/link"
+import Link from "next/link";
+import project from "../../../package.json";
+import { kebabCase } from "lodash-es";
+import { Button } from "../ui/Buttons";
+import { MyFursona } from "../icons";
 
-import project from "../../../package.json"
-import { kebabCase } from "lodash-es"
-import { Button } from "../ui/Buttons"
-import { MyFursona } from "../icons"
-
-const version = project.version
+const version = project.version;
 
 export default function Footer() {
   /* NOTE: in the links array, you can override the links with the "link" key */
@@ -48,14 +47,14 @@ export default function Footer() {
         { text: "Privacy Policy" }
       ]
     }
-  ]
+  ];
 
   const ColumnItems = ({
     heading,
     links
   }: {
-    heading: string
-    links: Array<{ text?: string; link?: string }>
+    heading: string;
+    links: Array<{ text?: string; link?: string }>;
   }) => {
     return (
       <div className="flex flex-col">
@@ -75,30 +74,30 @@ export default function Footer() {
           ))}
         </ul>
       </div>
-    )
-  }
+    );
+  };
 
   const commitHashEnv =
-    process.env.NEXT_PUBLIC_VERCEL_GIT_COMMIT_SHA || "reserved"
-  const commitHash = commitHashEnv.slice(0, 8)
+    process.env.NEXT_PUBLIC_VERCEL_GIT_COMMIT_SHA || "reserved";
+  const commitHash = commitHashEnv.slice(0, 8);
 
   return (
     <div className="relative">
       <footer>
-        <section className="flex justify-between px-12 pb-6 pt-48 mx-auto max-w-screen-2xl">
-          <div className="flex flex-col justify-between w-fit">
-            <div className="flex flex-col">
-              <Link href="/">
+        <section className="px-4 pb-6 pt-12 mx-auto max-w-screen-2xl">
+          <div className="flex flex-col">
+            <div className="flex flex-col md: mx-auto">
+              <Link className="mb-4" href="/">
                 <MyFursona size={1.1} />
               </Link>
               <Button href={"/"} variant="secondary">
-                <span id="mf-status" className="flex flex-row text-success">
-                  <span className="text-700">Status:</span>
-                  <span>All systems normal</span>
-                </span>
-              </Button>
+  <span id="mf-status" className="flex flex-row text-success">
+    <span className="text-700">Status:</span>
+    <span>All systems normal</span>
+  </span>
+</Button>
             </div>
-            <span>
+            <span className="md: mx-auto md: mt-5">
               {`MyFursona ${version} `}
               {commitHashEnv ? (
                 <Link
@@ -112,7 +111,7 @@ export default function Footer() {
               )}
             </span>
           </div>
-          <div className="grid grid-cols-4 gap-4">
+          <div className="sm: text-center lg:text-left grid grid-cols-2 md:grid-cols-2 lg:grid-cols-4 gap-4 md: mt-5">
             {FOOTER_ITEMS.map(({ heading, links }, index) => (
               <ColumnItems heading={heading} links={links} key={index} />
             ))}
@@ -120,7 +119,7 @@ export default function Footer() {
         </section>
         <section
           id="copyright"
-          className="p-12 text-center text-sm text-subtext"
+          className="p-4 text-center text-sm text-subtext"
         >
           {`MyFursona is an open source project licensed under Apache-2.0.
           © 2022-${new Date().getFullYear()} Fusky Labs Software Ltd.`}
@@ -128,5 +127,5 @@ export default function Footer() {
       </footer>
       <svg className="absolute top-0 -z-[1] w-full h-full" aria-hidden></svg>
     </div>
-  )
+  );
 }
