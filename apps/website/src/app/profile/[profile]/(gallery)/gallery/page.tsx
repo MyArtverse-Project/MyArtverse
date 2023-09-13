@@ -29,9 +29,9 @@ export default function GalleryPage({ params }: Props) {
     <Fragment>
       <div
         data-profile-contents=""
-        className="px-12 py-4 mx-auto max-w-screen-2xl"
+        className="py-4 max-w-screen-2xl"
       >
-        <div className="grid px-4 py-16 text-center border rounded-md place-items-center border-error prose-p:w-2/3 prose-p:mx-auto prose-p:leading-6 prose-p:mt-2">
+        <div className="grid py-16 text-center border rounded-md place-items-center border-error w-full prose-p:mx-auto prose-p:leading-6 prose-p:mt-2">
           <div>
             <img src="/img/hero/ozzy-banner.png" alt="" className="w-4 h-4" />
             <span>OzzyTheDev</span>

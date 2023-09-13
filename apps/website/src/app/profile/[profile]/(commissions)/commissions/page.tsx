@@ -1,3 +1,5 @@
+import Comissions from "@/components/ui/Comissions/Comissions"
+import Switch from "@/components/ui/Comissions/Switch"
 import { Palette } from "lucide-react"
 import { Metadata, ResolvingMetadata } from "next"
 
@@ -19,9 +21,11 @@ export async function generateMetadata(
   { params, searchParams }: Props,
   parent: ResolvingMetadata
 ): Promise<Metadata> {
+  // !! NOTE: For testing only, actual user data is going to be fetched through the API
+  const decodeUserHandle = `@${params.profile}`
   return {
-    title: `User's Commissions`,
-    description: `Follow User on new commission updates on MyFursona by creating an account!`
+    title: `User (${decodeUserHandle})`,
+    description: `Follow ${decodeUserHandle} on MyFursona by creating an account!`
   }
 }
 
@@ -43,61 +47,14 @@ export default function Page({ params }: Props) {
               className="w-16 h-16 rounded-full mr-2"
             />
             <span className="text-xl font-bold">OzzyTheDev</span>
-            <div className="flex flex-row p-2.5 border border-300 rounded-md mx-4 items-center text-center justify-center">
-              <div className="bg-500 text-100 w-32 h-9 fkex flex-row justify-center my-auto rounded-md">
-                <span className="my-auto">Prices</span>
-              </div>
-              <div className="bg-500 text-100 w-32 h-9 flex flex-row text-center justify-center items-center rounded-md">
-                <Palette className="mr-2" width={24} height={24} />
-                Queue
-              </div>
-            </div>
+            <Switch />
           </div>
           <div className="grid grid-cols-2 gap-2">
-            <div className="flex flex-col text-left items-start justify-start">
-              <Image
-                // objectFit="cover"
-                // layout="fill"
-                width="568"
-                height="156"
-                src="/img/hero/ozzy-sniff.png"
-                alt=""
-              />
-              <div className="flex flex-col justify-start">
-                <h3 className="text-4xl no-prose">Banners - $45+</h3>
-                <p className="no-prose text-left mx-0">Wallpaper IDK</p>
-                <p className="no-prose text-left mx-0">
-                  Each extra character is $50 extra
-                </p>
-              </div>
-            </div>
-            <div className="flex flex-col">
-              <Image
-                // objectFit="cover"
-                // layout="fill"
-                width="568"
-                height="156"
-                src="/img/hero/ozzy-sniff.png"
-                alt=""
-              />
-              <h1>Banners - $45+</h1>
-              <p>Wallpaper IDK</p>
-              <p>Each extra character is $50 extra</p>
-            </div>
-            <div className="flex flex-col">
-              <Image
-                // objectFit="cover"
-                // layout="fill"
-                width="568"
-                height="156"
-                src="/img/hero/ozzy-sniff.png"
-                alt=""
-              />
-              <h1>Banners - $45+</h1>
-              <p>Wallpaper IDK</p>
-              <p>Each extra character is $50 extra</p>
-            </div>
-          </div>
+            <Comissions title="Banners" description="Awesome scene with 2+ Characters" imageURL="/img/hero/ozzy-sniff.png" price={30} key={1}  />
+            <Comissions title="Banners" description="Awesome scene with 2+ Characters" imageURL="/img/hero/ozzy-sniff.png" price={30} key={1}  />
+            <Comissions title="Banners" description="Awesome scene with 2+ Characters" imageURL="/img/hero/ozzy-sniff.png" price={30} key={1}  />
+            <Comissions title="Banners" description="Awesome scene with 2+ Characters" imageURL="/img/hero/ozzy-sniff.png" price={30} key={1}  />
+           </div>
         </div>
       </div>
     </Fragment>
