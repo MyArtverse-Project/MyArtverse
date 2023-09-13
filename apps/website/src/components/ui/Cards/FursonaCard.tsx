@@ -12,9 +12,10 @@ export default function FursonaCard({
   img = "",
   species,
   isHybrid,
-  palette
+  palette,
+  status = "notForAdopt"
 }: {
-  name?: string
+  name: string
   img?: string
   species?: string
   isHybrid?: boolean
@@ -28,8 +29,14 @@ export default function FursonaCard({
         alt={`Avatar of ${name}`}
         loading="lazy"
         decoding="async"
+        height="100"
+        width="100"
       />
-      <div id="fursona-container" className=""></div>
+      <div id="fursona-container" className="">
+        <span>{name}</span>
+        <span>{species}</span>
+        <span>{status}</span>
+      </div>
     </div>
   )
 }

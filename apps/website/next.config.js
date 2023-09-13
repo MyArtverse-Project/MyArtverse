@@ -29,7 +29,7 @@ const nextConfig = {
   async redirects() {
     return [
       { source: "/signup", destination: "/register", permanent: true },
-      { source: "/login", destination: "/login", permanent: true }
+      { source: "/signin", destination: "/login", permanent: true }
     ]
   }
 }
