@@ -1,4 +1,3 @@
-/** @type {import('next').NextConfig} */
 const withMDX = require("@next/mdx")()
 const withPWA = require("next-pwa")({
   dest: "public",
@@ -6,6 +5,7 @@ const withPWA = require("next-pwa")({
   skipWaiting: true
 })
 
+/** @type {import('next').NextConfig} */
 const nextConfig = {
   swcMinify: true,
   poweredByHeader: false,
@@ -29,7 +29,12 @@ const nextConfig = {
   async redirects() {
     return [
       { source: "/signup", destination: "/register", permanent: true },
-      { source: "/signin", destination: "/login", permanent: true }
+      { source: "/signin", destination: "/login", permanent: true },
+      {
+        source: "/profile/@create",
+        destination: "/profile/create",
+        permanent: true
+      }
     ]
   }
 }
