@@ -17,13 +17,16 @@ export default function FolderItem({
 }) {
   const DynamicFolderIcon = !isOpen ? Folder : FolderOpen
   return (
-    <div className="w-full" data-folder-item="" data-is-open={isOpen}>
+    <div className="w-full" data-folder-item="">
       <Button
+        aria-label={`Folder item: ${name}`}
         className={[
           "w-full flex flex-row items-center px-3 py-2 rounded-md cursor-pointer",
           !active ? "hover:text-500" : "text-500"
         ].join(" ")}
-        prefixIcon={<DynamicFolderIcon size={21} className="mr-2" />}
+        prefixIcon={
+          <DynamicFolderIcon size={21} className="mr-2" aria-hidden />
+        }
       >
         <p className="font-semibold">{name}</p>
       </Button>

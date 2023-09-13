@@ -28,13 +28,21 @@ export default function Page({ params }: Props) {
   return (
     <div className="flex gap-x-4">
       <FolderView />
-      <div className="grid grid-flow-col">
-        <FursonaCard
-          name={"ozzy"}
-          img={"/img/examples/ozzy/5.png"}
-          species="Otter"
-          status="notForAdopt"
-        />
+      <div
+        className="w-full grid gap-4"
+        style={{ gridTemplateColumns: "repeat(auto-fill, minmax(230px, 1fr))" }}
+        role="listbox"
+      >
+        {[...Array(10)].map((_, i) => (
+          <FursonaCard
+            key={i}
+            name={"Renzo"}
+            img={"/img/hero/renzo-snowglobe.jpg"}
+            species="Raccoon-Fox-Dragon"
+            status="notForAdopt"
+            role="listitem"
+          />
+        ))}
       </div>
     </div>
   )

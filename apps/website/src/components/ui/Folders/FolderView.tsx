@@ -27,7 +27,6 @@ export default function FolderView({}: {}) {
       if (!isDragging) {
         return
       }
-
       if (mousePosition < 250 || mousePosition > 800) {
         return
       }
@@ -74,17 +73,22 @@ export default function FolderView({}: {}) {
         userSelect: !isDragging ? "initial" : "none"
       }}
     >
-      <div className="grid gap-y-1.5 w-full">
-        <span className="flex items-center">
-          <FolderItem name="All characters" active={true} />
+      <div className="grid gap-y-1.5 w-full h-fit">
+        <span className="flex items-center flex-row-reverse">
           <div>
             <Button
+              aria-label={
+                !hasExpandedDetails
+                  ? "Expand folder menu"
+                  : "Collapse folder menu"
+              }
               iconOnly
               prefixIcon={<PanelIconDynamic size={21} />}
-              className="p-3 hover:text-500"
+              className="p-2 hover:text-500"
               onClick={handleExpandDetails}
             />
           </div>
+          <FolderItem name="All characters" active={true} />
         </span>
         <Separator dir="horizontal" padding="0.25rem" />
         <FolderItem name="Icons" active={false} />
