@@ -1,23 +1,30 @@
 import Image from "next/image"
 import { Button } from "../Buttons"
 
-interface IComissionProps {
-  imageURL: string
-  title: string
-  price: number
-  description: string
-}
-
 export default function Commissions({
   description,
   imageURL,
   price,
   title
-}: IComissionProps) {
+}: {
+  imageURL: string
+  title: string
+  price: number
+  description: string
+}) {
   return (
-    <div className="flex flex-col justify-start items-center w-fit my-4">
+    <div
+      className="flex flex-col justify-start items-center w-fit my-4"
+      data-commission-card=""
+    >
       <div className="relative w-[568px] h-[156px] rounded-md overflow-hidden">
-        <Image objectFit="cover" layout="fill" src={imageURL} alt="" className="hover:scale:90" />
+        <Image
+          objectFit="cover"
+          layout="fill"
+          src={imageURL}
+          alt=""
+          className="hover:scale:90"
+        />
       </div>
       <div className="flex flex-col justify-between w-full mt-3">
         <div className="flex flex-row">
@@ -26,7 +33,6 @@ export default function Commissions({
           </h1>
           <Button>Commission</Button>
         </div>
-
         <p className="not-prose mx-0 text-left w-full text-xl font-inter">
           {description}
         </p>
