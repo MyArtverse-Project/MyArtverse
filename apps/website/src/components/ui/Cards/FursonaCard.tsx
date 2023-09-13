@@ -23,7 +23,7 @@ export default function FursonaCard({
   palette?: CharacterCardPalette
 }) {
   return (
-    <div tabIndex={-1} aria-label={`${name}, ${species}`} className="">
+    <div tabIndex={0} aria-label={`Character item: ${name}, ${species}`}>
       <Image
         src={img}
         alt={`Avatar of ${name}`}

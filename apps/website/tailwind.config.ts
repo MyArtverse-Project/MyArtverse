@@ -38,7 +38,8 @@ const config: Config = {
         "warning-hl": "hsla(var(--bui-warning-highlight), var(--tw-bg-opacity, 1))",
         "info-hl": "hsla(var(--bui-info-highlight, var(--tw-bg-opacity, 1)))",
         // ! overrides
-        "context-menu": "var(--bui-context-menu)"
+        "context-menu": "var(--bui-context-menu)",
+        active: "var(--bui-active)"
       }
     }
   },

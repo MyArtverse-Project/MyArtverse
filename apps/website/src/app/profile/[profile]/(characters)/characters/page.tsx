@@ -1,9 +1,8 @@
 import { FursonaCard } from "@/components/ui/Cards"
-import { FolderView } from "@/components/ui/FolderView"
+import { FolderView } from "@/components/ui/Folders"
 import { Metadata, ResolvingMetadata } from "next"
 
 import dynamic from "next/dynamic"
-import { Fragment } from "react"
 
 const Modal = dynamic(() => import("@/components/ui/Modal"), { ssr: false })
 
@@ -29,8 +28,13 @@ export default function Page({ params }: Props) {
   return (
     <div className="flex gap-x-4">
       <FolderView />
-      <div className="flex flex-row">
-        <FursonaCard name={"ozzy"} img={"/img/examples/ozzy/5.png"} species="Otter" status="notForAdopt"  />
+      <div className="grid grid-flow-col">
+        <FursonaCard
+          name={"ozzy"}
+          img={"/img/examples/ozzy/5.png"}
+          species="Otter"
+          status="notForAdopt"
+        />
       </div>
     </div>
   )
