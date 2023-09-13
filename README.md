@@ -44,4 +44,4 @@ You can now access http://localhost:3000 on your browser.
 
 ## License
 
-Apache-2.0
+Apache-2.0 © Fusky Labs Software

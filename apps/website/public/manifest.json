@@ -1,7 +1,7 @@
 {
     "name": "MyFursona",
     "short_name": "MF",
-    "start_url": "/signin",
+    "start_url": "/login",
     "display": "standalone",
     "description": "An open source platform for your fursonas, commissions, and adopts!",
     "lang": "en",

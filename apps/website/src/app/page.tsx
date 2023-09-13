@@ -32,7 +32,7 @@ export default function Home() {
             <Button variant="secondary" href="/?showdatshit">
               I'll look around
             </Button>
-            <Button variant="primary" href="/signup">
+            <Button variant="primary" href="/register">
               Sign Up
             </Button>
           </div>

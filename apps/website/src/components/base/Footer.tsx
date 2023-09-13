@@ -31,13 +31,7 @@ export default function Footer() {
         { text: "FAQ" },
         { text: "Brand" },
         { text: "Developers" },
-        { text: "Report Issue" }
-      ]
-    },
-    {
-      heading: "Company",
-      links: [
-        { text: "About MyFursona" },
+        { text: "Report issue" },
         { text: "Contributing" },
         { text: "Open Source", link: "https://github.com/MyFursona-Project" },
         { text: "Licenses" }
@@ -46,6 +40,8 @@ export default function Footer() {
     {
       heading: "Legal",
       links: [
+        { text: "About MyFursona" },
+
         { text: "Community Guidelines" },
         { text: "Terms of Service" },
         { text: "Privacy Policy" }
@@ -109,7 +105,7 @@ export default function Footer() {
               )}
             </div>
           </div>
-          <div className="grid grid-cols-4 gap-4">
+          <div className="grid grid-cols-3 gap-4">
             {FOOTER_ITEMS.map(({ heading, links }, index) => (
               <ColumnItems heading={heading} links={links} key={index} />
             ))}

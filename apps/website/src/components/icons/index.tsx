@@ -35,6 +35,16 @@ export function XTwitter({ size = 21 }: { size?: number }) {
   )
 }
 
+export function Google({ size = 21 }: { size?: number }) {
+  return (
+    <FontAwesomeIcon
+      icon={["fab", "google"]}
+      fixedWidth
+      fontSize={size.toString()}
+    />
+  )
+}
+
 export function Facebook({ size = 21 }: { size?: number }) {
   return (
     <FontAwesomeIcon

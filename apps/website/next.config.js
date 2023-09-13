@@ -25,6 +25,12 @@ const nextConfig = {
         destination: "/profile/:username/:path*"
       }
     ]
+  },
+  async redirects() {
+    return [
+      { source: "/signup", destination: "/register", permanent: true },
+      { source: "/login", destination: "/login", permanent: true }
+    ]
   }
 }
 

@@ -73,9 +73,9 @@ export default function Button({
   }
 
   const positions = {
-    left: "text-left",
-    center: "text-center",
-    right: "text-right"
+    left: "text-left justify-start",
+    center: "text-center justify-center",
+    right: "text-right justify-end"
   }
 
   const sizeDynamic = sizes[size ?? "big"]
@@ -84,6 +84,13 @@ export default function Button({
 
   const DynamicElement = !href ? "button" : Link
 
+  const joinClasses = [
+    baseStyles,
+    sizeDynamic,
+    variantsDynamic,
+    positionDynamic
+  ].join(" ")
+
   return (
     <DynamicElement
       data-biro-ui-variant={className ? "custom" : variant ?? "primary"}
@@ -91,13 +98,7 @@ export default function Button({
       href={href ?? undefined}
       type={!href ? type ?? "button" : undefined}
       aria-disabled={disabled ?? undefined}
-      className={
-        className
-          ? className
-          : [baseStyles, sizeDynamic, variantsDynamic, positionDynamic].join(
-              " "
-            )
-      }
+      className={className ? className : joinClasses}
       {...attributes}
     >
       {prefixIcon}

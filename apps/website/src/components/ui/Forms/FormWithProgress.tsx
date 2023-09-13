@@ -54,7 +54,7 @@ export default function FormWithProgress({
           <div className="px-4">
             <div>
               {"Already have an account? "}
-              <Link href="/signin" className="text-info underline">
+              <Link href="/login" className="text-info underline">
                 Sign in
               </Link>
             </div>

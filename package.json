@@ -13,7 +13,7 @@
     "dev:client": "cd apps/client && yarn tauri dev",
     "build": "turbo build --filter=website",
     "build:client": "cd apps/client && yarn tauri build",
-    "build:all": "concurrently -n web,desktop \"yarn turbo build\" \"yarn build:client\" ",
+    "build:all": "concurrently -n web,desktop \"yarn turbo build\" \"yarn build:client\"",
     "prettier:check": "prettier --check .",
     "prettier:write": "prettier --write .",
     "prepare": "husky install"

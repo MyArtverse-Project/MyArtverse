@@ -174,7 +174,7 @@ export default function Navbar() {
             </>
           }
         />
-        <Button href="/signin">Sign in</Button>
+        <Button href="/login">Sign in</Button>
       </div>
     </nav>
   )
