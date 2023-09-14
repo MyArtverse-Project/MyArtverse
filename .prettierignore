@@ -10,3 +10,5 @@ target
 
 vercel.json
 turbo.json
+
+Cargo.toml

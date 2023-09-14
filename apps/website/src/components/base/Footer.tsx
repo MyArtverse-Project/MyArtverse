@@ -4,7 +4,6 @@ import Link from "next/link"
 
 import project from "../../../package.json"
 import { kebabCase } from "lodash-es"
-import { Button } from "../ui/Buttons"
 import { MyFursona } from "../icons"
 import { BuiLink } from "../ui"
 import { HeartIcon } from "lucide-react"
@@ -83,10 +82,10 @@ export default function Footer() {
   return (
     <div className="relative overflow-y-hidden before:absolute before:inset-0 before:bottom-[unset] before:bg-gradient-to-r before:from-cyan-600 before:to-fuchsia-600 before:h-[1px]">
       <footer>
-        <section className="flex justify-between px-12 pt-10 pb-2.5 mx-auto max-w-screen-2xl">
-          <div className="flex flex-col justify-between w-fit">
-            <div className="flex flex-col gap-y-6">
-              <Link href="/">
+        <section className="px-8 pb-6 pt-12 mx-auto max-w-screen-2xl flex justify-between items-center md:items-start flex-col md:flex-row">
+          <div className="flex flex-col">
+            <div className="flex flex-col md:mx-auto">
+              <Link className="mb-4" href="/">
                 <MyFursona size={1.125} />
               </Link>
               <BuiLink href={"https://status.uptimerobot.com/myfursona"}>
@@ -105,7 +104,7 @@ export default function Footer() {
               )}
             </div>
           </div>
-          <div className="grid grid-cols-3 gap-4">
+          <div className="sm:text-left text-center grid grid-cols-2 md:grid-cols-2 lg:grid-cols-4 gap-4 md:mt-5">
             {FOOTER_ITEMS.map(({ heading, links }, index) => (
               <ColumnItems heading={heading} links={links} key={index} />
             ))}
@@ -113,11 +112,11 @@ export default function Footer() {
         </section>
         <section
           id="copyright"
-          className="px-12 py-8 text-center text-sm text-subtext flex flex-col justify-center gap-y-4"
+          className="p-4 text-center text-sm text-subtext prose-p:my-4"
         >
           <p>
             {`MyFursona is an open source project licensed under Apache License 2.0.
-          © 2022-${new Date().getFullYear()} Fusky Labs Software Ltd.`}
+             © 2022-${new Date().getFullYear()} Fusky Labs Software Ltd.`}
           </p>
           <p
             className="flex justify-center items-center flex-wrap"
