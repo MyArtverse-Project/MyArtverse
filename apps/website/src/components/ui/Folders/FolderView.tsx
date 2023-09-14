@@ -74,7 +74,7 @@ export default function FolderView({}: {}) {
         userSelect: !isDragging ? "initial" : "none"
       }}
     >
-      <div className="grid gap-y-1.5 w-full h-fit sticky top-36">
+      <div className="grid gap-y-1.5 w-full h-fit sticky top-32">
         <span className="flex gap-2.5 items-center flex-row-reverse">
           <div>
             <Button

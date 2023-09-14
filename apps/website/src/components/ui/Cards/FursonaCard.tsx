@@ -2,6 +2,7 @@ import Image from "next/image"
 
 import type { AdoptionStatus, ColorPalette as Palette } from "@/types"
 import ColorPalette from "./ColorPalette"
+import BuiImage from "../BuiImage"
 
 type CharacterCardPalette =
   | [Palette]
@@ -32,29 +33,15 @@ export default function FursonaCard({
       {...attributes}
     >
       <div className="overflow-hidden rounded-md">
-        <div
-          data-custom-img-renderer=""
-          className="relative before:absolute before:-inset-0.5 before:z-[2]"
-          style={
-            {
-              aspectRatio: "1/1",
-              width: "100%"
-            } as React.CSSProperties
-          }
-          draggable="false"
-        >
-          <Image
-            className="select-none object-cover"
-            alt={`Avatar of ${name}`}
-            src={img}
-            fetchPriority="low"
-            loading="lazy"
-            decoding="async"
-            quality="80"
-            sizes="(max-width: 1280px) 400px"
-            fill
-          />
-        </div>
+        <BuiImage
+          src={img}
+          objectFit="cover"
+          aspectRatio="1/1"
+          width="100%"
+          alt={`Avatar of ${name}`}
+          sizes="(max-width: 1280px) 400px"
+          strategy="neutral"
+        />
         <ColorPalette
           width="100%"
           palette={[

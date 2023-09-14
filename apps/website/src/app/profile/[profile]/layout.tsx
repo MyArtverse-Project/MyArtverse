@@ -1,8 +1,6 @@
 import { Metadata, ResolvingMetadata } from "next"
 
-import dynamic from "next/dynamic"
 import ProfileMasthead from "./ProfileMasthead"
-import { Note } from "@/components/ui"
 
 type Props = {
   params: {
