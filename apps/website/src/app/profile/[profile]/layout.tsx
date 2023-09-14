@@ -2,6 +2,7 @@ import { Metadata, ResolvingMetadata } from "next"
 
 import dynamic from "next/dynamic"
 import ProfileMasthead from "./ProfileMasthead"
+import { Note } from "@/components/ui"
 
 type Props = {
   params: {
@@ -37,22 +38,24 @@ export default function Layout({ params, children }: Props) {
       Reimplmenting stuff
 
       <Masthead>
-        <Masthead.Avatar src="./avatar.png" />
-        <Masthead.Info followers={69} following={21} />
-        <Masthead.Actions>
-          <Button>Follow</Button>
-          <Button>Report</Button>
-          <Button>Block</Button>
-        </Masthead.Actions>
+        <Masthead.Banner src="./avatar.png" />
+        <Masthead.Info>
+          <Profile>
+            <Profile.Actions>
+              <Button>Follow</Button>
+              <Button>Report</Button>
+              <Button>Block</Button>
+            </Profile.Actions>
+          </Profile>
+        </Masthead.Info>
+        <Masthead.Tabs>
+          tab stuff
+        </Masthead.Tabs>
       </Masthead>
-
       */}
-      <div
-        data-margin-gutter=""
-        className="px-12 py-4 mx-auto max-w-screen-2xl"
-      >
-        {children}
-      </div>
+      <main id="content-gutter" className="px-12 mx-auto max-w-screen-2xl">
+        <div className="py-4">{children}</div>
+      </main>
     </>
   )
 }

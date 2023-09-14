@@ -22,7 +22,7 @@ export default function FolderItem({
         aria-label={`Folder item: ${name}`}
         className={[
           "w-full flex flex-row items-center px-3 py-2 rounded-md cursor-pointer",
-          !active ? "hover:text-500" : "text-500"
+          !active ? "hover:text-500" : "bg-500 text-active"
         ].join(" ")}
         prefixIcon={
           <DynamicFolderIcon size={21} className="mr-2" aria-hidden />

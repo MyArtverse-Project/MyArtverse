@@ -21,15 +21,12 @@ export default function FolderView({}: {}) {
     const folderView = folderViewRef.current
 
     const dragMeDaddy = (e: MouseEvent) => {
+      if (!isDragging) return
+
       const rect = folderView.getBoundingClientRect()
       const mousePosition = e.x - rect.x + 13
 
-      if (!isDragging) {
-        return
-      }
-      if (mousePosition < 250 || mousePosition > 800) {
-        return
-      }
+      if (mousePosition < 250 || mousePosition > 800) return
 
       setDragQueen(mousePosition)
     }
@@ -40,7 +37,7 @@ export default function FolderView({}: {}) {
     window.addEventListener("pointermove", dragMeDaddy)
 
     const resetPosition = () => {
-      setDragQueen(300)
+      setDragQueen(DEFAULT_WIDTH)
       return
     }
 
@@ -52,17 +49,21 @@ export default function FolderView({}: {}) {
     }
   }, [isDragging, setIsDragging])
 
-  const hasExpandedDetails = dragQueen > 350
+  const expandThreshold = dragQueen > 375
 
   const handleExpandDetails = () => {
-    if (!hasExpandedDetails) {
-      setDragQueen(355)
+    if (!expandThreshold) {
+      setDragQueen(376)
       return
     }
+
     setDragQueen(DEFAULT_WIDTH)
   }
 
-  const PanelIconDynamic = hasExpandedDetails ? PanelLeftClose : PanelLeftOpen
+  const PanelIconDynamic = expandThreshold ? PanelLeftClose : PanelLeftOpen
+  const panelStateAria = !expandThreshold
+    ? "Expand folder menu"
+    : "Collapse folder menu"
 
   return (
     <div
@@ -73,15 +74,11 @@ export default function FolderView({}: {}) {
         userSelect: !isDragging ? "initial" : "none"
       }}
     >
-      <div className="grid gap-y-1.5 w-full h-fit">
-        <span className="flex items-center flex-row-reverse">
+      <div className="grid gap-y-1.5 w-full h-fit sticky top-36">
+        <span className="flex gap-2.5 items-center flex-row-reverse">
           <div>
             <Button
-              aria-label={
-                !hasExpandedDetails
-                  ? "Expand folder menu"
-                  : "Collapse folder menu"
-              }
+              aria-label={panelStateAria}
               iconOnly
               prefixIcon={<PanelIconDynamic size={21} />}
               className="p-2 hover:text-500"

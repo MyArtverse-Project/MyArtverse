@@ -8,14 +8,18 @@ import SocialsRow from "./SocialsRow"
 import Fieldset from "./Fieldset"
 
 import BuiLink from "./BuiLink"
+import BuiImage from "./BuiImage"
+
+import EmptySection from "./EmptySection"
 
 export {
+  BuiImage,
   BuiLink,
+  EmptySection,
   Modal,
   Note,
   Overlay,
   Separator,
-  Separator as Hr,
   Tabs,
   SocialsRow,
   Fieldset

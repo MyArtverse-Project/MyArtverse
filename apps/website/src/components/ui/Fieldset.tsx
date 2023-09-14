@@ -9,7 +9,7 @@ export default function Fieldset({
 }) {
   return (
     <section
-      data-biro-ui-fieldset=""
+      id="biro-ui-fieldset"
       className="p-6 rounded-lg border border-300 bg-200"
     >
       <div>

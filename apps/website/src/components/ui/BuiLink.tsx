@@ -14,6 +14,7 @@ export default function BuiLink({
 
   return (
     <Link
+      id="biro-ui-link"
       className="underline text-blue-400 hover:text-blue-500 inline-flex items-center w-fit"
       href={href as unknown as UrlObject}
       target={hasHTTPInUrl ? "_blank" : undefined}
