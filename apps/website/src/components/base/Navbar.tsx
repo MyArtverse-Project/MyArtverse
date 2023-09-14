@@ -59,11 +59,11 @@ export default function Navbar() {
   ]
 
   return (
-    <nav className="z-[15] relative flex items-center justify-between px-5 py-4 text-sm font-medium bg-opacity-50 select-none font-inter bg-100">
-      <div className="flex items-center gap-x-2.5">
+    <nav className="z-[15] relative flex items-center justify-between px-5 py-3 text-sm font-medium select-none font-inter bg-100">
+      <div className="flex items-center gap-x-3">
         <Button
           iconOnly
-          variant="secondary"
+          variant="tritery"
           onClick={() => setSidebarState(!isSidebarOpen)}
           aria-label="Toggle sidebar"
         >
@@ -174,7 +174,7 @@ export default function Navbar() {
             </>
           }
         />
-        <Button href="/signin">Sign in</Button>
+        <Button href="/login">Sign in</Button>
       </div>
     </nav>
   )

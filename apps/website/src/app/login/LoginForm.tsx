@@ -1,15 +1,14 @@
 "use client"
 
-import { FormEvent, useEffect, useState } from "react"
-
-import { FontAwesomeIcon } from "@fortawesome/react-fontawesome"
+import { FormEvent, useState } from "react"
 
 import { emailRegex } from "@/constants"
+import { Separator } from "@/components/ui"
 import { Button } from "@/components/ui/Buttons"
-import Separator from "@/components/ui/Separator"
 import { InputField } from "@/components/ui/Forms"
+import { Facebook, Google, XTwitter } from "@/components/icons"
 
-export default function SignInForm() {
+export default function LoginForm() {
   const [emailEntered, setEmailEntered] = useState(false)
   const [errors, setErrors] = useState<string[]>([])
   const [email, setEmail] = useState("")
@@ -43,38 +42,20 @@ export default function SignInForm() {
         ) : null}
         <h2 className="my-4 text-3xl text-center">Sign In</h2>
         <div className="grid gap-y-1.5 w-full">
-          <Button
-            variant="secondary"
-            position="center"
-            prefixIcon={
-              <FontAwesomeIcon icon={["fab", "google"]} fixedWidth size="xl" />
-            }
-          >
+          <Button variant="secondary" position="center" prefixIcon={<Google />}>
             Sign in with Google
           </Button>
           <Button
             variant="secondary"
             position="center"
-            prefixIcon={
-              <FontAwesomeIcon
-                icon={["fab", "facebook"]}
-                fixedWidth
-                size="xl"
-              />
-            }
+            prefixIcon={<Facebook />}
           >
             Sign in with Facebook
           </Button>
           <Button
             variant="secondary"
             position="center"
-            prefixIcon={
-              <FontAwesomeIcon
-                icon={["fab", "x-twitter"]}
-                fixedWidth
-                size="xl"
-              />
-            }
+            prefixIcon={<XTwitter />}
           >
             Sign in with X
           </Button>
@@ -98,7 +79,7 @@ export default function SignInForm() {
             >
               Next
             </Button>
-            <Button href="/signup">Sign Up</Button>
+            <Button href="/register">Sign Up</Button>
           </div>
           <div
             className={[

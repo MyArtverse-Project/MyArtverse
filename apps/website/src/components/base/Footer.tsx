@@ -1,12 +1,16 @@
-"use client";
+"use client"
 
-import Link from "next/link";
-import project from "../../../package.json";
-import { kebabCase } from "lodash-es";
-import { Button } from "../ui/Buttons";
-import { MyFursona } from "../icons";
+import Link from "next/link"
 
-const version = project.version;
+import project from "../../../package.json"
+import { kebabCase } from "lodash-es"
+import { Button } from "../ui/Buttons"
+import { MyFursona } from "../icons"
+import { BuiLink } from "../ui"
+import { HeartIcon } from "lucide-react"
+import FooterGradient from "./FooterGraphics"
+
+const version = project.version
 
 export default function Footer() {
   /* NOTE: in the links array, you can override the links with the "link" key */
@@ -27,13 +31,7 @@ export default function Footer() {
         { text: "FAQ" },
         { text: "Brand" },
         { text: "Developers" },
-        { text: "Report Issue" }
-      ]
-    },
-    {
-      heading: "Company",
-      links: [
-        { text: "About MyFursona" },
+        { text: "Report issue" },
         { text: "Contributing" },
         { text: "Open Source", link: "https://github.com/MyFursona-Project" },
         { text: "Licenses" }
@@ -42,19 +40,21 @@ export default function Footer() {
     {
       heading: "Legal",
       links: [
+        { text: "About MyFursona" },
+
         { text: "Community Guidelines" },
         { text: "Terms of Service" },
         { text: "Privacy Policy" }
       ]
     }
-  ];
+  ]
 
   const ColumnItems = ({
     heading,
     links
   }: {
-    heading: string;
-    links: Array<{ text?: string; link?: string }>;
+    heading: string
+    links: Array<{ text?: string; link?: string }>
   }) => {
     return (
       <div className="flex flex-col">
@@ -66,7 +66,7 @@ export default function Footer() {
             <li key={index}>
               <Link
                 className="my-2 font-semibold"
-                href={!link ? kebabCase(text) : (link as any)}
+                href={!link ? `/${kebabCase(text)}` : (link as any)}
               >
                 {text}
               </Link>
@@ -74,44 +74,38 @@ export default function Footer() {
           ))}
         </ul>
       </div>
-    );
-  };
+    )
+  }
 
-  const commitHashEnv =
-    process.env.NEXT_PUBLIC_VERCEL_GIT_COMMIT_SHA || "reserved";
-  const commitHash = commitHashEnv.slice(0, 8);
+  const commitHashEnv = process.env.NEXT_PUBLIC_VERCEL_GIT_COMMIT_SHA || ""
+  const commitHash = commitHashEnv.slice(0, 7)
 
   return (
-    <div className="relative">
+    <div className="relative overflow-y-hidden before:absolute before:inset-0 before:bottom-[unset] before:bg-gradient-to-r before:from-cyan-600 before:to-fuchsia-600 before:h-[1px]">
       <footer>
-        <section className="px-4 pb-6 pt-12 mx-auto max-w-screen-2xl">
-          <div className="flex flex-col">
-            <div className="flex flex-col md: mx-auto">
-              <Link className="mb-4" href="/">
-                <MyFursona size={1.1} />
+        <section className="flex justify-between px-12 pt-10 pb-2.5 mx-auto max-w-screen-2xl">
+          <div className="flex flex-col justify-between w-fit">
+            <div className="flex flex-col gap-y-6">
+              <Link href="/">
+                <MyFursona size={1.125} />
               </Link>
-              <Button href={"/"} variant="secondary">
-  <span id="mf-status" className="flex flex-row text-success">
-    <span className="text-700">Status:</span>
-    <span>All systems normal</span>
-  </span>
-</Button>
+              <BuiLink href={"https://status.uptimerobot.com/myfursona"}>
+                MyFursona Status
+              </BuiLink>
             </div>
-            <span className="md: mx-auto md: mt-5">
-              {`MyFursona ${version} `}
-              {commitHashEnv ? (
+            <div className="inline-flex gap-x-2">
+              <span>{version}</span>
+              {!commitHashEnv ? null : (
                 <Link
-                  className="underline text-blue-400 hover:text-blue-500"
+                  className="underline text-subtext hover:text-500"
                   href={`https://github.com/MyFursona-Project/MyFursona/commit/${commitHash}`}
                 >
                   {commitHash}
                 </Link>
-              ) : (
-                "RESERVED"
               )}
-            </span>
+            </div>
           </div>
-          <div className="sm: text-center lg:text-left grid grid-cols-2 md:grid-cols-2 lg:grid-cols-4 gap-4 md: mt-5">
+          <div className="grid grid-cols-3 gap-4">
             {FOOTER_ITEMS.map(({ heading, links }, index) => (
               <ColumnItems heading={heading} links={links} key={index} />
             ))}
@@ -119,13 +113,26 @@ export default function Footer() {
         </section>
         <section
           id="copyright"
-          className="p-4 text-center text-sm text-subtext"
+          className="px-12 py-8 text-center text-sm text-subtext flex flex-col justify-center gap-y-4"
         >
-          {`MyFursona is an open source project licensed under Apache-2.0.
+          <p>
+            {`MyFursona is an open source project licensed under Apache License 2.0.
           © 2022-${new Date().getFullYear()} Fusky Labs Software Ltd.`}
+          </p>
+          <p
+            className="flex justify-center items-center flex-wrap"
+            aria-label="Made with love by the MyFursona contributors"
+          >
+            {"Made with"}
+            <HeartIcon size={16} className="mx-1 text-500" />
+            by&nbsp;
+            <BuiLink href="https://github.com/MyFursona-Project/MyFursona/graphs/contributors">
+              the MyFursona contributors!
+            </BuiLink>
+          </p>
         </section>
       </footer>
-      <svg className="absolute top-0 -z-[1] w-full h-full" aria-hidden></svg>
+      <FooterGradient />
     </div>
-  );
+  )
 }

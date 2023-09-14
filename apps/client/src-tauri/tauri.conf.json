@@ -29,7 +29,7 @@
         "icons/icon.icns",
         "icons/icon.ico"
       ],
-      "identifier": "com.tauri.dev",
+      "identifier": "com.myfursona.client",
       "longDescription": "",
       "macOS": {
         "entitlements": null,
@@ -59,7 +59,7 @@
         "height": 600,
         "resizable": true,
         "title": "MyFursona",
-        "width": 800
+        "width": 1280
       }
     ]
   }

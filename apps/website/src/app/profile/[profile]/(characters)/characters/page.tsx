@@ -1,7 +1,8 @@
+import { FursonaCard } from "@/components/ui/Cards"
+import { FolderView } from "@/components/ui/Folders"
 import { Metadata, ResolvingMetadata } from "next"
 
 import dynamic from "next/dynamic"
-import { Fragment } from "react"
 
 const Modal = dynamic(() => import("@/components/ui/Modal"), { ssr: false })
 
@@ -17,8 +18,6 @@ export async function generateMetadata(
   { params, searchParams }: Props,
   parent: ResolvingMetadata
 ): Promise<Metadata> {
-  // !! NOTE: For testing only, actual user data is going to be fetched through the API
-  const decodeUserHandle = `@${params.profile}`
   return {
     title: `User's characters`,
     description: `See User's characters and others on MyFursona by creating an account!`
@@ -26,12 +25,25 @@ export async function generateMetadata(
 }
 
 export default function Page({ params }: Props) {
-  // !! NOTE: For testing only, actual user data is going to be fetched through the API
-  const decodeUserHandle = `@${params.profile}`
-
   return (
-    <Fragment>
-      <p>CHARAVTERS</p>
-    </Fragment>
+    <div className="flex gap-x-4">
+      <FolderView />
+      <div
+        className="w-full grid gap-4"
+        style={{ gridTemplateColumns: "repeat(auto-fill, minmax(230px, 1fr))" }}
+        role="listbox"
+      >
+        {[...Array(10)].map((_, i) => (
+          <FursonaCard
+            key={i}
+            name={"Renzo"}
+            img={"/img/hero/renzo-snowglobe.jpg"}
+            species="Raccoon-Fox-Dragon"
+            status="notForAdopt"
+            role="listitem"
+          />
+        ))}
+      </div>
+    </div>
   )
 }

@@ -14,7 +14,7 @@ export default function Tabs({
   }>
 }) {
   return (
-    <div data-biro-ui-tab-list="" className="flex items-center gap-x-0.5">
+    <div data-biro-ui-tab-list="" className="flex items-center">
       {items.map(({ text, link, icon: Icon, countIndicator }, i) => (
         <Link
           key={i}

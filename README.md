@@ -5,39 +5,43 @@
 <h1 align="center">MyFursona</h1>
 
 <p align="center">
-  The <strong>MyFursona</strong> web and desktop platform written in Next.js, Tailwind, and
-  Tauri.
+  The <strong>MyFursona</strong> web and desktop client written in Next.js,
+  Tailwind CSS, and Tauri.
 </p>
 
 ## Contributing
 
-This repo uses Husky hooks that format your code automatically when you push
-a commit.
+This repo uses Husky hooks that format your code automatically with Prettier
+when you push a commit.
+
+### Prerequisites
+
+- Node.js (versions 18 or higher)
+- Yarn
+- [Optional] Rust, for building the standalone desktop client (versions 1.72
+  or higher)
 
 ### Installation
 
-> **Note**
-> We recommend that you use the Yarn package manager to install dependencies.
-
-Clone the repository and install dependencies and run the local dev server
+Fork/clone the repository and install dependencies and run the local dev server
 on the root directory:
 
 ```console
 git clone https://github.com/MyFursona-Project/MyFursona.git
-yarn install
+yarn
 yarn dev
 ```
 
-You can access it on http://localhost:3000.
+You can now access http://localhost:3000 on your browser.
 
 ## Commands
 
 - `yarn dev` - Serves a running web app on your local machine
 - `yarn dev:client` - Opens a desktop client, will require Rust
-- `yarn build` - Builds the web app with Turborepo and caches it
+- `yarn build` - Builds the web app with Turborepo and caches it on Vercel
 - `yarn build:client` - Builds and bundles the desktop app for production
-- `yarn build:all` - Builds both the web and desktop app
+- `yarn build:all` - Builds both the web and desktop clients
 
 ## License
 
-Apache-2.0
+Apache-2.0 © Fusky Labs Software

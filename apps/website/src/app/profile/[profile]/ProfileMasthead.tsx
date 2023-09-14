@@ -41,7 +41,7 @@ export default function ProfileMasthead({
   isNSFW?: boolean
 }) {
   return (
-    <div data-masthead-root="">
+    <div id="masthead-root" className="contents">
       <div
         className="relative aspect-[15/3]"
         style={{ "--profile-banner-parallax": 1 } as React.CSSProperties}
@@ -149,35 +149,43 @@ export default function ProfileMasthead({
             </div>
           </div>
         </section>
-        <Tabs
-          items={[
-            { icon: HomeIcon, text: "Overview", link: `/profile/@${handle}/` },
-            {
-              icon: CatIcon,
-              text: "Characters",
-              link: `/profile/@${handle}/characters`,
-              countIndicator: 5
-            },
-            {
-              icon: LayoutGridIcon,
-              text: "Gallery",
-              link: `/profile/@${handle}/gallery`
-            },
-            {
-              icon: BrushIcon,
-              text: "Commissions",
-              link: `/profile/@${handle}/commissions`
-            },
-            {
-              icon: HeartIcon,
-              text: "Favorites",
-              link: `/profile/@${handle}/favorites`,
-              countIndicator: 69
-            }
-          ]}
-        />
       </div>
-      <Separator dir="horizontal" padding={12.5} />
+      <div className="sticky top-16 z-10 bg-100">
+        <div className="max-w-screen-2xl mx-auto px-9">
+          <Tabs
+            items={[
+              {
+                icon: HomeIcon,
+                text: "Overview",
+                link: `/profile/@${handle}/`
+              },
+              {
+                icon: CatIcon,
+                text: "Characters",
+                link: `/profile/@${handle}/characters`,
+                countIndicator: 5
+              },
+              {
+                icon: LayoutGridIcon,
+                text: "Gallery",
+                link: `/profile/@${handle}/gallery`
+              },
+              {
+                icon: BrushIcon,
+                text: "Commissions",
+                link: `/profile/@${handle}/commissions`
+              },
+              {
+                icon: HeartIcon,
+                text: "Favorites",
+                link: `/profile/@${handle}/favorites`,
+                countIndicator: 69
+              }
+            ]}
+          />
+        </div>
+        <Separator dir="horizontal" padding={12.5} />
+      </div>
     </div>
   )
 }

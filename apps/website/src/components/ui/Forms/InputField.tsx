@@ -21,7 +21,15 @@ export default function InputField({
       data-biro-ui-input-field=""
       className="flex flex-col gap-y-1.5 w-full"
     >
-      <label htmlFor={inputName} className="uppercase text-600 font-bold">
+      <label
+        htmlFor={inputName}
+        className={[
+          "uppercase text-600 font-bold",
+          required
+            ? "after:content-['*'] after:ml-1 after:font-bold after:text-error"
+            : null
+        ].join(" ")}
+      >
         {inputName}
       </label>
       <input

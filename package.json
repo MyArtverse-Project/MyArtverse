@@ -13,15 +13,23 @@
     "dev:client": "cd apps/client && yarn tauri dev",
     "build": "turbo build --filter=website",
     "build:client": "cd apps/client && yarn tauri build",
-    "build:all": "turbo build",
+    "build:all": "concurrently -n web,desktop \"yarn turbo build\" \"yarn build:client\"",
     "prettier:check": "prettier --check .",
     "prettier:write": "prettier --write .",
     "prepare": "husky install"
   },
   "devDependencies": {
-    "prettier": "^3.0.2",
-    "turbo": "^1.10.13",
-    "husky": "^8.0.0"
+    "@turbo/gen": "^1.10.13",
+    "concurrently": "^8.2.1",
+    "husky": "^8.0.0",
+    "lint-staged": "^14.0.1",
+    "prettier": "^3.0.3",
+    "turbo": "^1.10.13"
+  },
+  "lint-staged": {
+    "apps/**": "yarn prettier:write",
+    "packages/**": "yarn prettier:write",
+    "*.md": "yarn prettier:write"
   },
   "engines": {
     "node": ">= 18.0.0",
