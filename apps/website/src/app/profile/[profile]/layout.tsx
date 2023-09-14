@@ -19,7 +19,7 @@ export async function generateMetadata(
   return {
     title: {
       template: `%s (@${decodeUserHandle}) - MyFursona`,
-      default: "lol"
+      default: "Profile layout"
     },
     description: `Follow @${decodeUserHandle} on MyFursona by creating an account!`
   }

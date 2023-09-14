@@ -25,11 +25,10 @@ export default function Overlay({
   return (
     <Portal>
       <div
-        data-overlay-screen=""
-        className={`duration-[350ms] fixed z-[19] transition-all bg-black/40 inset-0 ${overlayState}`}
         onClick={toggler as () => any}
+        className={`duration-[350ms] fixed z-[19] transition-all bg-black/40 inset-0 ${overlayState}`}
       />
-      <div data-overlay-wrapper="" className="fixed z-[20]">
+      <div id="overlay-wrapper" className="fixed z-[20]">
         {children}
       </div>
     </Portal>
