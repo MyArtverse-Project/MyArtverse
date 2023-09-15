@@ -40,7 +40,7 @@ export default function Page({ params }: Props) {
               name={"Renzo"}
               img={"/img/hero/renzo-snowglobe.jpg"}
               species="Raccoon-Fox-Dragon"
-              status="notForAdopt"
+              status="owned"
               role="listitem"
             />
           ))}

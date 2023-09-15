@@ -5,6 +5,8 @@ import ColorPalette from "./ColorPalette"
 import BuiImage from "../BuiImage"
 import { useRouter } from "next/navigation"
 import Link from "next/link"
+import { Heart } from "lucide-react"
+import Status from "./Status"
 
 type CharacterCardPalette =
   | [Palette]
@@ -18,7 +20,8 @@ export default function FursonaCard({
   isHybrid,
   palette,
   href,
-  status = "notForAdopt",
+  likes,
+  status = "owned",
   ...attributes
 }: {
   name: string
@@ -27,6 +30,7 @@ export default function FursonaCard({
   isHybrid?: boolean
   status?: AdoptionStatus
   palette?: CharacterCardPalette
+  likes?: number,
   href?: string,
 } & Pick<React.HTMLAttributes<HTMLDivElement>, "role">) {
   const DynamicElement = !href ? "div" : Link
@@ -36,7 +40,7 @@ export default function FursonaCard({
       href={href as any}
       tabIndex={0}
       aria-label={`Character item: ${name}, ${species}`}
-      className="p-5 border border-400 bg-200 rounded-md grid gap-y-2"
+      className={`p-5 border border-400 bg-200 rounded-md grid gap-y-2 hover:bg-mute transition-all ${href ? "cursor-pointer" : ""}}`}
       {...attributes}
     >
       <div className="overflow-hidden rounded-md">
@@ -59,8 +63,10 @@ export default function FursonaCard({
         />
       </div>
       <div className="grid">
+        <Status status={status} />
         <h3 className="not-prose font-inter font-bold text-2xl">{name}</h3>
         <span>{species}</span>
+        <span className="flex flex-row text-md font-semibold my-2"><Heart className="mr-1" size={18} />{likes}</span>
       </div>
     </DynamicElement>
   )

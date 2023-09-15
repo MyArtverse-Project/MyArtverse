@@ -2,6 +2,7 @@ import { Button } from "@/components/ui/Buttons"
 import { BuiImage } from "@/components/ui"
 import { Brush, Heart, Layers, Sparkles } from "lucide-react"
 import { FursonaCard } from "@/components/ui/Cards"
+import { FursonaStatus } from "@/types/Fursonas"
 
 export default function Browse() {
   return (
@@ -17,14 +18,16 @@ export default function Browse() {
         </div>
         <hr />
         <div className="grid grid-cols-4 gap-4 mt-4">
-          {[...Array(10)].map((_, i) => (
+          {[...Array(7)].map((_, i) => (
             <FursonaCard
               key={i}
               name={"Renzo"}
               img={"/img/hero/renzo-snowglobe.jpg"}
               species="Raccoon-Fox-Dragon"
-              status="notForAdopt"
+              status={(["owned", "adopted", "hidden", "upForAdopt", "main"] as FursonaStatus[])[Math.floor(Math.random() * 5)]}
               role="listitem"
+              href="/er"
+              likes={Math.floor(Math.random() * 100)}
               />
           ))}
         </div>
@@ -39,14 +42,16 @@ export default function Browse() {
         <hr />
         <div className="grid grid-cols-4 gap-4 mt-4 ">
             {/* TODO: Make it skinny */}
-          {[...Array(10)].map((_, i) => (
+            {[...Array(7)].map((_, i) => (
             <FursonaCard
               key={i}
               name={"Renzo"}
               img={"/img/hero/renzo-snowglobe.jpg"}
               species="Raccoon-Fox-Dragon"
-              status="notForAdopt"
+              status={(["owned", "adopted", "hidden", "upForAdopt", "main"] as FursonaStatus[])[Math.floor(Math.random() * 5)]}
               role="listitem"
+              href="/er"
+              likes={Math.floor(Math.random() * 100)}
               />
           ))}
         </div>
