@@ -15,17 +15,17 @@ type Props = {
   searchParams: { [key: string]: string | string[] | undefined }
 }
 
-export async function generateMetadata(
-  { params, searchParams }: Props,
-  parent: ResolvingMetadata
-): Promise<Metadata> {
-  // !! NOTE: For testing only, actual user data is going to be fetched through the API
-  const decodeUserHandle = params.profile
-  return {
-    title: `User`,
-    description: `Follow ${decodeUserHandle} on MyFursona by creating an account!`
-  }
-}
+// export async function generateMetadata(
+//   { params, searchParams }: Props,
+//   parent: ResolvingMetadata
+// ): Promise<Metadata> {
+//   // !! NOTE: For testing only, actual user data is going to be fetched through the API
+//   const decodeUserHandle = params.profile
+//   return {
+//     title: `User`,
+//     description: `Follow ${decodeUserHandle} on MyFursona by creating an account!`
+//   }
+// }
 
 export default function Page() {
   const [isModalOpen, setModalOpen] = useState(false)
