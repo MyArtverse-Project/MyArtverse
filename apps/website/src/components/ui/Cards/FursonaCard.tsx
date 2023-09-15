@@ -3,6 +3,8 @@ import Image from "next/image"
 import type { AdoptionStatus, ColorPalette as Palette } from "@/types"
 import ColorPalette from "./ColorPalette"
 import BuiImage from "../BuiImage"
+import { useRouter } from "next/navigation"
+import Link from "next/link"
 
 type CharacterCardPalette =
   | [Palette]
@@ -15,6 +17,7 @@ export default function FursonaCard({
   species,
   isHybrid,
   palette,
+  href,
   status = "notForAdopt",
   ...attributes
 }: {
@@ -24,9 +27,13 @@ export default function FursonaCard({
   isHybrid?: boolean
   status?: AdoptionStatus
   palette?: CharacterCardPalette
+  href?: string,
 } & Pick<React.HTMLAttributes<HTMLDivElement>, "role">) {
+  const DynamicElement = !href ? "div" : Link
   return (
-    <div
+    <DynamicElement
+      // TODO: I'll change it dw bb 
+      href={href as any}
       tabIndex={0}
       aria-label={`Character item: ${name}, ${species}`}
       className="p-5 border border-400 bg-200 rounded-md grid gap-y-2"
@@ -55,6 +62,6 @@ export default function FursonaCard({
         <h3 className="not-prose font-inter font-bold text-2xl">{name}</h3>
         <span>{species}</span>
       </div>
-    </div>
+    </DynamicElement>
   )
 }

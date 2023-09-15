@@ -1,8 +1,5 @@
-'use client'
-
 import { Metadata } from "next"
-import { useSearchParams } from "next/navigation"
-import Landing from "./Landing"
+import HomeContent from "./HomeContent"
 
 const title = "MyFursona — a place where everyfur belongs!"
 const description =
@@ -20,14 +17,7 @@ export const metadata: Metadata = {
 }
 
 export default function Home() {
-  const guestMode = useSearchParams().get("show-as-guest")
   return (
-    <>
-      {guestMode ? (
-        <div></div>
-      ) : (
-        <Landing />
-      )}
-    </>
+    <HomeContent />
   )
 }
