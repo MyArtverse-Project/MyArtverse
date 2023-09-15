@@ -1,11 +1,11 @@
 @use "mixins" as *;
 
 :root {
-  --bui-warning: hsla(46, 99.3%, 54.6%, var(--tw-bg-opacity, 1));
-  --bui-info: hsla(212, 95.4%, 46.3%, var(--tw-bg-opacity, 1));
-  --bui-error: hsla(0, 100%, 61.2%, var(--tw-bg-opacity, 1));
-  --bui-hyperlink: hsla(219, 100%, 50%, var(--tw-bg-opacity, 1));
-  --bui-success: hsla(136, 87.7%, 40.4%, var(--tw-bg-opacity, 1));
+  --bui-warning: 46, 99.3%, 54.6%;
+  --bui-info: 212, 95.4%, 46.3%;
+  --bui-error: 0, 100%, 61.2%;
+  --bui-hyperlink: 219, 100%, 50%;
+  --bui-success: 136, 87.7%, 40.4%;
 }
 
 // * Color tone reference; can be overwritten

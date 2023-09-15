@@ -16,13 +16,12 @@ const config: Config = {
         "open-sans": "var(--font-open-sans)"
       },
       colors: {
-        // TODO refactor this into its own function
-        // ! global
-        warning: "var(--bui-warning)",
-        info: "var(--bui-info)",
-        error: "var(--bui-error)",
-        success: "var(--bui-success)",
         current: "currentColor",
+        // ! global
+        warning: "hsla(var(--bui-warning), var(--tw-bg-opacity, 1))",
+        info: "hsla(var(--bui-info), var(--tw-bg-opacity, 1))",
+        error: "hsla(var(--bui-error), var(--tw-bg-opacity, 1))",
+        success: "hsla(var(--bui-success), var(--tw-bg-opacity, 1))",
         100: "hsla(var(--bui-100), var(--tw-bg-opacity, 1))",
         200: "hsla(var(--bui-200), var(--tw-bg-opacity, 1))",
         300: "hsla(var(--bui-300), var(--tw-bg-opacity, 1))",
@@ -43,11 +42,11 @@ const config: Config = {
         active: "var(--bui-active)"
       },
       borderColor: {
-        warning: "var(--bui-warning)",
-        info: "var(--bui-info)",
-        error: "var(--bui-error)",
-        success: "var(--bui-success)",
         current: "currentColor",
+        warning: "hsla(var(--bui-warning), var(--tw-border-opacity, 1))",
+        info: "hsla(var(--bui-info), var(--tw-border-opacity, 1))",
+        error: "hsla(var(--bui-error), var(--tw-border-opacity, 1))",
+        success: "hsla(var(--bui-success), var(--tw-border-opacity, 1))",
         100: "hsla(var(--bui-100), var(--tw-border-opacity, 1))",
         200: "hsla(var(--bui-200), var(--tw-border-opacity, 1))",
         300: "hsla(var(--bui-300), var(--tw-border-opacity, 1))",

@@ -1,17 +1,9 @@
 import { Metadata, ResolvingMetadata } from "next"
-
+import type { SlugRouteProps } from "@/types"
 import ProfileMasthead from "./ProfileMasthead"
 
-type Props = {
-  params: {
-    profile: string
-  }
-  children: React.ReactNode
-  searchParams: { [key: string]: string | string[] | undefined }
-}
-
 export async function generateMetadata(
-  { params, searchParams }: Props,
+  { params, searchParams }: SlugRouteProps,
   parent: ResolvingMetadata
 ): Promise<Metadata> {
   // !! NOTE: For testing only, actual user data is going to be fetched through the API
@@ -25,7 +17,10 @@ export async function generateMetadata(
   }
 }
 
-export default function Layout({ params, children }: Props) {
+export default function Layout({
+  params,
+  children
+}: SlugRouteProps & { children: React.ReactNode }) {
   const profile = params.profile
 
   return (

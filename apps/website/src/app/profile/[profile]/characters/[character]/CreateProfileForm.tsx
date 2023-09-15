@@ -1,14 +1,10 @@
 "use client"
 
 import { useState } from "react"
-import Link from "next/link"
 
-import type { IconName } from "@fortawesome/fontawesome-svg-core"
-import { CreditCardIcon, LockIcon } from "lucide-react"
-import { FontAwesomeIcon } from "@fortawesome/react-fontawesome"
-import { Fieldset, Note, Separator } from "@/components/ui"
+import { Fieldset } from "@/components/ui"
 import { Button } from "@/components/ui/Buttons"
-import { FormWithProgress, InputField } from "@/components/ui/Forms"
+import { FormWithProgress } from "@/components/ui/Forms"
 import DropZone from "@/components/ui/Drop/DropZone"
 
 export default function CreateCharacterForm() {
@@ -38,10 +34,7 @@ export default function CreateCharacterForm() {
 
   return (
     <>
-      <section
-        className="max-w-screen-xl mt-20 mb-12 mx-auto px-9 text-center"
-        data-new-user-onboarding=""
-      >
+      <section className="max-w-screen-xl mt-20 mb-12 mx-auto px-9 text-center">
         <h1 className="not-prose font-bold font-inter !leading-[4.25rem] text-4xl xl:text-5xl bg-gradient-to-tl from-blue-700 via-purple-700 to-pink-500 text-transparent bg-clip-text">
           Create new Character
         </h1>
@@ -53,11 +46,9 @@ export default function CreateCharacterForm() {
             heading="Details"
             description={
               <div className="flex flex-col gap-y-2">
-                <span>
-                  Provide details, traits, and quirks about your character! Note
-                  that any fields that aren’t filled below aren’t shown on the
-                  character page.
-                </span>
+                Provide details, traits, and quirks about your character! Note
+                that any fields that aren't filled below aren't shown on the
+                character page.
               </div>
             }
           ></Fieldset>

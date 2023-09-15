@@ -1,26 +1,19 @@
 import type { Metadata, ResolvingMetadata } from "next"
 import { AlertOctagon } from "lucide-react"
 import { EmptySection } from "@/components/ui"
+import type { SlugRouteProps } from "@/types"
 
-type Props = {
-  params: {
-    profile: string
-    slug: string
+export async function generateMetadata(
+  { params, searchParams }: SlugRouteProps,
+  parent: ResolvingMetadata
+): Promise<Metadata> {
+  const decodeUserHandle = params.profile
+
+  return {
+    title: `User`,
+    description: `Follow ${decodeUserHandle} on MyFursona by creating an account!`
   }
-  searchParams: { [key: string]: string | string[] | undefined }
 }
-
-// export async function generateMetadata(
-//   { params, searchParams }: Props,
-//   parent: ResolvingMetadata
-// ): Promise<Metadata> {
-//   // !! NOTE: For testing only, actual user data is going to be fetched through the API
-//   const decodeUserHandle = params.profile
-//   return {
-//     title: `User`,
-//     description: `Follow ${decodeUserHandle} on MyFursona by creating an account!`
-//   }
-// }
 
 export default function Page() {
   return (

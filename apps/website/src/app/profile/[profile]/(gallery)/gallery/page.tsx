@@ -1,21 +1,9 @@
+import { SlugRouteProps } from "@/types"
 import { Palette } from "lucide-react"
 import { Metadata, ResolvingMetadata } from "next"
 
-import dynamic from "next/dynamic"
-import { Fragment } from "react"
-
-const Modal = dynamic(() => import("@/components/ui/Modal"), { ssr: false })
-
-type Props = {
-  params: {
-    profile: string
-    slug: string
-  }
-  searchParams: { [key: string]: string | string[] | undefined }
-}
-
 export async function generateMetadata(
-  { params, searchParams }: Props,
+  { params, searchParams }: SlugRouteProps,
   parent: ResolvingMetadata
 ): Promise<Metadata> {
   return {
@@ -24,9 +12,9 @@ export async function generateMetadata(
   }
 }
 
-export default function GalleryPage({ params }: Props) {
+export default function GalleryPage({ params }: SlugRouteProps) {
   return (
-    <Fragment>
+    <>
       <div data-profile-contents="" className="py-4 max-w-screen-2xl">
         <div className="grid py-16 text-center border rounded-md place-items-center border-error w-full prose-p:mx-auto prose-p:leading-6 prose-p:mt-2">
           <div>
@@ -42,6 +30,6 @@ export default function GalleryPage({ params }: Props) {
           </div>
         </div>
       </div>
-    </Fragment>
+    </>
   )
 }

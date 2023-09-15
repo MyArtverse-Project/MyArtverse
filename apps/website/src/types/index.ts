@@ -29,3 +29,11 @@ export type Variants =
   | "warning"
   | "error"
   | "info"
+
+export type SlugRouteProps = {
+  params: {
+    profile: string
+    slug: string
+  }
+  searchParams: { [key: string]: string | string[] | undefined }
+}

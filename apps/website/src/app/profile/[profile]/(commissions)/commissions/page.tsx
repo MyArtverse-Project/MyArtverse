@@ -1,18 +1,10 @@
 import { Metadata, ResolvingMetadata } from "next"
-
 import { Commissions } from "@/components/ui/Cards"
 import { Switch } from "@/components/ui"
-
-type Props = {
-  params: {
-    profile: string
-    slug: string
-  }
-  searchParams: { [key: string]: string | string[] | undefined }
-}
+import type { SlugRouteProps } from "@/types"
 
 export async function generateMetadata(
-  { params, searchParams }: Props,
+  { params, searchParams }: SlugRouteProps,
   parent: ResolvingMetadata
 ): Promise<Metadata> {
   return {
@@ -21,7 +13,7 @@ export async function generateMetadata(
   }
 }
 
-export default function Page({ params }: Props) {
+export default function Page({ params }: SlugRouteProps) {
   return (
     <div className="grid px-4 prose-p:w-2/3 prose-p:mx-auto prose-p:leading-6 prose-p:mt-2">
       <div className="flex flex-row items-center">

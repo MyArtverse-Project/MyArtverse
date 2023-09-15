@@ -17,7 +17,7 @@ export default function Browse() {
           {/* TODO: Filter Dropdowm */}
         </div>
         <hr />
-        <div className="grid grid-cols-4 gap-4 mt-4">
+        <div className="grid grid-cols-6 gap-1 mt-4">
           {[...Array(7)].map((_, i) => (
             <FursonaCard
               key={i}
@@ -50,7 +50,7 @@ export default function Browse() {
           </span>
         </div>
         <hr />
-        <div className="grid grid-cols-4 gap-4 mt-4 ">
+        <div className="grid grid-cols-6 gap-1 mt-4">
           {/* TODO: Make it skinny */}
           {[...Array(7)].map((_, i) => (
             <FursonaCard

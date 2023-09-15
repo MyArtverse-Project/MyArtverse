@@ -36,11 +36,10 @@ export default function FursonaCard({
   const DynamicElement = !href ? "div" : Link
   return (
     <DynamicElement
-      // TODO: I'll change it dw bb
-      href={href as any}
+      href={!href ? null : (href as any)}
       tabIndex={0}
       aria-label={`Character item: ${name}, ${species}`}
-      className={`p-5 border border-400 bg-200 rounded-md grid gap-y-2 hover:bg-mute transition-all ${
+      className={`p-4 rounded-md grid gap-y-2 hover:bg-mute transition-all ${
         href ? "cursor-pointer" : ""
       }}`}
       {...attributes}
