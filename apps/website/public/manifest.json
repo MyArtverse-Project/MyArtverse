@@ -38,11 +38,11 @@
   
     "shortcuts": [
       {
-          "name": "Shortcut1",
-          "url": "/Page1",
+          "name": "Adoptables",
+          "url": "/adoptables",
           "icons": [
             {
-               "src": "/icons/Icon1.png",
+               "src": "img/pwa/icon_adopts.png",
                "sizes": "96x96",
                "type": "image/png",
                "purpose": "any"
@@ -50,11 +50,11 @@
          ]
       },
       {
-          "name": "Shortcut 2",
-          "url": "/Page2",
+          "name": "Commissions",
+          "url": "/commissions",
           "icons": [
             {
-               "src": "/icons/Icon2.png",
+               "src": "img/pwa/icon_commissions.png",
                "sizes": "96x96",
                "type": "image/png",
                "purpose": "any"
@@ -62,11 +62,11 @@
          ]
       },
       {
-          "name": "Shortcut 3",
-          "url": "/Page3",
+          "name": "3D Models",
+          "url": "/3dmodels",
           "icons": [
             {
-               "src": "/icons/Icon3.png",
+               "src": "img/pwa/icon_3dmodels.png",
                "sizes": "96x96",
                "type": "image/png",
                "purpose": "any"
