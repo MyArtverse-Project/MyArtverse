@@ -1,6 +1,7 @@
 import { BuiImage } from "@/components/ui"
 import { Button } from "@/components/ui/Buttons"
 
+// TODO create a reusable component for displaying landing sections
 export default function Landing() {
   return (
     <div className="flex flex-col lg:w-4/5 md:mt-8 md:flex-row items-center justify-between w-4/5 mx-auto my-20">

@@ -21,3 +21,6 @@ Cargo.toml
 
 vercel.json
 turbo.json
+
+# Format stuff from `packages` dir
+!packages/*

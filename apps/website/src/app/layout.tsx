@@ -1,4 +1,4 @@
-import "../styles/globals.scss"
+import "@myfursona-internal/ui/styles/globals.scss"
 import "@fortawesome/fontawesome-svg-core/styles.css"
 
 import dynamic from "next/dynamic"

@@ -1,4 +1,5 @@
-import "./globals.scss"
+import "@myfursona-internal/ui/styles/globals.scss"
+
 import type { Metadata } from "next"
 import { Inter } from "next/font/google"
 

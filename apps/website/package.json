@@ -46,18 +46,11 @@
     "typescript": "5.1.6"
   },
   "devDependencies": {
+    "@myfursona-internal/config": "*",
     "@myfursona-internal/tsconfig": "*",
-    "@storybook/addon-essentials": "^7.2.3",
-    "@storybook/addon-interactions": "^7.2.3",
-    "@storybook/addon-links": "^7.2.3",
-    "@storybook/addon-onboarding": "^1.0.8",
-    "@storybook/blocks": "^7.2.3",
-    "@storybook/nextjs": "^7.2.3",
-    "@storybook/react": "^7.2.3",
-    "@storybook/testing-library": "^0.2.0",
+    "@myfursona-internal/ui": "*",
     "@types/lodash": "^4.14.195",
     "dedent": "^1.5.1",
-    "eslint-plugin-storybook": "^0.6.13",
     "storybook": "^7.2.3"
   },
   "engines": {
