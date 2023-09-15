@@ -11,6 +11,7 @@ export default function BuiImage({
   sizes,
   strategy = "neutral",
   insetShieldSize = "0.5",
+  objectFit,
   ...attributes
 }: {
   aspectRatio?: string
@@ -19,6 +20,7 @@ export default function BuiImage({
   sizes?: any
   insetShieldSize?: string
   strategy?: ImgLoadStrategy
+  objectFit?: React.CSSProperties["objectFit"]
 } & Pick<
   React.ImgHTMLAttributes<HTMLImageElement>,
   "src" | "alt" | "onClick" | "onContextMenu"
@@ -58,7 +60,7 @@ export default function BuiImage({
       {...attributes}
     >
       <Image
-        style={{ userSelect: "none" }}
+        style={{ userSelect: "none", objectFit }}
         fill
         src={src}
         alt={alt}

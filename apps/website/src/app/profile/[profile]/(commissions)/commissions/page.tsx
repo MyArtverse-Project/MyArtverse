@@ -1,7 +1,7 @@
 import { Metadata, ResolvingMetadata } from "next"
 
 import { Commissions } from "@/components/ui/Cards"
-import Switch from "@/components/ui/Comissions/Switch"
+import { Switch } from "@/components/ui"
 
 type Props = {
   params: {

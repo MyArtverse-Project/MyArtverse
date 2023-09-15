@@ -1,4 +1,4 @@
-export type AdoptionStatus = "adopted" | "upForAdopt" | "notForAdopt"
+export type FursonaStatus = "adopted" | "upForAdopt" | "owned" | "hidden" | "main"
 
 export interface ColorPalette {
   name: string

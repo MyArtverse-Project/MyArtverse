@@ -1,4 +1,3 @@
-// TODO convert this as a tab variant
 "use client"
 
 import { Palette } from "lucide-react"

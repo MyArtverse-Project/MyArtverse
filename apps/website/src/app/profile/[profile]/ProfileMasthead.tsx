@@ -11,13 +11,13 @@ import {
   HomeIcon,
   LayoutGridIcon,
   MoreVerticalIcon,
+  ShoppingCartIcon,
   UserPlusIcon
 } from "lucide-react"
 import Tabs from "@/components/ui/Tabs"
 import { Dropdown, DropdownItem } from "@/components/ui/Dropdown"
 import SocialsRow from "@/components/ui/SocialsRow"
 import Separator from "@/components/ui/Separator"
-import { Fragment, useState } from "react"
 
 // TODO rewrite this masthead function to be reusable for profiles and character pages
 export default function ProfileMasthead({
@@ -42,10 +42,7 @@ export default function ProfileMasthead({
 }) {
   return (
     <div id="masthead-root" className="contents">
-      <div
-        className="relative aspect-[15/3]"
-        style={{ "--profile-banner-parallax": 1 } as React.CSSProperties}
-      >
+      <div className="relative aspect-[15/3]">
         {/* Banner */}
         {/* <div
           data-edit-banner-layout=""
@@ -64,7 +61,7 @@ export default function ProfileMasthead({
           fill
           priority
           style={{
-            objectPosition: "0 calc(50% * var(--profile-banner-parallax, 1))"
+            objectPosition: "0 calc(50% * 1))"
           }}
         />
       </div>
@@ -150,14 +147,14 @@ export default function ProfileMasthead({
           </div>
         </section>
       </div>
-      <div className="sticky top-16 z-10 bg-100">
+      <div className="sticky top-[3.75rem] z-[2] bg-100 overflow-x-auto">
         <div className="max-w-screen-2xl mx-auto px-9">
           <Tabs
             items={[
               {
                 icon: HomeIcon,
                 text: "Overview",
-                link: `/profile/@${handle}/`
+                link: `/profile/@${handle}`
               },
               {
                 icon: CatIcon,
@@ -176,6 +173,11 @@ export default function ProfileMasthead({
                 link: `/profile/@${handle}/commissions`
               },
               {
+                icon: ShoppingCartIcon,
+                text: "Shop",
+                link: `/profile/@${handle}/shop`
+              },
+              {
                 icon: HeartIcon,
                 text: "Favorites",
                 link: `/profile/@${handle}/favorites`,
@@ -184,7 +186,10 @@ export default function ProfileMasthead({
             ]}
           />
         </div>
-        <Separator dir="horizontal" padding={12.5} />
+        <div
+          className="relative -z-[1] w-full border-b-2 border-0 border-b-separator border-opacity-50"
+          aria-hidden
+        ></div>
       </div>
     </div>
   )

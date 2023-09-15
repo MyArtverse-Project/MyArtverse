@@ -1,5 +1,5 @@
 import { FursonaCard } from "@/components/ui/Cards"
-import { FolderView } from "@/components/ui/Folders"
+import { FolderView } from "@/components/ui"
 import { Metadata, ResolvingMetadata } from "next"
 
 import dynamic from "next/dynamic"
@@ -26,24 +26,26 @@ export async function generateMetadata(
 
 export default function Page({ params }: Props) {
   return (
-    <div className="flex gap-x-4">
-      <FolderView />
-      <div
-        className="w-full grid gap-4"
-        style={{ gridTemplateColumns: "repeat(auto-fill, minmax(230px, 1fr))" }}
-        role="listbox"
-      >
-        {[...Array(10)].map((_, i) => (
-          <FursonaCard
-            key={i}
-            name={"Renzo"}
-            img={"/img/hero/renzo-snowglobe.jpg"}
-            species="Raccoon-Fox-Dragon"
-            status="notForAdopt"
-            role="listitem"
-          />
-        ))}
-      </div>
-    </div>
+    <>
+      <FolderView>
+        <FolderView.Shelf>
+          <FolderView.Item name="Icons" />
+          <FolderView.Item name="Adopts" />
+          <FolderView.Item name="Fursuits" />
+        </FolderView.Shelf>
+        <FolderView.Contents>
+          {[...Array(10)].map((_, i) => (
+            <FursonaCard
+              key={i}
+              name={"Renzo"}
+              img={"/img/hero/renzo-snowglobe.jpg"}
+              species="Raccoon-Fox-Dragon"
+              status="owned"
+              role="listitem"
+            />
+          ))}
+        </FolderView.Contents>
+      </FolderView>
+    </>
   )
 }

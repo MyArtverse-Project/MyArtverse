@@ -1,6 +1,6 @@
-import type { AdoptionStatus, ColorPalette } from "./Fursonas"
+import type { FursonaStatus, ColorPalette } from "./Fursonas"
 
-export type { AdoptionStatus, ColorPalette }
+export type { FursonaStatus as AdoptionStatus, ColorPalette }
 
 export type PartialRecord<K extends PropertyKey, T = string> = Partial<
   Record<K, T>

@@ -123,7 +123,7 @@ export default function CreateProfileForm() {
               </div>
             }
           >
-            <div className="bg-100 p-3.5 border border-300 rounded-lg">
+            <Fieldset.Inner>
               <div className="flex flex-wrap gap-2">
                 {socialIcons.map((icon, i) => (
                   <Button
@@ -146,14 +146,14 @@ export default function CreateProfileForm() {
                   Let us know!
                 </Link>
               </Note>
-            </div>
+            </Fieldset.Inner>
           </Fieldset>
           {/* Payment field */}
           <Fieldset
             heading="Payment methods"
             description="Optional, you can skip this and add them from Account Settings at anytime. Add your preferred payment method(s) when commissioning an artist or purchasing a physical goodies on MyFursona."
           >
-            <div className="bg-100 p-3.5 border border-300 rounded-lg">
+            <Fieldset.Inner>
               <div className="flex gap-x-2 flex-wrap">
                 <Button prefixIcon={<CreditCardIcon size={21} />}>
                   Credit/Debit card
@@ -187,7 +187,7 @@ export default function CreateProfileForm() {
                   Klarna
                 </Button>
               </div>
-            </div>
+            </Fieldset.Inner>
           </Fieldset>
           {/* Auth field */}
           <Fieldset

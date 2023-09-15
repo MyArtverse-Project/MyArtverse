@@ -1,4 +1,8 @@
+"use client"
+
 import Link from "next/link"
+import { usePathname } from "next/navigation"
+
 import type { LucideIcon } from "lucide-react"
 import type { PartialArray } from "@/types"
 
@@ -13,15 +17,22 @@ export default function Tabs({
     countIndicator: number
   }>
 }) {
+  const pathname = usePathname()
+
   return (
-    <div data-biro-ui-tab-list="" className="flex items-center">
+    <div id="biro-ui-tab-row" className="flex items-center gap-x-1 py-2">
       {items.map(({ text, link, icon: Icon, countIndicator }, i) => (
         <Link
           key={i}
-          data-biro-ui-tab=""
-          href={link as unknown}
-          tabIndex={0}
-          className="flex items-center px-4 py-2 transition-colors rounded-md gap-x-2 hover:bg-300 focus:bg-300 group hover:bg-opacity-60 focus:bg-opacity-60"
+          prefetch
+          id="tab-link"
+          href={link as any}
+          className={[
+            "flex items-center px-4 py-2 transition-colors rounded-md gap-x-2 group relative before:absolute before:left-0 before:right-0 before:-bottom-2 before:block before:h-0.5",
+            pathname === link
+              ? "text-500 hover:bg-200 before:bg-500"
+              : "hover:bg-200"
+          ].join(" ")}
           aria-label={
             !countIndicator ? text : `${text}, ${countIndicator} items`
           }

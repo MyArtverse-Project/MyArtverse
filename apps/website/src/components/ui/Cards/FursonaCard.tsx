@@ -2,6 +2,11 @@ import Image from "next/image"
 
 import type { AdoptionStatus, ColorPalette as Palette } from "@/types"
 import ColorPalette from "./ColorPalette"
+import BuiImage from "../BuiImage"
+import { useRouter } from "next/navigation"
+import Link from "next/link"
+import { Heart } from "lucide-react"
+import Status from "./Status"
 
 type CharacterCardPalette =
   | [Palette]
@@ -14,7 +19,9 @@ export default function FursonaCard({
   species,
   isHybrid,
   palette,
-  status = "notForAdopt",
+  href,
+  likes,
+  status = "owned",
   ...attributes
 }: {
   name: string
@@ -23,38 +30,29 @@ export default function FursonaCard({
   isHybrid?: boolean
   status?: AdoptionStatus
   palette?: CharacterCardPalette
+  likes?: number,
+  href?: string,
 } & Pick<React.HTMLAttributes<HTMLDivElement>, "role">) {
+  const DynamicElement = !href ? "div" : Link
   return (
-    <div
+    <DynamicElement
+      // TODO: I'll change it dw bb 
+      href={href as any}
       tabIndex={0}
       aria-label={`Character item: ${name}, ${species}`}
-      className="p-5 border border-400 bg-200 rounded-md grid gap-y-2"
+      className={`p-5 border border-400 bg-200 rounded-md grid gap-y-2 hover:bg-mute transition-all ${href ? "cursor-pointer" : ""}}`}
       {...attributes}
     >
       <div className="overflow-hidden rounded-md">
-        <div
-          data-custom-img-renderer=""
-          className="relative before:absolute before:-inset-0.5 before:z-[2]"
-          style={
-            {
-              aspectRatio: "1/1",
-              width: "100%"
-            } as React.CSSProperties
-          }
-          draggable="false"
-        >
-          <Image
-            className="select-none object-cover"
-            alt={`Avatar of ${name}`}
-            src={img}
-            fetchPriority="low"
-            loading="lazy"
-            decoding="async"
-            quality="80"
-            sizes="(max-width: 1280px) 400px"
-            fill
-          />
-        </div>
+        <BuiImage
+          src={img}
+          objectFit="cover"
+          aspectRatio="1/1"
+          width="100%"
+          alt={`Avatar of ${name}`}
+          sizes="(max-width: 1280px) 400px"
+          strategy="neutral"
+        />
         <ColorPalette
           width="100%"
           palette={[
@@ -65,9 +63,11 @@ export default function FursonaCard({
         />
       </div>
       <div className="grid">
+        <Status status={status} />
         <h3 className="not-prose font-inter font-bold text-2xl">{name}</h3>
         <span>{species}</span>
+        <span className="flex flex-row text-md font-semibold my-2"><Heart className="mr-1" size={18} />{likes}</span>
       </div>
-    </div>
+    </DynamicElement>
   )
 }

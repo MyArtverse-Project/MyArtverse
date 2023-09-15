@@ -77,17 +77,17 @@ export default function RootLayout({
         <Analytics nonce={nonce} />
       </head>
       <body className="bg-100 text-700 !overflow-x-hidden bg-background prose-headings:font-bold prose-headings:font-inter text-sm font-medium font-open-sans prose-h1:text-5xl prose-h2:text-[2.75rem] prose-h3:text-4xl prose-h4:text-[2rem] prose-h5:text-[1.65rem]">
-        <SkipNav />
         <NoJSReminder />
         <Providers>
           <div id="myfursona-app">
+            <SkipNav />
             {/* Platform announcements sent through the API goes here */}
             <div id="announcements"></div>
             <header className="sticky top-0 z-10">
               <Navbar />
               <Sidebar />
             </header>
-            <div id="skip-navigation" className="min-h-[calc(100dvh-6rem)]">
+            <div id="skip-navigation" className="min-h-[calc(100dvh-4rem)]">
               {children}
             </div>
             <Footer />

@@ -1,16 +1,19 @@
-// This index file is here to clean up and manage the import hell
-import Modal from "./Modal"
 import Note from "./Note"
-import Overlay from "./Overlay"
+import Modal from "./Modal"
 import Separator from "./Separator"
-import Tabs from "./Tabs"
+
 import SocialsRow from "./SocialsRow"
 import Fieldset from "./Fieldset"
+
+import Tabs from "./Tabs"
+import Switch from "./Switch"
 
 import BuiLink from "./BuiLink"
 import BuiImage from "./BuiImage"
 
 import EmptySection from "./EmptySection"
+
+import FolderView from "./Folders"
 
 export {
   BuiImage,
@@ -18,9 +21,10 @@ export {
   EmptySection,
   Modal,
   Note,
-  Overlay,
   Separator,
   Tabs,
+  Switch,
   SocialsRow,
-  Fieldset
+  Fieldset,
+  FolderView
 }
