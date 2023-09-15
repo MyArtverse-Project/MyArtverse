@@ -1,6 +1,5 @@
 "use client"
 
-import { useState, useEffect } from "react"
 import { Folder, FolderClosed, FolderOpen } from "lucide-react"
 import { Button } from "../Buttons"
 

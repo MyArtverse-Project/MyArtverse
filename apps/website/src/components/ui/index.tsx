@@ -1,6 +1,5 @@
-import Modal from "./Modal"
 import Note from "./Note"
-import Overlay from "./Overlay"
+import Modal from "./Modal"
 import Separator from "./Separator"
 
 import SocialsRow from "./SocialsRow"
@@ -14,16 +13,18 @@ import BuiImage from "./BuiImage"
 
 import EmptySection from "./EmptySection"
 
+import FolderView from "./Folders"
+
 export {
   BuiImage,
   BuiLink,
   EmptySection,
   Modal,
   Note,
-  Overlay,
   Separator,
   Tabs,
   Switch,
   SocialsRow,
-  Fieldset
+  Fieldset,
+  FolderView
 }
