@@ -1,9 +1,12 @@
 import Note from "./Note"
 import Modal from "./Modal"
-import Separator from "./Separator"
 
-import SocialsRow from "./SocialsRow"
+import Separator from "./Separator"
+import Clamp from "./Clamp"
+import EmptySection from "./EmptySection"
+
 import Fieldset from "./Fieldset"
+import SocialsRow from "./SocialsRow"
 
 import Tabs from "./Tabs"
 import Switch from "./Switch"
@@ -11,9 +14,9 @@ import Switch from "./Switch"
 import BuiLink from "./BuiLink"
 import BuiImage from "./BuiImage"
 
-import EmptySection from "./EmptySection"
-
+import GridResponsive from "./GridResponsive"
 import FolderView from "./Folders"
+import Carousel from "./Carousel"
 
 export {
   BuiImage,
@@ -26,5 +29,8 @@ export {
   Switch,
   SocialsRow,
   Fieldset,
-  FolderView
+  FolderView,
+  Carousel,
+  Clamp,
+  GridResponsive
 }

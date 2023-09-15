@@ -37,11 +37,11 @@ export default function FursonaCard({
   return (
     <DynamicElement
       href={!href ? null : (href as any)}
-      tabIndex={0}
       aria-label={`Character item: ${name}, ${species}`}
-      className={`p-4 rounded-md grid gap-y-2 hover:bg-mute transition-all ${
+      className={[
+        "flex flex-col p-4 rounded-md gap-y-2 hover:bg-mute transition-all",
         href ? "cursor-pointer" : ""
-      }}`}
+      ].join(" ")}
       {...attributes}
     >
       <div className="overflow-hidden rounded-md">

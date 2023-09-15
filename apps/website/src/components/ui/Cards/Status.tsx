@@ -1,42 +1,50 @@
-import { FursonaStatus } from "@/types/Fursonas"
-import { LockIcon, Sparkles, Star } from "lucide-react"
-import React from "react"
+import { type LucideIcon, LockIcon, SparklesIcon, StarIcon } from "lucide-react"
+import type { FursonaStatus } from "@/types/Fursonas"
 
 export default function Status({ status }: { status: FursonaStatus }) {
-  const base = "flex flex-row  items-center text-md font-semibold my-2"
-  const styles = ["main", "upForAdopt", "adopted"].includes(status)
-    ? "text-500"
-    : "text-subtext"
-  switch (status) {
-    case "adopted":
-      return (
-        <span className={[styles, base].join(" ")}>
-          <Sparkles size={19} className="mr-2" />
-          Adopted
-        </span>
-      )
-    case "upForAdopt":
-      return (
-        <span className={[styles, base].join(" ")}>
-          <Sparkles size={19} className="mr-2" />
-          Up For Adoption
-        </span>
-      )
-    case "owned":
-      return null
-    case "hidden":
-      return (
-        <span className={[styles, base].join(" ")}>
-          <LockIcon size={19} className="mr-2" />
-          Only Visible to you
-        </span>
-      )
-    case "main":
-      return (
-        <span className={[styles, base].join(" ")}>
-          <Star size={19} className="mr-2" />
-          Main Character
-        </span>
-      )
+  const base = "flex flex-row items-center text-md font-semibold my-1"
+
+  const statusObj: Record<
+    FursonaStatus,
+    { label: string; className: string; icon: LucideIcon }
+  > = {
+    adopted: {
+      label: "Adopted",
+      className: "text-500",
+      icon: SparklesIcon
+    },
+    upForAdopt: {
+      label: "Up for adoption",
+      className: "text-500",
+      icon: SparklesIcon
+    },
+    main: {
+      label: "Main character",
+      className: "text-500",
+      icon: StarIcon
+    },
+    hidden: {
+      label: "Only visible to you",
+      className: "text-subtext",
+      icon: LockIcon
+    },
+    owned: {
+      label: null,
+      className: null,
+      icon: null
+    }
   }
+
+  const StatusIcon = statusObj[status].icon
+  const StatusLabel = statusObj[status].label
+  const StatusClassName = statusObj[status].className
+
+  const isOwnedLabel = !StatusIcon && !StatusLabel && !StatusClassName
+
+  return isOwnedLabel ? null : (
+    <span className={[StatusClassName, base].join(" ")}>
+      {StatusIcon ? <StatusIcon size={19} className="mr-2" /> : null}
+      {StatusLabel ? StatusLabel : null}
+    </span>
+  )
 }

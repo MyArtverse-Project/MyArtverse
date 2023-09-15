@@ -1,6 +1,5 @@
 import { BuiImage } from "@/components/ui"
 import { Button } from "@/components/ui/Buttons"
-import React from "react"
 
 export default function Landing() {
   return (

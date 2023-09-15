@@ -1,9 +1,8 @@
 "use client"
 
 import { useSearchParams } from "next/navigation"
-import React from "react"
-import Landing from "./Landing"
-import Browse from "./Browse"
+import Landing from "./landing/page"
+import Browse from "./browse/page"
 
 export default function HomeContent() {
   const guestMode = useSearchParams().get("show-as-guest")
