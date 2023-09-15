@@ -1,14 +1,23 @@
+# Dev folders
 .next
+
+# Build folders
 .turbo
 .output
 dist
 config
-public
 out
 
+# PWA
+workbox-*.js
+worker-*.js
+sw.js.map
+workbox-*.js.map
+worker-*.js.map
+
+# Tauri-specific
 target
+Cargo.toml
 
 vercel.json
 turbo.json
-
-Cargo.toml

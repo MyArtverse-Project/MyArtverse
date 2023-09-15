@@ -30,17 +30,19 @@ export default function FursonaCard({
   isHybrid?: boolean
   status?: AdoptionStatus
   palette?: CharacterCardPalette
-  likes?: number,
-  href?: string,
+  likes?: number
+  href?: string
 } & Pick<React.HTMLAttributes<HTMLDivElement>, "role">) {
   const DynamicElement = !href ? "div" : Link
   return (
     <DynamicElement
-      // TODO: I'll change it dw bb 
+      // TODO: I'll change it dw bb
       href={href as any}
       tabIndex={0}
       aria-label={`Character item: ${name}, ${species}`}
-      className={`p-5 border border-400 bg-200 rounded-md grid gap-y-2 hover:bg-mute transition-all ${href ? "cursor-pointer" : ""}}`}
+      className={`p-5 border border-400 bg-200 rounded-md grid gap-y-2 hover:bg-mute transition-all ${
+        href ? "cursor-pointer" : ""
+      }}`}
       {...attributes}
     >
       <div className="overflow-hidden rounded-md">
@@ -66,7 +68,10 @@ export default function FursonaCard({
         <Status status={status} />
         <h3 className="not-prose font-inter font-bold text-2xl">{name}</h3>
         <span>{species}</span>
-        <span className="flex flex-row text-md font-semibold my-2"><Heart className="mr-1" size={18} />{likes}</span>
+        <span className="flex flex-row text-md font-semibold my-2">
+          <Heart className="mr-1" size={18} />
+          {likes}
+        </span>
       </div>
     </DynamicElement>
   )
