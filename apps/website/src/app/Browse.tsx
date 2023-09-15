@@ -24,11 +24,21 @@ export default function Browse() {
               name={"Renzo"}
               img={"/img/hero/renzo-snowglobe.jpg"}
               species="Raccoon-Fox-Dragon"
-              status={(["owned", "adopted", "hidden", "upForAdopt", "main"] as FursonaStatus[])[Math.floor(Math.random() * 5)]}
+              status={
+                (
+                  [
+                    "owned",
+                    "adopted",
+                    "hidden",
+                    "upForAdopt",
+                    "main"
+                  ] as FursonaStatus[]
+                )[Math.floor(Math.random() * 5)]
+              }
               role="listitem"
               href="/er"
               likes={Math.floor(Math.random() * 100)}
-              />
+            />
           ))}
         </div>
       </div>
@@ -41,18 +51,28 @@ export default function Browse() {
         </div>
         <hr />
         <div className="grid grid-cols-4 gap-4 mt-4 ">
-            {/* TODO: Make it skinny */}
-            {[...Array(7)].map((_, i) => (
+          {/* TODO: Make it skinny */}
+          {[...Array(7)].map((_, i) => (
             <FursonaCard
               key={i}
               name={"Renzo"}
               img={"/img/hero/renzo-snowglobe.jpg"}
               species="Raccoon-Fox-Dragon"
-              status={(["owned", "adopted", "hidden", "upForAdopt", "main"] as FursonaStatus[])[Math.floor(Math.random() * 5)]}
+              status={
+                (
+                  [
+                    "owned",
+                    "adopted",
+                    "hidden",
+                    "upForAdopt",
+                    "main"
+                  ] as FursonaStatus[]
+                )[Math.floor(Math.random() * 5)]
+              }
               role="listitem"
               href="/er"
               likes={Math.floor(Math.random() * 100)}
-              />
+            />
           ))}
         </div>
       </div>
