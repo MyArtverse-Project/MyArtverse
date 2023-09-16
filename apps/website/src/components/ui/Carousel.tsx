@@ -1,4 +1,3 @@
-import React from "react"
 import { Button } from "./Buttons"
 import Separator from "./Separator"
 import { ChevronRight } from "lucide-react"

@@ -1,14 +1,13 @@
+import GridResponsive from "../GridResponsive"
+
 export default function FolderContents({
   children
 }: {
   children: React.ReactNode
 }) {
   return (
-    <div
-      className="w-full grid gap-4"
-      style={{ gridTemplateColumns: "repeat(auto-fill, minmax(230px, 1fr))" }}
-    >
+    <GridResponsive breakpoint={250} className="gap-1.5">
       {children}
-    </div>
+    </GridResponsive>
   )
 }

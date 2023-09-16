@@ -1,7 +1,7 @@
 "use client"
 
+import { useState } from "react"
 import { Check, DownloadIcon, UploadIcon } from "lucide-react"
-import React, { useState } from "react"
 
 export default function DropZone() {
   const [isDragging, setIsDragging] = useState(false)

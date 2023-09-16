@@ -1,6 +1,6 @@
 "use client"
 
-import React, { useContext } from "react"
+import { Fragment, useContext } from "react"
 import Link from "next/link"
 
 import {
@@ -89,62 +89,6 @@ export default function Navbar() {
           </Button>
         </div>
         <Separator dir="vertical" size="2.125rem" />
-        {/* Signed in */}
-        {/* <Dropdown
-          button={
-            <Button
-              iconOnly
-              variant="secondary"
-              aria-label="Add or create item"
-              suffixIcon={<ChevronDown size={18} />}
-            >
-              <PlusIcon size={20} />
-            </Button>
-          }
-          items={
-            <>
-              {createNewItems.map((item, index) => {
-                return (
-                  <DropdownItem
-                    prefix={<item.icon size={20} />}
-                    key={index}
-                    link={item.link}
-                  >
-                    {item.name}
-                  </DropdownItem>
-                )
-              })}
-            </>
-          }
-        />
-        <NotificationPopup />
-        <Dropdown
-          button={
-            <Button className="grid p-0 border-none rounded-full place-items-center">
-              <Avatar username={USER_PLACEHOLDER} src="/img/examples/ozzy/5.png" />
-            </Button>
-          }
-          items={
-            <>
-              <div className="flex items-center px-4 py-1.5 gap-x-3">
-                <Avatar
-                  username={USER_PLACEHOLDER}
-                  size={69}
-                  src="/img/hero/vulpo.jpg"
-                />
-                <div>
-                  <h1 className="text-lg font-bold leading-6">
-                    {USER_PLACEHOLDER}
-                  </h1>
-                  <span className="text-sm opacity-50">
-                    {HANDLE_PLACEHOLDER}
-                  </span>
-                </div>
-              </div>
-              <Separator dir="horizontal" padding="0.66rem" />
-            </>
-          }
-        /> */}
         {/* Signed out */}
         <Dropdown
           button={
@@ -155,7 +99,7 @@ export default function Navbar() {
           items={
             <>
               {siteSettingsItems.map((item, index) => (
-                <React.Fragment key={index}>
+                <Fragment key={index}>
                   {typeof item.name !== "undefined" ? (
                     <Menu.Item>
                       <Button
@@ -169,7 +113,7 @@ export default function Navbar() {
                   ) : (
                     <Separator dir="horizontal" padding={6.5} />
                   )}
-                </React.Fragment>
+                </Fragment>
               ))}
             </>
           }
