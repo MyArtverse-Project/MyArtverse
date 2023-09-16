@@ -1,3 +1,5 @@
+const shared = require("@myfursona-internal/config/next-config-shared")
+
 const withMDX = require("@next/mdx")()
 const withPWA = require("next-pwa")({
   dest: "public",
@@ -7,13 +9,8 @@ const withPWA = require("next-pwa")({
 
 /** @type {import('next').NextConfig} */
 const nextConfig = {
-  swcMinify: true,
-  poweredByHeader: false,
+  ...shared,
   transpilePackages: ["lodash"],
-  experimental: {
-    typedRoutes: true,
-    mdxRs: true
-  },
   async rewrites() {
     return [
       {

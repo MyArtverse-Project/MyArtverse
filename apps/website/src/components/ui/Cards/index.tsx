@@ -1,5 +1,5 @@
 import ColorPalette from "./ColorPalette"
 import FursonaCard from "./FursonaCard"
-import Commissions from "./Commissions"
+import CommissionsListing from "./CommissionListing"
 
-export { ColorPalette, FursonaCard, Commissions }
+export { ColorPalette, FursonaCard, CommissionsListing }

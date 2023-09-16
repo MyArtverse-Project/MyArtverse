@@ -1,7 +1,8 @@
+const shared = require("@myfursona-internal/config/next-config-shared")
+
 /** @type {import('next').NextConfig} */
 const nextConfig = {
-  swcMinify: true,
-  poweredByHeader: false,
+  ...shared,
   output: "export"
 }
 

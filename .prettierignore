@@ -17,7 +17,6 @@ worker-*.js.map
 
 # Tauri-specific
 target
-Cargo.toml
 
 vercel.json
 turbo.json

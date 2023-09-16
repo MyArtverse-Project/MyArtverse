@@ -1,5 +1,5 @@
 import { Metadata, ResolvingMetadata } from "next"
-import { Commissions } from "@/components/ui/Cards"
+import { CommissionsListing } from "@/components/ui/Cards"
 import { Switch } from "@/components/ui"
 import type { SlugRouteProps } from "@/types"
 
@@ -26,33 +26,29 @@ export default function Page({ params }: SlugRouteProps) {
         <Switch />
       </div>
       <div className="grid grid-cols-2 gap-2">
-        <Commissions
+        <CommissionsListing
           title="Banners"
           description="Awesome scene with 2+ Characters"
-          imageURL="/img/hero/ozzy-sniff.png"
+          img="/img/hero/ozzy-sniff.png"
           price={30}
-          key={1}
         />
-        <Commissions
+        <CommissionsListing
           title="Banners"
           description="Awesome scene with 2+ Characters"
-          imageURL="/img/hero/ozzy-sniff.png"
+          img="/img/hero/ozzy-sniff.png"
           price={30}
-          key={1}
         />
-        <Commissions
+        <CommissionsListing
           title="Banners"
           description="Awesome scene with 2+ Characters"
-          imageURL="/img/hero/ozzy-sniff.png"
+          img="/img/hero/ozzy-sniff.png"
           price={30}
-          key={1}
         />
-        <Commissions
+        <CommissionsListing
           title="Banners"
           description="Awesome scene with 2+ Characters"
-          imageURL="/img/hero/ozzy-sniff.png"
+          img="/img/hero/ozzy-sniff.png"
           price={30}
-          key={1}
         />
       </div>
     </div>

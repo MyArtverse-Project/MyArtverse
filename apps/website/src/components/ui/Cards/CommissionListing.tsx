@@ -1,30 +1,27 @@
 import Image from "next/image"
 import { Button } from "../Buttons"
+import BuiImage from "../BuiImage"
 
-export default function Commissions({
+export default function CommissionsListing({
   description,
-  imageURL,
+  img,
   price,
   title
 }: {
-  imageURL: string
+  img: string
   title: string
   price: number
   description: string
 }) {
   return (
     <div
+      id="listing"
       className="flex flex-col justify-start items-center w-fit my-4"
-      data-commission-card=""
     >
       <div className="relative w-[568px] h-[156px] rounded-md overflow-hidden">
-        <Image
-          objectFit="cover"
-          layout="fill"
-          src={imageURL}
-          alt=""
-          className="hover:scale:90"
-        />
+        <div className="hover:scale:90">
+          <BuiImage src={img} />
+        </div>
       </div>
       <div className="flex flex-col justify-between w-full mt-3">
         <div className="flex flex-row">
