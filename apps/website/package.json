@@ -6,9 +6,7 @@
     "dev": "next dev",
     "build": "next build",
     "start": "next start",
-    "lint": "next lint",
-    "storybook": "storybook dev -p 6006",
-    "build-storybook": "storybook build"
+    "lint": "next lint"
   },
   "dependencies": {
     "@fortawesome/fontawesome-svg-core": "^6.4.0",
@@ -20,19 +18,17 @@
     "@next/mdx": "^13.4.19",
     "@tailwindcss/forms": "^0.5.5",
     "@tailwindcss/typography": "^0.5.9",
-    "@types/lodash-es": "^4.17.8",
+    "@types/lodash": "^4.17.8",
     "@types/mdx": "^2.0.7",
     "@types/node": "^20.5.6",
     "@types/react": "^18.2.21",
     "@types/react-dom": "^18.2.7",
     "autoprefixer": "^10.4.15",
-    "bcrypt": "^5.1.0",
     "eslint": "^8.48.0",
     "eslint-config-next": "^13.4.19",
     "framer-motion": "^10.12.18",
     "gray-matter": "^4.0.3",
-    "lodash-es": "^4.17.21",
-    "lodash.kebabcase": "^4.1.1",
+    "lodash": "^4.17.21",
     "lucide-react": "^0.269.0",
     "next": "^13.4.19",
     "next-pwa": "^5.6.0",
@@ -50,8 +46,8 @@
     "@myfursona-internal/tsconfig": "*",
     "@myfursona-internal/ui": "*",
     "@types/lodash": "^4.14.195",
-    "dedent": "^1.5.1",
-    "storybook": "^7.2.3"
+    "clsx": "^2.0.0",
+    "dedent": "^1.5.1"
   },
   "engines": {
     "node": ">= 18.0.0",

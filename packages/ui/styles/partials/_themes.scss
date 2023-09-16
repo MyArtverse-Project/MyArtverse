@@ -8,15 +8,6 @@
   --bui-success: 136, 87.7%, 40.4%;
 }
 
-// * Color tone reference; can be overwritten
-// * 100: background-text
-// * 200: modal
-// * 300: button-idle-chips
-// * 400: dropdowns-text-field
-// * 500: active-state
-// * 600: text-emphasis
-// * 700: text
-
 @include theme-variable-sets(light) {
   --bui-100: 256, 100%, 99%;
   --bui-200: 248, 88.8%, 94.6%;
