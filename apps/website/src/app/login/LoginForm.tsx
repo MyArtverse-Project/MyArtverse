@@ -32,7 +32,7 @@ export default function LoginForm() {
   }
 
   return (
-    <div className="grid place-items-center h-3/4 m-auto max-w-lg pt-[16vh]">
+    <main className="grid place-items-center m-auto max-w-md absolute inset-0 px-8">
       <div className="w-full">
         {errors && errors.length !== 0 ? (
           <div>
@@ -64,7 +64,7 @@ export default function LoginForm() {
           </Button>
         </div>
         <Separator dir="horizontal" padding="1.25rem" />
-        <form onSubmit={submitLogin} className="relative w-full">
+        <form onSubmit={submitLogin} className="relative w-full mb-40">
           <div
             className={`absolute top-0 left-0 w-full transition-all duration-500 transform ${
               emailEntered ? "-translate-x-full" : "translate-x-0"
@@ -112,6 +112,6 @@ export default function LoginForm() {
           </div>
         </form>
       </div>
-    </div>
+    </main>
   )
 }

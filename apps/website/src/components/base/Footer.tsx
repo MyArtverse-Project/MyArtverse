@@ -104,7 +104,7 @@ export default function Footer() {
               )}
             </div>
           </div>
-          <div className="sm:text-left text-center grid grid-cols-2 md:grid-cols-2 lg:grid-cols-4 gap-4 md:mt-5">
+          <div className="sm:text-left text-center grid grid-cols-2 md:grid-cols-2 lg:grid-cols-3 gap-4 md:mt-5">
             {FOOTER_ITEMS.map(({ heading, links }, index) => (
               <ColumnItems heading={heading} links={links} key={index} />
             ))}

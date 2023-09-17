@@ -56,7 +56,7 @@ export default function ProfileMasthead({
       ([entry]) => {
         setPeeking(entry.isIntersecting)
       },
-      { rootMargin: "-6% 0%" }
+      { rootMargin: "-7% 0%" }
     )
 
     io.observe(profileDetails)
