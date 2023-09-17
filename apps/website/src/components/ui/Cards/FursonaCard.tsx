@@ -1,10 +1,8 @@
-import Image from "next/image"
-
+import Link from "next/link"
+import clsx from "clsx"
 import type { AdoptionStatus, ColorPalette as Palette } from "@/types"
 import ColorPalette from "./ColorPalette"
 import BuiImage from "../BuiImage"
-import { useRouter } from "next/navigation"
-import Link from "next/link"
 import { Heart } from "lucide-react"
 import Status from "./Status"
 
@@ -38,10 +36,10 @@ export default function FursonaCard({
     <DynamicElement
       href={!href ? null : (href as any)}
       aria-label={`Character item: ${name}, ${species}`}
-      className={[
+      className={clsx(
         "flex flex-col p-4 rounded-md gap-y-2 hover:bg-mute transition-all",
         href ? "cursor-pointer" : ""
-      ].join(" ")}
+      )}
       {...attributes}
     >
       <div className="overflow-hidden rounded-md">

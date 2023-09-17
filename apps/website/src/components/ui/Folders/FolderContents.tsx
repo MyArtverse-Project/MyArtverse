@@ -6,7 +6,7 @@ export default function FolderContents({
   children: React.ReactNode
 }) {
   return (
-    <GridResponsive breakpoint={250} className="gap-1.5">
+    <GridResponsive breakpoint={250} className="gap-1.5 w-full">
       {children}
     </GridResponsive>
   )

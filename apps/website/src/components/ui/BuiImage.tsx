@@ -63,7 +63,7 @@ export default function BuiImage({
         style={{ userSelect: "none", objectFit }}
         fill
         src={src}
-        alt={alt}
+        alt={alt ?? ""}
         decoding="async"
         sizes={sizes}
         loading={setStrategy.loading}

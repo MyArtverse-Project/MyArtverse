@@ -17,18 +17,15 @@ export default function InputField({
   "type" | "placeholder" | "required" | "onChange" | "value" | "readOnly"
 >) {
   return (
-    <span
-      data-biro-ui-input-field=""
-      className="flex flex-col gap-y-1.5 w-full"
-    >
+    <div className="flex flex-col gap-y-1.5 w-full">
       <label
         htmlFor={inputName}
-        className={[
+        className={clsx(
           "uppercase text-600 font-bold",
           required
             ? "after:content-['*'] after:ml-1 after:font-bold after:text-error"
             : null
-        ].join(" ")}
+        )}
       >
         {inputName}
       </label>
@@ -44,6 +41,6 @@ export default function InputField({
         value={value}
       />
       <div data-error-boundary=""></div>
-    </span>
+    </div>
   )
 }

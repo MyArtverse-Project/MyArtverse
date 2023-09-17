@@ -2,12 +2,9 @@
 
 import { Fragment, useContext } from "react"
 import Link from "next/link"
-
+import { usePathname } from "next/navigation"
 import {
   MenuIcon,
-  SearchIcon,
-  ChevronDown,
-  PlusIcon,
   MoreVerticalIcon,
   CatIcon,
   ShareIcon,
@@ -16,12 +13,11 @@ import {
   ContrastIcon,
   LucideIcon
 } from "lucide-react"
-
-import { toLower } from "lodash-es"
+import { toLower } from "lodash"
 import { Menu } from "@headlessui/react"
 import { SidebarContext } from "@/context/NavbarProvider"
 import { MyFursona } from "../icons"
-import { Button } from "../ui/Buttons"
+import { Button, SearchButton } from "../ui/Buttons"
 import { Separator } from "../ui"
 import { Dropdown } from "../ui/Dropdown"
 
@@ -40,7 +36,6 @@ export default function Navbar() {
   const USER_PLACEHOLDER = "VulpoTheDev"
   const HANDLE_PLACEHOLDER = `@${toLower(USER_PLACEHOLDER)}`
 
-  // TODO: Invoke a modal event here (i.e. "event: () => openModal(newCollectionModal)")
   const createNewItems: ItemIterator = [
     { icon: CatIcon, name: "New fursona", link: "/" },
     { icon: ShareIcon, name: "Upload image(s)", link: "/" },
@@ -58,17 +53,23 @@ export default function Navbar() {
     { icon: ContrastIcon, name: "Send feedback" }
   ]
 
+  const pathname = usePathname()
+  const disableSidebar = pathname == "/login" || pathname == "/register"
+
   return (
     <nav className="z-[15] relative flex items-center justify-between px-5 py-3 text-sm font-medium select-none font-inter bg-100">
+      {/* Navbar left side */}
       <div className="flex items-center gap-x-3">
-        <Button
-          iconOnly
-          variant="tritery"
-          onClick={() => setSidebarState(!isSidebarOpen)}
-          aria-label="Toggle sidebar"
-        >
-          <MenuIcon size={20} />
-        </Button>
+        {!disableSidebar ? (
+          <Button
+            iconOnly
+            variant="tritery"
+            onClick={() => setSidebarState(!isSidebarOpen)}
+            aria-label="Toggle sidebar"
+          >
+            <MenuIcon size={20} />
+          </Button>
+        ) : null}
         <Link href="/" aria-label="Home" title="Home">
           <div className="desktop-only-lg">
             <MyFursona size={0.75} />
@@ -80,15 +81,14 @@ export default function Navbar() {
       </div>
       {/* Navbar right side */}
       <div className="flex items-center gap-x-2.5">
-        <div className="desktop-only-md">
-          <Button
-            className="rounded-md flex items-center gap-x-1.5 pl-3 pr-24 lg:pr-32 xl:pr-48 py-2 border border-button-idle-chips hover:border-dropdowns-text-field border:border-dropdowns-text-field"
-            prefixIcon={<SearchIcon size={20} />}
-          >
-            Search
-          </Button>
-        </div>
-        <Separator dir="vertical" size="2.125rem" />
+        {!disableSidebar ? (
+          <>
+            <div className="desktop-only-md">
+              <SearchButton />
+            </div>
+            <Separator dir="vertical" size="2.125rem" />
+          </>
+        ) : null}
         {/* Signed out */}
         <Dropdown
           button={
@@ -103,6 +103,7 @@ export default function Navbar() {
                   {typeof item.name !== "undefined" ? (
                     <Menu.Item>
                       <Button
+                        position="left"
                         prefixIcon={<item.icon size={20} />}
                         variant="tritery"
                         style={{ width: "100%" }}

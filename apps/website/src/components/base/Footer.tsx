@@ -3,7 +3,7 @@
 import Link from "next/link"
 
 import project from "../../../package.json"
-import { kebabCase } from "lodash-es"
+import { kebabCase } from "lodash"
 import { MyFursona } from "../icons"
 import { BuiLink } from "../ui"
 import { HeartIcon } from "lucide-react"

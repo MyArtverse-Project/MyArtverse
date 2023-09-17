@@ -1,3 +1,4 @@
+import clsx from "clsx"
 import { type LucideIcon, LockIcon, SparklesIcon, StarIcon } from "lucide-react"
 import type { FursonaStatus } from "@/types/Fursonas"
 
@@ -42,7 +43,7 @@ export default function Status({ status }: { status: FursonaStatus }) {
   const isOwnedLabel = !StatusIcon && !StatusLabel && !StatusClassName
 
   return isOwnedLabel ? null : (
-    <span className={[StatusClassName, base].join(" ")}>
+    <span className={clsx(StatusClassName, base)}>
       {StatusIcon ? <StatusIcon size={19} className="mr-2" /> : null}
       {StatusLabel ? StatusLabel : null}
     </span>

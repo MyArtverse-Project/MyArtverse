@@ -7,6 +7,7 @@ import { Separator } from "@/components/ui"
 import { Button } from "@/components/ui/Buttons"
 import { InputField } from "@/components/ui/Forms"
 import { Facebook, Google, XTwitter } from "@/components/icons"
+import clsx from "clsx"
 
 export default function LoginForm() {
   const [emailEntered, setEmailEntered] = useState(false)
@@ -82,12 +83,12 @@ export default function LoginForm() {
             <Button href="/register">Sign Up</Button>
           </div>
           <div
-            className={[
+            className={clsx(
               "absolute top-0 left-0 w-full transition-all duration-500 transform",
               emailEntered
                 ? "translate-x-0 opacity-100"
                 : "translate-x-full opacity-0"
-            ].join(" ")}
+            )}
           >
             <InputField
               inputName="Password"

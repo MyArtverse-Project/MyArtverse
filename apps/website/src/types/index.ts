@@ -1,6 +1,6 @@
 import type { FursonaStatus, ColorPalette } from "./Fursonas"
-
-export type { FursonaStatus as AdoptionStatus, ColorPalette }
+import type { LucideIcon } from "lucide-react"
+import type { UrlObject } from "url"
 
 export type PartialRecord<K extends PropertyKey, T = string> = Partial<
   Record<K, T>
@@ -37,3 +37,33 @@ export type SlugRouteProps = {
   }
   searchParams: { [key: string]: string | string[] | undefined }
 }
+
+export type ButtonVariants = OmitUnion<Variants, "success">
+type ExtendedDynamicButtonAnchorElement = Pick<
+  React.ButtonHTMLAttributes<HTMLButtonElement> &
+    React.AnchorHTMLAttributes<HTMLAnchorElement>,
+  | "onClick"
+  | "onContextMenu"
+  | "onKeyDown"
+  | "onMouseDown"
+  | "onMouseOver"
+  | "aria-label"
+  | "formAction"
+  | "className"
+  | "style"
+>
+
+export type BuiButtonProps = {
+  children?: React.ReactNode
+  iconOnly?: boolean
+  disabled?: boolean
+  type?: React.ButtonHTMLAttributes<HTMLButtonElement>["type"]
+  variant?: ButtonVariants
+  position?: "left" | "center" | "right"
+  size?: Sizes
+  prefixIcon?: React.ReactElement<LucideIcon>
+  suffixIcon?: React.ReactElement<LucideIcon>
+  href?: string | UrlObject
+} & ExtendedDynamicButtonAnchorElement
+
+export type { FursonaStatus as AdoptionStatus, ColorPalette }

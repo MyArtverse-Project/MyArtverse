@@ -1,17 +1,13 @@
 import Link from "next/link"
-
+import clsx from "clsx"
 import type {
+  BuiButtonProps,
   Sizes as ButtonSizes,
-  Variants,
-  OmitUnion,
-  PartialRecord
+  PartialRecord,
+  ButtonVariants
 } from "@/types"
-import type { LucideIcon } from "lucide-react"
-import type { UrlObject } from "url"
 
-type ButtonVariants = OmitUnion<Variants, "success">
 type ButtonVariantsRecord = PartialRecord<ButtonVariants>
-
 type ButtonSizesRecord = PartialRecord<ButtonSizes>
 
 export default function Button({
@@ -31,37 +27,14 @@ export default function Button({
    */
   className,
   ...attributes
-}: {
-  children?: React.ReactNode
-  iconOnly?: boolean
-  disabled?: boolean
-  type?: React.ButtonHTMLAttributes<HTMLButtonElement>["type"]
-  variant?: ButtonVariants
-  position?: "left" | "center" | "right"
-  size?: ButtonSizes
-  prefixIcon?: React.ReactElement<LucideIcon>
-  suffixIcon?: React.ReactElement<LucideIcon>
-  href?: string | UrlObject
-} & Pick<
-  React.ButtonHTMLAttributes<HTMLButtonElement> &
-    React.AnchorHTMLAttributes<HTMLAnchorElement>,
-  | "onClick"
-  | "onContextMenu"
-  | "onKeyDown"
-  | "onMouseDown"
-  | "onMouseOver"
-  | "aria-label"
-  | "formAction"
-  | "className"
-  | "style"
->) {
+}: BuiButtonProps) {
+  const baseStyles =
+    "flex items-center gap-x-1.5 rounded-md transition-[border,background-color] border border-[2px]"
+
   const sizes: ButtonSizesRecord = {
     small: !iconOnly ? "px-1.5 py-1" : "p-1.5",
     big: !iconOnly ? "px-4 py-2" : "p-2"
   }
-
-  const baseStyles =
-    "flex items-center gap-x-1.5 rounded-md transition-[border,background-color] border border-[2px]"
 
   const variants: ButtonVariantsRecord = {
     primary: "border-transparent bg-300 hover:bg-400 focus:bg-400",
@@ -84,16 +57,16 @@ export default function Button({
 
   const DynamicElement = !href ? "button" : Link
 
-  const joinClasses = [
+  const joinClasses = clsx(
     baseStyles,
     sizeDynamic,
     variantsDynamic,
     positionDynamic
-  ].join(" ")
+  )
 
   return (
     <DynamicElement
-      data-biro-ui-variant={className ? "custom" : variant ?? "primary"}
+      data-button-variant={className ? "custom" : variant ?? "primary"}
       // @ts-ignore
       href={href ?? undefined}
       type={!href ? type ?? "button" : undefined}
