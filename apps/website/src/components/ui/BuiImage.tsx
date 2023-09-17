@@ -10,20 +10,21 @@ export default function BuiImage({
   width,
   sizes,
   strategy = "neutral",
-  insetShieldSize = "0.5",
   objectFit,
+  rounded,
   ...attributes
 }: {
+  src: string
   aspectRatio?: string
   height?: string | number
   width?: string | number
   sizes?: any
-  insetShieldSize?: string
   strategy?: ImgLoadStrategy
   objectFit?: React.CSSProperties["objectFit"]
+  rounded?: boolean
 } & Pick<
   React.ImgHTMLAttributes<HTMLImageElement>,
-  "src" | "alt" | "onClick" | "onContextMenu"
+  "alt" | "onClick" | "onContextMenu"
 >) {
   const loadingStrategy: Record<
     ImgLoadStrategy,
@@ -54,13 +55,22 @@ export default function BuiImage({
   return (
     <div
       id="img-shield"
-      className="relative before:absolute before:-inset-[var(--inset-shield,0.25rem)] before:z-[2]"
-      style={{ aspectRatio, height, width }}
+      className="relative before:absolute before:inset-0 before:z-[2]"
+      style={{
+        aspectRatio,
+        height,
+        width,
+        overflow: "hidden",
+        borderRadius: !rounded ? 0 : 9999
+      }}
       draggable="false"
       {...attributes}
     >
       <Image
-        style={{ userSelect: "none", objectFit }}
+        style={{
+          userSelect: "none",
+          objectFit
+        }}
         fill
         src={src}
         alt={alt ?? ""}

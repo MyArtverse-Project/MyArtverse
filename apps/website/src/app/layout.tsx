@@ -1,14 +1,11 @@
-import "@myfursona-internal/ui/styles/globals.scss"
-import "@fortawesome/fontawesome-svg-core/styles.css"
-
 import dynamic from "next/dynamic"
 import { Metadata } from "next"
 import { headers } from "next/headers"
 import { Inter, Open_Sans } from "next/font/google"
-
+import "@myfursona-internal/ui/styles/globals.scss"
+import "@fortawesome/fontawesome-svg-core/styles.css"
 import { config } from "@fortawesome/fontawesome-svg-core"
-
-import Providers from "@/context/Providers"
+import Providers from "@/context"
 import {
   Analytics,
   Footer,
@@ -47,7 +44,12 @@ export const metadata: Metadata = {
     type: "website",
     siteName: "MyFursona"
   },
-  robots: "noai, noimageai, noindex, nofollow"
+  robots: "noai, noimageai, noindex, nofollow",
+  manifest: "/manifest.json",
+  themeColor: "#080313",
+  other: {
+    "apple-mobile-web-app-status-bar": "#080313"
+  }
 }
 
 export default function RootLayout({
@@ -65,33 +67,32 @@ export default function RootLayout({
       className={`${inter.variable} ${open_sans.variable} theme-system`}
     >
       <head>
-        <link rel="manifest" href="/manifest.json" />
-        <meta name="theme-color" content="#080313" />
         <link rel="apple-touch-icon" href="/logo-96x96.png" />
-        <meta name="apple-mobile-web-app-status-bar" content="#080313" />
         <script
           nonce={nonce}
           dangerouslySetInnerHTML={{ __html: DEV_CONVERSION_INLINE_SCRIPT }}
+          defer
+        />
+        <script
+          src="https://cdnjs.cloudflare.com/ajax/libs/lazysizes/5.3.2/lazysizes.min.js"
           defer
         />
         <Analytics nonce={nonce} />
       </head>
       <body className="bg-100 text-700 !overflow-x-hidden bg-background prose-headings:font-bold prose-headings:font-inter text-sm font-medium font-open-sans prose-h1:text-5xl prose-h2:text-[2.75rem] prose-h3:text-4xl prose-h4:text-[2rem] prose-h5:text-[1.65rem]">
         <NoJSReminder />
+        <SkipNav />
+        {/* Platform announcements sent through the API goes here */}
+        <div id="announcements"></div>
         <Providers>
-          <div id="myfursona-app">
-            <SkipNav />
-            {/* Platform announcements sent through the API goes here */}
-            <div id="announcements"></div>
-            <header className="sticky top-0 z-10">
-              <Navbar />
-              <Sidebar />
-            </header>
-            <div id="skip-navigation" className="min-h-[calc(100dvh-4rem)]">
-              {children}
-            </div>
-            <Footer />
+          <header className="sticky top-0 z-10">
+            <Navbar />
+            <Sidebar />
+          </header>
+          <div id="skip-navigation" className="min-h-[calc(100dvh-4rem)]">
+            {children}
           </div>
+          <Footer />
         </Providers>
       </body>
     </html>

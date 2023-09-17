@@ -1,7 +1,7 @@
 "use client"
 
+import { useEffect, useRef } from "react"
 import Image from "next/image"
-
 import { Button } from "@/components/ui/Buttons"
 import {
   AlertTriangleIcon,
@@ -14,10 +14,9 @@ import {
   ShoppingCartIcon,
   UserPlusIcon
 } from "lucide-react"
-import Tabs from "@/components/ui/Tabs"
+import { Tabs, SocialsRow } from "@/components/ui"
 import { Dropdown, DropdownItem } from "@/components/ui/Dropdown"
-import SocialsRow from "@/components/ui/SocialsRow"
-import Separator from "@/components/ui/Separator"
+import { useDetailPeekContext } from "@/context"
 
 // TODO rewrite this masthead function to be reusable for profiles and character pages
 export default function ProfileMasthead({
@@ -40,6 +39,29 @@ export default function ProfileMasthead({
   hasCommissions?: boolean
   isNSFW?: boolean
 }) {
+  const { setPeek, setPeeking } = useDetailPeekContext()
+
+  const profileDetailsRef = useRef<HTMLDivElement>(null)
+
+  useEffect(() => {
+    setPeek.img("/img/examples/ozzy/5.png")
+    setPeek.type("profile")
+    setPeek.username(handle)
+  }, [setPeek, handle])
+
+  useEffect(() => {
+    const profileDetails = profileDetailsRef.current
+
+    const io = new IntersectionObserver(
+      ([entry]) => {
+        setPeeking(entry.isIntersecting)
+      },
+      { rootMargin: "-6% 0%" }
+    )
+
+    io.observe(profileDetails)
+  }, [setPeeking])
+
   return (
     <div id="masthead-root" className="contents">
       <div className="relative aspect-[15/3]">
@@ -54,7 +76,6 @@ export default function ProfileMasthead({
         <Image
           src="/img/hero/ozzy-banner.png"
           alt=""
-          role="presentation"
           className="object-cover w-full overflow-hidden rounded-bl-2xl rounded-br-2xl"
           quality={90}
           draggable="false"
@@ -65,7 +86,7 @@ export default function ProfileMasthead({
           }}
         />
       </div>
-      <div className="px-12 mx-auto max-w-screen-2xl">
+      <div ref={profileDetailsRef} className="px-12 mx-auto max-w-screen-2xl">
         <section className="flex gap-x-2.5 h-fit">
           {/* Avatar */}
           <div className="relative flex-shrink-0 w-[var(--avatar-size)] h-[calc(var(--avatar-size)/1.25)]">

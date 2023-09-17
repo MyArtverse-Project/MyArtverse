@@ -1,9 +1,12 @@
 "use client"
 
+import { library } from "@fortawesome/fontawesome-svg-core"
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome"
-
+import { fab } from "@fortawesome/free-brands-svg-icons"
 import Linktree from "./Linktree"
 import MyFursona from "./MyFursona"
+
+library.add(fab)
 
 export function YouTube({ size = 21 }: { size?: number }) {
   return (

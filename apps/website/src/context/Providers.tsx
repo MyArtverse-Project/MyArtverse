@@ -1,7 +1,8 @@
 "use client"
 
-import { SidebarProvider } from "./NavbarProvider"
 import { ThemeProvider } from "./ThemeProvider"
+import { DetailPeekProvider } from "./DetailPeekProvider"
+import { SidebarProvider } from "./SidebarProvider"
 
 export default function Providers({
   children
@@ -10,7 +11,9 @@ export default function Providers({
 }) {
   return (
     <ThemeProvider>
-      <SidebarProvider>{children}</SidebarProvider>
+      <DetailPeekProvider>
+        <SidebarProvider>{children}</SidebarProvider>
+      </DetailPeekProvider>
     </ThemeProvider>
   )
 }

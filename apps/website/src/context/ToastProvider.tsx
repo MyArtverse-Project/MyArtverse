@@ -1,6 +1,6 @@
 "use client"
 
-import { OmitUnion, Variants } from "@/types"
+import type { OmitUnion, Variants } from "@/types"
 import { createContext, useContext, useState, useEffect } from "react"
 
 type ToastMsgProperty = {
@@ -20,7 +20,7 @@ const ToastContext = createContext<{
   setMessages: () => {}
 })
 
-export function useThemeContext() {
+export function useToastContext() {
   const ctx = useContext(ToastContext)
 
   if (!ctx) {

@@ -1,9 +1,8 @@
 "use client"
 
-import { useCallback, useContext, useEffect, Fragment } from "react"
+import { useCallback, useEffect, Fragment } from "react"
 import Link from "next/link"
-
-import { SidebarContext } from "@/context/NavbarProvider"
+import { useSidebarContext } from "@/context"
 
 import {
   HomeIcon,
@@ -47,8 +46,7 @@ export default function Sidebar() {
     }
   ]
 
-  const { sidebarState: isSidebarOpen, setSidebarState } =
-    useContext(SidebarContext)
+  const { sidebarState: isSidebarOpen, setSidebarState } = useSidebarContext()
 
   const toggleSidebar = useCallback(() => {
     setSidebarState(!isSidebarOpen)

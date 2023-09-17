@@ -3,7 +3,7 @@
 import { FormEvent, useState } from "react"
 
 import { emailRegex } from "@/constants"
-import { Separator } from "@/components/ui"
+import { BuiLink, Separator } from "@/components/ui"
 import { Button } from "@/components/ui/Buttons"
 import { InputField } from "@/components/ui/Forms"
 import { Facebook, Google, XTwitter } from "@/components/icons"
@@ -41,24 +41,26 @@ export default function LoginForm() {
             ))}
           </div>
         ) : null}
-        <h2 className="my-4 text-3xl text-center">Sign In</h2>
+        <h2 className="not-prose font-bold font-inter my-4 text-3xl text-center">
+          Log in to MyFursona
+        </h2>
         <div className="grid gap-y-1.5 w-full">
           <Button variant="secondary" position="center" prefixIcon={<Google />}>
-            Sign in with Google
+            Log in with Google
           </Button>
           <Button
             variant="secondary"
             position="center"
             prefixIcon={<Facebook />}
           >
-            Sign in with Facebook
+            Log in with Facebook
           </Button>
           <Button
             variant="secondary"
             position="center"
             prefixIcon={<XTwitter />}
           >
-            Sign in with X
+            Log in with X
           </Button>
         </div>
         <Separator dir="horizontal" padding="1.25rem" />
@@ -74,13 +76,12 @@ export default function LoginForm() {
               value={email}
               onChange={(e) => setEmail(e.target.value)}
             />
-            <Button
-              className="flex items-center gap-x-1.5 rounded-md transition-[border,background-color] border-[2px] px-4 py-2 border-transparent bg-300 hover:bg-400 focus:bg-400 w-full my-2"
-              onClick={validateEmail}
-            >
-              Next
-            </Button>
-            <Button href="/register">Sign Up</Button>
+            <div className="flex justify-end">
+              <Button onClick={validateEmail}>Next</Button>
+            </div>
+            <div className="text-center my-3">
+              <BuiLink href="/register">Create an account</BuiLink>
+            </div>
           </div>
           <div
             className={clsx(

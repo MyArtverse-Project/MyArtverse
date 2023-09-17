@@ -11,17 +11,19 @@ export default function middleware(request: NextRequest) {
     "script-src": [
       "self",
       "unsafe-eval",
-      "https://assets.hcaptcha.com",
-      "https://www.clarity.ms/",
-      "https://analytics.umami.is/",
+      "https:",
+      "assets.hcaptcha.com",
+      "www.clarity.ms",
+      "analytics.umami.is",
+      "cdnjs.cloudflare.com",
       `nonce-${generatedNonce}`
     ],
     "style-src": ["self", "unsafe-inline"],
     "connect-src": [
       "self",
-      "https://assets.hcaptcha.com",
-      "https://api.stripe.com",
-      "https://analytics.umami.is/"
+      "assets.hcaptcha.com",
+      "api.stripe.com",
+      "analytics.umami.is"
     ],
     "frame-src": [
       "https://www.youtube-nocookie.com",
@@ -46,7 +48,7 @@ export default function middleware(request: NextRequest) {
   response.headers.set("Content-Encoding", "br")
   response.headers.set("Content-Security-Policy", csp)
   // This header technically not supported by most browsers
-  // as it's a non-standard, but it's here  just for good measure.
+  // as it's a non-standard, but it's here just for good measure.
   response.headers.set("X-XSS-Protection", "1; mode=block")
 
   return response

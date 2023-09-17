@@ -6,7 +6,7 @@ import { useRouter } from "next/navigation"
 import { Button } from "@/components/ui/Buttons"
 import Separator from "@/components/ui/Separator"
 import { emailRegex } from "@/constants"
-import { Facebook, XTwitter } from "@/components/icons"
+import { Facebook, Google, XTwitter } from "@/components/icons"
 import { BuiLink } from "@/components/ui"
 import { InputField } from "@/components/ui/Forms"
 
@@ -35,6 +35,9 @@ export default function RegisterForm() {
         Sign Up
       </h2>
       <div className="grid gap-y-1.5 w-full">
+        <Button variant="secondary" prefixIcon={<Google />} position="center">
+          Continue with Google
+        </Button>
         <Button variant="secondary" prefixIcon={<Facebook />} position="center">
           Continue with Facebook
         </Button>
