@@ -26,7 +26,7 @@ export default function Overlay({
     <Portal>
       <div
         onClick={toggler as () => any}
-        className={`duration-[350ms] fixed z-[19] transition-all bg-black/40 inset-0 ${overlayState}`}
+        className={`duration-[350ms] fixed z-[19] transition-all bg-black/60 inset-0 ${overlayState}`}
       />
       <div id="overlay-wrapper" className="fixed z-[20]">
         {children}

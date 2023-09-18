@@ -1,8 +1,8 @@
-import { Clamp } from "@/components/ui"
 import { Brush, Heart, Layers, Sparkles } from "lucide-react"
 import { FursonaCard } from "@/components/ui/Cards"
 import type { FursonaStatus } from "@/types/Fursonas"
 import ShelfSection from "./ShelfSection"
+import { MarginClamp } from "@/components/ui"
 
 export default function Browse() {
   const RandomizedFursonaCards = () => {
@@ -31,7 +31,7 @@ export default function Browse() {
   }
 
   return (
-    <Clamp>
+    <MarginClamp>
       <div className="flex flex-col gap-y-2  md:mt-8 md:flex-col justify-between mx-auto my-20">
         <ShelfSection icon={Heart} title={"Featured Characters"}>
           <RandomizedFursonaCards />
@@ -59,6 +59,6 @@ export default function Browse() {
           <div></div>
         </div>
       </div>
-    </Clamp>
+    </MarginClamp>
   )
 }

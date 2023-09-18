@@ -1,7 +1,7 @@
 import { Metadata, ResolvingMetadata } from "next"
 import type { SlugRouteProps } from "@/types"
-import { FursonaCard } from "@/components/ui/Cards"
-import { FolderView } from "@/components/ui"
+
+import CharacterView from "./CharacterView"
 
 export async function generateMetadata(
   { params, searchParams }: SlugRouteProps,
@@ -14,25 +14,5 @@ export async function generateMetadata(
 }
 
 export default function Page({ params }: SlugRouteProps) {
-  return (
-    <FolderView>
-      <FolderView.Shelf>
-        <FolderView.Item name="Icons" />
-        <FolderView.Item name="Adopts" />
-        <FolderView.Item name="Fursuits" />
-      </FolderView.Shelf>
-      <FolderView.Contents>
-        {[...Array(10)].map((_, i) => (
-          <FursonaCard
-            key={i}
-            name={"Renzo"}
-            img={"/img/hero/renzo-snowglobe.jpg"}
-            species="Raccoon-Fox-Dragon"
-            status="owned"
-            role="listitem"
-          />
-        ))}
-      </FolderView.Contents>
-    </FolderView>
-  )
+  return <CharacterView />
 }

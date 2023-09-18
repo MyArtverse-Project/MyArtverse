@@ -1,7 +1,7 @@
 import { Metadata, ResolvingMetadata } from "next"
 import type { SlugRouteProps } from "@/types"
 import ProfileMasthead from "./ProfileMasthead"
-import { Clamp } from "@/components/ui"
+import { MarginClamp } from "@/components/ui"
 
 export async function generateMetadata(
   { params, searchParams }: SlugRouteProps,
@@ -47,9 +47,9 @@ export default function Layout({
         </Masthead.Tabs>
       </Masthead>
       */}
-      <Clamp as="main">
+      <MarginClamp as="main">
         <div className="py-4">{children}</div>
-      </Clamp>
+      </MarginClamp>
     </>
   )
 }

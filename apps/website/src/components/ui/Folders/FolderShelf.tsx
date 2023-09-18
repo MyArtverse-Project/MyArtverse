@@ -8,18 +8,19 @@ import FolderItem from "./FolderItem"
 import Separator from "../Separator"
 
 export default function FolderShelf({
-  children
+  children,
+  defaultName
 }: {
   children: React.ReactNode
+  defaultName?: string
 }) {
   const { folderWidth, setFolderWidth } = useFolderViewContext()
 
   const [isDragging, setIsDragging] = useState(false)
-
-  const DEFAULT_WIDTH = 270
-
   const resizableRef = useRef<HTMLDivElement | null>(null)
   const folderViewRef = useRef<HTMLDivElement | null>(null)
+
+  const DEFAULT_WIDTH = 270
 
   useEffect(() => {
     const resizeArea = resizableRef.current
@@ -31,15 +32,12 @@ export default function FolderShelf({
       const rect = folderView.getBoundingClientRect()
       const calcMousePosition = e.x - rect.x + 13
 
-      if (calcMousePosition < 250 || calcMousePosition > 725) return
+      if (calcMousePosition < 250 || calcMousePosition > 600) return
 
       setFolderWidth(calcMousePosition)
     }
 
-    resizeArea.addEventListener("pointerdown", () => setIsDragging(true))
-    window.addEventListener("pointerup", () => setIsDragging(false))
-
-    window.addEventListener("pointermove", dragMeDaddy)
+    window.addEventListener("mousemove", dragMeDaddy)
 
     const resetPosition = () => {
       setFolderWidth(DEFAULT_WIDTH)
@@ -48,8 +46,11 @@ export default function FolderShelf({
 
     resizeArea.addEventListener("dblclick", resetPosition)
 
+    resizeArea.addEventListener("mousedown", () => setIsDragging(true))
+    window.addEventListener("mouseup", () => setIsDragging(false))
+
     return () => {
-      window.removeEventListener("pointermove", dragMeDaddy)
+      window.removeEventListener("mousemove", dragMeDaddy)
       resizeArea.removeEventListener("dblclick", resetPosition)
     }
   }, [isDragging, setIsDragging, setFolderWidth])
@@ -74,9 +75,7 @@ export default function FolderShelf({
     <div
       className="flex-shrink-0 flex"
       ref={folderViewRef}
-      style={{
-        width: folderWidth
-      }}
+      style={{ width: folderWidth }}
     >
       <aside className="grid gap-y-1.5 w-full h-fit sticky top-32">
         <span className="flex gap-2.5 items-center flex-row-reverse">
@@ -85,18 +84,17 @@ export default function FolderShelf({
               aria-label={panelStateAria}
               iconOnly
               prefixIcon={<PanelIconDynamic size={21} />}
-              className="p-2 hover:text-500"
+              className="p-2 rounded-md transition-colors hover:bg-200 hover:text-500"
               onClick={handleExpandDetails}
             />
           </div>
-          <FolderItem name="All characters" active={true} />
+          <FolderItem name={defaultName} open />
         </span>
         <Separator dir="horizontal" padding="0.25rem" />
         {children}
       </aside>
-      <div
+      <span
         ref={resizableRef}
-        aria-hidden
         className="hover:cursor-e-resize px-2 mx-1 h-full before:block before:w-0.5 before:h-full before:bg-separator before:transition-opacity before:opacity-25 before:hover:opacity-100"
       />
     </div>

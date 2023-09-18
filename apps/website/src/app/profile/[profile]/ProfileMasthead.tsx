@@ -168,7 +168,7 @@ export default function ProfileMasthead({
           </div>
         </section>
       </div>
-      <div className="sticky top-[3.75rem] z-[2] bg-100 overflow-x-auto">
+      <div className="sticky top-[3.75rem] z-[3] bg-100 overflow-x-auto">
         <div className="max-w-screen-2xl mx-auto px-9">
           <Tabs
             items={[

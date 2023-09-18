@@ -2,7 +2,7 @@ import Note from "./Note"
 import Modal from "./Modal"
 
 import Separator from "./Separator"
-import Clamp from "./Clamp"
+import MarginClamp from "./MarginClamp"
 import EmptySection from "./EmptySection"
 
 import Fieldset from "./Fieldset"
@@ -31,6 +31,6 @@ export {
   Fieldset,
   FolderView,
   Carousel,
-  Clamp,
+  MarginClamp,
   GridResponsive
 }

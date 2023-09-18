@@ -1,22 +1,20 @@
 "use client"
 
+import clsx from "clsx"
 import Overlay from "../Overlay"
 import { motion } from "framer-motion"
 
 export default function Modal({
   children,
-  title,
-  actions,
   state,
-  toggler
+  toggler,
+  className
 }: {
   children?: React.ReactNode
-  title?: string | NonNullable<React.ReactNode>
-  actions?: NonNullable<React.ReactNode>
   state?: boolean
   toggler?: () => void
-}) {
-  const positionInitial = "-30%"
+} & Pick<React.HTMLAttributes<HTMLDivElement>, "className">) {
+  const positionInitial = "-60%"
 
   const modalInitial = {
     opacity: 0,
@@ -37,11 +35,14 @@ export default function Modal({
         animate={!state ? modalInitial : modalActive}
         transition={{
           type: "tween",
-          duration: 0.18
+          duration: 0.22
         }}
-        className="fixed left-1/2 top-1/2 overflow-hidden rounded-md border border-300 bg-100"
+        className={clsx(
+          "fixed left-1/2 top-1/2 overflow-hidden rounded-md border border-300 bg-200",
+          className
+        )}
       >
-        {children}
+        <div>{children}</div>
       </motion.div>
     </Overlay>
   )

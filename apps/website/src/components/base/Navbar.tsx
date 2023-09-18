@@ -59,7 +59,7 @@ export default function Navbar() {
   return (
     <nav className="z-[15] relative flex items-center justify-between px-5 py-3 text-sm font-medium select-none font-inter bg-100">
       {/* Navbar left side */}
-      <div className="flex items-center gap-x-3">
+      <div className="flex items-center gap-x-3 h-5">
         {!disableSidebar ? (
           <Button
             iconOnly
