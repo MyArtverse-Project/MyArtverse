@@ -51,8 +51,16 @@ export default function NavbarProfilePeek() {
         transition={transitionOptions}
         className="absolute top-0"
       >
-        <Link href="/" aria-label="Home" draggable={false}>
+        <Link
+          href="/"
+          aria-label="Home"
+          draggable={false}
+          className="flex items-center"
+        >
           <MyFursona wordmarkOnly size={0.7} />
+          <span className="ml-2 px-1 py-0.5 bg-red-600 text-xs rounded-sm uppercase">
+            Alpha
+          </span>
         </Link>
       </motion.div>
       {/* User avatar and handle */}

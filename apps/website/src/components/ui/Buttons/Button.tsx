@@ -42,10 +42,9 @@ const Button = forwardRef(
     }
 
     const variants: ButtonVariantsRecord = {
-      primary: "border-transparent bg-300 hover:bg-400 focus:bg-400",
-      secondary:
-        "bg-transparent border-300 hover:bg-400 hover:border-400 focus:border-400",
-      tritery: "border-transparent bg-transparent hover:bg-400 focus:bg-400",
+      primary: "border-transparent bg-300 hover:bg-400",
+      secondary: "bg-transparent border-300 hover:bg-400 hover:border-400",
+      tritery: "border-transparent bg-transparent hover:bg-400",
       warning: "border-transparent",
       error: "border-transparent"
     }

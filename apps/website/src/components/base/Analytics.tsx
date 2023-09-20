@@ -1,8 +1,11 @@
 import Script from "next/script"
+import { headers } from "next/headers"
 import dedent from "dedent"
 import { DEV_CONVERSION_INLINE_SCRIPT } from "@/constants"
 
-export default function Analytics({ nonce }: { nonce: string }) {
+export default function Analytics() {
+  const nonce = headers().get("x-nonce")
+
   const devFallback = "owo"
   const umamiId = process.env.UMAMI_ID || devFallback
   const clarityId = process.env.CLARITY_ID || devFallback
@@ -12,15 +15,14 @@ export default function Analytics({ nonce }: { nonce: string }) {
       {/* Site analytics - Umami */}
       <Script
         id="umami"
-        async
         defer
         src="https://analytics.umami.is/script.js"
         data-website-id={umamiId}
       />
       {/* Behavior analytics - Microsoft Clarity */}
       <Script
-        nonce={nonce}
         id="clarity"
+        nonce={nonce}
         strategy="beforeInteractive"
         dangerouslySetInnerHTML={{
           __html: dedent`

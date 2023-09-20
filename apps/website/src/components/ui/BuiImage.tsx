@@ -12,6 +12,7 @@ export default function BuiImage({
   strategy = "neutral",
   objectFit,
   rounded,
+  style,
   ...attributes
 }: {
   src: string
@@ -24,7 +25,7 @@ export default function BuiImage({
   rounded?: boolean
 } & Pick<
   React.ImgHTMLAttributes<HTMLImageElement>,
-  "alt" | "onClick" | "onContextMenu"
+  "alt" | "onClick" | "onContextMenu" | "style"
 >) {
   const loadingStrategy: Record<
     ImgLoadStrategy,
@@ -69,7 +70,8 @@ export default function BuiImage({
       <Image
         style={{
           userSelect: "none",
-          objectFit
+          objectFit,
+          ...style
         }}
         fill
         src={src}

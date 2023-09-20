@@ -3,8 +3,7 @@ import type { NextRequest } from "next/server"
 import { generateCSP } from "./utils"
 
 export default function middleware(request: NextRequest) {
-  const requestHeaders = new Headers(request.headers)
-  const generatedNonce = crypto.randomUUID()
+  const generatedNonce = Buffer.from(crypto.randomUUID()).toString("base64")
 
   const csp = generateCSP({
     "default-src": ["self"],
@@ -20,9 +19,12 @@ export default function middleware(request: NextRequest) {
     "style-src": ["self", "unsafe-inline"],
     "connect-src": [
       "self",
+      "https:",
       "assets.hcaptcha.com",
       "api.stripe.com",
-      "analytics.umami.is"
+      "analytics.umami.is",
+      "api.umami.is",
+      "w.clarity.ms"
     ],
     "frame-src": [
       "https://www.youtube-nocookie.com",
@@ -34,21 +36,20 @@ export default function middleware(request: NextRequest) {
     "upgrade-insecure-requests": true
   })
 
+  const requestHeaders = new Headers()
   requestHeaders.set("Content-Encoding", "br")
   requestHeaders.set("Content-Security-Policy", csp)
   requestHeaders.set("x-nonce", generatedNonce)
+  // This header technically not supported by most browsers
+  // as it's a non-standard, but it's here just for good measure.
+  requestHeaders.set("X-XSS-Protection", "1; mode=block")
 
   const response = NextResponse.next({
+    headers: requestHeaders,
     request: {
       headers: requestHeaders
     }
   })
-
-  response.headers.set("Content-Encoding", "br")
-  response.headers.set("Content-Security-Policy", csp)
-  // This header technically not supported by most browsers
-  // as it's a non-standard, but it's here just for good measure.
-  response.headers.set("X-XSS-Protection", "1; mode=block")
 
   return response
 }

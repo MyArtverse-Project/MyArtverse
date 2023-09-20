@@ -14,7 +14,7 @@ import {
   ShoppingCartIcon,
   UserPlusIcon
 } from "lucide-react"
-import { Tabs, SocialsRow } from "@/components/ui"
+import { Tabs, SocialsRow, BuiImage } from "@/components/ui"
 import { Dropdown, DropdownItem } from "@/components/ui/Dropdown"
 import { useDetailPeekContext } from "@/context"
 
@@ -64,28 +64,23 @@ export default function ProfileMasthead({
 
   return (
     <div id="masthead-root" className="contents">
-      <div className="relative aspect-[15/3]">
-        {/* Banner */}
-        {/* <div
+      {/* Banner */}
+      {/* <div
           data-edit-banner-layout=""
           className="absolute inset-0 grid place-items-center z-[4]"
         >
           <span>Change banner</span>
         </div> */}
-        <div className="absolute inset-0 z-[3]" />
-        <Image
-          src="/img/hero/ozzy-banner.png"
-          alt=""
-          className="object-cover w-full overflow-hidden rounded-bl-2xl rounded-br-2xl"
-          quality={90}
-          draggable="false"
-          fill
-          priority
-          style={{
-            objectPosition: "0 calc(50% * 1))"
-          }}
-        />
-      </div>
+      <BuiImage
+        aspectRatio="15/3"
+        width="100vw"
+        objectFit="cover"
+        src="/img/hero/ozzy-banner.png"
+        strategy="important"
+        style={{
+          objectPosition: "0 calc(50% * 1))"
+        }}
+      />
       <div ref={profileDetailsRef} className="px-12 mx-auto max-w-screen-2xl">
         <section className="flex gap-x-2.5 h-fit">
           {/* Avatar */}

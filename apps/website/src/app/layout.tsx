@@ -1,6 +1,5 @@
 import type { Metadata } from "next"
 import dynamic from "next/dynamic"
-import { headers } from "next/headers"
 import { Inter, Open_Sans } from "next/font/google"
 import "@myfursona-internal/ui/styles/globals.scss"
 import "@fortawesome/fontawesome-svg-core/styles.css"
@@ -38,16 +37,26 @@ export const metadata: Metadata = {
     template: "%s - MyFursona",
     default: "MyFursona"
   },
-  keywords: ["fur", "furries", "furry", "fursona", "mascot", "furry fandom"],
+  keywords: [
+    "fur",
+    "furries",
+    "furry",
+    "fursona",
+    "mascot",
+    "furry fandom",
+    "toyhouse",
+    "furaffinity",
+    "weasyl"
+  ],
   openGraph: {
     type: "website",
     siteName: "MyFursona"
   },
   robots: "noai, noimageai, noindex, nofollow",
   manifest: "/manifest.json",
-  themeColor: "#080313",
+  themeColor: "#7300ff",
   other: {
-    "apple-mobile-web-app-status-bar": "#080313"
+    "apple-mobile-web-app-status-bar": "#7300ff"
   }
 }
 
@@ -56,9 +65,6 @@ export default function RootLayout({
 }: {
   children: React.ReactNode
 }) {
-  const headersList = headers()
-  const nonce = headersList.get("x-nonce")
-
   return (
     <html
       lang="en"
@@ -66,6 +72,9 @@ export default function RootLayout({
       className={`${inter.variable} ${open_sans.variable} theme-system`}
     >
       <head>
+        <link rel="preconnect" href="https://api.myfursona.art/" />
+        <link rel="preconnect" href="https://i-r2.myfursona.art/" />
+        <link rel="preconnect" href="https://images.ctfassets.net/" />
         <link rel="apple-touch-icon" href="/logo-96x96.png" />
       </head>
       <body className="bg-100 text-700 !overflow-x-hidden bg-background prose-headings:font-bold prose-headings:font-inter text-sm font-medium font-open-sans prose-h1:text-5xl prose-h2:text-[2.75rem] prose-h3:text-4xl prose-h4:text-[2rem] prose-h5:text-[1.65rem]">
@@ -83,7 +92,7 @@ export default function RootLayout({
           </div>
           <Footer />
         </Providers>
-        <Analytics nonce={nonce} />
+        <Analytics />
       </body>
     </html>
   )
