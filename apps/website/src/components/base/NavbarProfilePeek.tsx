@@ -40,7 +40,7 @@ export default function NavbarProfilePeek() {
 
   return (
     <div id="profile-peek" className="relative flex items-center">
-      <Link href="/" aria-label="Home" title="Home">
+      <Link href="/" aria-label="Home" draggable={false}>
         <MyFursona logoOnly size={0.7} />
       </Link>
       {/* Wordmark */}
@@ -51,7 +51,7 @@ export default function NavbarProfilePeek() {
         transition={transitionOptions}
         className="absolute top-0"
       >
-        <Link href="/" aria-label="Home" title="Home">
+        <Link href="/" aria-label="Home" draggable={false}>
           <MyFursona wordmarkOnly size={0.7} />
         </Link>
       </motion.div>
