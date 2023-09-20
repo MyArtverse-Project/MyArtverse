@@ -94,7 +94,7 @@ export default function CreateCharacterForm() {
             heading="Upload/Import Images"
             description="Upload images of your ref sheet, from a commission, art trade, etc. directly or import from Google Drive, Dropbox, Facebook, etc."
           >
-                <DropZone />
+            <DropZone />
           </Fieldset>
           <Fieldset heading="Options">
             {/* TODO: Check Box "Sell as adoptable" */}
@@ -104,10 +104,10 @@ export default function CreateCharacterForm() {
             {/* TODO: CHeck Box Prevent others from tagging */}
           </Fieldset>
           <div className="flex justify-between">
-            <Button className="">Discard Changes</Button>
+            <Button>Discard Changes</Button>
             <div className="flex flex-row">
-              <Button className="">Save as Draft</Button>
-              <Button className="">Save and Exit</Button>
+              <Button>Save as draft</Button>
+              <Button>Save and Exit</Button>
             </div>
           </div>
         </main>
