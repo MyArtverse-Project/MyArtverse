@@ -7,11 +7,9 @@ node_modules
 .turbo
 
 *.log*
+.env
 .env.*
 !.env.example
 
 # JetBrains stuff
 .idea
-
-# Prisma
-prisma/migrations

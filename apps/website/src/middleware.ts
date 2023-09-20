@@ -15,7 +15,6 @@ export default function middleware(request: NextRequest) {
       "assets.hcaptcha.com",
       "www.clarity.ms",
       "analytics.umami.is",
-      "cdnjs.cloudflare.com",
       `nonce-${generatedNonce}`
     ],
     "style-src": ["self", "unsafe-inline"],

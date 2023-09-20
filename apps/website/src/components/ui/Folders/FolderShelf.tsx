@@ -41,17 +41,26 @@ export default function FolderShelf({
 
     const resetPosition = () => {
       setFolderWidth(DEFAULT_WIDTH)
-      return
+    }
+
+    const setDraggingTrue = () => {
+      setIsDragging(true)
+    }
+
+    const setDraggingFalse = () => {
+      setIsDragging(false)
     }
 
     resizeArea.addEventListener("dblclick", resetPosition)
 
-    resizeArea.addEventListener("mousedown", () => setIsDragging(true))
-    window.addEventListener("mouseup", () => setIsDragging(false))
+    resizeArea.addEventListener("mousedown", setDraggingTrue)
+    window.addEventListener("mouseup", setDraggingFalse)
 
     return () => {
       window.removeEventListener("mousemove", dragMeDaddy)
       resizeArea.removeEventListener("dblclick", resetPosition)
+      resizeArea.removeEventListener("mousedown", setDraggingTrue)
+      window.removeEventListener("mouseup", setDraggingFalse)
     }
   }, [isDragging, setIsDragging, setFolderWidth])
 

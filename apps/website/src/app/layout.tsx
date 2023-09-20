@@ -1,5 +1,5 @@
+import type { Metadata } from "next"
 import dynamic from "next/dynamic"
-import { Metadata } from "next"
 import { headers } from "next/headers"
 import { Inter, Open_Sans } from "next/font/google"
 import "@myfursona-internal/ui/styles/globals.scss"
@@ -13,7 +13,6 @@ import {
   NoJSReminder,
   SkipNav
 } from "@/components/base"
-import { DEV_CONVERSION_INLINE_SCRIPT } from "@/constants"
 
 config.autoAddCss = false
 
@@ -68,20 +67,10 @@ export default function RootLayout({
     >
       <head>
         <link rel="apple-touch-icon" href="/logo-96x96.png" />
-        <script
-          nonce={nonce}
-          dangerouslySetInnerHTML={{ __html: DEV_CONVERSION_INLINE_SCRIPT }}
-          defer
-        />
-        <script
-          src="https://cdnjs.cloudflare.com/ajax/libs/lazysizes/5.3.2/lazysizes.min.js"
-          defer
-        />
-        <Analytics nonce={nonce} />
       </head>
       <body className="bg-100 text-700 !overflow-x-hidden bg-background prose-headings:font-bold prose-headings:font-inter text-sm font-medium font-open-sans prose-h1:text-5xl prose-h2:text-[2.75rem] prose-h3:text-4xl prose-h4:text-[2rem] prose-h5:text-[1.65rem]">
-        <NoJSReminder />
         <SkipNav />
+        <NoJSReminder />
         {/* Platform announcements sent through the API goes here */}
         <div id="announcements"></div>
         <Providers>
@@ -94,6 +83,7 @@ export default function RootLayout({
           </div>
           <Footer />
         </Providers>
+        <Analytics nonce={nonce} />
       </body>
     </html>
   )
