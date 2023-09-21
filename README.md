@@ -3,7 +3,6 @@
 </div>
 
 <h1 align="center">MyFursona</h1>
-
 <p align="center">
   The <strong>MyFursona</strong> web and desktop client written in Next.js,
   Tailwind CSS, and Tauri.
@@ -11,17 +10,23 @@
 
 ## Contributing
 
-This repo uses Husky hooks that format your code automatically with Prettier
+This repo uses `lint-staged` that format your code automatically with Prettier
 when you push a commit.
+
+If you're having issues when commiting, you can bypass the Husky hooks entirely:
+
+```console
+git commit -m "<COMMIT-MSG>" -n
+```
 
 ### Prerequisites
 
 - Node.js (versions 18 or higher)
 - Yarn
-- [Optional] Rust, for building the standalone desktop client (versions 1.72
+- _[Optional]_ Rust, for building the standalone desktop client (versions 1.72
   or higher)
 
-### Installation
+### Setup and Installation
 
 Fork/clone the repository and install dependencies and run the local dev server
 on the root directory:
@@ -33,6 +38,20 @@ yarn dev
 ```
 
 You can now access http://localhost:3000 on your browser.
+
+For making changes to Stripe and/or PayPal payments, copy the
+`.env.local.example` file from the root directory:
+
+```console
+# For Unix systems or using Git Bash/WSL
+cp .env.local.example ./apps/website/.env.local
+
+# For Windows systems
+copy .env.local.example .\apps\website\.env.local /a
+```
+
+From there, you can provide your own client and secret keys setup to test
+your own environment.
 
 ## Commands
 

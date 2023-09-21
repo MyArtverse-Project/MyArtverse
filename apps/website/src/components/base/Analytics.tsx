@@ -8,7 +8,7 @@ export default function Analytics() {
 
   const devFallback = "owo"
   const umamiId = process.env.UMAMI_ID || devFallback
-  const clarityId = process.env.CLARITY_ID || devFallback
+  const clarityId = process.env.MS_CLARITY_ID || devFallback
 
   return (
     <>

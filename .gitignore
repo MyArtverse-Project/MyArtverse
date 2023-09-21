@@ -8,7 +8,7 @@ node_modules
 
 *.log*
 .env
-.env.*
+.env.local
 !.env.example
 
 # JetBrains stuff

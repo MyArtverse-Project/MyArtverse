@@ -1,8 +1,7 @@
 import { NextResponse } from "next/server"
-import type { NextRequest } from "next/server"
-import { generateCSP } from "./utils"
+import { generateCSP } from "./utils/generateCSP"
 
-export default function middleware(request: NextRequest) {
+export default function middleware() {
   const generatedNonce = Buffer.from(crypto.randomUUID()).toString("base64")
 
   const csp = generateCSP({
@@ -10,6 +9,7 @@ export default function middleware(request: NextRequest) {
     "script-src": [
       "self",
       "unsafe-eval",
+      "strict-dynamic",
       "https:",
       "assets.hcaptcha.com",
       "www.clarity.ms",
@@ -32,20 +32,24 @@ export default function middleware(request: NextRequest) {
       "https://js.stripe.com"
     ],
     "frame-ancestors": ["none"],
-    "img-src": ["self", "data:", "https://c.bing.com", "https://c.clarity.ms"],
+    "img-src": [
+      "self",
+      "data:",
+      "https:",
+      "images.ctfassets.net",
+      "c.bing.com",
+      "c.clarity.ms"
+    ],
     "upgrade-insecure-requests": true
   })
 
   const requestHeaders = new Headers()
+
   requestHeaders.set("Content-Encoding", "br")
   requestHeaders.set("Content-Security-Policy", csp)
   requestHeaders.set("x-nonce", generatedNonce)
-  // This header technically not supported by most browsers
-  // as it's a non-standard, but it's here just for good measure.
-  requestHeaders.set("X-XSS-Protection", "1; mode=block")
 
   const response = NextResponse.next({
-    headers: requestHeaders,
     request: {
       headers: requestHeaders
     }
