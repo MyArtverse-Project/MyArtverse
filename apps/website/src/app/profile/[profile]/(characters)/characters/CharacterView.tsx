@@ -1,8 +1,8 @@
 "use client"
 
-import { useState, useEffect } from "react"
+import { useState } from "react"
 import { CheckCircle2Icon, FolderPlus, XIcon } from "lucide-react"
-import { FolderView, Modal } from "@/components/ui"
+import { FolderView, GridResponsive, Modal } from "@/components/ui"
 import { FursonaCard } from "@/components/ui/Cards"
 import { Button } from "@/components/ui/Buttons"
 import { InputField } from "@/components/ui/Forms"
@@ -49,16 +49,18 @@ export default function CharacterView() {
         <FolderView.Item newItem onClick={toggleCreateFolderModal} />
       </FolderView.Shelf>
       <FolderView.Contents>
-        {[...Array(10)].map((_, i) => (
-          <FursonaCard
-            key={i}
-            name={"Renzo"}
-            img={"/img/hero/renzo-snowglobe.jpg"}
-            species="Raccoon-Fox-Dragon"
-            status="owned"
-            role="listitem"
-          />
-        ))}
+        <GridResponsive breakpoint={250} className="gap-1.5" role="listbox">
+          {[...Array(10)].map((_, i) => (
+            <FursonaCard
+              key={i}
+              name={"Renzo"}
+              img={"/img/hero/renzo-snowglobe.jpg"}
+              species="Raccoon-Fox-Dragon"
+              status="owned"
+              role="listitem"
+            />
+          ))}
+        </GridResponsive>
       </FolderView.Contents>
       <Modal
         state={createFolderModal}

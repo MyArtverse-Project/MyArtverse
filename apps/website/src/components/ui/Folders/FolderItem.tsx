@@ -5,6 +5,7 @@ import clsx from "clsx"
 import { Folder, FolderClosed, FolderOpen, FolderPlus } from "lucide-react"
 import { motion } from "framer-motion"
 import { Button } from "../Buttons"
+import { useScrollBounds } from "@/hooks/useScrollBounds"
 
 export default function FolderItem({
   children,
@@ -53,25 +54,25 @@ export default function FolderItem({
     )
   }
 
+  const { height: collapsibleHeight } = useScrollBounds(collapsibleRef)
+
   useEffect(() => {
-    const collapsibleDiv = collapsibleRef.current
     const toggleButton = toggleButtonRef.current
 
     const handleCollapseState = () => {
       if (!children) return
 
-      setExpandedHeight(collapsibleDiv.scrollHeight)
+      setExpandedHeight(collapsibleHeight)
       return
     }
 
     handleCollapseState()
-
     toggleButton.addEventListener("click", handleCollapseState)
 
     return () => {
       toggleButton.removeEventListener("click", handleCollapseState)
     }
-  }, [children, isExpand])
+  }, [children, isExpand, collapsibleHeight])
 
   return (
     <div

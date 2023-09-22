@@ -11,7 +11,7 @@ import {
   HomeIcon,
   LayoutGridIcon,
   MoreVerticalIcon,
-  ShoppingCartIcon,
+  StoreIcon,
   UserPlusIcon
 } from "lucide-react"
 import { Tabs, SocialsRow, BuiImage } from "@/components/ui"
@@ -93,7 +93,7 @@ export default function ProfileMasthead({
                 loading="eager"
                 src="/img/examples/ozzy/5.png"
                 alt={`Avatar of Username`}
-                sizes="(min-width: 1200px) 200px"
+                sizes="(min-width: 1200px) 800px"
                 className="object-cover"
                 draggable="false"
               />
@@ -105,15 +105,15 @@ export default function ProfileMasthead({
             <div className="flex justify-between">
               <h2 className="text-3xl not-prose font-inter font-bold flex items-center gap-x-1.5">
                 <span>Username</span>
-                <span data-badge-shelf="" aria-hidden></span>
+                <span id="badge-shelf" aria-hidden></span>
               </h2>
-              <div className="flex items-start gap-x-2.5 relative z-0">
+              <div className="flex items-start gap-x-2.5 relative z-2">
                 <Button
                   prefixIcon={<BrushIcon size={20} />}
                   aria-label="View Username's Commissions"
                   variant="secondary"
                 >
-                  Commission ToS
+                  View Commission ToS
                 </Button>
                 <Button
                   prefixIcon={<UserPlusIcon size={20} />}
@@ -145,8 +145,8 @@ export default function ProfileMasthead({
               <span id="user-handle" className="font-semibold text-700">
                 @{handle}
               </span>
-              <span className="inline-flex items-center font-semibold gap-x-1 text-error">
-                <AlertTriangleIcon size={19} />
+              <span className="inline-flex items-center font-semibold gap-x-1 bg-error px-1 text-xs rounded-md">
+                <AlertTriangleIcon size={17} />
                 <span>NSFW</span>
               </span>
               <span id="user-followers" className="text-700">
@@ -184,14 +184,14 @@ export default function ProfileMasthead({
                 link: `/profile/@${handle}/gallery`
               },
               {
+                icon: StoreIcon,
+                text: "Store",
+                link: `/profile/@${handle}/shop`
+              },
+              {
                 icon: BrushIcon,
                 text: "Commissions",
                 link: `/profile/@${handle}/commissions`
-              },
-              {
-                icon: ShoppingCartIcon,
-                text: "Shop",
-                link: `/profile/@${handle}/shop`
               },
               {
                 icon: HeartIcon,

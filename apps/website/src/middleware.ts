@@ -50,9 +50,7 @@ export default function middleware() {
   requestHeaders.set("x-nonce", generatedNonce)
 
   const response = NextResponse.next({
-    request: {
-      headers: requestHeaders
-    }
+    headers: requestHeaders
   })
 
   return response

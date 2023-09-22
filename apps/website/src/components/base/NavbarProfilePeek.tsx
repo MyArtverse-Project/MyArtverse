@@ -9,7 +9,7 @@ import { BuiImage } from "../ui"
 import { Button } from "../ui/Buttons"
 
 export default function NavbarProfilePeek() {
-  const { type, img: peekImg, username, isPeeking } = useDetailPeekContext()
+  const { img: peekImg, username, isPeeking } = useDetailPeekContext()
 
   const pathname = usePathname()
   const handlePeekRoutes =
@@ -23,17 +23,14 @@ export default function NavbarProfilePeek() {
   const peekVariants: Variants = {
     visible: {
       y: 0,
-      opacity: 1,
       pointerEvents: "auto"
     },
     up: {
       y: -30,
-      opacity: 0,
       pointerEvents: "none"
     },
     down: {
       y: 30,
-      opacity: 0,
       pointerEvents: "none"
     }
   }
@@ -48,6 +45,10 @@ export default function NavbarProfilePeek() {
         variants={peekVariants}
         initial={"visible"}
         animate={handlePeekRoutes && !isPeeking ? "up" : "visible"}
+        style={{
+          opacity: handlePeekRoutes && !isPeeking ? 0 : 1,
+          transition: "opacity 150ms ease"
+        }}
         transition={transitionOptions}
         className="absolute top-0"
       >
@@ -69,6 +70,10 @@ export default function NavbarProfilePeek() {
         variants={peekVariants}
         initial={"down"}
         animate={handlePeekRoutes && !isPeeking ? "visible" : "down"}
+        style={{
+          opacity: handlePeekRoutes && !isPeeking ? 1 : 0,
+          transition: "opacity 150ms ease"
+        }}
         transition={transitionOptions}
         className="ml-3.5 flex gap-x-2 items-center"
       >
