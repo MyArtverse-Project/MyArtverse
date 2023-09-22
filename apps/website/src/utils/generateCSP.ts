@@ -44,6 +44,9 @@ export function generateCSP(policy: Policies): string {
           if (value === "unsafe-inline") {
             return `'unsafe-inline'`
           }
+          if (value === "strict-dynamic") {
+            return `'strict-dynamic'`
+          }
           if (value === "unsafe-hashes") {
             return `'unsafe-hashes'`
           }

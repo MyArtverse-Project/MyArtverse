@@ -9,11 +9,11 @@ export default function middleware() {
     "script-src": [
       "self",
       "unsafe-eval",
-      "strict-dynamic",
       "https:",
       "assets.hcaptcha.com",
       "www.clarity.ms",
       "analytics.umami.is",
+      "static.cloudflareinsights.com",
       `nonce-${generatedNonce}`
     ],
     "style-src": ["self", "unsafe-inline"],
@@ -22,6 +22,7 @@ export default function middleware() {
       "https:",
       "assets.hcaptcha.com",
       "api.stripe.com",
+      "static.cloudflareinsights.com",
       "analytics.umami.is",
       "api.umami.is",
       "w.clarity.ms"
