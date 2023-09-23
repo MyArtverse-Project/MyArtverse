@@ -1,5 +1,6 @@
 {
   "github": {
-    "silent": true
-  }
+    "slient": true
+  },
+  "framework": "nextjs"
 }

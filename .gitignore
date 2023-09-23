@@ -1,3 +1,15 @@
+# ---------------------------------------
+#
+#           GLOBAL GITIGNORE
+#
+# ---------------------------------------
 node_modules
-*.log*
 .turbo
+
+*.log*
+.env
+.env.local
+!.env.example
+
+# JetBrains stuff
+.idea

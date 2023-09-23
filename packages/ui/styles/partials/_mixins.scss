@@ -1,0 +1,10 @@
+@mixin theme-variable-sets($theme) {
+  .theme-#{$theme} {
+    @content;
+  }
+  .theme-system {
+    @media (prefers-color-scheme: $theme) {
+      @content;
+    }
+  }
+}

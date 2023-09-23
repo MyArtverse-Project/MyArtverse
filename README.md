@@ -1,41 +1,66 @@
+<div align="center">
+  <img alt="MyFursona cards" src="https://github.com/MyFursona-Project/MyFursona/assets/94678583/0cc5e73f-3197-4170-906b-30a64063569a">
+</div>
+
 <h1 align="center">MyFursona</h1>
-
-> **Note**
-> The project is still work-in-progress and not ready for production yet, so a lot of breaking changes are bound to happen!
-
-_MyFursona_ is an open-source platform where users can keep track of their characters/fursonas, commissions, and adoptables. 
-
-![MyFursona design prototype](https://github.com/MyFursona-Project/MyFursona/assets/94678583/86098e7a-3d4b-414c-8953-931c95e34034)
-
-## Tech stack
-
-- **Nuxt.js** for the user interface
-- **Fastify** powering its REST and GraphQL API
-- **Python** for advanced image and data processing (e.g. profile views, favorites, etc.)
+<p align="center">
+  The <strong>MyFursona</strong> web and desktop client written in Next.js,
+  Tailwind CSS, and Tauri.
+</p>
 
 ## Contributing
 
-### Requirements
+This repo uses `lint-staged` that format your code automatically with Prettier
+when you push a commit.
 
-- Node.js 18 or higher (LTS recommended)
-- Postgres
-- Redis
-- Yarn package manager
-- (Optional) WSL/Git Bash
-
-### Installation
-
-Clone the repository and install dependencies
+If you're having issues when commiting, you can bypass the Husky hooks entirely:
 
 ```console
-yarn install
+git commit -m "<COMMIT-MSG>" -n
 ```
 
-Start a local dev server
+### Prerequisites
+
+- Node.js (versions 18 or higher)
+- Yarn
+- _[Optional]_ Rust, for building the standalone desktop client (versions 1.72
+  or higher)
+
+### Setup and Installation
+
+Fork/clone the repository and install dependencies and run the local dev server
+on the root directory:
+
 ```console
-yarn dev:web
+git clone https://github.com/MyFursona-Project/MyFursona.git
+yarn
+yarn dev
 ```
+
+You can now access http://localhost:3000 on your browser.
+
+For making changes to Stripe and/or PayPal payments, copy the
+`.env.local.example` file from the root directory:
+
+```console
+# For Unix systems or using Git Bash/WSL
+cp .env.local.example ./apps/website/.env.local
+
+# For Windows systems
+copy .env.local.example .\apps\website\.env.local /a
+```
+
+From there, you can provide your own client and secret keys setup to test
+your own environment.
+
+## Commands
+
+- `yarn dev` - Serves a running web app on your local machine
+- `yarn dev:client` - Opens a desktop client, will require Rust
+- `yarn build` - Builds the web app with Turborepo and caches it on Vercel
+- `yarn build:client` - Builds and bundles the desktop app for production
+- `yarn build:all` - Builds both the web and desktop clients
 
 ## License
 
-MIT
+Apache-2.0 © Fusky Labs Software

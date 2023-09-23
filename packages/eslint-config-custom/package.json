@@ -1,0 +1,8 @@
+{
+  "name": "@myfursona-internal/eslint-config-custom",
+  "version": "0.0.0",
+  "private": true,
+  "devDependencies": {
+    "eslint-config-turbo": "^1.10.12"
+  }
+}

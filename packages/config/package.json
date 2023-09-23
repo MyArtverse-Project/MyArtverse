@@ -1,0 +1,10 @@
+{
+  "name": "@myfursona-internal/config",
+  "version": "0.0.0",
+  "private": true,
+  "license": "Apache-2.0",
+  "dependencies": {
+    "next": "^13.4.19",
+    "tailwindcss": "^3.3.3"
+  }
+}

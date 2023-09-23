@@ -1,3 +1,25 @@
-.nuxt
+# Dev folders
+.next
+
+# Build folders
+.turbo
 .output
 dist
+config
+out
+
+# PWA
+workbox-*.js
+worker-*.js
+sw.js.map
+workbox-*.js.map
+worker-*.js.map
+
+# Tauri-specific
+target
+
+vercel.json
+turbo.json
+
+# Format stuff from `packages` dir
+!packages/*

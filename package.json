@@ -2,24 +2,34 @@
   "name": "myfursona",
   "private": true,
   "version": "0.0.0",
-  "license": "MIT",
+  "license": "Apache-2.0",
+  "homepage": "https://github.com/MyFursona-Project/MyFursona",
   "workspaces": [
-    "website",
-    "api"
+    "apps/*",
+    "packages/*"
   ],
   "scripts": {
-    "postinstall": "cd website && nuxt prepare",
-    "dev:web": "turbo dev --filter=website",
-    "build:web": "turbo build --filter=website",
-    "dev:api": "turbo dev --filter=api",
-    "build:api": "turbo build --filter=api",
-    "build": "turbo build",
+    "dev": "turbo dev --filter=website --no-daemon",
+    "dev:client": "cd apps/client && yarn tauri dev",
+    "build": "turbo build --filter=website",
+    "build:client": "cd apps/client && yarn tauri build",
+    "build:all": "concurrently -n web,desktop \"yarn turbo build\" \"yarn build:client\"",
     "prettier:check": "prettier --check .",
-    "prettier:write": "prettier --write ."
+    "prettier:write": "prettier --write .",
+    "prepare": "husky install"
   },
   "devDependencies": {
-    "prettier": "^2.8.3",
-    "turbo": "^1.8.8"
+    "@turbo/gen": "^1.10.13",
+    "concurrently": "^8.2.1",
+    "husky": "^8.0.0",
+    "lint-staged": "^14.0.1",
+    "prettier": "^3.0.3",
+    "turbo": "^1.10.13"
+  },
+  "lint-staged": {
+    "apps/**": "yarn prettier:write",
+    "packages/**": "yarn prettier:write",
+    "*.md": "yarn prettier:write"
   },
   "engines": {
     "node": ">= 18.0.0",
