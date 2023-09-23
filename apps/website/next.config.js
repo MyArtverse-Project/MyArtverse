@@ -11,10 +11,6 @@ const withPWA = require("next-pwa")({
 const nextConfig = {
   ...shared,
   transpilePackages: ["lodash"],
-  images: {
-    dangerouslyAllowSVG: true,
-    contentDispositionType: "attachment"
-  },
   async rewrites() {
     return [
       {

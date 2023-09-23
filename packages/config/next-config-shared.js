@@ -5,5 +5,9 @@ module.exports = {
   experimental: {
     typedRoutes: true,
     mdxRs: true
+  },
+  images: {
+    dangerouslyAllowSVG: true,
+    contentDispositionType: "attachment"
   }
 }
