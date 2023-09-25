@@ -21,6 +21,7 @@ export default function FolderShelf({
   const folderViewRef = useRef<HTMLDivElement | null>(null)
 
   const DEFAULT_WIDTH = 270
+  const MAX_WIDTH = 375
 
   useEffect(() => {
     const resizeArea = resizableRef.current
@@ -64,11 +65,11 @@ export default function FolderShelf({
     }
   }, [isDragging, setIsDragging, setFolderWidth])
 
-  const expandThreshold = folderWidth > 375
+  const expandThreshold = folderWidth > MAX_WIDTH
 
   const handleExpandDetails = () => {
     if (!expandThreshold) {
-      setFolderWidth(376)
+      setFolderWidth(MAX_WIDTH + 1)
       return
     }
 
