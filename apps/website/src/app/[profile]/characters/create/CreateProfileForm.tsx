@@ -57,9 +57,33 @@ export default function CreateCharacterForm() {
               value={name}
               onChange={(e) => setName(e.target.value)}
             />
-            {/* TODO: SELECT MENU COMPONENT FOR PRONOUNS */}
-            {/* TODO: SELECT MENU COMPONENT FOR SPECIES */}
-            {/* TODO: SELECT MENU COMPONENT FOR VISIBILTY */}
+            <select name="pronouns">
+              <option value="hehim">He/Him</option>
+              <option value="sheher">She/Her</option>
+              <option value="theythem">They/Them</option>
+            </select>
+            <select name="Species" id="species">
+              <option value="wolf">Wolf</option>
+              <option value="fox">Fox</option>
+              <option value="cat">Cat</option>
+              <option value="dog">Dog</option>
+              <option value="bear">Bear</option>
+              <option value="tiger">Tiger</option>
+              <option value="lion">Lion</option>
+              <option value="rabbit">Rabbit</option>
+              <option value="deer">Deer</option>
+              <option value="horse">Horse</option>
+              <option value="dragon">Dragon</option>
+              <option value="bird">Bird</option>
+              <option value="dolphin">Dolphin</option>
+              <option value="otter">Otter</option>
+              <option value="squirrel">Squirrel</option>
+              <option value="elephant">Elephant</option>
+            </select>
+            <select name="visibility" id="visibility">
+              <option value="public">Public</option>
+              <option value="private">Private</option>
+            </select>
           </Fieldset>
           <Fieldset
             heading="Details"
