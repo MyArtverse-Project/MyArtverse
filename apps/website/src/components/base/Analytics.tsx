@@ -1,14 +1,12 @@
 import Script from "next/script"
 import { headers } from "next/headers"
 import dedent from "dedent"
-import { DEV_CONVERSION_INLINE_SCRIPT } from "@/constants"
 
 export default function Analytics() {
   const nonce = headers().get("x-nonce")
 
-  const devFallback = "owo"
-  const umamiId = process.env.UMAMI_ID || devFallback
-  const clarityId = process.env.MS_CLARITY_ID || devFallback
+  const umamiId = process.env.UMAMI_ID || ""
+  const clarityId = process.env.MS_CLARITY_ID || ""
 
   return (
     <>
@@ -34,18 +32,11 @@ export default function Analytics() {
             `
         }}
       />
-      <Script
+      {/* <Script
         nonce={nonce}
         strategy="beforeInteractive"
         src="https://cdnjs.cloudflare.com/ajax/libs/lazysizes/5.3.2/lazysizes.min.js"
-      />
-      <Script
-        id="owo-whats-this"
-        strategy="beforeInteractive"
-        nonce={nonce}
-        dangerouslySetInnerHTML={{ __html: DEV_CONVERSION_INLINE_SCRIPT }}
-        defer
-      />
+      /> */}
     </>
   )
 }

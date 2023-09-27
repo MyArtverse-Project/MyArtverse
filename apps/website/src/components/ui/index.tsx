@@ -5,6 +5,7 @@ import MarginClamp from "./MarginClamp"
 import EmptySection from "./EmptySection"
 import Group from "./Group"
 import Fieldset from "./Fieldset"
+import Field from "./Field"
 import SocialsRow from "./SocialsRow"
 import Tabs from "./Tabs"
 import Switch from "./Switch"
@@ -29,5 +30,6 @@ export {
   Carousel,
   MarginClamp,
   GridResponsive,
-  Group
+  Group,
+  Field
 }

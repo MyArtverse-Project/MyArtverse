@@ -1,14 +1,15 @@
 {
+  "$schema": "https://json.schemastore.org/web-manifest-combined.json",
   "name": "MyFursona",
   "short_name": "MyFursona",
   "start_url": "/login",
   "display": "standalone",
   "description": "An open source platform for your fursonas, commissions, and adopts!",
   "lang": "en",
-  "dir": "auto",
+  "dir": "ltr",
   "theme_color": "#080313",
   "background_color": "#080313",
-  "orientation": "any",
+  "orientation": "portrait",
   "icons": [
     {
       "src": "img/icon_192x192-colored.png",

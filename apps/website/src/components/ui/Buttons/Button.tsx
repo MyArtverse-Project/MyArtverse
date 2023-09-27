@@ -37,7 +37,7 @@ const Button = forwardRef(
       "flex items-center gap-x-1.5 rounded-md transition-[border,background-color] border border-[2px]"
 
     const sizes: ButtonSizesRecord = {
-      small: !iconOnly ? "px-1.5 py-1" : "p-1.5",
+      small: !iconOnly ? "px-2.5 py-1" : "p-1.5",
       big: !iconOnly ? "px-4 py-2" : "p-2"
     }
 

@@ -4,7 +4,7 @@ export default function GroupContents({
   children?: React.ReactNode
 }) {
   return (
-    <div
+    <section
       /**
        * This attr is for when users customize their profiles by assigning
        * a letter and a number
@@ -13,9 +13,9 @@ export default function GroupContents({
        */
       data-group-placement="l5"
       id="group-wrapper"
-      className="grid grid-cols-[minmax(0,1fr)_auto] grid-rows-[auto_1fr]"
+      className="grid grid-cols-[minmax(0,1fr)_auto] grid-rows-[auto_1fr] gap-x-2.5 gap-y-3"
     >
-      <h3>{children}</h3>
-    </div>
+      {children}
+    </section>
   )
 }
