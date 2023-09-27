@@ -10,15 +10,6 @@
 
 ## Contributing
 
-This repo uses `lint-staged` that format your code automatically with Prettier
-when you push a commit.
-
-If you're having issues when commiting, you can bypass the Husky hooks entirely:
-
-```console
-git commit -m "<COMMIT-MSG>" -n
-```
-
 ### Prerequisites
 
 - Node.js (versions 18 or higher)
@@ -33,25 +24,39 @@ on the root directory:
 
 ```console
 git clone https://github.com/MyFursona-Project/MyFursona.git
+cd MyFursona
 yarn
 yarn dev
 ```
 
 You can now access http://localhost:3000 on your browser.
 
-For making changes to Stripe and/or PayPal payments, copy the
-`.env.local.example` file from the root directory:
+It's also recommended to copy the `.env` file on root (i.e. For making changes
+to Stripe and/or PayPal payments), copy the `.env.local.example` file from the
+root directory:
 
 ```console
 # For Unix systems or using Git Bash/WSL
-cp .env.local.example ./apps/website/.env.local
+cp .env.local.example .env.local
 
 # For Windows systems
-copy .env.local.example .\apps\website\.env.local /a
+copy .env.local.example .\.env.local /a
 ```
 
 From there, you can provide your own client and secret keys setup to test
 your own environment.
+
+### Troubleshooting
+
+This repo uses `lint-staged` that format your code automatically with Prettier
+when you push a commit.
+
+Sometimes, `lint-staged` will fail for one reason or another and if you're
+having issues when commiting, you can bypass Git hooks entirely:
+
+```console
+git commit -m "<COMMIT-MSG>" -n
+```
 
 ## Commands
 

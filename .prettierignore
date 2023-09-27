@@ -18,7 +18,6 @@ worker-*.js.map
 # Tauri-specific
 target
 
-vercel.json
 turbo.json
 
 # Format stuff from `packages` dir

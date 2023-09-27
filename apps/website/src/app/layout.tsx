@@ -1,7 +1,7 @@
 import type { Metadata } from "next"
 import dynamic from "next/dynamic"
 import { Inter, Open_Sans } from "next/font/google"
-import "biro-ui/styles/globals.scss"
+import "@myfursona/biro-ui/styles/globals.scss"
 import "@fortawesome/fontawesome-svg-core/styles.css"
 import { config } from "@fortawesome/fontawesome-svg-core"
 import Providers from "@/context"
