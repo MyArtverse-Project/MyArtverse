@@ -11,9 +11,7 @@ import { Button } from "../ui/Buttons"
 export default function NavbarProfilePeek() {
   const { img: peekImg, username, isPeeking } = useDetailPeekContext()
 
-  const pathname = usePathname()
-  const handlePeekRoutes =
-    pathname.includes("/profile") || pathname.includes("/character")
+  const handlePeekRoutes = usePathname().includes("/@")
 
   const transitionOptions: AnimationProps["transition"] = {
     type: "spring",

@@ -1,6 +1,4 @@
-export {}
-
-interface Profile {
+type Profile = Partial<{
   uuid: any
   name: string
   handle: string
@@ -14,24 +12,28 @@ interface Profile {
     name: string
     species: string
   }>
-}
+}>
+
+type Character = Partial<{
+  name: string
+  species: string
+  isHybrid: boolean
+  adopted: boolean
+  adoptedFrom: Partial<Omit<Profile, "characters">>
+  colorPalette: Array<{
+    name: string
+    color: string
+  }>
+}>
 
 declare global {
   interface Window {
     MyFursona: {
-      version?: string
-      profileDebug?: Partial<Profile>
-      characterDebug?: Partial<{
-        name: string
-        species: string
-        isHybrid: boolean
-        adopted: boolean
-        adoptedFrom: Partial<Omit<Profile, "characters">>
-        colorPalette: Array<{
-          name: string
-          color: string
-        }>
-      }>
+      __myfursona_version?: string
+      profileDebug?: Profile
+      characterDebug?: Character
     }
   }
 }
+
+export {}

@@ -1327,6 +1327,13 @@
   dependencies:
     hi-base32 "^0.5.0"
 
+"@quentin-sommer/react-useragent@^3.2.0":
+  version "3.2.0"
+  resolved "https://registry.yarnpkg.com/@quentin-sommer/react-useragent/-/react-useragent-3.2.0.tgz#76e235d55d3c2610277e4fa42e8bbb6d862cbf2d"
+  integrity sha512-4ZCL6AZp5p4vtZv+2cE//aGRv0OCUaoa/YgNya4aJbNXRRJdHN8ZvB+sb7EpyylbkqW9MukFXBf51/V3iT3I7g==
+  dependencies:
+    ua-parser-js "^0.7.20"
+
 "@rollup/plugin-babel@^5.2.0":
   version "5.3.1"
   resolved "https://registry.yarnpkg.com/@rollup/plugin-babel/-/plugin-babel-5.3.1.tgz#04bc0608f4aa4b2e4b1aebf284344d0f68fda283"
@@ -5173,11 +5180,6 @@ mkdirp@^0.5.1:
   dependencies:
     minimist "^1.2.6"
 
-mobile-detect@^1.3.6:
-  version "1.4.5"
-  resolved "https://registry.yarnpkg.com/mobile-detect/-/mobile-detect-1.4.5.tgz#da393c3c413ca1a9bcdd9ced653c38281c0fb6ad"
-  integrity sha512-yc0LhH6tItlvfLBugVUEtgawwFU2sIe+cSdmRJJCTMZ5GEJyLxNyC/NIOAOGk67Fa8GNpOttO3Xz/1bHpXFD/g==
-
 mri@^1.1.0:
   version "1.2.0"
   resolved "https://registry.yarnpkg.com/mri/-/mri-1.2.0.tgz#6721480fec2a11a4889861115a48b6cbe7cc8f0b"
@@ -5900,13 +5902,6 @@ react-quill@^2.0.0:
     "@types/quill" "^1.3.10"
     lodash "^4.17.4"
     quill "^1.3.7"
-
-react-useragent@^1.1.2:
-  version "1.1.2"
-  resolved "https://registry.yarnpkg.com/react-useragent/-/react-useragent-1.1.2.tgz#7fcdaf0d0269cac9f8ffc4b728157100c17c2415"
-  integrity sha512-yJK8nb3keAeDtr4TF+seROKMDrrOW+XEMPCVkDPzxROJi211Qj8jVz23R/bqUcPwvwL3TYihfUctMt1vzh/DPw==
-  dependencies:
-    mobile-detect "^1.3.6"
 
 react@18.2.0, react@^18.2.0:
   version "18.2.0"
@@ -6941,6 +6936,11 @@ typescript@5.1.6:
   version "5.1.6"
   resolved "https://registry.yarnpkg.com/typescript/-/typescript-5.1.6.tgz#02f8ac202b6dad2c0dd5e0913745b47a37998274"
   integrity sha512-zaWCozRZ6DLEWAWFrVDz1H6FVXzUSfTy5FUMWsQlU8Ym5JP9eO4xkTIROFCQvhQf61z6O/G6ugw3SgAnvvm+HA==
+
+ua-parser-js@^0.7.20:
+  version "0.7.36"
+  resolved "https://registry.yarnpkg.com/ua-parser-js/-/ua-parser-js-0.7.36.tgz#382c5d6fc09141b6541be2cae446ecfcec284db2"
+  integrity sha512-CPPLoCts2p7D8VbybttE3P2ylv0OBZEAy7a12DsulIEcAiMtWJy+PBgMXgWDI80D5UwqE8oQPHYnk13tm38M2Q==
 
 uglify-js@^3.1.4:
   version "3.17.4"

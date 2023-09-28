@@ -1,6 +1,12 @@
 const shared = require("@myfursona-internal/config/next-config-shared")
 
-const withMDX = require("@next/mdx")()
+const withMDX = require("@next/mdx")({
+  options: {
+    extension: /\.mdx?$/,
+    providerImportSource: "@mdx-js/react"
+  }
+})
+
 const withPWA = require("next-pwa")({
   dest: "public",
   register: true,
@@ -14,11 +20,11 @@ const nextConfig = {
   async rewrites() {
     return [
       {
-        source: "/profile/@:username",
+        source: "/@:username",
         destination: "/profile/:username"
       },
       {
-        source: "/profile/@:username/:path*",
+        source: "/@:username/:path*",
         destination: "/profile/:username/:path*"
       }
     ]
@@ -33,4 +39,7 @@ const nextConfig = {
   }
 }
 
-module.exports = withMDX(withPWA(nextConfig))
+module.exports = withMDX({
+  pageExtensions: ["js", "jsx", "ts", "tsx", "md", "mdx"],
+  ...withPWA(nextConfig)
+})

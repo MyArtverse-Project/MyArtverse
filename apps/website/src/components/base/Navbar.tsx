@@ -11,7 +11,11 @@ import {
   AlbumIcon,
   FileLockIcon,
   ContrastIcon,
-  LucideIcon
+  LucideIcon,
+  AccessibilityIcon,
+  LanguagesIcon,
+  HelpCircleIcon,
+  MessageSquarePlusIcon
 } from "lucide-react"
 import { toLower } from "lodash"
 import { Menu } from "@headlessui/react"
@@ -45,12 +49,12 @@ export default function Navbar() {
 
   const siteSettingsItems: ItemIterator = [
     { icon: ContrastIcon, name: "Change theme" },
-    { icon: ContrastIcon, name: "Language" },
+    { icon: LanguagesIcon, name: "Language" },
     { icon: ContrastIcon, name: "Filter content settings" },
+    { icon: AccessibilityIcon, name: "Accessibility" },
     {},
-    { icon: ContrastIcon, name: "Help" },
-    {},
-    { icon: ContrastIcon, name: "Send feedback" }
+    { icon: HelpCircleIcon, name: "Help" },
+    { icon: MessageSquarePlusIcon, name: "Send feedback" }
   ]
 
   const pathname = usePathname()

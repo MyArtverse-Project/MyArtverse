@@ -14,8 +14,6 @@
     "build": "turbo build --filter=website",
     "build:client": "cd apps/client && yarn tauri build",
     "build:all": "concurrently -n web,desktop \"yarn turbo build\" \"yarn build:client\"",
-    "prettier:check": "prettier --check .",
-    "prettier:write": "prettier --write .",
     "prepare": "husky install"
   },
   "devDependencies": {
@@ -28,9 +26,9 @@
     "turbo": "^1.10.13"
   },
   "lint-staged": {
-    "apps/**": "yarn prettier:write",
-    "packages/**": "yarn prettier:write",
-    "*.md": "yarn prettier:write"
+    "apps/**": "yarn prettier --write .",
+    "packages/**": "yarn prettier --write .",
+    "*.md": "yarn prettier --write ."
   },
   "engines": {
     "node": ">= 18.0.0",

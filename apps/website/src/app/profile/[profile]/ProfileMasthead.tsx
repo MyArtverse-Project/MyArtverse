@@ -49,6 +49,7 @@ export default function ProfileMasthead({
     setPeek.username(handle)
 
     window.MyFursona = {
+      __myfursona_version: "0.0.1",
       profileDebug: {
         uuid: "null",
         name: "username",
@@ -180,33 +181,33 @@ export default function ProfileMasthead({
               {
                 icon: HomeIcon,
                 text: "Overview",
-                link: `/profile/@${handle}`
+                link: `/@${handle}`
               },
               {
                 icon: CatIcon,
                 text: "Characters",
-                link: `/profile/@${handle}/characters`,
+                link: `/@${handle}/characters`,
                 countIndicator: 5
               },
               {
                 icon: LayoutGridIcon,
                 text: "Gallery",
-                link: `/profile/@${handle}/gallery`
+                link: `/@${handle}/gallery`
               },
               {
                 icon: StoreIcon,
-                text: "Store",
-                link: `/profile/@${handle}/shop`
+                text: "Shop",
+                link: `/@${handle}/shop`
               },
               {
                 icon: BrushIcon,
                 text: "Commissions",
-                link: `/profile/@${handle}/commissions`
+                link: `/@${handle}/commissions`
               },
               {
                 icon: HeartIcon,
                 text: "Favorites",
-                link: `/profile/@${handle}/favorites`,
+                link: `/@${handle}/favorites`,
                 countIndicator: 69
               }
             ]}
