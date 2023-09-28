@@ -14,7 +14,7 @@ import BuiImage from "./BuiImage"
 import GridResponsive from "./GridResponsive"
 import FolderView from "./Folders"
 import Carousel from "./Carousel"
-
+import Comment from "./Group/Comment"
 export {
   BuiImage,
   BuiLink,
@@ -31,5 +31,6 @@ export {
   MarginClamp,
   GridResponsive,
   Group,
+  Comment,
   Field
 }

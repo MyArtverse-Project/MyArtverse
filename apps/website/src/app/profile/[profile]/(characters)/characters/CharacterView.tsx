@@ -51,11 +51,16 @@ export default function CharacterView() {
       <FolderView.Contents>
         <PinnedCharacter
           artist="Ratking"
-          characterColors={[{ color: "cyan", name: "cyan" }, { color: "yellow", name: "yellow" }, { color: "purple", name: "purple" }, { color: "white", name: "white" }]}
-          characterImage="/img/hero/renzo-snowglobe.jpg"
-          characterName="Kuroji"
-          characterSpecies="Raccoon-Fox-Dragon"
-          refSheetImage="/img/examples/kuro/kuro-refsheet.png"
+          colors={[
+            { color: "cyan", name: "cyan" },
+            { color: "yellow", name: "yellow" },
+            { color: "purple", name: "purple" },
+            { color: "white", name: "white" }
+          ]}
+          avatar="/img/hero/renzo-snowglobe.jpg"
+          name="Kuroji"
+          species="Raccoon-Fox-Dragon"
+          refSheetImg="/img/examples/kuro/kuro-refsheet.png"
         />
         <GridResponsive breakpoint={250} className="gap-1.5" role="listbox">
           {[...Array(10)].map((_, i) => (

@@ -1,9 +1,8 @@
 "use client"
 
-import { useEffect, useContext } from "react"
+import { useEffect } from "react"
 import dynamic from "next/dynamic"
 import clsx from "clsx"
-import { UAContext } from "@quentin-sommer/react-useragent"
 
 const Portal = dynamic(() => import("./Portal"), { ssr: false })
 
@@ -16,28 +15,17 @@ export default function Overlay({
   state?: unknown
   toggler?: React.Dispatch<React.SetStateAction<boolean>>
 }) {
-  const { parser } = useContext(UAContext)
   useEffect(() => {
     const bodyStyle = document.body.style
 
-    const browser = parser.getBrowser()
-    const isChrome = browser.name === "Brave" || browser.name === "Chrome"
-
     if (!state) {
       bodyStyle.overflowY = "auto"
-      if (isChrome) {
-        bodyStyle.marginRight = "0px"
-      }
       return
     }
 
     bodyStyle.overflowY = "hidden"
-
-    if (isChrome) {
-      bodyStyle.marginRight = "13px"
-    }
     return
-  }, [state, parser])
+  }, [state])
 
   return (
     <Portal>
