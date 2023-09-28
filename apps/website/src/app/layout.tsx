@@ -55,9 +55,9 @@ export const metadata: Metadata = {
   },
   robots: "noai, noimageai, noindex, nofollow",
   manifest: "/manifest.json",
-  themeColor: "#7300ff",
+  themeColor: "#9e00ff",
   other: {
-    "apple-mobile-web-app-status-bar": "#7300ff",
+    "apple-mobile-web-app-status-bar": "#9e00ff",
     copyright: "Fusky Labs Software"
   }
 }
@@ -77,6 +77,7 @@ export default function RootLayout({
         <link rel="preconnect" href="https://api.myfursona.art/" />
         <link rel="preconnect" href="https://i-r2.myfursona.art/" />
         <link rel="preconnect" href="https://images.ctfassets.net/" />
+        <link rel="mask-icon" href="./safari-pinned-tab.svg" color="9e00ff" />
       </head>
       <body className="bg-100 text-700 !overflow-x-hidden bg-background prose-headings:font-bold prose-headings:font-inter text-sm font-medium font-open-sans prose-h1:text-5xl prose-h2:text-[2.75rem] prose-h3:text-4xl prose-h4:text-[2rem] prose-h5:text-[1.65rem]">
         <SkipNav />
@@ -88,7 +89,7 @@ export default function RootLayout({
             <Navbar />
             <Sidebar />
           </header>
-          <div id="skip-navigation" className="min-h-[calc(100dvh-4rem)]">
+          <div id="skip-navigation" className="min-h-[calc(100dvh-3.75rem)]">
             {children}
           </div>
           <Footer />
