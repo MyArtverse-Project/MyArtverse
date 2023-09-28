@@ -177,37 +177,38 @@ export default function ProfileMasthead({
       <div className="sticky top-[3.75rem] z-[3] bg-100 overflow-x-auto">
         <div className="max-w-screen-2xl mx-auto px-9">
           <Tabs
+            baseURL={`/@${handle}`}
             items={[
               {
                 icon: HomeIcon,
                 text: "Overview",
-                link: `/@${handle}`
+                link: `/`
               },
               {
                 icon: CatIcon,
                 text: "Characters",
-                link: `/@${handle}/characters`,
+                link: `/characters`,
                 countIndicator: 5
               },
               {
                 icon: LayoutGridIcon,
                 text: "Gallery",
-                link: `/@${handle}/gallery`
+                link: `/gallery`
               },
               {
                 icon: StoreIcon,
                 text: "Shop",
-                link: `/@${handle}/shop`
+                link: `/shop`
               },
               {
                 icon: BrushIcon,
                 text: "Commissions",
-                link: `/@${handle}/commissions`
+                link: `/commissions`
               },
               {
                 icon: HeartIcon,
                 text: "Favorites",
-                link: `/@${handle}/favorites`,
+                link: `/favorites`,
                 countIndicator: 69
               }
             ]}

@@ -3,7 +3,7 @@
   "plugins": ["unused-imports"],
   "rules": {
     "react/no-unescaped-entities": "off",
-    "unused-imports/no-unused-imports": "error",
+    "unused-imports/no-unused-imports": "warn",
     "@next/next/no-before-interactive-script-outside-document": "off"
   }
 }

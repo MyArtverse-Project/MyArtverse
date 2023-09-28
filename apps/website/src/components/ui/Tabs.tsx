@@ -8,14 +8,17 @@ import type { LucideIcon } from "lucide-react"
 import type { PartialArray } from "@/types"
 
 export default function Tabs({
+  baseURL = "/",
   items
 }: {
+  baseURL?: string
   items: PartialArray<{
     text: string
     link: string
     active: boolean
     icon: LucideIcon
     countIndicator: number
+    isNew: boolean
   }>
 }) {
   const pathname = usePathname()
@@ -27,12 +30,12 @@ export default function Tabs({
           key={i}
           prefetch
           id="tab-link"
-          href={link as any}
+          href={`${baseURL}${link}` as any}
           className={clsx(
             "flex items-center px-4 py-2 transition-colors rounded-md gap-x-2 group relative before:absolute before:left-0 before:right-0 before:-bottom-2 before:block before:h-0.5",
             pathname === link
               ? "text-500 hover:bg-200 before:bg-500"
-              : "hover:bg-200"
+              : "hover:bg-300"
           )}
           aria-label={
             !countIndicator ? text : `${text}, ${countIndicator} items`

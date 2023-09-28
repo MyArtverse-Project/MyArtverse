@@ -92,17 +92,6 @@ export default function Footer() {
                 MyFursona Status
               </BuiLink>
             </div>
-            <div className="inline-flex gap-x-2">
-              <span>{version}</span>
-              {!commitHashEnv ? null : (
-                <Link
-                  className="underline text-subtext hover:text-500"
-                  href={`https://github.com/MyFursona-Project/MyFursona/commit/${commitHash}`}
-                >
-                  {commitHash}
-                </Link>
-              )}
-            </div>
           </div>
           <div className="sm:text-left text-center grid grid-cols-2 md:grid-cols-2 lg:grid-cols-3 gap-4 md:mt-5">
             {FOOTER_ITEMS.map(({ heading, links }, index) => (
@@ -118,17 +107,31 @@ export default function Footer() {
             {`MyFursona is an open source project licensed under Apache License 2.0.
              © 2022-${new Date().getFullYear()} Fusky Labs Software Ltd.`}
           </p>
-          <p
-            className="flex justify-center items-center flex-wrap"
-            aria-label="Made with love by the MyFursona contributors"
-          >
-            {"Made with"}
-            <HeartIcon size={16} className="mx-1 text-500" />
-            by&nbsp;
-            <BuiLink href="https://github.com/MyFursona-Project/MyFursona/graphs/contributors">
-              the MyFursona contributors!
-            </BuiLink>
-          </p>
+          <div className="mb-4 mt-0 inline-flex gap-x-4 flex-wrap">
+            {!commitHashEnv ? (
+              <span aria-hidden>Development</span>
+            ) : (
+              <Link
+                className="underline text-subtext hover:text-blue-400"
+                href={`https://github.com/MyFursona-Project/MyFursona/commit/${commitHash}`}
+                aria-hidden
+              >
+                {commitHash}
+              </Link>
+            )}
+            <span aria-hidden>{version}</span>
+            <p
+              className="!my-0 flex justify-center items-center flex-wrap"
+              aria-label="Made with love by the MyFursona contributors"
+            >
+              {"Made with"}
+              <HeartIcon size={16} className="mx-1 text-500" />
+              by&nbsp;
+              <BuiLink href="https://github.com/MyFursona-Project/MyFursona/graphs/contributors">
+                the MyFursona contributors!
+              </BuiLink>
+            </p>
+          </div>
         </section>
       </footer>
       <FooterGradient />
