@@ -13,3 +13,7 @@ node_modules
 
 # JetBrains stuff
 .idea
+
+# Mac OS
+
+.DS_Store
