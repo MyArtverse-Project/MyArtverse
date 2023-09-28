@@ -3,7 +3,7 @@
 import { useState } from "react"
 import { CheckCircle2Icon, FolderPlus, XIcon } from "lucide-react"
 import { FolderView, GridResponsive, Modal } from "@/components/ui"
-import { FursonaCard } from "@/components/ui/Cards"
+import { FursonaCard, PinnedCharacter } from "@/components/ui/Cards"
 import { Button } from "@/components/ui/Buttons"
 import { InputField } from "@/components/ui/Forms"
 import clsx from "clsx"
@@ -49,6 +49,14 @@ export default function CharacterView() {
         <FolderView.Item newItem onClick={toggleCreateFolderModal} />
       </FolderView.Shelf>
       <FolderView.Contents>
+        <PinnedCharacter
+          artist="Ratking"
+          characterColors={[{ color: "cyan", name: "cyan" }, { color: "yellow", name: "yellow" }, { color: "purple", name: "purple" }, { color: "white", name: "white" }]}
+          characterImage="/img/hero/renzo-snowglobe.jpg"
+          characterName="Kuroji"
+          characterSpecies="Raccoon-Fox-Dragon"
+          refSheetImage="/img/examples/kuro/kuro-refsheet.png"
+        />
         <GridResponsive breakpoint={250} className="gap-1.5" role="listbox">
           {[...Array(10)].map((_, i) => (
             <FursonaCard
