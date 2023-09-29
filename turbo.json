@@ -1,14 +1,24 @@
 {
   "$schema": "https://turbo.build/schema.json",
-  "globalDotEnv": [".env"],
+  "globalDotEnv": [".env", ".env.local"],
+  "globalEnv": [
+    "NODE_ENV",
+    "UMAMI_ID",
+    "MS_CLARITY_ID",
+    "PAYPAL_CLIENT_SECRET",
+    "STRIPE_SECRET_KEY",
+    "NEXT_PUBLIC_VERCEL_GIT_COMMIT_SHA",
+    "NEXT_PUBLIC_PAYPAL_CLIENT_ID",
+    "NEXT_PUBLIC_STRIPE_PUBLISHABLE_KEY"
+  ],
   "pipeline": {
     "dev": {
-      "dotEnv": [".env.development.local", ".env.local", ".env.development", ".env"],
+      "dotEnv": [".env.development.local", ".env.development", ".env"],
       "cache": false,
       "persistent": true
     },
     "build": {
-      "dotEnv": [".env.production.local", ".env.local", ".env.production", ".env"],
+      "dotEnv": [".env.production.local", ".env.production", ".env"],
       "dependsOn": ["^build"],
       "outputs": [".next/**", "!.next/cache/**"]
     },
@@ -16,7 +26,7 @@
       "dependsOn": ["^lint"]
     },
     "deploy": {
-      "dotEnv": [".env.production.local", ".env.local", ".env.production", ".env"],
+      "dotEnv": [".env.production.local", ".env.production", ".env"],
       "dependsOn": ["lint", "build"]
     }
   }
