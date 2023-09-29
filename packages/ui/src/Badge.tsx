@@ -1,6 +1,7 @@
+import * as React from "react"
 import type { LucideIcon } from "lucide-react"
 
-export default function Badge({
+export function Badge({
   prefixIcon,
   text,
   variants,
@@ -12,7 +13,7 @@ export default function Badge({
   text?: string
 }) {
   return (
-    <div data-badge="">
+    <div id="badge">
       {prefixIcon}
       {text}
     </div>

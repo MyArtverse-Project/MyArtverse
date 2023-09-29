@@ -9,18 +9,22 @@ config
 out
 
 # PWA
+sw.js
 workbox-*.js
 worker-*.js
 sw.js.map
+workbox-*.js
 workbox-*.js.map
 worker-*.js.map
 
+# Why tf would Prettier format binary files?
 *.ico
+*.png
+*.jpg
 
 # Tauri-specific
 target
-
-turbo.json
+Cargo.toml
 
 # Format stuff from `packages` dir
 !packages/*

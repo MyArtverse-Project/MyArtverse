@@ -2,7 +2,7 @@ import type { Config } from "tailwindcss"
 import formsPlugin from "@tailwindcss/forms"
 import typographyPlugin from "@tailwindcss/typography"
 
-import kuroTw from "@myfursona-internal/config/tailwind.config"
+import myfursonaTW from "@myfursona-internal/config/tailwind.config"
 
 const config: Config = {
   content: [
@@ -19,7 +19,7 @@ const config: Config = {
       }
     }
   },
-  presets: [kuroTw],
+  presets: [myfursonaTW],
   plugins: [formsPlugin, typographyPlugin]
 }
 

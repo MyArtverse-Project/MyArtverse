@@ -2,5 +2,18 @@
   "name": "@myfursona/biro-ui",
   "version": "0.0.1",
   "private": true,
-  "license": "Apache-2.0"
+  "license": "Apache-2.0",
+  "scripts": {
+    "lint": "eslint \"**/*.ts*\""
+  },
+  "devDependencies": {
+    "@myfursona-internal/tsconfig": "*",
+    "@types/react": "^18.2.0",
+    "@types/react-dom": "^18.2.0",
+    "clsx": "^2.0.0",
+    "eslint": "^8.50.0",
+    "eslint-config-myfursona": "*",
+    "react": "^18.2.0",
+    "typescript": "^5.2.2"
+  }
 }
