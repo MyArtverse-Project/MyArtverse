@@ -17,18 +17,18 @@ const withPWA = require("next-pwa")({
 const nextConfig = {
   ...shared,
   transpilePackages: ["lodash"],
-  async rewrites() {
-    return [
-      {
-        source: "/@:username",
-        destination: "/profile/:username"
-      },
-      {
-        source: "/@:username/:path*",
-        destination: "/profile/:username/:path*"
-      }
-    ]
-  },
+  // async rewrites() {
+  //   return [
+  //     {
+  //       source: "/@:username",
+  //       destination: "/profile/:username"
+  //     },
+  //     {
+  //       source: "/@:username/:path*",
+  //       destination: "/profile/:username/:path*"
+  //     }
+  //   ]
+  // },
   async redirects() {
     return [
       { source: "/signup", destination: "/register", permanent: true },
