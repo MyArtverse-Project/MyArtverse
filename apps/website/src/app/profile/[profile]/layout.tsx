@@ -1,7 +1,7 @@
 import { Metadata, ResolvingMetadata } from "next"
 import type { SlugRouteProps } from "@/types"
-import ProfileMasthead from "./ProfileMasthead"
 import { MarginClamp } from "@/components/ui"
+import DynamicMasthead from "./DynamicMasthead"
 
 export async function generateMetadata(
   { params, searchParams }: SlugRouteProps,
@@ -26,7 +26,7 @@ export default function Layout({
 
   return (
     <>
-      <ProfileMasthead handle={profile} />
+      <DynamicMasthead handle={profile} />
       {/*
       
       Reimplmenting stuff
