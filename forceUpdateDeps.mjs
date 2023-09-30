@@ -1,3 +1,5 @@
+#!/usr/bin/env node
+
 import { readFileSync } from "fs"
 /**
  * TODO: cd from the apps folder, look through their package.json's dependencies

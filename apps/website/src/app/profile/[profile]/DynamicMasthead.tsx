@@ -10,12 +10,12 @@ export default function DynamicMasthead({ handle }: { handle?: string }) {
     <ProfileMasthead handle={handle} />
   ) : (
     <CharacterMasthead
-      characterCreator="@ozzydevs"
-      characterName="Ozzy"
-      characterOwner="@ozzydevs"
-      characterPronouns="He/Him"
-      characterSpecies="Otter"
-      characterToyhouseLink="toyhouse"
+      creator="@ozzydevs"
+      name="Ozzy"
+      owner="@ozzydevs"
+      pronouns="He/Him"
+      species="Otter"
+      toyhouseLink="toyhouse"
       handle={handle}
       status="Owned"
     />

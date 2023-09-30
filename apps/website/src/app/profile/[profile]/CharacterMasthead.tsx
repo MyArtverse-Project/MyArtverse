@@ -2,72 +2,47 @@
 
 import { useEffect, useRef } from "react"
 import Image from "next/image"
+import Link from "next/link"
 import { Button } from "@/components/ui/Buttons"
 import {
-  AlertTriangleIcon,
   ArrowLeft,
   BookMarked,
-  BrushIcon,
-  CatIcon,
   EditIcon,
-  Heart,
   HeartIcon,
   HistoryIcon,
   HomeIcon,
   InfoIcon,
   LayoutGridIcon,
-  LockIcon,
-  MoreVerticalIcon,
-  StoreIcon,
-  UserPlusIcon
+  LockIcon
 } from "lucide-react"
-import { Tabs, SocialsRow, BuiImage } from "@/components/ui"
-import Link from "next/link"
-import { Dropdown, DropdownItem } from "@/components/ui/Dropdown"
+import { Tabs } from "@/components/ui"
 import { useDetailPeekContext } from "@/context"
 import Badge from "@/components/ui/Badges/Badge"
 
 export default function CharacterMasthead({
   handle,
-  characterName,
-  characterSpecies,
-  characterPronouns,
-  characterOwner,
-  characterCreator,
-  characterToyhouseLink,
+  name,
+  species,
+  pronouns,
+  owner,
+  creator,
+  toyhouseLink,
   status,
-    favoriteCount = 0
+  favoriteCount = 0
 }: {
   handle: string
-  characterName: string
-  characterSpecies: string
-  characterPronouns: string
-  characterOwner: string
-  characterCreator: string
-  characterToyhouseLink: string
+  name: string
+  species: string
+  pronouns: string
+  owner: string
+  creator: string
+  toyhouseLink: string
   status: "Owned" | "Up For Adoption" | "Hidden" | "Adopted"
   favoriteCount?: number
 }) {
   const { setPeek, setPeeking } = useDetailPeekContext()
 
   const profileDetailsRef = useRef<HTMLDivElement>(null)
-
-  useEffect(() => {
-    setPeek.img("/img/examples/ozzy/4.png")
-    setPeek.type("character")
-    setPeek.username(`${handle} / ${characterName}`)
-
-    window.MyFursona = {
-      __myfursona_version: "0.0.1",
-      profileDebug: {
-        uuid: "null",
-        name: "username",
-        handle: handle,
-        img: "/img/examples/ozzy/5.png",
-        isFollowing: false
-      }
-    }
-  }, [setPeek, handle])
 
   useEffect(() => {
     const profileDetails = profileDetailsRef.current
@@ -85,7 +60,12 @@ export default function CharacterMasthead({
   return (
     <div id="masthead-root" className="contents">
       <div ref={profileDetailsRef} className="px-12 mx-auto max-w-screen-2xl">
-        <Button prefixIcon={<ArrowLeft className="mr-3" />} className="mb-4 my-8 flex flex-row items-center ">Back to {characterOwner}'s profile</Button>
+        <Button
+          prefixIcon={<ArrowLeft className="mr-3" />}
+          className="mb-4 my-8 flex flex-row items-center "
+        >
+          Back to {owner}'s profile
+        </Button>
         <section className="flex gap-x-2.5 h-fit">
           {/* Avatar */}
           <div className="relative flex-shrink-0 w-[var(--avatar-size)] h-[calc(var(--avatar-size)/1)]">
@@ -108,17 +88,21 @@ export default function CharacterMasthead({
             {/* layer 1 - username */}
             <div className="flex justify-between">
               <h2 className="text-3xl not-prose font-inter font-bold flex items-center gap-x-1.5">
-                <span>{characterName}</span>
+                <span>{name}</span>
                 <span id="badge-shelf" aria-hidden>
-                  <Badge label="Visible to followers" varient="default" prefixIcon={<LockIcon size={17} />} />
+                  <Badge
+                    label="Visible to followers"
+                    varient="default"
+                    prefixIcon={<LockIcon size={17} />}
+                  />
                 </span>
               </h2>
               <div className="flex items-start gap-x-2.5 relative z-2">
-              <Button
+                <Button
                   prefixIcon={<EditIcon size={20} />}
                   aria-label="Follow Username"
                 >
-                    Edit Profile
+                  Edit Profile
                 </Button>
                 <Button
                   prefixIcon={<HeartIcon size={20} />}
@@ -126,58 +110,40 @@ export default function CharacterMasthead({
                 >
                   Favorite
                   {favoriteCount && (
-            <span
-              aria-hidden
-              className="text-xs px-2 py-3 group-hover:bg-opacity-100 bg-100 text-700 mx-4 rounded-2xl"
-            >
-              {favoriteCount}
-            </span>
-          )}
+                    <span
+                      aria-hidden
+                      className="text-xs px-2 py-3 group-hover:bg-opacity-100 bg-100 text-700 mx-4 rounded-2xl"
+                    >
+                      {favoriteCount}
+                    </span>
+                  )}
                 </Button>
-                
-                <Dropdown
-                  button={
-                    <Button
-                      iconOnly
-                      prefixIcon={<MoreVerticalIcon size={20} />}
-                      aria-label="More"
-                    ></Button>
-                  }
-                  items={
-                    <>
-                      <DropdownItem link="/">Share</DropdownItem>
-                      <DropdownItem link="/">Manage trades</DropdownItem>
-                      <DropdownItem link="/">Report Username</DropdownItem>
-                      <DropdownItem link="/">Block Username</DropdownItem>
-                    </>
-                  }
-                />
               </div>
             </div>
             {/* layer 2 - handles and followers */}
             <div className="flex gap-x-3.5">
               <span id="user-handle" className="font-semibold text-700">
-                {characterSpecies}
+                {species}
               </span>
 
               <span id="user-followers" className="text-700">
-                {characterPronouns}
+                {pronouns}
               </span>
-              
             </div>
             {/* layer 3 - Fursona Info */}
             <div className="flex gap-x-2.5 pt-1.5">
-            <span id="user-followers" className="text-700">
-                Created by {characterCreator}
+              <span id="user-followers" className="text-700">
+                Created by {creator}
               </span>
             </div>
             {/* layer 3 - Toyhouse/Notices */}
             <div className="flex gap-x-2.5 pt-1.5">
-            <span id="user-followers" className="text-700">
-                {characterToyhouseLink && (
-                    <span className="flex flex-row items-center">
-                    <InfoIcon size={16}  className="mr-2"/> This character has been migrated from <Link href={characterToyhouseLink}>Toyhouse</Link>
-                    </span>
+              <span id="user-followers" className="text-700">
+                {toyhouseLink && (
+                  <span className="flex flex-row items-center">
+                    <InfoIcon size={16} className="mr-2" /> This character has
+                    been migrated from <Link href={toyhouseLink}>Toyhouse</Link>
+                  </span>
                 )}
               </span>
             </div>
@@ -208,7 +174,7 @@ export default function CharacterMasthead({
                 icon: HistoryIcon,
                 text: "Activity",
                 link: `/activity`
-              },
+              }
             ]}
           />
         </div>
