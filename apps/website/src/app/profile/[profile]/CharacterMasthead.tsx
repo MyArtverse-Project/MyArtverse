@@ -15,9 +15,9 @@ import {
   LayoutGridIcon,
   LockIcon
 } from "lucide-react"
+import {Badge} from '@/../../../packages/ui'
 import { Tabs } from "@/components/ui"
 import { useDetailPeekContext } from "@/context"
-import Badge from "@/components/ui/Badges/Badge"
 
 export default function CharacterMasthead({
   handle,
