@@ -5,7 +5,6 @@ import { useState } from "react"
 import { Fieldset } from "@/components/ui"
 import { Button } from "@/components/ui/Buttons"
 import { FormWithProgress } from "@/components/ui/Forms"
-import DropZone from "@/components/ui/Drop/DropZone"
 
 export default function CreateCharacterForm() {
   const [isBasicComplete, setBasicComplete] = useState(false)

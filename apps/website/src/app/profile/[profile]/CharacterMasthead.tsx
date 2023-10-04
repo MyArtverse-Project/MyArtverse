@@ -2,7 +2,6 @@
 
 import { useEffect, useRef } from "react"
 import Image from "next/image"
-import Link from "next/link"
 import { Button } from "@/components/ui/Buttons"
 import {
   ArrowLeft,
@@ -11,16 +10,16 @@ import {
   HeartIcon,
   HistoryIcon,
   HomeIcon,
-  InfoIcon,
   LayoutGridIcon,
-  LockIcon
+  // LockIcon
 } from "lucide-react"
-import {Badge} from '@/../../../packages/ui'
+// import {Badge} from '@/../../../packages/ui'
 import { Tabs } from "@/components/ui"
 import { useDetailPeekContext } from "@/context"
 
 export default function CharacterMasthead({
   handle,
+  character,
   name,
   species,
   pronouns,
@@ -31,6 +30,7 @@ export default function CharacterMasthead({
   favoriteCount = 0
 }: {
   handle: string
+  character: string
   name: string
   species: string
   pronouns: string
@@ -61,10 +61,11 @@ export default function CharacterMasthead({
     <div id="masthead-root" className="contents">
       <div ref={profileDetailsRef} className="px-12 mx-auto max-w-screen-2xl">
         <Button
+         href={`/@${owner}`}
           prefixIcon={<ArrowLeft className="mr-3" />}
-          className="mb-4 my-8 flex flex-row items-center "
+          className="mb-4 my-8 flex flex-row items-center bg-300 px-4 py-2 rounded-lg hover:bg-400 transition-all ease-in-out duration-200"
         >
-          Back to {owner}'s profile
+          Back to <span className="font-bold">{owner}'s</span> profile
         </Button>
         <section className="flex gap-x-2.5 h-fit">
           {/* Avatar */}
@@ -90,11 +91,11 @@ export default function CharacterMasthead({
               <h2 className="text-3xl not-prose font-inter font-bold flex items-center gap-x-1.5">
                 <span>{name}</span>
                 <span id="badge-shelf" aria-hidden>
-                  <Badge
+                  {/* <Badge
                     label="Visible to followers"
                     varient="default"
                     prefixIcon={<LockIcon size={17} />}
-                  />
+                  /> */}
                 </span>
               </h2>
               <div className="flex items-start gap-x-2.5 relative z-2">
@@ -107,16 +108,10 @@ export default function CharacterMasthead({
                 <Button
                   prefixIcon={<HeartIcon size={20} />}
                   aria-label="Favorite"
+                  count={3}
                 >
                   Favorite
-                  {favoriteCount && (
-                    <span
-                      aria-hidden
-                      className="text-xs px-2 py-3 group-hover:bg-opacity-100 bg-100 text-700 mx-4 rounded-2xl"
-                    >
-                      {favoriteCount}
-                    </span>
-                  )}
+                  
                 </Button>
               </div>
             </div>
@@ -138,14 +133,17 @@ export default function CharacterMasthead({
             </div>
             {/* layer 3 - Toyhouse/Notices */}
             <div className="flex gap-x-2.5 pt-1.5">
-              <span id="user-followers" className="text-700">
+              {/* TODO: Temporary */}
+              {/* <span id="user-followers" className="text-700">
                 {toyhouseLink && (
                   <span className="flex flex-row items-center">
                     <InfoIcon size={16} className="mr-2" /> This character has
-                    been migrated from <Link href={toyhouseLink}>Toyhouse</Link>
+                    been migrated from  <Link href={{
+                      href: toyhouseLink,
+                    }}>Toyhouse</Link>
                   </span>
                 )}
-              </span>
+              </span> */}
             </div>
           </div>
         </section>
@@ -153,7 +151,7 @@ export default function CharacterMasthead({
       <div className="sticky top-[3.75rem] z-[3] bg-100 overflow-x-auto">
         <div className="max-w-screen-2xl mx-auto px-9">
           <Tabs
-            baseURL={`/@${handle}`}
+            baseURL={`/@${handle}/character/${character}`}
             items={[
               {
                 icon: HomeIcon,

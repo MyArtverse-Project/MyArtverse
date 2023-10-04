@@ -64,6 +64,7 @@ export type BuiButtonProps = {
   prefixIcon?: React.ReactElement<LucideIcon>
   suffixIcon?: React.ReactElement<LucideIcon>
   href?: string | UrlObject
+  count?: number
 } & ExtendedDynamicButtonAnchorElement
 
 export type { FursonaStatus as AdoptionStatus, ColorPalette }

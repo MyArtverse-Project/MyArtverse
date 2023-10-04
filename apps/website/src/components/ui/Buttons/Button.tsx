@@ -24,6 +24,7 @@ const Button = forwardRef(
       prefixIcon,
       suffixIcon,
       href,
+      count,
       /**
        * Adding this property will override the `variant` and will ignore them
        * This is behavor intended for custom styling
@@ -85,6 +86,10 @@ const Button = forwardRef(
         {children && (
           <span className="inline-block overflow-hidden select-none whitespace-nowrap overflow-ellipsis">
             {children}
+            {count && (
+              <span className="ml-1.5 font-semibold bg-100 text-700 rounded-xl p-2">{count}</span>
+            
+            )}
           </span>
         )}
         {suffixIcon}

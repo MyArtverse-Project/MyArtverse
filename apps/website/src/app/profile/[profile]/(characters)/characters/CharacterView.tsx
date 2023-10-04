@@ -71,6 +71,7 @@ export default function CharacterView() {
               species="Raccoon-Fox-Dragon"
               status="owned"
               role="listitem"
+              href={`/@username/character/renzo`}
             />
           ))}
         </GridResponsive>

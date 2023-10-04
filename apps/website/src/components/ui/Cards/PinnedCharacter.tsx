@@ -20,7 +20,7 @@ export default function PinnedCharacter({
   refSheetImg: string
 }) {
   return (
-    <section className="flex flex-row justify-around">
+    <section className="flex flex-row justify-around mb-5">
       <div className="flex flex-col">
         <div className="flex flex-col justify-between">
           <div className="flex flex-row">
@@ -51,7 +51,6 @@ export default function PinnedCharacter({
         </div>
       </div>
       <BuiImage
-        rounded
         width={640}
         height={360}
         src={refSheetImg}
