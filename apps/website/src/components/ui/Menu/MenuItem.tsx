@@ -1,7 +1,7 @@
 import Link from "next/link"
 import type { UrlObject } from "url"
 import type { ReactElement } from "react"
-import type { LucideIcon } from "lucide-react"
+import type { IconType } from "react-icons"
 
 export default function MenuItem({
   prefix,
@@ -9,8 +9,8 @@ export default function MenuItem({
   name,
   href
 }: {
-  prefix: ReactElement<LucideIcon> | ReactElement
-  suffix?: ReactElement<LucideIcon> | ReactElement
+  prefix: ReactElement<IconType> | ReactElement
+  suffix?: ReactElement<IconType> | ReactElement
   name: string
   href: string
 }) {
