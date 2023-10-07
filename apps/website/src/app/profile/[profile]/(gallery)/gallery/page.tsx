@@ -1,5 +1,5 @@
 import { SlugRouteProps } from "@/types"
-import { Palette } from "lucide-react"
+import { LuPalette as Palette } from "react-icons/lu"
 import { Metadata, ResolvingMetadata } from "next"
 
 export async function generateMetadata(

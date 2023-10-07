@@ -1,5 +1,5 @@
 import Button from "./Button"
-import { SearchIcon } from "lucide-react"
+import { LuSearch as SearchIcon } from "react-icons/lu"
 
 export default function SearchButton({
   onClick

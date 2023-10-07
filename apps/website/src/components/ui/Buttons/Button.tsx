@@ -87,8 +87,9 @@ const Button = forwardRef(
           <span className="inline-block overflow-hidden select-none whitespace-nowrap overflow-ellipsis">
             {children}
             {count && (
-              <span className="ml-1.5 font-semibold bg-100 text-700 rounded-xl p-2">{count}</span>
-            
+              <span className="ml-1.5 font-semibold bg-100 text-700 rounded-xl p-2">
+                {count}
+              </span>
             )}
           </span>
         )}

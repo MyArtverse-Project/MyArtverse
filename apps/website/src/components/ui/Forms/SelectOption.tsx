@@ -1,4 +1,4 @@
-import type { LucideIcon } from "lucide-react"
+import type { IconType } from "react-icons"
 
 export default function SelectOption({
   label,
@@ -8,8 +8,8 @@ export default function SelectOption({
 }: {
   label: string
   value: string
-  prefixIcon: React.ReactElement<LucideIcon>
-  suffixIcon: React.ReactElement<LucideIcon>
+  prefixIcon: React.ReactElement<IconType>
+  suffixIcon: React.ReactElement<IconType>
 }) {
   return (
     <option value={value}>

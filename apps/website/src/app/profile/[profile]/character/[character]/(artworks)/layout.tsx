@@ -1,7 +1,6 @@
 import type { SlugRouteProps } from "@/types"
 import { MarginClamp } from "@/components/ui"
 
-
 export default function Layout({
   params,
   children

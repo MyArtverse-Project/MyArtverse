@@ -5,16 +5,16 @@ import Link from "next/link"
 import { useSidebarContext } from "@/context"
 
 import {
-  HomeIcon,
-  SparklesIcon,
-  XIcon,
-  BrushIcon,
-  SettingsIcon,
-  HelpCircleIcon,
-  MessageSquarePlusIcon,
-  AlertTriangleIcon,
-  BoxIcon
-} from "lucide-react"
+  LuHome as HomeIcon,
+  LuSparkles as SparklesIcon,
+  LuX as XIcon,
+  LuBrush as BrushIcon,
+  LuSettings as SettingsIcon,
+  LuHelpCircle as HelpCircleIcon,
+  LuMessageSquarePlus as MessageSquarePlusIcon,
+  LuAlertTriangle as AlertTriangleIcon,
+  LuBox as BoxIcon
+} from "react-icons/lu"
 import MyFursona from "../icons/MyFursona"
 import Overlay from "../ui/Overlay"
 import { Button } from "../ui/Buttons"

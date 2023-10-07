@@ -3,9 +3,10 @@
 import { useState } from "react"
 import Link from "next/link"
 
-import type { IconName } from "@fortawesome/fontawesome-svg-core"
-import { CreditCardIcon, LockIcon } from "lucide-react"
-import { FontAwesomeIcon } from "@fortawesome/react-fontawesome"
+import {
+  LuCreditCard as CreditCardIcon,
+  LuLock as LockIcon
+} from "react-icons/lu"
 import { Fieldset, Note, Separator } from "@/components/ui"
 import { Button } from "@/components/ui/Buttons"
 import { FormWithProgress, InputField } from "@/components/ui/Forms"
@@ -38,33 +39,6 @@ export default function CreateProfileForm() {
       item: "Payment methods",
       isComplete: isPaymentComplete
     }
-  ]
-
-  // TODO export these lil shits into their own component like lucide icons
-  const socialIcons: IconName[] = [
-    "youtube",
-    "facebook",
-    "x-twitter",
-    "instagram",
-    "twitch",
-    "tiktok",
-    "github",
-    "telegram",
-    "discord",
-    "reddit",
-    "tumblr",
-    "threads",
-    "deviantart",
-    "artstation",
-    "soundcloud",
-    "spotify",
-    "itunes-note",
-    "patreon",
-    "bandcamp",
-    "xbox",
-    "steam",
-    "battle-net",
-    "dribbble"
   ]
 
   return (
@@ -124,7 +98,7 @@ export default function CreateProfileForm() {
             }
           >
             <Fieldset.Inner>
-              <div className="flex flex-wrap gap-2">
+              {/* <div className="flex flex-wrap gap-2">
                 {socialIcons.map((icon, i) => (
                   <Button
                     key={i}
@@ -138,7 +112,7 @@ export default function CreateProfileForm() {
                     }
                   ></Button>
                 ))}
-              </div>
+              </div> */}
               <Separator dir="horizontal" padding="0.75rem" />
               <Note type="info" inline>
                 {"Any platforms missing or have a suggestions to add? "}
@@ -158,26 +132,10 @@ export default function CreateProfileForm() {
                 <Button prefixIcon={<CreditCardIcon size={21} />}>
                   Credit/Debit card
                 </Button>
-                <Button
-                  prefixIcon={
-                    <FontAwesomeIcon
-                      icon={["fab", "paypal"]}
-                      fixedWidth
-                      size="lg"
-                    />
-                  }
-                >
+                <Button prefixIcon={<CreditCardIcon size={21} />}>
                   PayPal
                 </Button>
-                <Button
-                  prefixIcon={
-                    <FontAwesomeIcon
-                      icon={["fab", "stripe-s"]}
-                      fixedWidth
-                      size="lg"
-                    />
-                  }
-                >
+                <Button prefixIcon={<CreditCardIcon size={21} />}>
                   Stripe
                 </Button>
                 <Button prefixIcon={<CreditCardIcon size={21} />}>

@@ -1,6 +1,6 @@
 import { Button } from "./Buttons"
 import Separator from "./Separator"
-import { ChevronRight } from "lucide-react"
+import { LuChevronRight as ChevronRight } from "react-icons/lu"
 
 export default function Carousel({
   children,

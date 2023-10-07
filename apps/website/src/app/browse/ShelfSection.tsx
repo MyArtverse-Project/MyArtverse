@@ -1,5 +1,5 @@
 import { Carousel, GridResponsive } from "@/components/ui"
-import type { LucideIcon } from "lucide-react"
+import type { IconType } from "react-icons"
 
 export default function ShelfSection({
   children,
@@ -7,7 +7,7 @@ export default function ShelfSection({
   title
 }: {
   children?: React.ReactNode
-  icon?: LucideIcon
+  icon?: IconType
   title?: string
 }) {
   return (
@@ -15,7 +15,7 @@ export default function ShelfSection({
       as="section"
       title={
         <span className="flex items-center gap-x-1 font-bold font-inter text-2xl">
-          <Icon size={26} className="mr-2" />
+          <Icon size="1.3rem" className="mr-2" />
           {title}
         </span>
       }

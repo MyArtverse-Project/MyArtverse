@@ -6,7 +6,7 @@ import project from "../../../package.json"
 import { kebabCase } from "lodash"
 import { MyFursona } from "../icons"
 import { BuiLink } from "../ui"
-import { HeartIcon } from "lucide-react"
+import { LuHeart as HeartIcon } from "react-icons/lu"
 import FooterGradient from "./FooterGraphics"
 
 const version = project.version

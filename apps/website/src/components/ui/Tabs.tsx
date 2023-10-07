@@ -4,8 +4,8 @@ import Link from "next/link"
 import { usePathname } from "next/navigation"
 
 import clsx from "clsx"
-import type { LucideIcon } from "lucide-react"
 import type { PartialArray } from "@/types"
+import type { IconType } from "react-icons"
 
 export default function Tabs({
   baseURL = "/",
@@ -16,7 +16,7 @@ export default function Tabs({
     text: string
     link: string
     active: boolean
-    icon: LucideIcon
+    icon: IconType
     countIndicator: number
     isNew: boolean
   }>

@@ -1,11 +1,11 @@
-import type { LucideIcon } from "lucide-react"
+import type { IconType } from "react-icons"
 
 export default function EmptySection({
   children,
   icon: Icon
 }: {
   children?: React.ReactNode
-  icon?: LucideIcon
+  icon?: IconType
 }) {
   return (
     <div

@@ -1,7 +1,10 @@
 "use client"
 
 import { useState, useEffect, useRef } from "react"
-import { PanelLeftClose, PanelLeftOpen } from "lucide-react"
+import {
+  LuPanelLeftClose as PanelLeftClose,
+  LuPanelLeftOpen as PanelLeftOpen
+} from "react-icons/lu"
 import { useFolderViewContext } from "./FolderViewProvider"
 import { Button } from "../Buttons"
 import FolderItem from "./FolderItem"

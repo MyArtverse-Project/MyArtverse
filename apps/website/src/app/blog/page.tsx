@@ -1,6 +1,6 @@
 import { MarginClamp, Separator, Tabs } from "@/components/ui"
 import { Button } from "@/components/ui/Buttons"
-import { RssIcon, SearchIcon } from "lucide-react"
+import { LuRss as RssIcon, LuSearch as SearchIcon } from "react-icons/lu"
 import type { Metadata } from "next"
 
 const title = "Blog"

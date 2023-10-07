@@ -4,16 +4,16 @@ import { useEffect, useRef } from "react"
 import Image from "next/image"
 import { Button } from "@/components/ui/Buttons"
 import {
-  AlertTriangleIcon,
-  BrushIcon,
-  CatIcon,
-  HeartIcon,
-  HomeIcon,
-  LayoutGridIcon,
-  MoreVerticalIcon,
-  StoreIcon,
-  UserPlusIcon
-} from "lucide-react"
+  LuAlertTriangle as AlertTriangleIcon,
+  LuBrush as BrushIcon,
+  LuCat as CatIcon,
+  LuHeart as HeartIcon,
+  LuHome as HomeIcon,
+  LuLayoutGrid as LayoutGridIcon,
+  LuMoreVertical as MoreVerticalIcon,
+  LuStore as StoreIcon,
+  LuUserPlus as UserPlusIcon
+} from "react-icons/lu"
 import { Tabs, SocialsRow, BuiImage } from "@/components/ui"
 import { Dropdown, DropdownItem } from "@/components/ui/Dropdown"
 import { useDetailPeekContext } from "@/context"

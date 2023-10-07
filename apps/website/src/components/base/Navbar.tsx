@@ -4,19 +4,19 @@ import { Fragment } from "react"
 import Link from "next/link"
 import { usePathname } from "next/navigation"
 import {
-  MenuIcon,
-  MoreVerticalIcon,
-  CatIcon,
-  ShareIcon,
-  AlbumIcon,
-  FileLockIcon,
-  ContrastIcon,
-  LucideIcon,
-  AccessibilityIcon,
-  LanguagesIcon,
-  HelpCircleIcon,
-  MessageSquarePlusIcon
-} from "lucide-react"
+  LuMenu as MenuIcon,
+  LuMoreVertical as MoreVerticalIcon,
+  LuCat as CatIcon,
+  LuShare as ShareIcon,
+  LuAlbum as AlbumIcon,
+  LuFileLock as FileLockIcon,
+  LuContrast as ContrastIcon,
+  LuAccessibility as AccessibilityIcon,
+  LuLanguages as LanguagesIcon,
+  LuHelpCircle as HelpCircleIcon,
+  LuMessageSquarePlus as MessageSquarePlusIcon
+} from "react-icons/lu"
+import type { IconType } from "react-icons"
 import { toLower } from "lodash"
 import { Menu } from "@headlessui/react"
 import { useSidebarContext } from "@/context"
@@ -27,7 +27,7 @@ import { Dropdown } from "../ui/Dropdown"
 import NavbarProfilePeek from "./NavbarProfilePeek"
 
 type ItemIterator = Array<{
-  icon?: LucideIcon
+  icon?: IconType
   name?: string
   link?: string
   event?: boolean

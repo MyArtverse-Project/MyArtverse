@@ -1,5 +1,5 @@
 import { Button } from "../Buttons"
-import type { LucideIcon } from "lucide-react"
+import type { IconType } from "react-icons"
 
 export default function DropdownsTemp({
   button,
@@ -8,7 +8,7 @@ export default function DropdownsTemp({
   button: NonNullable<React.ReactElement>
   items: Array<
     Partial<{
-      icon: LucideIcon
+      icon: IconType
       name: string
       link: string
       event: () => any

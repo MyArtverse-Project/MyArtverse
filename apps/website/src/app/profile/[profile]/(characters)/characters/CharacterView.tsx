@@ -1,7 +1,11 @@
 "use client"
 
 import { useState } from "react"
-import { CheckCircle2Icon, FolderPlus, XIcon } from "lucide-react"
+import {
+  LuCheckCircle2 as CheckCircle2Icon,
+  LuFolderPlus as FolderPlus,
+  LuX as XIcon
+} from "react-icons/lu"
 import { FolderView, GridResponsive, Modal } from "@/components/ui"
 import { FursonaCard, PinnedCharacter } from "@/components/ui/Cards"
 import { Button } from "@/components/ui/Buttons"

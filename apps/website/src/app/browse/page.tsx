@@ -1,4 +1,9 @@
-import { Brush, Heart, Layers, Sparkles } from "lucide-react"
+import {
+  LuBrush as Brush,
+  LuHeart as Heart,
+  LuLayers as Layers,
+  LuSparkles as Sparkles
+} from "react-icons/lu"
 import { FursonaCard } from "@/components/ui/Cards"
 import type { FursonaStatus } from "@/types/Fursonas"
 import ShelfSection from "./ShelfSection"
@@ -47,7 +52,7 @@ export default function Browse() {
               Artists Open for Comissions
             </span>
             <hr />
-            <div></div>
+            <div />
           </div>
         </div>
         <div className="flex flex-row my-3">
@@ -56,7 +61,7 @@ export default function Browse() {
             Curated Collections
           </span>
           <hr />
-          <div></div>
+          <div />
         </div>
       </div>
     </MarginClamp>

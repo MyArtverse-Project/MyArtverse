@@ -3,13 +3,13 @@ import type {
   Variants as NoteVariants,
   PartialRecord
 } from "@/types"
+import type { IconType } from "react-icons"
 import {
-  AlertTriangleIcon,
-  CheckCircle2Icon,
-  InfoIcon,
-  LucideIcon,
-  XCircleIcon
-} from "lucide-react"
+  LuAlertTriangle as AlertTriangleIcon,
+  LuCheckCircle2 as CheckCircle2Icon,
+  LuInfo as InfoIcon,
+  LuXCircle as XCircleIcon
+} from "react-icons/lu"
 
 type NoteStatus = PickUnion<
   NoteVariants,
@@ -35,7 +35,7 @@ export default function Note({
 
   const status: PartialRecord<
     NoteStatus,
-    { css: string; icon: LucideIcon; iconColor: string }
+    { css: string; icon: IconType; iconColor: string }
   > = {
     warning: {
       icon: AlertTriangleIcon,
@@ -61,7 +61,7 @@ export default function Note({
 
   const statusStyles = status[type]?.css
   const statusIconColor = status[type]?.iconColor
-  const StatusIcon = status[type]?.icon as LucideIcon
+  const StatusIcon = status[type]?.icon as IconType
 
   return (
     <div

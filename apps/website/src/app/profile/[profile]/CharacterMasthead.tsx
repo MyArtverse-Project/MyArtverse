@@ -4,16 +4,14 @@ import { useEffect, useRef } from "react"
 import Image from "next/image"
 import { Button } from "@/components/ui/Buttons"
 import {
-  ArrowLeft,
-  BookMarked,
-  EditIcon,
-  HeartIcon,
-  HistoryIcon,
-  HomeIcon,
-  LayoutGridIcon,
-  // LockIcon
-} from "lucide-react"
-// import {Badge} from '@/../../../packages/ui'
+  LuArrowLeft as ArrowLeft,
+  LuBookMarked as BookMarked,
+  LuPencil as EditIcon,
+  LuHeart as HeartIcon,
+  LuHistory as HistoryIcon,
+  LuHome as HomeIcon,
+  LuLayoutGrid as LayoutGridIcon
+} from "react-icons/lu"
 import { Tabs } from "@/components/ui"
 import { useDetailPeekContext } from "@/context"
 
@@ -61,7 +59,7 @@ export default function CharacterMasthead({
     <div id="masthead-root" className="contents">
       <div ref={profileDetailsRef} className="px-12 mx-auto max-w-screen-2xl">
         <Button
-         href={`/@${owner}`}
+          href={`/@${owner}`}
           prefixIcon={<ArrowLeft className="mr-3" />}
           className="mb-4 my-8 flex flex-row items-center bg-300 px-4 py-2 rounded-lg hover:bg-400 transition-all ease-in-out duration-200"
         >
@@ -111,7 +109,6 @@ export default function CharacterMasthead({
                   count={3}
                 >
                   Favorite
-                  
                 </Button>
               </div>
             </div>

@@ -1,6 +1,6 @@
-import type { FursonaStatus, ColorPalette } from "./Fursonas"
-import type { LucideIcon } from "lucide-react"
 import type { UrlObject } from "url"
+import type { FursonaStatus, ColorPalette } from "./Fursonas"
+import type { IconType } from "react-icons"
 
 export type PartialRecord<K extends PropertyKey, T = string> = Partial<
   Record<K, T>
@@ -61,8 +61,8 @@ export type BuiButtonProps = {
   variant?: ButtonVariants
   position?: "left" | "center" | "right"
   size?: Sizes
-  prefixIcon?: React.ReactElement<LucideIcon>
-  suffixIcon?: React.ReactElement<LucideIcon>
+  prefixIcon?: React.ReactElement<IconType>
+  suffixIcon?: React.ReactElement<IconType>
   href?: string | UrlObject
   count?: number
 } & ExtendedDynamicButtonAnchorElement

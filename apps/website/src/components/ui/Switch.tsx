@@ -1,6 +1,6 @@
 "use client"
 
-import { Palette } from "lucide-react"
+import { LuPalette as Palette } from "react-icons/lu"
 import { useState } from "react"
 
 type SwitchTemp = "prices" | "queue"

@@ -1,4 +1,4 @@
-import { AlertTriangleIcon } from "lucide-react"
+import { LuAlertTriangle as AlertTriangleIcon } from "react-icons/lu"
 
 export default function NoJSReminder() {
   return (

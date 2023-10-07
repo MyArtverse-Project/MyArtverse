@@ -2,7 +2,12 @@
 
 import { Children, useRef, useEffect, useState } from "react"
 import clsx from "clsx"
-import { Folder, FolderClosed, FolderOpen, FolderPlus } from "lucide-react"
+import {
+  LuFolder as Folder,
+  LuFolderClosed as FolderClosed,
+  LuFolderOpen as FolderOpen,
+  LuFolderPlus as FolderPlus
+} from "react-icons/lu"
 import { motion } from "framer-motion"
 import { Button } from "../Buttons"
 import { useScrollBounds } from "@/hooks/useScrollBounds"

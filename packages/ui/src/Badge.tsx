@@ -1,6 +1,6 @@
 import * as React from "react"
-import type { LucideIcon } from "lucide-react"
 import clsx from "clsx"
+import type { IconType } from "react-icons"
 
 export default function Badge({
   label,
@@ -8,7 +8,7 @@ export default function Badge({
   variant = "default"
 }: {
   label: string
-  prefixIcon: React.ReactElement<LucideIcon>
+  prefixIcon: React.ReactElement<IconType>
   variant: "warning" | "info" | "danger" | "default"
 }) {
   // TODO REFACTOR THIS TERNARY ABOMINATION INTO CVA

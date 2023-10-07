@@ -1,5 +1,10 @@
 import clsx from "clsx"
-import { type LucideIcon, LockIcon, SparklesIcon, StarIcon } from "lucide-react"
+import type { IconType } from "react-icons"
+import {
+  LuLock as LockIcon,
+  LuSparkles as SparklesIcon,
+  LuStar as StarIcon
+} from "react-icons/lu"
 import type { FursonaStatus } from "@/types/Fursonas"
 
 export default function Status({ status }: { status: FursonaStatus }) {
@@ -7,7 +12,7 @@ export default function Status({ status }: { status: FursonaStatus }) {
 
   const statusObj: Record<
     FursonaStatus,
-    { label: string; className: string; icon: LucideIcon }
+    { label: string; className: string; icon: IconType }
   > = {
     adopted: {
       label: "Adopted",

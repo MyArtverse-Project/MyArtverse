@@ -1,7 +1,7 @@
 import ColorPalette from "./ColorPalette"
 import { ColorPalette as Colors } from "@/types"
 import { Button } from "../Buttons"
-import { CatIcon, Palette } from "lucide-react"
+import { LuCat as CatIcon, LuPalette as Palette } from "react-icons/lu"
 import BuiImage from "../BuiImage"
 
 export default function PinnedCharacter({
@@ -51,6 +51,7 @@ export default function PinnedCharacter({
         </div>
       </div>
       <BuiImage
+        rounded={false}
         width={640}
         height={360}
         src={refSheetImg}

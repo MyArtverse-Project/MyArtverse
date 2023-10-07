@@ -3,7 +3,7 @@ import clsx from "clsx"
 import type { AdoptionStatus, ColorPalette as Palette } from "@/types"
 import ColorPalette from "./ColorPalette"
 import BuiImage from "../BuiImage"
-import { Heart } from "lucide-react"
+import { LuHeart as Heart } from "react-icons/lu"
 import Status from "./Status"
 
 type CharacterCardPalette =

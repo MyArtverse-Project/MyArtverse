@@ -1,6 +1,5 @@
 ## TODO list
 
-
 ### Components
 
 - [ ] Notification Drop Down
@@ -17,7 +16,7 @@
 - [ ] Completed Landing Page
 - [ ] Terms and Service
 - [ ] Pricing Page
-- [ ] Character 
+- [ ] Character
 - [ ] Art Page
 - [ ] Character Shop Page
 - [ ] Character Gallery Page
@@ -26,8 +25,7 @@
 
 - [ ] Avatar Cropper (Appears when Uploading Images for Characters/Characters)
 
-
-*Tasks listed below are just waiting to get the backend setup*
+_Tasks listed below are just waiting to get the backend setup_
 
 - [ ] Authentication, Signing In, Out, Registering, Email Verification
 - [ ] Ability to create a Fursona

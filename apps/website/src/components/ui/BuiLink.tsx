@@ -1,6 +1,6 @@
 import Link from "next/link"
 
-import { ExternalLinkIcon } from "lucide-react"
+import { LuExternalLink as ExternalLinkIcon } from "react-icons/lu"
 import type { UrlObject } from "url"
 
 export default function BuiLink({
