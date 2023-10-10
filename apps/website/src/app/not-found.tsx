@@ -1,15 +1,24 @@
+import { BuiImage } from "@/components/ui"
 import { Metadata } from "next"
 
 export const metadata: Metadata = {
-  title: "404"
+  title: "404 Not Found"
 }
 
 export default function NotFoundCatchAll() {
   return (
-    <div id="error-page" className="grid place-items-center">
-      <article className="text-center prose-h1:text-3xl">
-        <h1>404</h1>
-        <p>Page doesn't exist cutie</p>
+    <div className="pt-32 pb-5 px-12 max-w-screen-lg mx-auto">
+      <article className="text-center">
+        <div className="flex flex-col items-center">
+          <BuiImage src="/kuro_confused.png" aspectRatio="1/1" width={250} />
+          <h2 className="not-prose text-4xl font-inter font-bold text-center my-5">
+            404 Not Found
+          </h2>
+        </div>
+        <p className="text-lg opacity-75">
+          Unless you've traveled back in time, the page you're looking for
+          doesn't exist anymore.
+        </p>
       </article>
     </div>
   )

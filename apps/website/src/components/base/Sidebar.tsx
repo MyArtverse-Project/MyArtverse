@@ -3,7 +3,6 @@
 import { useCallback, useEffect, Fragment } from "react"
 import Link from "next/link"
 import { useSidebarContext } from "@/context"
-
 import {
   LuHome as HomeIcon,
   LuSparkles as SparklesIcon,
@@ -15,7 +14,7 @@ import {
   LuAlertTriangle as AlertTriangleIcon,
   LuBox as BoxIcon
 } from "react-icons/lu"
-import MyFursona from "../icons/MyFursona"
+import { MyFursona } from "../icons"
 import Overlay from "../ui/Overlay"
 import { Button } from "../ui/Buttons"
 import { MenuGroup, MenuItem } from "../ui/Menu"

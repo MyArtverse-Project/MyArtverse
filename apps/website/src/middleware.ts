@@ -12,8 +12,8 @@ export default function middleware() {
       "https:",
       "assets.hcaptcha.com",
       "www.clarity.ms",
-      "analytics.umami.is",
-      "static.cloudflareinsights.com",
+      "analytics.eu.umami.is",
+      "cdn.onesignal.com",
       `nonce-${generatedNonce}`
     ],
     "style-src": ["self", "unsafe-inline"],
@@ -22,9 +22,9 @@ export default function middleware() {
       "https:",
       "assets.hcaptcha.com",
       "api.stripe.com",
-      "static.cloudflareinsights.com",
-      "analytics.umami.is",
       "api.umami.is",
+      "analytics.eu.umami.is",
+      "cdn.onesignal.com",
       "w.clarity.ms"
     ],
     "frame-src": [

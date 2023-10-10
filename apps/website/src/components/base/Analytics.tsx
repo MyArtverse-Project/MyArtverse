@@ -1,4 +1,5 @@
 import Script from "next/script"
+
 import { headers } from "next/headers"
 import dedent from "dedent"
 
@@ -14,7 +15,7 @@ export default function Analytics() {
       <Script
         id="umami"
         defer
-        src="https://analytics.umami.is/script.js"
+        src="https://analytics.eu.umami.is/script.js"
         data-website-id={umamiId}
       />
       {/* Behavior analytics - Microsoft Clarity */}
@@ -25,18 +26,13 @@ export default function Analytics() {
         dangerouslySetInnerHTML={{
           __html: dedent`
             (function(c,l,a,r,i,t,y){
-            c[a]=c[a]||function(){(c[a].q=c[a].q||[]).push(arguments)};
-            t=l.createElement(r);t.async=1;t.src="https://www.clarity.ms/tag/"+i;
-            y=l.getElementsByTagName(r)[0];y.parentNode.insertBefore(t,y);
+              c[a]=c[a]||function(){(c[a].q=c[a].q||[]).push(arguments)};
+              t=l.createElement(r);t.async=1;t.src="https://www.clarity.ms/tag/"+i;
+              y=l.getElementsByTagName(r)[0];y.parentNode.insertBefore(t,y);
             })(window, document, "clarity", "script", "${clarityId}");
             `
         }}
       />
-      {/* <Script
-        nonce={nonce}
-        strategy="beforeInteractive"
-        src="https://cdnjs.cloudflare.com/ajax/libs/lazysizes/5.3.2/lazysizes.min.js"
-      /> */}
     </>
   )
 }

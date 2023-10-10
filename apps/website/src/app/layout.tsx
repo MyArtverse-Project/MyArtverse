@@ -9,7 +9,6 @@ import {
   Analytics,
   Footer,
   Navbar,
-  NoJSReminder,
   SkipNav
 } from "@/components/base"
 
@@ -71,26 +70,25 @@ export default function RootLayout({
       className={`${inter.variable} ${open_sans.variable} theme-system`}
     >
       <head>
-        <link rel="preconnect" href="https://api.myfursona.art/" />
-        <link rel="preconnect" href="https://i-r2.myfursona.art/" />
         <link rel="preconnect" href="https://images.ctfassets.net/" />
         <link rel="mask-icon" href="./safari-pinned-tab.svg" color="9e00ff" />
       </head>
       <body className="bg-100 text-700 !overflow-x-hidden bg-background prose-headings:font-bold prose-headings:font-inter text-sm font-medium font-open-sans prose-h1:text-5xl prose-h2:text-[2.75rem] prose-h3:text-4xl prose-h4:text-[2rem] prose-h5:text-[1.65rem]">
-        <SkipNav />
-        <NoJSReminder />
-        {/* Platform announcements sent through the API goes here */}
-        <div id="announcements"></div>
-        <Providers>
-          <header className="sticky top-0 z-20">
-            <Navbar />
-            <Sidebar />
-          </header>
-          <div id="skip-navigation" className="min-h-[calc(100dvh-3.75rem)]">
-            {children}
-          </div>
-          <Footer />
-        </Providers>
+        <div id="myfursona-app">
+          <SkipNav />
+          {/* Platform announcements sent through the API goes here */}
+          <div id="announcements"></div>
+          <Providers>
+            <header className="sticky top-0 z-20">
+              <Navbar />
+              <Sidebar />
+            </header>
+            <div id="skip-navigation" className="min-h-[calc(100dvh-3.75rem)]">
+              {children}
+            </div>
+            <Footer />
+          </Providers>
+        </div>
         <Analytics />
         <ClientInit />
       </body>

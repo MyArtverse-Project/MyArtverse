@@ -43,12 +43,9 @@ export default function CreateProfileForm() {
 
   return (
     <>
-      <section
-        className="max-w-screen-xl mt-20 mb-12 mx-auto px-9 text-center"
-        data-new-user-onboarding=""
-      >
-        <h1 className="not-prose font-bold font-inter !leading-[4.25rem] text-4xl xl:text-5xl bg-gradient-to-tl from-blue-700 via-purple-700 to-pink-500 text-transparent bg-clip-text">
-          Welcome to MyFursona
+      <section className="max-w-screen-xl mt-20 mb-12 mx-auto px-9 text-center">
+        <h1 className="not-prose font-bold font-inter !leading-[4.25rem] text-4xl xl:text-5xl bg-gradient-to-tl from-blue-500 via-purple-700 to-pink-500 text-transparent bg-clip-text">
+          Welcome to MyFursona!
         </h1>
         <p className="xl:text-lg xl:!leading-8 text-base">
           {`Hello, ${username}—we're so glad to have you on board! You're almost there,
