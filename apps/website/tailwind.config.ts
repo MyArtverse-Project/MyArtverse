@@ -1,18 +1,15 @@
 import type { Config } from "tailwindcss"
-import formsPlugin from "@tailwindcss/forms"
-import typographyPlugin from "@tailwindcss/typography"
+import myfursonaPreset from "@myfursona-internal/config/tailwind.config"
+import forms from "@tailwindcss/forms"
+import typography from "@tailwindcss/typography"
 
-import myfursonaTw from "@myfursona-internal/config/tailwind.config"
-
-const config: Config = {
+export default {
   darkMode: "class",
   content: [
     "./src/pages/**/*.{js,ts,jsx,tsx,mdx}",
     "./src/components/**/*.{js,ts,jsx,tsx,mdx}",
     "./src/app/**/*.{js,ts,jsx,tsx,mdx}"
   ],
-  presets: [myfursonaTw],
-  plugins: [formsPlugin, typographyPlugin]
-}
-
-export default config
+  presets: [myfursonaPreset],
+  plugins: [forms, typography]
+} as Config

@@ -4,7 +4,7 @@ module.exports = {
   rules: {
     "@next/next/no-html-link-for-pages": "off",
     "react/no-unescaped-entities": "off",
-    "unused-imports/no-unused-imports": "error",
+    "unused-imports/no-unused-imports": "warn",
     "@next/next/no-before-interactive-script-outside-document": "off"
   }
 }

@@ -2,6 +2,7 @@ import type { Metadata } from "next"
 import dynamic from "next/dynamic"
 import { Inter, Open_Sans } from "next/font/google"
 import "@myfursona/biro-ui/styles/globals.scss"
+import "./loader.scss"
 import "react-quill/dist/quill.snow.css"
 import Providers from "@/context"
 import {
@@ -11,6 +12,7 @@ import {
   Navbar,
   SkipNav
 } from "@/components/base"
+import Preloader from "@/components/Preloader"
 
 const Sidebar = dynamic(
   () => import("@/components/base").then((c) => c.Sidebar),
@@ -89,6 +91,7 @@ export default function RootLayout({
             <Footer />
           </Providers>
         </div>
+        <Preloader />
         <Analytics />
         <ClientInit />
       </body>

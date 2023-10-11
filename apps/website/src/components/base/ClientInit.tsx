@@ -2,7 +2,6 @@
 
 import { useEffect } from "react"
 // import OneSignal from "react-onesignal"
-import Preloader from "../Preloader"
 
 export default function ClientInit() {
   const CONSOLE_MSG =
@@ -28,5 +27,5 @@ export default function ClientInit() {
     // })
   }, [])
 
-  return <Preloader />
+  return <></>
 }
