@@ -3,6 +3,16 @@
 </div>
 
 <h1 align="center">MyFursona</h1>
+
+<div align="center">
+  <a href="https://www.codefactor.io/repository/github/myfursona-project/myfursona">
+    <img alt="CodeFactor Grade" src="https://img.shields.io/codefactor/grade/github/MyFursona-Project/MyFursona">
+  </a>
+  <a href="https://stats.uptimerobot.com/rlVXRfwrKz">
+    <img alt="UptimeRobot status" src="https://img.shields.io/uptimerobot/status/m794028551-c8c7591f5785702785b52996">
+  </a>
+</div>
+
 <p align="center">
   The <strong>MyFursona</strong> web and desktop client written in Next.js,
   Tailwind CSS, and Tauri.
@@ -14,12 +24,12 @@
 
 - Node.js (versions 18 or higher)
 - Yarn
-- _[Optional]_ Rust, for building the standalone desktop client (versions 1.72
+- [Optional] Rust, for building the standalone desktop client (versions 1.72
   or higher)
 
 ### Setup and Installation
 
-Fork/clone the repository and install dependencies and run the local dev server
+Fork/clone the repository, install its dependencies and run the local dev server
 on the root directory:
 
 ```console
@@ -31,7 +41,7 @@ yarn dev
 
 You can now access http://localhost:3000 on your browser.
 
-It's also recommended to copy the `.env` file on root (i.e. For making changes
+It's also recommended to copy the `.env` file on the root (i.e. For making changes
 to Stripe and/or PayPal payments), copy the `.env.local.example` file from the
 root directory:
 
@@ -43,24 +53,12 @@ cp .env.local.example .env.local
 copy .env.local.example .\.env.local /a
 ```
 
-From there, you can provide your own client and secret keys setup to test
-your own environment.
-
-### Troubleshooting
-
-This repo uses `lint-staged` that format your code automatically with Prettier
-when you push a commit.
-
-Sometimes, `lint-staged` will fail for one reason or another and if you're
-having issues when commiting, you can bypass Git hooks entirely:
-
-```console
-git commit -m "<COMMIT-MSG>" -n
-```
+From there, you can provide your own client and secret keys already set
+to test your own environment.
 
 ## Commands
 
-- `yarn dev` - Serves a running web app on your local machine
+- `yarn dev` - Serves a local web app on
 - `yarn dev:client` - Opens a desktop client, will require Rust
 - `yarn build` - Builds the web app with Turborepo and caches it on Vercel
 - `yarn build:client` - Builds and bundles the desktop app for production
@@ -68,4 +66,4 @@ git commit -m "<COMMIT-MSG>" -n
 
 ## License
 
-Apache-2.0 © Fusky Labs Software
+[Apache 2.0](/LICENSE) © Fusky Labs Software
