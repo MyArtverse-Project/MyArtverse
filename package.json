@@ -19,6 +19,7 @@
   "devDependencies": {
     "@turbo/gen": "^1.10.13",
     "concurrently": "^8.2.1",
+    "dotenv": "^16.3.1",
     "dotenv-cli": "^7.3.0",
     "husky": "^8.0.0",
     "lint-staged": "^14.0.1",
