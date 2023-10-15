@@ -24,7 +24,11 @@ export default function Tabs({
   const pathname = usePathname()
 
   return (
-    <div id="biro-ui-tab-row" className="flex items-center gap-x-1 py-2">
+    <div
+      data-next-pathname={pathname}
+      id="biro-ui-tab-row"
+      className="flex items-center gap-x-1 py-2"
+    >
       {items.map(({ text, link, icon: Icon, countIndicator }, i) => (
         <Link
           key={i}
@@ -33,7 +37,7 @@ export default function Tabs({
           href={`${baseURL}${link}` as any}
           className={clsx(
             "flex items-center px-4 py-2 transition-colors rounded-md gap-x-2 group relative before:absolute before:left-0 before:right-0 before:-bottom-2 before:block before:h-0.5",
-            pathname === link
+            pathname === `${baseURL}${link}`
               ? "text-500 hover:bg-200 before:bg-500"
               : "hover:bg-300"
           )}

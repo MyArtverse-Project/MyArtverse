@@ -182,33 +182,33 @@ export default function ProfileMasthead({
               {
                 icon: HomeIcon,
                 text: "Overview",
-                link: `/`
+                link: ""
               },
               {
                 icon: CatIcon,
                 text: "Characters",
-                link: `/characters`,
+                link: "/characters",
                 countIndicator: 5
               },
               {
                 icon: LayoutGridIcon,
                 text: "Gallery",
-                link: `/gallery`
+                link: "/gallery"
               },
               {
                 icon: StoreIcon,
                 text: "Shop",
-                link: `/shop`
+                link: "/shop"
               },
               {
                 icon: BrushIcon,
                 text: "Commissions",
-                link: `/commissions`
+                link: "/commissions"
               },
               {
                 icon: HeartIcon,
                 text: "Favorites",
-                link: `/favorites`,
+                link: "/favorites",
                 countIndicator: 69
               }
             ]}
