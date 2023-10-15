@@ -2,17 +2,26 @@
 
 import { useState, useEffect, useRef } from "react"
 import clsx from "clsx"
-import NoJSReminder from "./base/NoJSReminder"
-import { MyFursona } from "./icons"
+import NoJSReminder from "./NoJSReminder"
+import { MyFursona } from "../icons"
 
 export default function Preloader() {
   const [loaded, setLoaded] = useState(false)
 
-  const preloaderRef = useRef(null)
+  const preloaderRef = useRef<HTMLDivElement>(null)
   useEffect(() => {
-    if (document.readyState == "complete") {
+    const handleLoad = () => {
       setLoaded(true)
       preloaderRef.current.setAttribute("data-loaded", "")
+    }
+
+    if (document.readyState == "complete") {
+      handleLoad()
+
+      setTimeout(handleLoad, 25)
+      setTimeout(() => {
+        preloaderRef.current.style.display = "none"
+      }, 500)
     }
   }, [setLoaded])
 

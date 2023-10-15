@@ -1,11 +1,10 @@
 "use client"
 
 import Link from "next/link"
-
-import project from "../../../package.json"
+import project from "../../../../package.json"
 import { kebabCase } from "lodash"
-import { MyFursona } from "../icons"
-import { BuiLink } from "../ui"
+import { MyFursona } from "../../icons"
+import { BuiLink } from "../../ui"
 import { LuHeart as HeartIcon } from "react-icons/lu"
 import FooterGradient from "./FooterGraphics"
 

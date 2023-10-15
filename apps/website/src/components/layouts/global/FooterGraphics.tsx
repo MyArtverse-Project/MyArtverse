@@ -1,8 +1,7 @@
-type PassAnyString = { [bitch: string]: string }
-
 export default function FooterGradient() {
   return (
     <svg
+      aria-hidden
       className="absolute inset-x-0 -top-6 bottom-[unset] -z-[1]"
       viewBox="0 0 1289 317"
       fill="none"

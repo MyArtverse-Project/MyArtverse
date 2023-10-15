@@ -14,11 +14,11 @@ import {
   LuAlertTriangle as AlertTriangleIcon,
   LuBox as BoxIcon
 } from "react-icons/lu"
-import { MyFursona } from "../icons"
-import Overlay from "../ui/Overlay"
-import { Button } from "../ui/Buttons"
-import { MenuGroup, MenuItem } from "../ui/Menu"
-import Separator from "../ui/Separator"
+import { MyFursona } from "../../icons"
+import Overlay from "../../ui/Overlay"
+import { Button } from "../../ui/Buttons"
+import { MenuGroup, MenuItem } from "../../ui/Menu"
+import Separator from "../../ui/Separator"
 
 export default function Sidebar() {
   const SIDEBAR_ITEMS = [

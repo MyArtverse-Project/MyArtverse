@@ -4,9 +4,9 @@ import Link from "next/link"
 import { usePathname } from "next/navigation"
 import { type AnimationProps, type Variants, motion } from "framer-motion"
 import { useDetailPeekContext } from "@/context"
-import { MyFursona } from "../icons"
-import { BuiImage } from "../ui"
-import { Button } from "../ui/Buttons"
+import { MyFursona } from "../../icons"
+import { BuiImage } from "../../ui"
+import { Button } from "../../ui/Buttons"
 
 export default function NavbarProfilePeek() {
   const { img: peekImg, username, isPeeking } = useDetailPeekContext()

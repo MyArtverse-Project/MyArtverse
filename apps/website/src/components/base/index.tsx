@@ -1,8 +1,5 @@
-import Footer from "./Footer"
-import Navbar from "./Navbar"
-import Sidebar from "./Sidebar"
-import SkipNav from "./SkipNav"
 import ClientInit from "./ClientInit"
 import Analytics from "./Analytics"
+import AppWrapper from "./AppWrapper"
 
-export { Navbar, Sidebar, Footer, SkipNav, Analytics, ClientInit }
+export { Analytics, ClientInit, AppWrapper as MyFursonaApp }
