@@ -13,7 +13,7 @@ export default function Error({
   return (
     <div className="pt-16 pb-5 px-12 max-w-screen-lg mx-auto">
       <div className="flex flex-col items-center">
-        <BuiImage src="/ozzy_depressed.png" aspectRatio="1/1" width={250} />
+        <BuiImage src="/ozzy_depressed.png" aspectRatio="1" width={250} />
         <h2 className="not-prose text-4xl font-inter font-bold text-center my-3.5">
           Something went wrong!
         </h2>
