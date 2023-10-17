@@ -1,6 +1,8 @@
 import { forwardRef } from "react"
 import Link from "next/link"
 import clsx from "clsx"
+import type { VariantProps } from "class-variance-authority"
+import { cva } from "class-variance-authority"
 import type {
   BuiButtonProps,
   Sizes as ButtonSizes,
@@ -34,8 +36,42 @@ const Button = forwardRef(
     }: BuiButtonProps,
     ref
   ) => {
-    const baseStyles =
-      "flex items-center gap-x-1.5 rounded-md transition-[border,background-color] border border-[2px]"
+    const buttonVars = cva(
+      [
+        "flex items-center gap-x-1.5 rounded-md transition-[border,background-color] border-[2px]"
+      ],
+      {
+        variants: {
+          intent: {
+            primary: ["border-transparent bg-300 hover:bg-400"],
+            secondary: [
+              "bg-transparent border-300 hover:bg-400 hover:border-400"
+            ],
+            tritery: ["border-transparent bg-transparent hover:bg-400"],
+            warning: ["bg-transparent"],
+            error: ["bg-transparent"]
+          },
+          size: {
+            small: !iconOnly ? ["px-2.5 py-1"] : "p-1.5",
+            medium: !iconOnly ? ["px-4 py-2"] : "p-2",
+            big: !iconOnly ? ["px-5 py-2.5"] : "p-3"
+          },
+          positions: {
+            left: ["text-left justify-start"],
+            center: ["text-center justify-center"],
+            right: ["text-right justify-end"]
+          }
+        },
+        compoundVariants: [
+          { intent: "primary", size: "medium", class: "uppercase" }
+        ],
+        defaultVariants: {
+          intent: "primary",
+          size: "medium"
+        }
+      }
+    )
+    const baseStyles = ""
 
     const sizes: ButtonSizesRecord = {
       small: !iconOnly ? "px-2.5 py-1" : "p-1.5",
@@ -43,18 +79,14 @@ const Button = forwardRef(
     }
 
     const variants: ButtonVariantsRecord = {
-      primary: "border-transparent bg-300 hover:bg-400",
-      secondary: "bg-transparent border-300 hover:bg-400 hover:border-400",
-      tritery: "border-transparent bg-transparent hover:bg-400",
-      warning: "border-transparent",
-      error: "border-transparent"
+      primary: "",
+      secondary: "",
+      tritery: "",
+      warning: "",
+      error: ""
     }
 
-    const positions = {
-      left: "text-left justify-start",
-      center: "text-center justify-center",
-      right: "text-right justify-end"
-    }
+    const positions = {}
 
     const sizeDynamic = sizes[size ?? "big"]
     const variantsDynamic = className
@@ -64,22 +96,19 @@ const Button = forwardRef(
 
     const DynamicElement = !href ? "button" : Link
 
-    const joinClasses = clsx(
-      baseStyles,
-      sizeDynamic,
-      variantsDynamic,
-      positionDynamic
-    )
-
     return (
       <DynamicElement
         ref={ref as React.LegacyRef<HTMLAnchorElement & HTMLButtonElement>}
-        data-button-variant={className ? "custom" : variant ?? "primary"}
+        data-button-variant-debug={className ? "custom" : variant ?? "primary"}
         // @ts-ignore
         href={href ?? undefined}
         type={!href ? type ?? "button" : undefined}
         aria-disabled={disabled ?? undefined}
-        className={className ? className : joinClasses}
+        className={clsx(
+          className
+            ? className
+            : [baseStyles, sizeDynamic, variantsDynamic, positionDynamic]
+        )}
         {...attributes}
       >
         {prefixIcon}

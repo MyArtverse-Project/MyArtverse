@@ -8,6 +8,11 @@
     "start": "next start",
     "lint": "next lint"
   },
+  "workspaces": {
+    "nohoist": [
+      "class-variance-authority"
+    ]
+  },
   "dependencies": {
     "@headlessui/react": "^1.7.17",
     "@mdx-js/loader": "^2.3.0",

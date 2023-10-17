@@ -48,30 +48,27 @@ export type SlugRouteProps = {
 
 export type ButtonVariants = OmitUnion<Variants, "success">
 
+type Positions = "left" | "center" | "right"
+
+type AdditionalButtonAndLinkProps =
+  | React.ButtonHTMLAttributes<HTMLButtonElement>
+  | React.AnchorHTMLAttributes<HTMLAnchorElement>
+
 // Complicated custom button type abomination
-export type BuiButtonProps = {
-  children?: React.ReactNode
-  iconOnly?: boolean
-  disabled?: boolean
-  type?: React.ButtonHTMLAttributes<HTMLButtonElement>["type"]
-  variant?: ButtonVariants
-  position?: "left" | "center" | "right"
-  size?: Sizes
-  prefixIcon?: React.ReactElement<IconType>
-  suffixIcon?: React.ReactElement<IconType>
-  href?: string | UrlObject
-  count?: number
-} & Pick<
-  React.ButtonHTMLAttributes<HTMLButtonElement>,
-  | "onClick"
-  | "onContextMenu"
-  | "onKeyDown"
-  | "onMouseDown"
-  | "onMouseOver"
-  | "aria-label"
-  | "formAction"
-  | "className"
-  | "style"
->
+export type BuiButtonProps = Partial<{
+  children: React.ReactNode
+  iconOnly: boolean
+  disabled: boolean
+  type: React.ButtonHTMLAttributes<HTMLButtonElement>["type"]
+  variant: ButtonVariants
+  position: Positions
+  size: Sizes
+  prefixIcon: React.ReactElement<IconType>
+  suffixIcon: React.ReactElement<IconType>
+  href: string | UrlObject
+  count: number
+  override: boolean
+}> &
+  AdditionalButtonAndLinkProps
 
 export type { FursonaStatus as AdoptionStatus }
