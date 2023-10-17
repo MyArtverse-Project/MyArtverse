@@ -1,11 +1,11 @@
-import type { ColorPalette } from "@/types"
+import type { ColorPalette as _ColorPalette } from "@/types"
 
 export default function ColorPalette({
   palette,
   width = "100%",
   height = "0.66rem"
 }: {
-  palette: ColorPalette[]
+  palette: _ColorPalette[]
   width?: number | string
   height?: number | string
 }) {

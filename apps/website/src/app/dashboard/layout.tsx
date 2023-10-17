@@ -5,13 +5,13 @@ export default function DashboardLayout({
 }) {
   return (
     <div className="flex">
-      {/* dashboard sidebar */}
-      <div
+      <nav
+        data-d-nav-drawer=""
         style={{ width: 250 }}
         className="sticky top-16 [align-self:flex-start] h-[calc(100dvh-4rem)] border-r border-r-separator"
       >
         sidebar items
-      </div>
+      </nav>
       <div className="w-full">{children}</div>
     </div>
   )
