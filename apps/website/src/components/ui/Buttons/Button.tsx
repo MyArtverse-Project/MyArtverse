@@ -99,7 +99,6 @@ const Button = forwardRef(
     return (
       <DynamicElement
         ref={ref as React.LegacyRef<HTMLAnchorElement & HTMLButtonElement>}
-        data-button-variant-debug={className ? "custom" : variant ?? "primary"}
         // @ts-ignore
         href={href ?? undefined}
         type={!href ? type ?? "button" : undefined}

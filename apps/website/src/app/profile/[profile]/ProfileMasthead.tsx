@@ -74,10 +74,9 @@ export default function ProfileMasthead({
   }, [setPeeking])
 
   return (
-    <div id="masthead-root" className="contents">
+    <div className="contents">
       {/* Banner */}
       {/* <div
-          data-edit-banner-layout=""
           className="absolute inset-0 grid place-items-center z-[4]"
         >
           <span>Change banner</span>
@@ -116,7 +115,7 @@ export default function ProfileMasthead({
             <div className="flex justify-between">
               <h2 className="text-3xl not-prose font-inter font-bold flex items-center gap-x-1.5">
                 <span>Username</span>
-                <span id="badge-shelf" aria-hidden></span>
+                <span aria-hidden></span>
               </h2>
               <div className="flex items-start gap-x-2.5 relative z-2">
                 <Button
@@ -153,19 +152,13 @@ export default function ProfileMasthead({
             </div>
             {/* layer 2 - handles and followers */}
             <div className="flex gap-x-3.5">
-              <span id="user-handle" className="font-semibold text-700">
-                @{handle}
-              </span>
+              <span className="font-semibold text-700">@{handle}</span>
               <span className="inline-flex items-center font-semibold gap-x-1 bg-error px-1 text-xs rounded-md">
                 <AlertTriangleIcon size={17} />
                 <span>NSFW</span>
               </span>
-              <span id="user-followers" className="text-700">
-                69 followers
-              </span>
-              <span id="user-following" className="text-700">
-                21 following
-              </span>
+              <span className="text-700">69 followers</span>
+              <span className="text-700">21 following</span>
             </div>
             {/* layer 3 - socials */}
             <div className="flex gap-x-2.5 pt-1.5">

@@ -56,7 +56,7 @@ export default function CharacterMasthead({
   }, [setPeeking])
 
   return (
-    <div id="masthead-root" className="contents">
+    <div className="contents">
       <div ref={profileDetailsRef} className="px-12 mx-auto max-w-screen-2xl">
         <Button
           href={`/@${owner}`}
@@ -88,7 +88,7 @@ export default function CharacterMasthead({
             <div className="flex justify-between">
               <h2 className="text-3xl not-prose font-inter font-bold flex items-center gap-x-1.5">
                 <span>{name}</span>
-                <span id="badge-shelf" aria-hidden>
+                <span aria-hidden>
                   {/* <Badge
                     label="Visible to followers"
                     varient="default"
@@ -114,24 +114,17 @@ export default function CharacterMasthead({
             </div>
             {/* layer 2 - handles and followers */}
             <div className="flex gap-x-3.5">
-              <span id="user-handle" className="font-semibold text-700">
-                {species}
-              </span>
-
-              <span id="user-followers" className="text-700">
-                {pronouns}
-              </span>
+              <span className="font-semibold text-700">{species}</span>
+              <span className="text-700">{pronouns}</span>
             </div>
             {/* layer 3 - Fursona Info */}
             <div className="flex gap-x-2.5 pt-1.5">
-              <span id="user-followers" className="text-700">
-                Created by {creator}
-              </span>
+              <span className="text-700">Created by {creator}</span>
             </div>
             {/* layer 3 - Toyhouse/Notices */}
             <div className="flex gap-x-2.5 pt-1.5">
               {/* TODO: Temporary */}
-              {/* <span id="user-followers" className="text-700">
+              {/* <span className="text-700">
                 {toyhouseLink && (
                   <span className="flex flex-row items-center">
                     <InfoIcon size={16} className="mr-2" /> This character has

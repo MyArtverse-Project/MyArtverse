@@ -9,9 +9,7 @@ export default function FolderView({
 }) {
   return (
     <FolderViewProvider>
-      <div id="folder-view-wrapper" className="flex gap-x-4">
-        {children}
-      </div>
+      <div className="flex gap-x-4">{children}</div>
     </FolderViewProvider>
   )
 }

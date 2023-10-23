@@ -6,7 +6,7 @@ export default function Group({
   children?: React.ReactNode
 }) {
   return (
-    <div data-dashboard-group="">
+    <div>
       <h2 className="not-prose font-inter block">{title}</h2>
       <div>{children}</div>
     </div>

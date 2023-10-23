@@ -34,7 +34,7 @@ export default function NavbarProfilePeek() {
   }
 
   return (
-    <div id="profile-peek" className="relative flex items-center">
+    <div className="relative flex items-center">
       <Link href="/" aria-label="Home" draggable={false}>
         <MyFursona logoOnly size={0.7} />
       </Link>
@@ -64,7 +64,6 @@ export default function NavbarProfilePeek() {
       </motion.div>
       {/* User avatar and handle */}
       <motion.div
-        id="handle-wrapper"
         variants={peekVariants}
         initial={"down"}
         animate={handlePeekRoutes && !isPeeking ? "visible" : "down"}

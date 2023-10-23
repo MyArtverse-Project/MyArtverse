@@ -6,7 +6,7 @@ export default function GroupTitle({
   children: React.ReactNode
 }) {
   return (
-    <div id="group-title" className="flex items-center">
+    <div className="flex items-center">
       <div>{prefix}</div>
       <h3 className="not-prose font-bold font-inter text-2xl">{children}</h3>
     </div>

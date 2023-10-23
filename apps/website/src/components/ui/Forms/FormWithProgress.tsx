@@ -17,7 +17,7 @@ export default function FormWithProgress({
 
   const FormProgress = () => {
     return (
-      <div id="form-progress-wrapper">
+      <div>
         {progress.map(({ item, isComplete }, i) => (
           <div key={i} className="px-5 flex gap-x-4 items-center pt-3 pb-1.5">
             <div
@@ -45,10 +45,7 @@ export default function FormWithProgress({
   }
 
   return (
-    <div
-      data-biro-ui-form-progress=""
-      className="flex mx-auto max-w-screen-xl px-9 gap-x-4 mt-12"
-    >
+    <div className="flex mx-auto max-w-screen-xl px-9 gap-x-4 mt-12">
       <div className="w-1/4 flex-shrink-0">
         <aside className="sticky top-24 flex flex-col gap-y-5">
           <FormProgress />

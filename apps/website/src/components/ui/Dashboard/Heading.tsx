@@ -6,7 +6,7 @@ export default function Heading({
   buttons?: NonNullable<React.ReactElement>
 }) {
   return (
-    <div data-d-heading="" className="flex justify-between items-center">
+    <div className="flex justify-between items-center">
       <span>{title}</span>
       <div>{buttons}</div>
     </div>

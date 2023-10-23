@@ -81,11 +81,9 @@ export default function FolderItem({
 
   return (
     <div
-      id="folder-item"
       className={clsx(!nestedItem ? "w-full" : "w-full relative")}
       aria-expanded={!children ? undefined : isExpand}
       // Data attribute for debugging purposes in production
-      data-has-subitems={!children ? undefined : ""}
       {...attributes}
     >
       <Button

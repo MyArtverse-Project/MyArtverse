@@ -46,7 +46,8 @@ export default function InputField({
           spellCheck={false}
         />
       </label>
-      <div data-error-boundary=""></div>
+      {/* Error boundary */}
+      <div></div>
     </div>
   )
 }

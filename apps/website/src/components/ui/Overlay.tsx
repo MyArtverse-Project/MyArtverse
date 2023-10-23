@@ -36,9 +36,7 @@ export default function Overlay({
           state ? "opacity-100" : "opacity-0 pointer-events-none"
         )}
       />
-      <div id="overlay-wrapper" className="fixed z-[100]">
-        {children}
-      </div>
+      <div className="fixed z-[100]">{children}</div>
     </Portal>
   )
 }

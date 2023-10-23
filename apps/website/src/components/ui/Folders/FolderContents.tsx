@@ -3,9 +3,5 @@ export default function FolderContents({
 }: {
   children: React.ReactNode
 }) {
-  return (
-    <div id="folder-contents" className="w-full">
-      {children}
-    </div>
-  )
+  return <div className="w-full">{children}</div>
 }

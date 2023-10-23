@@ -3,9 +3,5 @@ export default function GroupButtons({
 }: {
   children: React.ReactNode
 }) {
-  return (
-    <div id="group-buttons-wrapper" className="flex items-center">
-      {children}
-    </div>
-  )
+  return <div className="flex items-center">{children}</div>
 }

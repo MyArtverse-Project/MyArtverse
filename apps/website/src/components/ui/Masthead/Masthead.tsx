@@ -23,5 +23,5 @@ export function Avatar() {
 export function Info() {}
 
 export default function Masthead({ children }: { children?: React.ReactNode }) {
-  return <div data-masthead-constructor="">{children}</div>
+  return <div>{children}</div>
 }

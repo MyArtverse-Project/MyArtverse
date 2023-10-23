@@ -15,5 +15,5 @@ export default function Comment({
   editable?: boolean
   favCount?: number
 }) {
-  return <div id="comment">{children}</div>
+  return <div>{children}</div>
 }

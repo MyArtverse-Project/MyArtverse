@@ -34,7 +34,6 @@ export default function GridResponsive({
 
   return (
     <div
-      id="grid-responsive-wrapper"
       style={{
         display: "grid",
         gridTemplateColumns: `repeat(${constraint}, minmax(${breakpoint}px, 1fr))`

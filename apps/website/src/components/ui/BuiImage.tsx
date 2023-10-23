@@ -55,7 +55,6 @@ export default function BuiImage({
 
   return (
     <div
-      id="img-shield"
       className="relative before:absolute before:inset-0 before:z-[2]"
       style={{
         aspectRatio,

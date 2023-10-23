@@ -30,7 +30,6 @@ export default function Modal({
   return (
     <Overlay state={state} toggler={toggler}>
       <motion.div
-        id="modal-transition"
         initial={{ opacity: 0, y: positionInitial, x: "-50%" }}
         animate={!state ? modalInitial : modalActive}
         transition={{

@@ -17,9 +17,9 @@ export async function generateMetadata(
 
 export default function Page() {
   return (
-    <div data-group-mode="visual" className="flex w-full gap-3">
-      <div id="l-seperator" className="flex-shrink-0 w-1/2"></div>
-      <div id="r-seperator" className="flex-shrink-0 w-1/2">
+    <div className="flex w-full gap-3">
+      <div className="flex-shrink-0 w-1/2"></div>
+      <div className="flex-shrink-0 w-1/2">
         <Group>
           <Group.Header>About Username</Group.Header>
           <Group.HeaderButtons>

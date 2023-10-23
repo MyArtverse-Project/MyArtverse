@@ -24,16 +24,11 @@ export default function Tabs({
   const pathname = usePathname()
 
   return (
-    <div
-      data-next-pathname={pathname}
-      id="biro-ui-tab-row"
-      className="flex items-center gap-x-1 py-2"
-    >
+    <div className="flex items-center gap-x-1 py-2">
       {items.map(({ text, link, icon: Icon, countIndicator }, i) => (
         <Link
           key={i}
           prefetch
-          id="tab-link"
           href={`${baseURL}${link}` as any}
           className={clsx(
             "flex items-center px-4 py-2 transition-colors rounded-md gap-x-2 group relative before:absolute before:left-0 before:right-0 before:-bottom-2 before:block before:h-0.5",

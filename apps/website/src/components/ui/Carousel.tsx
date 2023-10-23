@@ -14,7 +14,7 @@ export default function Carousel({
   seeAllLink?: string
 }) {
   return (
-    <Element id="carousel-root">
+    <Element>
       <div className="flex items-center justify-between gap-x-1 px-3.5 py-2">
         <div>{title}</div>
         <Button
@@ -27,7 +27,8 @@ export default function Carousel({
         </Button>
       </div>
       <Separator dir="horizontal" padding="0.25rem" />
-      <div id="carousel-contents">{children}</div>
+      {/* Carousel contents */}
+      <div>{children}</div>
     </Element>
   )
 }

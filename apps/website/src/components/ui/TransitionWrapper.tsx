@@ -7,7 +7,6 @@ export default function TransitionWrapper({
 }) {
   return (
     <Transition
-      data-transition-wrapper=""
       enter="transition duration-[200ms] ease"
       enterFrom="transform -translate-y-1 opacity-0"
       enterTo="transform opacity-100"

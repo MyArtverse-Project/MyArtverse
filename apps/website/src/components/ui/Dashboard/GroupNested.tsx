@@ -6,7 +6,7 @@ export default function GroupNested({
   children?: React.ReactNode
 }) {
   return (
-    <div data-dashboard-nested-group="">
+    <div>
       <h3 className="not-prose block">{title}</h3>
       <div>{children}</div>
     </div>

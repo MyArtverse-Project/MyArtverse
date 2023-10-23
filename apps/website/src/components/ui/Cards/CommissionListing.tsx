@@ -14,10 +14,7 @@ export default function CommissionsListing({
   description: string
 }) {
   return (
-    <div
-      id="listing"
-      className="flex flex-col justify-start items-center w-fit my-4"
-    >
+    <div className="flex flex-col justify-start items-center w-fit my-4">
       <div className="relative w-[568px] h-[156px] rounded-md overflow-hidden">
         <div className="hover:scale:90">
           <BuiImage src={img} />

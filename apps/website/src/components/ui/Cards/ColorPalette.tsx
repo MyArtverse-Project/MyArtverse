@@ -10,11 +10,7 @@ export default function ColorPalette({
   height?: number | string
 }) {
   return (
-    <ul
-      data-color-palette=""
-      className="grid grid-flow-col"
-      style={{ width, height }}
-    >
+    <ul className="grid grid-flow-col" style={{ width, height }}>
       {palette.map(({ color, name }, index) => {
         return (
           <li

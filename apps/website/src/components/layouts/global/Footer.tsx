@@ -98,10 +98,7 @@ export default function Footer() {
             ))}
           </div>
         </section>
-        <section
-          id="copyright"
-          className="p-4 text-center text-sm text-subtext prose-p:my-4"
-        >
+        <section className="p-4 text-center text-sm text-subtext prose-p:my-4">
           <p>
             {`MyFursona is an open source project licensed under Apache License 2.0.
              © 2022-${new Date().getFullYear()} Fusky Labs Software Ltd.`}

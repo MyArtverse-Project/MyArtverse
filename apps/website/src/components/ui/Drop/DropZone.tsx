@@ -69,7 +69,6 @@ export default function DropZone() {
         >
           <input
             type="file"
-            id="fileInput"
             style={{ display: "none" }}
             onChange={handleFileInputChange}
           />
@@ -86,7 +85,6 @@ export default function DropZone() {
         >
           <input
             type="file"
-            id="fileInput"
             style={{ display: "none" }}
             onChange={handleFileInputChange}
           />
