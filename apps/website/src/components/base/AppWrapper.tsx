@@ -19,7 +19,7 @@ export default function AppWrapper({
       {/* Platform announcements sent through the API goes here */}
       <div id="announcements"></div>
       <DynamicLayout>
-        <div id="skip-navigation" className="min-h-[calc(100dvh-3.75rem)]">
+        <div id="sn" className="min-h-[calc(100dvh-3.75rem)]">
           {children}
         </div>
       </DynamicLayout>

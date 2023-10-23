@@ -1,10 +1,8 @@
 import type { Metadata } from "next"
 import { Inter, Open_Sans } from "next/font/google"
 import "@myfursona/biro-ui/styles/globals.scss"
-import "./loader.scss"
 import "react-quill/dist/quill.snow.css"
 import { ClientInit, Analytics, MyFursonaApp } from "@/components/base"
-import Preloader from "@/components/base/Preloader"
 import Providers from "@/context"
 
 const inter = Inter({
@@ -66,7 +64,6 @@ export default function RootLayout({
       <body className="bg-100 text-700 !overflow-x-hidden bg-background prose-headings:font-bold prose-headings:font-inter text-sm font-medium font-open-sans prose-h1:text-5xl prose-h2:text-[2.75rem] prose-h3:text-4xl prose-h4:text-[2rem] prose-h5:text-[1.65rem]">
         <Analytics />
         <ClientInit />
-        <Preloader />
         <Providers>
           <MyFursonaApp>{children}</MyFursonaApp>
         </Providers>

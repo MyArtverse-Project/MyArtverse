@@ -5,9 +5,9 @@ import {
   LuSparkles as Sparkles
 } from "react-icons/lu"
 import { FursonaCard } from "@/components/ui/Cards"
-import type { FursonaStatus } from "@/types/Fursonas"
 import ShelfSection from "./ShelfSection"
 import { MarginClamp } from "@/components/ui"
+import { FursonaStatus } from "@/types"
 
 export default function Browse() {
   const RandomizedFursonaCards = () => {
