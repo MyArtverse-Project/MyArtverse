@@ -1,7 +1,7 @@
 "use client"
 import { MDXProvider } from "@mdx-js/react"
 import { useMDXComponents } from "./mdx-components"
-import CommunityGuidelines from "./community-guidelines.mdx"
+import CommunityGuidelines from "./terms-of-service.mdx"
 
 export default function Home() {
   const customComponents = useMDXComponents({})
