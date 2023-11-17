@@ -14,8 +14,7 @@
 </div>
 
 <p align="center">
-  The <strong>MyFursona</strong> web and desktop client written in Next.js,
-  Tailwind CSS, and Tauri.
+  The <strong>MyFursona</strong> web and desktop client written in Next.js.
 </p>
 
 ## Contributing

@@ -10,10 +10,7 @@
   ],
   "scripts": {
     "dev": "dotenv -- turbo dev --filter=website --no-daemon",
-    "dev:client": "dotenv -- cd apps/client && yarn tauri dev",
     "build": "turbo build --filter=website",
-    "build:client": "cd apps/client && yarn tauri build",
-    "build:all": "concurrently -n web,desktop \"yarn turbo build\" \"yarn build:client\"",
     "prepare": "husky install"
   },
   "devDependencies": {
