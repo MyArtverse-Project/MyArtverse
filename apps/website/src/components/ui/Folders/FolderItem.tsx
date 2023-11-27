@@ -44,8 +44,8 @@ export default function FolderItem({
       ? FolderClosed
       : FolderOpen
     : newItem
-    ? FolderPlus
-    : Folder
+      ? FolderPlus
+      : Folder
 
   if (newItem && expanded) {
     throw new Error(
