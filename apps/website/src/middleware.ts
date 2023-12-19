@@ -1,7 +1,8 @@
+import type { NextRequest } from "next/server"
 import { NextResponse } from "next/server"
 import { generateCSP } from "./utils/generateCSP"
 
-export default function middleware() {
+export function middleware(request: NextRequest) {
   const generatedNonce = Buffer.from(crypto.randomUUID()).toString("base64")
 
   const csp = generateCSP({
@@ -33,26 +34,23 @@ export default function middleware() {
       "https://js.stripe.com"
     ],
     "frame-ancestors": ["none"],
-    "img-src": [
-      "self",
-      "data:",
-      "https:",
-      "images.ctfassets.net",
-      "c.bing.com",
-      "c.clarity.ms"
-    ],
+    "img-src": ["self", "data:", "https:", "c.bing.com", "c.clarity.ms"],
     "upgrade-insecure-requests": true
   })
 
-  const requestHeaders = new Headers()
+  const requestHeaders = new Headers(request.headers)
 
-  requestHeaders.set("Content-Encoding", "br")
   requestHeaders.set("Content-Security-Policy", csp)
   requestHeaders.set("x-nonce", generatedNonce)
 
   const response = NextResponse.next({
-    headers: requestHeaders
+    request: {
+      headers: requestHeaders
+    }
   })
+
+  response.headers.set("Content-Encoding", "br")
+  response.headers.set("Content-Security-Polilcy", csp)
 
   return response
 }
@@ -66,6 +64,12 @@ export const config = {
      * - _next/image (image optimization files)
      * - favicon.ico (favicon file)
      */
-    "/((?!api|_next/static|_next/image|favicon.ico).*)"
+    {
+      source: "/((?!api|_next/static|_next/image|favicon.ico).*)",
+      missing: [
+        { type: "header", key: "next-router-prefetch" },
+        { type: "header", key: "purpose", value: "prefetch" }
+      ]
+    }
   ]
 }
