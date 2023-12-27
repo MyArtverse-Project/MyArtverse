@@ -21,7 +21,7 @@
     "husky": "^8.0.0",
     "lint-staged": "^14.0.1",
     "prettier": "^3.0.3",
-    "turbo": "^1.10.13"
+    "turbo": "^1.11.2"
   },
   "lint-staged": {
     "apps/**": "yarn prettier --write .",

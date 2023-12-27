@@ -4,6 +4,8 @@ import { usePathname } from "next/navigation"
 import SkipNav from "./SkipNav"
 import { DashboardLayout, GlobalLayout } from "../layouts"
 
+import "swiper/css"
+
 export default function AppWrapper({
   children
 }: {
@@ -18,11 +20,13 @@ export default function AppWrapper({
       <SkipNav />
       {/* Platform announcements sent through the API goes here */}
       <div id="announcements"></div>
-      <DynamicLayout>
-        <div id="sn" className="min-h-[calc(100dvh-3.75rem)]">
-          {children}
-        </div>
-      </DynamicLayout>
+      <div className="contents" id="dynamic-layout-wrapper">
+        <DynamicLayout>
+          <div id="skip-nav" className="min-h-[calc(100dvh-3.75rem)]">
+            {children}
+          </div>
+        </DynamicLayout>
+      </div>
     </div>
   )
 }

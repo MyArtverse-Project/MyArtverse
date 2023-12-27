@@ -14,17 +14,17 @@
 </div>
 
 <p align="center">
-  The <strong>MyFursona</strong> web and desktop client written in Next.js.
+  The <strong>MyFursona</strong> web and desktop client
+  written in Next.js, Tailwind CSS, and Headless UI! Uses
+  <a href="https://github.com/pmndrs/jotai">Jotai</a> for state management.
 </p>
 
 ## Contributing
 
 ### Prerequisites
 
-- Node.js (versions 18 or higher)
+- Node.js (version 20 or higher)
 - Yarn
-- [Optional] Rust, for building the standalone desktop client (versions 1.72
-  or higher)
 
 ### Setup and Installation
 
@@ -38,17 +38,21 @@ yarn
 yarn dev
 ```
 
-You can now access http://localhost:3000 on your browser.
+You can now access http://localhost:3000 on your browser!
 
 It's also recommended to copy the `.env` file on the root (i.e. For making changes
 to Stripe and/or PayPal payments), copy the `.env.local.example` file from the
 root directory:
 
-```console
-# For Unix systems or using Git Bash/WSL
-cp .env.local.example .env.local
+#### Unix systems or Git Bash/WSL
 
-# For Windows systems
+```sh
+cp .env.local.example .env.local
+```
+
+#### Windows
+
+```batch
 copy .env.local.example .\.env.local /a
 ```
 
@@ -57,11 +61,8 @@ to test your own environment.
 
 ## Commands
 
-- `yarn dev` - Serves a local web app on
-- `yarn dev:client` - Opens a desktop client, will require Rust
+- `yarn dev` - Serves a local web app
 - `yarn build` - Builds the web app with Turborepo and caches it on Vercel
-- `yarn build:client` - Builds and bundles the desktop app for production
-- `yarn build:all` - Builds both the web and desktop clients
 
 ## License
 

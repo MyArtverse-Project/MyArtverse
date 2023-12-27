@@ -1,17 +1,8 @@
 import { forwardRef } from "react"
 import Link from "next/link"
-import clsx from "clsx"
-import type { VariantProps } from "class-variance-authority"
 import { cva } from "class-variance-authority"
-import type {
-  BuiButtonProps,
-  Sizes as ButtonSizes,
-  PartialRecord,
-  ButtonVariants
-} from "@/types"
-
-type ButtonVariantsRecord = PartialRecord<ButtonVariants>
-type ButtonSizesRecord = PartialRecord<ButtonSizes>
+import type { BuiButtonProps } from "@/types"
+import clsx from "clsx"
 
 const Button = forwardRef(
   (
@@ -27,11 +18,6 @@ const Button = forwardRef(
       suffixIcon,
       href,
       count,
-      /**
-       * Adding this property will override the `variant` and will ignore them
-       * This is behavor intended for custom styling
-       */
-      className,
       ...attributes
     }: BuiButtonProps,
     ref
@@ -62,37 +48,13 @@ const Button = forwardRef(
             right: ["text-right justify-end"]
           }
         },
-        compoundVariants: [
-          { intent: "primary", size: "medium", class: "uppercase" }
-        ],
+        compoundVariants: [{ intent: "primary", size: "medium" }],
         defaultVariants: {
           intent: "primary",
           size: "medium"
         }
       }
     )
-    const baseStyles = ""
-
-    const sizes: ButtonSizesRecord = {
-      small: !iconOnly ? "px-2.5 py-1" : "p-1.5",
-      big: !iconOnly ? "px-4 py-2" : "p-2"
-    }
-
-    const variants: ButtonVariantsRecord = {
-      primary: "",
-      secondary: "",
-      tritery: "",
-      warning: "",
-      error: ""
-    }
-
-    const positions = {}
-
-    const sizeDynamic = sizes[size ?? "big"]
-    const variantsDynamic = className
-      ? className
-      : variants[variant ?? "primary"]
-    const positionDynamic = positions[position ?? "center"]
 
     const DynamicElement = !href ? "button" : Link
 
@@ -104,9 +66,10 @@ const Button = forwardRef(
         type={!href ? type ?? "button" : undefined}
         aria-disabled={disabled ?? undefined}
         className={clsx(
-          className
-            ? className
-            : [baseStyles, sizeDynamic, variantsDynamic, positionDynamic]
+          buttonVars({
+            positions: position,
+            intent: variant
+          })
         )}
         {...attributes}
       >

@@ -29,9 +29,8 @@ export default function Footer() {
         { text: "FAQ" },
         { text: "Brand" },
         { text: "Developers" },
-        { text: "Report issue" },
         { text: "Contributing" },
-        { text: "Open Source", link: "https://github.com/MyFursona-Project" },
+        { text: "Open Source" },
         { text: "Licenses" }
       ]
     },
@@ -39,7 +38,6 @@ export default function Footer() {
       heading: "Legal",
       links: [
         { text: "About MyFursona" },
-
         { text: "Community Guidelines" },
         { text: "Terms of Service" },
         { text: "Privacy Policy" }

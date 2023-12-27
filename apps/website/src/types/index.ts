@@ -1,9 +1,6 @@
 import type { UrlObject } from "url"
 import type { IconType } from "react-icons"
 
-/**
- * Fursona types
- */
 export type FursonaStatus =
   | "adopted"
   | "upForAdopt"
@@ -21,10 +18,6 @@ export type PartialRecord<K extends PropertyKey, T = string> = Partial<
   Record<K, T>
 >
 export type PartialArray<T> = Array<Partial<T>>
-
-// Pick and Omit versions of type literals
-export type PickUnion<T, U extends T> = T extends U ? T : never
-export type OmitUnion<T, U extends T> = T extends U ? never : T
 
 export type Theme = "system" | "light" | "dark"
 
@@ -46,7 +39,7 @@ export type SlugRouteProps = {
   searchParams: { [key: string]: string | string[] | undefined }
 }
 
-export type ButtonVariants = OmitUnion<Variants, "success">
+export type ButtonVariants = Exclude<Variants, "success" | "info">
 
 type Positions = "left" | "center" | "right"
 

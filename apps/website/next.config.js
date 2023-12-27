@@ -1,5 +1,3 @@
-const shared = require("@myfursona-internal/config/next-config-shared")
-
 const withMDX = require("@next/mdx")({
   options: {
     extension: /\.mdx?$/,
@@ -15,7 +13,16 @@ const withPWA = require("next-pwa")({
 
 /** @type {import('next').NextConfig} */
 const nextConfig = {
-  ...shared,
+  swcMinify: true,
+  poweredByHeader: false,
+  experimental: {
+    typedRoutes: true,
+    mdxRs: true
+  },
+  images: {
+    dangerouslyAllowSVG: true,
+    contentDispositionType: "attachment"
+  },
   transpilePackages: ["lodash-es"],
   async rewrites() {
     return [
