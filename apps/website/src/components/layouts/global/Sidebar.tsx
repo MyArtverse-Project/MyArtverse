@@ -15,7 +15,7 @@ import {
   LuBox as BoxIcon
 } from "react-icons/lu"
 import { MyFursona } from "../../icons"
-import Overlay from "../../ui/Overlay"
+import Overlay from "../../ui/Modal/Overlay"
 import { Button } from "../../ui/Buttons"
 import { MenuGroup, MenuItem } from "../../ui/Menu"
 import Separator from "../../ui/Separator"

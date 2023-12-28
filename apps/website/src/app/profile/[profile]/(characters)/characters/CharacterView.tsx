@@ -4,13 +4,15 @@ import { useState } from "react"
 import {
   LuCheckCircle2 as CheckCircle2Icon,
   LuFolderPlus as FolderPlus,
-  LuX as XIcon
+  LuX as XIcon,
+  LuFilter as FilterIcon
 } from "react-icons/lu"
 import { FolderView, GridResponsive, Modal } from "@/components/ui"
 import { FursonaCard, PinnedCharacter } from "@/components/ui/Cards"
 import { Button } from "@/components/ui/Buttons"
 import { InputField } from "@/components/ui/Forms"
 import clsx from "clsx"
+import SearchBox from "@/components/ui/Forms/SearchBox"
 
 export default function CharacterView() {
   const [createFolderModal, setFolderModalState] = useState(false)
@@ -53,6 +55,10 @@ export default function CharacterView() {
         <FolderView.Item newItem onClick={toggleCreateFolderModal} />
       </FolderView.Shelf>
       <FolderView.Contents>
+        <div className="flex gap-x-2.5 w-full mb-4">
+          <SearchBox placeholder="Search for characters" />
+          <Button prefixIcon={<FilterIcon size={20} />}>Filter</Button>
+        </div>
         <PinnedCharacter
           artist="Ratking"
           colors={[

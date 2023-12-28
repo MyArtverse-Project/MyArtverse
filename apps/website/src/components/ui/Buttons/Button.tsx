@@ -65,7 +65,8 @@ const Button = forwardRef(
         aria-disabled={disabled ?? undefined}
         className={buttonVars({
           positions: position,
-          intent: variant
+          intent: variant,
+          size
         })}
         {...attributes}
       >

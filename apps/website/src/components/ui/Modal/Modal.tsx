@@ -1,7 +1,7 @@
 "use client"
 
 import clsx from "clsx"
-import Overlay from "../Overlay"
+import Overlay from "./Overlay"
 import { motion } from "framer-motion"
 
 export default function Modal({
@@ -22,11 +22,13 @@ export default function Modal({
     y: positionInitial,
     x: "-50%"
   }
+
   const modalActive = {
     opacity: 1,
     y: "-50%",
     x: "-50%"
   }
+
   return (
     <Overlay state={state} toggler={toggler}>
       <motion.div

@@ -1,6 +1,6 @@
 "use client"
 
-import { useEffect, useRef } from "react"
+import { useState, useEffect, useRef } from "react"
 import Image from "next/image"
 import { Button } from "@/components/ui/Buttons"
 import {
@@ -11,7 +11,6 @@ import {
   LuHome as HomeIcon,
   LuLayoutGrid as LayoutGridIcon,
   LuMoreVertical as MoreVerticalIcon,
-  LuStore as StoreIcon,
   LuUserPlus as UserPlusIcon
 } from "react-icons/lu"
 import { Tabs, SocialsRow, BuiImage } from "@/components/ui"
@@ -42,6 +41,13 @@ export default function ProfileMasthead({
   const { setPeek, setPeeking } = useDetailPeekContext()
 
   const profileDetailsRef = useRef<HTMLDivElement>(null)
+
+  const [modalState, setModalState] = useState(false)
+
+  const toggleModal = () => {
+    setModalState(!modalState)
+    return
+  }
 
   useEffect(() => {
     setPeek.img("/img/examples/ozzy/5.png")
@@ -117,7 +123,7 @@ export default function ProfileMasthead({
                 <span>Username</span>
                 <span aria-hidden></span>
               </h2>
-              <div className="flex items-start gap-x-2.5 relative z-2">
+              <div className="flex items-start gap-x-2.5 relative z-[6]">
                 <Button
                   prefixIcon={<BrushIcon size={20} />}
                   aria-label="View Username's Commissions"
@@ -184,19 +190,14 @@ export default function ProfileMasthead({
                 countIndicator: 5
               },
               {
+                icon: BrushIcon,
+                text: "Listings",
+                link: "/listings"
+              },
+              {
                 icon: LayoutGridIcon,
                 text: "Gallery",
                 link: "/gallery"
-              },
-              {
-                icon: StoreIcon,
-                text: "Shop",
-                link: "/shop"
-              },
-              {
-                icon: BrushIcon,
-                text: "Commissions",
-                link: "/commissions"
               },
               {
                 icon: HeartIcon,

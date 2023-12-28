@@ -1,4 +1,5 @@
 import { Menu } from "@headlessui/react"
+import clsx from "clsx"
 import Link from "next/link"
 
 export default function DropdownItem({
@@ -23,9 +24,10 @@ export default function DropdownItem({
       {({ active }) => (
         <Link
           href={link as any}
-          className={`rounded-md w-full transition-colors ${
-            active && "bg-color-2"
-          }`}
+          className={clsx(
+            "rounded-md w-full transition-colors",
+            active && "bg-400 text-700"
+          )}
         >
           <span className="flex items-center justify-between px-3 py-2 font-medium select-none w-max gap-x-2">
             {prefix}

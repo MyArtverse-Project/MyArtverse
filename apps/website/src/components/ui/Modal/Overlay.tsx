@@ -24,7 +24,6 @@ export default function Overlay({
     }
 
     bodyStyle.overflowY = "hidden"
-    return
   }, [state])
 
   return (

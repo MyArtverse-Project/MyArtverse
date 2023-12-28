@@ -69,7 +69,7 @@ export default function RootLayout({
       <head>
         <link rel="mask-icon" href="./safari-pinned-tab.svg" color="9e00ff" />
       </head>
-      <body className="bg-100 text-700 !overflow-x-hidden bg-background prose-headings:font-bold prose-headings:font-inter text-sm font-medium font-open-sans prose-h1:text-5xl prose-h2:text-[2.75rem] prose-h3:text-4xl prose-h4:text-[2rem] prose-h5:text-[1.65rem]">
+      <body className="bg-100 text-700 !overflow-x-hidden bg-background prose-headings:font-bold prose-headings:font-inter text-sm font-medium font-open-sans">
         <Analytics />
         <ClientInit />
         <Providers>
