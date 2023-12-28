@@ -2,7 +2,6 @@ import { forwardRef } from "react"
 import Link from "next/link"
 import { cva } from "class-variance-authority"
 import type { BuiButtonProps } from "@/types"
-import clsx from "clsx"
 
 const Button = forwardRef(
   (
@@ -29,23 +28,22 @@ const Button = forwardRef(
       {
         variants: {
           intent: {
-            primary: ["border-transparent bg-300 hover:bg-400"],
-            secondary: [
-              "bg-transparent border-300 hover:bg-400 hover:border-400"
-            ],
-            tritery: ["border-transparent bg-transparent hover:bg-400"],
-            warning: ["bg-transparent"],
-            error: ["bg-transparent"]
+            primary: "border-transparent bg-300 hover:bg-400",
+            secondary:
+              "bg-transparent border-300 hover:bg-400 hover:border-400",
+            tritery: "border-transparent bg-transparent hover:bg-400",
+            warning: "bg-transparent",
+            error: "bg-transparent"
           },
           size: {
-            small: !iconOnly ? ["px-2.5 py-1"] : "p-1.5",
-            medium: !iconOnly ? ["px-4 py-2"] : "p-2",
-            big: !iconOnly ? ["px-5 py-2.5"] : "p-3"
+            small: !iconOnly ? "px-2.5 py-1" : "p-1.5",
+            medium: !iconOnly ? "px-4 py-2" : "p-2",
+            big: !iconOnly ? "px-5 py-2.5" : "p-3"
           },
           positions: {
-            left: ["text-left justify-start"],
-            center: ["text-center justify-center"],
-            right: ["text-right justify-end"]
+            left: "text-left justify-start",
+            center: "text-center justify-center",
+            right: "text-right justify-end"
           }
         },
         compoundVariants: [{ intent: "primary", size: "medium" }],
@@ -65,12 +63,10 @@ const Button = forwardRef(
         href={href ?? undefined}
         type={!href ? type ?? "button" : undefined}
         aria-disabled={disabled ?? undefined}
-        className={clsx(
-          buttonVars({
-            positions: position,
-            intent: variant
-          })
-        )}
+        className={buttonVars({
+          positions: position,
+          intent: variant
+        })}
         {...attributes}
       >
         {prefixIcon}

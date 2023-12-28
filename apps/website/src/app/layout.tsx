@@ -1,4 +1,4 @@
-import type { Metadata } from "next"
+import type { Metadata, Viewport } from "next"
 import { Inter, Open_Sans } from "next/font/google"
 import "@myfursona/biro-ui/styles/globals.scss"
 import "react-quill/dist/quill.snow.css"
@@ -40,11 +40,13 @@ export const metadata: Metadata = {
   },
   robots: "noai, noimageai, noindex, nofollow",
   manifest: "/manifest.json",
-  themeColor: "#9e00ff",
   other: {
-    "apple-mobile-web-app-status-bar": "#9e00ff",
-    copyright: "Fusky Labs Software"
+    "apple-mobile-web-app-status-bar": "#9e00ff"
   }
+}
+
+export const viewport: Viewport = {
+  themeColor: "#9e00ff"
 }
 
 export default function RootLayout({

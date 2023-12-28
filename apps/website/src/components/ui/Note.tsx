@@ -1,8 +1,4 @@
-import type {
-  PickUnion,
-  Variants as NoteVariants,
-  PartialRecord
-} from "@/types"
+import type { Variants as NoteVariants, PartialRecord } from "@/types"
 import type { IconType } from "react-icons"
 import {
   LuAlertTriangle as AlertTriangleIcon,
@@ -11,7 +7,7 @@ import {
   LuXCircle as XCircleIcon
 } from "react-icons/lu"
 
-type NoteStatus = PickUnion<
+type NoteStatus = Extract<
   NoteVariants,
   "success" | "warning" | "error" | "info"
 >
