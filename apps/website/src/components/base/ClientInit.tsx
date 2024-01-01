@@ -16,12 +16,6 @@ export default function ClientInit() {
 
     console.log(CONSOLE_MSG, "color:hsl(250,95.5%,75%")
 
-    window.MyFursona = {
-      __myfursona_version: "0.0.1",
-      profileDebug: {},
-      characterDebug: {}
-    }
-
     // OneSignal
     // OneSignal.init({
     //   appId: "test"

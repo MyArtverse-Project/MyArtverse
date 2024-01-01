@@ -1,5 +1,5 @@
 import Link from "next/link"
-import { MyFursona } from "@/components/icons"
+import { MyFursonaIcon } from "@/components/icons"
 import { Button, SearchButton } from "@/components/ui/Buttons"
 import {
   LuBell as BellIcon,
@@ -19,7 +19,7 @@ export default function Navbar() {
             <MenuIcon size={21} />
           </Button>
           <Link href="/" aria-label="Home" draggable={false}>
-            <MyFursona logoOnly size={0.7} />
+            <MyFursonaIcon logoOnly size={0.7} />
           </Link>
           <span className="opacity-50">/</span>
           <span className="font-bold">Dashboard</span>

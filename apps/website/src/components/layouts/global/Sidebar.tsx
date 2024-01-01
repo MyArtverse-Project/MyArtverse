@@ -14,10 +14,10 @@ import {
   LuAlertTriangle as AlertTriangleIcon,
   LuBox as BoxIcon
 } from "react-icons/lu"
-import { MyFursona } from "../../icons"
+import { MyFursonaIcon } from "../../icons"
 import Overlay from "../../ui/Modal/Overlay"
 import { Button } from "../../ui/Buttons"
-import { MenuGroup, MenuItem } from "../../ui/Menu"
+import Menu from "../../ui/Menu"
 import Separator from "../../ui/Separator"
 
 export default function Sidebar() {
@@ -80,22 +80,22 @@ export default function Sidebar() {
             <XIcon size={20} />
           </Button>
           <Link href="/" aria-label="Home" title="Home">
-            <MyFursona />
+            <MyFursonaIcon />
           </Link>
         </div>
         <div className="px-2.5 h-full overflow-y-scroll" role="menu">
           {SIDEBAR_ITEMS.map(({ heading, items }, index) => (
             <Fragment key={index}>
-              <MenuGroup heading={heading ?? undefined}>
+              <Menu heading={heading ?? undefined}>
                 {items.map((item, index) => (
-                  <MenuItem
+                  <Menu.Item
                     key={index}
                     name={item.name}
                     prefix={<item.icon size={20} />}
                     href="/"
                   />
                 ))}
-              </MenuGroup>
+              </Menu>
               <Separator dir="horizontal" padding="0.525rem" />
             </Fragment>
           ))}

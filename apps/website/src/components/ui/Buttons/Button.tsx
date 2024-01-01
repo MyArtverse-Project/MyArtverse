@@ -63,6 +63,7 @@ const Button = forwardRef(
         href={href ?? undefined}
         type={!href ? type ?? "button" : undefined}
         aria-disabled={disabled ?? undefined}
+        role={!href ? undefined : "button"}
         className={buttonVars({
           positions: position,
           intent: variant,

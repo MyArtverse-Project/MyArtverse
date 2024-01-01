@@ -20,7 +20,7 @@ import type { IconType } from "react-icons"
 import { toLower } from "lodash"
 import { Menu } from "@headlessui/react"
 import { useSidebarContext } from "@/context"
-import { MyFursona } from "../../icons"
+import { MyFursonaIcon } from "../../icons"
 import { Button, SearchButton } from "../../ui/Buttons"
 import { Separator } from "../../ui"
 import { Dropdown } from "../../ui/Dropdown"
@@ -79,7 +79,7 @@ export default function Navbar() {
         </div>
         <div className="mobile-only-lg">
           <Link href="/" aria-label="Home" title="Home">
-            <MyFursona logoOnly />
+            <MyFursonaIcon logoOnly />
           </Link>
         </div>
       </div>

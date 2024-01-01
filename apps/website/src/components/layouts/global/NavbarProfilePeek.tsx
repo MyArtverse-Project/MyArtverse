@@ -3,15 +3,18 @@
 import Link from "next/link"
 import { usePathname } from "next/navigation"
 import { type AnimationProps, type Variants, motion } from "framer-motion"
-import { useDetailPeekContext } from "@/context"
-import { MyFursona } from "../../icons"
+import { useAtom } from "jotai"
+import { isProfilePeeking, profilePeek } from "@/atoms"
+import { MyFursonaIcon } from "../../icons"
 import { BuiImage } from "../../ui"
 import { Button } from "../../ui/Buttons"
 
 export default function NavbarProfilePeek() {
-  const { img: peekImg, username, isPeeking } = useDetailPeekContext()
-
   const handlePeekRoutes = usePathname().includes("/@")
+  const [isPeeking] = useAtom(isProfilePeeking)
+  const [peekInfo] = useAtom(profilePeek)
+
+  const { type, username, handle, img } = peekInfo
 
   const transitionOptions: AnimationProps["transition"] = {
     type: "spring",
@@ -36,12 +39,12 @@ export default function NavbarProfilePeek() {
   return (
     <div className="relative flex items-center">
       <Link href="/" aria-label="Home" draggable={false}>
-        <MyFursona logoOnly size={0.7} />
+        <MyFursonaIcon logoOnly size={0.7} />
       </Link>
       {/* Wordmark */}
       <motion.div
         variants={peekVariants}
-        initial={"visible"}
+        initial="visible"
         animate={handlePeekRoutes && !isPeeking ? "up" : "visible"}
         style={{
           opacity: handlePeekRoutes && !isPeeking ? 0 : 1,
@@ -56,7 +59,7 @@ export default function NavbarProfilePeek() {
           draggable={false}
           className="flex items-center"
         >
-          <MyFursona wordmarkOnly size={0.7} />
+          <MyFursonaIcon wordmarkOnly size={0.7} />
           <span className="ml-2 px-1 py-0.5 bg-red-600 text-xs rounded-sm uppercase">
             Alpha
           </span>
@@ -74,7 +77,7 @@ export default function NavbarProfilePeek() {
         transition={transitionOptions}
         className="ml-3.5 flex gap-x-2 items-center"
       >
-        {peekImg ? (
+        {img ? (
           <>
             <span className="opacity-50 text-xl ml-1">&#47;</span>
             <Button
@@ -83,7 +86,7 @@ export default function NavbarProfilePeek() {
             >
               <span className="flex items-center gap-x-2">
                 <BuiImage
-                  src={peekImg}
+                  src={img}
                   height={30}
                   width={30}
                   objectFit="cover"

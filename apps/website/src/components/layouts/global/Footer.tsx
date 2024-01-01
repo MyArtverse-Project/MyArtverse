@@ -3,7 +3,7 @@
 import Link from "next/link"
 import project from "../../../../package.json"
 import { kebabCase } from "lodash"
-import { MyFursona } from "../../icons"
+import { MyFursonaIcon } from "../../icons"
 import { BuiLink } from "../../ui"
 import { LuHeart as HeartIcon } from "react-icons/lu"
 import FooterGradient from "./FooterGraphics"
@@ -83,7 +83,7 @@ export default function Footer() {
           <div className="flex flex-col">
             <div className="flex flex-col md:mx-auto">
               <Link className="mb-4" href="/">
-                <MyFursona size={1.125} />
+                <MyFursonaIcon size={1.125} />
               </Link>
               <BuiLink href={"https://myfursona.instatus.com"}>
                 MyFursona Status

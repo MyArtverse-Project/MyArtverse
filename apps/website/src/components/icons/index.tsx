@@ -1,5 +1,5 @@
-import MyFursona from "./MyFursona"
-export { MyFursona }
+import MyFursonaIcon from "./MyFursona"
+export { MyFursonaIcon }
 export { RiTwitterXFill as XTwitter } from "react-icons/ri"
 export {
   FaYoutube as Youtube,

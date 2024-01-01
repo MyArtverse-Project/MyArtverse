@@ -45,6 +45,7 @@ export const metadata: Metadata = {
   }
 }
 
+// @ts-ignore
 export const viewport: Viewport = {
   themeColor: "#9e00ff"
 }

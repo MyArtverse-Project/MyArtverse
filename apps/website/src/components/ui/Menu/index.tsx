@@ -1,4 +1,4 @@
-import MenuGroup from "./MenuGroup"
+import { MenuGroup as Menu } from "./MenuGroup"
 import MenuItem from "./MenuItem"
 
-export { MenuGroup, MenuItem }
+export default Object.assign(Menu, { Item: MenuItem })

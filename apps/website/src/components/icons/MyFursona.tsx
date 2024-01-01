@@ -1,4 +1,4 @@
-export default function MyFursona({
+export default function MyFursonaIcon({
   logoOnly = false,
   wordmarkOnly = false,
   size = 0.7

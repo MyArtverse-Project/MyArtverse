@@ -1,6 +1,6 @@
 import { Fragment } from "react"
 import { Menu } from "@headlessui/react"
-import TransitionWrapper from "../TransitionWrapper"
+import TransitionWrapper from "../Layouts/TransitionWrapper"
 
 export default function Dropdown({
   button,

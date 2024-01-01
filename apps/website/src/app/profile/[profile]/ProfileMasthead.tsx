@@ -53,17 +53,6 @@ export default function ProfileMasthead({
     setPeek.img("/img/examples/ozzy/5.png")
     setPeek.type("profile")
     setPeek.username(handle)
-
-    window.MyFursona = {
-      __myfursona_version: "0.0.1",
-      profileDebug: {
-        uuid: "null",
-        name: "username",
-        handle: handle,
-        img: "/img/examples/ozzy/5.png",
-        isFollowing: false
-      }
-    }
   }, [setPeek, handle])
 
   useEffect(() => {

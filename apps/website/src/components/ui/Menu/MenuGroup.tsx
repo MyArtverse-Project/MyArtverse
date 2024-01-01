@@ -1,4 +1,4 @@
-export default function MenuGroup({
+export function MenuGroup({
   children,
   heading
 }: {

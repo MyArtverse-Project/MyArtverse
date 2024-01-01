@@ -1,3 +1,5 @@
+"use client"
+
 import Image from "next/image"
 
 type ImgLoadStrategy = "lazy" | "neutral" | "important"
@@ -53,6 +55,10 @@ export default function BuiImage({
 
   const setStrategy = loadingStrategy[strategy]
 
+  const handleImgLoad = () => {
+    console.log(`Image ${src} loaded!`)
+  }
+
   return (
     <div
       className="relative before:absolute before:inset-0 before:z-[2]"
@@ -80,6 +86,7 @@ export default function BuiImage({
         loading={setStrategy.loading}
         fetchPriority={setStrategy.fetchPriority}
         priority={setStrategy.priority}
+        onLoadingComplete={handleImgLoad}
       />
       <div id="loading-skeleton" className="absolute inset-0 -z-[2]" />
     </div>
