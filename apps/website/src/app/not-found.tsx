@@ -24,7 +24,9 @@ export default function NotFoundCatchAll() {
           doesn't exist anymore.
         </p>
         <div className="w-fit mx-auto mt-6">
-          <Button href="/" size="big">Go home</Button>
+          <Button href="/" size="big">
+            Go home
+          </Button>
         </div>
       </article>
     </div>
