@@ -2,7 +2,7 @@ import Link from "next/link"
 import clsx from "clsx"
 import type { AdoptionStatus, ColorPalette as Palette } from "@/types"
 import ColorPalette from "./ColorPalette"
-import BuiImage from "../BuiImage"
+import MFImage from "../BuiImage"
 import { LuHeart as Heart } from "react-icons/lu"
 import Status from "./Status"
 
@@ -43,7 +43,7 @@ export default function FursonaCard({
       {...attributes}
     >
       <div className="overflow-hidden rounded-md">
-        <BuiImage
+        <MFImage
           src={img}
           objectFit="cover"
           aspectRatio="1/1"

@@ -1,10 +1,12 @@
 "use client"
 
+import { useState } from "react"
 import Image from "next/image"
+import clsx from "clsx"
 
 type ImgLoadStrategy = "lazy" | "neutral" | "important"
 
-export default function BuiImage({
+export default function MFImage({
   src,
   alt,
   aspectRatio,
@@ -29,35 +31,29 @@ export default function BuiImage({
   React.ImgHTMLAttributes<HTMLImageElement>,
   "alt" | "onClick" | "onContextMenu" | "style"
 >) {
+  const [imgLoaded, setImgLoaded] = useState(false)
+
   const loadingStrategy: Record<
     ImgLoadStrategy,
-    Pick<
-      React.ImgHTMLAttributes<HTMLImageElement>,
-      "fetchPriority" | "loading"
-    > & { priority: boolean }
+    Pick<React.ImgHTMLAttributes<HTMLImageElement>, "fetchPriority"> & {
+      priority: boolean
+    }
   > = {
     lazy: {
       fetchPriority: "low",
-      loading: "lazy",
       priority: false
     },
     neutral: {
       fetchPriority: "auto",
-      loading: "eager",
-      priority: false
+      priority: true
     },
     important: {
       fetchPriority: "high",
-      loading: "eager",
       priority: true
     }
   }
 
   const setStrategy = loadingStrategy[strategy]
-
-  const handleImgLoad = () => {
-    console.log(`Image ${src} loaded!`)
-  }
 
   return (
     <div
@@ -83,12 +79,17 @@ export default function BuiImage({
         alt={alt ?? ""}
         decoding="async"
         sizes={sizes}
-        loading={setStrategy.loading}
         fetchPriority={setStrategy.fetchPriority}
         priority={setStrategy.priority}
-        onLoadingComplete={handleImgLoad}
+        onLoad={() => setImgLoaded(true)}
       />
-      <div id="loading-skeleton" className="absolute inset-0 -z-[2]" />
+      <div
+        id="loading-skeleton"
+        className={clsx(
+          "absolute inset-0 -z-[2] bg-red-500 animate-pulse",
+          !imgLoaded ? "" : "hidden"
+        )}
+      />
     </div>
   )
 }

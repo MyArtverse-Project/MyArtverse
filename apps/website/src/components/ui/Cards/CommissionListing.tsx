@@ -1,6 +1,6 @@
 import Image from "next/image"
 import { Button } from "../Buttons"
-import BuiImage from "../BuiImage"
+import MFImage from "../BuiImage"
 
 export default function CommissionsListing({
   description,
@@ -17,7 +17,7 @@ export default function CommissionsListing({
     <div className="flex flex-col justify-start items-center w-fit my-4">
       <div className="relative w-[568px] h-[156px] rounded-md overflow-hidden">
         <div className="hover:scale:90">
-          <BuiImage src={img} />
+          <MFImage src={img} />
         </div>
       </div>
       <div className="flex flex-col justify-between w-full mt-3">

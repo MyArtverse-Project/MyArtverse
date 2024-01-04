@@ -2,7 +2,7 @@ import ColorPalette from "./ColorPalette"
 import { ColorPalette as Colors } from "@/types"
 import { Button } from "../Buttons"
 import { LuCat as CatIcon, LuPalette as Palette } from "react-icons/lu"
-import BuiImage from "../BuiImage"
+import MFImage from "../BuiImage"
 
 export default function PinnedCharacter({
   avatar,
@@ -24,7 +24,7 @@ export default function PinnedCharacter({
       <div className="flex flex-col">
         <div className="flex flex-col justify-between">
           <div className="flex flex-row">
-            <BuiImage
+            <MFImage
               width={118}
               height={118}
               src={avatar}
@@ -50,7 +50,7 @@ export default function PinnedCharacter({
           <span>{artist}</span>
         </div>
       </div>
-      <BuiImage
+      <MFImage
         rounded={false}
         width={640}
         height={360}

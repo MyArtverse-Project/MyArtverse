@@ -10,13 +10,13 @@ import SocialsRow from "./SocialsRow"
 import Tabs from "./Tabs"
 import Switch from "./Switch"
 import BuiLink from "./BuiLink"
-import BuiImage from "./BuiImage"
+import MFImage from "./BuiImage"
 import GridResponsive from "./Layouts/GridResponsive"
 import FolderView from "./Folders"
 import Carousel from "./Carousel"
 import Comment from "./Group/Comment"
 export {
-  BuiImage,
+  MFImage,
   BuiLink,
   EmptySection,
   Modal,
