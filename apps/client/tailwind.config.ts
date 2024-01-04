@@ -3,10 +3,6 @@ import myfursonaPreset from "@myfursona-internal/config/tailwind.config"
 
 export default {
   darkMode: "class",
-  content: [
-    "./src/pages/**/*.{js,ts,jsx,tsx,mdx}",
-    "./src/components/**/*.{js,ts,jsx,tsx,mdx}",
-    "./src/app/**/*.{js,ts,jsx,tsx,mdx}"
-  ],
+  content: ["./index.html", "./src/**/*.{js,ts,jsx,tsx}"],
   presets: [myfursonaPreset]
 } as Config

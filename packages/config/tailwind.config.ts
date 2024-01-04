@@ -1,4 +1,6 @@
 import type { Config } from "tailwindcss"
+import forms from "@tailwindcss/forms"
+import typography from "@tailwindcss/typography"
 
 export default {
   content: [],
@@ -71,5 +73,6 @@ export default {
         unset: "unset"
       }
     }
-  }
+  },
+  plugins: [forms, typography]
 } as Config
