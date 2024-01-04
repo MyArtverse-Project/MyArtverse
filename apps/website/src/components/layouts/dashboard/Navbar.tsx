@@ -43,7 +43,7 @@ export default function Navbar() {
             src="/img/examples/kuro/kuro-example4.png"
             aspectRatio="1"
             width={35}
-            rounded
+            rounded={999}
           />
         </div>
       </nav>

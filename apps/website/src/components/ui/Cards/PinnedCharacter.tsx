@@ -51,7 +51,7 @@ export default function PinnedCharacter({
         </div>
       </div>
       <MFImage
-        rounded={false}
+        rounded={12}
         width={640}
         height={360}
         src={refSheetImg}
