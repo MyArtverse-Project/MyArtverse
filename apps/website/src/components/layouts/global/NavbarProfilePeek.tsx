@@ -60,8 +60,8 @@ export default function NavbarProfilePeek() {
           className="flex items-center"
         >
           <MyFursonaIcon wordmarkOnly size={0.7} />
-          <span className="ml-2 px-1 py-0.5 bg-red-600 text-xs rounded-sm uppercase">
-            Alpha
+          <span className="ml-2 px-1.5 py-1 bg-red-600 text-xs rounded-md uppercase text-active">
+            WIP
           </span>
         </Link>
       </motion.div>
@@ -91,7 +91,7 @@ export default function NavbarProfilePeek() {
                   width={30}
                   objectFit="cover"
                   aspectRatio="1/1"
-                  rounded
+                  rounded={999}
                   strategy="important"
                 />
                 <span className="font-inter text-sm">{`@${username}`}</span>

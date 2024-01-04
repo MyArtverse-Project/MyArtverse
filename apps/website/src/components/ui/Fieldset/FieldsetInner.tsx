@@ -4,6 +4,6 @@ export default function FieldsetInner({
   children?: React.ReactNode
 }) {
   return (
-    <div className="bg-100 p-3.5 border border-300 rounded-lg">{children}</div>
+    <div className="bg-100 p-4 border border-300 rounded-lg">{children}</div>
   )
 }

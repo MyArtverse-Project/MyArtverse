@@ -8,11 +8,9 @@ export default function Fieldset({
   description?: NonNullable<React.ReactElement> | string
 }) {
   return (
-    <section className="p-6 rounded-lg border border-300 bg-200">
-      <div>
-        {heading ? <h5 className="mb-4">{heading}</h5> : null}
-        {description ? <span>{description}</span> : null}
-      </div>
+    <section className="p-3.5 px-4 rounded-lg border border-300 bg-200">
+      {heading ? <h2 className="text-xl pb-0.5">{heading}</h2> : null}
+      {description ? <span>{description}</span> : null}
       <div className="pt-2">{children}</div>
     </section>
   )

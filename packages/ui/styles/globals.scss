@@ -19,7 +19,7 @@ body {
 }
 
 @layer components {
-  .hyperlink {
+  a.hyperlink {
     @apply underline text-blue-400 hover:text-blue-500;
   }
 

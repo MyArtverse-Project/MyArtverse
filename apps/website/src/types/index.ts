@@ -53,7 +53,7 @@ export type BuiButtonProps = Partial<{
   iconOnly: boolean
   disabled: boolean
   type: React.ButtonHTMLAttributes<HTMLButtonElement>["type"]
-  variant: ButtonVariants
+  variant: ButtonVariants | "error-secondary"
   position: Positions
   size: Sizes
   prefixIcon: React.ReactElement<IconType>

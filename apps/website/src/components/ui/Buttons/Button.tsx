@@ -33,7 +33,9 @@ const Button = forwardRef(
               "bg-transparent border-300 hover:bg-400 hover:border-400",
             tritery: "border-transparent bg-transparent hover:bg-400",
             warning: "bg-transparent",
-            error: "bg-transparent"
+            error:
+              "bg-error text-active hover:bg-opacity-70 border-transparent",
+            "error-secondary": "border-error hover:border-opacity-50"
           },
           size: {
             small: !iconOnly ? "px-2.5 py-1" : "p-1.5",
