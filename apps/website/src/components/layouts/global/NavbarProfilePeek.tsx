@@ -6,7 +6,7 @@ import { type AnimationProps, type Variants, motion } from "framer-motion"
 import { useAtom } from "jotai"
 import { isProfilePeeking, profilePeek } from "@/atoms"
 import { MyFursonaIcon } from "../../icons"
-import { BuiImage } from "../../ui"
+import { MFImage } from "../../ui"
 import { Button } from "../../ui/Buttons"
 
 export default function NavbarProfilePeek() {
@@ -85,7 +85,7 @@ export default function NavbarProfilePeek() {
               onClick={() => navigator.clipboard.writeText("profile something")}
             >
               <span className="flex items-center gap-x-2">
-                <BuiImage
+                <MFImage
                   src={img}
                   height={30}
                   width={30}

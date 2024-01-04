@@ -1,6 +1,6 @@
 import ColorPalette from "./ColorPalette"
 import FursonaCard from "./FursonaCard"
-import CommissionsListing from "./CommissionListing"
+import Listing from "./Listing"
 import PinnedCharacter from "./PinnedCharacter"
 
-export { ColorPalette, FursonaCard, CommissionsListing, PinnedCharacter }
+export { ColorPalette, FursonaCard, Listing, PinnedCharacter }

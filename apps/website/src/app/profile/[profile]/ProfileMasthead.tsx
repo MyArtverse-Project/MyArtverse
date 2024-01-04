@@ -13,7 +13,7 @@ import {
   LuMoreVertical as MoreVerticalIcon,
   LuUserPlus as UserPlusIcon
 } from "react-icons/lu"
-import { Tabs, SocialsRow, BuiImage } from "@/components/ui"
+import { Tabs, SocialsRow, MFImage } from "@/components/ui"
 import { Dropdown, DropdownItem } from "@/components/ui/Dropdown"
 import { useDetailPeekContext } from "@/context"
 
@@ -76,7 +76,7 @@ export default function ProfileMasthead({
         >
           <span>Change banner</span>
         </div> */}
-      <BuiImage
+      <MFImage
         aspectRatio="15/3"
         width="100vw"
         objectFit="cover"

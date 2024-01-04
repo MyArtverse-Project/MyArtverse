@@ -8,7 +8,7 @@ import {
   LuMenu as MenuIcon,
   LuPlus as PlusIcon
 } from "react-icons/lu"
-import { BuiImage } from "@/components/ui"
+import { MFImage } from "@/components/ui"
 
 export default function Navbar() {
   return (
@@ -39,7 +39,7 @@ export default function Navbar() {
           <Button iconOnly variant="tritery">
             <BellIcon size={21} />
           </Button>
-          <BuiImage
+          <MFImage
             src="/img/examples/kuro/kuro-example4.png"
             aspectRatio="1"
             width={35}

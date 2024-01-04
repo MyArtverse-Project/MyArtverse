@@ -5,7 +5,7 @@ const withMDX = require("@next/mdx")({
   }
 })
 
-/** @type {import('next-pwa')}  */
+/** @type {import('next-pwa')} */
 const withPWA = require("next-pwa")({
   dest: "public",
   register: true,

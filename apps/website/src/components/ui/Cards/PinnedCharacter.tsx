@@ -2,7 +2,7 @@ import ColorPalette from "./ColorPalette"
 import { ColorPalette as Colors } from "@/types"
 import { Button } from "../Buttons"
 import { LuCat as CatIcon, LuPalette as Palette } from "react-icons/lu"
-import MFImage from "../BuiImage"
+import MFImage from "../MFImage"
 
 export default function PinnedCharacter({
   avatar,

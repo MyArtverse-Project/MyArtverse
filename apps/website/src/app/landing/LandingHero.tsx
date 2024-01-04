@@ -1,5 +1,5 @@
 import { Button } from "@/components/ui/Buttons"
-import { BuiImage } from "@/components/ui"
+import { MFImage } from "@/components/ui"
 import ProseWrapper from "@/components/ui/ProseWrapper"
 
 export default function LandingHero() {
@@ -23,7 +23,7 @@ export default function LandingHero() {
         </div>
       </article>
       <div className="md:w-[unset] w-1/2">
-        <BuiImage
+        <MFImage
           height="27.5rem"
           aspectRatio="9/15"
           src="/img/hero/sona-render.png"

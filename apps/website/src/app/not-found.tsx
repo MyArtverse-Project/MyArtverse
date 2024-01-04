@@ -1,4 +1,4 @@
-import { BuiImage } from "@/components/ui"
+import { MFImage } from "@/components/ui"
 import { Button } from "@/components/ui/Buttons"
 import { Metadata } from "next"
 
@@ -14,7 +14,7 @@ export default function NotFoundCatchAll() {
     <div className="pt-32 pb-5 px-12 max-w-screen-lg mx-auto">
       <article className="text-center">
         <div className="flex flex-col items-center justify-center">
-          <BuiImage src="/kuro_confused.png" aspectRatio="1" width={250} />
+          <MFImage src="/kuro_confused.png" aspectRatio="1" width={250} />
           <h2 className="not-prose text-4xl font-inter font-bold text-center my-5">
             404 Not Found
           </h2>

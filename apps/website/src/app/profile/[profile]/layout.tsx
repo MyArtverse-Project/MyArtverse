@@ -47,9 +47,8 @@ export default function Layout({
         </Masthead.Tabs>
       </Masthead>
       */}
-      <MarginClamp as="main">
-        <div className="py-4">{children}</div>
-      </MarginClamp>
+
+      <div className="py-4">{children}</div>
     </>
   )
 }

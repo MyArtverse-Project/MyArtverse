@@ -26,7 +26,7 @@ export default function MFImage({
   sizes?: any
   strategy?: ImgLoadStrategy
   objectFit?: React.CSSProperties["objectFit"]
-  rounded?: boolean
+  rounded?: number
 } & Pick<
   React.ImgHTMLAttributes<HTMLImageElement>,
   "alt" | "onClick" | "onContextMenu" | "style"
@@ -63,7 +63,7 @@ export default function MFImage({
         height,
         width,
         overflow: "hidden",
-        borderRadius: !rounded ? 0 : 9999
+        borderRadius: rounded
       }}
       draggable="false"
       {...attributes}

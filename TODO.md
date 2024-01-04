@@ -12,13 +12,13 @@
 
 ### Pages
 
-- [ ] Settings Page
+- [x] Settings Page
 - [ ] Completed Landing Page
 - [ ] Terms and Service
 - [ ] Pricing Page
 - [ ] Character
 - [ ] Art Page
-- [ ] Character Shop Page
+- [x] Character Shop Page
 - [ ] Character Gallery Page
 
 ### Functionality
