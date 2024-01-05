@@ -1,5 +1,3 @@
-import Script from "next/script"
-
 import { headers } from "next/headers"
 import dedent from "dedent"
 
@@ -12,17 +10,16 @@ export default function Analytics() {
   return (
     <>
       {/* Site analytics - Umami */}
-      <Script
+      <script
         id="umami"
         defer
         src="https://analytics.eu.umami.is/script.js"
         data-website-id={umamiId}
       />
       {/* Behavior analytics - Microsoft Clarity */}
-      <Script
+      <script
         id="clarity"
         nonce={nonce}
-        strategy="beforeInteractive"
         dangerouslySetInnerHTML={{
           __html: dedent`
             (function(c,l,a,r,i,t,y){

@@ -18,6 +18,13 @@ body {
   }
 }
 
+@layer base {
+  h1,
+  h2 {
+    @apply font-inter font-bold;
+  }
+}
+
 @layer components {
   a.hyperlink {
     @apply underline text-blue-400 hover:text-blue-500;

@@ -23,6 +23,7 @@ export const metadata: Metadata = {
     template: "%s - MyFursona",
     default: "MyFursona"
   },
+  formatDetection: { telephone: false, address: false },
   keywords: [
     "fur",
     "furries",
@@ -32,6 +33,7 @@ export const metadata: Metadata = {
     "furry fandom",
     "toyhouse",
     "furaffinity",
+    "fur affinity",
     "weasyl"
   ],
   openGraph: {
@@ -45,7 +47,6 @@ export const metadata: Metadata = {
   }
 }
 
-// @ts-ignore
 export const viewport: Viewport = {
   themeColor: "#9e00ff"
 }
@@ -69,11 +70,11 @@ export default function RootLayout({
     >
       <head>
         <link rel="mask-icon" href="./safari-pinned-tab.svg" color="9e00ff" />
+        <Analytics />
       </head>
       <body className="bg-100 text-700 !overflow-x-hidden bg-background prose-headings:font-bold prose-headings:font-inter text-sm font-medium font-open-sans">
-        <Analytics />
-        <ClientInit />
         <Providers>
+          <ClientInit />
           <MyFursonaApp>{children}</MyFursonaApp>
         </Providers>
       </body>
