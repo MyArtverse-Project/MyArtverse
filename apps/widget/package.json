@@ -1,0 +1,45 @@
+{
+  "name": "@myfursona/widget",
+  "private": true,
+  "version": "0.0.0",
+  "type": "module",
+  "workspaces": {
+    "nohoist": [
+      "@types/react",
+      "@types/react-dom",
+      "class-variance-authority",
+      "react",
+      "react-dom"
+    ]
+  },
+  "scripts": {
+    "dev": "vite",
+    "build": "tsc && vite build",
+    "lint": "eslint . --ext ts,tsx --report-unused-disable-directives --max-warnings 0",
+    "preview": "vite preview"
+  },
+  "dependencies": {
+    "@headlessui/react": "^1.7.17",
+    "@myfursona/biro-ui": "*",
+    "react": "^18.2.0",
+    "react-dom": "^18.2.0"
+  },
+  "devDependencies": {
+    "@myfursona-internal/config": "*",
+    "@myfursona-internal/tsconfig": "*",
+    "@types/react": "^18.2.43",
+    "@types/react-dom": "^18.2.17",
+    "@typescript-eslint/eslint-plugin": "^6.14.0",
+    "@typescript-eslint/parser": "^6.14.0",
+    "@vitejs/plugin-react-swc": "^3.5.0",
+    "autoprefixer": "^10.4.16",
+    "postcss": "^8.4.33",
+    "eslint": "^8.55.0",
+    "eslint-plugin-react-hooks": "^4.6.0",
+    "eslint-plugin-react-refresh": "^0.4.5",
+    "sass": "^1.69.7",
+    "tailwindcss": "^3.4.0",
+    "typescript": "^5.2.2",
+    "vite": "^5.0.8"
+  }
+}

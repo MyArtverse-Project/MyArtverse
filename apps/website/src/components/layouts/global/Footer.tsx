@@ -85,7 +85,7 @@ export default function Footer() {
               <Link className="mb-4" href="/">
                 <MyFursonaIcon size={1.125} />
               </Link>
-              <BuiLink href={"https://myfursona.instatus.com"}>
+              <BuiLink href={"https://stats.uptimerobot.com/rlVXRfwrKz"}>
                 MyFursona Status
               </BuiLink>
             </div>

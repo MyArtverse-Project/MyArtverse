@@ -3,7 +3,7 @@ import forms from "@tailwindcss/forms"
 import typography from "@tailwindcss/typography"
 
 export default {
-  content: [],
+  content: ["../**/*.{html,js,ts,jsx,tsx,mdx}"],
   theme: {
     extend: {
       fontFamily: {

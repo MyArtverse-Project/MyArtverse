@@ -11,7 +11,9 @@
   ],
   "scripts": {
     "dev": "dotenv -- turbo dev --filter=website --no-daemon",
+    "dev:widget": "dotenv -- turbo dev --filter=widget --no-daemon",
     "build": "turbo build --filter=website",
+    "build:all": "turbo build",
     "prepare": "husky install"
   },
   "devDependencies": {

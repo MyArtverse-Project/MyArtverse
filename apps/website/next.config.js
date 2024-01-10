@@ -15,6 +15,7 @@ const withPWA = require("next-pwa")({
 
 /** @type {import('next').NextConfig} */
 const nextConfig = {
+  transpilePackages: ["lodash-es", "gsap", "@myfursona/biro-ui"],
   swcMinify: true,
   poweredByHeader: false,
   experimental: {
@@ -25,7 +26,6 @@ const nextConfig = {
     dangerouslyAllowSVG: true,
     contentDispositionType: "attachment"
   },
-  transpilePackages: ["lodash-es"],
   async rewrites() {
     return [
       {
