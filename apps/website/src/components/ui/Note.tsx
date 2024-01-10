@@ -2,10 +2,10 @@ import type { Variants as NoteVariants, PartialRecord } from "@/types"
 import clsx from "clsx"
 import type { IconType } from "react-icons"
 import {
-  LuAlertTriangle as AlertTriangleIcon,
-  LuCheckCircle2 as CheckCircle2Icon,
-  LuInfo as InfoIcon,
-  LuXCircle as XCircleIcon
+  LuAlertTriangle,
+  LuCheckCircle2,
+  LuInfo,
+  LuXCircle
 } from "react-icons/lu"
 
 type NoteStatus = Extract<
@@ -35,22 +35,22 @@ export default function Note({
     { css: string; icon: IconType; iconColor: string }
   > = {
     warning: {
-      icon: AlertTriangleIcon,
+      icon: LuAlertTriangle,
       css: "border-warning",
       iconColor: "text-warning"
     },
     error: {
-      icon: XCircleIcon,
+      icon: LuXCircle,
       css: "border-error",
       iconColor: "text-error"
     },
     success: {
-      icon: CheckCircle2Icon,
+      icon: LuCheckCircle2,
       css: "border-success",
       iconColor: "text-success"
     },
     info: {
-      icon: InfoIcon,
+      icon: LuInfo,
       css: "border-info",
       iconColor: "text-info"
     }

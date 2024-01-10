@@ -1,6 +1,7 @@
 import { Metadata, ResolvingMetadata } from "next"
 
 import type { SlugRouteProps } from "@/types"
+import { MarginClamp } from "@/components/ui"
 
 export async function generateMetadata(
   { params, searchParams }: SlugRouteProps,
@@ -14,8 +15,8 @@ export async function generateMetadata(
 
 export default function FavoritesPage({ params }: SlugRouteProps) {
   return (
-    <>
+    <MarginClamp>
       <p>Favoites</p>
-    </>
+    </MarginClamp>
   )
 }

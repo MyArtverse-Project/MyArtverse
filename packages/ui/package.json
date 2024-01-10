@@ -6,6 +6,14 @@
   "scripts": {
     "lint": "eslint \"**/*.tsx*\""
   },
+  "workspaces": {
+    "nohoist": [
+      "react",
+      "react-dom",
+      "@types/react",
+      "@types/react-dom"
+    ]
+  },
   "devDependencies": {
     "@myfursona-internal/tsconfig": "*",
     "@types/react": "^18.2.0",

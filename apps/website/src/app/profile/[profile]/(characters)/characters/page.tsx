@@ -2,6 +2,7 @@ import { Metadata, ResolvingMetadata } from "next"
 import type { SlugRouteProps } from "@/types"
 
 import CharacterView from "./CharacterView"
+import { MarginClamp } from "@/components/ui"
 
 export async function generateMetadata(
   { params, searchParams }: SlugRouteProps,
@@ -14,5 +15,9 @@ export async function generateMetadata(
 }
 
 export default function Page({ params }: SlugRouteProps) {
-  return <CharacterView />
+  return (
+    <MarginClamp>
+      <CharacterView />
+    </MarginClamp>
+  )
 }
