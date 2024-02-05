@@ -29,7 +29,7 @@ export default function Browse() {
           )[Math.floor(Math.random() * 5)]
         }
         role="listitem"
-        href="/er"
+        href="/@testing/character/renzo"
         likes={Math.floor(Math.random() * 100)}
       />
     ))
