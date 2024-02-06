@@ -14,6 +14,8 @@
     "dev:widget": "dotenv -- turbo dev --filter=widget --no-daemon",
     "build": "turbo build --filter=website",
     "build:all": "turbo build",
+    "format:check": "prettier --check .",
+    "format:write": "prettier --write .",
     "prepare": "husky install"
   },
   "devDependencies": {

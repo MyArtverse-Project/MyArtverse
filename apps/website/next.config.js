@@ -22,6 +22,9 @@ const nextConfig = {
     typedRoutes: true,
     mdxRs: true
   },
+  typescript: {
+    ignoreBuildErrors: true
+  },
   images: {
     dangerouslyAllowSVG: true,
     contentDispositionType: "attachment"

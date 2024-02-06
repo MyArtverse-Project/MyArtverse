@@ -22,6 +22,7 @@ logs
 # Tauri/Vite
 dist
 dist-ssr
+target
 
 # JetBrains stuff
 .idea
