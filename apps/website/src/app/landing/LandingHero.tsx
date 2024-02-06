@@ -1,5 +1,5 @@
-import { Button } from "@/components/ui/Buttons"
 import { MFImage } from "@/components/ui"
+import { Button } from "@/components/ui/Buttons"
 import { ProseWrapper } from "@myfursona/biro-ui"
 
 export default function LandingHero() {

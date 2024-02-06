@@ -1,9 +1,9 @@
 import Link from "next/link"
-import clsx from "clsx"
 import type { AdoptionStatus, ColorPalette as Palette } from "@/types"
-import ColorPalette from "./ColorPalette"
-import MFImage from "../MFImage"
+import clsx from "clsx"
 import { LuHeart as Heart } from "react-icons/lu"
+import MFImage from "../MFImage"
+import ColorPalette from "./ColorPalette"
 import Status from "./Status"
 
 type CharacterCardPalette = [Palette] | [Palette, Palette] | [Palette, Palette, Palette]

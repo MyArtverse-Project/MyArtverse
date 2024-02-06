@@ -1,5 +1,5 @@
-import { STRIPE_PUBLISHABLE_KEY } from "./env"
 import { Stripe, loadStripe } from "@stripe/stripe-js"
+import { STRIPE_PUBLISHABLE_KEY } from "./env"
 
 let stripePromise: Promise<Stripe | null>
 

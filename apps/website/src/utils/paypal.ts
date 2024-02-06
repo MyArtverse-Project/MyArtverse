@@ -1,5 +1,5 @@
 import checkoutNodeJssdk from "@paypal/checkout-server-sdk"
-import { isProduction, PAYPAL_CLIENT_ID, PAYPAL_CLIENT_SECRET } from "./env"
+import { PAYPAL_CLIENT_ID, PAYPAL_CLIENT_SECRET, isProduction } from "./env"
 
 const configureEnvironment = () => {
   return isProduction

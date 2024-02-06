@@ -1,11 +1,11 @@
 "use client"
 
+import { Menu } from "@headlessui/react"
 import { MarginClamp } from "@/components/ui"
 import { Button } from "@/components/ui/Buttons"
 import { Listing } from "@/components/ui/Cards"
 import { Dropdown } from "@/components/ui/Dropdown"
 import SearchBox from "@/components/ui/Forms/SearchBox"
-import { Menu } from "@headlessui/react"
 import { LuChevronDown, LuStickyNote } from "react-icons/lu"
 
 export default function ListingPage() {

@@ -1,8 +1,8 @@
 "use client"
 
 import clsx from "clsx"
-import Overlay from "./Overlay"
 import { motion } from "framer-motion"
+import Overlay from "./Overlay"
 
 export default function Modal({
   children,

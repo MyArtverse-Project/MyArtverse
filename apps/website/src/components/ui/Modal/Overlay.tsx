@@ -1,7 +1,7 @@
 "use client"
 
-import { useEffect } from "react"
 import dynamic from "next/dynamic"
+import { useEffect } from "react"
 import clsx from "clsx"
 
 const Portal = dynamic(() => import("./Portal"), { ssr: false })

@@ -1,5 +1,5 @@
+import { type VariantProps, cva } from "class-variance-authority"
 import type { IconType } from "react-icons"
-import { cva, type VariantProps } from "class-variance-authority"
 
 const badgeStyles = cva(["inline-flex items-center border border-solid"], {
   variants: {

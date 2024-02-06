@@ -1,7 +1,7 @@
+import type { Metadata } from "next"
 import { MarginClamp, Separator, Tabs } from "@/components/ui"
 import { Button } from "@/components/ui/Buttons"
 import { LuRss as RssIcon, LuSearch as SearchIcon } from "react-icons/lu"
-import type { Metadata } from "next"
 
 const title = "Blog"
 const description = "Tune in for the latest news about MyFursona"

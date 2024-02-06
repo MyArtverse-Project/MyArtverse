@@ -1,5 +1,5 @@
-import type { UrlObject } from "url"
 import type { IconType } from "react-icons"
+import type { UrlObject } from "url"
 
 export type FursonaStatus = "adopted" | "upForAdopt" | "owned" | "hidden" | "main"
 

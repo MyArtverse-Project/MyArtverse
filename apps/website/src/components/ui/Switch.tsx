@@ -1,7 +1,7 @@
 "use client"
 
-import { LuPalette as Palette } from "react-icons/lu"
 import { useState } from "react"
+import { LuPalette as Palette } from "react-icons/lu"
 
 type SwitchTemp = "prices" | "queue"
 interface Switch {

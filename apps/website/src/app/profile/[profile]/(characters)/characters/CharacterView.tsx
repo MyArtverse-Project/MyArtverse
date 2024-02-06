@@ -1,18 +1,18 @@
 "use client"
 
 import { useState } from "react"
+import { FolderView, GridResponsive, Modal } from "@/components/ui"
+import { Button } from "@/components/ui/Buttons"
+import { FursonaCard, PinnedCharacter } from "@/components/ui/Cards"
+import { InputField } from "@/components/ui/Forms"
+import SearchBox from "@/components/ui/Forms/SearchBox"
+import clsx from "clsx"
 import {
   LuCheckCircle2 as CheckCircle2Icon,
+  LuFilter as FilterIcon,
   LuFolderPlus as FolderPlus,
-  LuX as XIcon,
-  LuFilter as FilterIcon
+  LuX as XIcon
 } from "react-icons/lu"
-import { FolderView, GridResponsive, Modal } from "@/components/ui"
-import { FursonaCard, PinnedCharacter } from "@/components/ui/Cards"
-import { Button } from "@/components/ui/Buttons"
-import { InputField } from "@/components/ui/Forms"
-import clsx from "clsx"
-import SearchBox from "@/components/ui/Forms/SearchBox"
 
 export default function CharacterView() {
   const [createFolderModal, setFolderModalState] = useState(false)

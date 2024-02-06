@@ -1,13 +1,12 @@
 "use client"
 
-import { useState } from "react"
 import Link from "next/link"
-
-import { LuCreditCard as CreditCardIcon, LuLock as LockIcon } from "react-icons/lu"
+import { useState } from "react"
 import { Fieldset, Note, Separator } from "@/components/ui"
 import { Button } from "@/components/ui/Buttons"
-import { FormWithProgress, InputField } from "@/components/ui/Forms"
 import DropZone from "@/components/ui/Drop/DropZone"
+import { FormWithProgress, InputField } from "@/components/ui/Forms"
+import { LuCreditCard as CreditCardIcon, LuLock as LockIcon } from "react-icons/lu"
 
 export default function CreateProfileForm() {
   const [displayName, setDisplayName] = useState("")

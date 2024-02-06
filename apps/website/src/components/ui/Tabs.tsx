@@ -2,9 +2,8 @@
 
 import Link from "next/link"
 import { usePathname } from "next/navigation"
-
-import clsx from "clsx"
 import type { PartialArray } from "@/types"
+import clsx from "clsx"
 import type { IconType } from "react-icons"
 
 export default function Tabs({

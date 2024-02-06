@@ -1,14 +1,13 @@
 "use client"
 
-import { FormEvent, useState } from "react"
 import { useRouter } from "next/navigation"
-
-import { Button } from "@/components/ui/Buttons"
-import Separator from "@/components/ui/Separator"
-import { emailRegex } from "@/constants"
+import { FormEvent, useState } from "react"
 import { Facebook, Google, XTwitter } from "@/components/icons"
 import { BuiLink } from "@/components/ui"
+import { Button } from "@/components/ui/Buttons"
 import { InputField } from "@/components/ui/Forms"
+import Separator from "@/components/ui/Separator"
+import { emailRegex } from "@/constants"
 
 export default function RegisterForm() {
   const router = useRouter()

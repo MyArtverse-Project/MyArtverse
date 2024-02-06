@@ -1,8 +1,8 @@
 "use client"
 
 import { usePathname } from "next/navigation"
-import ProfileMasthead from "./ProfileMasthead"
 import CharacterMasthead from "./CharacterMasthead"
+import ProfileMasthead from "./ProfileMasthead"
 
 export default function DynamicMasthead({
   handle,

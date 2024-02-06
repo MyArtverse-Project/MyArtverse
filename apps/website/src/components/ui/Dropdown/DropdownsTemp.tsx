@@ -1,5 +1,5 @@
-import { Button } from "../Buttons"
 import type { IconType } from "react-icons"
+import { Button } from "../Buttons"
 
 export default function DropdownsTemp({
   button,

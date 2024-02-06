@@ -1,6 +1,6 @@
 "use client"
 
-import { useState, useEffect } from "react"
+import { useEffect, useState } from "react"
 
 export function useScrollBounds<T extends HTMLElement>(el: React.MutableRefObject<T>) {
   const [{ width, height }, setScrollStates] = useState({

@@ -1,13 +1,13 @@
+import { MarginClamp } from "@/components/ui"
+import { FursonaCard } from "@/components/ui/Cards"
+import { FursonaStatus } from "@/types"
 import {
   LuBrush as Brush,
   LuHeart as Heart,
   LuLayers as Layers,
   LuSparkles as Sparkles
 } from "react-icons/lu"
-import { FursonaCard } from "@/components/ui/Cards"
 import ShelfSection from "./ShelfSection"
-import { MarginClamp } from "@/components/ui"
-import { FursonaStatus } from "@/types"
 
 export default function Browse() {
   const RandomizedFursonaCards = () => {

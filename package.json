@@ -17,6 +17,7 @@
     "prepare": "husky install"
   },
   "devDependencies": {
+    "@trivago/prettier-plugin-sort-imports": "^4.3.0",
     "@turbo/gen": "^1.10.13",
     "concurrently": "^8.2.1",
     "dotenv": "^16.3.1",

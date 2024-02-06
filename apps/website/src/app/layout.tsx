@@ -1,8 +1,8 @@
-import type { Metadata, Viewport } from "next"
-import { Inter, Open_Sans } from "next/font/google"
 import "@myfursona/biro-ui/styles/globals.scss"
 import "react-quill/dist/quill.snow.css"
-import { ClientInit, Analytics, MyFursonaApp } from "@/components/base"
+import type { Metadata, Viewport } from "next"
+import { Inter, Open_Sans } from "next/font/google"
+import { Analytics, ClientInit, MyFursonaApp } from "@/components/base"
 import Providers from "@/context"
 import clsx from "clsx"
 

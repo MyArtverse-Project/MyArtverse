@@ -2,6 +2,7 @@
 
 import { useEffect } from "react"
 import NoJSReminder from "./NoJSReminder"
+
 // import OneSignal from "react-onesignal"
 
 export default function ClientInit() {

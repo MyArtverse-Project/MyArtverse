@@ -1,12 +1,11 @@
 import type { IconType } from "react-icons"
+import {
+  LuMoreVertical as MoreIcon,
+  LuStar as StarIcon,
+  LuClock4 as TimeIcon
+} from "react-icons/lu"
 import { Button } from "../Buttons"
 import MFImage from "../MFImage"
-
-import {
-  LuClock4 as TimeIcon,
-  LuMoreVertical as MoreIcon,
-  LuStar as StarIcon
-} from "react-icons/lu"
 
 function ScopedLabel({ icon: Icon, text }: { icon: IconType; text: string }) {
   return (

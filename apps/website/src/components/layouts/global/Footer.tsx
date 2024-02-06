@@ -1,11 +1,11 @@
 "use client"
 
 import Link from "next/link"
-import project from "../../../../package.json"
 import { kebabCase } from "lodash"
+import { LuHeart as HeartIcon } from "react-icons/lu"
+import project from "../../../../package.json"
 import { MyFursonaIcon } from "../../icons"
 import { BuiLink } from "../../ui"
-import { LuHeart as HeartIcon } from "react-icons/lu"
 import FooterGradient from "./FooterGraphics"
 
 const version = project.version

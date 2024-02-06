@@ -1,7 +1,7 @@
-import { forwardRef } from "react"
 import Link from "next/link"
-import { cva } from "class-variance-authority"
+import { forwardRef } from "react"
 import type { BuiButtonProps } from "@/types"
+import { cva } from "class-variance-authority"
 
 const Button = forwardRef(
   (

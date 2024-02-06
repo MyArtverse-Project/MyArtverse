@@ -1,12 +1,12 @@
 "use client"
 
 import { FormEvent, useState } from "react"
-import { emailRegex } from "@/constants"
-import clsx from "clsx"
+import { Facebook, Google, XTwitter } from "@/components/icons"
 import { Separator } from "@/components/ui"
 import { Button } from "@/components/ui/Buttons"
 import { InputField } from "@/components/ui/Forms"
-import { Facebook, Google, XTwitter } from "@/components/icons"
+import { emailRegex } from "@/constants"
+import clsx from "clsx"
 
 export default function LoginForm() {
   const [emailEntered, setEmailEntered] = useState(false)

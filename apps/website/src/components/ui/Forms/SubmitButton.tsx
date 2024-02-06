@@ -1,5 +1,5 @@
-import { Button } from "../Buttons"
 import type { BuiButtonProps } from "@/types"
+import { Button } from "../Buttons"
 
 export default function SubmitButton({ children, variant, ...attributes }: BuiButtonProps) {
   return (

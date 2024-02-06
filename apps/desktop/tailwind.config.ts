@@ -1,6 +1,6 @@
 import type { Config } from "tailwindcss"
-import defaultTheme from "tailwindcss/defaultTheme"
 import myfursonaPreset from "@myfursona-internal/config/tailwind.config"
+import defaultTheme from "tailwindcss/defaultTheme"
 
 export default {
   darkMode: "class",

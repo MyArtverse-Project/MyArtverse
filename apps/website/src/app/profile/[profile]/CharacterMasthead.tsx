@@ -1,8 +1,10 @@
 "use client"
 
-import { useEffect, useRef } from "react"
 import Image from "next/image"
+import { useEffect, useRef } from "react"
+import { Tabs } from "@/components/ui"
 import { Button } from "@/components/ui/Buttons"
+import { useDetailPeekContext } from "@/context"
 import {
   LuArrowLeft as ArrowLeft,
   LuBookMarked as BookMarked,
@@ -12,8 +14,6 @@ import {
   LuHome as HomeIcon,
   LuLayoutGrid as LayoutGridIcon
 } from "react-icons/lu"
-import { Tabs } from "@/components/ui"
-import { useDetailPeekContext } from "@/context"
 
 export default function CharacterMasthead({
   handle,

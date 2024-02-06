@@ -1,14 +1,14 @@
 "use client"
 
-import { useState, useEffect, useRef } from "react"
+import { useEffect, useRef, useState } from "react"
 import {
   LuPanelLeftClose as PanelLeftClose,
   LuPanelLeftOpen as PanelLeftOpen
 } from "react-icons/lu"
-import { useFolderViewContext } from "./FolderViewProvider"
 import { Button } from "../Buttons"
-import FolderItem from "./FolderItem"
 import Separator from "../Separator"
+import FolderItem from "./FolderItem"
+import { useFolderViewContext } from "./FolderViewProvider"
 
 export default function FolderShelf({
   children,

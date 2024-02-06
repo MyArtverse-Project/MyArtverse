@@ -1,6 +1,6 @@
+import Link from "next/link"
 import { Menu } from "@headlessui/react"
 import clsx from "clsx"
-import Link from "next/link"
 
 export default function DropdownItem({
   children,

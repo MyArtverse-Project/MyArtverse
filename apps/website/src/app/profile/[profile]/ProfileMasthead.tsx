@@ -1,8 +1,11 @@
 "use client"
 
-import { useState, useEffect, useRef } from "react"
 import Image from "next/image"
+import { useEffect, useRef, useState } from "react"
+import { MFImage, SocialsRow, Tabs } from "@/components/ui"
 import { Button } from "@/components/ui/Buttons"
+import { Dropdown, DropdownItem } from "@/components/ui/Dropdown"
+import { useDetailPeekContext } from "@/context"
 import {
   LuAlertTriangle as AlertTriangleIcon,
   LuBrush as BrushIcon,
@@ -13,9 +16,6 @@ import {
   LuMoreVertical as MoreVerticalIcon,
   LuUserPlus as UserPlusIcon
 } from "react-icons/lu"
-import { Tabs, SocialsRow, MFImage } from "@/components/ui"
-import { Dropdown, DropdownItem } from "@/components/ui/Dropdown"
-import { useDetailPeekContext } from "@/context"
 
 // TODO rewrite this masthead function to be reusable for profiles and character pages
 export default function ProfileMasthead({

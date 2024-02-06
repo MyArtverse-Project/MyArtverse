@@ -1,6 +1,6 @@
 import FormWithProgress from "./FormWithProgress"
-import InputField from "./InputField"
 import FormWrapper from "./FormWrapper"
+import InputField from "./InputField"
 import SubmitButton from "./SubmitButton"
 
 export { InputField, FormWithProgress }

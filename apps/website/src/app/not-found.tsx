@@ -1,6 +1,6 @@
+import { Metadata } from "next"
 import { MFImage } from "@/components/ui"
 import { Button } from "@/components/ui/Buttons"
-import { Metadata } from "next"
 
 export const metadata: Metadata = {
   title: "404'd",
