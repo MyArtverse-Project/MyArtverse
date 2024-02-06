@@ -9,8 +9,8 @@ export default function LandingHero() {
         <ProseWrapper>
           <h1>A place where everyone belongs!</h1>
           <p className="text-lg">
-            MyFursona is a platform that allows users to track their characters,
-            commissions, and adoptable reference sheets!
+            MyFursona is a platform that allows users to track their characters, commissions, and
+            adoptable reference sheets!
           </p>
         </ProseWrapper>
         <div className="mt-3 md:mt-0 flex flex-col-reverse gap-3 md:flex-row">

@@ -23,11 +23,7 @@ function lol() {
   return (
     <DropdownsTemp
       button={<button></button>}
-      items={[
-        { name: "Filter content" },
-        { name: "Report issue to Github" },
-        { name: "owo" }
-      ]}
+      items={[{ name: "Filter content" }, { name: "Report issue to Github" }, { name: "owo" }]}
     />
   )
 }

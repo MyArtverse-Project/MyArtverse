@@ -3,10 +3,7 @@
 import { useState } from "react"
 import Link from "next/link"
 
-import {
-  LuCreditCard as CreditCardIcon,
-  LuLock as LockIcon
-} from "react-icons/lu"
+import { LuCreditCard as CreditCardIcon, LuLock as LockIcon } from "react-icons/lu"
 import { Fieldset, Note, Separator } from "@/components/ui"
 import { Button } from "@/components/ui/Buttons"
 import { FormWithProgress, InputField } from "@/components/ui/Forms"
@@ -65,11 +62,7 @@ export default function CreateProfileForm() {
                   onChange={(e) => setDisplayName(e.target.value)}
                   value={displayName}
                 />
-                <InputField
-                  type="text"
-                  inputName="Username"
-                  value={`@${username}`}
-                />
+                <InputField type="text" inputName="Username" value={`@${username}`} />
               </div>
               <div className="flex-shrink-0">
                 <DropZone />
@@ -82,14 +75,13 @@ export default function CreateProfileForm() {
             description={
               <div className="flex flex-col gap-y-2">
                 <span>
-                  Optional, you can skip this and add them from Account Settings
-                  at anytime. Add connections such as social media and donations
-                  associated to your account that will be displayed on your
-                  profile.
+                  Optional, you can skip this and add them from Account Settings at anytime. Add
+                  connections such as social media and donations associated to your account that
+                  will be displayed on your profile.
                 </span>
                 <span>
-                  Note that there are some connections that might display
-                  additional metadata, you can change their visibility later.
+                  Note that there are some connections that might display additional metadata, you
+                  can change their visibility later.
                 </span>
               </div>
             }
@@ -126,21 +118,11 @@ export default function CreateProfileForm() {
           >
             <Fieldset.Inner>
               <div className="flex gap-x-2 flex-wrap">
-                <Button prefixIcon={<CreditCardIcon size={21} />}>
-                  Credit/Debit card
-                </Button>
-                <Button prefixIcon={<CreditCardIcon size={21} />}>
-                  PayPal
-                </Button>
-                <Button prefixIcon={<CreditCardIcon size={21} />}>
-                  Stripe
-                </Button>
-                <Button prefixIcon={<CreditCardIcon size={21} />}>
-                  Square
-                </Button>
-                <Button prefixIcon={<CreditCardIcon size={21} />}>
-                  Klarna
-                </Button>
+                <Button prefixIcon={<CreditCardIcon size={21} />}>Credit/Debit card</Button>
+                <Button prefixIcon={<CreditCardIcon size={21} />}>PayPal</Button>
+                <Button prefixIcon={<CreditCardIcon size={21} />}>Stripe</Button>
+                <Button prefixIcon={<CreditCardIcon size={21} />}>Square</Button>
+                <Button prefixIcon={<CreditCardIcon size={21} />}>Klarna</Button>
               </div>
             </Fieldset.Inner>
           </Fieldset>
@@ -149,10 +131,9 @@ export default function CreateProfileForm() {
             heading="Authentication"
             description={
               <>
-                Optional but <em>highly recommended</em>. You can skip this and
-                add them from Account Settings at anytime. Protect your account
-                with an additional layer of security with two-factor
-                authentication.
+                Optional but <em>highly recommended</em>. You can skip this and add them from
+                Account Settings at anytime. Protect your account with an additional layer of
+                security with two-factor authentication.
               </>
             }
           >

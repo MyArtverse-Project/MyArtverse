@@ -69,9 +69,7 @@ export default function LoginForm() {
           <div
             className={clsx(
               "absolute top-0 left-0 w-full transition-all duration-500 transform",
-              emailEntered
-                ? "-translate-x-full opacity-0"
-                : "translate-x-0 opacity-100"
+              emailEntered ? "-translate-x-full opacity-0" : "translate-x-0 opacity-100"
             )}
           >
             <InputField
@@ -92,9 +90,7 @@ export default function LoginForm() {
           <div
             className={clsx(
               "absolute top-0 left-0 w-full transition-all duration-500 transform",
-              emailEntered
-                ? "translate-x-0 opacity-100"
-                : "translate-x-full opacity-0"
+              emailEntered ? "translate-x-0 opacity-100" : "translate-x-full opacity-0"
             )}
           >
             <InputField

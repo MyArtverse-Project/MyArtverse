@@ -1,17 +1,9 @@
 import type { Variants as NoteVariants, PartialRecord } from "@/types"
 import clsx from "clsx"
 import type { IconType } from "react-icons"
-import {
-  LuAlertTriangle,
-  LuCheckCircle2,
-  LuInfo,
-  LuXCircle
-} from "react-icons/lu"
+import { LuAlertTriangle, LuCheckCircle2, LuInfo, LuXCircle } from "react-icons/lu"
 
-type NoteStatus = Extract<
-  NoteVariants,
-  "success" | "warning" | "error" | "info"
->
+type NoteStatus = Extract<NoteVariants, "success" | "warning" | "error" | "info">
 
 export default function Note({
   children,
@@ -30,10 +22,7 @@ export default function Note({
     )
   }
 
-  const status: PartialRecord<
-    NoteStatus,
-    { css: string; icon: IconType; iconColor: string }
-  > = {
+  const status: PartialRecord<NoteStatus, { css: string; icon: IconType; iconColor: string }> = {
     warning: {
       icon: LuAlertTriangle,
       css: "border-warning",
@@ -68,16 +57,9 @@ export default function Note({
           : `inline-flex gap-2 ${statusStyles}`
       }
     >
-      <StatusIcon
-        size={!inline ? 25 : 19}
-        className={clsx("flex-shrink-0", statusIconColor)}
-      />
+      <StatusIcon size={!inline ? 25 : 19} className={clsx("flex-shrink-0", statusIconColor)} />
       <div className={!inline ? "flex flex-col justify-center" : null}>
-        {heading && (
-          <div className="text-xl font-bold font-inter -translate-y-0.5">
-            {heading}
-          </div>
-        )}
+        {heading && <div className="text-xl font-bold font-inter -translate-y-0.5">{heading}</div>}
         {children}
       </div>
     </div>

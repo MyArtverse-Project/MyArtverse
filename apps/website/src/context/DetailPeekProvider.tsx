@@ -32,19 +32,13 @@ export function useDetailPeekContext() {
   const ctx = useContext(DetailPeekContext)
 
   if (!ctx) {
-    throw new Error(
-      "The useSidebarContext hook must be used within the DetailPeekContext."
-    )
+    throw new Error("The useSidebarContext hook must be used within the DetailPeekContext.")
   }
 
   return ctx
 }
 
-export function DetailPeekProvider({
-  children
-}: {
-  children?: React.ReactNode
-}) {
+export function DetailPeekProvider({ children }: { children?: React.ReactNode }) {
   const [isPeeking, setPeeking] = useState(false)
   const [peekType, setPeekType] = useState<PeekType>("profile")
   const [img, setImg] = useState("")

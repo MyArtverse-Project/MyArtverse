@@ -20,9 +20,7 @@ export default function BuiLink({
       {...others}
     >
       {children}
-      {hasHTTPInUrl ? (
-        <ExternalLinkIcon size={16} style={{ marginLeft: "0.25rem" }} />
-      ) : null}
+      {hasHTTPInUrl ? <ExternalLinkIcon size={16} style={{ marginLeft: "0.25rem" }} /> : null}
     </Link>
   )
 }

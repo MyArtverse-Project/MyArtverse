@@ -22,19 +22,15 @@ const Button = forwardRef(
     ref
   ) => {
     const buttonVars = cva(
-      [
-        "flex items-center gap-x-1.5 rounded-md transition-[border,background-color] border-[2px]"
-      ],
+      ["flex items-center gap-x-1.5 rounded-md transition-[border,background-color] border-[2px]"],
       {
         variants: {
           intent: {
             primary: "border-transparent bg-300 hover:bg-400",
-            secondary:
-              "bg-transparent border-300 hover:bg-400 hover:border-400",
+            secondary: "bg-transparent border-300 hover:bg-400 hover:border-400",
             tritery: "border-transparent bg-transparent hover:bg-400",
             warning: "bg-transparent",
-            error:
-              "bg-error text-active hover:bg-opacity-70 border-transparent",
+            error: "bg-error text-active hover:bg-opacity-70 border-transparent",
             "error-secondary": "border-error hover:border-opacity-50"
           },
           size: {
@@ -78,9 +74,7 @@ const Button = forwardRef(
           <span className="inline-block overflow-hidden select-none whitespace-nowrap overflow-ellipsis">
             {children}
             {count && (
-              <span className="ml-1.5 font-semibold bg-100 text-700 rounded-xl p-2">
-                {count}
-              </span>
+              <span className="ml-1.5 font-semibold bg-100 text-700 rounded-xl p-2">{count}</span>
             )}
           </span>
         )}

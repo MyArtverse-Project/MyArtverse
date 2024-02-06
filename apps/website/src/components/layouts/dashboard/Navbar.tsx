@@ -26,11 +26,7 @@ export default function Navbar() {
         </div>
         <div className="flex items-center gap-x-1.5">
           <SearchButton />
-          <Button
-            iconOnly
-            variant="tritery"
-            suffixIcon={<ChevronDownIcon size={18} />}
-          >
+          <Button iconOnly variant="tritery" suffixIcon={<ChevronDownIcon size={18} />}>
             <PlusIcon size={21} />
           </Button>
           <Button iconOnly variant="tritery">

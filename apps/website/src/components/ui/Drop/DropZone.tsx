@@ -34,10 +34,7 @@ export default function DropZone() {
       const allowedTypes = ["image/png", "image/jpeg", "image/jpg"]
       const maxFileSize = 25 * 1024 * 1024
 
-      if (
-        allowedTypes.includes(uploadedFile.type) &&
-        uploadedFile.size <= maxFileSize
-      ) {
+      if (allowedTypes.includes(uploadedFile.type) && uploadedFile.size <= maxFileSize) {
         setFile(uploadedFile)
 
         const reader = new FileReader()
@@ -53,9 +50,7 @@ export default function DropZone() {
 
   return (
     <div
-      className={`${
-        isDragging ? "bg-400" : ""
-      } bg- border-4 rounded-[10px] border-dashed border-600 bg-300 px-10 py-10 text-center`}
+      className={`${isDragging ? "bg-400" : ""} bg- border-4 rounded-[10px] border-dashed border-600 bg-300 px-10 py-10 text-center`}
       onDragEnter={handleDragEnter}
       onDragLeave={handleDragLeave}
       onDrop={handleDrop}
@@ -67,11 +62,7 @@ export default function DropZone() {
           onDragLeave={handleDragLeave}
           onDrop={(e) => e.preventDefault()}
         >
-          <input
-            type="file"
-            style={{ display: "none" }}
-            onChange={handleFileInputChange}
-          />
+          <input type="file" style={{ display: "none" }} onChange={handleFileInputChange} />
           <img src={imageUrl} className="w-40 h-40 rounded-full mb-5" />
           <h4 className="text-sm">Uploaded!</h4>
           <p className="text-xl mt-4">Max size: 25MB, Supported: PNG, JPG</p>
@@ -83,11 +74,7 @@ export default function DropZone() {
           onDragLeave={handleDragLeave}
           onDrop={(e) => e.preventDefault()}
         >
-          <input
-            type="file"
-            style={{ display: "none" }}
-            onChange={handleFileInputChange}
-          />
+          <input type="file" style={{ display: "none" }} onChange={handleFileInputChange} />
           <span className=" bg-100 p-6 justify-center items-center flex mb-6 rounded-full">
             <UploadIcon size={64} className="" />
           </span>

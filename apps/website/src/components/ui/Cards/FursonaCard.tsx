@@ -6,10 +6,7 @@ import MFImage from "../MFImage"
 import { LuHeart as Heart } from "react-icons/lu"
 import Status from "./Status"
 
-type CharacterCardPalette =
-  | [Palette]
-  | [Palette, Palette]
-  | [Palette, Palette, Palette]
+type CharacterCardPalette = [Palette] | [Palette, Palette] | [Palette, Palette, Palette]
 
 export default function FursonaCard({
   name,

@@ -1,12 +1,7 @@
 import type { UrlObject } from "url"
 import type { IconType } from "react-icons"
 
-export type FursonaStatus =
-  | "adopted"
-  | "upForAdopt"
-  | "owned"
-  | "hidden"
-  | "main"
+export type FursonaStatus = "adopted" | "upForAdopt" | "owned" | "hidden" | "main"
 
 export interface ColorPalette {
   name: string
@@ -14,9 +9,7 @@ export interface ColorPalette {
 }
 
 // Partial versions for built-in types
-export type PartialRecord<K extends PropertyKey, T = string> = Partial<
-  Record<K, T>
->
+export type PartialRecord<K extends PropertyKey, T = string> = Partial<Record<K, T>>
 export type PartialArray<T> = Array<Partial<T>>
 
 export type Theme = "system" | "light" | "dark"

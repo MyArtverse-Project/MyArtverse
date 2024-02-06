@@ -3,14 +3,8 @@ import { isProduction, PAYPAL_CLIENT_ID, PAYPAL_CLIENT_SECRET } from "./env"
 
 const configureEnvironment = () => {
   return isProduction
-    ? new checkoutNodeJssdk.core.LiveEnvironment(
-        PAYPAL_CLIENT_ID,
-        PAYPAL_CLIENT_SECRET
-      )
-    : new checkoutNodeJssdk.core.SandboxEnvironment(
-        PAYPAL_CLIENT_ID,
-        PAYPAL_CLIENT_SECRET
-      )
+    ? new checkoutNodeJssdk.core.LiveEnvironment(PAYPAL_CLIENT_ID, PAYPAL_CLIENT_SECRET)
+    : new checkoutNodeJssdk.core.SandboxEnvironment(PAYPAL_CLIENT_ID, PAYPAL_CLIENT_SECRET)
 }
 
 const getPaypal = () => {

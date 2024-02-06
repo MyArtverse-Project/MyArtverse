@@ -22,14 +22,10 @@ export default function GridResponsive({
     )
   }
   if (breakpoint > BREAKPOINT_MAX_RANGE) {
-    throw new Error(
-      "Bruh too b i g;  the breakpoint's range is between 120-300"
-    )
+    throw new Error("Bruh too b i g;  the breakpoint's range is between 120-300")
   }
   if (breakpoint < BREAKPOINT_MIN_RANGE) {
-    throw new Error(
-      "Bruh too narrow!!!11! The breakpoint's range is between 120-300"
-    )
+    throw new Error("Bruh too narrow!!!11! The breakpoint's range is between 120-300")
   }
 
   return (

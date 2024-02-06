@@ -97,17 +97,10 @@ export default function CharacterMasthead({
                 </span>
               </h2>
               <div className="flex items-start gap-x-2.5 relative z-2">
-                <Button
-                  prefixIcon={<EditIcon size={20} />}
-                  aria-label="Follow Username"
-                >
+                <Button prefixIcon={<EditIcon size={20} />} aria-label="Follow Username">
                   Edit Profile
                 </Button>
-                <Button
-                  prefixIcon={<HeartIcon size={20} />}
-                  aria-label="Favorite"
-                  count={3}
-                >
+                <Button prefixIcon={<HeartIcon size={20} />} aria-label="Favorite" count={3}>
                   Favorite
                 </Button>
               </div>

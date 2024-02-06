@@ -2,9 +2,7 @@
 
 import { useState, useEffect } from "react"
 
-export function useScrollBounds<T extends HTMLElement>(
-  el: React.MutableRefObject<T>
-) {
+export function useScrollBounds<T extends HTMLElement>(el: React.MutableRefObject<T>) {
   const [{ width, height }, setScrollStates] = useState({
     width: 0,
     height: 0

@@ -45,9 +45,8 @@ export default function CreateCharacterForm() {
             heading="Details"
             description={
               <div className="flex flex-col gap-y-2">
-                Provide details, traits, and quirks about your character! Note
-                that any fields that aren't filled below aren't shown on the
-                character page.
+                Provide details, traits, and quirks about your character! Note that any fields that
+                aren't filled below aren't shown on the character page.
               </div>
             }
           ></Fieldset>

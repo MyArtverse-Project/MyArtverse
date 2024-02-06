@@ -32,34 +32,21 @@ export default function RegisterForm() {
             ))}
           </div>
         ) : null}
-        <h2 className="not-prose font-bold font-inter my-4 text-3xl text-center">
-          Sign Up
-        </h2>
+        <h2 className="not-prose font-bold font-inter my-4 text-3xl text-center">Sign Up</h2>
         <div className="grid gap-y-1.5 w-full">
           <Button variant="secondary" prefixIcon={<Google />} position="center">
             Continue with Google
           </Button>
-          <Button
-            variant="secondary"
-            prefixIcon={<Facebook />}
-            position="center"
-          >
+          <Button variant="secondary" prefixIcon={<Facebook />} position="center">
             Continue with Facebook
           </Button>
-          <Button
-            variant="secondary"
-            prefixIcon={<XTwitter />}
-            position="center"
-          >
+          <Button variant="secondary" prefixIcon={<XTwitter />} position="center">
             Continue with X
           </Button>
         </div>
         <Separator dir="horizontal" padding="1.25rem" />
         <div className="relative w-full">
-          <form
-            onSubmit={submitRegister}
-            className="flex justify-center flex-col gap-y-2"
-          >
+          <form onSubmit={submitRegister} className="flex justify-center flex-col gap-y-2">
             <InputField
               required
               inputName="Username"

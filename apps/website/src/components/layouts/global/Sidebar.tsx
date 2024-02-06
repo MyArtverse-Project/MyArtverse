@@ -70,9 +70,7 @@ export default function Sidebar() {
       <aside
         className="flex flex-col fixed inset-0 right-[unset] bg-context-menu transition-none md:transition-transform md:duration-300 ease-out w-full md:w-[325px]"
         style={{
-          transform: isSidebarOpen
-            ? "translate3d(0,0,0)"
-            : "translate3d(-100%,0,0)"
+          transform: isSidebarOpen ? "translate3d(0,0,0)" : "translate3d(-100%,0,0)"
         }}
       >
         <div className="w-full px-5 py-4 flex items-center gap-x-2.5">

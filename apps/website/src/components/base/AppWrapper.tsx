@@ -6,11 +6,7 @@ import { DashboardLayout, GlobalLayout } from "../layouts"
 
 import "swiper/css"
 
-export default function AppWrapper({
-  children
-}: {
-  children: React.ReactNode
-}) {
+export default function AppWrapper({ children }: { children: React.ReactNode }) {
   const isRouteDashboard = usePathname().includes("dashboard")
 
   const DynamicLayout = !isRouteDashboard ? GlobalLayout : DashboardLayout

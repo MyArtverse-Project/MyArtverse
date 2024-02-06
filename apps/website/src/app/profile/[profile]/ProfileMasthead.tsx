@@ -120,10 +120,7 @@ export default function ProfileMasthead({
                 >
                   View Commission ToS
                 </Button>
-                <Button
-                  prefixIcon={<UserPlusIcon size={20} />}
-                  aria-label="Follow Username"
-                >
+                <Button prefixIcon={<UserPlusIcon size={20} />} aria-label="Follow Username">
                   Follow
                 </Button>
                 <Dropdown

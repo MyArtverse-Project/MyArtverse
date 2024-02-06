@@ -30,12 +30,7 @@ export default function FormWithProgress({
               )}
               aria-hidden
             />
-            <span
-              className={clsx(
-                "font-inter text-lg",
-                !isComplete ? "text-mute" : "text-500"
-              )}
-            >
+            <span className={clsx("font-inter text-lg", !isComplete ? "text-mute" : "text-500")}>
               {item}
             </span>
           </div>

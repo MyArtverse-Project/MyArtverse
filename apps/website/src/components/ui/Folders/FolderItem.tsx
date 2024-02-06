@@ -99,9 +99,7 @@ export default function FolderItem({
           !open ? "hover:text-500 hover:bg-200" : "bg-500 text-active",
           !newItem ? "opacity-100" : "opacity-50 hover:opacity-100"
         )}
-        prefixIcon={
-          <DynamicFolderIcon aria-hidden size={21} className="mr-2" />
-        }
+        prefixIcon={<DynamicFolderIcon aria-hidden size={21} className="mr-2" />}
       >
         {newItem ? "New folder" : name}
       </Button>

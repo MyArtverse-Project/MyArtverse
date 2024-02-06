@@ -1,10 +1,4 @@
-export function MenuGroup({
-  children,
-  heading
-}: {
-  children?: React.ReactNode
-  heading?: string
-}) {
+export function MenuGroup({ children, heading }: { children?: React.ReactNode; heading?: string }) {
   return (
     <div role="group">
       {heading && (

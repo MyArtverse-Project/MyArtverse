@@ -16,10 +16,7 @@ export default function ListingPage() {
           <SearchBox placeholder="Find a listing" />
           <Dropdown
             button={
-              <Button
-                variant="secondary"
-                suffixIcon={<LuChevronDown size={21} />}
-              >
+              <Button variant="secondary" suffixIcon={<LuChevronDown size={21} />}>
                 Type
               </Button>
             }

@@ -6,11 +6,7 @@ import Navbar from "./Navbar"
 
 const Sidebar = dynamic(() => import("./Sidebar"), { ssr: false })
 
-export default function GlobalLayout({
-  children
-}: {
-  children: React.ReactNode
-}) {
+export default function GlobalLayout({ children }: { children: React.ReactNode }) {
   return (
     <>
       <header className="sticky top-0 z-20">

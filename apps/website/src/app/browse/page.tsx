@@ -18,15 +18,9 @@ export default function Browse() {
         img={"/img/hero/renzo-snowglobe.jpg"}
         species="Raccoon-Fox-Dragon"
         status={
-          (
-            [
-              "owned",
-              "adopted",
-              "hidden",
-              "upForAdopt",
-              "main"
-            ] as FursonaStatus[]
-          )[Math.floor(Math.random() * 5)]
+          (["owned", "adopted", "hidden", "upForAdopt", "main"] as FursonaStatus[])[
+            Math.floor(Math.random() * 5)
+          ]
         }
         role="listitem"
         href="/@testing/character/renzo"

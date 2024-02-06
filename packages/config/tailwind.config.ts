@@ -29,8 +29,7 @@ export default {
         skeleton: "hsla(var(--bui-skeleton), var(--tw-bg-opacity, 1))",
         separator: "hsla(var(--bui-separator), var(--tw-bg-opacity, 1))",
         "error-hl": "hsla(var(--bui-error-highlight), var(--tw-bg-opacity, 1))",
-        "warning-hl":
-          "hsla(var(--bui-warning-highlight), var(--tw-bg-opacity, 1))",
+        "warning-hl": "hsla(var(--bui-warning-highlight), var(--tw-bg-opacity, 1))",
         "info-hl": "hsla(var(--bui-info-highlight, var(--tw-bg-opacity, 1)))",
         // ! overrides
         "context-menu": "var(--bui-context-menu)",
@@ -53,12 +52,9 @@ export default {
         subtext: "hsla(var(--bui-subtext), var(--tw-border-opacity, 0.65))",
         skeleton: "hsla(var(--bui-skeleton), var(--tw-border-opacity, 1))",
         separator: "hsla(var(--bui-separator), var(--tw-border-opacity, 1))",
-        "error-hl":
-          "hsla(var(--bui-error-highlight), var(--tw-border-opacity, 1))",
-        "warning-hl":
-          "hsla(var(--bui-warning-highlight), var(--tw-border-opacity, 1))",
-        "info-hl":
-          "hsla(var(--bui-info-highlight, var(--tw-border-opacity, 1)))"
+        "error-hl": "hsla(var(--bui-error-highlight), var(--tw-border-opacity, 1))",
+        "warning-hl": "hsla(var(--bui-warning-highlight), var(--tw-border-opacity, 1))",
+        "info-hl": "hsla(var(--bui-info-highlight, var(--tw-border-opacity, 1)))"
       },
       spacing: {
         unset: "unset"
