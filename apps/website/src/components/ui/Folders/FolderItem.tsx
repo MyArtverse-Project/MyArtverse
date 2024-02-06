@@ -1,16 +1,16 @@
 "use client"
 
-import { Children, useRef, useEffect, useState } from "react"
+import { Children, useEffect, useRef, useState } from "react"
+import { useScrollBounds } from "@/hooks/useScrollBounds"
 import clsx from "clsx"
+import { motion } from "framer-motion"
 import {
   LuFolder as Folder,
   LuFolderClosed as FolderClosed,
   LuFolderOpen as FolderOpen,
   LuFolderPlus as FolderPlus
 } from "react-icons/lu"
-import { motion } from "framer-motion"
 import { Button } from "../Buttons"
-import { useScrollBounds } from "@/hooks/useScrollBounds"
 
 export default function FolderItem({
   children,
@@ -99,9 +99,7 @@ export default function FolderItem({
           !open ? "hover:text-500 hover:bg-200" : "bg-500 text-active",
           !newItem ? "opacity-100" : "opacity-50 hover:opacity-100"
         )}
-        prefixIcon={
-          <DynamicFolderIcon aria-hidden size={21} className="mr-2" />
-        }
+        prefixIcon={<DynamicFolderIcon aria-hidden size={21} className="mr-2" />}
       >
         {newItem ? "New folder" : name}
       </Button>

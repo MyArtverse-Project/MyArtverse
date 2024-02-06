@@ -1,7 +1,3 @@
 {
-  "recommendations": [
-    "bradlc.vscode-tailwindcss",
-    "heybourn.headwind",
-    "unifiedjs.vscode-mdx"
-  ]
+  "recommendations": ["bradlc.vscode-tailwindcss", "heybourn.headwind", "unifiedjs.vscode-mdx"]
 }

@@ -1,7 +1,6 @@
 import { Metadata, ResolvingMetadata } from "next"
-
-import type { SlugRouteProps } from "@/types"
 import { MarginClamp } from "@/components/ui"
+import type { SlugRouteProps } from "@/types"
 
 export async function generateMetadata(
   { params, searchParams }: SlugRouteProps,

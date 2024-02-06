@@ -1,7 +1,7 @@
+import type { Metadata } from "next"
 import { MarginClamp, Separator, Tabs } from "@/components/ui"
 import { Button } from "@/components/ui/Buttons"
 import { LuRss as RssIcon, LuSearch as SearchIcon } from "react-icons/lu"
-import type { Metadata } from "next"
 
 const title = "Blog"
 const description = "Tune in for the latest news about MyFursona"
@@ -19,9 +19,7 @@ export default function Page() {
   return (
     <main className="contents">
       <section className="relative text-center h-[25rem] flex justify-center items-center flex-col gap-y-5 bg-gradient-to-tr from-fuchsia-500  via-blue-900 to-purple-900 rounded-bl-xl rounded-br-xl">
-        <h1 className="not-prose text-6xl font-bold font-inter">
-          MyFursona Blog
-        </h1>
+        <h1 className="not-prose text-6xl font-bold font-inter">MyFursona Blog</h1>
         <p className="text-xl">{description}</p>
       </section>
       <div className="sticky top-28 -translate-y-6 grid place-items-center -mb-4">

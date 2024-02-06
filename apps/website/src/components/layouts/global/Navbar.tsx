@@ -1,28 +1,28 @@
 "use client"
 
-import { Fragment } from "react"
 import Link from "next/link"
 import { usePathname } from "next/navigation"
-import {
-  LuMenu as MenuIcon,
-  LuMoreVertical as MoreVerticalIcon,
-  LuCat as CatIcon,
-  LuShare as ShareIcon,
-  LuAlbum as AlbumIcon,
-  LuFileLock as FileLockIcon,
-  LuContrast as ContrastIcon,
-  LuAccessibility as AccessibilityIcon,
-  LuLanguages as LanguagesIcon,
-  LuHelpCircle as HelpCircleIcon,
-  LuMessageSquarePlus as MessageSquarePlusIcon
-} from "react-icons/lu"
-import type { IconType } from "react-icons"
-import { toLower } from "lodash"
 import { Menu } from "@headlessui/react"
+import { Fragment } from "react"
 import { useSidebarContext } from "@/context"
+import { toLower } from "lodash"
+import type { IconType } from "react-icons"
+import {
+  LuAccessibility as AccessibilityIcon,
+  LuAlbum as AlbumIcon,
+  LuCat as CatIcon,
+  LuContrast as ContrastIcon,
+  LuFileLock as FileLockIcon,
+  LuHelpCircle as HelpCircleIcon,
+  LuLanguages as LanguagesIcon,
+  LuMenu as MenuIcon,
+  LuMessageSquarePlus as MessageSquarePlusIcon,
+  LuMoreVertical as MoreVerticalIcon,
+  LuShare as ShareIcon
+} from "react-icons/lu"
 import { MyFursonaIcon } from "../../icons"
-import { Button, SearchButton } from "../../ui/Buttons"
 import { Separator } from "../../ui"
+import { Button, SearchButton } from "../../ui/Buttons"
 import { Dropdown } from "../../ui/Dropdown"
 import NavbarProfilePeek from "./NavbarProfilePeek"
 

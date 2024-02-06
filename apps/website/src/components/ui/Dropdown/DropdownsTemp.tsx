@@ -1,5 +1,5 @@
-import { Button } from "../Buttons"
 import type { IconType } from "react-icons"
+import { Button } from "../Buttons"
 
 export default function DropdownsTemp({
   button,
@@ -23,11 +23,7 @@ function lol() {
   return (
     <DropdownsTemp
       button={<button></button>}
-      items={[
-        { name: "Filter content" },
-        { name: "Report issue to Github" },
-        { name: "owo" }
-      ]}
+      items={[{ name: "Filter content" }, { name: "Report issue to Github" }, { name: "owo" }]}
     />
   )
 }

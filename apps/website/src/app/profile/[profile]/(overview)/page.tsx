@@ -1,7 +1,7 @@
 import type { Metadata, ResolvingMetadata } from "next"
-import { Group, Field } from "@/components/ui"
-import type { SlugRouteProps } from "@/types"
+import { Field, Group } from "@/components/ui"
 import { Button } from "@/components/ui/Buttons"
+import type { SlugRouteProps } from "@/types"
 
 export async function generateMetadata(
   { params }: SlugRouteProps,

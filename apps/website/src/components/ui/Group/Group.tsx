@@ -1,8 +1,4 @@
-export default function GroupContents({
-  children
-}: {
-  children?: React.ReactNode
-}) {
+export default function GroupContents({ children }: { children?: React.ReactNode }) {
   return (
     <section
       /**

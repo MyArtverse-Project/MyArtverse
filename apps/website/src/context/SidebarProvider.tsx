@@ -14,9 +14,7 @@ export function useSidebarContext() {
   const ctx = useContext(SidebarContext)
 
   if (!ctx) {
-    throw new Error(
-      "The useSidebarContext hook must be used within the SidebarContext."
-    )
+    throw new Error("The useSidebarContext hook must be used within the SidebarContext.")
   }
 
   return ctx

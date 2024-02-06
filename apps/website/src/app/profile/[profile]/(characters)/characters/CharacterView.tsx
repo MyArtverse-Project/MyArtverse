@@ -1,18 +1,18 @@
 "use client"
 
 import { useState } from "react"
+import { FolderView, GridResponsive, Modal } from "@/components/ui"
+import { Button } from "@/components/ui/Buttons"
+import { FursonaCard, PinnedCharacter } from "@/components/ui/Cards"
+import { InputField } from "@/components/ui/Forms"
+import SearchBox from "@/components/ui/Forms/SearchBox"
+import clsx from "clsx"
 import {
   LuCheckCircle2 as CheckCircle2Icon,
+  LuFilter as FilterIcon,
   LuFolderPlus as FolderPlus,
-  LuX as XIcon,
-  LuFilter as FilterIcon
+  LuX as XIcon
 } from "react-icons/lu"
-import { FolderView, GridResponsive, Modal } from "@/components/ui"
-import { FursonaCard, PinnedCharacter } from "@/components/ui/Cards"
-import { Button } from "@/components/ui/Buttons"
-import { InputField } from "@/components/ui/Forms"
-import clsx from "clsx"
-import SearchBox from "@/components/ui/Forms/SearchBox"
 
 export default function CharacterView() {
   const [createFolderModal, setFolderModalState] = useState(false)
@@ -45,11 +45,7 @@ export default function CharacterView() {
           <FolderView.Item name="For sale" nestedItem />
           <FolderView.Item name="Adopted" nestedItem />
           {/* TODO only show "new folder" item when user is logged in */}
-          <FolderView.Item
-            newItem
-            nestedItem
-            onClick={toggleCreateFolderModal}
-          />
+          <FolderView.Item newItem nestedItem onClick={toggleCreateFolderModal} />
         </FolderView.Item>
         <FolderView.Item name="From trades" />
         <FolderView.Item newItem onClick={toggleCreateFolderModal} />
@@ -97,12 +93,7 @@ export default function CharacterView() {
               <FolderPlus />
               Add new folder
             </span>
-            <Button
-              size="small"
-              variant="tritery"
-              iconOnly
-              onClick={toggleCreateFolderModal}
-            >
+            <Button size="small" variant="tritery" iconOnly onClick={toggleCreateFolderModal}>
               <XIcon size={18} />
             </Button>
           </div>
@@ -116,15 +107,10 @@ export default function CharacterView() {
               {colors.map((color, i) => (
                 <Button
                   key={i}
-                  className={clsx(
-                    "rounded-full h-10 w-10 grid place-items-center",
-                    color
-                  )}
+                  className={clsx("rounded-full h-10 w-10 grid place-items-center", color)}
                   onClick={() => setSelectedIndex(i)}
                 >
-                  {selectedIndex == i ? (
-                    <CheckCircle2Icon className="text-100" />
-                  ) : null}
+                  {selectedIndex == i ? <CheckCircle2Icon className="text-100" /> : null}
                 </Button>
               ))}
             </div>

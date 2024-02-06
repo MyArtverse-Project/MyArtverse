@@ -1,14 +1,14 @@
 "use client"
 
-import { useState, useEffect, useRef } from "react"
+import { useEffect, useRef, useState } from "react"
 import {
   LuPanelLeftClose as PanelLeftClose,
   LuPanelLeftOpen as PanelLeftOpen
 } from "react-icons/lu"
-import { useFolderViewContext } from "./FolderViewProvider"
 import { Button } from "../Buttons"
-import FolderItem from "./FolderItem"
 import Separator from "../Separator"
+import FolderItem from "./FolderItem"
+import { useFolderViewContext } from "./FolderViewProvider"
 
 export default function FolderShelf({
   children,
@@ -80,16 +80,10 @@ export default function FolderShelf({
   }
 
   const PanelIconDynamic = expandThreshold ? PanelLeftClose : PanelLeftOpen
-  const panelStateAria = !expandThreshold
-    ? "Expand folder menu"
-    : "Collapse folder menu"
+  const panelStateAria = !expandThreshold ? "Expand folder menu" : "Collapse folder menu"
 
   return (
-    <div
-      className="flex-shrink-0 flex"
-      ref={folderViewRef}
-      style={{ width: folderWidth }}
-    >
+    <div className="flex-shrink-0 flex" ref={folderViewRef} style={{ width: folderWidth }}>
       <aside className="grid gap-y-1.5 w-full h-fit sticky top-32">
         <span className="flex gap-2.5 items-center flex-row-reverse">
           <div>

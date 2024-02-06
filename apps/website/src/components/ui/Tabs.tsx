@@ -2,9 +2,8 @@
 
 import Link from "next/link"
 import { usePathname } from "next/navigation"
-
-import clsx from "clsx"
 import type { PartialArray } from "@/types"
+import clsx from "clsx"
 import type { IconType } from "react-icons"
 
 export default function Tabs({
@@ -36,9 +35,7 @@ export default function Tabs({
               ? "text-500 hover:bg-200 before:bg-500"
               : "hover:bg-300"
           )}
-          aria-label={
-            !countIndicator ? text : `${text}, ${countIndicator} items`
-          }
+          aria-label={!countIndicator ? text : `${text}, ${countIndicator} items`}
         >
           {Icon && <Icon size={20} aria-hidden />}
           <span>{text}</span>

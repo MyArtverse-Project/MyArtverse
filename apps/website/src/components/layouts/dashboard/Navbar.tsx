@@ -1,5 +1,6 @@
 import Link from "next/link"
 import { MyFursonaIcon } from "@/components/icons"
+import { MFImage } from "@/components/ui"
 import { Button, SearchButton } from "@/components/ui/Buttons"
 import {
   LuBell as BellIcon,
@@ -8,7 +9,6 @@ import {
   LuMenu as MenuIcon,
   LuPlus as PlusIcon
 } from "react-icons/lu"
-import { MFImage } from "@/components/ui"
 
 export default function Navbar() {
   return (
@@ -26,11 +26,7 @@ export default function Navbar() {
         </div>
         <div className="flex items-center gap-x-1.5">
           <SearchButton />
-          <Button
-            iconOnly
-            variant="tritery"
-            suffixIcon={<ChevronDownIcon size={18} />}
-          >
+          <Button iconOnly variant="tritery" suffixIcon={<ChevronDownIcon size={18} />}>
             <PlusIcon size={21} />
           </Button>
           <Button iconOnly variant="tritery">

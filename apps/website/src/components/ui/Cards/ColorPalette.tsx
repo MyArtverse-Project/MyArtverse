@@ -12,13 +12,7 @@ export default function ColorPalette({
   return (
     <ul className="grid grid-flow-col" style={{ width, height }}>
       {palette.map(({ color, name }, index) => {
-        return (
-          <li
-            key={index}
-            aria-label={name}
-            style={{ backgroundColor: color }}
-          ></li>
-        )
+        return <li key={index} aria-label={name} style={{ backgroundColor: color }}></li>
       })}
     </ul>
   )

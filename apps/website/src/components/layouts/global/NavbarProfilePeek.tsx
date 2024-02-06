@@ -2,9 +2,9 @@
 
 import Link from "next/link"
 import { usePathname } from "next/navigation"
+import { isProfilePeeking, profilePeek } from "@/atoms"
 import { type AnimationProps, type Variants, motion } from "framer-motion"
 import { useAtom } from "jotai"
-import { isProfilePeeking, profilePeek } from "@/atoms"
 import { MyFursonaIcon } from "../../icons"
 import { MFImage } from "../../ui"
 import { Button } from "../../ui/Buttons"
@@ -53,12 +53,7 @@ export default function NavbarProfilePeek() {
         transition={transitionOptions}
         className="absolute top-0"
       >
-        <Link
-          href="/"
-          aria-label="Home"
-          draggable={false}
-          className="flex items-center"
-        >
+        <Link href="/" aria-label="Home" draggable={false} className="flex items-center">
           <MyFursonaIcon wordmarkOnly size={0.7} />
           <span className="ml-2 px-1.5 py-1 bg-red-600 text-xs rounded-md uppercase text-active">
             WIP

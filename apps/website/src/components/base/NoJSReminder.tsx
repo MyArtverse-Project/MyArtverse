@@ -9,12 +9,10 @@ export default function NoJSReminder() {
           <span>JavaScript disabled</span>
         </h1>
         <p>
-          MyFursona heavily relies on JavaScript - most modern browsers have
-          JavaScript enabled and it looks like you're browsing MyFursona with
-          either JavaScript disabled with the use of a third-party extension via
-          an ad blocker or from an outdated and/or unsupported browser. This
-          message can be dismissed by re-enabling JavaScript and reloading the
-          browser.
+          MyFursona heavily relies on JavaScript - most modern browsers have JavaScript enabled and
+          it looks like you're browsing MyFursona with either JavaScript disabled with the use of a
+          third-party extension via an ad blocker or from an outdated and/or unsupported browser.
+          This message can be dismissed by re-enabling JavaScript and reloading the browser.
         </p>
       </div>
     </noscript>

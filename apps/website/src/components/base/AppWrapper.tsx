@@ -1,16 +1,11 @@
 "use client"
 
-import { usePathname } from "next/navigation"
-import SkipNav from "./SkipNav"
-import { DashboardLayout, GlobalLayout } from "../layouts"
-
 import "swiper/css"
+import { usePathname } from "next/navigation"
+import { DashboardLayout, GlobalLayout } from "../layouts"
+import SkipNav from "./SkipNav"
 
-export default function AppWrapper({
-  children
-}: {
-  children: React.ReactNode
-}) {
+export default function AppWrapper({ children }: { children: React.ReactNode }) {
   const isRouteDashboard = usePathname().includes("dashboard")
 
   const DynamicLayout = !isRouteDashboard ? GlobalLayout : DashboardLayout

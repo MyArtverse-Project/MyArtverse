@@ -1,6 +1,6 @@
+import { Metadata } from "next"
 import { MFImage } from "@/components/ui"
 import { Button } from "@/components/ui/Buttons"
-import { Metadata } from "next"
 
 export const metadata: Metadata = {
   title: "404'd",
@@ -20,8 +20,7 @@ export default function NotFoundCatchAll() {
           </h2>
         </div>
         <p className="text-lg opacity-75">
-          Unless you've traveled back in time, the page you're looking for
-          doesn't exist anymore.
+          Unless you've traveled back in time, the page you're looking for doesn't exist anymore.
         </p>
         <div className="w-fit mx-auto mt-6">
           <Button href="/" size="big">

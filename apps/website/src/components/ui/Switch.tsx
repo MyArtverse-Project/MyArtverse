@@ -1,7 +1,7 @@
 "use client"
 
-import { LuPalette as Palette } from "react-icons/lu"
 import { useState } from "react"
+import { LuPalette as Palette } from "react-icons/lu"
 
 type SwitchTemp = "prices" | "queue"
 interface Switch {
@@ -15,9 +15,7 @@ export default function Switch() {
       <div className="flex flex-row p-2.5 border border-300 rounded-md mx-4 items-center text-center justify-center">
         <div
           onClick={() => setOption("prices")}
-          className={`${
-            option == "prices" ? "bg-500 text-100" : "text-700"
-          }  w-32 h-9 flex flex-row justify-center my-auto rounded-md cursor-pointer`}
+          className={`${option == "prices" ? "bg-500 text-100" : "text-700"}  w-32 h-9 flex flex-row justify-center my-auto rounded-md cursor-pointer`}
         >
           <span className="my-auto">Prices</span>
         </div>

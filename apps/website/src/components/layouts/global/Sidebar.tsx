@@ -1,23 +1,23 @@
 "use client"
 
-import { useCallback, useEffect, Fragment } from "react"
 import Link from "next/link"
+import { Fragment, useCallback, useEffect } from "react"
 import { useSidebarContext } from "@/context"
 import {
-  LuHome as HomeIcon,
-  LuSparkles as SparklesIcon,
-  LuX as XIcon,
-  LuBrush as BrushIcon,
-  LuSettings as SettingsIcon,
-  LuHelpCircle as HelpCircleIcon,
-  LuMessageSquarePlus as MessageSquarePlusIcon,
   LuAlertTriangle as AlertTriangleIcon,
-  LuBox as BoxIcon
+  LuBox as BoxIcon,
+  LuBrush as BrushIcon,
+  LuHelpCircle as HelpCircleIcon,
+  LuHome as HomeIcon,
+  LuMessageSquarePlus as MessageSquarePlusIcon,
+  LuSettings as SettingsIcon,
+  LuSparkles as SparklesIcon,
+  LuX as XIcon
 } from "react-icons/lu"
 import { MyFursonaIcon } from "../../icons"
-import Overlay from "../../ui/Modal/Overlay"
 import { Button } from "../../ui/Buttons"
 import Menu from "../../ui/Menu"
+import Overlay from "../../ui/Modal/Overlay"
 import Separator from "../../ui/Separator"
 
 export default function Sidebar() {
@@ -70,9 +70,7 @@ export default function Sidebar() {
       <aside
         className="flex flex-col fixed inset-0 right-[unset] bg-context-menu transition-none md:transition-transform md:duration-300 ease-out w-full md:w-[325px]"
         style={{
-          transform: isSidebarOpen
-            ? "translate3d(0,0,0)"
-            : "translate3d(-100%,0,0)"
+          transform: isSidebarOpen ? "translate3d(0,0,0)" : "translate3d(-100%,0,0)"
         }}
       >
         <div className="w-full px-5 py-4 flex items-center gap-x-2.5">

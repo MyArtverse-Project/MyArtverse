@@ -2,6 +2,7 @@
 
 import { useEffect } from "react"
 import NoJSReminder from "./NoJSReminder"
+
 // import OneSignal from "react-onesignal"
 
 export default function ClientInit() {
@@ -10,8 +11,7 @@ export default function ClientInit() {
 
   useEffect(() => {
     const d = document
-    const commentMsg =
-      "Oh you decided to take a looksies at the precious sauce code I see OwO"
+    const commentMsg = "Oh you decided to take a looksies at the precious sauce code I see OwO"
     d.insertBefore(d.createComment(commentMsg), d.childNodes[0])
 
     console.log(CONSOLE_MSG, "color:hsl(250,95.5%,75%")

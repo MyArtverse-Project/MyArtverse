@@ -23,9 +23,7 @@ export default function InputField({
         <span
           className={clsx(
             "flex gap-x-0.5 uppercase text-600 font-bold",
-            required
-              ? "after:content-['*'] after:ml-1 after:font-bold after:text-error"
-              : null
+            required ? "after:content-['*'] after:ml-1 after:font-bold after:text-error" : null
           )}
         >
           {inputName}

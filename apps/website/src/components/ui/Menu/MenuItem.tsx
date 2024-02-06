@@ -1,7 +1,7 @@
 import Link from "next/link"
-import type { UrlObject } from "url"
 import type { ReactElement } from "react"
 import type { IconType } from "react-icons"
+import type { UrlObject } from "url"
 
 export default function MenuItem({
   prefix,

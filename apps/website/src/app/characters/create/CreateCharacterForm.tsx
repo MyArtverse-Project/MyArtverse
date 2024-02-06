@@ -1,7 +1,6 @@
 "use client"
 
 import { useState } from "react"
-
 import { Fieldset } from "@/components/ui"
 import { Button } from "@/components/ui/Buttons"
 import { FormWithProgress } from "@/components/ui/Forms"
@@ -45,9 +44,8 @@ export default function CreateCharacterForm() {
             heading="Details"
             description={
               <div className="flex flex-col gap-y-2">
-                Provide details, traits, and quirks about your character! Note
-                that any fields that aren't filled below aren't shown on the
-                character page.
+                Provide details, traits, and quirks about your character! Note that any fields that
+                aren't filled below aren't shown on the character page.
               </div>
             }
           ></Fieldset>

@@ -16,14 +16,12 @@ export default function LandingIntegration() {
         <ProseWrapper>
           <h1>Import from other platforms</h1>
           <p>
-            Lorem ipsum dolor sit amet consectetur, adipisicing elit. Rerum
-            minima eveniet exercitationem, corporis voluptatum maxime totam
-            tempore. Officia, voluptatibus.
+            Lorem ipsum dolor sit amet consectetur, adipisicing elit. Rerum minima eveniet
+            exercitationem, corporis voluptatum maxime totam tempore. Officia, voluptatibus.
           </p>
           <p>
-            Architecto rerum, ratione, omnis inventore quis reprehenderit saepe
-            iure temporibus nesciunt provident eum culpa facilis laudantium
-            magni debitis alias?
+            Architecto rerum, ratione, omnis inventore quis reprehenderit saepe iure temporibus
+            nesciunt provident eum culpa facilis laudantium magni debitis alias?
           </p>
         </ProseWrapper>
       </article>

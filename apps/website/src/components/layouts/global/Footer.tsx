@@ -1,11 +1,11 @@
 "use client"
 
 import Link from "next/link"
-import project from "../../../../package.json"
 import { kebabCase } from "lodash"
+import { LuHeart as HeartIcon } from "react-icons/lu"
+import project from "../../../../package.json"
 import { MyFursonaIcon } from "../../icons"
 import { BuiLink } from "../../ui"
-import { LuHeart as HeartIcon } from "react-icons/lu"
 import FooterGradient from "./FooterGraphics"
 
 const version = project.version
@@ -54,9 +54,7 @@ export default function Footer() {
   }) => {
     return (
       <div className="flex flex-col">
-        <h2 className="not-prose text-lg font-inter mb-2 font-semibold text-500">
-          {heading}
-        </h2>
+        <h2 className="not-prose text-lg font-inter mb-2 font-semibold text-500">{heading}</h2>
         <ul className="grid gap-y-3">
           {links.map(({ text, link }, index) => (
             <li key={index}>
@@ -85,9 +83,7 @@ export default function Footer() {
               <Link className="mb-4" href="/">
                 <MyFursonaIcon size={1.125} />
               </Link>
-              <BuiLink href={"https://stats.uptimerobot.com/rlVXRfwrKz"}>
-                MyFursona Status
-              </BuiLink>
+              <BuiLink href={"https://stats.uptimerobot.com/rlVXRfwrKz"}>MyFursona Status</BuiLink>
             </div>
           </div>
           <div className="sm:text-left text-center grid grid-cols-2 md:grid-cols-2 lg:grid-cols-3 gap-4 md:mt-5">

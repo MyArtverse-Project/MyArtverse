@@ -22,11 +22,7 @@ export function useFolderViewContext() {
   return ctx
 }
 
-export function FolderViewProvider({
-  children
-}: {
-  children?: React.ReactNode
-}) {
+export function FolderViewProvider({ children }: { children?: React.ReactNode }) {
   const [folderWidth, setFolderWidth] = useState(275)
 
   return (
