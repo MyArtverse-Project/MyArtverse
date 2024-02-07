@@ -1,19 +1,29 @@
 @use "mixins" as *;
 
 // --bui-context-menu
-@include theme-variable-sets(light) {
-  --bui-context-menu: theme("colors.100");
-}
-
-@include theme-variable-sets(dark) {
-  --bui-context-menu: theme("colors.200");
-}
+@include map-theme-variables(
+  "light",
+  (
+    "context-menu": theme("colors.100")
+  )
+);
+@include map-theme-variables(
+  "dark",
+  (
+    "context-menu": theme("colors.200")
+  )
+);
 
 // --bui-active
-@include theme-variable-sets(light) {
-  --bui-active: theme("colors.100");
-}
-
-@include theme-variable-sets(dark) {
-  --bui-active: theme("colors.700");
-}
+@include map-theme-variables(
+  "light",
+  (
+    "active": theme("colors.100")
+  )
+);
+@include map-theme-variables(
+  "dark",
+  (
+    "active": theme("colors.700")
+  )
+);
