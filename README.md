@@ -5,8 +5,8 @@
 <h1 align="center">MyFursona</h1>
 
 <div align="center">
-  <a href="https://www.codefactor.io/repository/github/MyFursona-Project/MyArtverse">
-    <img alt="CodeFactor Grade" src="https://img.shields.io/codefactor/grade/github/MyFursona-Project/MyArtverse">
+  <a href="https://www.codefactor.io/repository/github/MyArtverse-Project/MyArtverse">
+    <img alt="CodeFactor Grade" src="https://img.shields.io/codefactor/grade/github/MyArtverse-Project/MyArtverse">
   </a>
   <a href="https://stats.uptimerobot.com/rlVXRfwrKz">
     <img alt="UptimeRobot status" src="https://img.shields.io/uptimerobot/status/m794028551-c8c7591f5785702785b52996">
@@ -14,13 +14,13 @@
 </div>
 
 <p align="center">
-  The <strong>MyFursona</strong> web and desktop client
+  The <strong>MyArtverse</strong> web and desktop client
   written in Next.js, Tailwind CSS, and Headless UI!
 </p>
 
 ## Overview
 
-This repository is a monorepo, containing frontend code written in TypeScript.
+This repository is a monorepo containing frontend code written in TypeScript.
 
 There are also `codemods` that are small and custom Node scripts to keep
 the codebase clean and maintainable.
@@ -47,13 +47,13 @@ Fork/clone the repository, install its dependencies and run the local dev server
 on the root directory:
 
 ```console
-git clone https://github.com/MyFursona-Project/MyFursona.git
-cd MyFursona
+git clone https://github.com/MyArtverse-Project/MyArtverse.git
+cd MyArtverse
 yarn
 yarn dev
 ```
 
-You can now access http://localhost:3000 on your browser!
+You can now access <http://localhost:3000> on your browser!
 
 ## Commands
 
