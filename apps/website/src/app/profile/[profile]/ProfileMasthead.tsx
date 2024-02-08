@@ -86,12 +86,12 @@ export default function ProfileMasthead({
           objectPosition: "0 calc(50% * 1))"
         }}
       />
-      <div ref={profileDetailsRef} className="px-12 mx-auto max-w-screen-2xl">
-        <section className="flex gap-x-2.5 h-fit">
+      <div ref={profileDetailsRef} className="mx-auto max-w-screen-2xl px-12">
+        <section className="flex h-fit gap-x-2.5">
           {/* Avatar */}
-          <div className="relative flex-shrink-0 w-[var(--avatar-size)] h-[calc(var(--avatar-size)/1.25)]">
-            <div className="absolute inset-0 z-[3] -top-12" />
-            <div className="w-[var(--avatar-size)] absolute -top-12 aspect-square overflow-hidden border-4 rounded-full border-100 bg-100">
+          <div className="relative h-[calc(var(--avatar-size)/1.25)] w-[var(--avatar-size)] flex-shrink-0">
+            <div className="absolute inset-0 -top-12 z-[3]" />
+            <div className="border-100 bg-100 absolute -top-12 aspect-square w-[var(--avatar-size)] overflow-hidden rounded-full border-4">
               <Image
                 fill
                 priority
@@ -105,14 +105,14 @@ export default function ProfileMasthead({
             </div>
           </div>
           {/* Username details */}
-          <div className="flex flex-col w-full pt-4 gap-y-2">
+          <div className="flex w-full flex-col gap-y-2 pt-4">
             {/* layer 1 - username */}
             <div className="flex justify-between">
-              <h2 className="text-3xl not-prose font-inter font-bold flex items-center gap-x-1.5">
+              <h2 className="not-prose font-inter flex items-center gap-x-1.5 text-3xl font-bold">
                 <span>Username</span>
                 <span aria-hidden></span>
               </h2>
-              <div className="flex items-start gap-x-2.5 relative z-[6]">
+              <div className="relative z-[6] flex items-start gap-x-2.5">
                 <Button
                   prefixIcon={<BrushIcon size={20} />}
                   aria-label="View Username's Commissions"
@@ -120,7 +120,10 @@ export default function ProfileMasthead({
                 >
                   View Commission ToS
                 </Button>
-                <Button prefixIcon={<UserPlusIcon size={20} />} aria-label="Follow Username">
+                <Button
+                  prefixIcon={<UserPlusIcon size={20} />}
+                  aria-label="Follow Username"
+                >
                   Follow
                 </Button>
                 <Dropdown
@@ -144,8 +147,8 @@ export default function ProfileMasthead({
             </div>
             {/* layer 2 - handles and followers */}
             <div className="flex gap-x-3.5">
-              <span className="font-semibold text-700">@{handle}</span>
-              <span className="inline-flex items-center font-semibold gap-x-1 bg-error px-1 text-xs rounded-md">
+              <span className="text-700 font-semibold">@{handle}</span>
+              <span className="bg-error inline-flex items-center gap-x-1 rounded-md px-1 text-xs font-semibold">
                 <AlertTriangleIcon size={17} />
                 <span>NSFW</span>
               </span>
@@ -159,8 +162,8 @@ export default function ProfileMasthead({
           </div>
         </section>
       </div>
-      <div className="sticky top-[3.75rem] z-[3] bg-100 overflow-x-auto">
-        <div className="max-w-screen-2xl mx-auto px-9">
+      <div className="bg-100 sticky top-[3.75rem] z-[3] overflow-x-auto">
+        <div className="mx-auto max-w-screen-2xl px-9">
           <Tabs
             baseURL={`/@${handle}`}
             items={[
@@ -195,7 +198,7 @@ export default function ProfileMasthead({
           />
         </div>
         <div
-          className="relative -z-[1] w-full border-b-2 border-0 border-b-separator border-opacity-50"
+          className="border-b-separator relative -z-[1] w-full border-0 border-b-2 border-opacity-50"
           aria-hidden
         ></div>
       </div>

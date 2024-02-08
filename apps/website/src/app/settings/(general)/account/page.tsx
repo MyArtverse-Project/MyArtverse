@@ -7,7 +7,7 @@ export default function Page() {
     <div className="grid gap-y-3.5">
       <Fieldset heading="Features">
         <Fieldset.Inner>Yeet</Fieldset.Inner>
-        <div className="flex justify-end mt-2">
+        <div className="mt-2 flex justify-end">
           <Button>Save</Button>
         </div>
       </Fieldset>
@@ -18,9 +18,11 @@ export default function Page() {
         <Fieldset.Inner>
           <div className="flex flex-col justify-start gap-y-1.5">
             <p className="leading-relaxed">
-              Deleting your account would mean that you'll lose comments, favorites, characters, and
-              [number] of your listings, will no longer be available.{" "}
-              <strong>Remember: this action is irreversable and cannot be restored!</strong>
+              Deleting your account would mean that you'll lose comments, favorites,
+              characters, and [number] of your listings, will no longer be available.{" "}
+              <strong>
+                Remember: this action is irreversable and cannot be restored!
+              </strong>
             </p>
             <div className="mt-2">
               <Note type="warning" inline>

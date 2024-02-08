@@ -51,7 +51,7 @@ export default function CharacterView() {
         <FolderView.Item newItem onClick={toggleCreateFolderModal} />
       </FolderView.Shelf>
       <FolderView.Contents>
-        <div className="flex gap-x-2.5 w-full mb-4">
+        <div className="mb-4 flex w-full gap-x-2.5">
           <SearchBox placeholder="Search for characters" />
           <Button prefixIcon={<FilterIcon size={20} />}>Filter</Button>
         </div>
@@ -85,29 +85,37 @@ export default function CharacterView() {
       <Modal
         state={createFolderModal}
         toggler={toggleCreateFolderModal}
-        className="md:w-[600px] w-full"
+        className="w-full md:w-[600px]"
       >
         <Modal.Title>
-          <div className="flex items-center justify-between w-full">
-            <span className="flex items-center gap-x-2 text-xl font-inter font-bold">
+          <div className="flex w-full items-center justify-between">
+            <span className="font-inter flex items-center gap-x-2 text-xl font-bold">
               <FolderPlus />
               Add new folder
             </span>
-            <Button size="small" variant="tritery" iconOnly onClick={toggleCreateFolderModal}>
+            <Button
+              size="small"
+              variant="tritery"
+              iconOnly
+              onClick={toggleCreateFolderModal}
+            >
               <XIcon size={18} />
             </Button>
           </div>
         </Modal.Title>
-        <div className="px-4 pb-3 flex flex-col gap-y-1">
+        <div className="flex flex-col gap-y-1 px-4 pb-3">
           <InputField inputName="Folder name" />
           <div className="flex flex-col gap-y-1">
             {/* TODO export as a <SelectField /> component */}
-            <span className="uppercase text-600 font-bold">Color</span>
+            <span className="text-600 font-bold uppercase">Color</span>
             <div className="flex flex-wrap gap-2">
               {colors.map((color, i) => (
                 <Button
                   key={i}
-                  className={clsx("rounded-full h-10 w-10 grid place-items-center", color)}
+                  className={clsx(
+                    "grid h-10 w-10 place-items-center rounded-full",
+                    color
+                  )}
                   onClick={() => setSelectedIndex(i)}
                 >
                   {selectedIndex == i ? <CheckCircle2Icon className="text-100" /> : null}

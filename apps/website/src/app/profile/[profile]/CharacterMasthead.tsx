@@ -57,19 +57,19 @@ export default function CharacterMasthead({
 
   return (
     <div className="contents">
-      <div ref={profileDetailsRef} className="px-12 mx-auto max-w-screen-2xl">
+      <div ref={profileDetailsRef} className="mx-auto max-w-screen-2xl px-12">
         <Button
           href={`/@${owner}`}
           prefixIcon={<ArrowLeft className="mr-3" />}
-          className="mb-4 my-8 flex flex-row items-center bg-300 px-4 py-2 rounded-lg hover:bg-400 transition-all ease-in-out duration-200"
+          className="bg-300 hover:bg-400 my-8 mb-4 flex flex-row items-center rounded-lg px-4 py-2 transition-all duration-200 ease-in-out"
         >
           Back to <span className="font-bold">{owner}'s</span> profile
         </Button>
-        <section className="flex gap-x-2.5 h-fit">
+        <section className="flex h-fit gap-x-2.5">
           {/* Avatar */}
-          <div className="relative flex-shrink-0 w-[var(--avatar-size)] h-[calc(var(--avatar-size)/1)]">
+          <div className="relative h-[calc(var(--avatar-size)/1)] w-[var(--avatar-size)] flex-shrink-0">
             <div className="absolute inset-0 z-[3] " />
-            <div className="w-[var(--avatar-size)] absolute  aspect-square overflow-hidden border-4 rounded-xl border-100 bg-100">
+            <div className="border-100 bg-100  absolute aspect-square w-[var(--avatar-size)] overflow-hidden rounded-xl border-4">
               <Image
                 fill
                 priority
@@ -83,10 +83,10 @@ export default function CharacterMasthead({
             </div>
           </div>
           {/* Username details */}
-          <div className="flex flex-col w-full pt-4 gap-y-2">
+          <div className="flex w-full flex-col gap-y-2 pt-4">
             {/* layer 1 - username */}
             <div className="flex justify-between">
-              <h2 className="text-3xl not-prose font-inter font-bold flex items-center gap-x-1.5">
+              <h2 className="not-prose font-inter flex items-center gap-x-1.5 text-3xl font-bold">
                 <span>{name}</span>
                 <span aria-hidden>
                   {/* <Badge
@@ -96,18 +96,22 @@ export default function CharacterMasthead({
                   /> */}
                 </span>
               </h2>
-              <div className="flex items-start gap-x-2.5 relative z-2">
+              <div className="z-2 relative flex items-start gap-x-2.5">
                 <Button prefixIcon={<EditIcon size={20} />} aria-label="Follow Username">
                   Edit Profile
                 </Button>
-                <Button prefixIcon={<HeartIcon size={20} />} aria-label="Favorite" count={3}>
+                <Button
+                  prefixIcon={<HeartIcon size={20} />}
+                  aria-label="Favorite"
+                  count={3}
+                >
                   Favorite
                 </Button>
               </div>
             </div>
             {/* layer 2 - handles and followers */}
             <div className="flex gap-x-3.5">
-              <span className="font-semibold text-700">{species}</span>
+              <span className="text-700 font-semibold">{species}</span>
               <span className="text-700">{pronouns}</span>
             </div>
             {/* layer 3 - Fursona Info */}
@@ -131,8 +135,8 @@ export default function CharacterMasthead({
           </div>
         </section>
       </div>
-      <div className="sticky top-[3.75rem] z-[3] bg-100 overflow-x-auto">
-        <div className="max-w-screen-2xl mx-auto px-9">
+      <div className="bg-100 sticky top-[3.75rem] z-[3] overflow-x-auto">
+        <div className="mx-auto max-w-screen-2xl px-9">
           <Tabs
             baseURL={`/@${handle}/character/${character}`}
             items={[
@@ -160,7 +164,7 @@ export default function CharacterMasthead({
           />
         </div>
         <div
-          className="relative -z-[1] w-full border-b-2 border-0 border-b-separator border-opacity-50"
+          className="border-b-separator relative -z-[1] w-full border-0 border-b-2 border-opacity-50"
           aria-hidden
         ></div>
       </div>

@@ -68,12 +68,12 @@ export default function Sidebar() {
   return (
     <Overlay state={isSidebarOpen} toggler={toggleSidebar}>
       <aside
-        className="flex flex-col fixed inset-0 right-[unset] bg-context-menu transition-none md:transition-transform md:duration-300 ease-out w-full md:w-[325px]"
+        className="bg-context-menu fixed inset-0 right-[unset] flex w-full flex-col transition-none ease-out md:w-[325px] md:transition-transform md:duration-300"
         style={{
           transform: isSidebarOpen ? "translate3d(0,0,0)" : "translate3d(-100%,0,0)"
         }}
       >
-        <div className="w-full px-5 py-4 flex items-center gap-x-2.5">
+        <div className="flex w-full items-center gap-x-2.5 px-5 py-4">
           <Button variant="secondary" iconOnly onClick={toggleSidebar}>
             <XIcon size={20} />
           </Button>
@@ -81,7 +81,7 @@ export default function Sidebar() {
             <MyFursonaIcon />
           </Link>
         </div>
-        <div className="px-2.5 h-full overflow-y-scroll" role="menu">
+        <div className="h-full overflow-y-scroll px-2.5" role="menu">
           {SIDEBAR_ITEMS.map(({ heading, items }, index) => (
             <Fragment key={index}>
               <Menu heading={heading ?? undefined}>

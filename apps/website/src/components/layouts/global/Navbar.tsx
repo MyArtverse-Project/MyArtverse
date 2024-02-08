@@ -61,9 +61,9 @@ export default function Navbar() {
   const disableSidebar = pathname == "/login" || pathname == "/register"
 
   return (
-    <nav className="relative flex items-center justify-between px-5 py-3 text-sm font-medium select-none font-inter bg-100">
+    <nav className="font-inter bg-100 relative flex select-none items-center justify-between px-5 py-3 text-sm font-medium">
       {/* Navbar left side */}
-      <div className="flex items-center gap-x-3 h-5">
+      <div className="flex h-5 items-center gap-x-3">
         {!disableSidebar ? (
           <Button
             iconOnly

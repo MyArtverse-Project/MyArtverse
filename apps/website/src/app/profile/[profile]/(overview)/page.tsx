@@ -18,8 +18,8 @@ export async function generateMetadata(
 export default function Page() {
   return (
     <div className="flex w-full gap-3">
-      <div className="flex-shrink-0 w-1/2"></div>
-      <div className="flex-shrink-0 w-1/2">
+      <div className="w-1/2 flex-shrink-0"></div>
+      <div className="w-1/2 flex-shrink-0">
         <Group>
           <Group.Header>About Username</Group.Header>
           <Group.HeaderButtons>

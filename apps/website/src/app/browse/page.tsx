@@ -31,7 +31,7 @@ export default function Browse() {
 
   return (
     <MarginClamp>
-      <div className="flex flex-col gap-y-2  md:mt-8 md:flex-col justify-between mx-auto my-20">
+      <div className="mx-auto my-20 flex  flex-col justify-between gap-y-2 md:mt-8 md:flex-col">
         <ShelfSection icon={Heart} title={"Featured Characters"}>
           <RandomizedFursonaCards />
         </ShelfSection>
@@ -40,8 +40,8 @@ export default function Browse() {
         </ShelfSection>
         {/* TODO create profile card and collections card */}
         <div>
-          <div className="flex flex-row my-3">
-            <span className="flex flex-row text-2xl font-bold items-center justify-center">
+          <div className="my-3 flex flex-row">
+            <span className="flex flex-row items-center justify-center text-2xl font-bold">
               <Brush width={26} height={26} className="mr-2" />
               Artists Open for Comissions
             </span>
@@ -49,8 +49,8 @@ export default function Browse() {
             <div />
           </div>
         </div>
-        <div className="flex flex-row my-3">
-          <span className="flex flex-row text-2xl font-bold items-center justify-center">
+        <div className="my-3 flex flex-row">
+          <span className="flex flex-row items-center justify-center text-2xl font-bold">
             <Layers width={26} height={26} className="mr-2" />
             Curated Collections
           </span>

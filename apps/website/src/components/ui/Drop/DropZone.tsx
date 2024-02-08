@@ -50,36 +50,44 @@ export default function DropZone() {
 
   return (
     <div
-      className={`${isDragging ? "bg-400" : ""} bg- border-4 rounded-[10px] border-dashed border-600 bg-300 px-10 py-10 text-center`}
+      className={`${isDragging ? "bg-400" : ""} bg- border-600 bg-300 rounded-[10px] border-4 border-dashed px-10 py-10 text-center`}
       onDragEnter={handleDragEnter}
       onDragLeave={handleDragLeave}
       onDrop={handleDrop}
     >
       {file ? (
         <div
-          className="flex flex-col justify-center items-center"
+          className="flex flex-col items-center justify-center"
           onDragEnter={handleDragEnter}
           onDragLeave={handleDragLeave}
           onDrop={(e) => e.preventDefault()}
         >
-          <input type="file" style={{ display: "none" }} onChange={handleFileInputChange} />
-          <img src={imageUrl} className="w-40 h-40 rounded-full mb-5" />
+          <input
+            type="file"
+            style={{ display: "none" }}
+            onChange={handleFileInputChange}
+          />
+          <img src={imageUrl} className="mb-5 h-40 w-40 rounded-full" />
           <h4 className="text-sm">Uploaded!</h4>
-          <p className="text-xl mt-4">Max size: 25MB, Supported: PNG, JPG</p>
+          <p className="mt-4 text-xl">Max size: 25MB, Supported: PNG, JPG</p>
         </div>
       ) : (
         <div
-          className="flex flex-col justify-center items-center"
+          className="flex flex-col items-center justify-center"
           onDragEnter={handleDragEnter}
           onDragLeave={handleDragLeave}
           onDrop={(e) => e.preventDefault()}
         >
-          <input type="file" style={{ display: "none" }} onChange={handleFileInputChange} />
-          <span className=" bg-100 p-6 justify-center items-center flex mb-6 rounded-full">
+          <input
+            type="file"
+            style={{ display: "none" }}
+            onChange={handleFileInputChange}
+          />
+          <span className=" bg-100 mb-6 flex items-center justify-center rounded-full p-6">
             <UploadIcon size={64} className="" />
           </span>
           <h4 className="text-sm">Drag Files Here</h4>
-          <p className="text-xl mt-4">Max size: 25MB, Supported: PNG, JPG</p>
+          <p className="mt-4 text-xl">Max size: 25MB, Supported: PNG, JPG</p>
           {error && <p className="text-red">{error}</p>}
         </div>
       )}

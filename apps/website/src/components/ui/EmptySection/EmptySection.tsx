@@ -8,8 +8,8 @@ export default function EmptySection({
   icon?: IconType
 }) {
   return (
-    <div className="grid px-4 py-32 text-center border rounded-md place-items-center border-error prose-p:w-2/3 prose-p:mx-auto prose-p:leading-6 prose-p:mt-2">
-      <div className="p-4 rounded-lg bg-error-hl">
+    <div className="border-error prose-p:w-2/3 prose-p:mx-auto prose-p:leading-6 prose-p:mt-2 grid place-items-center rounded-md border px-4 py-32 text-center">
+      <div className="bg-error-hl rounded-lg p-4">
         <Icon size={48} strokeWidth={2} />
       </div>
       {children}

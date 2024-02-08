@@ -32,7 +32,9 @@ export function useDetailPeekContext() {
   const ctx = useContext(DetailPeekContext)
 
   if (!ctx) {
-    throw new Error("The useSidebarContext hook must be used within the DetailPeekContext.")
+    throw new Error(
+      "The useSidebarContext hook must be used within the DetailPeekContext."
+    )
   }
 
   return ctx

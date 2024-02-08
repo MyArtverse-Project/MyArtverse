@@ -31,8 +31,8 @@ export default function Overlay({
       <div
         onClick={toggler as () => any}
         className={clsx(
-          "duration-[350ms] fixed z-[99] transition-all bg-black/60 inset-0",
-          state ? "opacity-100" : "opacity-0 pointer-events-none"
+          "fixed inset-0 z-[99] bg-black/60 transition-all duration-[350ms]",
+          state ? "opacity-100" : "pointer-events-none opacity-0"
         )}
       />
       <div className="fixed z-[100]">{children}</div>

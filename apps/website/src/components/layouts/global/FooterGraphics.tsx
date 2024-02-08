@@ -45,7 +45,14 @@ export default function FooterGradient() {
       <g>
         <rect opacity="0.12" x="-215" y="-82" width="897" height="276" fill="url(#rg1)" />
         <rect opacity="0.12" x="132" y="-82" width="1053" height="276" fill="url(#rg2)" />
-        <rect opacity="0.12" x="629" y="-100" width="1053" height="378" fill="url(#rg3)" />
+        <rect
+          opacity="0.12"
+          x="629"
+          y="-100"
+          width="1053"
+          height="378"
+          fill="url(#rg3)"
+        />
       </g>
     </svg>
   )

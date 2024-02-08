@@ -18,12 +18,12 @@ export const metadata: Metadata = {
 export default function Page() {
   return (
     <main className="contents">
-      <section className="relative text-center h-[25rem] flex justify-center items-center flex-col gap-y-5 bg-gradient-to-tr from-fuchsia-500  via-blue-900 to-purple-900 rounded-bl-xl rounded-br-xl">
-        <h1 className="not-prose text-6xl font-bold font-inter">MyFursona Blog</h1>
+      <section className="relative flex h-[25rem] flex-col items-center justify-center gap-y-5 rounded-bl-xl rounded-br-xl bg-gradient-to-tr  from-fuchsia-500 via-blue-900 to-purple-900 text-center">
+        <h1 className="not-prose font-inter text-6xl font-bold">MyFursona Blog</h1>
         <p className="text-xl">{description}</p>
       </section>
-      <div className="sticky top-28 -translate-y-6 grid place-items-center -mb-4">
-        <div className="px-3 py-1 rounded-md flex items-center font-inter bg-100">
+      <div className="sticky top-28 -mb-4 grid -translate-y-6 place-items-center">
+        <div className="font-inter bg-100 flex items-center rounded-md px-3 py-1">
           <Tabs
             baseURL="/blog"
             items={[

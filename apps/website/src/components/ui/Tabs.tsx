@@ -30,7 +30,7 @@ export default function Tabs({
           prefetch
           href={`${baseURL}${link}` as any}
           className={clsx(
-            "flex items-center px-4 py-2 transition-colors rounded-md gap-x-2 group relative before:absolute before:left-0 before:right-0 before:-bottom-2 before:block before:h-0.5",
+            "group relative flex items-center gap-x-2 rounded-md px-4 py-2 transition-colors before:absolute before:-bottom-2 before:left-0 before:right-0 before:block before:h-0.5",
             pathname === `${baseURL}${link}`
               ? "text-500 hover:bg-200 before:bg-500"
               : "hover:bg-300"
@@ -42,7 +42,7 @@ export default function Tabs({
           {countIndicator && (
             <span
               aria-hidden
-              className="text-xs px-2 py-0.5 group-hover:bg-opacity-100 bg-300 rounded-2xl"
+              className="bg-300 rounded-2xl px-2 py-0.5 text-xs group-hover:bg-opacity-100"
             >
               {countIndicator}
             </span>

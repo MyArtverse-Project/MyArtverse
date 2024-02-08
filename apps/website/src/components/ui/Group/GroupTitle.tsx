@@ -8,7 +8,7 @@ export default function GroupTitle({
   return (
     <div className="flex items-center">
       <div>{prefix}</div>
-      <h3 className="not-prose font-bold font-inter text-2xl">{children}</h3>
+      <h3 className="not-prose font-inter text-2xl font-bold">{children}</h3>
     </div>
   )
 }

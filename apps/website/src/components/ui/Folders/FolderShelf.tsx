@@ -83,15 +83,19 @@ export default function FolderShelf({
   const panelStateAria = !expandThreshold ? "Expand folder menu" : "Collapse folder menu"
 
   return (
-    <div className="flex-shrink-0 flex" ref={folderViewRef} style={{ width: folderWidth }}>
-      <aside className="grid gap-y-1.5 w-full h-fit sticky top-32">
-        <span className="flex gap-2.5 items-center flex-row-reverse">
+    <div
+      className="flex flex-shrink-0"
+      ref={folderViewRef}
+      style={{ width: folderWidth }}
+    >
+      <aside className="sticky top-32 grid h-fit w-full gap-y-1.5">
+        <span className="flex flex-row-reverse items-center gap-2.5">
           <div>
             <Button
               aria-label={panelStateAria}
               iconOnly
               prefixIcon={<PanelIconDynamic size={21} />}
-              className="p-2 rounded-md transition-colors hover:bg-200 hover:text-500"
+              className="hover:bg-200 hover:text-500 rounded-md p-2 transition-colors"
               onClick={handleExpandDetails}
             />
           </div>
@@ -102,7 +106,7 @@ export default function FolderShelf({
       </aside>
       <span
         ref={resizableRef}
-        className="hover:cursor-e-resize px-2 mx-1 h-full before:block before:w-0.5 before:h-full before:bg-separator before:transition-opacity before:opacity-25 before:hover:opacity-100"
+        className="before:bg-separator mx-1 h-full px-2 before:block before:h-full before:w-0.5 before:opacity-25 before:transition-opacity hover:cursor-e-resize before:hover:opacity-100"
       />
     </div>
   )

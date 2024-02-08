@@ -1,10 +1,11 @@
 module.exports = {
   semi: false,
-  printWidth: 100,
+  printWidth: 90,
   endOfLine: "lf",
   tabWidth: 2,
   useTabs: false,
   trailingComma: "none",
+  plugins: ["@trivago/prettier-plugin-sort-imports", "prettier-plugin-tailwindcss"],
   overrides: [
     {
       files: ["tailwind.config.ts"],
@@ -13,7 +14,7 @@ module.exports = {
       }
     }
   ],
-  plugins: ["@trivago/prettier-plugin-sort-imports"],
+  // prettier-plugin-sort-imports config
   importOrder: [
     ".scss$|.css$",
     "next|^next/(.*)",

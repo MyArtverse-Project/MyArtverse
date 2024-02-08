@@ -28,16 +28,16 @@ export default function Listing({
   description: string
 }) {
   return (
-    <div className="overflow-hidden rounded-md shadow-md p-3.5 bg-white">
+    <div className="overflow-hidden rounded-md bg-white p-3.5 shadow-md">
       <div className="mb-2.5">
         <MFImage src={img} alt="" aspectRatio="2/1" rounded={12} objectFit="cover" />
       </div>
       {/* Commission info */}
       <div className="flex flex-col gap-y-1.5">
-        <div className="grid grid-cols-[auto,1fr] gap-y-1 gap-x-3">
+        <div className="grid grid-cols-[auto,1fr] gap-x-3 gap-y-1">
           <MFImage src={img} alt="Your mom" aspectRatio="1" height={30} rounded={999} />
-          <h2 className="font-bold text-2xl">Cruel Summer</h2>
-          <div className="flex flex-wrap gap-x-3 col-span-2">
+          <h2 className="text-2xl font-bold">Cruel Summer</h2>
+          <div className="col-span-2 flex flex-wrap gap-x-3">
             <span>Taylor Swift</span>
             <span className="text-green-600">$20—$69</span>
             <ScopedLabel icon={TimeIcon} text="69 hours remaining" />
@@ -45,10 +45,11 @@ export default function Listing({
         </div>
         <article className="px-0.5 pt-1">
           <div>
-            Lorem, ipsum dolor sit amet consectetur adipisicing elit. Officia alias, vel debitis
-            voluptates numquam dolores commodi? Corporis alias perspiciatis autem quidem!
+            Lorem, ipsum dolor sit amet consectetur adipisicing elit. Officia alias, vel
+            debitis voluptates numquam dolores commodi? Corporis alias perspiciatis autem
+            quidem!
           </div>
-          <div className="inline-block mt-2 hover:underline cursor-pointer text-blue-600">
+          <div className="mt-2 inline-block cursor-pointer text-blue-600 hover:underline">
             See more
           </div>
         </article>

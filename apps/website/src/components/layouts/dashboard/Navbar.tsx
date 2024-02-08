@@ -13,8 +13,8 @@ import {
 export default function Navbar() {
   return (
     <header className="sticky top-0 z-20">
-      <nav className="relative flex items-center justify-between px-5 py-3 text-sm font-medium select-none font-inter bg-100">
-        <div className="font-inter flex gap-x-3.5 items-center text-xl">
+      <nav className="font-inter bg-100 relative flex select-none items-center justify-between px-5 py-3 text-sm font-medium">
+        <div className="font-inter flex items-center gap-x-3.5 text-xl">
           <Button iconOnly variant="tritery">
             <MenuIcon size={21} />
           </Button>

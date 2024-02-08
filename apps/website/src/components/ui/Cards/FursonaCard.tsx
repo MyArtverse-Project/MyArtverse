@@ -34,7 +34,7 @@ export default function FursonaCard({
       href={!href ? null : (href as any)}
       aria-label={`Character item: ${name}, ${species}`}
       className={clsx(
-        "flex flex-col p-4 rounded-md gap-y-2 hover:bg-mute transition-all",
+        "hover:bg-mute flex flex-col gap-y-2 rounded-md p-4 transition-all",
         href ? "cursor-pointer" : ""
       )}
       {...attributes}
@@ -60,9 +60,9 @@ export default function FursonaCard({
       </div>
       <div className="grid">
         <Status status={status} />
-        <h3 className="not-prose font-inter font-bold text-2xl">{name}</h3>
+        <h3 className="not-prose font-inter text-2xl font-bold">{name}</h3>
         <span>{species}</span>
-        <span className="flex flex-row text-md font-semibold my-2">
+        <span className="text-md my-2 flex flex-row font-semibold">
           <Heart className="mr-1" size={18} />
           {likes}
         </span>

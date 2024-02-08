@@ -14,7 +14,7 @@ export default function ShelfSection({
     <Carousel
       as="section"
       title={
-        <span className="flex items-center gap-x-1 font-bold font-inter text-2xl">
+        <span className="font-inter flex items-center gap-x-1 text-2xl font-bold">
           <Icon size="1.3rem" className="mr-2" />
           {title}
         </span>

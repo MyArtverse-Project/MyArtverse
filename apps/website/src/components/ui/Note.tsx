@@ -22,7 +22,10 @@ export default function Note({
     )
   }
 
-  const status: PartialRecord<NoteStatus, { css: string; icon: IconType; iconColor: string }> = {
+  const status: PartialRecord<
+    NoteStatus,
+    { css: string; icon: IconType; iconColor: string }
+  > = {
     warning: {
       icon: LuAlertTriangle,
       css: "border-warning",
@@ -53,13 +56,18 @@ export default function Note({
     <div
       className={
         !inline
-          ? `flex gap-1.5 px-3.5 py-3 border rounded-md ${statusStyles}`
+          ? `flex gap-1.5 rounded-md border px-3.5 py-3 ${statusStyles}`
           : `inline-flex gap-2 ${statusStyles}`
       }
     >
-      <StatusIcon size={!inline ? 25 : 19} className={clsx("flex-shrink-0", statusIconColor)} />
+      <StatusIcon
+        size={!inline ? 25 : 19}
+        className={clsx("flex-shrink-0", statusIconColor)}
+      />
       <div className={!inline ? "flex flex-col justify-center" : null}>
-        {heading && <div className="text-xl font-bold font-inter -translate-y-0.5">{heading}</div>}
+        {heading && (
+          <div className="font-inter -translate-y-0.5 text-xl font-bold">{heading}</div>
+        )}
         {children}
       </div>
     </div>

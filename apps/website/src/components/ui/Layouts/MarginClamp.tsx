@@ -5,5 +5,5 @@ export default function MarginClamp({
   children?: React.ReactNode
   as?: keyof HTMLElementTagNameMap
 }) {
-  return <Element className="px-12 mx-auto max-w-screen-2xl">{children}</Element>
+  return <Element className="mx-auto max-w-screen-2xl px-12">{children}</Element>
 }

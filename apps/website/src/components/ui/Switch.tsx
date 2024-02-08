@@ -12,10 +12,10 @@ export default function Switch() {
   const [option, setOption] = useState<SwitchTemp>("prices")
   return (
     <div>
-      <div className="flex flex-row p-2.5 border border-300 rounded-md mx-4 items-center text-center justify-center">
+      <div className="border-300 mx-4 flex flex-row items-center justify-center rounded-md border p-2.5 text-center">
         <div
           onClick={() => setOption("prices")}
-          className={`${option == "prices" ? "bg-500 text-100" : "text-700"}  w-32 h-9 flex flex-row justify-center my-auto rounded-md cursor-pointer`}
+          className={`${option == "prices" ? "bg-500 text-100" : "text-700"}  my-auto flex h-9 w-32 cursor-pointer flex-row justify-center rounded-md`}
         >
           <span className="my-auto">Prices</span>
         </div>
@@ -23,7 +23,7 @@ export default function Switch() {
           onClick={() => setOption("queue")}
           className={`${
             option == "queue" ? "bg-500 text-100" : "text-700"
-          } w-32 h-9 flex flex-row text-center justify-center items-center rounded-md cursor-pointer`}
+          } flex h-9 w-32 cursor-pointer flex-row items-center justify-center rounded-md text-center`}
         >
           <Palette className="mr-2" width={24} height={24} />
           Queue

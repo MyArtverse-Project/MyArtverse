@@ -20,12 +20,12 @@ export default function PinnedCharacter({
   refSheetImg: string
 }) {
   return (
-    <section className="flex flex-row justify-around mb-5">
+    <section className="mb-5 flex flex-row justify-around">
       <div className="flex flex-col">
         <div className="flex flex-col justify-between">
           <div className="flex flex-row">
             <MFImage width={118} height={118} src={avatar} alt={`${name}'s avatar`} />
-            <div className="flex flex-col m-4">
+            <div className="m-4 flex flex-col">
               <h2 className="text-3xl">{name}</h2>
               <span className="text-lg">{species}</span>
               <ColorPalette palette={colors} />
@@ -41,7 +41,7 @@ export default function PinnedCharacter({
           </div>
         </div>
         <div className="mt-auto">
-          <h4 className="not-prose text-sm text-subtext">ARTIST CREDIT</h4>
+          <h4 className="not-prose text-subtext text-sm">ARTIST CREDIT</h4>
           <span>{artist}</span>
         </div>
       </div>

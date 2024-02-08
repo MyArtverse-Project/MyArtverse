@@ -22,7 +22,9 @@ const Button = forwardRef(
     ref
   ) => {
     const buttonVars = cva(
-      ["flex items-center gap-x-1.5 rounded-md transition-[border,background-color] border-[2px]"],
+      [
+        "flex items-center gap-x-1.5 rounded-md transition-[border,background-color] border-[2px]"
+      ],
       {
         variants: {
           intent: {
@@ -71,10 +73,12 @@ const Button = forwardRef(
       >
         {prefixIcon}
         {children && (
-          <span className="inline-block overflow-hidden select-none whitespace-nowrap overflow-ellipsis">
+          <span className="inline-block select-none overflow-hidden overflow-ellipsis whitespace-nowrap">
             {children}
             {count && (
-              <span className="ml-1.5 font-semibold bg-100 text-700 rounded-xl p-2">{count}</span>
+              <span className="bg-100 text-700 ml-1.5 rounded-xl p-2 font-semibold">
+                {count}
+              </span>
             )}
           </span>
         )}

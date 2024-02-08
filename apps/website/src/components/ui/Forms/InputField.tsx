@@ -22,14 +22,16 @@ export default function InputField({
       <label htmlFor={kebabCase(inputName)} className="flex flex-col gap-y-1.5">
         <span
           className={clsx(
-            "flex gap-x-0.5 uppercase text-600 font-bold",
-            required ? "after:content-['*'] after:ml-1 after:font-bold after:text-error" : null
+            "text-600 flex gap-x-0.5 font-bold uppercase",
+            required
+              ? "after:text-error after:ml-1 after:font-bold after:content-['*']"
+              : null
           )}
         >
           {inputName}
         </span>
         <input
-          className="px-4 py-2 border rounded-md text-700 border-400 w-full bg-100"
+          className="text-700 border-400 bg-100 w-full rounded-md border px-4 py-2"
           id={kebabCase(inputName)}
           name={kebabCase(inputName)}
           type={type}

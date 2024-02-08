@@ -81,7 +81,7 @@ export default function FolderItem({
 
   return (
     <div
-      className={clsx(!nestedItem ? "w-full" : "w-full relative")}
+      className={clsx(!nestedItem ? "w-full" : "relative w-full")}
       aria-expanded={!children ? undefined : isExpand}
       // Data attribute for debugging purposes in production
       {...attributes}
@@ -95,7 +95,7 @@ export default function FolderItem({
             : `Folder item: ${name}, folder contains ${childrenCount} items`
         }
         className={clsx(
-          "font-semibold w-full flex flex-row items-center px-3 py-2 rounded-md cursor-pointer transition-all",
+          "flex w-full cursor-pointer flex-row items-center rounded-md px-3 py-2 font-semibold transition-all",
           !open ? "hover:text-500 hover:bg-200" : "bg-500 text-active",
           !newItem ? "opacity-100" : "opacity-50 hover:opacity-100"
         )}
@@ -110,7 +110,7 @@ export default function FolderItem({
         animate={{
           height: !isExpand ? 0 : expandedHeight
         }}
-        className={clsx(!!children ? "relative pl-6 overflow-hidden" : "")}
+        className={clsx(!!children ? "relative overflow-hidden pl-6" : "")}
       >
         {children}
       </motion.div>

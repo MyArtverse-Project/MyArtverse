@@ -3,7 +3,7 @@ export default function DashboardLayout({ children }: { children: React.ReactNod
     <div className="flex">
       <nav
         style={{ width: 250 }}
-        className="sticky top-16 [align-self:flex-start] h-[calc(100dvh-4rem)] border-r border-r-separator"
+        className="border-r-separator sticky top-16 h-[calc(100dvh-4rem)] border-r [align-self:flex-start]"
       >
         sidebar items
       </nav>

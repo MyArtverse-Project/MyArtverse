@@ -12,14 +12,14 @@ const SearchBox = forwardRef(
   ) => {
     return (
       <div className="relative w-full">
-        <div className="absolute h-full flex justify-center items-center left-3 pointer-events-none">
+        <div className="pointer-events-none absolute left-3 flex h-full items-center justify-center">
           <SearchIcon size={18} />
         </div>
         <input
           ref={ref}
           type="search"
           name="Search"
-          className="pl-9 pr-1 py-2 text-sm rounded-md w-full h-full bg-100"
+          className="bg-100 h-full w-full rounded-md py-2 pl-9 pr-1 text-sm"
           placeholder={placeholder}
         />
       </div>

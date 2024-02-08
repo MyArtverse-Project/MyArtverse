@@ -22,7 +22,7 @@ export default function RegisterForm() {
   }
 
   return (
-    <main className="grid place-items-center m-auto max-w-md absolute inset-0 px-8">
+    <main className="absolute inset-0 m-auto grid max-w-md place-items-center px-8">
       <div className="w-full">
         {errors && errors.length !== 0 ? (
           <div>
@@ -31,8 +31,10 @@ export default function RegisterForm() {
             ))}
           </div>
         ) : null}
-        <h2 className="not-prose font-bold font-inter my-4 text-3xl text-center">Sign Up</h2>
-        <div className="grid gap-y-1.5 w-full">
+        <h2 className="not-prose font-inter my-4 text-center text-3xl font-bold">
+          Sign Up
+        </h2>
+        <div className="grid w-full gap-y-1.5">
           <Button variant="secondary" prefixIcon={<Google />} position="center">
             Continue with Google
           </Button>
@@ -45,7 +47,10 @@ export default function RegisterForm() {
         </div>
         <Separator dir="horizontal" padding="1.25rem" />
         <div className="relative w-full">
-          <form onSubmit={submitRegister} className="flex justify-center flex-col gap-y-2">
+          <form
+            onSubmit={submitRegister}
+            className="flex flex-col justify-center gap-y-2"
+          >
             <InputField
               required
               inputName="Username"

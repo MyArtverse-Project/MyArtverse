@@ -13,13 +13,15 @@ export default function BuiLink({
 
   return (
     <Link
-      className="underline text-blue-400 hover:text-blue-500 inline-flex items-center w-fit"
+      className="inline-flex w-fit items-center text-blue-400 underline hover:text-blue-500"
       href={href as unknown as UrlObject}
       target={hasHTTPInUrl ? "_blank" : undefined}
       {...others}
     >
       {children}
-      {hasHTTPInUrl ? <ExternalLinkIcon size={16} style={{ marginLeft: "0.25rem" }} /> : null}
+      {hasHTTPInUrl ? (
+        <ExternalLinkIcon size={16} style={{ marginLeft: "0.25rem" }} />
+      ) : null}
     </Link>
   )
 }

@@ -86,7 +86,7 @@ export default function MFImage({
       <div
         id="loading-skeleton"
         className={clsx(
-          "absolute inset-0 -z-[2] bg-red-500 animate-pulse",
+          "absolute inset-0 -z-[2] animate-pulse bg-red-500",
           !imgLoaded ? "" : "hidden"
         )}
       />

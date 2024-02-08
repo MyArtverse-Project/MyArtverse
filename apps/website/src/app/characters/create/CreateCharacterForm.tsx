@@ -32,20 +32,20 @@ export default function CreateCharacterForm() {
 
   return (
     <>
-      <section className="max-w-screen-xl mt-20 mb-12 mx-auto px-9 text-center">
-        <h1 className="not-prose font-bold font-inter !leading-[4.25rem] text-4xl xl:text-5xl bg-gradient-to-tl from-blue-700 via-purple-700 to-pink-500 text-transparent bg-clip-text">
+      <section className="mx-auto mb-12 mt-20 max-w-screen-xl px-9 text-center">
+        <h1 className="not-prose font-inter bg-gradient-to-tl from-blue-700 via-purple-700 to-pink-500 bg-clip-text text-4xl font-bold !leading-[4.25rem] text-transparent xl:text-5xl">
           Create new Character
         </h1>
       </section>
       <FormWithProgress progress={progress}>
-        <main className="w-full flex flex-col gap-y-5">
+        <main className="flex w-full flex-col gap-y-5">
           <Fieldset heading="Basic Info"></Fieldset>
           <Fieldset
             heading="Details"
             description={
               <div className="flex flex-col gap-y-2">
-                Provide details, traits, and quirks about your character! Note that any fields that
-                aren't filled below aren't shown on the character page.
+                Provide details, traits, and quirks about your character! Note that any
+                fields that aren't filled below aren't shown on the character page.
               </div>
             }
           ></Fieldset>

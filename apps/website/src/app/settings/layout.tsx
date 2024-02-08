@@ -64,7 +64,11 @@ const SettingList = ({ items }: { items?: SettingContents[] }) => {
       key={index}
       variant="tritery"
       prefixIcon={<item.icon size={19} />}
-      href={!item.slug ? `/settings/${kebabCase(item.text)}` : `/settings/${kebabCase(item.slug)}`}
+      href={
+        !item.slug
+          ? `/settings/${kebabCase(item.text)}`
+          : `/settings/${kebabCase(item.slug)}`
+      }
     >
       {item.text}
     </Button>
@@ -73,12 +77,15 @@ const SettingList = ({ items }: { items?: SettingContents[] }) => {
 
 export default function Layout({ children }: { children: React.ReactNode }) {
   return (
-    <main className="flex gap-x-10 mt-8 mx-auto max-w-screen-2xl px-8">
-      <nav className="flex-shrink-0 w-72 flex flex-col pb-5">
+    <main className="mx-auto mt-8 flex max-w-screen-2xl gap-x-10 px-8">
+      <nav className="flex w-72 flex-shrink-0 flex-col pb-5">
         {SETTING_NAV.map(({ heading, list }, index) => (
           <div role="group" tabIndex={0} aria-labelledby={kebabCase(heading)} key={index}>
             {index !== 0 ? <Separator dir="horizontal" padding={10} /> : null}
-            <h2 id={kebabCase(heading)} className="text-sm uppercase mt-3.5  mb-1.5 ml-4 text-600">
+            <h2
+              id={kebabCase(heading)}
+              className="text-600 mb-1.5 ml-4  mt-3.5 text-sm uppercase"
+            >
               {heading}
             </h2>
             <SettingList items={list} />

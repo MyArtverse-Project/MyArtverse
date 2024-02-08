@@ -14,25 +14,25 @@
     "dev:widget": "dotenv -- turbo dev --filter=widget --no-daemon",
     "build": "turbo build --filter=website",
     "build:all": "turbo build",
-    "format:check": "prettier --check .",
-    "format:write": "prettier --write .",
-    "prepare": "husky install"
+    "format:check": "prettier --check \"**/*.{json,js,cjs,mjs,ts,tsx,md,mdx}\"",
+    "format:write": "prettier --write \"**/*.{json,js,cjs,mjs,ts,tsx,md,mdx}\"",
+    "prepare": "husky"
   },
   "devDependencies": {
     "@trivago/prettier-plugin-sort-imports": "^4.3.0",
-    "@turbo/gen": "^1.10.13",
-    "concurrently": "^8.2.1",
+    "@turbo/gen": "latest",
     "dotenv": "^16.3.1",
     "dotenv-cli": "^7.3.0",
-    "husky": "^8.0.0",
+    "husky": "^9.0.0",
     "lint-staged": "^14.0.1",
     "prettier": "^3.0.3",
-    "turbo": "^1.11.2"
+    "prettier-plugin-tailwindcss": "^0.5.11",
+    "turbo": "latest"
   },
   "lint-staged": {
-    "apps/**": "yarn prettier --write .",
-    "packages/**": "yarn prettier --write .",
-    "*.md": "yarn prettier --write ."
+    "apps/**": "npm run format:write",
+    "packages/**": "npm run format:write",
+    "*.md": "npm run format:write"
   },
   "engines": {
     "node": ">= 18.0.0",

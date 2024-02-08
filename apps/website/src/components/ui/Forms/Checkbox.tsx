@@ -24,7 +24,7 @@ export default function Checkbox({
         onChange={onChange}
         disabled={disabled}
         aria-disabled={disabled}
-        className="appearance-none h-5 w-5 rounded-sm border border-300 checked:bg-blue-600 checked:border-transparent focus:ring-blue-500"
+        className="border-300 h-5 w-5 appearance-none rounded-sm border checked:border-transparent checked:bg-blue-600 focus:ring-blue-500"
       />
       <label htmlFor={kebabCase(inputName)} className={clsx("text-700")}>
         {label}

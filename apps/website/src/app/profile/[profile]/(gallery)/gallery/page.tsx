@@ -16,10 +16,10 @@ export async function generateMetadata(
 export default function GalleryPage({ params }: SlugRouteProps) {
   return (
     <MarginClamp>
-      <div className="py-4 max-w-screen-2xl">
-        <div className="grid py-16 text-center border rounded-md place-items-center border-error w-full prose-p:mx-auto prose-p:leading-6 prose-p:mt-2">
+      <div className="max-w-screen-2xl py-4">
+        <div className="border-error prose-p:mx-auto prose-p:leading-6 prose-p:mt-2 grid w-full place-items-center rounded-md border py-16 text-center">
           <div>
-            <img src="/img/hero/ozzy-banner.png" alt="" className="w-4 h-4" />
+            <img src="/img/hero/ozzy-banner.png" alt="" className="h-4 w-4" />
             <span>OzzyTheDev</span>
             <div>
               <button>Prices</button>

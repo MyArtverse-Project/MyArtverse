@@ -55,7 +55,7 @@ export default function NavbarProfilePeek() {
       >
         <Link href="/" aria-label="Home" draggable={false} className="flex items-center">
           <MyFursonaIcon wordmarkOnly size={0.7} />
-          <span className="ml-2 px-1.5 py-1 bg-red-600 text-xs rounded-md uppercase text-active">
+          <span className="text-active ml-2 rounded-md bg-red-600 px-1.5 py-1 text-xs uppercase">
             WIP
           </span>
         </Link>
@@ -70,13 +70,13 @@ export default function NavbarProfilePeek() {
           transition: "opacity 150ms ease"
         }}
         transition={transitionOptions}
-        className="ml-3.5 flex gap-x-2 items-center"
+        className="ml-3.5 flex items-center gap-x-2"
       >
         {img ? (
           <>
-            <span className="opacity-50 text-xl ml-1">&#47;</span>
+            <span className="ml-1 text-xl opacity-50">&#47;</span>
             <Button
-              className="cursor-pointer px-2.5 py-1.5 hover:bg-300 transition-colors rounded-md flex items-center justify-center"
+              className="hover:bg-300 flex cursor-pointer items-center justify-center rounded-md px-2.5 py-1.5 transition-colors"
               onClick={() => navigator.clipboard.writeText("profile something")}
             >
               <span className="flex items-center gap-x-2">

@@ -1,12 +1,19 @@
 import { FursonaStatus } from "@/types"
 import clsx from "clsx"
 import type { IconType } from "react-icons"
-import { LuLock as LockIcon, LuSparkles as SparklesIcon, LuStar as StarIcon } from "react-icons/lu"
+import {
+  LuLock as LockIcon,
+  LuSparkles as SparklesIcon,
+  LuStar as StarIcon
+} from "react-icons/lu"
 
 export default function Status({ status }: { status: FursonaStatus }) {
   const base = "flex flex-row items-center text-md font-semibold my-1"
 
-  const statusObj: Record<FursonaStatus, { label: string; className: string; icon: IconType }> = {
+  const statusObj: Record<
+    FursonaStatus,
+    { label: string; className: string; icon: IconType }
+  > = {
     adopted: {
       label: "Adopted",
       className: "text-500",

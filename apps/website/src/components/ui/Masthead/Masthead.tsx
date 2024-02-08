@@ -2,9 +2,9 @@ import Image from "next/image"
 
 export function Avatar() {
   return (
-    <div className="relative flex-shrink-0 w-[var(--avatar-size)] h-[calc(var(--avatar-size)/1.25)]">
-      <div className="absolute inset-0 z-[3] -top-12" />
-      <div className="w-[var(--avatar-size)] absolute -top-12 aspect-square overflow-hidden border-4 rounded-full border-100 bg-100">
+    <div className="relative h-[calc(var(--avatar-size)/1.25)] w-[var(--avatar-size)] flex-shrink-0">
+      <div className="absolute inset-0 -top-12 z-[3]" />
+      <div className="border-100 bg-100 absolute -top-12 aspect-square w-[var(--avatar-size)] overflow-hidden rounded-full border-4">
         <Image
           fill
           priority

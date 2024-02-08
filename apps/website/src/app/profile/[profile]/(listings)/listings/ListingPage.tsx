@@ -11,8 +11,8 @@ import { LuChevronDown, LuStickyNote } from "react-icons/lu"
 export default function ListingPage() {
   return (
     <>
-      <div className="sticky top-[7.1rem] py-3.5 -mt-3 bg-100 z-[3]">
-        <div className="flex gap-x-3 max-w-screen-2xl mx-auto px-12">
+      <div className="bg-100 sticky top-[7.1rem] z-[3] -mt-3 py-3.5">
+        <div className="mx-auto flex max-w-screen-2xl gap-x-3 px-12">
           <SearchBox placeholder="Find a listing" />
           <Dropdown
             button={

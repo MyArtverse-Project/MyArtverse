@@ -19,18 +19,23 @@ export default function FormWithProgress({
     return (
       <div>
         {progress.map(({ item, isComplete }, i) => (
-          <div key={i} className="px-5 flex gap-x-4 items-center pt-3 pb-1.5">
+          <div key={i} className="flex items-center gap-x-4 px-5 pb-1.5 pt-3">
             <div
               className={clsx(
-                "flex-shrink-0 w-4 h-4 rounded-full",
+                "h-4 w-4 flex-shrink-0 rounded-full",
                 i !== 0
-                  ? "before:block before:w-[0.133rem] before:relative before:left-[0.4rem] before:h-14 before:bottom-10 before:-z-[1]"
+                  ? "before:relative before:bottom-10 before:left-[0.4rem] before:-z-[1] before:block before:h-14 before:w-[0.133rem]"
                   : "",
                 !isComplete ? "bg-mute before:bg-mute" : "bg-500 before:bg-500"
               )}
               aria-hidden
             />
-            <span className={clsx("font-inter text-lg", !isComplete ? "text-mute" : "text-500")}>
+            <span
+              className={clsx(
+                "font-inter text-lg",
+                !isComplete ? "text-mute" : "text-500"
+              )}
+            >
               {item}
             </span>
           </div>
@@ -40,7 +45,7 @@ export default function FormWithProgress({
   }
 
   return (
-    <div className="flex mx-auto max-w-screen-xl px-9 gap-x-4 mt-12">
+    <div className="mx-auto mt-12 flex max-w-screen-xl gap-x-4 px-9">
       <div className="w-1/4 flex-shrink-0">
         <aside className="sticky top-24 flex flex-col gap-y-5">
           <FormProgress />

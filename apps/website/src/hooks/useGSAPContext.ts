@@ -3,7 +3,10 @@
 import { useEffect } from "react"
 import gsap from "gsap"
 
-export default function useGSAPContext(callback: gsap.ContextFunc, scope: string | object) {
+export default function useGSAPContext(
+  callback: gsap.ContextFunc,
+  scope: string | object
+) {
   useEffect(() => {
     const ctx = gsap.context(callback, scope)
 

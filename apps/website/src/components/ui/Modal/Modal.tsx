@@ -39,7 +39,7 @@ export default function Modal({
           duration: 0.22
         }}
         className={clsx(
-          "fixed left-1/2 top-1/2 overflow-hidden rounded-md border border-300 bg-200",
+          "border-300 bg-200 fixed left-1/2 top-1/2 overflow-hidden rounded-md border",
           className
         )}
       >

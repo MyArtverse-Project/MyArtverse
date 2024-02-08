@@ -46,12 +46,12 @@ export default function LoginForm() {
   ]
 
   return (
-    <main className="grid place-items-center m-auto max-w-md absolute inset-0 px-8">
+    <main className="absolute inset-0 m-auto grid max-w-md place-items-center px-8">
       <div className="w-full">
-        <h2 className="not-prose font-bold font-inter my-4 text-3xl text-center">
+        <h2 className="not-prose font-inter my-4 text-center text-3xl font-bold">
           Log in to MyFursona
         </h2>
-        <div className="grid gap-y-1.5 w-full">
+        <div className="grid w-full gap-y-1.5">
           {thirdPartyProviders.map(({ icon: Icon, platform }, index) => (
             <Button
               key={index}
@@ -64,11 +64,11 @@ export default function LoginForm() {
             </Button>
           ))}
         </div>
-        <form onSubmit={submitLogin} className="relative w-full mb-40">
+        <form onSubmit={submitLogin} className="relative mb-40 w-full">
           <Separator dir="horizontal" padding="1.25rem" />
           <div
             className={clsx(
-              "absolute top-0 left-0 w-full transition-all duration-500 transform",
+              "absolute left-0 top-0 w-full transform transition-all duration-500",
               emailEntered ? "-translate-x-full opacity-0" : "translate-x-0 opacity-100"
             )}
           >
@@ -81,7 +81,7 @@ export default function LoginForm() {
             <div className="flex justify-end">
               <Button onClick={validateEmail}>Next</Button>
             </div>
-            <div className="text-center my-3">
+            <div className="my-3 text-center">
               <Button variant="secondary" position="center" href="/register">
                 Create an account
               </Button>
@@ -89,7 +89,7 @@ export default function LoginForm() {
           </div>
           <div
             className={clsx(
-              "absolute top-0 left-0 w-full transition-all duration-500 transform",
+              "absolute left-0 top-0 w-full transform transition-all duration-500",
               emailEntered ? "translate-x-0 opacity-100" : "translate-x-full opacity-0"
             )}
           >
@@ -100,13 +100,13 @@ export default function LoginForm() {
               onChange={({ target }) => setPassword(target.value)}
             />
             <Button
-              className="flex items-center gap-x-1.5 rounded-md transition-[border,background-color] border-[2px] px-4 py-2 border-transparent bg-300 hover:bg-400 focus:bg-400 w-full my-2"
+              className="bg-300 hover:bg-400 focus:bg-400 my-2 flex w-full items-center gap-x-1.5 rounded-md border-[2px] border-transparent px-4 py-2 transition-[border,background-color]"
               type="submit"
             >
               Login
             </Button>
             <Button
-              className="flex items-center gap-x-1.5 rounded-md transition-[border,background-color] border-[2px] px-4 py-2 border-transparent bg-300 hover:bg-400 focus:bg-400 w-full my-2"
+              className="bg-300 hover:bg-400 focus:bg-400 my-2 flex w-full items-center gap-x-1.5 rounded-md border-[2px] border-transparent px-4 py-2 transition-[border,background-color]"
               onClick={() => setEmailEntered(false)}
             >
               Previous

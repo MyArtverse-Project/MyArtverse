@@ -39,18 +39,18 @@ export default function CreateProfileForm() {
 
   return (
     <>
-      <section className="max-w-screen-xl mt-20 mb-12 mx-auto px-9 text-center">
-        <h1 className="not-prose font-bold font-inter !leading-[4.25rem] text-4xl xl:text-5xl bg-gradient-to-tl from-blue-500 via-purple-700 to-pink-500 text-transparent bg-clip-text">
+      <section className="mx-auto mb-12 mt-20 max-w-screen-xl px-9 text-center">
+        <h1 className="not-prose font-inter bg-gradient-to-tl from-blue-500 via-purple-700 to-pink-500 bg-clip-text text-4xl font-bold !leading-[4.25rem] text-transparent xl:text-5xl">
           Welcome to MyFursona!
         </h1>
-        <p className="xl:text-lg xl:!leading-8 text-base">
+        <p className="text-base xl:text-lg xl:!leading-8">
           {`Hello, ${username}—we're so glad to have you on board! You're almost there,
           all we need is to get some of the nitty-gritty stuff done first. 
           Don't worry, you can change these anytime!`}
         </p>
       </section>
       <FormWithProgress progress={progress}>
-        <main className="w-full flex flex-col gap-y-5">
+        <main className="flex w-full flex-col gap-y-5">
           {/* Profile field */}
           <Fieldset heading="Profile information">
             <div className="flex flex-row justify-between gap-6">
@@ -74,13 +74,13 @@ export default function CreateProfileForm() {
             description={
               <div className="flex flex-col gap-y-2">
                 <span>
-                  Optional, you can skip this and add them from Account Settings at anytime. Add
-                  connections such as social media and donations associated to your account that
-                  will be displayed on your profile.
+                  Optional, you can skip this and add them from Account Settings at
+                  anytime. Add connections such as social media and donations associated
+                  to your account that will be displayed on your profile.
                 </span>
                 <span>
-                  Note that there are some connections that might display additional metadata, you
-                  can change their visibility later.
+                  Note that there are some connections that might display additional
+                  metadata, you can change their visibility later.
                 </span>
               </div>
             }
@@ -116,8 +116,10 @@ export default function CreateProfileForm() {
             description="Optional, you can skip this and add them from Account Settings at anytime. Add your preferred payment method(s) when commissioning an artist or purchasing a physical goodies on MyFursona."
           >
             <Fieldset.Inner>
-              <div className="flex gap-x-2 flex-wrap">
-                <Button prefixIcon={<CreditCardIcon size={21} />}>Credit/Debit card</Button>
+              <div className="flex flex-wrap gap-x-2">
+                <Button prefixIcon={<CreditCardIcon size={21} />}>
+                  Credit/Debit card
+                </Button>
                 <Button prefixIcon={<CreditCardIcon size={21} />}>PayPal</Button>
                 <Button prefixIcon={<CreditCardIcon size={21} />}>Stripe</Button>
                 <Button prefixIcon={<CreditCardIcon size={21} />}>Square</Button>
@@ -130,9 +132,9 @@ export default function CreateProfileForm() {
             heading="Authentication"
             description={
               <>
-                Optional but <em>highly recommended</em>. You can skip this and add them from
-                Account Settings at anytime. Protect your account with an additional layer of
-                security with two-factor authentication.
+                Optional but <em>highly recommended</em>. You can skip this and add them
+                from Account Settings at anytime. Protect your account with an additional
+                layer of security with two-factor authentication.
               </>
             }
           >

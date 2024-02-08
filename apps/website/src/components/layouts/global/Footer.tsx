@@ -54,7 +54,9 @@ export default function Footer() {
   }) => {
     return (
       <div className="flex flex-col">
-        <h2 className="not-prose text-lg font-inter mb-2 font-semibold text-500">{heading}</h2>
+        <h2 className="not-prose font-inter text-500 mb-2 text-lg font-semibold">
+          {heading}
+        </h2>
         <ul className="grid gap-y-3">
           {links.map(({ text, link }, index) => (
             <li key={index}>
@@ -75,34 +77,36 @@ export default function Footer() {
   const commitHash = commitHashEnv.slice(0, 7)
 
   return (
-    <div className="relative overflow-y-hidden before:absolute before:inset-0 before:bottom-[unset] before:bg-gradient-to-r before:from-cyan-600 before:to-fuchsia-600 before:h-[1px]">
+    <div className="relative overflow-y-hidden before:absolute before:inset-0 before:bottom-[unset] before:h-[1px] before:bg-gradient-to-r before:from-cyan-600 before:to-fuchsia-600">
       <footer>
-        <section className="px-8 pb-6 pt-12 mx-auto max-w-screen-2xl flex justify-between items-center md:items-start flex-col md:flex-row">
+        <section className="mx-auto flex max-w-screen-2xl flex-col items-center justify-between px-8 pb-6 pt-12 md:flex-row md:items-start">
           <div className="flex flex-col">
             <div className="flex flex-col md:mx-auto">
               <Link className="mb-4" href="/">
                 <MyFursonaIcon size={1.125} />
               </Link>
-              <BuiLink href={"https://stats.uptimerobot.com/rlVXRfwrKz"}>MyFursona Status</BuiLink>
+              <BuiLink href={"https://stats.uptimerobot.com/rlVXRfwrKz"}>
+                MyFursona Status
+              </BuiLink>
             </div>
           </div>
-          <div className="sm:text-left text-center grid grid-cols-2 md:grid-cols-2 lg:grid-cols-3 gap-4 md:mt-5">
+          <div className="grid grid-cols-2 gap-4 text-center sm:text-left md:mt-5 md:grid-cols-2 lg:grid-cols-3">
             {FOOTER_ITEMS.map(({ heading, links }, index) => (
               <ColumnItems heading={heading} links={links} key={index} />
             ))}
           </div>
         </section>
-        <section className="p-4 text-center text-sm text-subtext prose-p:my-4">
+        <section className="text-subtext prose-p:my-4 p-4 text-center text-sm">
           <p>
             {`MyFursona is an open source project licensed under Apache License 2.0.
              © 2022-${new Date().getFullYear()} Fusky Labs Software Ltd.`}
           </p>
-          <div className="mb-4 mt-0 inline-flex gap-x-4 flex-wrap">
+          <div className="mb-4 mt-0 inline-flex flex-wrap gap-x-4">
             {!commitHashEnv ? (
               <span aria-hidden>Development</span>
             ) : (
               <Link
-                className="underline text-subtext hover:text-blue-400"
+                className="text-subtext underline hover:text-blue-400"
                 href={`https://github.com/MyFursona-Project/MyFursona/commit/${commitHash}`}
                 aria-hidden
               >
@@ -111,11 +115,11 @@ export default function Footer() {
             )}
             <span aria-hidden>{version}</span>
             <p
-              className="!my-0 flex justify-center items-center flex-wrap"
+              className="!my-0 flex flex-wrap items-center justify-center"
               aria-label="Made with love by the MyFursona contributors"
             >
               {"Made with"}
-              <HeartIcon size={16} className="mx-1 text-500" />
+              <HeartIcon size={16} className="text-500 mx-1" />
               by&nbsp;
               <BuiLink href="https://github.com/MyFursona-Project/MyFursona/graphs/contributors">
                 the MyFursona contributors!

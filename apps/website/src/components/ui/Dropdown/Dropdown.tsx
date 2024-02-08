@@ -13,7 +13,7 @@ export default function Dropdown({
     <Menu as="div" className="relative z-[4]">
       <Menu.Button as={Fragment}>{button}</Menu.Button>
       <TransitionWrapper>
-        <Menu.Items className="absolute z-[9] border bg-context-menu border-300 rounded-md top-2.5 p-2 right-0 grid shadow-md">
+        <Menu.Items className="bg-context-menu border-300 absolute right-0 top-2.5 z-[9] grid rounded-md border p-2 shadow-md">
           {items}
         </Menu.Items>
       </TransitionWrapper>

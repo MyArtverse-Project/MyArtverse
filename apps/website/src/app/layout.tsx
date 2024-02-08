@@ -68,7 +68,7 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
         <link rel="mask-icon" href="./safari-pinned-tab.svg" color="9e00ff" />
         <Analytics />
       </head>
-      <body className="bg-100 text-700 !overflow-x-hidden bg-background prose-headings:font-bold prose-headings:font-inter text-sm font-medium font-open-sans">
+      <body className="bg-100 text-700 bg-background prose-headings:font-bold prose-headings:font-inter font-open-sans !overflow-x-hidden text-sm font-medium">
         <Providers>
           <ClientInit />
           <MyFursonaApp>{children}</MyFursonaApp>

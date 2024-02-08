@@ -8,14 +8,15 @@ dist
 config
 out
 
+public
+
 # PWA
 sw.js
 workbox-*.js
-worker-*.js
-sw.js.map
-workbox-*.js
 workbox-*.js.map
+worker-*.js
 worker-*.js.map
+sw.js.map
 
 # Why tf would Prettier format binary files?
 *.ico
@@ -25,6 +26,3 @@ worker-*.js.map
 # Tauri-specific
 target
 Cargo.toml
-
-# Format stuff from `packages` dir
-!packages/*
