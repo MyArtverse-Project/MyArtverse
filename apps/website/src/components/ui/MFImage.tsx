@@ -2,6 +2,7 @@
 
 import Image from "next/image"
 import { useState } from "react"
+import type { ReactMapElement } from "@/types"
 import clsx from "clsx"
 
 type ImgLoadStrategy = "lazy" | "neutral" | "important"
@@ -27,15 +28,12 @@ export default function MFImage({
   strategy?: ImgLoadStrategy
   objectFit?: React.CSSProperties["objectFit"]
   rounded?: number
-} & Pick<
-  React.ImgHTMLAttributes<HTMLImageElement>,
-  "alt" | "onClick" | "onContextMenu" | "style"
->) {
+} & Pick<ReactMapElement<"img">, "alt" | "onClick" | "onContextMenu" | "style">) {
   const [imgLoaded, setImgLoaded] = useState(false)
 
   const loadingStrategy: Record<
     ImgLoadStrategy,
-    Pick<React.ImgHTMLAttributes<HTMLImageElement>, "fetchPriority"> & {
+    Pick<ReactMapElement<"img">, "fetchPriority"> & {
       priority: boolean
     }
   > = {

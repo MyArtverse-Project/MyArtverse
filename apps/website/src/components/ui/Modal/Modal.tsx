@@ -1,5 +1,6 @@
 "use client"
 
+import type { MapElement } from "@/types"
 import clsx from "clsx"
 import { motion } from "framer-motion"
 import Overlay from "./Overlay"
@@ -13,7 +14,7 @@ export default function Modal({
   children?: React.ReactNode
   state?: boolean
   toggler?: () => void
-} & Pick<React.HTMLAttributes<HTMLDivElement>, "className">) {
+} & Pick<React.HTMLAttributes<MapElement<"div">>, "className">) {
   const positionInitial = "-60%"
 
   const modalInitial = {

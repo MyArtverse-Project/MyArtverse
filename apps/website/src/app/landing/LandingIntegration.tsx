@@ -5,7 +5,7 @@ import useGSAPContext from "@/hooks/useGSAPContext"
 import { ProseWrapper } from "@myfursona/biro-ui"
 
 export default function LandingIntegration() {
-  const animateGraphicRef = useRef<HTMLDivElement>(null)
+  const animateGraphicRef = useRef<React.ElementRef<"div">>(null)
 
   useGSAPContext((self) => {}, animateGraphicRef)
 

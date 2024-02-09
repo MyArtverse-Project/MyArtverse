@@ -20,8 +20,8 @@ export default function FolderShelf({
   const { folderWidth, setFolderWidth } = useFolderViewContext()
 
   const [isDragging, setIsDragging] = useState(false)
-  const resizableRef = useRef<HTMLDivElement | null>(null)
-  const folderViewRef = useRef<HTMLDivElement | null>(null)
+  const resizableRef = useRef<React.ElementRef<"div">>(null)
+  const folderViewRef = useRef<React.ElementRef<"div">>(null)
 
   const DEFAULT_WIDTH = 270
   const MAX_WIDTH = 375

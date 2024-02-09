@@ -1,5 +1,6 @@
 "use client"
 
+import type { ReactMapElement } from "@/types"
 import clsx from "clsx"
 import { kebabCase } from "lodash"
 
@@ -14,7 +15,7 @@ export default function InputField({
 }: {
   inputName: string
 } & Pick<
-  React.InputHTMLAttributes<HTMLInputElement>,
+  ReactMapElement<"input">,
   "type" | "placeholder" | "required" | "onChange" | "value" | "readOnly"
 >) {
   return (

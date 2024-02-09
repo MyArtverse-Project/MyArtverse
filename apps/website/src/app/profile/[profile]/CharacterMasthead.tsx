@@ -40,7 +40,7 @@ export default function CharacterMasthead({
 }) {
   const { setPeek, setPeeking } = useDetailPeekContext()
 
-  const profileDetailsRef = useRef<HTMLDivElement>(null)
+  const profileDetailsRef = useRef<React.ElementRef<"div">>(null)
 
   useEffect(() => {
     const profileDetails = profileDetailsRef.current

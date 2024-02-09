@@ -1,3 +1,5 @@
+import type { ReactMapElement } from "@/types"
+
 export default function GridResponsive({
   children,
   constraint = "auto-fill",
@@ -7,9 +9,9 @@ export default function GridResponsive({
   children?: React.ReactNode
   constraint?: "auto-fill" | "auto-fit"
   breakpoint?: number
-} & Pick<React.HTMLAttributes<HTMLDivElement>, "className" | "role">) {
+} & Pick<ReactMapElement<"div">, "className" | "role">) {
   const BREAKPOINT_MAX_RANGE = 300
-  const BREAKPOINT_MIN_RANGE = 120
+  const BREAKPOINT_MIN_RANGE = 110
 
   if (attrs.className.includes("flex")) {
     throw new Error(

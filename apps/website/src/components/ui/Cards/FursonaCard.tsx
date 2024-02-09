@@ -1,5 +1,5 @@
 import Link from "next/link"
-import type { AdoptionStatus, ColorPalette as Palette } from "@/types"
+import type { AdoptionStatus, MapElement, ColorPalette as Palette } from "@/types"
 import clsx from "clsx"
 import { LuHeart as Heart } from "react-icons/lu"
 import MFImage from "../MFImage"
@@ -27,7 +27,7 @@ export default function FursonaCard({
   palette?: CharacterCardPalette
   likes?: number
   href?: string
-} & Pick<React.HTMLAttributes<HTMLDivElement>, "role">) {
+} & Pick<React.HTMLAttributes<MapElement<"div">>, "role">) {
   const DynamicElement = !href ? "div" : Link
   return (
     <DynamicElement

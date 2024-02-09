@@ -1,11 +1,10 @@
-import type { BuiButtonProps } from "@/types"
 import { Button } from "../Buttons"
 
 export default function SubmitButton({
   children,
   variant,
   ...attributes
-}: BuiButtonProps) {
+}: React.ComponentPropsWithRef<typeof Button>) {
   return (
     <Button type="submit" variant={variant} {...attributes}>
       {children}

@@ -1,5 +1,6 @@
 import Link from "next/link"
 import { Menu } from "@headlessui/react"
+import type { ReactMapElement } from "@/types"
 import clsx from "clsx"
 
 export default function DropdownItem({
@@ -15,10 +16,7 @@ export default function DropdownItem({
   disabled?: boolean
   prefix?: React.ReactElement
   suffix?: React.ReactElement
-} & Pick<
-  React.ButtonHTMLAttributes<HTMLButtonElement>,
-  "onClick" | "onKeyDown" | "aria-label"
->) {
+} & Pick<ReactMapElement<"button">, "onClick" | "onKeyDown" | "aria-label">) {
   return (
     <Menu.Item>
       {({ active }) => (

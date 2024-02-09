@@ -2,6 +2,7 @@
 
 import { Children, useEffect, useRef, useState } from "react"
 import { useScrollBounds } from "@/hooks/useScrollBounds"
+import type { MapElement } from "@/types"
 import clsx from "clsx"
 import { motion } from "framer-motion"
 import {
@@ -30,14 +31,14 @@ export default function FolderItem({
   newItem?: boolean
   /** WIP */
   color?: string
-} & Pick<React.HTMLAttributes<HTMLDivElement>, "onClick">) {
+} & Pick<React.HTMLAttributes<MapElement<"div">>, "onClick">) {
   const childrenCount = Children.count(children)
 
   const [isExpand, setIsExpand] = useState(expanded)
   const [expandedHeight, setExpandedHeight] = useState(0)
 
-  const collapsibleRef = useRef<HTMLDivElement | null>(null)
-  const toggleButtonRef = useRef<HTMLButtonElement | null>(null)
+  const collapsibleRef = useRef<React.ElementRef<"div">>(null)
+  const toggleButtonRef = useRef<React.ElementRef<"button">>(null)
 
   const DynamicFolderIcon = children
     ? !isExpand

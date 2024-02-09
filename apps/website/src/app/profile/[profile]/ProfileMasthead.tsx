@@ -40,7 +40,7 @@ export default function ProfileMasthead({
 }) {
   const { setPeek, setPeeking } = useDetailPeekContext()
 
-  const profileDetailsRef = useRef<HTMLDivElement>(null)
+  const profileDetailsRef = useRef<React.ElementRef<"div">>(null)
 
   const [modalState, setModalState] = useState(false)
 

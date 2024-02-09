@@ -1,7 +1,13 @@
 import Link from "next/link"
 import { forwardRef } from "react"
-import type { BuiButtonProps } from "@/types"
+import type { MapElement, ReactMapElement, Variants } from "@/types"
 import { cva } from "class-variance-authority"
+import type { IconType } from "react-icons"
+import type { UrlObject } from "url"
+
+type Positions = "left" | "center" | "right"
+type Sizes = "small" | "big"
+type ButtonVariants = Exclude<Variants, "success" | "info"> | "error-secondary"
 
 const Button = forwardRef(
   (
@@ -18,7 +24,21 @@ const Button = forwardRef(
       href,
       count,
       ...attributes
-    }: BuiButtonProps,
+    }: Partial<{
+      children: React.ReactNode
+      iconOnly: boolean
+      disabled: boolean
+      type: ReactMapElement<"button">["type"]
+      variant: ButtonVariants
+      position: Positions
+      size: Sizes
+      prefixIcon: React.ReactElement<IconType>
+      suffixIcon: React.ReactElement<IconType>
+      href: string | UrlObject
+      count: number
+      override: boolean
+    }> &
+      (ReactMapElement<"button"> | ReactMapElement<"a">),
     ref
   ) => {
     const buttonVars = cva(
@@ -58,7 +78,7 @@ const Button = forwardRef(
 
     return (
       <DynamicElement
-        ref={ref as React.LegacyRef<HTMLAnchorElement & HTMLButtonElement>}
+        ref={ref as React.LegacyRef<MapElement<"a"> & MapElement<"button">>}
         // @ts-ignore
         href={href ?? undefined}
         type={!href ? type ?? "button" : undefined}

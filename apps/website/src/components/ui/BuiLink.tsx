@@ -1,4 +1,5 @@
 import Link from "next/link"
+import type { ReactMapElement } from "@/types"
 import { LuExternalLink as ExternalLinkIcon } from "react-icons/lu"
 import type { UrlObject } from "url"
 
@@ -8,7 +9,7 @@ export default function BuiLink({
   ...others
 }: {
   children?: React.ReactNode
-} & React.AnchorHTMLAttributes<HTMLAnchorElement>) {
+} & ReactMapElement<"a">) {
   const hasHTTPInUrl = href.startsWith("http")
 
   return (
