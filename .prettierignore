@@ -26,3 +26,5 @@ sw.js.map
 # Tauri-specific
 target
 Cargo.toml
+
+!packages/**

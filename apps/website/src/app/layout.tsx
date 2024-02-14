@@ -1,10 +1,13 @@
 import "@myfursona/biro-ui/styles/globals.scss"
-import "react-quill/dist/quill.snow.css"
+// import "react-quill/dist/quill.snow.css"
 import type { Metadata, Viewport } from "next"
 import { Inter, Open_Sans } from "next/font/google"
-import { Analytics, ClientInit, MyFursonaApp } from "@/components/base"
+import Script from "next/script"
+import { ClientInit } from "@/components/base"
+import NoJSReminder from "@/components/base/NoJSReminder"
 import Providers from "@/context"
 import clsx from "clsx"
+import dedent from "dedent"
 
 const inter = Inter({
   subsets: ["latin", "cyrillic-ext"],
@@ -52,6 +55,9 @@ export const viewport: Viewport = {
 }
 
 export default function RootLayout({ children }: { children: React.ReactNode }) {
+  const umamiId = process.env.UMAMI_ID || ""
+  const clarityId = process.env.MS_CLARITY_ID || ""
+
   return (
     <html
       lang="en"
@@ -66,12 +72,31 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
     >
       <head>
         <link rel="mask-icon" href="./safari-pinned-tab.svg" color="9e00ff" />
-        <Analytics />
       </head>
-      <body className="bg-100 text-700 bg-background prose-headings:font-bold prose-headings:font-inter font-open-sans !overflow-x-hidden text-sm font-medium">
+      <body className="bg-100 text-700 bg-background prose-headings:font-bold prose-headings:font-inter font-open-sans select-none !overflow-x-hidden text-sm font-medium">
+        {/* Site analytics - Umami */}
+        <Script
+          id="umami"
+          defer
+          src="https://analytics.eu.umami.is/script.js"
+          data-website-id={umamiId}
+        />
+        {/* Behavior analytics - Microsoft Clarity */}
+        <Script id="clarity">
+          {dedent`
+          (function(c,l,a,r,i,t,y){
+            c[a]=c[a]||function(){(c[a].q=c[a].q||[]).push(arguments)};
+            t=l.createElement(r);t.async=1;t.src="https://www.clarity.ms/tag/"+i;
+            y=l.getElementsByTagName(r)[0];y.parentNode.insertBefore(t,y);
+          })(window, document, "clarity", "script", "${clarityId}");
+          `}
+        </Script>
         <Providers>
-          <ClientInit />
-          <MyFursonaApp>{children}</MyFursonaApp>
+          <NoJSReminder />
+          <div>
+            <ClientInit />
+            {children}
+          </div>
         </Providers>
       </body>
     </html>

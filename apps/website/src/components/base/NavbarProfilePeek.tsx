@@ -5,9 +5,9 @@ import { usePathname } from "next/navigation"
 import { isProfilePeeking, profilePeek } from "@/atoms"
 import { type AnimationProps, type Variants, motion } from "framer-motion"
 import { useAtom } from "jotai"
-import { MyFursonaIcon } from "../../icons"
-import { MFImage } from "../../ui"
-import { Button } from "../../ui/Buttons"
+import { MyFursonaIcon } from "../icons"
+import { MFImage } from "../ui"
+import { Button } from "../ui/Buttons"
 
 export default function NavbarProfilePeek() {
   const handlePeekRoutes = usePathname().includes("/@")

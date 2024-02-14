@@ -4,13 +4,13 @@
 @include map-theme-variables(
   "light",
   (
-    "context-menu": theme("colors.100")
+    "context-menu": var(--bui-100)
   )
 );
 @include map-theme-variables(
   "dark",
   (
-    "context-menu": theme("colors.200")
+    "context-menu": var(--bui-200)
   )
 );
 
@@ -18,12 +18,12 @@
 @include map-theme-variables(
   "light",
   (
-    "active": theme("colors.100")
+    "active": var(--bui-100)
   )
 );
 @include map-theme-variables(
   "dark",
   (
-    "active": theme("colors.700")
+    "active": var(--bui-700)
   )
 );

@@ -20,10 +20,10 @@ import {
   LuMoreVertical as MoreVerticalIcon,
   LuShare as ShareIcon
 } from "react-icons/lu"
-import { MyFursonaIcon } from "../../icons"
-import { Separator } from "../../ui"
-import { Button, SearchButton } from "../../ui/Buttons"
-import { Dropdown } from "../../ui/Dropdown"
+import { MyFursonaIcon } from "../icons"
+import { Separator } from "../ui"
+import { Button, SearchButton } from "../ui/Buttons"
+import { Dropdown } from "../ui/Dropdown"
 import NavbarProfilePeek from "./NavbarProfilePeek"
 
 type ItemIterator = Array<{

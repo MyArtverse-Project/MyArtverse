@@ -14,11 +14,11 @@ import {
   LuSparkles as SparklesIcon,
   LuX as XIcon
 } from "react-icons/lu"
-import { MyFursonaIcon } from "../../icons"
-import { Button } from "../../ui/Buttons"
-import Menu from "../../ui/Menu"
-import Overlay from "../../ui/Modal/Overlay"
-import Separator from "../../ui/Separator"
+import { MyFursonaIcon } from "../icons"
+import { Button } from "../ui/Buttons"
+import Menu from "../ui/Menu"
+import Overlay from "../ui/Modal/Overlay"
+import Separator from "../ui/Separator"
 
 export default function Sidebar() {
   const SIDEBAR_ITEMS = [

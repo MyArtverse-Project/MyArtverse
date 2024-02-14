@@ -1,50 +1,17 @@
 "use client"
 
 import Link from "next/link"
+import { BRAND, FOOTER_ITEMS } from "@/constants"
 import { kebabCase } from "lodash"
 import { LuHeart as HeartIcon } from "react-icons/lu"
-import project from "../../../../package.json"
-import { MyFursonaIcon } from "../../icons"
-import { BuiLink } from "../../ui"
+import project from "../../../package.json"
+import { MyFursonaIcon } from "../icons"
+import { BuiLink } from "../ui"
 import FooterGradient from "./FooterGraphics"
 
 const version = project.version
 
 export default function Footer() {
-  /* NOTE: in the links array, you can override the links with the "link" key */
-  const FOOTER_ITEMS = [
-    {
-      heading: "Explore",
-      links: [
-        { text: "Download client" },
-        { text: "MyFursona+", link: "/plus" },
-        { text: "Beta testing" },
-        { text: "Contact" }
-      ]
-    },
-    {
-      heading: "Resources",
-      links: [
-        { text: "Blog" },
-        { text: "FAQ" },
-        { text: "Brand" },
-        { text: "Developers" },
-        { text: "Contributing" },
-        { text: "Open Source" },
-        { text: "Licenses" }
-      ]
-    },
-    {
-      heading: "Legal",
-      links: [
-        { text: "About MyFursona" },
-        { text: "Community Guidelines" },
-        { text: "Terms of Service" },
-        { text: "Privacy Policy" }
-      ]
-    }
-  ]
-
   const ColumnItems = ({
     heading,
     links
@@ -86,7 +53,7 @@ export default function Footer() {
                 <MyFursonaIcon size={1.125} />
               </Link>
               <BuiLink href={"https://stats.uptimerobot.com/rlVXRfwrKz"}>
-                MyFursona Status
+                {BRAND} Status
               </BuiLink>
             </div>
           </div>
@@ -98,7 +65,7 @@ export default function Footer() {
         </section>
         <section className="text-subtext prose-p:my-4 p-4 text-center text-sm">
           <p>
-            {`MyFursona is an open source project licensed under Apache License 2.0.
+            {`${BRAND} is an open source project licensed under Apache License 2.0.
              © 2022-${new Date().getFullYear()} Fusky Labs Software Ltd.`}
           </p>
           <div className="mb-4 mt-0 inline-flex flex-wrap gap-x-4">
@@ -107,7 +74,7 @@ export default function Footer() {
             ) : (
               <Link
                 className="text-subtext underline hover:text-blue-400"
-                href={`https://github.com/MyFursona-Project/MyFursona/commit/${commitHash}`}
+                href={`https://github.com/MyArtverse-Project/MyArtverse/commit/${commitHash}`}
                 aria-hidden
               >
                 {commitHash}
@@ -116,13 +83,13 @@ export default function Footer() {
             <span aria-hidden>{version}</span>
             <p
               className="!my-0 flex flex-wrap items-center justify-center"
-              aria-label="Made with love by the MyFursona contributors"
+              aria-label={`Made with love by the ${BRAND} contributors`}
             >
               {"Made with"}
               <HeartIcon size={16} className="text-500 mx-1" />
               by&nbsp;
               <BuiLink href="https://github.com/MyFursona-Project/MyFursona/graphs/contributors">
-                the MyFursona contributors!
+                the {BRAND} contributors!
               </BuiLink>
             </p>
           </div>

@@ -1,4 +1,4 @@
-$_PREFIX: av;
+$_PREFIX: bui;
 
 @mixin map-variables($map) {
   @each $k, $v in $map {
@@ -8,8 +8,8 @@ $_PREFIX: av;
 
 @mixin map-root($map) {
   :root {
-    @each $k, $v in map {
-      --#{$_PREFIX}-#{$k}: #{v};
+    @each $k, $v in $map {
+      --#{$_PREFIX}-#{$k}: #{$v};
     }
   }
 }

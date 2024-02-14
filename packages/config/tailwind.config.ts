@@ -3,7 +3,7 @@ import forms from "@tailwindcss/forms"
 import typography from "@tailwindcss/typography"
 
 export default {
-  content: ["../**/*.{html,js,ts,jsx,tsx,mdx}"],
+  content: [],
   theme: {
     extend: {
       fontFamily: {
@@ -30,10 +30,10 @@ export default {
         separator: "hsla(var(--bui-separator), var(--tw-bg-opacity, 1))",
         "error-hl": "hsla(var(--bui-error-highlight), var(--tw-bg-opacity, 1))",
         "warning-hl": "hsla(var(--bui-warning-highlight), var(--tw-bg-opacity, 1))",
-        "info-hl": "hsla(var(--bui-info-highlight, var(--tw-bg-opacity, 1)))",
+        "info-hl": "hsla(var(--bui-info-highlight), var(--tw-bg-opacity, 1))",
         // ! overrides
-        "context-menu": "var(--bui-context-menu)",
-        active: "var(--bui-active)"
+        "context-menu": "hsla(var(--bui-context-menu), var(--tw-bg-opacity, 1))",
+        active: "hsla(var(--bui-active), var(--tw-bg-opacity, 1))"
       },
       borderColor: {
         current: "currentColor",
@@ -54,7 +54,7 @@ export default {
         separator: "hsla(var(--bui-separator), var(--tw-border-opacity, 1))",
         "error-hl": "hsla(var(--bui-error-highlight), var(--tw-border-opacity, 1))",
         "warning-hl": "hsla(var(--bui-warning-highlight), var(--tw-border-opacity, 1))",
-        "info-hl": "hsla(var(--bui-info-highlight, var(--tw-border-opacity, 1)))"
+        "info-hl": "hsla(var(--bui-info-highlight), var(--tw-border-opacity, 1))"
       },
       spacing: {
         unset: "unset"
@@ -71,4 +71,4 @@ export default {
     }
   },
   plugins: [forms, typography]
-} as Config
+} satisfies Config

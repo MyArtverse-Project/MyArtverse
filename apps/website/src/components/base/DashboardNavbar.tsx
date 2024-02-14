@@ -10,7 +10,7 @@ import {
   LuPlus as PlusIcon
 } from "react-icons/lu"
 
-export default function Navbar() {
+export default function DashboardNavbar() {
   return (
     <header className="sticky top-0 z-20">
       <nav className="font-inter bg-100 relative flex select-none items-center justify-between px-5 py-3 text-sm font-medium">
@@ -22,10 +22,10 @@ export default function Navbar() {
             <MyFursonaIcon logoOnly size={0.7} />
           </Link>
           <span className="opacity-50">/</span>
-          <span className="font-bold">Dashboard</span>
+          <span className="font-bold">Studio</span>
         </div>
+        <SearchButton />
         <div className="flex items-center gap-x-1.5">
-          <SearchButton />
           <Button iconOnly variant="tritery" suffixIcon={<ChevronDownIcon size={18} />}>
             <PlusIcon size={21} />
           </Button>
