@@ -1,10 +1,11 @@
 {
-  "name": "myfursona",
+  "name": "myartverse",
+  "description": "The open source art platform where you keep track of your characters (or fursonas), commissions, and adopts!",
   "private": true,
   "version": "0.0.0",
   "license": "Apache-2.0",
   "type": "module",
-  "homepage": "https://github.com/MyFursona-Project/MyFursona",
+  "homepage": "https://github.com/MyArtverse-Project/MyArtverse",
   "workspaces": [
     "apps/*",
     "packages/*"
@@ -14,9 +15,9 @@
     "dev:widget": "dotenv -- turbo dev --filter=widget --no-daemon",
     "build": "turbo build --filter=website",
     "build:all": "turbo build",
-    "format:check": "prettier --check \"**/*.{json,js,cjs,mjs,ts,tsx,md,mdx}\"",
-    "format:write": "prettier --write \"**/*.{json,js,cjs,mjs,ts,tsx,md,mdx}\"",
-    "prepare": "husky"
+    "format:check": "prettier --check .",
+    "format:write": "prettier --write .",
+    "prepare": "husky || true"
   },
   "devDependencies": {
     "@trivago/prettier-plugin-sort-imports": "^4.3.0",
@@ -30,9 +31,7 @@
     "turbo": "latest"
   },
   "lint-staged": {
-    "apps/**": "npm run format:write",
-    "packages/**": "npm run format:write",
-    "*.md": "npm run format:write"
+    "**/*.{cjs,js,ts,tsx,md,mdx,json}": "npm run format:write"
   },
   "engines": {
     "node": ">= 18.0.0",

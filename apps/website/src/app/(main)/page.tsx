@@ -1,7 +1,8 @@
 import { Metadata } from "next"
 import LandingHero from "@/components/landing/LandingHero"
 import LandingIntegration from "@/components/landing/LandingIntegration"
-import { BRAND, config } from "@/constants"
+import { config } from "@/constants"
+import { BRAND } from "@myfursona-internal/config"
 
 const title = `${BRAND} — a place where everyfur belongs!`
 const description = config.description

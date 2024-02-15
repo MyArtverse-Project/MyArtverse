@@ -1,7 +1,8 @@
 "use client"
 
 import Link from "next/link"
-import { BRAND, FOOTER_ITEMS } from "@/constants"
+import { FOOTER_ITEMS } from "@/constants"
+import { BRAND } from "@myfursona-internal/config"
 import { kebabCase } from "lodash"
 import { LuHeart as HeartIcon } from "react-icons/lu"
 import project from "../../../package.json"

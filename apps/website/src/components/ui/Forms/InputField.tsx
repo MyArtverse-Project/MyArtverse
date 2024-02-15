@@ -5,19 +5,39 @@ import clsx from "clsx"
 import { kebabCase } from "lodash"
 
 export default function InputField({
-  inputName,
+  inputName = "",
   type = "text",
   placeholder,
   required,
   onChange,
   value,
-  readOnly
+  readOnly,
+  noLabel = false
 }: {
-  inputName: string
+  inputName?: string
+  noLabel?: boolean
 } & Pick<
   ReactMapElement<"input">,
   "type" | "placeholder" | "required" | "onChange" | "value" | "readOnly"
 >) {
+  const InputWrapper = () => (
+    <input
+      className="text-700 border-400 bg-100 w-full rounded-md border px-4 py-2"
+      id={kebabCase(inputName)}
+      name={kebabCase(inputName)}
+      type={type}
+      placeholder={placeholder}
+      aria-placeholder={placeholder}
+      required={required}
+      onChange={onChange}
+      value={value}
+      autoCapitalize="off"
+      autoComplete="off"
+      autoCorrect="off"
+      spellCheck={false}
+    />
+  )
+
   return (
     <div className="w-full">
       <label htmlFor={kebabCase(inputName)} className="flex flex-col gap-y-1.5">
@@ -31,21 +51,7 @@ export default function InputField({
         >
           {inputName}
         </span>
-        <input
-          className="text-700 border-400 bg-100 w-full rounded-md border px-4 py-2"
-          id={kebabCase(inputName)}
-          name={kebabCase(inputName)}
-          type={type}
-          placeholder={placeholder}
-          aria-placeholder={placeholder}
-          required={required}
-          onChange={onChange}
-          value={value}
-          autoCapitalize="off"
-          autoComplete="off"
-          autoCorrect="off"
-          spellCheck={false}
-        />
+        <InputWrapper />
       </label>
       {/* Error boundary */}
       <div></div>

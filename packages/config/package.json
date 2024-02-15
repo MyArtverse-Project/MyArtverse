@@ -4,7 +4,8 @@
   "private": true,
   "license": "Apache-2.0",
   "devDependencies": {
-    "tailwindcss": "^3.3.3",
-    "eslint-config-myfursona": "*"
+    "cssnano": "^6.0.3",
+    "eslint-config-myfursona": "*",
+    "tailwindcss": "^3.3.3"
   }
 }

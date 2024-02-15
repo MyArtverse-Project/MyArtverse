@@ -1,10 +1,11 @@
+import { MapElement } from "@/types"
 import { LuSearch as SearchIcon } from "react-icons/lu"
 import Button from "./Button"
 
 export default function SearchButton({
   onClick
 }: {
-  onClick?: React.MouseEventHandler<HTMLButtonElement & HTMLAnchorElement>
+  onClick?: React.MouseEventHandler<MapElement<"button"> & MapElement<"a">>
 }) {
   return (
     <Button

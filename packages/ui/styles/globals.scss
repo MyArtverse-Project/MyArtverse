@@ -27,7 +27,7 @@ body {
 
 @layer components {
   a.hyperlink {
-    @apply underline text-blue-400 hover:text-blue-500;
+    @apply text-blue-400 underline hover:text-blue-500;
   }
 
   .desktop-only-lg {
