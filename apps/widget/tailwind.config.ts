@@ -3,7 +3,6 @@ import myfursonaPreset from "@myfursona-internal/config/tailwind.config"
 import defaultTheme from "tailwindcss/defaultTheme"
 
 export default {
-  darkMode: "class",
   content: ["./index.html", "./src/**/*.{js,ts,jsx,tsx}", "../../packages/ui/src/**/*.{ts,tsx}", "../../node_modules/@myfursona/biro-ui/src/**/*.{ts,tsx}"],
   theme: {
     extend: {
@@ -14,4 +13,4 @@ export default {
     }
   },
   presets: [myfursonaPreset]
-} as Config
+} satisfies Config

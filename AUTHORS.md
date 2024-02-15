@@ -1,9 +1,9 @@
-# Authors and contributors of the MyFursona Project
+# Authors and contributors of the MyArtverse Project
 
-## Project authors/maintainers
+## Project maintainers
 
-- [Jason Diaz Jimenez](https://github.com/VulpoTheDev) - project leader
-- [Kerby Keith Aquino](https://github.com/kuroji-fusky) - project leader, UI/UX design
+- [Jason Diaz Jimenez](https://github.com/VulpoTheDev) - project lead
+- [Kerby Keith Aquino](https://github.com/kuroji-fusky) - project lead, UI/UX design
 
 ## Contributors
 

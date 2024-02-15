@@ -2,8 +2,52 @@ import type { Config } from "tailwindcss"
 import forms from "@tailwindcss/forms"
 import typography from "@tailwindcss/typography"
 
+const PREFIX = "bui"
+
+const iterateColorVars = (baseVariable: string, colors: (string | string[])[]): { [x: string]: string } => {
+  const colorTmpl = `"{0}": "hsla(var(--${PREFIX}-{1}), var(${baseVariable}, 1))"`
+
+  const fmtColorStr = (...args: string[]) => {
+    return colorTmpl.replace(/{([0-9]+)}/g, (match, index) => {
+      return typeof args[index] === "undefined" ? match : args[index]
+    })
+  }
+
+  const parseCols = colors.map((color) => {
+    if (Array.isArray(color)) return fmtColorStr(color[0], color[1])
+
+    return fmtColorStr(color, color)
+  })
+
+  return JSON.parse(`{${parseCols}}`)
+}
+
+const GLOBAL_COLORS = [
+  "100",
+  "200",
+  "300",
+  "400",
+  "500",
+  "600",
+  "700",
+  "mute",
+  "subtext",
+  "skeleton",
+  "separator",
+  ["error-hl", "error-highlight"],
+  ["warning-hl", "warning-highlight"],
+  ["info-hl", "info-highlight"],
+  ["success-hl", "success-highlight"]
+]
+const OVERRIDE_COLORS = ["context-menu", "active"]
+
+const unsetStyle = {
+  unset: "unset"
+} as const
+
 export default {
   content: [],
+  darkMode: "class",
   theme: {
     extend: {
       fontFamily: {
@@ -12,62 +56,14 @@ export default {
       },
       colors: {
         current: "currentColor",
-        // ! global
-        warning: "hsla(var(--bui-warning), var(--tw-bg-opacity, 1))",
-        info: "hsla(var(--bui-info), var(--tw-bg-opacity, 1))",
-        error: "hsla(var(--bui-error), var(--tw-bg-opacity, 1))",
-        success: "hsla(var(--bui-success), var(--tw-bg-opacity, 1))",
-        100: "hsla(var(--bui-100), var(--tw-bg-opacity, 1))",
-        200: "hsla(var(--bui-200), var(--tw-bg-opacity, 1))",
-        300: "hsla(var(--bui-300), var(--tw-bg-opacity, 1))",
-        400: "hsla(var(--bui-400), var(--tw-bg-opacity, 1))",
-        500: "hsla(var(--bui-500), var(--tw-bg-opacity, 1))",
-        600: "hsla(var(--bui-600), var(--tw-bg-opacity, 1))",
-        700: "hsla(var(--bui-700), var(--tw-bg-opacity, 1))",
-        mute: "hsla(var(--bui-mute), var(--tw-bg-opacity, 1))",
-        subtext: "hsla(var(--bui-subtext), var(--tw-bg-opacity, 0.65))",
-        skeleton: "hsla(var(--bui-skeleton), var(--tw-bg-opacity, 1))",
-        separator: "hsla(var(--bui-separator), var(--tw-bg-opacity, 1))",
-        "error-hl": "hsla(var(--bui-error-highlight), var(--tw-bg-opacity, 1))",
-        "warning-hl": "hsla(var(--bui-warning-highlight), var(--tw-bg-opacity, 1))",
-        "info-hl": "hsla(var(--bui-info-highlight), var(--tw-bg-opacity, 1))",
-        // ! overrides
-        "context-menu": "hsla(var(--bui-context-menu), var(--tw-bg-opacity, 1))",
-        active: "hsla(var(--bui-active), var(--tw-bg-opacity, 1))"
+        ...iterateColorVars("--tw-bg-opacity", [...GLOBAL_COLORS, ...OVERRIDE_COLORS])
       },
       borderColor: {
         current: "currentColor",
-        warning: "hsla(var(--bui-warning), var(--tw-border-opacity, 1))",
-        info: "hsla(var(--bui-info), var(--tw-border-opacity, 1))",
-        error: "hsla(var(--bui-error), var(--tw-border-opacity, 1))",
-        success: "hsla(var(--bui-success), var(--tw-border-opacity, 1))",
-        100: "hsla(var(--bui-100), var(--tw-border-opacity, 1))",
-        200: "hsla(var(--bui-200), var(--tw-border-opacity, 1))",
-        300: "hsla(var(--bui-300), var(--tw-border-opacity, 1))",
-        400: "hsla(var(--bui-400), var(--tw-border-opacity, 1))",
-        500: "hsla(var(--bui-500), var(--tw-border-opacity, 1))",
-        600: "hsla(var(--bui-600), var(--tw-border-opacity, 1))",
-        700: "hsla(var(--bui-700), var(--tw-border-opacity, 1))",
-        mute: "hsla(var(--bui-mute), var(--tw-border-opacity, 1))",
-        subtext: "hsla(var(--bui-subtext), var(--tw-border-opacity, 0.65))",
-        skeleton: "hsla(var(--bui-skeleton), var(--tw-border-opacity, 1))",
-        separator: "hsla(var(--bui-separator), var(--tw-border-opacity, 1))",
-        "error-hl": "hsla(var(--bui-error-highlight), var(--tw-border-opacity, 1))",
-        "warning-hl": "hsla(var(--bui-warning-highlight), var(--tw-border-opacity, 1))",
-        "info-hl": "hsla(var(--bui-info-highlight), var(--tw-border-opacity, 1))"
+        ...iterateColorVars("--tw-border-opacity", GLOBAL_COLORS)
       },
-      spacing: {
-        unset: "unset"
-      },
-      inset: {
-        unset: "unset"
-      },
-      width: {
-        unset: "unset"
-      },
-      height: {
-        unset: "unset"
-      }
+      spacing: unsetStyle,
+      inset: unsetStyle
     }
   },
   plugins: [forms, typography]
