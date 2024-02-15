@@ -28,7 +28,9 @@ export default function Error({ error, reset }: { error: Error; reset: () => voi
           <div className="border-b-400 font-inter border-b px-6 pb-3.5 pt-4">
             Stack trace (for developers only)
           </div>
-          <pre className="!select-text overflow-auto p-4 font-mono">{error.stack}</pre>
+          <div className="bg-100 bg-opacity-100">
+            <pre className="!select-text overflow-auto p-4 font-mono">{error.stack}</pre>
+          </div>
         </div>
         <div className="mt-3 flex justify-center">
           <Button onClick={() => reset()}>Try again</Button>

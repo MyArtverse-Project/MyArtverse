@@ -1,7 +1,7 @@
 "use client"
 
 import { Fragment } from "react"
-import { ItemIterator } from "@/components/helpers"
+import { ItemIterator } from "@/components/ui"
 import {
   LuBrush,
   LuCat,
@@ -23,7 +23,7 @@ export default function DashboardSidebar() {
     top: [
       { icon: LuLayoutDashboard, text: "Overview" },
       { icon: LuCat, text: "Characters" },
-      { icon: LuBrush, text: "Commissions" },
+      { icon: LuBrush, text: "Listings" },
       { icon: LuMessagesSquare, text: "Messages" },
       { icon: LuKanbanSquare, text: "Queue board" },
       { icon: LuImage, text: "Gallery" },
@@ -41,10 +41,10 @@ export default function DashboardSidebar() {
       style={{ width: 375 }}
       className="border-r-mute sticky top-16 h-[calc(100dvh-4.15rem)] border-r [align-self:flex-start]"
     >
-      <nav className="flex h-full flex-col justify-between px-4 py-3.5">
+      <nav className="flex h-full flex-col justify-between px-3.5 py-3.5">
         <div>
           {/* Profile card */}
-          <div className="font-inter bg-200 mb-1.5 flex items-center gap-x-2.5 gap-y-3.5 rounded-md px-3 py-2.5">
+          <div className="font-inter bg-200 mb-3 flex items-center gap-x-2.5 gap-y-3.5 rounded-md px-4 py-2.5">
             <span className="w-10 flex-shrink-0">
               <MFImage
                 src="/img/examples/kuro/kuro-example4.png"
@@ -54,8 +54,8 @@ export default function DashboardSidebar() {
                 rounded={999}
               />
             </span>
-            <span className="grid w-full">
-              <span className="text-lg font-bold">Name</span>
+            <span className="flex w-full flex-col">
+              <span className="-mb-0.5 text-lg font-bold">Name</span>
               <span className="text-subtext text-xs">@Handle</span>
             </span>
             <span className="flex-shrink-0">

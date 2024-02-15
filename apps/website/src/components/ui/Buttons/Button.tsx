@@ -49,7 +49,7 @@ const Button = forwardRef(
         variants: {
           intent: {
             primary: "border-transparent bg-300 hover:bg-400",
-            secondary: "bg-transparent border-300 hover:bg-400 hover:border-400",
+            secondary: "bg-100 border-300 hover:bg-400 hover:border-400",
             tritery: "border-transparent bg-transparent hover:bg-400",
             warning: "bg-transparent",
             error: "bg-error text-active hover:bg-opacity-70 border-transparent",
@@ -57,7 +57,7 @@ const Button = forwardRef(
           },
           size: {
             small: !iconOnly ? "px-2.5 py-1" : "p-1.5",
-            medium: !iconOnly ? "px-4 py-2" : "p-2",
+            medium: !iconOnly ? "px-3.5 py-2" : "p-2",
             big: !iconOnly ? "px-5 py-2.5" : "p-3"
           },
           positions: {

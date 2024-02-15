@@ -75,6 +75,13 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
         <link rel="mask-icon" href="./safari-pinned-tab.svg" color="9e00ff" />
       </head>
       <body className="bg-100 text-700 bg-background prose-headings:font-bold prose-headings:font-inter font-open-sans select-none !overflow-x-hidden text-sm font-medium">
+        <Providers>
+          <NoJSReminder />
+          <div>
+            <ClientInit />
+            {children}
+          </div>
+        </Providers>
         {/* Site analytics - Umami */}
         <Script
           id="umami"
@@ -83,22 +90,15 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
           data-website-id={umamiId}
         />
         {/* Behavior analytics - Microsoft Clarity */}
-        <Providers>
-          <NoJSReminder />
-          <div>
-            <Script id="clarity" strategy="beforeInteractive">
-              {dedent`
-              (function(c,l,a,r,i,t,y){
-                c[a]=c[a]||function(){(c[a].q=c[a].q||[]).push(arguments)};
-                t=l.createElement(r);t.async=1;t.src="https://www.clarity.ms/tag/"+i;
-                y=l.getElementsByTagName(r)[0];y.parentNode.insertBefore(t,y);
-              })(window, document, "clarity", "script", "${clarityId}");
-              `}
-            </Script>
-            <ClientInit />
-            {children}
-          </div>
-        </Providers>
+        <Script id="clarity" strategy="afterInteractive">
+          {dedent`
+        (function(c,l,a,r,i,t,y){
+          c[a]=c[a]||function(){(c[a].q=c[a].q||[]).push(arguments)};
+          t=l.createElement(r);t.async=1;t.src="https://www.clarity.ms/tag/"+i;
+          y=l.getElementsByTagName(r)[0];y.parentNode.insertBefore(t,y);
+        })(window, document, "clarity", "script", "${clarityId}");
+        `}
+        </Script>
       </body>
     </html>
   )
