@@ -2,18 +2,16 @@ import { atom } from "jotai"
 
 // Sidebar
 export const sidebarToggle = atom(false)
+export const dashboardSidebarToggle = atom(false)
 
-// Navbar profile/character peeking
-type PeekType = "profile" | "character"
-
-export const isProfilePeeking = atom(false)
-export const profilePeek = atom<{
-  type: PeekType
+interface ProfilePeekAtom {
   img: string
   username: string
   handle: string
-}>({
-  type: "profile",
+}
+
+export const isProfilePeeking = atom(false)
+export const profilePeekData = atom<ProfilePeekAtom>({
   img: "",
   username: "",
   handle: ""

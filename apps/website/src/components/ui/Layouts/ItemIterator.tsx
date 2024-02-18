@@ -25,7 +25,7 @@ export default function ItemIterator({
           <Button
             key={index}
             variant="tritery"
-            prefixIcon={<item.icon size={21} />}
+            prefixIcon={<item.icon size={21} className="flex-shrink-0" />}
             href={`${baseUrl}${kebabCase(item.text)}`}
             aria-current={isMatchingRoute ? "page" : null}
             className={clsx(

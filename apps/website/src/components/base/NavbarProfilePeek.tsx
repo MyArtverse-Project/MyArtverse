@@ -2,7 +2,7 @@
 
 import Link from "next/link"
 import { usePathname } from "next/navigation"
-import { isProfilePeeking, profilePeek } from "@/atoms"
+import { isProfilePeeking, profilePeekData } from "@/atoms"
 import { type AnimationProps, type Variants, motion } from "framer-motion"
 import { useAtom } from "jotai"
 import { MyFursonaIcon } from "../icons"
@@ -12,7 +12,7 @@ import { Button } from "../ui/Buttons"
 export default function NavbarProfilePeek() {
   const handlePeekRoutes = usePathname().includes("/@")
   const [isPeeking] = useAtom(isProfilePeeking)
-  const [peekInfo] = useAtom(profilePeek)
+  const [peekInfo] = useAtom(profilePeekData)
 
   const { type, username, handle, img } = peekInfo
 

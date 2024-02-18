@@ -1,7 +1,7 @@
 export default function MyFursonaIcon({
   logoOnly = false,
   wordmarkOnly = false,
-  size = 0.7
+  size = 0.675
 }: {
   logoOnly?: boolean
   wordmarkOnly?: boolean
