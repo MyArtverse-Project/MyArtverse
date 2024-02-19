@@ -1,3 +1,4 @@
+import { BRAND } from "@myfursona-internal/config"
 import { LuAlertTriangle as AlertTriangleIcon } from "react-icons/lu"
 
 export default function NoJSReminder() {
@@ -9,11 +10,10 @@ export default function NoJSReminder() {
           <span>JavaScript disabled</span>
         </h1>
         <p>
-          MyFursona heavily relies on JavaScript - most modern browsers have JavaScript
-          enabled and it looks like you're browsing MyFursona with either JavaScript
+          {BRAND} heavily relies on JavaScript - most modern browsers have JavaScript
+          enabled and it looks like you're browsing {BRAND} with either JavaScript
           disabled with the use of a third-party extension via an ad blocker or from an
-          outdated and/or unsupported browser. This message can be dismissed by
-          re-enabling JavaScript and reloading the browser.
+          outdated and/or unsupported browser.
         </p>
       </div>
     </noscript>

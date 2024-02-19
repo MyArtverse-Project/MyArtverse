@@ -1,40 +1,43 @@
 import { type VariantProps, cva } from "class-variance-authority"
+import clsx from "clsx"
 import type { IconType } from "react-icons"
 
-const badgeStyles = cva(["inline-flex items-center border border-solid"], {
+const badgeStyles = cva(["inline-flex items-center border border-solid rounded-full"], {
   variants: {
-    intent: {
-      default: "border-100 text-100 bg-100",
+    variant: {
+      default: "border-400 text-700 bg-100",
       error: "border-error text-error bg-error-hl",
       warning: "border-warning text-warning bg-warning-hl",
       info: "border-info text-info bg-info-hl"
     },
     size: {
-      small: "px-2 py-1 mx-1 rounded-md",
-      normal: "px-2.5 py-2 mx-2 gap-x-1.5 rounded-md",
-      thicc: "px-3.5 py-3 mx-3.5 rounded-lg"
+      small: "px-2.5 py-0.5",
+      normal: "px-3 py-1 gap-x-1.5",
+      big: "px-3.5 py-1"
     }
   },
-  compoundVariants: [{ size: "normal", intent: "default" }],
+  compoundVariants: [{ size: "normal", variant: "default" }],
   defaultVariants: {
-    intent: "default",
+    variant: "default",
     size: "normal"
   }
 })
 
 export default function Badge({
-  label,
+  children,
   prefixIcon,
   size,
-  intent = "default"
+  variant = "default"
 }: {
-  label: string
-  prefixIcon: React.ReactElement<IconType>
+  children: React.ReactNode
+  prefixIcon?: React.ReactElement<IconType>
 } & VariantProps<typeof badgeStyles>) {
   return (
-    <div className={badgeStyles({ size, intent })}>
+    <div id="badge" className={badgeStyles({ variant, size })}>
       {prefixIcon}
-      <span className="text-xs font-semibold">{label}</span>
+      <span className={clsx("font-inter", size !== "big" ? "text-xs" : "text-sm")}>
+        {children}
+      </span>
     </div>
   )
 }

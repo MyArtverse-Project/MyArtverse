@@ -13,7 +13,7 @@ export default function ListingPage() {
     <>
       <div className="bg-100 sticky top-[7.1rem] z-[3] -mt-3 py-3.5">
         <div className="mx-auto flex max-w-screen-2xl gap-x-3 px-12">
-          <SearchBox placeholder="Find a listing" />
+          <SearchBox placeholder="Search listings" />
           <Dropdown
             button={
               <Button variant="secondary" suffixIcon={<LuChevronDown size={21} />}>
@@ -50,7 +50,7 @@ export default function ListingPage() {
         </div>
       </div>
       <MarginClamp>
-        <div className="grid grid-cols-3 gap-3">
+        <div className="mt-2 grid grid-cols-3 gap-5">
           <Listing
             title="Banners"
             description="Awesome scene with 2+ Characters"

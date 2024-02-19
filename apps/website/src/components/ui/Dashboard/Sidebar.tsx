@@ -28,10 +28,10 @@ export default function DashboardSidebar() {
     top: [
       { icon: LuLayoutDashboard, text: "Overview" },
       { icon: LuCat, text: "Characters" },
+      { icon: LuImage, text: "Gallery" },
       { icon: LuBrush, text: "Listings" },
       { icon: LuMessagesSquare, text: "Messages" },
       { icon: LuKanbanSquare, text: "Queue board" },
-      { icon: LuImage, text: "Gallery" },
       { icon: LuLineChart, text: "Analytics" }
     ],
     bottom: [

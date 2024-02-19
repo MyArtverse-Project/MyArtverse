@@ -14,7 +14,7 @@ export default function NavbarProfilePeek() {
   const [isPeeking] = useAtom(isProfilePeeking)
   const [peekInfo] = useAtom(profilePeekData)
 
-  const { type, username, handle, img } = peekInfo
+  const { username, handle, img } = peekInfo
 
   const transitionOptions: AnimationProps["transition"] = {
     type: "spring",

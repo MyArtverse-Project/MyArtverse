@@ -8,11 +8,6 @@ export default function ClientInit() {
 
   useEffect(() => {
     console.log(CONSOLE_MSG, "color:hsl(250,95.5%,75%")
-
-    // OneSignal
-    // OneSignal.init({
-    //   appId: "test"
-    // })
   }, [])
 
   return null

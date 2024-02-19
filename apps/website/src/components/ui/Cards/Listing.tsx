@@ -4,6 +4,7 @@ import {
   LuStar as StarIcon,
   LuClock4 as TimeIcon
 } from "react-icons/lu"
+import { Badge } from "../Badges"
 import { Button } from "../Buttons"
 import MFImage from "../MFImage"
 
@@ -20,39 +21,47 @@ export default function Listing({
   description,
   img,
   price,
-  title
+  title,
+  isPublic
 }: {
   img: string
   title: string
   price: number
   description: string
+  isPublic?: boolean
+  isListingExpired?: boolean
 }) {
   return (
-    <div className="overflow-hidden rounded-md bg-white p-3.5 shadow-md">
-      <div className="mb-2.5">
+    <div className="overflow-hidden rounded-md">
+      <div className="mb-3">
         <MFImage src={img} alt="" aspectRatio="2/1" rounded={12} objectFit="cover" />
       </div>
       {/* Commission info */}
       <div className="flex flex-col gap-y-1.5">
+        <div className="flex flex-wrap gap-x-1.5">
+          <Badge size="big">ListingType</Badge>
+          <Badge size="big" variant="error">
+            NSFW
+          </Badge>
+          <ScopedLabel icon={TimeIcon} text="69 hours remaining" />
+        </div>
         <div className="grid grid-cols-[auto,1fr] gap-x-3 gap-y-1">
-          <MFImage src={img} alt="Your mom" aspectRatio="1" height={30} rounded={999} />
+          {/* <MFImage src={img} alt="Your mom" aspectRatio="1" height={30} rounded={999} /> */}
           <h2 className="text-2xl font-bold">Cruel Summer</h2>
           <div className="col-span-2 flex flex-wrap gap-x-3">
-            <span>Taylor Swift</span>
-            <span className="text-green-600">$20—$69</span>
-            <ScopedLabel icon={TimeIcon} text="69 hours remaining" />
+            <span className="font-bold text-green-600">$20—$69</span>
           </div>
         </div>
-        <article className="px-0.5 pt-1">
-          <div>
+        <div className="px-0.5 pt-1">
+          <p>
             Lorem, ipsum dolor sit amet consectetur adipisicing elit. Officia alias, vel
             debitis voluptates numquam dolores commodi? Corporis alias perspiciatis autem
             quidem!
-          </div>
+          </p>
           <div className="mt-2 inline-block cursor-pointer text-blue-600 hover:underline">
             See more
           </div>
-        </article>
+        </div>
         {/* Links and CTA */}
         <div className="flex justify-between">
           <div></div>
