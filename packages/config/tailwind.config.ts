@@ -4,7 +4,10 @@ import typography from "@tailwindcss/typography"
 
 const PREFIX = "bui"
 
-const iterateColorVars = (baseVariable: string, colors: (string | string[])[]): { [x: string]: string } => {
+const iterateColorVars = (
+  baseVariable: string,
+  colors: (string | string[])[]
+): { [x: string]: string } => {
   const colorTmpl = `"{0}": "hsla(var(--${PREFIX}-{1}), var(${baseVariable}, 1))"`
 
   const fmtColorStr = (...args: string[]) => {

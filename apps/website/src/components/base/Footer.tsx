@@ -1,5 +1,6 @@
 "use client"
 
+/* eslint-disable @typescript-eslint/no-explicit-any */
 import Link from "next/link"
 import project from "../../../package.json"
 import { MyFursonaIcon } from "../icons"
@@ -12,13 +13,13 @@ export default function Footer() {
 
   const footerLinks = [
     { text: "Pricing", link: "/plus" },
-    { text: "Status", link: "https://stats.uptimerobot.com/rlVXRfwrKz" },
     { text: "Brand", link: "/branding" },
     { text: "API", link: "/docs/api" },
     { text: "Docs", link: "/docs" },
     { text: "Blog", link: "/blog" },
     { text: "Privacy", link: "/legal/privacy-policy" },
-    { text: "Terms", link: "/legal/tos" }
+    { text: "Terms", link: "/legal/tos" },
+    { text: "Status", link: "https://stats.uptimerobot.com/rlVXRfwrKz" }
   ]
 
   const copyrightOwner = "Fusky Labs Software Ltd and the MyArtverse contributors"

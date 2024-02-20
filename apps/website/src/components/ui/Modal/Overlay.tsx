@@ -1,5 +1,6 @@
 "use client"
 
+/* eslint-disable @typescript-eslint/no-explicit-any */
 import dynamic from "next/dynamic"
 import { useEffect } from "react"
 import clsx from "clsx"

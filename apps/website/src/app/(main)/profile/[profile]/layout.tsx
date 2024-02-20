@@ -1,5 +1,4 @@
 import { Metadata, ResolvingMetadata } from "next"
-import { MarginClamp } from "@/components/ui"
 import type { SlugRouteProps } from "@/types"
 import DynamicMasthead from "./DynamicMasthead"
 

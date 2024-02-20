@@ -3,9 +3,6 @@
   "version": "0.0.1",
   "private": true,
   "license": "Apache-2.0",
-  "scripts": {
-    "lint": "eslint \"**/*.tsx*\""
-  },
   "workspaces": {
     "nohoist": [
       "react",
@@ -27,8 +24,7 @@
     "@types/react-dom": "^18.2.0",
     "class-variance-authority": "^0.7.0",
     "clsx": "^2.0.0",
-    "eslint": "^8.50.0",
-    "eslint-config-myfursona": "*",
+    "eslint": "^8.55.0",
     "react": "^18.2.0",
     "typescript": "^5.2.2"
   }

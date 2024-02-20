@@ -1,11 +1,7 @@
 "use client"
 
 import { useState } from "react"
-import {
-  LuCheck as Check,
-  LuDownload as DownloadIcon,
-  LuUpload as UploadIcon
-} from "react-icons/lu"
+import { LuUpload as UploadIcon } from "react-icons/lu"
 
 export default function DropZone() {
   const [isDragging, setIsDragging] = useState(false)

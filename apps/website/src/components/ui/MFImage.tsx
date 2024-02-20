@@ -24,7 +24,7 @@ export default function MFImage({
   aspectRatio?: string
   height?: string | number
   width?: string | number
-  sizes?: any
+  sizes?: string
   strategy?: ImgLoadStrategy
   objectFit?: React.CSSProperties["objectFit"]
   rounded?: number

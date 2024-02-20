@@ -1,5 +1,6 @@
 "use client"
 
+/* eslint-disable @typescript-eslint/no-explicit-any */
 import { usePathname } from "next/navigation"
 import clsx from "clsx"
 import { kebabCase } from "lodash"

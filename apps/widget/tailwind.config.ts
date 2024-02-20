@@ -3,7 +3,12 @@ import myfursonaPreset from "@myfursona-internal/config/tailwind.config"
 import defaultTheme from "tailwindcss/defaultTheme"
 
 export default {
-  content: ["./index.html", "./src/**/*.{js,ts,jsx,tsx}", "../../packages/ui/src/**/*.{ts,tsx}", "../../node_modules/@myfursona/biro-ui/src/**/*.{ts,tsx}"],
+  content: [
+    "./index.html",
+    "./src/**/*.{js,ts,jsx,tsx}",
+    "../../packages/ui/src/**/*.{ts,tsx}",
+    "../../node_modules/@myfursona/biro-ui/src/**/*.{ts,tsx}"
+  ],
   theme: {
     extend: {
       fontFamily: {

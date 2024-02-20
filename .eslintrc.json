@@ -1,6 +1,15 @@
 {
   "root": true,
-  "extends": ["myfursona"],
+  "extends": ["next", "plugin:@typescript-eslint/recommended"],
+  "plugins": ["unused-imports"],
+  "rules": {
+    "@typescript-eslint/ban-ts-comment": "off",
+    "@typescript-eslint/no-unused-vars": "warn",
+    "unused-imports/no-unused-imports": "warn",
+    "react/no-unescaped-entities": "off"
+  },
+  "parser": "@typescript-eslint/parser",
+  "ignorePatterns": ["dist", ".next", ".eslintrc.json", "sw.js", "workbox-*", "worker-*"],
   "settings": {
     "next": {
       "rootDir": ["apps/website/"]

@@ -27,7 +27,7 @@ type Policies = Partial<{
 }>
 
 export function generateCSP(policy: Policies): string {
-  let _directivesArr = []
+  const _directivesArr = []
 
   const joinSpaces = (s: string[]) => s.join(" ")
 

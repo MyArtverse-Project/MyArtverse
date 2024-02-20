@@ -15,5 +15,5 @@
     "skipLibCheck": true,
     "strict": true
   },
-  "exclude": ["node_modules"]
+  "include": ["../../node_modules/@types/react", "../../node_modules/@types/react-dom"]
 }

@@ -5,11 +5,7 @@
   "type": "module",
   "workspaces": {
     "nohoist": [
-      "@types/react",
-      "@types/react-dom",
-      "class-variance-authority",
-      "react",
-      "react-dom"
+      "class-variance-authority"
     ]
   },
   "scripts": {
