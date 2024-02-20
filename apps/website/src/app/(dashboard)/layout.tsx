@@ -4,7 +4,7 @@ export default function DashboardLayout({
   children
 }: Readonly<{ children?: React.ReactNode }>) {
   return (
-    <>
+    <div>
       <header className="sticky top-0 z-20">
         <DashboardNavbar />
       </header>
@@ -12,6 +12,6 @@ export default function DashboardLayout({
         <DashboardSidebar />
         <main className="w-full">{children}</main>
       </div>
-    </>
+    </div>
   )
 }

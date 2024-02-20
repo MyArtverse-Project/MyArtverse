@@ -1,13 +1,14 @@
 import { Tabs } from "@/components/ui"
 import { Button } from "@/components/ui/Buttons"
 import { Container } from "@/components/ui/Dashboard"
-import { LuArrowDownAZ, LuFilter, LuMoreVertical, LuSearch } from "react-icons/lu"
+import { LuArrowDownAZ, LuMoreVertical, LuSearch } from "react-icons/lu"
 
 export default function ListingLayout({
   children
 }: Readonly<{ children: React.ReactNode }>) {
   return (
     <Container
+      headingTransparent
       noChildrenPadding
       heading="Listings"
       actions={

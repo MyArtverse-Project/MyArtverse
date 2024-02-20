@@ -44,7 +44,6 @@ export const metadata: Metadata = {
     type: "website",
     siteName: BRAND
   },
-  robots: "noai, noimageai, noindex, nofollow",
   manifest: "/manifest.json",
   other: {
     "apple-mobile-web-app-status-bar": "#9e00ff"
@@ -77,10 +76,8 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
       <body className="bg-100 text-700 bg-background prose-headings:font-bold prose-headings:font-inter font-open-sans select-none !overflow-x-hidden text-sm font-medium">
         <Providers>
           <NoJSReminder />
-          <div>
-            <ClientInit />
-            {children}
-          </div>
+          {children}
+          <ClientInit />
         </Providers>
         {/* Site analytics - Umami */}
         <Script

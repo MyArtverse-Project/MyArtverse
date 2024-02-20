@@ -1,6 +1,6 @@
 import { Button } from "@/components/ui/Buttons"
 import { Container } from "@/components/ui/Dashboard"
-import DashboardTitle from "../../DashboardTitle"
+import DashboardTitle from "@/utils/DashboardTitle"
 
 export const metadata = DashboardTitle("Overview")
 

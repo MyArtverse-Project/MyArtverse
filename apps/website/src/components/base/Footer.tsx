@@ -12,20 +12,21 @@ export default function Footer() {
 
   const footerLinks = [
     { text: "Pricing", link: "/plus" },
-    { text: "Brand", link: "/branding" },
     { text: "Status", link: "https://stats.uptimerobot.com/rlVXRfwrKz" },
+    { text: "Brand", link: "/branding" },
+    { text: "API", link: "/docs/api" },
     { text: "Docs", link: "/docs" },
     { text: "Blog", link: "/blog" },
-    { text: "Terms", link: "/legal/tos" },
-    { text: "Privacy", link: "/legal/privacy-policy" }
+    { text: "Privacy", link: "/legal/privacy-policy" },
+    { text: "Terms", link: "/legal/tos" }
   ]
 
-  const copyrightOwner = "Fusky Labs Software Ltd and MyArtverse contributors"
+  const copyrightOwner = "Fusky Labs Software Ltd and the MyArtverse contributors"
 
   return (
-    <div className="border-t-400 border-t py-8">
-      <footer className="font-inter mx-auto max-w-screen-xl px-8">
-        <div className="flex items-center gap-x-3.5 pb-6">
+    <div className="border-t-400 mt-12 border-t py-8">
+      <footer className="font-inter mx-auto flex max-w-screen-xl flex-col gap-y-10 px-8">
+        <div className="flex items-center gap-x-3.5">
           <Link href="/" className="hover:opacity-60">
             <MyFursonaIcon size={0.8} />
           </Link>
@@ -37,10 +38,11 @@ export default function Footer() {
             ))}
           </div>
         </div>
-        <div className="text-subtext flex gap-x-4 pt-4">
+        <div className="text-subtext flex gap-x-4 opacity-75">
           <div className="w-full">{`© ${new Date().getFullYear()} ${copyrightOwner}`}</div>
+          <span className="whitespace-nowrap">{version}</span>
           {!commitHashEnv ? (
-            <span>Development</span>
+            <span className="cursor-help underline decoration-dashed">Development</span>
           ) : (
             <Link
               className="text-subtext underline hover:text-blue-400"
@@ -49,7 +51,6 @@ export default function Footer() {
               {commitHash}
             </Link>
           )}
-          <span className="whitespace-nowrap">{version}</span>
         </div>
       </footer>
     </div>

@@ -1,12 +1,7 @@
-import { Container } from "@/components/ui/Dashboard"
-import DashboardTitle from "../../DashboardTitle"
+import DashboardTitle from "@/utils/DashboardTitle"
 
 export const metadata = DashboardTitle("Characters")
 
 export default function CharacterPage() {
-  return (
-    <Container noChildrenPadding heading="Your characters">
-      Content
-    </Container>
-  )
+  return <div>characters page</div>
 }

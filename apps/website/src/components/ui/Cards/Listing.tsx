@@ -1,9 +1,5 @@
 import type { IconType } from "react-icons"
-import {
-  LuMoreVertical as MoreIcon,
-  LuStar as StarIcon,
-  LuClock4 as TimeIcon
-} from "react-icons/lu"
+import { LuMoreVertical as MoreIcon, LuStar as StarIcon } from "react-icons/lu"
 import { Badge } from "../Badges"
 import { Button } from "../Buttons"
 import MFImage from "../MFImage"
@@ -43,7 +39,7 @@ export default function Listing({
           <Badge size="big" variant="error">
             NSFW
           </Badge>
-          <ScopedLabel icon={TimeIcon} text="69 hours remaining" />
+          {/* <ScopedLabel icon={TimeIcon} text="69 hours remaining" /> */}
         </div>
         <div className="grid grid-cols-[auto,1fr] gap-x-3 gap-y-1">
           {/* <MFImage src={img} alt="Your mom" aspectRatio="1" height={30} rounded={999} /> */}

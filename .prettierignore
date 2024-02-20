@@ -1,14 +1,12 @@
-# Dev folders
-.next
-
 # Build folders
-.turbo
-.output
-dist
-config
-out
+.next/
+.turbo/
+.output/
+dist/
+config/
+out/
 
-public
+public/
 
 # PWA
 sw.js
@@ -18,13 +16,7 @@ worker-*.js
 worker-*.js.map
 sw.js.map
 
-# Why tf would Prettier format binary files?
-*.ico
-*.png
-*.jpg
-
-# Tauri-specific
-target
+target/
 Cargo.toml
 
 !packages/**

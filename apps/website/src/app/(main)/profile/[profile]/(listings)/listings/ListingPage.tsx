@@ -50,7 +50,7 @@ export default function ListingPage() {
         </div>
       </div>
       <MarginClamp>
-        <div className="mt-2 grid grid-cols-3 gap-5">
+        <div className="mt-2 grid grid-cols-3 gap-7">
           <Listing
             title="Banners"
             description="Awesome scene with 2+ Characters"

@@ -1,4 +1,4 @@
-import DashboardTitle from "../../DashboardTitle"
+import DashboardTitle from "@/utils/DashboardTitle"
 
 export const metadata = DashboardTitle("Characters")
 

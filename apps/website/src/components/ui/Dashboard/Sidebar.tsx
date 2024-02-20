@@ -3,8 +3,8 @@
 import { Fragment } from "react"
 import { dashboardSidebarToggle } from "@/atoms"
 import { ItemIterator } from "@/components/ui"
-import clsx from "clsx"
 import { useAtom } from "jotai"
+import type { IconType } from "react-icons"
 import {
   LuBrush,
   LuCat,
@@ -14,20 +14,32 @@ import {
   LuLayoutDashboard,
   LuLineChart,
   LuMessagesSquare,
-  LuPencil,
   LuSettings,
   LuSparkles
 } from "react-icons/lu"
-import { Button } from "../Buttons"
-import MFImage from "../MFImage"
+import SidebarProfile from "./SidebarProfile"
+
+interface DashboardMenuItems {
+  [x: string]: {
+    icon: IconType
+    text: string
+    /** Check for any sub routes to make sure the root item still stays active */
+    checkRoutes?: `/${string}`[]
+  }[]
+}
 
 export default function DashboardSidebar() {
   const [isToggled] = useAtom(dashboardSidebarToggle)
 
-  const menuItems = {
+  const menuItems: DashboardMenuItems = {
     top: [
       { icon: LuLayoutDashboard, text: "Overview" },
-      { icon: LuCat, text: "Characters" },
+      {
+        icon: LuCat,
+        text: "Characters",
+        // TODO implement this logic to checkroutes with these with startswith()
+        checkRoutes: ["/characters", "/characters/refsheets"]
+      },
       { icon: LuImage, text: "Gallery" },
       { icon: LuBrush, text: "Listings" },
       { icon: LuMessagesSquare, text: "Messages" },
@@ -49,38 +61,7 @@ export default function DashboardSidebar() {
     >
       <nav className="flex h-full flex-col justify-between px-3.5 py-3.5">
         <div>
-          {/* Profile card */}
-          <div
-            className={clsx(
-              "font-inter flex items-center gap-x-2.5 gap-y-3.5 overflow-hidden rounded-md bg-opacity-75 transition-[margin,padding,background-color] duration-[420ms] ease-in-out",
-              isToggled ? "bg-300 mb-3 px-4 py-2.5" : "hover:bg-300 mb-0 px-3.5 py-1"
-            )}
-          >
-            <span
-              className={clsx(
-                "flex-shrink-0 transition-[width] duration-[420ms] ease-in-out",
-                isToggled ? "w-10" : "w-8"
-              )}
-            >
-              <MFImage
-                src="/img/examples/kuro/kuro-example4.png"
-                aspectRatio="1"
-                width="100%"
-                height="100%"
-                rounded={999}
-              />
-            </span>
-            <span className="flex w-full flex-col">
-              <span className="-mb-0.5 text-lg font-bold">Name</span>
-              <span className="text-subtext text-xs">@Handle</span>
-            </span>
-            <span className="flex-shrink-0">
-              <Button iconOnly variant="tritery" size="small">
-                <LuPencil size={18} />
-              </Button>
-            </span>
-          </div>
-          {/* Profile card end */}
+          <SidebarProfile />
           <ItemIterator as={Fragment} baseUrl="/dashboard/" items={menuItems.top} />
         </div>
         <ItemIterator items={menuItems.bottom} />

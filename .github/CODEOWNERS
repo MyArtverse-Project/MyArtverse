@@ -1,7 +1,7 @@
 # Learn how to add code owners here:
 # https://help.github.com/en/articles/about-code-owners
 
-TODO.md    @MyArtverse-Project/frontend
-AUTHORS.md @MyArtverse-Project/frontend
-*rc.cjs    @MyArtverse-Project/frontend
-/packages  @MyArtverse-Project/frontend
+TODO.md     @MyArtverse-Project/Frontend
+AUTHORS.md  @MyArtverse-Project/Frontend
+*rc.json    @MyArtverse-Project/Frontend
+/packages   @MyArtverse-Project/Frontend

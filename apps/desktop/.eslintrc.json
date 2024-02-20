@@ -1,5 +1,5 @@
-module.exports = {
-  rules: {
+{
+  "rules": {
     "@next/next/no-img-element": "off"
   }
 }
