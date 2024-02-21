@@ -17,13 +17,13 @@
       "cache": false,
       "persistent": true
     },
-    "build": {
-      "dotEnv": [".env.production.local", ".env.production", ".env"],
-      "dependsOn": ["^build"],
-      "outputs": [".next/**", "!.next/cache/**"]
-    },
     "lint": {
       "dependsOn": ["^lint"]
+    },
+    "build": {
+      "dotEnv": [".env.production.local", ".env.production", ".env"],
+      "dependsOn": ["lint", "^build"],
+      "outputs": [".next/**", "!.next/cache/**"]
     },
     "deploy": {
       "dotEnv": [".env.production.local", ".env.production", ".env"],
