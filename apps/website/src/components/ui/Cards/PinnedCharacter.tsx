@@ -1,5 +1,5 @@
-import { ColorPalette as Colors } from "@/types"
 import { LuCat as CatIcon, LuPalette as Palette } from "react-icons/lu"
+import { ColorPalette as Colors } from "@/types/characters"
 import { Button } from "../Buttons"
 import MFImage from "../MFImage"
 import ColorPalette from "./ColorPalette"

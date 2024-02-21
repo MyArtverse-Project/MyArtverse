@@ -1,8 +1,12 @@
 /* eslint-disable @typescript-eslint/no-explicit-any */
 import Link from "next/link"
-import type { AdoptionStatus, MapElement, ColorPalette as Palette } from "@/types"
 import clsx from "clsx"
 import { LuHeart as Heart } from "react-icons/lu"
+import type {
+  FursonaStatus as AdoptionStatus,
+  ColorPalette as Palette
+} from "@/types/characters"
+import type { MapElement } from "@/types/utils"
 import MFImage from "../MFImage"
 import ColorPalette from "./ColorPalette"
 import Status from "./Status"

@@ -2,8 +2,8 @@
 
 import Image from "next/image"
 import { useState } from "react"
-import type { ReactMapElement } from "@/types"
 import clsx from "clsx"
+import type { ReactMapElement } from "@/types/utils"
 
 type ImgLoadStrategy = "lazy" | "neutral" | "important"
 

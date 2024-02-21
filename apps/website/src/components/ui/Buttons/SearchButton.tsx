@@ -1,5 +1,5 @@
-import { MapElement } from "@/types"
 import { LuSearch as SearchIcon } from "react-icons/lu"
+import { MapElement } from "@/types/utils"
 import Button from "./Button"
 
 export default function SearchButton({

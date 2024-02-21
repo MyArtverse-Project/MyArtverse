@@ -1,5 +1,5 @@
 import { Metadata, ResolvingMetadata } from "next"
-import type { SlugRouteProps } from "@/types"
+import type { SlugRouteProps } from "@/types/utils"
 import ListingPage from "./ListingPage"
 
 export async function generateMetadata(

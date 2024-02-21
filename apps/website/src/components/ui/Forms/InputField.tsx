@@ -1,8 +1,8 @@
 "use client"
 
-import type { ReactMapElement } from "@/types"
 import clsx from "clsx"
 import { kebabCase } from "lodash"
+import type { ReactMapElement } from "@/types/utils"
 
 export default function InputField({
   inputName = "",

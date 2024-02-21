@@ -1,9 +1,9 @@
 import Link from "next/link"
 import { forwardRef } from "react"
-import type { MapElement, ReactMapElement, Variants } from "@/types"
 import { cva } from "class-variance-authority"
 import type { IconType } from "react-icons"
 import type { UrlObject } from "url"
+import type { MapElement, ReactMapElement, Variants } from "@/types/utils"
 
 type Positions = "left" | "center" | "right"
 type Sizes = "small" | "big"

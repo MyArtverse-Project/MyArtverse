@@ -1,8 +1,8 @@
 "use client"
 
-import type { MapElement } from "@/types"
 import clsx from "clsx"
 import { motion } from "framer-motion"
+import type { MapElement } from "@/types/utils"
 import Overlay from "./Overlay"
 
 export default function Modal({

@@ -1,8 +1,8 @@
 /* eslint-disable @typescript-eslint/no-explicit-any */
 import Link from "next/link"
 import { Menu } from "@headlessui/react"
-import type { ReactMapElement } from "@/types"
 import clsx from "clsx"
+import type { ReactMapElement } from "@/types/utils"
 
 export default function DropdownItem({
   children,
@@ -10,7 +10,7 @@ export default function DropdownItem({
   prefix,
   suffix,
   disabled,
-  ...attributes
+  ...attrs
 }: {
   children?: React.ReactNode
   link?: string

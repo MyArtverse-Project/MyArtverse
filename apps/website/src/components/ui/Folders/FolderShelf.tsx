@@ -8,7 +8,7 @@ import {
 import { Button } from "../Buttons"
 import Separator from "../Separator"
 import FolderItem from "./FolderItem"
-import { useFolderViewContext } from "./FolderViewProvider"
+import { useFolderViewContext } from "./FolderView"
 
 export default function FolderShelf({
   children,
@@ -30,7 +30,7 @@ export default function FolderShelf({
     const resizeArea = resizableRef.current
     const folderView = folderViewRef.current
 
-    const dragMeDaddy = (e: MouseEvent) => {
+    const handleShelfDrag = (e: MouseEvent) => {
       if (!isDragging) return
 
       const rect = folderView.getBoundingClientRect()
@@ -41,19 +41,11 @@ export default function FolderShelf({
       setFolderWidth(calcMousePosition)
     }
 
-    window.addEventListener("mousemove", dragMeDaddy)
+    window.addEventListener("mousemove", handleShelfDrag)
 
-    const resetPosition = () => {
-      setFolderWidth(DEFAULT_WIDTH)
-    }
-
-    const setDraggingTrue = () => {
-      setIsDragging(true)
-    }
-
-    const setDraggingFalse = () => {
-      setIsDragging(false)
-    }
+    const resetPosition = () => setFolderWidth(DEFAULT_WIDTH)
+    const setDraggingTrue = () => setIsDragging(true)
+    const setDraggingFalse = () => setIsDragging(false)
 
     resizeArea.addEventListener("dblclick", resetPosition)
 
@@ -61,7 +53,7 @@ export default function FolderShelf({
     window.addEventListener("mouseup", setDraggingFalse)
 
     return () => {
-      window.removeEventListener("mousemove", dragMeDaddy)
+      window.removeEventListener("mousemove", handleShelfDrag)
       resizeArea.removeEventListener("dblclick", resetPosition)
       resizeArea.removeEventListener("mousedown", setDraggingTrue)
       window.removeEventListener("mouseup", setDraggingFalse)
@@ -84,6 +76,7 @@ export default function FolderShelf({
 
   return (
     <div
+      data-folder-shelf=""
       className="flex flex-shrink-0"
       ref={folderViewRef}
       style={{ width: folderWidth }}

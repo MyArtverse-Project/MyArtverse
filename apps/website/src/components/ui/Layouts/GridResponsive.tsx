@@ -1,4 +1,4 @@
-import type { ReactMapElement } from "@/types"
+import type { ReactMapElement } from "@/types/utils"
 
 export default function GridResponsive({
   children,

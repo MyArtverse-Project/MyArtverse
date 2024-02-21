@@ -3,9 +3,9 @@
 /* eslint-disable @typescript-eslint/no-explicit-any */
 import Link from "next/link"
 import { usePathname } from "next/navigation"
-import type { PartialArray } from "@/types"
 import clsx from "clsx"
 import type { IconType } from "react-icons"
+import type { PartialArray } from "@/types/utils"
 
 export default function Tabs({
   baseURL = "/",

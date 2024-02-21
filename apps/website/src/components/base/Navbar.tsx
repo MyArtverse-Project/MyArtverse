@@ -37,15 +37,15 @@ export default function Navbar() {
   const { sidebarState: isSidebarOpen, setSidebarState } = useSidebarContext()
 
   // TODO: Implement User Data onto sidebar
-  const USER_PLACEHOLDER = "VulpoTheDev"
-  const HANDLE_PLACEHOLDER = `@${toLower(USER_PLACEHOLDER)}`
+  // const USER_PLACEHOLDER = "VulpoTheDev"
+  // const HANDLE_PLACEHOLDER = `@${toLower(USER_PLACEHOLDER)}`
 
-  const createNewItems: ItemIterator = [
-    { icon: CatIcon, name: "New fursona", link: "/" },
-    { icon: ShareIcon, name: "Upload image(s)", link: "/" },
-    { icon: AlbumIcon, name: "New collection", link: "/" },
-    { icon: FileLockIcon, name: "New private note", link: "/" }
-  ]
+  // const createNewItems: ItemIterator = [
+  //   { icon: CatIcon, name: "New fursona", link: "/" },
+  //   { icon: ShareIcon, name: "Upload image(s)", link: "/" },
+  //   { icon: AlbumIcon, name: "New collection", link: "/" },
+  //   { icon: FileLockIcon, name: "New private note", link: "/" }
+  // ]
 
   const siteSettingsItems: ItemIterator = [
     { icon: ContrastIcon, name: "Change theme" },

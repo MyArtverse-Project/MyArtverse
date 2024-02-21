@@ -1,4 +1,4 @@
-import type { ColorPalette as _ColorPalette } from "@/types"
+import type { ColorPalette as _ColorPalette } from "@/types/characters"
 
 export default function ColorPalette({
   palette,

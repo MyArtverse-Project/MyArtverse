@@ -1,7 +1,7 @@
-import type { Variants as NoteVariants, PartialRecord } from "@/types"
 import clsx from "clsx"
 import type { IconType } from "react-icons"
 import { LuAlertTriangle, LuCheckCircle2, LuInfo, LuXCircle } from "react-icons/lu"
+import type { Variants as NoteVariants, PartialRecord } from "@/types/utils"
 
 type NoteStatus = Extract<NoteVariants, "success" | "warning" | "error" | "info">
 

@@ -63,7 +63,7 @@ export default function DropZone() {
             style={{ display: "none" }}
             onChange={handleFileInputChange}
           />
-          <img src={imageUrl} className="mb-5 h-40 w-40 rounded-full" />
+          <img src={imageUrl} alt="" className="mb-5 h-40 w-40 rounded-full" />
           <h4 className="text-sm">Uploaded!</h4>
           <p className="mt-4 text-xl">Max size: 25MB, Supported: PNG, JPG</p>
         </div>

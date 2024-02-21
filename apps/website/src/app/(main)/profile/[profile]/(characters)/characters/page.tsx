@@ -1,6 +1,6 @@
 import { Metadata, ResolvingMetadata } from "next"
 import { MarginClamp } from "@/components/ui"
-import type { SlugRouteProps } from "@/types"
+import type { SlugRouteProps } from "@/types/utils"
 import CharacterView from "./CharacterView"
 
 export async function generateMetadata(

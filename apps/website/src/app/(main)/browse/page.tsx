@@ -1,12 +1,12 @@
 import { MarginClamp } from "@/components/ui"
 import { FursonaCard } from "@/components/ui/Cards"
-import { FursonaStatus } from "@/types"
 import {
   LuBrush as Brush,
   LuHeart as Heart,
   LuLayers as Layers,
   LuSparkles as Sparkles
 } from "react-icons/lu"
+import { FursonaStatus } from "@/types/characters"
 import ShelfSection from "./ShelfSection"
 
 export default function Browse() {

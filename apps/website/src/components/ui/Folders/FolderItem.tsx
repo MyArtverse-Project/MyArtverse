@@ -2,7 +2,6 @@
 
 import { Children, useEffect, useRef, useState } from "react"
 import { useScrollBounds } from "@/hooks/useScrollBounds"
-import type { MapElement } from "@/types"
 import clsx from "clsx"
 import { motion } from "framer-motion"
 import {
@@ -11,6 +10,7 @@ import {
   LuFolderOpen as FolderOpen,
   LuFolderPlus as FolderPlus
 } from "react-icons/lu"
+import type { MapElement } from "@/types/utils"
 import { Button } from "../Buttons"
 
 export default function FolderItem({
@@ -20,7 +20,6 @@ export default function FolderItem({
   expanded = false,
   nestedItem,
   newItem,
-  color,
   ...attributes
 }: {
   children?: React.ReactNode

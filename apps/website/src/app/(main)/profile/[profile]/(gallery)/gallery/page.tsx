@@ -1,7 +1,7 @@
 import { Metadata, ResolvingMetadata } from "next"
 import { MarginClamp } from "@/components/ui"
-import { SlugRouteProps } from "@/types"
 import { LuPalette as Palette } from "react-icons/lu"
+import { SlugRouteProps } from "@/types/utils"
 
 export async function generateMetadata(
   { params, searchParams }: SlugRouteProps,
