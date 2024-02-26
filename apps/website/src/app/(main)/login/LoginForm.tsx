@@ -44,7 +44,7 @@ export default function LoginForm() {
     }).then((res) => {
       if (res.ok) {
         return res.json().then((data) => {
-          router.push(`/profile/${data.handle}`)
+          router.push(`/profile/${data.handler}`)
         })
       }
 
