@@ -1,10 +1,11 @@
 "use client"
 
+import { useRouter } from "next/navigation"
 import { FormEvent, useState } from "react"
 import { Facebook, Google, XTwitter } from "@/components/icons"
 import { Separator } from "@/components/ui"
 import { Button } from "@/components/ui/Buttons"
-import { InputField } from "@/components/ui/Forms"
+// import { InputField } from "@/components/ui/Forms"
 import { emailRegex } from "@/constants"
 import clsx from "clsx"
 
@@ -12,7 +13,10 @@ export default function LoginForm() {
   const [emailEntered, setEmailEntered] = useState(false)
   const [errors, setErrors] = useState<string[]>([])
   const [email, setEmail] = useState("")
+  const [emailError, setEmailError] = useState(null)
   const [password, setPassword] = useState("")
+  const [passwordError, setPasswordError] = useState(null)
+  const router = useRouter()
 
   // TODO export this function as a custom hook as `useValidateEmail()` so it can be used to the signup page as well
   const validateEmail = () => {
@@ -28,6 +32,38 @@ export default function LoginForm() {
 
   const submitLogin = (e: FormEvent<HTMLFormElement>) => {
     e.preventDefault()
+
+    const endpoint = process.env.NEXT_PUBLIC_BACKEND_URL
+    fetch(`${endpoint}/v1/auth/login`, {
+      method: "POST",
+      credentials: "include",
+      headers: {
+        "Content-Type": "application/json"
+      },
+      body: JSON.stringify({ email, password })
+    }).then((res) => {
+      if (res.ok) {
+        return res.json().then((data) => {
+          router.push(`/profile/${data.handle}`)
+        })
+      }
+
+      return res.json().then((data) => {
+        switch (res.status) {
+          case 400:
+            // Invalid Login
+            if (data.email) setEmailEntered(false)
+            setEmailError(data.email)
+            setPasswordError(data.password)
+            break
+          case 401:
+            // Unauthorized -- Must need to be verified
+            setEmailError(data.error)
+            setEmailEntered(false)
+            break
+        }
+      })
+    })
   }
 
   const thirdPartyProviders = [
@@ -64,6 +100,15 @@ export default function LoginForm() {
             </Button>
           ))}
         </div>
+        {errors.length > 0 && (
+          <div className="flex flex-col gap-y-1.5">
+            {errors.map((error, index) => (
+              <span key={index} className="text-error">
+                {error}
+              </span>
+            ))}
+          </div>
+        )}
         <form onSubmit={submitLogin} className="relative mb-40 w-full">
           <Separator dir="horizontal" padding="1.25rem" />
           <div
@@ -72,14 +117,44 @@ export default function LoginForm() {
               emailEntered ? "-translate-x-full opacity-0" : "translate-x-0 opacity-100"
             )}
           >
-            <InputField
-              inputName="Email"
-              type="email"
-              value={email}
-              onChange={(e) => setEmail(e.target.value)}
-            />
-            <div className="flex justify-end">
-              <Button onClick={validateEmail}>Next</Button>
+            {/* TODO: Temporary */}
+            <div className="w-full">
+              <label htmlFor="email" className="flex flex-col gap-y-1.5">
+                <span
+                  className={clsx(
+                    "text-600 mt-4 flex gap-x-0.5 font-bold uppercase",
+                    errors.length > 0 ? "text-error" : null
+                  )}
+                >
+                  Email
+                </span>
+                <input
+                  className="text-700 border-400 bg-100 mb-4 w-full rounded-md border px-4 py-2"
+                  id="email"
+                  name="email"
+                  type="email"
+                  placeholder="Email"
+                  aria-placeholder="Email"
+                  required
+                  onChange={(e) => setEmail(e.target.value)}
+                  value={email}
+                  autoCapitalize="off"
+                  autoComplete="off"
+                  autoCorrect="off"
+                  spellCheck={false}
+                />
+              </label>
+              <div>{emailError}</div>
+            </div>
+            <div className="text-center">
+              <Button
+                variant="primary"
+                position="center"
+                onClick={validateEmail}
+                href="/login"
+              >
+                Next
+              </Button>
             </div>
             <div className="my-3 text-center">
               <Button variant="secondary" position="center" href="/register">
@@ -93,12 +168,41 @@ export default function LoginForm() {
               emailEntered ? "translate-x-0 opacity-100" : "translate-x-full opacity-0"
             )}
           >
-            <InputField
+            {/* <InputField
               inputName="Password"
               type="password"
               value={password}
               onChange={({ target }) => setPassword(target.value)}
-            />
+            /> */}
+            {/* TODO: Temporary */}
+            <div className="w-full">
+              <label htmlFor="password" className="flex flex-col gap-y-1.5">
+                <span
+                  className={clsx(
+                    "text-600 mt-4 flex gap-x-0.5 font-bold uppercase",
+                    errors.length > 0 ? "text-error" : null
+                  )}
+                >
+                  Password
+                </span>
+                <input
+                  className="text-700 border-400 bg-100 my-2 w-full rounded-md border px-4 py-2"
+                  id="password"
+                  name="password"
+                  type="password"
+                  placeholder="Password"
+                  aria-placeholder="Password"
+                  required
+                  onChange={(e) => setPassword(e.target.value)}
+                  value={password}
+                  autoCapitalize="off"
+                  autoComplete="off"
+                  autoCorrect="off"
+                  spellCheck={false}
+                />
+              </label>
+              <div>{passwordError}</div>
+            </div>
             <Button
               className="bg-300 hover:bg-400 focus:bg-400 my-2 flex w-full items-center gap-x-1.5 rounded-md border-[2px] border-transparent px-4 py-2 transition-[border,background-color]"
               type="submit"
