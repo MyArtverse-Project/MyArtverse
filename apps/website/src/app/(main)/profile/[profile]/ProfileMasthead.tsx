@@ -1,5 +1,6 @@
 "use client"
 
+import { useEffect, useState } from "react"
 import { Button } from "@/components/ui/Buttons"
 import { Dropdown, DropdownItem } from "@/components/ui/Dropdown"
 import { Masthead } from "@/components/ui/Masthead"
@@ -15,6 +16,20 @@ import {
   LuUserPlus as UserPlusIcon
 } from "react-icons/lu"
 import type { UserRoles } from "@/types/users"
+
+const fetchUserData = () => {
+  console.log("fetching user data")
+  const data = fetch(`${process.env.NEXT_PUBLIC_BACKEND_URL}/v1/profile/me`, {
+    method: "GET",
+    headers: {
+      "Content-Type": "application/json"
+    },
+    credentials: "include",
+    referrerPolicy: "no-referrer",
+    redirect: "follow"
+  }).then((res) => res.json())
+  return data
+}
 
 export default function ProfileMasthead({
   handle,
@@ -35,6 +50,12 @@ export default function ProfileMasthead({
     icon: IconType
   }[]
 }) {
+  const [userData, setUserData] = useState(null)
+  const [isLoading, setIsLoading] = useState(true)
+  const [error, setError] = useState(null)
+
+  fetchUserData()
+
   const profileTabs = [
     {
       icon: HomeIcon,
