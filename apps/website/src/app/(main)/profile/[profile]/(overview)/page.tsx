@@ -1,4 +1,5 @@
 import type { Metadata, ResolvingMetadata } from "next"
+import { cookies } from "next/headers"
 import { Field, Group, MarginClamp } from "@/components/ui"
 import { Button } from "@/components/ui/Buttons"
 import type { SlugRouteProps } from "@/types/utils"
@@ -15,7 +16,25 @@ export async function generateMetadata(
   }
 }
 
-export default function Page() {
+export default async function Page() {
+  const fetchUserData = async (accessToken: string) => {
+    console.log("fetching user data")
+    const data = fetch(`${process.env.NEXT_PUBLIC_BACKEND_URL}/v1/profile/me`, {
+      method: "GET",
+      headers: {
+        "Content-Type": "application/json",
+        Cookie: `accessToken=${accessToken}`
+      },
+      credentials: "include"
+    }).then((res) => res.json())
+    return data
+  }
+  const cookieStore = cookies()
+  console.log(cookieStore.getAll())
+  const accessToken = cookieStore.getAll()[0].value // Access Token Value (Temporary)
+  console.log(accessToken)
+  const userData = await fetchUserData(accessToken)
+  console.log(userData)
   return (
     <MarginClamp>
       <div className="flex w-full gap-3">
