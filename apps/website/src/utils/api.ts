@@ -2,79 +2,66 @@ import { cookies } from "next/headers"
 
 type APIMethods = "GET" | "POST" | "DELETE" | "PUT"
 
-export const apiWithAuth = (route: string, method: APIMethods) => {
-  const cookiesHeaders = cookies()
-  const accessToken = cookiesHeaders.get("accessToken").value
-  console.log(accessToken)
-  let data, response: Promise<Response>
+export const apiWithAuth = async (route: string, method: APIMethods) => {
   const endpoint = process.env.NEXT_PUBLIC_BACKEND_URL
-  try {
-    response = fetch(`${endpoint}${route}`, {
+
+  const makeRequest = async () => {
+    const cookiesHeaders = cookies()
+    const accessToken = cookiesHeaders.get("accessToken").value
+    const refreshToken = cookiesHeaders.get("refreshToken").value
+    console.log(accessToken)
+    return fetch(`${endpoint}${route}`, {
       method: method,
       headers: {
         "Content-Type": "application/json",
-        Cookie: `accessToken=${accessToken}`
+        Cookie: `accessToken=${accessToken}; refreshToken=${refreshToken}`
       },
       cache: "no-cache",
       credentials: "include"
-    }).then((res) => {
-      if (!res.ok) {
-        const refreshed = refreshToken()
-        if (refreshed) {
-          response = fetch(`${endpoint}${route}`, {
-            method: method,
-            headers: {
-              "Content-Type": "application/json",
-              Cookie: `accessToken=${accessToken}`
-            },
-            credentials: "include"
-          }).then((res) => {
-            console.log(res.status)
-            if (!res.ok) {
-              throw new Error("Unable to Provide data")
-            }
-            return res
-          })
-        } else {
-          throw new Error("Unauthorized")
-        }
-      }
-      return res
     })
-
-    data = response.then((res) => {
-      return res.json()
-    })
-
-    return { data: data }
-  } catch (err) {
-    throw new Error(err)
   }
+  return makeRequest()
+    .then((res) => {
+      if (res.ok) return res.json()
+      if (res.status === 401) {
+        return refreshToken().then((refreshed) => {
+          if (!refreshed) throw new Error("Unauthorized")
+          return makeRequest().then((res) => {
+            console.log(res.status)
+            if (!res.ok) throw new Error("Unable to Provide data")
+            return res.json()
+          })
+        })
+      }
+      console.log(res.status)
+    })
+    .catch((err) => {
+      throw new Error(err)
+    })
 }
 
-export const refreshToken = async () => {
+export const refreshToken = () => {
   const endpoint = process.env.NEXT_PUBLIC_BACKEND_URL
-  const route = "/v1/auth/refresh-token"
   const cookiesHeaders = cookies()
   const refreshToken = cookiesHeaders.get("refreshToken").value
-  try {
-    const response = await fetch(`${endpoint}${route}`, {
-      method: "POST",
-      credentials: "include",
-      headers: {
-        Cookie: `refreshToken=${refreshToken}`,
-        "Content-Type": "application/json"
-      },
-      body: JSON.stringify({})
-    })
+  return fetch(`${endpoint}/v1/auth/refresh-token`, {
+    method: "POST",
+    headers: {
+      "Content-Type": "application/json",
+      Cookie: `refreshToken=${refreshToken}`
+    },
+    body: JSON.stringify({}),
+    credentials: "include"
+  })
+    .then((response) => {
+      if (!response.ok) {
+        throw new Error("Failed to refresh token")
+      }
 
-    if (response.ok) {
       return true
-    }
-
-    return false
-  } catch (err) {
-    console.error(err)
-    return false
-  }
+    })
+    .catch((error) => {
+      console.error("Error in refreshToken:", error)
+      return false
+    })
 }

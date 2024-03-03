@@ -15,7 +15,7 @@ import {
   LuMoreVertical as MoreVerticalIcon,
   LuUserPlus as UserPlusIcon
 } from "react-icons/lu"
-import type { UserRoles } from "@/types/users"
+import type { UserRoles, UserType } from "@/types/users"
 
 export default function ProfileMasthead({
   handle,
@@ -36,10 +36,6 @@ export default function ProfileMasthead({
     icon: IconType
   }[]
 }) {
-  const [userData, setUserData] = useState(null)
-  const [isLoading, setIsLoading] = useState(true)
-  const [error, setError] = useState(null)
-
   const profileTabs = [
     {
       icon: HomeIcon,
@@ -50,7 +46,7 @@ export default function ProfileMasthead({
       icon: CatIcon,
       text: "Characters",
       link: "/characters",
-      countIndicator: 5
+      countIndicator: 4
     },
     {
       icon: BrushIcon,
