@@ -3,7 +3,7 @@ import { cookies } from "next/headers"
 type APIMethods = "GET" | "POST" | "DELETE" | "PUT"
 
 export const apiWithAuth = async (route: string, method: APIMethods) => {
-  const endpoint = process.env.NEXT_PUBLIC_BACKEND_URL
+  const endpoint = process.env.NEXT_PUBLIC_BACKEND_URL || "http://localhost:8081"
 
   const makeRequest = async () => {
     const cookiesHeaders = cookies()
@@ -41,7 +41,7 @@ export const apiWithAuth = async (route: string, method: APIMethods) => {
 }
 
 export const refreshToken = () => {
-  const endpoint = process.env.NEXT_PUBLIC_BACKEND_URL
+  const endpoint = process.env.NEXT_PUBLIC_BACKEND_URL || "http://localhost:8081"
   const cookiesHeaders = cookies()
   const refreshToken = cookiesHeaders.get("refreshToken").value
   return fetch(`${endpoint}/v1/auth/refresh-token`, {

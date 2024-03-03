@@ -1,5 +1,4 @@
 import type { Metadata, ResolvingMetadata } from "next"
-import { cookies } from "next/headers"
 import { Field, Group, MarginClamp } from "@/components/ui"
 import { Button } from "@/components/ui/Buttons"
 import { apiWithAuth } from "@/utils/api"
@@ -19,7 +18,7 @@ export async function generateMetadata(
 
 const fetchUserData = async () => {
   console.log("fetching user data")
-  const data = apiWithAuth(`/v1/profile/me`, "GET").data
+  const data = apiWithAuth(`/v1/profile/me`, "GET")
   return data
 }
 
