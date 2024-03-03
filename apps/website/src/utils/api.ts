@@ -65,3 +65,9 @@ export const refreshToken = () => {
       return false
     })
 }
+
+export const fetchUserData = async () => {
+  console.log("fetching user data")
+  const data = apiWithAuth(`/v1/profile/me`, "GET")
+  return data
+}

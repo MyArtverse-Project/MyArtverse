@@ -7,6 +7,7 @@ import { Fragment } from "react"
 import { useSidebarContext } from "@/context"
 import { toLower } from "lodash"
 import type { IconType } from "react-icons"
+import { FaBell } from "react-icons/fa6"
 import {
   LuAccessibility as AccessibilityIcon,
   LuAlbum as AlbumIcon,
@@ -15,11 +16,14 @@ import {
   LuFileLock as FileLockIcon,
   LuHelpCircle as HelpCircleIcon,
   LuLanguages as LanguagesIcon,
+  LuBell,
   LuMenu as MenuIcon,
   LuMessageSquarePlus as MessageSquarePlusIcon,
   LuMoreVertical as MoreVerticalIcon,
   LuShare as ShareIcon
 } from "react-icons/lu"
+import { RiBellLine, RiNotificationLine } from "react-icons/ri"
+import { UserType } from "@/types/users"
 import { MyFursonaIcon } from "../icons"
 import { Separator } from "../ui"
 import { Button, SearchButton } from "../ui/Buttons"
@@ -33,19 +37,21 @@ type ItemIterator = Array<{
   event?: boolean
 }>
 
-export default function Navbar() {
+export default function Navbar({ user }: { user?: UserType }) {
   const { sidebarState: isSidebarOpen, setSidebarState } = useSidebarContext()
 
-  // TODO: Implement User Data onto sidebar
-  // const USER_PLACEHOLDER = "VulpoTheDev"
-  // const HANDLE_PLACEHOLDER = `@${toLower(USER_PLACEHOLDER)}`
+  if (user) {
+    // TODO: Implement User Data onto sidebar
+    const USER_PLACEHOLDER = "VulpoTheDev"
+    const HANDLE_PLACEHOLDER = `@${toLower(USER_PLACEHOLDER)}`
+  }
 
-  // const createNewItems: ItemIterator = [
-  //   { icon: CatIcon, name: "New fursona", link: "/" },
-  //   { icon: ShareIcon, name: "Upload image(s)", link: "/" },
-  //   { icon: AlbumIcon, name: "New collection", link: "/" },
-  //   { icon: FileLockIcon, name: "New private note", link: "/" }
-  // ]
+  const createNewItems: ItemIterator = [
+    { icon: CatIcon, name: "New fursona", link: "/" },
+    { icon: ShareIcon, name: "Upload image(s)", link: "/" },
+    { icon: AlbumIcon, name: "New collection", link: "/" },
+    { icon: FileLockIcon, name: "New private note", link: "/" }
+  ]
 
   const siteSettingsItems: ItemIterator = [
     { icon: ContrastIcon, name: "Change theme" },
@@ -94,36 +100,78 @@ export default function Navbar() {
           </>
         ) : null}
         {/* Signed out */}
-        <Dropdown
-          button={
-            <Button iconOnly variant="secondary" aria-label="Site options">
-              <MoreVerticalIcon size={20} />
-            </Button>
-          }
-          items={
-            <>
-              {siteSettingsItems.map((item, index) => (
-                <Fragment key={index}>
-                  {typeof item.name !== "undefined" ? (
-                    <Menu.Item>
-                      <Button
-                        position="left"
-                        prefixIcon={<item.icon size={20} />}
-                        variant="tritery"
-                        style={{ width: "100%" }}
-                      >
-                        {item.name}
-                      </Button>
-                    </Menu.Item>
-                  ) : (
-                    <Separator dir="horizontal" padding={6.5} />
-                  )}
-                </Fragment>
-              ))}
-            </>
-          }
+        {!user ? (
+          <div>
+            <Dropdown
+              button={
+                <Button iconOnly variant="secondary" aria-label="Site options">
+                  <MoreVerticalIcon size={20} />
+                </Button>
+              }
+              items={
+                <>
+                  {siteSettingsItems.map((item, index) => (
+                    <Fragment key={index}>
+                      {typeof item.name !== "undefined" ? (
+                        <Menu.Item>
+                          <Button
+                            position="left"
+                            prefixIcon={<item.icon size={20} />}
+                            variant="tritery"
+                            style={{ width: "100%" }}
+                          >
+                            {item.name}
+                          </Button>
+                        </Menu.Item>
+                      ) : (
+                        <Separator dir="horizontal" padding={6.5} />
+                      )}
+                    </Fragment>
+                  ))}
+                </>
+              }
+            />
+            <Button href="/login">Sign in</Button>
+          </div>
+        ) : (
+          <div>
+            <Dropdown
+              button={
+                <Button iconOnly variant="secondary" aria-label="Site options">
+                  <MoreVerticalIcon size={20} />
+                </Button>
+              }
+              items={
+                <>
+                  {createNewItems.map((item, index) => (
+                    <Fragment key={index}>
+                      {typeof item.name !== "undefined" ? (
+                        <Menu.Item>
+                          <Button
+                            position="left"
+                            prefixIcon={<item.icon size={20} />}
+                            variant="tritery"
+                            style={{ width: "100%" }}
+                          >
+                            {item.name}
+                          </Button>
+                        </Menu.Item>
+                      ) : (
+                        <Separator dir="horizontal" padding={6.5} />
+                      )}
+                    </Fragment>
+                  ))}
+                </>
+              }
+            />
+          </div>
+        )}
+        <LuBell size={20} />
+        {/* Avatar */}
+        <img
+          src={user.avatarUrl || "/img/default_banner.jpg"}
+          className="h-8 w-8 rounded-full"
         />
-        <Button href="/login">Sign in</Button>
       </div>
     </nav>
   )

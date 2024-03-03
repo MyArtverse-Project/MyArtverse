@@ -59,7 +59,7 @@ export default function FormWithProgress({
           </div>
         </aside>
       </div>
-      <div>{children}</div>
+      <div className="w-full">{children}</div>
     </div>
   )
 }

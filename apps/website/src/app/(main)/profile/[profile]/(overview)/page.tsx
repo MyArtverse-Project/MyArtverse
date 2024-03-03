@@ -1,7 +1,7 @@
 import type { Metadata, ResolvingMetadata } from "next"
 import { Field, Group, MarginClamp } from "@/components/ui"
 import { Button } from "@/components/ui/Buttons"
-import { apiWithAuth } from "@/utils/api"
+import { apiWithAuth, fetchUserData } from "@/utils/api"
 import type { SlugRouteProps } from "@/types/utils"
 
 export async function generateMetadata(
@@ -16,15 +16,9 @@ export async function generateMetadata(
   }
 }
 
-const fetchUserData = async () => {
-  console.log("fetching user data")
-  const data = apiWithAuth(`/v1/profile/me`, "GET")
-  return data
-}
-
 export default async function Page() {
   const userData = await fetchUserData()
-  console.log(userData)
+
   return (
     <MarginClamp>
       <div className="flex w-full gap-3">
