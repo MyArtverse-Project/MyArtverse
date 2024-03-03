@@ -19,6 +19,59 @@
     "format:write": "prettier --write .",
     "prepare": "husky || true"
   },
+  "husky": {
+    "hooks": {
+      "pre-commit": "lint-staged"
+    }
+  },
+  "lint-staged": {
+    "**/*.{js,ts,tsx,md,mdx,json}": [
+      "prettier --write .",
+      "eslint . --quiet"
+    ]
+  },
+  "prettier": {
+    "semi": false,
+    "printWidth": 90,
+    "endOfLine": "lf",
+    "tabWidth": 2,
+    "useTabs": false,
+    "trailingComma": "none",
+    "plugins": [
+      "@trivago/prettier-plugin-sort-imports",
+      "prettier-plugin-tailwindcss"
+    ],
+    "overrides": [
+      {
+        "files": [
+          "./apps/website/tailwind.config.ts",
+          "**/types/*.ts"
+        ],
+        "options": {
+          "printWidth": 180
+        }
+      },
+      {
+        "files": [
+          "./apps/website/src/components/**/index.tsx"
+        ],
+        "options": {
+          "printWidth": 50
+        }
+      }
+    ],
+    "importOrder": [
+      ".scss$|.css$",
+      "next|^next/(.*)",
+      "react$|react-dom",
+      "<THIRD_PARTY_MODULES>",
+      "^@/types/(.*)$",
+      "^hooks/(.*)$",
+      "^components/(.*)$",
+      "^[./]"
+    ],
+    "importOrderSortSpecifiers": true
+  },
   "devDependencies": {
     "@stylistic/eslint-plugin": "^1.6.3",
     "@trivago/prettier-plugin-sort-imports": "^4.3.0",
@@ -35,15 +88,5 @@
     "prettier": "^3.0.3",
     "prettier-plugin-tailwindcss": "^0.5.11",
     "turbo": "latest"
-  },
-  "lint-staged": {
-    "**/*.{js,ts,tsx,md,mdx,json}": [
-      "prettier --write .",
-      "eslint . --quiet"
-    ]
-  },
-  "engines": {
-    "node": ">= 18.0.0",
-    "npm": ">= 8.0.0"
   }
 }
