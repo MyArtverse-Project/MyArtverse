@@ -12,6 +12,12 @@
       "options": {
         "printWidth": 180
       }
+    },
+    {
+      "files": ["./apps/website/src/components/**/index.tsx"],
+      "options": {
+        "printWidth": 50
+      }
     }
   ],
   "importOrder": [

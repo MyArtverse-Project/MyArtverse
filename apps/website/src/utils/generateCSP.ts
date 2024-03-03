@@ -35,33 +35,21 @@ export function generateCSP(policy: Policies): string {
     if (directive !== "upgrade-insecure-requests") {
       const parsedValues = joinSpaces(
         (values as string[]).map((value) => {
-          if (value === "self") {
-            return `'self'`
-          }
-          if (value === "none") {
-            return `'none'`
-          }
-          if (value === "unsafe-inline") {
-            return `'unsafe-inline'`
-          }
-          if (value === "strict-dynamic") {
-            return `'strict-dynamic'`
-          }
-          if (value === "unsafe-hashes") {
-            return `'unsafe-hashes'`
-          }
-          if (value === "unsafe-eval") {
-            return `'unsafe-eval'`
-          }
-          if (value.startsWith("nonce-") || value.startsWith("sha")) {
-            return `'${value}'`
-          }
+          if (value === "self") return `'self'`
+          if (value === "none") return `'none'`
+          if (value === "unsafe-inline") return `'unsafe-inline'`
+          if (value === "strict-dynamic") return `'strict-dynamic'`
+          if (value === "unsafe-hashes") return `'unsafe-hashes'`
+          if (value === "unsafe-eval") return `'unsafe-eval'`
+          if (value.startsWith("nonce-") || value.startsWith("sha")) return `'${value}'`
+
           return value
         })
       )
 
       _directivesArr.push(`${directive} ${parsedValues};`)
     }
+
     if (directive == "upgrade-insecure-requests") {
       _directivesArr.push(`upgrade-insecure-requests;`)
     }

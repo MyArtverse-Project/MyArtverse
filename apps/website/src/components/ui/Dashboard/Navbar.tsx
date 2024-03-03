@@ -26,6 +26,7 @@ export default function DashboardNavbar() {
     { icon: LuAlbum, name: "New collection" },
     { icon: LuFileLock, name: "New private note" }
   ]
+
   return (
     <nav className="font-inter bg-100 border-b-mute relative flex select-none items-center justify-between border-b px-5 py-3 text-sm font-medium">
       <div className="font-inter flex items-center gap-x-2.5 text-xl">

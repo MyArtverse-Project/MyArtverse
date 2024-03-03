@@ -4,6 +4,8 @@
 import { usePathname } from "next/navigation"
 import clsx from "clsx"
 import { kebabCase } from "lodash"
+import type { IconType } from "react-icons"
+import type { LinkedString } from "@/types/utils"
 import { Button } from "../Buttons"
 
 export default function ItemIterator({
@@ -12,7 +14,12 @@ export default function ItemIterator({
   baseUrl = "/"
 }: {
   as?: keyof HTMLElementTagNameMap | React.ComponentType
-  items: { icon: any; text: string }[]
+  items: {
+    icon: IconType
+    text: string
+    link?: LinkedString
+    matchStartingRoute?: boolean
+  }[]
   baseUrl?: string
 }) {
   const path = usePathname()

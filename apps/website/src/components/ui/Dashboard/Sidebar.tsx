@@ -19,26 +19,16 @@ import {
 } from "react-icons/lu"
 import SidebarProfile from "./SidebarProfile"
 
-interface DashboardMenuItems {
-  [x: string]: {
-    icon: IconType
-    text: string
-    /** Check for any sub routes to make sure the root item still stays active */
-    checkRoutes?: `/${string}`[]
-  }[]
-}
-
 export default function DashboardSidebar() {
   const [isToggled] = useAtom(dashboardSidebarToggle)
 
-  const menuItems: DashboardMenuItems = {
+  const menuItems = {
     top: [
       { icon: LuLayoutDashboard, text: "Overview" },
       {
         icon: LuCat,
         text: "Characters",
-        // TODO implement this logic to checkroutes with these with startswith()
-        checkRoutes: ["/characters", "/characters/refsheets"]
+        matchStartingRoute: true
       },
       { icon: LuImage, text: "Gallery" },
       { icon: LuBrush, text: "Listings" },
@@ -47,9 +37,13 @@ export default function DashboardSidebar() {
       { icon: LuLineChart, text: "Analytics" }
     ],
     bottom: [
-      { icon: LuSparkles, text: "Upgrade" },
-      { icon: LuSettings, text: "Settings" },
-      { icon: LuHelpCircle, text: "Help" }
+      { icon: LuSparkles, text: "Upgrade", link: "/plus" },
+      {
+        icon: LuSettings,
+        text: "Settings",
+        link: "/settings/account"
+      },
+      { icon: LuHelpCircle, text: "Help", link: "/support" }
     ]
   }
 

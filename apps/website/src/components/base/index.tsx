@@ -5,4 +5,11 @@ import NoJSReminder from "./NoJSReminder"
 import Sidebar from "./Sidebar"
 import SkipNav from "./SkipNav"
 
-export { ClientInit, Navbar, Footer, Sidebar, SkipNav, NoJSReminder }
+export {
+  ClientInit,
+  Navbar,
+  Footer,
+  Sidebar,
+  SkipNav,
+  NoJSReminder
+}

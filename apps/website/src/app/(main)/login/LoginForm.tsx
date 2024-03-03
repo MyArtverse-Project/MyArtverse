@@ -168,12 +168,6 @@ export default function LoginForm() {
               emailEntered ? "translate-x-0 opacity-100" : "translate-x-full opacity-0"
             )}
           >
-            {/* <InputField
-              inputName="Password"
-              type="password"
-              value={password}
-              onChange={({ target }) => setPassword(target.value)}
-            /> */}
             {/* TODO: Temporary */}
             <div className="w-full">
               <label htmlFor="password" className="flex flex-col gap-y-1.5">

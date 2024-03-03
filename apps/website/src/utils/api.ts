@@ -20,6 +20,7 @@ export const apiWithAuth = async (route: string, method: APIMethods) => {
       credentials: "include"
     })
   }
+
   return makeRequest()
     .then((res) => {
       if (res.ok) return res.json()
@@ -33,6 +34,7 @@ export const apiWithAuth = async (route: string, method: APIMethods) => {
           })
         })
       }
+
       console.log(res.status)
     })
     .catch((err) => {

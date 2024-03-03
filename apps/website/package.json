@@ -28,8 +28,6 @@
     "@types/react-dom": "^18.2.7",
     "autoprefixer": "^10.4.15",
     "class-variance-authority": "^0.7.0",
-    "eslint": "^8.48.0",
-    "eslint-config-next": "^14.0.4",
     "framer-motion": "^10.12.18",
     "gray-matter": "^4.0.3",
     "gsap": "^3.12.2",

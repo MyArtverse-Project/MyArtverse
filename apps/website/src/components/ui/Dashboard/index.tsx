@@ -5,7 +5,9 @@ import Heading from "./Heading"
 import DashboardNavbar from "./Navbar"
 import DashboardSidebar from "./Sidebar"
 
-const Group = Object.assign(GroupRoot, { Nested: GroupNested })
+const Group = Object.assign(GroupRoot, {
+  Nested: GroupNested
+})
 
 export {
   Heading,

@@ -1,3 +1,6 @@
+"use client"
+
+/* eslint-disable @typescript-eslint/no-explicit-any */
 import Link from "next/link"
 import { forwardRef } from "react"
 import { cva } from "class-variance-authority"
@@ -74,11 +77,11 @@ const Button = forwardRef(
       }
     )
 
-    const DynamicElement = !href ? "button" : Link
+    const DynamicElement: any = !href ? "button" : Link
 
     return (
       <DynamicElement
-        ref={ref as React.LegacyRef<MapElement<"a"> & MapElement<"button">>}
+        ref={ref as any}
         // @ts-ignore
         href={href ?? undefined}
         type={!href ? type ?? "button" : undefined}

@@ -7,6 +7,7 @@ const getStripe = () => {
   if (!stripePromise) {
     stripePromise = loadStripe(STRIPE_PUBLISHABLE_KEY!)
   }
+
   return stripePromise
 }
 

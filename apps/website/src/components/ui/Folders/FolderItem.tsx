@@ -110,7 +110,7 @@ export default function FolderItem({
         animate={{
           height: !isExpand ? 0 : expandedHeight
         }}
-        className={clsx(!!children ? "relative overflow-hidden pl-6" : "")}
+        className={clsx(children ? "relative overflow-hidden pl-6" : "")}
       >
         {children}
       </motion.div>

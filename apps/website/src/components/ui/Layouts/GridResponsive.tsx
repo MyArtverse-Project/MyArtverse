@@ -13,21 +13,26 @@ export default function GridResponsive({
   const BREAKPOINT_MAX_RANGE = 300
   const BREAKPOINT_MIN_RANGE = 110
 
+  const bpRange = `the breakpoint's range is between ${BREAKPOINT_MIN_RANGE}-${BREAKPOINT_MAX_RANGE}`
+
   if (attrs.className.includes("flex")) {
     throw new Error(
       `"flex" className detected on a grid component; remove it or use a <div> element instead.`
     )
   }
+
   if (attrs.className.includes("grid")) {
     throw new Error(
       `"grid" className detected and already applied! Either remove it or use a <div> element instead.`
     )
   }
+
   if (breakpoint > BREAKPOINT_MAX_RANGE) {
-    throw new Error("Bruh too b i g;  the breakpoint's range is between 120-300")
+    throw new Error(`Bruh too b i g;  ${bpRange}`)
   }
+
   if (breakpoint < BREAKPOINT_MIN_RANGE) {
-    throw new Error("Bruh too narrow!!!11! The breakpoint's range is between 120-300")
+    throw new Error(`Bruh too narrow!!!11! ${bpRange}`)
   }
 
   return (

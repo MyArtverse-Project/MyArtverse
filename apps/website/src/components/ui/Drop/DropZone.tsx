@@ -37,6 +37,7 @@ export default function DropZone() {
         reader.onload = () => {
           setImageUrl(reader.result)
         }
+
         reader.readAsDataURL(uploadedFile)
       } else {
         setError("This bitch is too big")

@@ -29,8 +29,6 @@ export default function InputField({
       placeholder={placeholder}
       aria-placeholder={placeholder}
       required={required}
-      onChange={onChange}
-      value={value}
       autoCapitalize="off"
       autoComplete="off"
       autoCorrect="off"
