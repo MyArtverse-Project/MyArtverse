@@ -42,6 +42,7 @@ export default function LoginForm() {
       },
       body: JSON.stringify({ email, password })
     }).then((res) => {
+      console.log(res.status)
       if (res.ok) {
         return res.json().then((data) => {
           router.push(`/profile/${data.handler}`)

@@ -1,4 +1,6 @@
 import type { Metadata } from "next"
+import { fetchUserData } from "@/utils/api"
+import { UserType } from "@/types/users"
 import type { SlugRouteProps } from "@/types/utils"
 import DynamicLayout from "./DynamicLayout"
 
@@ -15,10 +17,20 @@ export async function generateMetadata({ params }: SlugRouteProps): Promise<Meta
   }
 }
 
-export default function Layout({ children }: { children: React.ReactNode }) {
+export default async function Layout({
+  children,
+  params
+}: {
+  children: React.ReactNode
+  params: { profile: string }
+}) {
+  // Fetch user data from the API
+  const userData = await fetchUserData()
+  if (!userData) return null
+  // TODO: Add Character API Logic
   return (
     <>
-      <DynamicLayout />
+      <DynamicLayout profile={userData} />
       <div>{children}</div>
     </>
   )

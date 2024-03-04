@@ -5,18 +5,19 @@ import { usePathname } from "next/navigation"
 import { useSidebarContext } from "@/context"
 import { toLower } from "lodash"
 import { LuMenu } from "react-icons/lu"
+import type { UserType } from "@/types/users"
 import { MyFursonaIcon } from "../icons"
 import { Separator } from "../ui"
 import { Button, SearchButton } from "../ui/Buttons"
 import NavbarProfilePeek from "./NavbarProfilePeek"
 import NavbarUserActions from "./NavbarUserActions"
 
-export default function Navbar() {
+export default function Navbar({ userData }: { userData: UserType | null }) {
   const { sidebarState: isSidebarOpen, setSidebarState } = useSidebarContext()
 
   // TODO: Implement User Data onto sidebar
-  const USER_PLACEHOLDER = "VulpoTheDev"
-  const HANDLE_PLACEHOLDER = `@${toLower(USER_PLACEHOLDER)}`
+  // const USER_PLACEHOLDER = "VulpoTheDev"
+  // const HANDLE_PLACEHOLDER = `@${toLower(USER_PLACEHOLDER)}`
 
   const pathname = usePathname()
   const disableSidebar = pathname == "/login" || pathname == "/register"
@@ -54,7 +55,10 @@ export default function Navbar() {
             <Separator dir="vertical" size="2.125rem" />
           </>
         ) : null}
-        <NavbarUserActions user={USER_PLACEHOLDER} handle={HANDLE_PLACEHOLDER} />
+        <NavbarUserActions
+          user={userData.displayName ? userData.displayName : userData.handle}
+          handle={userData.handle}
+        />
       </div>
     </nav>
   )

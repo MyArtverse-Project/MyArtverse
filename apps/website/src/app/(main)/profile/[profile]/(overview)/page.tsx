@@ -15,22 +15,28 @@ export async function generateMetadata({ params }: SlugRouteProps): Promise<Meta
 
 export default async function Page() {
   const userData = await fetchUserData()
-
+  // TODO: Redirect to 404 instead of login when api route for user by handler is implemented
   return (
     <MarginClamp>
       <div className="flex w-full gap-3">
         <div className="w-1/2 flex-shrink-0"></div>
         <div className="w-1/2 flex-shrink-0">
           <Group>
-            <Group.Header>About Username</Group.Header>
+            <Group.Header>
+              About {userData.displayName ? userData.displayName : userData.handle}
+            </Group.Header>
             <Group.HeaderButtons>
               <Button size="small">Edit</Button>
             </Group.HeaderButtons>
             <Group.Content>
-              <Field title="Date joined" content="January 1, 2021" />
-              <Field title="Birthday" content="January 1, 2021" />
-              <Field title="Pronouns" content="He/Him" />
-              <Field title="Nationality" content="Murica" />
+              <Field
+                title="Date joined"
+                content={new Date(userData.dateRegistered).toDateString()}
+              />
+              {/* TODO: Custom attributes for Backend */}
+              {/* <Field title="Birthday" content="January 1, 2021" /> */}
+              {/* <Field title="Pronouns" content="He/Him" /> */}
+              {/* <Field title="Nationality" content="Murica" /> */}
             </Group.Content>
           </Group>
         </div>

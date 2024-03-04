@@ -1,4 +1,5 @@
 import type { Metadata } from "next"
+import { fetchUserData } from "@/utils/api"
 import SignInForm from "./LoginForm"
 
 export const metadata: Metadata = {

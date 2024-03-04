@@ -13,14 +13,14 @@ import {
   LuMoreVertical as MoreVerticalIcon,
   LuUserPlus as UserPlusIcon
 } from "react-icons/lu"
-import type { UserRoles } from "@/types/users"
+import type { UserRoles, UserType } from "@/types/users"
 
 export default function ProfileMasthead({
-  handle,
+  profileData,
   hasEditAccess
 }: {
   username?: string
-  handle: string
+  profileData: UserType
   badges?: UserRoles
   /** Only for logged in users that should be set to `true` */
   hasEditAccess?: boolean
@@ -72,7 +72,9 @@ export default function ProfileMasthead({
         <Masthead.Details>
           <Masthead.Layer spaceBetween>
             <h2 className="not-prose font-inter mt-4 flex items-center gap-x-1.5 text-3xl font-bold">
-              <span>Username</span>
+              <span>
+                {profileData.displayName ? profileData.displayName : profileData.handle}
+              </span>
               <span aria-hidden></span>
             </h2>
             <div className="relative z-[6] mt-4 flex items-start gap-x-2.5">
@@ -108,11 +110,13 @@ export default function ProfileMasthead({
               />
             </div>
           </Masthead.Layer>
-          <Masthead.Layer>following</Masthead.Layer>
-          <Masthead.Layer>socials</Masthead.Layer>
+          {/* TODO: Figure out mutuals through backend */}
+          {/* <Masthead.Layer>following</Masthead.Layer> */}
+          {/* TODO: Figure out links through backend */}
+          {/* <Masthead.Layer>{profileData.links}</Masthead.Layer> */}
         </Masthead.Details>
       </Masthead.Wrapper>
-      <Masthead.Tabs baseURL={`/@${handle}`} items={profileTabs} />
+      <Masthead.Tabs baseURL={`/@${profileData.handle}`} items={profileTabs} />
     </Masthead>
   )
 }

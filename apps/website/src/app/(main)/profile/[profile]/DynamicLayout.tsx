@@ -1,24 +1,24 @@
 "use client"
 
 import { usePathname } from "next/navigation"
+import { UserType } from "@/types/users"
 import CharacterMasthead from "./CharacterMasthead"
 import ProfileMasthead from "./ProfileMasthead"
 
 export default function DynamicMasthead({
-  handle,
+  profile,
   character
 }: {
-  handle?: string
+  profile?: UserType
   character?: string
 }) {
   const path = usePathname()
   const isRouteCharacter = path.includes("character/")
   const containsArtUrl = path.includes("/art/")
-
   if (containsArtUrl) return null
 
   return !isRouteCharacter ? (
-    <ProfileMasthead handle={handle} />
+    <ProfileMasthead profileData={profile} />
   ) : (
     <CharacterMasthead
       creator="@ozzydevs"
@@ -28,7 +28,7 @@ export default function DynamicMasthead({
       pronouns="He/Him"
       species="Otter"
       toyhouseLink="toyhouse"
-      handle={handle}
+      handle={profile.handle}
       status="Owned"
     />
   )
