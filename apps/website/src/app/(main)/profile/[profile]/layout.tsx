@@ -19,7 +19,7 @@ export default function Layout({ children }: { children: React.ReactNode }) {
   return (
     <>
       <DynamicLayout />
-      <div className="py-4">{children}</div>
+      <div>{children}</div>
     </>
   )
 }

@@ -2,64 +2,21 @@
 
 import Link from "next/link"
 import { usePathname } from "next/navigation"
-import { Menu } from "@headlessui/react"
-import { Fragment } from "react"
 import { useSidebarContext } from "@/context"
 import { toLower } from "lodash"
-import type { IconType } from "react-icons"
-import {
-  LuAccessibility as AccessibilityIcon,
-  LuAlbum as AlbumIcon,
-  LuCat as CatIcon,
-  LuContrast as ContrastIcon,
-  LuFileLock as FileLockIcon,
-  LuHelpCircle as HelpCircleIcon,
-  LuLanguages as LanguagesIcon,
-  LuBell,
-  LuMenu as MenuIcon,
-  LuMessageSquarePlus as MessageSquarePlusIcon,
-  LuMoreVertical as MoreVerticalIcon,
-  LuShare as ShareIcon
-} from "react-icons/lu"
-import type { UserType } from "@/types/users"
+import { LuMenu } from "react-icons/lu"
 import { MyFursonaIcon } from "../icons"
 import { Separator } from "../ui"
 import { Button, SearchButton } from "../ui/Buttons"
-import { Dropdown } from "../ui/Dropdown"
 import NavbarProfilePeek from "./NavbarProfilePeek"
+import NavbarUserActions from "./NavbarUserActions"
 
-type ItemIterator = Array<{
-  icon?: IconType
-  name?: string
-  link?: string
-  event?: boolean
-}>
-
-export default function Navbar({ user }: { user?: UserType }) {
+export default function Navbar() {
   const { sidebarState: isSidebarOpen, setSidebarState } = useSidebarContext()
 
-  if (user) {
-    // TODO: Implement User Data onto sidebar
-    const USER_PLACEHOLDER = "VulpoTheDev"
-    const HANDLE_PLACEHOLDER = `@${toLower(USER_PLACEHOLDER)}`
-  }
-
-  const createNewItems: ItemIterator = [
-    { icon: CatIcon, name: "New fursona", link: "/" },
-    { icon: ShareIcon, name: "Upload image(s)", link: "/" },
-    { icon: AlbumIcon, name: "New collection", link: "/" },
-    { icon: FileLockIcon, name: "New private note", link: "/" }
-  ]
-
-  const siteSettingsItems: ItemIterator = [
-    { icon: ContrastIcon, name: "Change theme" },
-    { icon: LanguagesIcon, name: "Language" },
-    { icon: ContrastIcon, name: "Filter content settings" },
-    { icon: AccessibilityIcon, name: "Accessibility" },
-    {},
-    { icon: HelpCircleIcon, name: "Help" },
-    { icon: MessageSquarePlusIcon, name: "Send feedback" }
-  ]
+  // TODO: Implement User Data onto sidebar
+  const USER_PLACEHOLDER = "VulpoTheDev"
+  const HANDLE_PLACEHOLDER = `@${toLower(USER_PLACEHOLDER)}`
 
   const pathname = usePathname()
   const disableSidebar = pathname == "/login" || pathname == "/register"
@@ -75,7 +32,7 @@ export default function Navbar({ user }: { user?: UserType }) {
             onClick={() => setSidebarState(!isSidebarOpen)}
             aria-label="Toggle sidebar"
           >
-            <MenuIcon size={20} />
+            <LuMenu size={20} />
           </Button>
         ) : null}
         <div className="desktop-only-lg">
@@ -97,79 +54,7 @@ export default function Navbar({ user }: { user?: UserType }) {
             <Separator dir="vertical" size="2.125rem" />
           </>
         ) : null}
-        {/* Signed out */}
-        {!user ? (
-          <div>
-            <Dropdown
-              button={
-                <Button iconOnly variant="secondary" aria-label="Site options">
-                  <MoreVerticalIcon size={20} />
-                </Button>
-              }
-              items={
-                <>
-                  {siteSettingsItems.map((item, index) => (
-                    <Fragment key={index}>
-                      {typeof item.name !== "undefined" ? (
-                        <Menu.Item>
-                          <Button
-                            position="left"
-                            prefixIcon={<item.icon size={20} />}
-                            variant="tritery"
-                            style={{ width: "100%" }}
-                          >
-                            {item.name}
-                          </Button>
-                        </Menu.Item>
-                      ) : (
-                        <Separator dir="horizontal" padding={6.5} />
-                      )}
-                    </Fragment>
-                  ))}
-                </>
-              }
-            />
-            <Button href="/login">Sign in</Button>
-          </div>
-        ) : (
-          <div>
-            <Dropdown
-              button={
-                <Button iconOnly variant="secondary" aria-label="Site options">
-                  <MoreVerticalIcon size={20} />
-                </Button>
-              }
-              items={
-                <>
-                  {createNewItems.map((item, index) => (
-                    <Fragment key={index}>
-                      {typeof item.name !== "undefined" ? (
-                        <Menu.Item>
-                          <Button
-                            position="left"
-                            prefixIcon={<item.icon size={20} />}
-                            variant="tritery"
-                            style={{ width: "100%" }}
-                          >
-                            {item.name}
-                          </Button>
-                        </Menu.Item>
-                      ) : (
-                        <Separator dir="horizontal" padding={6.5} />
-                      )}
-                    </Fragment>
-                  ))}
-                </>
-              }
-            />
-          </div>
-        )}
-        {/* <LuBell size={20} /> */}
-        {/* Avatar */}
-        {/* <img
-          src={user.avatarUrl || "/img/default_banner.jpg"}
-          className="h-8 w-8 rounded-full"
-        /> */}
+        <NavbarUserActions user={USER_PLACEHOLDER} handle={HANDLE_PLACEHOLDER} />
       </div>
     </nav>
   )
