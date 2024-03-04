@@ -1,7 +1,7 @@
 import type { Metadata } from "next"
 import { Field, Group, MarginClamp } from "@/components/ui"
 import { Button } from "@/components/ui/Buttons"
-import { apiWithAuth, fetchUserData } from "@/utils/api"
+import { fetchUserData } from "@/utils/api"
 import type { SlugRouteProps } from "@/types/utils"
 
 export async function generateMetadata({ params }: SlugRouteProps): Promise<Metadata> {
