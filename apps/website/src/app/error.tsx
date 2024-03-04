@@ -1,14 +1,11 @@
 "use client"
 
 import Link from "next/link"
-import { usePathname } from "next/navigation"
 import { MyFursonaIcon } from "@/components/icons"
 import { MFImage } from "@/components/ui"
 import { Button } from "@/components/ui/Buttons"
 
 export default function Error({ error, reset }: { error: Error; reset: () => void }) {
-  const path = usePathname()
-
   return (
     <>
       <div className="px-5 py-3">

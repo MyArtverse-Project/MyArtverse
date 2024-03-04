@@ -11,7 +11,12 @@ export default function DynamicMasthead({
   handle?: string
   character?: string
 }) {
-  const isRouteCharacter = usePathname().includes("character/")
+  const path = usePathname()
+  const isRouteCharacter = path.includes("character/")
+  const containsArtUrl = path.includes("/art/")
+
+  if (containsArtUrl) return null
+
   return !isRouteCharacter ? (
     <ProfileMasthead handle={handle} />
   ) : (

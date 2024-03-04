@@ -11,10 +11,18 @@
     "no-else-return": ["error", { "allowElseIf": false }],
     "no-duplicate-imports": "error",
     "max-depth": ["error", 3],
+
     "unused-imports/no-unused-imports": "warn",
+
     "react/no-unescaped-entities": "off",
+
     "@typescript-eslint/ban-ts-comment": "off",
     "@typescript-eslint/no-unused-vars": "warn",
+    "@typescript-eslint/consistent-type-imports": ["error", { "prefer": "type-imports" }],
+
+    "@stylistic/function-call-spacing": ["error", "never"],
+    "@stylistic/space-before-blocks": "error",
+    "@stylistic/keyword-spacing": ["error", { "before": true }],
     "@stylistic/newline-per-chained-call": ["error", { "ignoreChainWithDepth": 3 }],
     "@stylistic/no-confusing-arrow": ["error", { "onlyOneSimpleParam": true }],
     "@stylistic/no-floating-decimal": "error",
@@ -31,9 +39,6 @@
         "consistent": true
       }
     ],
-    "@stylistic/function-call-spacing": ["error", "never"],
-    "@stylistic/space-before-blocks": "error",
-    "@stylistic/keyword-spacing": ["error", { "before": true }],
     "@stylistic/padding-line-between-statements": [
       "error",
       {

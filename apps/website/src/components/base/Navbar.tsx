@@ -7,7 +7,6 @@ import { Fragment } from "react"
 import { useSidebarContext } from "@/context"
 import { toLower } from "lodash"
 import type { IconType } from "react-icons"
-import { FaBell } from "react-icons/fa6"
 import {
   LuAccessibility as AccessibilityIcon,
   LuAlbum as AlbumIcon,
@@ -22,8 +21,7 @@ import {
   LuMoreVertical as MoreVerticalIcon,
   LuShare as ShareIcon
 } from "react-icons/lu"
-import { RiBellLine, RiNotificationLine } from "react-icons/ri"
-import { UserType } from "@/types/users"
+import type { UserType } from "@/types/users"
 import { MyFursonaIcon } from "../icons"
 import { Separator } from "../ui"
 import { Button, SearchButton } from "../ui/Buttons"
@@ -166,12 +164,12 @@ export default function Navbar({ user }: { user?: UserType }) {
             />
           </div>
         )}
-        <LuBell size={20} />
+        {/* <LuBell size={20} /> */}
         {/* Avatar */}
-        <img
+        {/* <img
           src={user.avatarUrl || "/img/default_banner.jpg"}
           className="h-8 w-8 rounded-full"
-        />
+        /> */}
       </div>
     </nav>
   )

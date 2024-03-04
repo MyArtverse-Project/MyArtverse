@@ -1,10 +1,10 @@
-import { Metadata } from "next"
+import type { Metadata } from "next"
 import type { SlugRouteProps } from "@/types/utils"
-import DynamicMasthead from "./DynamicMasthead"
+import DynamicLayout from "./DynamicLayout"
 
 export async function generateMetadata({ params }: SlugRouteProps): Promise<Metadata> {
   // !! NOTE: For testing only, actual user data is going to be fetched through the API
-  const userHandleParam = params.profile!
+  const userHandleParam = params.profile
 
   return {
     title: {
@@ -15,15 +15,10 @@ export async function generateMetadata({ params }: SlugRouteProps): Promise<Meta
   }
 }
 
-export default function Layout({
-  params,
-  children
-}: SlugRouteProps & { children: React.ReactNode }) {
-  const profile = params.profile
-
+export default function Layout({ children }: { children: React.ReactNode }) {
   return (
     <>
-      <DynamicMasthead handle={profile} />
+      <DynamicLayout />
       <div className="py-4">{children}</div>
     </>
   )

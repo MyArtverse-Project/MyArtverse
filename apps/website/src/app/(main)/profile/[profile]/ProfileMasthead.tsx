@@ -1,6 +1,5 @@
 "use client"
 
-import { useEffect, useState } from "react"
 import { Button } from "@/components/ui/Buttons"
 import { Dropdown, DropdownItem } from "@/components/ui/Dropdown"
 import { Masthead } from "@/components/ui/Masthead"
@@ -10,12 +9,11 @@ import {
   LuCat as CatIcon,
   LuHeart as HeartIcon,
   LuHome as HomeIcon,
-  LuLayoutGrid as LayoutGridIcon,
   LuImage,
   LuMoreVertical as MoreVerticalIcon,
   LuUserPlus as UserPlusIcon
 } from "react-icons/lu"
-import type { UserRoles, UserType } from "@/types/users"
+import type { UserRoles } from "@/types/users"
 
 export default function ProfileMasthead({
   handle,
