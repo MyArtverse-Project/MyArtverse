@@ -45,7 +45,8 @@ export default function LoginForm() {
       console.log(res.status)
       if (res.ok) {
         return res.json().then((data) => {
-          router.push(`/profile/${data.handler}`)
+          // TODO: Redirect to user's profile
+          router.push(`/`)
         })
       }
 
