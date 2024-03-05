@@ -12,12 +12,13 @@ import { Button, SearchButton } from "../ui/Buttons"
 import NavbarProfilePeek from "./NavbarProfilePeek"
 import NavbarUserActions from "./NavbarUserActions"
 
-export default function Navbar() {
+export default function Navbar({ userData }: { userData: UserType }) {
   const { sidebarState: isSidebarOpen, setSidebarState } = useSidebarContext()
-
   // TODO: Implement User Data onto sidebar
-  const USER_PLACEHOLDER = "VulpoTheDev"
-  const HANDLE_PLACEHOLDER = `@${toLower(USER_PLACEHOLDER)}`
+  // const USER_PLACEHOLDER = "VulpoTheDev"
+  // const HANDLE_PLACEHOLDER = `@${toLower(USER_PLACEHOLDER)}`
+
+
 
   const pathname = usePathname()
   const disableSidebar = pathname == "/login" || pathname == "/register"
@@ -55,7 +56,7 @@ export default function Navbar() {
             <Separator dir="vertical" size="2.125rem" />
           </>
         ) : null}
-        <NavbarUserActions user={USER_PLACEHOLDER} handle={HANDLE_PLACEHOLDER} />
+        <NavbarUserActions user={userData} isRegistered={userData ? true : false} />
       </div>
     </nav>
   )

@@ -13,14 +13,14 @@ import {
   LuShare
 } from "react-icons/lu"
 import { Avatar, Button } from "../ui/Buttons"
+import { UserType } from "@/types/users"
 
 export default function NavbarUserActions({
   isRegistered,
   user
 }: {
   isRegistered?: boolean
-  user?: string
-  handle?: string
+  user?: UserType
 }) {
   const createNewItems = [
     { icon: LuCat, name: "New fursona", link: "/" },
@@ -54,7 +54,8 @@ export default function NavbarUserActions({
 
   return (
     <>
-      <Avatar username={user} size={32} src="/img/examples/kuro/kuro-example4.png" />
+      {/* TODO: Default Avatar */}
+      <Avatar username={user.handle} size={32} src={user.avatarUrl} />
     </>
   )
 }
