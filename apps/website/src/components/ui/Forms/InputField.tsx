@@ -9,6 +9,7 @@ export default function InputField({
   type = "text",
   placeholder,
   required,
+  error,
   onChange,
   value,
   readOnly,
@@ -16,6 +17,7 @@ export default function InputField({
 }: {
   inputName?: string
   noLabel?: boolean
+  error?: string
 } & Pick<
   ReactMapElement<"input">,
   "type" | "placeholder" | "required" | "onChange" | "value" | "readOnly"
@@ -51,8 +53,7 @@ export default function InputField({
         </span>
         <InputWrapper />
       </label>
-      {/* Error boundary */}
-      <div></div>
+      <div>{error}</div>
     </div>
   )
 }

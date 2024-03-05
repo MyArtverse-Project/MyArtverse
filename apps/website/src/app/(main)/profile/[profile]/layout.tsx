@@ -1,5 +1,5 @@
 import type { Metadata } from "next"
-import { fetchUserData } from "@/utils/api"
+import { fetchUser, fetchUserData } from "@/utils/api"
 import { UserType } from "@/types/users"
 import type { SlugRouteProps } from "@/types/utils"
 import DynamicLayout from "./DynamicLayout"
@@ -25,7 +25,7 @@ export default async function Layout({
   params: { profile: string }
 }) {
   // Fetch user data from the API
-  const userData = await fetchUserData()
+  const userData = await fetchUser(params.profile)
   if (!userData) return null
   // TODO: Add Character API Logic
   return (

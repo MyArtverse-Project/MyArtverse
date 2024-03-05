@@ -45,6 +45,26 @@ export const apiWithAuth = async (route: string, method: APIMethods) => {
     })
 }
 
+export const apiWithoutAuth = async (route: string, method: APIMethods, body?: any) => {
+  const endpoint = process.env.NEXT_PUBLIC_BACKEND_URL || "http://localhost:8081"
+  return fetch(`${endpoint}${route}`, {
+    method: method,
+    headers: {
+      "Content-Type": "application/json"
+    },
+    body: JSON.stringify(body),
+    cache: "no-cache",
+    credentials: "include"
+  })
+    .then((res) => {
+      if (res.ok) return res.json()
+      throw new Error("Unable to provide data")
+    })
+    .catch((err) => {
+      throw new Error(err)
+    })
+}
+
 export const refreshToken = () => {
   const endpoint = process.env.NEXT_PUBLIC_BACKEND_URL || "http://localhost:8081"
   const cookiesHeaders = cookies()
@@ -80,4 +100,9 @@ export const fetchUserData = async () => {
   const data = await apiWithAuth(`/v1/profile/me`, "GET")
 
   return data as UserType;
+}
+
+export const fetchUser = async (handle: string) => {
+  const data = await apiWithoutAuth(`/v1/profile/${handle}`, "GET")
+  return data as UserType
 }

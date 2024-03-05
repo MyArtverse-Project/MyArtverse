@@ -9,7 +9,7 @@ export default function MastheadBanner({
         aspectRatio="15/3"
         width="100%"
         objectFit="cover"
-        src={src ?? "/img/hero/ozzy-banner.png"}
+        src={src ?? "/default_banner.jpg"}
         strategy="important"
         style={{
           objectPosition: "0 calc(50% * 1))"
