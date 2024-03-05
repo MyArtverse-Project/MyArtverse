@@ -13,6 +13,7 @@ export default function Avatar({
 }) {
   return (
     <div
+      data-avatar=""
       aria-label={username}
       style={{ height: `${size}px`, width: `${size}px` }}
       className={className ?? "overflow-hidden rounded-full"}

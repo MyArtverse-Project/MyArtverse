@@ -8,7 +8,7 @@ export default function GroupContents({ children }: { children?: React.ReactNode
        * i.e. "l" for left and "r" for right, ff. by the index number
        */
       data-group-placement="l5"
-      className="grid grid-cols-[minmax(0,1fr)_auto] grid-rows-[auto_1fr] gap-x-2.5 gap-y-3"
+      className="grid-cols-resizable grid grid-rows-[auto_1fr] gap-x-2.5 gap-y-3"
     >
       {children}
     </section>

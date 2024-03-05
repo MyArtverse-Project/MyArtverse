@@ -4,23 +4,10 @@
 @tailwind components;
 @tailwind utilities;
 
-svg.lucide {
-  pointer-events: none;
-}
-
-body {
-  --avatar-size: 8rem;
-}
-
-@media (min-width: 1024px) {
-  body {
-    --avatar-size: 11rem;
-  }
-}
-
 @layer base {
   h1,
-  h2 {
+  h2,
+  h3 {
     @apply font-inter font-bold;
   }
 }
