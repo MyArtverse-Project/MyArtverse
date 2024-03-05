@@ -11,9 +11,18 @@ export type UserType = {
   dateUpdated: Date
   hasArtistAccess: boolean
   hasBetaAccess: boolean
-  links: string | null
-  badges: string | null
+  links: {
+    url: string
+    label: string
+  }[]
+  badges: {
+    roleName: string,
+    rewardDate: Date
+  }
   onlineStatus: "offline" | "online"
   customStatus: string | null
   previousAliases: string | null
+  pronouns: string,
+  nationaility: string,
+  birthday: Date,
 }
