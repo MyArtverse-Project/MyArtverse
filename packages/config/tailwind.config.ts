@@ -38,6 +38,11 @@ const GLOBAL_COLORS = [
   "subtext",
   "skeleton",
   "separator",
+  "error",
+  "warning",
+  "info",
+  "success",
+  "hyperlink",
   ["error-hl", "error-highlight"],
   ["warning-hl", "warning-highlight"],
   ["info-hl", "info-highlight"],
@@ -45,8 +50,13 @@ const GLOBAL_COLORS = [
 ]
 const OVERRIDE_COLORS = ["context-menu", "active"]
 
-const unsetStyle = {
-  unset: "unset"
+const customStyles = {
+  unset: {
+    unset: "unset"
+  },
+  gridResizable: {
+    resizable: "minmax(0, 1fr) auto"
+  }
 } as const
 
 export default {
@@ -54,6 +64,8 @@ export default {
   darkMode: "class",
   theme: {
     extend: {
+      gridTemplateRows: customStyles.gridResizable,
+      gridTemplateColumns: customStyles.gridResizable,
       fontFamily: {
         inter: "var(--font-inter)",
         "open-sans": "var(--font-open-sans)"
@@ -66,8 +78,8 @@ export default {
         current: "currentColor",
         ...iterateColorVars("--tw-border-opacity", GLOBAL_COLORS)
       },
-      spacing: unsetStyle,
-      inset: unsetStyle
+      spacing: customStyles.unset,
+      inset: customStyles.unset
     }
   },
   plugins: [forms, typography]

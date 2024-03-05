@@ -46,11 +46,11 @@ export default function Note({
       css: "border-info",
       iconColor: "text-info"
     }
-  }
+  } as const
 
-  const statusStyles = status[type]?.css
-  const statusIconColor = status[type]?.iconColor
-  const StatusIcon = status[type]?.icon as IconType
+  const statusStyles = status[type].css
+  const statusIconColor = status[type].iconColor
+  const StatusIcon = status[type].icon
 
   return (
     <div
@@ -61,7 +61,7 @@ export default function Note({
       }
     >
       <StatusIcon
-        size={!inline ? 25 : 19}
+        size={!inline ? 23 : 19}
         className={clsx("flex-shrink-0", statusIconColor)}
       />
       <div className={!inline ? "flex flex-col justify-center" : null}>

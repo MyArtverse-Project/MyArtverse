@@ -18,6 +18,7 @@ export default function MFImage({
   objectFit,
   rounded,
   style,
+  quality = 75,
   ...attributes
 }: {
   src: string
@@ -28,6 +29,7 @@ export default function MFImage({
   strategy?: ImgLoadStrategy
   objectFit?: React.CSSProperties["objectFit"]
   rounded?: number
+  quality?: number
 } & Pick<ReactMapElement<"img">, "alt" | "onClick" | "onContextMenu" | "style">) {
   const [imgLoaded, setImgLoaded] = useState(false)
 
@@ -80,6 +82,7 @@ export default function MFImage({
         fetchPriority={setStrategy.fetchPriority}
         priority={setStrategy.priority}
         onLoad={() => setImgLoaded(true)}
+        quality={quality}
       />
       <div
         id="loading-skeleton"
