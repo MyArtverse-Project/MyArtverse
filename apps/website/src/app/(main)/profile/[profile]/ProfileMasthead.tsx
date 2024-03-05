@@ -34,6 +34,7 @@ export default function ProfileMasthead({
     icon: IconType
   }[]
 }) {
+  const name = profileData.displayName ? profileData.displayName : profileData.handle
   const profileTabs = [
     {
       icon: HomeIcon,
@@ -66,28 +67,26 @@ export default function ProfileMasthead({
 
   return (
     <Masthead hasEditAccess={hasEditAccess}>
-      <Masthead.Banner />
+      <Masthead.Banner src={profileData.bannerUrl || null} />
       <Masthead.Wrapper>
-        <Masthead.Avatar profileOnly />
+        <Masthead.Avatar profileOnly src={profileData.avatarUrl || null} />
         <Masthead.Details>
           <Masthead.Layer spaceBetween>
             <h2 className="not-prose font-inter mt-4 flex items-center gap-x-1.5 text-3xl font-bold">
-              <span>
-                {profileData.displayName ? profileData.displayName : profileData.handle}
-              </span>
+              <span>{name}</span>
               <span aria-hidden></span>
             </h2>
             <div className="relative z-[6] mt-4 flex items-start gap-x-2.5">
               <Button
                 prefixIcon={<BrushIcon size={20} />}
-                aria-label="View Username's Commissions"
+                aria-label={`View ${name}'s Commissions`}
                 variant="secondary"
               >
                 View Commission ToS
               </Button>
               <Button
                 prefixIcon={<UserPlusIcon size={20} />}
-                aria-label="Follow Username"
+                aria-label={`Follow ${name}`}
               >
                 Follow
               </Button>
@@ -103,8 +102,8 @@ export default function ProfileMasthead({
                   <>
                     <DropdownItem link="/">Share</DropdownItem>
                     <DropdownItem link="/">Manage trades</DropdownItem>
-                    <DropdownItem link="/">Report Username</DropdownItem>
-                    <DropdownItem link="/">Block Username</DropdownItem>
+                    <DropdownItem link="/">Report {name}</DropdownItem>
+                    <DropdownItem link="/">Block {name}</DropdownItem>
                   </>
                 }
               />

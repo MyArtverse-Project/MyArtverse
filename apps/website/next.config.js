@@ -31,7 +31,8 @@ const nextConfig = {
   },
   images: {
     dangerouslyAllowSVG: true,
-    contentDispositionType: "attachment"
+    contentDispositionType: "attachment",
+    domains: ["localhost"]
   },
   async rewrites() {
     return [

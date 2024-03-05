@@ -15,6 +15,7 @@ export async function generateMetadata({ params }: SlugRouteProps): Promise<Meta
 
 export default async function Page() {
   const userData = await fetchUserData()
+  if (!userData) throw new Error("User not found")
   // TODO: Redirect to 404 instead of login when api route for user by handler is implemented
   return (
     <MarginClamp>

@@ -74,13 +74,10 @@ export const refreshToken = () => {
     })
 }
 
-export const fetchUserData = () => {
-  const data = apiWithAuth(`/v1/profile/me`, "GET")
-    .then(() => {
-      return data
-    })
-    .catch((err) => {
-      return null
-    })
-  return data as UserType | null
+export const fetchUserData = async () => {
+
+  console.log("fetchUserData")
+  const data = await apiWithAuth(`/v1/profile/me`, "GET")
+
+  return data as UserType;
 }
