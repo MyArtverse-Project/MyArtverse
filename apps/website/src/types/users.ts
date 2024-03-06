@@ -1,4 +1,4 @@
-export type UserRoles = ("artist" | "admin" | "contributor")[]
+export type UserRoles = ("artist" | "admin" | "contributor" | "early-tester")[]
 
 export type UserType = {
   id: number

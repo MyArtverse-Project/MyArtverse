@@ -1,5 +1,6 @@
 import type { Metadata } from "next"
 import { MFImage, Note } from "@/components/ui"
+import Comments from "@/components/ui/Comments"
 import { BRAND } from "@myfursona-internal/config"
 import ArtworkDetails from "./ArtworkDetails"
 
@@ -38,14 +39,22 @@ export default function ArtPage() {
         {/* Artwork details, notes/alerts and comments */}
         <div className="mx-auto flex w-full flex-col gap-y-2 px-5 pt-6 min-[1400px]:w-[1024px]">
           <span className="mb-2.5">
-            <Note type="info" inline>Generic info notice</Note>
+            <Note type="info" inline>
+              Generic info notice
+            </Note>
           </span>
           <ArtworkDetails />
-          <div>comments</div>
+          <div>
+            <Comments>
+              <Comments.Field />
+              <Comments.Item>nice</Comments.Item>
+              <Comments.Item>very cool</Comments.Item>
+            </Comments>
+          </div>
         </div>
       </div>
       {/* More from this artist */}
-      <div className="w-96 flex-shrink-0 px-6 py-4">more stuff</div>
+      <aside className="w-96 flex-shrink-0 px-6 py-4">more stuff</aside>
     </div>
   )
 }

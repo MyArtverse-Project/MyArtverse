@@ -1,5 +1,5 @@
 /* eslint-disable @typescript-eslint/no-explicit-any */
-import React from "react"
+import type React from "react"
 
 export type PartialRecord<K extends PropertyKey, T = string> = Partial<Record<K, T>>
 export type PartialArray<T> = Partial<T>[]

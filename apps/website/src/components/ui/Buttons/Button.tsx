@@ -27,7 +27,6 @@ const Button = forwardRef(
       suffixIcon,
       href,
       count,
-      _INTERNAL_NO_ROUND,
       ...attributes
     }: Readonly<
       Partial<{
@@ -42,14 +41,15 @@ const Button = forwardRef(
         suffixIcon: React.ReactElement<IconType>
         href: string | UrlObject
         count: number
-        _INTERNAL_NO_ROUND: boolean
       }> &
         (ReactMapElement<"button"> | ReactMapElement<"a">)
     >,
     ref
   ) => {
     const buttonVars = cva(
-      ["flex items-center gap-x-1.5 transition-[border,background-color] border-[2px]"],
+      [
+        "rounded-md flex items-center gap-x-1.5 transition-[border,background-color] border-[2px]"
+      ],
       {
         variants: {
           intent: {
@@ -61,7 +61,7 @@ const Button = forwardRef(
             "error-secondary": "border-error hover:border-opacity-50"
           },
           size: {
-            small: !iconOnly ? "px-2.5 py-0.5" : "p-1.5",
+            small: !iconOnly ? "px-2.5 py-1.5" : "p-2",
             medium: !iconOnly ? "px-3.5 py-2" : "p-2",
             big: !iconOnly ? "px-5 py-2.5" : "p-3"
           },
@@ -94,9 +94,7 @@ const Button = forwardRef(
             positions: position,
             intent: variant,
             size
-          }),
-          size === "small" ? "text-xs" : "",
-          !_INTERNAL_NO_ROUND ? "rounded-md" : ""
+          })
         )}
         {...attributes}
       >

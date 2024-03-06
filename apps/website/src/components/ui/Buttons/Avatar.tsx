@@ -7,7 +7,7 @@ export default function Avatar({
   size = 36
 }: {
   className?: string
-  username: string
+  username?: string
   src: string
   size?: number
 }) {
@@ -21,7 +21,7 @@ export default function Avatar({
       <Image
         src={src}
         className="aspect-square object-cover"
-        alt={`Avatar of ${username}`}
+        alt={username ? `Avatar of ${username}"}` : ""}
         decoding="async"
         loading="eager"
         priority

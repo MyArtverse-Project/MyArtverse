@@ -1,10 +1,10 @@
+import Author from "./Author"
 import BuiLink from "./BuiLink"
 import Carousel from "./Carousel"
 import EmptySection from "./EmptySection"
 import Fieldset from "./Fieldset"
 import FolderView from "./Folders"
 import Group from "./Group"
-import Comment from "./Group/Comment"
 import Field from "./Layouts/Field"
 import GridResponsive from "./Layouts/GridResponsive"
 import ItemIterator from "./Layouts/ItemIterator"
@@ -18,6 +18,7 @@ import Switch from "./Switch"
 import Tabs from "./Tabs"
 
 export {
+  Author,
   ItemIterator,
   MFImage,
   BuiLink,
@@ -34,6 +35,5 @@ export {
   MarginClamp,
   GridResponsive,
   Group,
-  Comment,
   Field
 }

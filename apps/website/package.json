@@ -55,7 +55,8 @@
     "@types/lodash": "^4.14.198",
     "@types/paypal__checkout-server-sdk": "^1.0.5",
     "clsx": "^2.0.0",
-    "dedent": "^1.5.1"
+    "dedent": "^1.5.1",
+    "tailwind-merge": "^2.2.1"
   },
   "engines": {
     "node": ">= 18.0.0",

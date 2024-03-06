@@ -1,4 +1,4 @@
-import { Footer, Navbar, Sidebar } from "@/components/base"
+import { Footer, Navbar, NoJSReminder, Sidebar } from "@/components/base"
 import { fetchUserData } from "@/utils/api"
 
 export default async function MainLayout({
@@ -6,8 +6,10 @@ export default async function MainLayout({
   modal
 }: Readonly<{ children: React.ReactNode; modal: React.ReactNode }>) {
   // const userData = await fetchUserData()
+
   return (
     <>
+      <NoJSReminder />
       <div>
         <header className="sticky top-0 z-20">
           <Navbar />

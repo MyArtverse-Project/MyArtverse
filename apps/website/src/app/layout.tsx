@@ -4,7 +4,6 @@ import type { Metadata, Viewport } from "next"
 import { Inter, Open_Sans } from "next/font/google"
 import Script from "next/script"
 import { ClientInit } from "@/components/base"
-import NoJSReminder from "@/components/base/NoJSReminder"
 import Providers from "@/context"
 import { BRAND } from "@myfursona-internal/config"
 import clsx from "clsx"
@@ -77,7 +76,6 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
       <body className="bg-100 text-700 bg-background prose-headings:font-bold prose-headings:font-inter font-open-sans !overflow-x-hidden text-sm font-medium">
         <PreconnectResources />
         <Providers>
-          <NoJSReminder />
           {children}
           <ClientInit />
         </Providers>
