@@ -1,6 +1,6 @@
 "use client"
 
-import { dashboardSidebarToggle } from "@/atoms"
+import { sidebarToggleDashboard } from "@/atoms"
 import { Avatar, Button } from "@/components/ui/Buttons"
 import { useAtom } from "jotai"
 import {
@@ -17,7 +17,7 @@ import NavbarLogo from "./NavbarLogo"
 import NavbarSearch from "./NavbarSearch"
 
 export default function DashboardNavbar() {
-  const [isToggled, setIsToggled] = useAtom(dashboardSidebarToggle)
+  const [isToggled, setIsToggled] = useAtom(sidebarToggleDashboard)
   const createNewItems = [
     { icon: LuCat, name: "New fursona" },
     { icon: LuShare, name: "Upload image(s)" },

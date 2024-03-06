@@ -1,7 +1,7 @@
 "use client"
 
 import { Fragment } from "react"
-import { dashboardSidebarToggle } from "@/atoms"
+import { sidebarToggleDashboard } from "@/atoms"
 import { ItemIterator } from "@/components/ui"
 import { useAtom } from "jotai"
 import {
@@ -19,7 +19,7 @@ import {
 import SidebarProfile from "./SidebarProfile"
 
 export default function DashboardSidebar() {
-  const [isToggled] = useAtom(dashboardSidebarToggle)
+  const [isToggled] = useAtom(sidebarToggleDashboard)
 
   const menuItems = {
     top: [

@@ -2,7 +2,7 @@ import { atom } from "jotai"
 
 // Sidebar
 export const sidebarToggle = atom(false)
-export const dashboardSidebarToggle = atom(true)
+export const sidebarToggleDashboard = atom(true)
 
 interface ProfilePeekAtom {
   img: string
@@ -10,7 +10,6 @@ interface ProfilePeekAtom {
   handle: string
 }
 
-export const isProfilePeeking = atom(false)
 export const profilePeekData = atom<ProfilePeekAtom>({
   img: "",
   username: "",

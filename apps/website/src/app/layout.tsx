@@ -4,7 +4,6 @@ import type { Metadata, Viewport } from "next"
 import { Inter, Open_Sans } from "next/font/google"
 import Script from "next/script"
 import { ClientInit } from "@/components/base"
-import Providers from "@/context"
 import { BRAND } from "@myfursona-internal/config"
 import clsx from "clsx"
 import dedent from "dedent"
@@ -74,11 +73,9 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
         <link rel="mask-icon" href="./safari-pinned-tab.svg" color="9e00ff" />
       </head>
       <body className="bg-100 text-700 bg-background prose-headings:font-bold prose-headings:font-inter font-open-sans !overflow-x-hidden text-sm font-medium">
+        <ClientInit />
         <PreconnectResources />
-        <Providers>
-          {children}
-          <ClientInit />
-        </Providers>
+        {children}
         {/* Site analytics - Umami */}
         <Script
           id="umami"
