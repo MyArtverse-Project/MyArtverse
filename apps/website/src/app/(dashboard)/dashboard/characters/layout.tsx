@@ -1,5 +1,5 @@
 import { Tabs } from "@/components/ui"
-import { Container } from "@/components/ui/Dashboard"
+import { Container } from "@/components/dashboard"
 
 export default function CharactersLayout({
   children
