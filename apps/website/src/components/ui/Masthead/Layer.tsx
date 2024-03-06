@@ -1,7 +1,7 @@
 "use client"
 
 import clsx from "clsx"
-import { MapElement } from "@/types/utils"
+import type { MapElement } from "@/types/utils"
 
 export default function MastheadLayer({
   children,

@@ -1,4 +1,4 @@
-import { ReactMapElement } from "@/types/utils"
+import type { ReactMapElement } from "@/types/utils"
 
 export default function FormWrapper({
   children,

@@ -1,7 +1,7 @@
 "use client"
 
 import { useRouter } from "next/navigation"
-import { FormEvent, useState } from "react"
+import { type FormEvent, useState } from "react"
 import { Facebook, Google, XTwitter } from "@/components/icons"
 import { Separator } from "@/components/ui"
 import { Button } from "@/components/ui/Buttons"
