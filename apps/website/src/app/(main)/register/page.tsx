@@ -7,8 +7,10 @@ export const metadata: Metadata = {
   title: "Register an account"
 }
 
-export default function SignUp() {
-  const user = fetchUserData()
+export default async function SignUp() {
+  const user = await fetchUserData().catch(() => {
+    return null
+  })
   if (user) redirect("/")
   return <RegisterForm />
 }
