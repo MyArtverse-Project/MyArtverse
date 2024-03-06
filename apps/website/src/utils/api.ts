@@ -102,6 +102,8 @@ export const fetchUserData = async () => {
   return data as UserType;
 }
 
+
+
 export const fetchUser = async (handle: string) => {
   const data = await apiWithoutAuth(`/v1/profile/${handle}`, "GET")
   return data as UserType

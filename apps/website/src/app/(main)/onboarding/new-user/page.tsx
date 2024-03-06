@@ -11,7 +11,7 @@ export const metadata: Metadata = {
 }
 
 export default async function Page() {
-  // const userData = fetchUserData()
+  const userData = await fetchUserData()
 
-  return <CreateProfileForm userData={null}  />
+  return <CreateProfileForm userData={userData}  />
 }

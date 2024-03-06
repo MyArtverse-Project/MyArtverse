@@ -8,7 +8,9 @@ export const metadata: Metadata = {
 }
 
 export default async function SignIn() {
-  const user = fetchUserData()
+  const user = await fetchUserData().catch(() => {
+    return null
+  })
   if (user) redirect("/")
   return <SignInForm />
 }

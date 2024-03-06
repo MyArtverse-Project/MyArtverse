@@ -1,7 +1,7 @@
 import type { Metadata } from "next"
 import { Field, Group, MarginClamp } from "@/components/ui"
 import { Button } from "@/components/ui/Buttons"
-import { fetchUserData } from "@/utils/api"
+import { fetchUser, fetchUserData } from "@/utils/api"
 import type { SlugRouteProps } from "@/types/utils"
 
 export async function generateMetadata({ params }: SlugRouteProps): Promise<Metadata> {
@@ -13,9 +13,9 @@ export async function generateMetadata({ params }: SlugRouteProps): Promise<Meta
   }
 }
 
-export default async function Page() {
-  const userData = await fetchUserData()
-  if (!userData) throw new Error("User not found")
+export default async function Page({ params }) {
+  const userData = await fetchUser(params.profile)
+  if (!userData) return null
   // TODO: Redirect to 404 instead of login when api route for user by handler is implemented
   return (
     <MarginClamp>

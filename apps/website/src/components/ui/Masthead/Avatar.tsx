@@ -23,7 +23,7 @@ export default function MastheadAvatar({
         )}
       >
         <MFImage
-          src={src ?? "/img/examples/kuro/kuro-example2.png"}
+          src={src ?? "/UserProfile.png"}
           alt={`Avatar of Username`}
           aspectRatio="1"
           width="100%"
