@@ -5,8 +5,9 @@ import { fetchUserData } from "@/utils/api"
 export default async function DashboardLayout({
   children
 }: Readonly<{ children?: React.ReactNode }>) {
-  const userData = await fetchUserData()
-  if (!userData) return redirect("/login")
+  const userData = await fetchUserData().catch(() => {
+    return redirect("/login")
+  })
   return (
     <div>
       <header className="sticky top-0 z-20">

@@ -16,7 +16,6 @@ import {
 import { Character } from "@/types/characters"
 
 export default function CharacterView({ characters }: { characters: { characters: Character[], mainCharacter: Character | null } }) {
-  console.log(characters)
   const [createFolderModal, setFolderModalState] = useState(false)
 
   const toggleCreateFolderModal = () => {

@@ -16,3 +16,7 @@ export interface Character {
   reference_sheet_url: string | null
 }
 
+export interface CharacterResponse {
+  characters: CharacterData[],
+  mainCharacter: CharacterData | null
+}

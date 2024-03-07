@@ -1,6 +1,7 @@
 import { cookies } from "next/headers"
 import type { UserType } from "@/types/users"
 import { BACKEND_URL } from "./env"
+import { CharacterResponse } from "@/types/characters"
 
 type APIMethods = "GET" | "POST" | "DELETE" | "PUT"
 
@@ -112,6 +113,6 @@ export const fetchUser = async (handle: string) => {
 }
 
 export const fetchUserCharacters = async (handle: string) => {
-  const data = await apiWithoutAuth("GET", `/v1/character/${handle}`)
+  const data = await apiWithoutAuth<CharacterResponse>("GET", `/v1/character/${handle}`)
   return data
 }
