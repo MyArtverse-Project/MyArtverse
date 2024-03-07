@@ -4,10 +4,11 @@ import { useAtom } from "jotai"
 import { LuPencil } from "react-icons/lu"
 import { Button } from "../Buttons"
 import MFImage from "../MFImage"
+import { UserType } from "@/types/users"
 
-export default function SidebarProfile() {
+export default function SidebarProfile({ userData }: { userData: UserType }) {
   const [isToggled] = useAtom(dashboardSidebarToggle)
-
+  const name = userData.displayName ? userData.displayName : userData.handle
   return (
     <div
       className={clsx(
@@ -22,7 +23,7 @@ export default function SidebarProfile() {
         )}
       >
         <MFImage
-          src="/img/examples/kuro/kuro-example4.png"
+          src={userData.avatarUrl || "/UserProfile.png"}
           aspectRatio="1"
           width="100%"
           height="100%"
@@ -30,8 +31,8 @@ export default function SidebarProfile() {
         />
       </span>
       <span className="flex w-full flex-col">
-        <span className="-mb-0.5 text-lg font-bold">Name</span>
-        <span className="text-subtext text-xs">@Handle</span>
+        <span className="-mb-0.5 text-lg font-bold">{name}</span>
+        <span className="text-subtext text-xs">@{userData.handle}</span>
       </span>
       <span className="flex-shrink-0">
         <Button iconOnly variant="tritery" size="small">

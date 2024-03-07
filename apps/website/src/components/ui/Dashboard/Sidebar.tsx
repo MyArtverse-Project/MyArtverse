@@ -18,8 +18,9 @@ import {
   LuSparkles
 } from "react-icons/lu"
 import SidebarProfile from "./SidebarProfile"
+import { UserType } from "@/types/users"
 
-export default function DashboardSidebar() {
+export default function DashboardSidebar({ userData }: { userData: UserType }) {
   const [isToggled] = useAtom(dashboardSidebarToggle)
 
   const menuItems = {
@@ -55,7 +56,7 @@ export default function DashboardSidebar() {
     >
       <nav className="flex h-full flex-col justify-between px-3.5 py-3.5">
         <div>
-          <SidebarProfile />
+          <SidebarProfile userData={userData} />
           <ItemIterator as={Fragment} baseUrl="/dashboard/" items={menuItems.top} />
         </div>
         <ItemIterator items={menuItems.bottom} />

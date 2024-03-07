@@ -17,8 +17,9 @@ import {
   LuPlus as PlusIcon,
   LuSearch as SearchIcon
 } from "react-icons/lu"
+import { UserType } from "@/types/users"
 
-export default function DashboardNavbar() {
+export default function DashboardNavbar({ userData }: { userData: UserType }) {
   const [isToggled, setIsToggled] = useAtom(dashboardSidebarToggle)
   const createNewItems = [
     { icon: LuCat, name: "New fursona" },
@@ -64,7 +65,7 @@ export default function DashboardNavbar() {
         </Button>
         <span className="ml-3">
           <MFImage
-            src="/img/examples/kuro/kuro-example4.png"
+            src={userData.avatarUrl || "/UserProfile.png"}
             aspectRatio="1"
             width={35}
             rounded={999}
