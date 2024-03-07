@@ -55,7 +55,7 @@ export default function NavbarUserActions({
 
   return (
     <>
-      <Link href={`/profile/${user.handle}`}>
+      <Link href={`/@${user.handle}` as any}>
         <Avatar
           username={user.handle}
           size={32}

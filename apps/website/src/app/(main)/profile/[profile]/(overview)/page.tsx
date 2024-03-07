@@ -35,8 +35,9 @@ export default async function Page({ params }) {
                 content={new Date(userData.dateRegistered).toDateString()}
               />
               {/* TODO: Custom attributes for Backend */}
-              {/* <Field title="Birthday" content="January 1, 2021" /> */}
-              {/* <Field title="Pronouns" content="He/Him" /> */}
+              <Field title="Birthday" content={userData.birthday ? new Date(userData.birthday).toDateString() : "Not Set"} />
+              <Field title="Pronouns" content={userData.pronouns ? userData.pronouns : "Not Set"} />
+              <Field title="Nationality" content={userData.nationaility ? userData.nationaility : "Not Set"} />
               {/* <Field title="Nationality" content="Murica" /> */}
             </Group.Content>
           </Group>

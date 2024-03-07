@@ -110,3 +110,8 @@ export const fetchUser = async (handle: string) => {
   const data = await apiWithoutAuth<UserType>("GET", `/v1/profile/${handle}`)
   return data
 }
+
+export const fetchUserCharacters = async (handle: string) => {
+  const data = await apiWithoutAuth("GET", `/v1/character/${handle}`)
+  return data
+}

@@ -13,8 +13,10 @@ import {
   LuFolderPlus as FolderPlus,
   LuX as XIcon
 } from "react-icons/lu"
+import { Character } from "@/types/characters"
 
-export default function CharacterView() {
+export default function CharacterView({ characters }: { characters: { characters: Character[], mainCharacter: Character | null } }) {
+  console.log(characters)
   const [createFolderModal, setFolderModalState] = useState(false)
 
   const toggleCreateFolderModal = () => {
@@ -55,19 +57,22 @@ export default function CharacterView() {
           <SearchBox placeholder="Search for characters" />
           <Button prefixIcon={<FilterIcon size={20} />}>Filter</Button>
         </div>
-        <PinnedCharacter
-          artist="Ratking"
-          colors={[
-            { color: "cyan", name: "cyan" },
-            { color: "yellow", name: "yellow" },
-            { color: "purple", name: "purple" },
-            { color: "white", name: "white" }
-          ]}
-          avatar="/img/hero/renzo-snowglobe.jpg"
-          name="Kuroji"
-          species="Raccoon-Fox-Dragon"
-          refSheetImg="/img/examples/kuro/kuro-refsheet.png"
-        />
+        {characters.mainCharacter && (
+          <PinnedCharacter
+            artist="Ratking"
+            colors={[
+              { color: "cyan", name: "cyan" },
+              { color: "yellow", name: "yellow" },
+              { color: "purple", name: "purple" },
+              { color: "white", name: "white" }
+            ]}
+            avatar={characters.mainCharacter.avatar_url || "/UserProfile.png"}
+            name={characters.mainCharacter.name}
+            species={characters.mainCharacter.species}
+            refSheetImg={characters.mainCharacter.reference_sheet_url || "/GenericBG.png"}
+          />
+        )}
+
         <GridResponsive breakpoint={250} className="gap-1.5" role="listbox">
           {[...Array(10)].map((_, i) => (
             <FursonaCard

@@ -2,6 +2,7 @@ import type { Metadata } from "next"
 import { MarginClamp } from "@/components/ui"
 import { BRAND } from "@myfursona-internal/config"
 import CharacterView from "./CharacterView"
+import { fetchUserCharacters } from "@/utils/api"
 
 export async function generateMetadata(): Promise<Metadata> {
   return {
@@ -10,10 +11,11 @@ export async function generateMetadata(): Promise<Metadata> {
   }
 }
 
-export default function Page() {
+export default async function Page({ params }) {
+  const characters = await fetchUserCharacters(params.profile)
   return (
     <MarginClamp>
-      <CharacterView />
+      <CharacterView characters={characters} />
     </MarginClamp>
   )
 }
