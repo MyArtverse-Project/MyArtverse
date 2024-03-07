@@ -36,7 +36,6 @@ export default function RegisterForm() {
       },
       body: JSON.stringify({ email, username, password })
     }).then((res) => {
-      console.log(res.status)
       if (res.ok) {
         return res.json().then((data) => {
           router.push("/verify")

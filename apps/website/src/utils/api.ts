@@ -20,7 +20,7 @@ export const apiWithAuth = async (route: string, method: APIMethods) => {
         Cookie: `accessToken=${accessToken}; refreshToken=${refreshToken}`
       },
       cache: "no-cache",
-      credentials: "include"
+      credentials: "include",
     })
   }
 
@@ -31,14 +31,11 @@ export const apiWithAuth = async (route: string, method: APIMethods) => {
         return refreshToken().then((refreshed) => {
           if (!refreshed) throw new Error("Unauthorized")
           return makeRequest().then((res) => {
-            console.log(res.status)
             if (!res.ok) throw new Error("Unable to provide data")
             return res.json()
           })
         })
       }
-
-      console.log(res.status)
     })
     .catch((err) => {
       throw new Error(err)
@@ -79,7 +76,8 @@ export const refreshToken = () => {
       Cookie: `refreshToken=${refreshToken}`
     },
     body: JSON.stringify({}),
-    credentials: "include"
+    credentials: "include",
+    cache: "no-cache"
   })
     .then((response) => {
       if (!response.ok) {
@@ -89,20 +87,14 @@ export const refreshToken = () => {
       return true
     })
     .catch((error) => {
-      console.error("Error in refreshToken:", error)
       return false
     })
 }
 
 export const fetchUserData = async () => {
-
-  console.log("fetchUserData")
   const data = await apiWithAuth(`/v1/profile/me`, "GET")
-
   return data as UserType;
 }
-
-
 
 export const fetchUser = async (handle: string) => {
   const data = await apiWithoutAuth(`/v1/profile/${handle}`, "GET")

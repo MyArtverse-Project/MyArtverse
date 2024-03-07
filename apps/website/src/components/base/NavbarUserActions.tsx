@@ -14,6 +14,7 @@ import {
 } from "react-icons/lu"
 import { Avatar, Button } from "../ui/Buttons"
 import { UserType } from "@/types/users"
+import Link from "next/link"
 
 export default function NavbarUserActions({
   isRegistered,
@@ -54,8 +55,9 @@ export default function NavbarUserActions({
 
   return (
     <>
-      {/* TODO: Default Avatar */}
-      <Avatar username={user.handle} size={32} src={user.avatarUrl} />
+      <Link href={`/profile/${user.handle}`}>
+        <Avatar username={user.handle} size={32} src={user.avatarUrl || "/UserProfile.png"} />
+      </Link>
     </>
   )
 }
