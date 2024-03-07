@@ -13,9 +13,9 @@ import {
   LuFolderPlus as FolderPlus,
   LuX as XIcon
 } from "react-icons/lu"
-import { Character } from "@/types/characters"
+import { Character, CharacterResponse } from "@/types/characters"
 
-export default function CharacterView({ characters }: { characters: { characters: Character[], mainCharacter: Character | null } }) {
+export default function CharacterView({ handle, characters }: { handle: string, characters: CharacterResponse }) {
   const [createFolderModal, setFolderModalState] = useState(false)
 
   const toggleCreateFolderModal = () => {
@@ -73,15 +73,14 @@ export default function CharacterView({ characters }: { characters: { characters
         )}
 
         <GridResponsive breakpoint={250} className="gap-1.5" role="listbox">
-          {[...Array(10)].map((_, i) => (
+          {characters.characters.map((character, index) => (
             <FursonaCard
-              key={i}
-              name={"Renzo"}
-              img={"/img/hero/renzo-snowglobe.jpg"}
-              species="Raccoon-Fox-Dragon"
+              key={index}
+              img={character.avatar_url || "/UserProfile.png"}
+              name={character.name}
+              species={character.species}
               status="owned"
-              role="listitem"
-              href={`/@username/character/renzo`}
+              href={`/profile/${handle}/character/${character.name}`}
             />
           ))}
         </GridResponsive>

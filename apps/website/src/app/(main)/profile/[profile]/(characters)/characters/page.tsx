@@ -15,7 +15,7 @@ export default async function Page({ params }) {
   const characters = await fetchUserCharacters(params.profile)
   return (
     <MarginClamp>
-      <CharacterView characters={characters} />
+      <CharacterView handle={params.profile} characters={characters} />
     </MarginClamp>
   )
 }

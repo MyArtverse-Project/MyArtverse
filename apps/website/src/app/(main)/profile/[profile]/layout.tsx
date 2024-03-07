@@ -1,5 +1,5 @@
 import type { Metadata } from "next"
-import { fetchUser, fetchUserData } from "@/utils/api"
+import { fetchUser, fetchUserCharacters, fetchUserData } from "@/utils/api"
 import { UserType } from "@/types/users"
 import type { SlugRouteProps } from "@/types/utils"
 import DynamicLayout from "./DynamicLayout"
@@ -22,15 +22,16 @@ export default async function Layout({
   params
 }: {
   children: React.ReactNode
-  params: { profile: string }
+  params: { profile: string, character: string }
 }) {
   // Fetch user data from the API
   const userData = await fetchUser(params.profile)
   if (!userData) return null
-  // TODO: Add Character API Logic
+  const characterData = params.character ? await fetchUserCharacters(params.profile) : null
+  if (params.character && !characterData) return null
   return (
     <>
-      <DynamicLayout profile={userData} />
+      <DynamicLayout profile={userData} character={characterData} />
       <div>{children}</div>
     </>
   )

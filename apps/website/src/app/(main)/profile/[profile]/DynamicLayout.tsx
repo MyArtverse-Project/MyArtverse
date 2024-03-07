@@ -4,13 +4,14 @@ import { usePathname } from "next/navigation"
 import type { UserType } from "@/types/users"
 import CharacterMasthead from "./CharacterMasthead"
 import ProfileMasthead from "./ProfileMasthead"
+import { Character, CharacterResponse } from "@/types/characters"
 
 export default function DynamicMasthead({
   profile,
   character
 }: {
   profile?: UserType
-  character?: string
+  character?: Character
 }) {
   const path = usePathname()
   const isRouteCharacter = path.includes("character/")
@@ -21,14 +22,13 @@ export default function DynamicMasthead({
     <ProfileMasthead profileData={profile} />
   ) : (
     <CharacterMasthead
-      creator="@ozzydevs"
-      name="Ozzy"
-      character={character}
-      owner="@ozzydevs"
-      pronouns="He/Him"
-      species="Otter"
-      toyhouseLink="toyhouse"
-      handle={profile.handle}
+      creator={profile.displayName}
+      name={character.name}
+      owner={profile.displayName}
+      pronouns={"TODO"}
+      species={character.species}
+      toyhouseLink={"TODO"}
+      handle={"TODO"}
       status="Owned"
     />
   )

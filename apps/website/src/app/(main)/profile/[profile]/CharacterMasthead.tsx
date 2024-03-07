@@ -14,7 +14,6 @@ import {
 
 export default function CharacterMasthead({
   handle,
-  character,
   name,
   species,
   pronouns,
@@ -22,7 +21,6 @@ export default function CharacterMasthead({
   creator
 }: {
   handle: string
-  character: string
   name: string
   species: string
   pronouns: string
@@ -74,7 +72,7 @@ export default function CharacterMasthead({
         </Masthead.Details>
       </Masthead.Wrapper>
       <Masthead.Tabs
-        baseURL={`/@${handle}/character/${character}`}
+        baseURL={`/@${handle}/character/${name}`}
         items={[
           {
             icon: HomeIcon,
