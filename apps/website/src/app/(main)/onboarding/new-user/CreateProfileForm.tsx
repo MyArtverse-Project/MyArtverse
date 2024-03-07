@@ -9,7 +9,7 @@ import DropZone from "@/components/ui/Drop/DropZone"
 import { FormWithProgress, InputField } from "@/components/ui/Forms"
 import clsx from "clsx"
 import { LuCreditCard as CreditCardIcon, LuLock as LockIcon } from "react-icons/lu"
-import { UserType } from "@/types/users"
+import type { UserType } from "@/types/users"
 
 export default function CreateProfileForm({ userData }: { userData: UserType }) {
   const router = useRouter()

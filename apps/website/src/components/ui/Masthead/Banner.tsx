@@ -1,8 +1,6 @@
 import { MFImage } from "@/components/ui"
 
-export default function MastheadBanner({
-  src,
-}: { src: string }) {
+export default function MastheadBanner({ src }: { src: string }) {
   return (
     <div data-masthead-banner="" className="relative">
       <MFImage

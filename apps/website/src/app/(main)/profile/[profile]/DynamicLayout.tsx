@@ -1,7 +1,7 @@
 "use client"
 
 import { usePathname } from "next/navigation"
-import { UserType } from "@/types/users"
+import type { UserType } from "@/types/users"
 import CharacterMasthead from "./CharacterMasthead"
 import ProfileMasthead from "./ProfileMasthead"
 

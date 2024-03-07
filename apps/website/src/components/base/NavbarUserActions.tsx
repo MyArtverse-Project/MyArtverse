@@ -1,5 +1,6 @@
 "use client"
 
+import Link from "next/link"
 import {
   LuAccessibility,
   LuAlbum,
@@ -12,9 +13,8 @@ import {
   LuMoreVertical,
   LuShare
 } from "react-icons/lu"
+import type { UserType } from "@/types/users"
 import { Avatar, Button } from "../ui/Buttons"
-import { UserType } from "@/types/users"
-import Link from "next/link"
 
 export default function NavbarUserActions({
   isRegistered,
@@ -56,7 +56,11 @@ export default function NavbarUserActions({
   return (
     <>
       <Link href={`/profile/${user.handle}`}>
-        <Avatar username={user.handle} size={32} src={user.avatarUrl || "/UserProfile.png"} />
+        <Avatar
+          username={user.handle}
+          size={32}
+          src={user.avatarUrl || "/UserProfile.png"}
+        />
       </Link>
     </>
   )

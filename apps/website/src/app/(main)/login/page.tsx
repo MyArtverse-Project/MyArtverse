@@ -4,7 +4,7 @@ import { fetchUserData } from "@/utils/api"
 import { redirect } from "next/navigation"
 
 export const metadata: Metadata = {
-  title: { absolute: "Login to MyFursona" }
+  title: "Login"
 }
 
 export default async function SignIn() {

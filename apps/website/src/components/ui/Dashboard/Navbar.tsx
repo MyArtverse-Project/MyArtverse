@@ -17,7 +17,7 @@ import {
   LuPlus as PlusIcon,
   LuSearch as SearchIcon
 } from "react-icons/lu"
-import { UserType } from "@/types/users"
+import type { UserType } from "@/types/users"
 
 export default function DashboardNavbar({ userData }: { userData: UserType }) {
   const [isToggled, setIsToggled] = useAtom(dashboardSidebarToggle)

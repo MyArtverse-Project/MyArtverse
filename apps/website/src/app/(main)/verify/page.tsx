@@ -1,7 +1,5 @@
-import React from 'react'
+import React from "react"
 
 export default function Page() {
-  return (
-    <div>Verify your email</div>
-  )
+  return <div>Verify your email</div>
 }

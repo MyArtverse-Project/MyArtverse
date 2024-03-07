@@ -17,8 +17,8 @@ import {
   LuSettings,
   LuSparkles
 } from "react-icons/lu"
+import type { UserType } from "@/types/users"
 import SidebarProfile from "./SidebarProfile"
-import { UserType } from "@/types/users"
 
 export default function DashboardSidebar({ userData }: { userData: UserType }) {
   const [isToggled] = useAtom(dashboardSidebarToggle)

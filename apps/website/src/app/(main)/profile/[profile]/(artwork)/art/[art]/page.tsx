@@ -38,7 +38,9 @@ export default function ArtPage() {
         {/* Artwork details, notes/alerts and comments */}
         <div className="mx-auto flex w-full flex-col gap-y-2 px-5 pt-6 min-[1400px]:w-[1024px]">
           <span className="mb-2.5">
-            <Note type="info" inline>Generic info notice</Note>
+            <Note type="info" inline>
+              Generic info notice
+            </Note>
           </span>
           <ArtworkDetails />
           <div>comments</div>

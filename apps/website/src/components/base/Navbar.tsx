@@ -18,8 +18,6 @@ export default function Navbar({ userData }: { userData: UserType }) {
   // const USER_PLACEHOLDER = "VulpoTheDev"
   // const HANDLE_PLACEHOLDER = `@${toLower(USER_PLACEHOLDER)}`
 
-
-
   const pathname = usePathname()
   const disableSidebar = pathname == "/login" || pathname == "/register"
 

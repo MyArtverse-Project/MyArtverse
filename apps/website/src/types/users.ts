@@ -16,13 +16,13 @@ export type UserType = {
     label: string
   }[]
   badges: {
-    roleName: string,
+    roleName: string
     rewardDate: Date
   }
   onlineStatus: "offline" | "online"
   customStatus: string | null
   previousAliases: string | null
-  pronouns: string,
-  nationaility: string,
-  birthday: Date,
+  pronouns: string
+  nationaility: string
+  birthday: Date
 }

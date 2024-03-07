@@ -1,4 +1,4 @@
-import { Metadata } from "next"
+import type { Metadata } from "next"
 import { MFImage } from "@/components/ui"
 import { Button } from "@/components/ui/Buttons"
 

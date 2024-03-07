@@ -1,17 +1,17 @@
 import { Footer, Navbar, Sidebar } from "@/components/base"
-import { UserType } from "@/types/users";
-import { fetchUserData } from "@/utils/api";
+import { fetchUserData } from "@/utils/api"
+import type { UserType } from "@/types/users"
 
 export default async function MainLayout({
   children,
   modal
 }: Readonly<{ children: React.ReactNode; modal: React.ReactNode }>) {
-  let userData: UserType | null = null;
+  let userData: UserType | null = null
 
   try {
-    userData = await fetchUserData();
+    userData = await fetchUserData()
   } catch (error) {
-    console.error('Failed to fetch user data:', error);
+    console.error("Failed to fetch user data:", error)
   }
 
   return (

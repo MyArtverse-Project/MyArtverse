@@ -1,4 +1,4 @@
-import { Metadata } from "next"
+import type { Metadata } from "next"
 import LandingHero from "@/components/landing/LandingHero"
 import LandingIntegration from "@/components/landing/LandingIntegration"
 import { config } from "@/constants"
