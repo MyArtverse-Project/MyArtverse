@@ -1,7 +1,7 @@
 import type { Metadata } from "next"
-import RegisterForm from "./RegisterForm"
-import { fetchUser, fetchUserData } from "@/utils/api"
 import { redirect } from "next/navigation"
+import { fetchUser, fetchUserData } from "@/utils/api"
+import RegisterForm from "./RegisterForm"
 
 export const metadata: Metadata = {
   title: "Register an account"
