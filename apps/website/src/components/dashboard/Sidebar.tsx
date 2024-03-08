@@ -1,10 +1,12 @@
 "use client"
 
 import { Fragment } from "react"
-import { dashboardSidebarToggle } from "@/atoms"
 import { ItemIterator } from "@/components/ui"
 import { useAtom } from "jotai"
 import type { IconType } from "react-icons"
+import { sidebarToggleDashboard } from "@/atoms"
+import { ItemIterator } from "@/components/ui"
+import { useAtom } from "jotai"
 import {
   LuBrush,
   LuCat,
@@ -21,7 +23,7 @@ import type { UserType } from "@/types/users"
 import SidebarProfile from "./SidebarProfile"
 
 export default function DashboardSidebar({ userData }: { userData: UserType }) {
-  const [isToggled] = useAtom(dashboardSidebarToggle)
+  const [isToggled] = useAtom(sidebarToggleDashboard)
 
   const menuItems = {
     top: [

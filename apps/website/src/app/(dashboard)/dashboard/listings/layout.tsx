@@ -1,3 +1,4 @@
+import { Container } from "@/components/dashboard"
 import { Tabs } from "@/components/ui"
 import { Button } from "@/components/ui/Buttons"
 import { Container } from "@/components/dashboard"

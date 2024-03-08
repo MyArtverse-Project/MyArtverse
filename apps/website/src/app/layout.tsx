@@ -6,7 +6,6 @@ import { Inter, Open_Sans } from "next/font/google"
 import { headers } from "next/headers"
 import Script from "next/script"
 import { NoJSReminder } from "@/components/base"
-import Providers from "@/context"
 import { BRAND } from "@myfursona-internal/config"
 import { QueryClient, QueryClientProvider } from "@tanstack/react-query"
 import { ReactQueryDevtools } from "@tanstack/react-query-devtools"
@@ -79,14 +78,12 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
       </head>
       <body className="bg-100 text-700 bg-background prose-headings:font-bold prose-headings:font-inter font-open-sans !overflow-x-hidden text-sm font-medium">
         <PreconnectResources />
-        <Providers>
-          <NoJSReminder />
-          <QueryClientProvider client={queryMeDaddy}>
-            {children}
-            <ReactQueryDevtools />
-          </QueryClientProvider>
-          <SecretMessage />
-        </Providers>
+        <NoJSReminder />
+        <QueryClientProvider client={queryMeDaddy}>
+          {children}
+          <ReactQueryDevtools />
+        </QueryClientProvider>
+        <SecretMessage />
         {/* Site analytics - Umami */}
         <Script
           id="umami"

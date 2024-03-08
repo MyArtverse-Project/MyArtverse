@@ -1,4 +1,4 @@
-import { Footer, Navbar, Sidebar } from "@/components/base"
+import { Footer, Navbar, NoJSReminder, Sidebar } from "@/components/base"
 import { fetchUserData } from "@/utils/api"
 import type { UserType } from "@/types/users"
 
@@ -16,6 +16,7 @@ export default async function MainLayout({
 
   return (
     <>
+      <NoJSReminder />
       <div>
         <header className="sticky top-0 z-20">
           <Navbar userData={userData} />

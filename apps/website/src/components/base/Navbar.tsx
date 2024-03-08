@@ -1,19 +1,21 @@
 "use client"
 
-import Link from "next/link"
 import { usePathname } from "next/navigation"
-import { useSidebarContext } from "@/context"
+import { sidebarToggle } from "@/atoms"
+import { useAtom } from "jotai"
 import { toLower } from "lodash"
 import { LuMenu } from "react-icons/lu"
 import type { UserType } from "@/types/users"
 import { MyFursonaIcon } from "../icons"
 import { Separator } from "../ui"
 import { Button, SearchButton } from "../ui/Buttons"
-import NavbarProfilePeek from "./NavbarProfilePeek"
+import NavbarLogo from "./NavbarLogo"
 import NavbarUserActions from "./NavbarUserActions"
+import ProfileBreadcrumb from "./ProfileBreadcrumb"
+
 
 export default function Navbar({ userData }: { userData: UserType }) {
-  const { sidebarState: isSidebarOpen, setSidebarState } = useSidebarContext()
+  const [open, setOpen] = useAtom(sidebarToggle)
   // TODO: Implement User Data onto sidebar
   // const USER_PLACEHOLDER = "VulpoTheDev"
   // const HANDLE_PLACEHOLDER = `@${toLower(USER_PLACEHOLDER)}`
@@ -29,20 +31,14 @@ export default function Navbar({ userData }: { userData: UserType }) {
           <Button
             iconOnly
             variant="tritery"
-            onClick={() => setSidebarState(!isSidebarOpen)}
+            onClick={() => setOpen(!open)}
             aria-label="Toggle sidebar"
           >
             <LuMenu size={20} />
           </Button>
         ) : null}
-        <div className="desktop-only-lg">
-          <NavbarProfilePeek />
-        </div>
-        <div className="mobile-only-lg">
-          <Link href="/" aria-label="Home" title="Home">
-            <MyFursonaIcon logoOnly />
-          </Link>
-        </div>
+        <NavbarLogo />
+        <ProfileBreadcrumb />
       </div>
       {/* Navbar right side */}
       <div className="flex items-center gap-x-2.5">

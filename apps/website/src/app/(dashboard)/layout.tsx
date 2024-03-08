@@ -1,7 +1,8 @@
 import dynamic from "next/dynamic"
 import { redirect } from "next/navigation"
-// import { DashboardNavbar, DashboardSidebar } from "@/components/dashboard"
 import { fetchUserData } from "@/utils/api"
+import { DashboardNavbar } from "@/components/dashboard"
+import { Note } from "@/components/ui"
 
 const Navbar = dynamic(() =>
   import("@/components/dashboard").then((c) => c.DashboardNavbar)
@@ -24,8 +25,17 @@ export default async function DashboardLayout({
         <Navbar userData={userData} />
       </header>
       <div className="flex">
-        <Sidebar userData={userData} />
-        <main className="w-full">{children}</main>
+        <DashboardSidebar userData={userData} />
+        <main className="w-full">
+          <noscript>
+            <div className="p-4">
+              <Note type="warning">
+                You'll need to enable JavaScript to access the dashboard.
+              </Note>
+            </div>
+          </noscript>
+          {children}
+        </main>
       </div>
     </div>
   )

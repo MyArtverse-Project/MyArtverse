@@ -1,4 +1,4 @@
-import { dashboardSidebarToggle } from "@/atoms"
+import { sidebarToggleDashboard } from "@/atoms"
 import clsx from "clsx"
 import { useAtom } from "jotai"
 import { LuPencil } from "react-icons/lu"
@@ -9,6 +9,7 @@ import MFImage from "../ui/MFImage"
 export default function SidebarProfile({ userData }: { userData: UserType }) {
   const [isToggled] = useAtom(dashboardSidebarToggle)
   const name = userData.displayName ? userData.displayName : userData.handle
+  
   return (
     <div
       className={clsx(

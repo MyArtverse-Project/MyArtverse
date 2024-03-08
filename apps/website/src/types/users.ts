@@ -1,6 +1,7 @@
+
 import type { LinkedString } from "./utils"
 
-export type UserRoles = ("artist" | "admin" | "contributor")[]
+export type UserRoles = ("artist" | "admin" | "contributor" | "early-tester")[]
 
 export interface UserType {
   id: number
