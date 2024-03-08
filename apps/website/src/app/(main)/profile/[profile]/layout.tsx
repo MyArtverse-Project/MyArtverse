@@ -1,10 +1,10 @@
 import type { Metadata } from "next"
 import { fetchUser, fetchUserCharacters } from "@/utils/api"
+import { BRAND } from "@myfursona-internal/config"
 import type { SlugRouteProps } from "@/types/utils"
 import DynamicLayout from "./DynamicLayout"
 
 export async function generateMetadata({ params }: SlugRouteProps): Promise<Metadata> {
-  // !! NOTE: For testing only, actual user data is going to be fetched through the API
   const userHandleParam = params.profile
 
   return {
@@ -12,7 +12,7 @@ export async function generateMetadata({ params }: SlugRouteProps): Promise<Meta
       template: `%s (@${userHandleParam}) - MyFursona`,
       default: "Profile layout"
     },
-    description: `Follow @${userHandleParam} on MyFursona by creating an account!`
+    description: `Follow @${userHandleParam} on ${BRAND} by creating an account!`
   }
 }
 
@@ -33,6 +33,7 @@ export default async function Layout({
 
   return (
     <>
+      {/* TODO: Remove all props to be retrieved directly from Jotai or react-query */}
       <DynamicLayout profile={userData} character={characterData.mainCharacter} />
       <div>{children}</div>
     </>

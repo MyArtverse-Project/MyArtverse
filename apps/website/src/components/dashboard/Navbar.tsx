@@ -21,6 +21,7 @@ import type { UserType } from "@/types/users"
 
 export default function DashboardNavbar({ userData }: { userData: UserType }) {
   const [isToggled, setIsToggled] = useAtom(dashboardSidebarToggle)
+
   const createNewItems = [
     { icon: LuCat, name: "New fursona" },
     { icon: LuShare, name: "Upload image(s)" },

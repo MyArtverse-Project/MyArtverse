@@ -1,6 +1,8 @@
 /* eslint-disable @typescript-eslint/no-explicit-any */
 import type React from "react"
 
+export type APIMethods = "GET" | "POST" | "DELETE" | "PUT"
+
 export type PartialRecord<K extends PropertyKey, T = string> = Partial<Record<K, T>>
 export type PartialArray<T> = Partial<T>[]
 
@@ -25,3 +27,6 @@ export type ReactMapElement<T extends keyof IntrinsicElements> = IntrinsicElemen
 
 export type Theme = "system" | "light" | "dark"
 export type Variants = "primary" | "secondary" | "tritery" | "success" | "warning" | "error" | "info"
+
+export type Visibility = "public" | "private" | "secret" | "unlisted"
+export type StatusIndicator = "blocked" | "failed" | "canceled" | "pending" | "success" | "finished"

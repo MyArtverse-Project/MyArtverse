@@ -1,12 +1,12 @@
-import ClientInit from "./ClientInit"
 import Footer from "./Footer"
 import Navbar from "./Navbar"
 import NoJSReminder from "./NoJSReminder"
+import SecretMessage from "./SecretMessage"
 import Sidebar from "./Sidebar"
 import SkipNav from "./SkipNav"
 
 export {
-  ClientInit,
+  SecretMessage,
   Navbar,
   Footer,
   Sidebar,

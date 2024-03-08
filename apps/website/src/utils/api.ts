@@ -1,11 +1,37 @@
 import { cookies } from "next/headers"
 import type { CharacterResponse } from "@/types/characters"
 import type { UserType as UserResponse } from "@/types/users"
-import { BACKEND_URL } from "./env"
+import type { APIMethods } from "@/types/utils"
+import { BACKEND_URL as endpoint } from "./env"
 
-type APIMethods = "GET" | "POST" | "DELETE" | "PUT"
+export const refreshToken = () => {
+  const cookiesHeaders = cookies()
+  if (!cookiesHeaders.has("refreshToken")) {
+    return Promise.resolve(false)
+  }
 
-const endpoint = BACKEND_URL
+  const refreshToken = cookiesHeaders.get("refreshToken").value
+  return fetch(`${endpoint}/v1/auth/refresh-token`, {
+    method: "POST",
+    headers: {
+      "Content-Type": "application/json",
+      Cookie: `refreshToken=${refreshToken}`
+    },
+    body: JSON.stringify({}),
+    credentials: "include",
+    cache: "no-cache"
+  })
+    .then((response) => {
+      if (!response.ok) {
+        throw new Error("Failed to refresh token")
+      }
+
+      return true
+    })
+    .catch(() => {
+      return false
+    })
+}
 
 export const apiWithAuth = async <Data>(
   method: APIMethods,
@@ -70,35 +96,6 @@ export const apiWithoutAuth = async <Data>(
     })
     .catch((err) => {
       throw new Error(err)
-    })
-}
-
-export const refreshToken = () => {
-  const cookiesHeaders = cookies()
-  if (!cookiesHeaders.has("refreshToken")) {
-    return Promise.resolve(false)
-  }
-
-  const refreshToken = cookiesHeaders.get("refreshToken").value
-  return fetch(`${endpoint}/v1/auth/refresh-token`, {
-    method: "POST",
-    headers: {
-      "Content-Type": "application/json",
-      Cookie: `refreshToken=${refreshToken}`
-    },
-    body: JSON.stringify({}),
-    credentials: "include",
-    cache: "no-cache"
-  })
-    .then((response) => {
-      if (!response.ok) {
-        throw new Error("Failed to refresh token")
-      }
-
-      return true
-    })
-    .catch(() => {
-      return false
     })
 }
 

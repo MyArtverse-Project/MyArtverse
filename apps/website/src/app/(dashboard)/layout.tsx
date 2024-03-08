@@ -1,6 +1,15 @@
+import dynamic from "next/dynamic"
 import { redirect } from "next/navigation"
-import { DashboardNavbar, DashboardSidebar } from "@/components/ui/Dashboard"
+// import { DashboardNavbar, DashboardSidebar } from "@/components/dashboard"
 import { fetchUserData } from "@/utils/api"
+
+const Navbar = dynamic(() =>
+  import("@/components/dashboard").then((c) => c.DashboardNavbar)
+)
+
+const Sidebar = dynamic(() =>
+  import("@/components/dashboard").then((c) => c.DashboardSidebar)
+)
 
 export default async function DashboardLayout({
   children
@@ -12,10 +21,10 @@ export default async function DashboardLayout({
   return (
     <div>
       <header className="sticky top-0 z-20">
-        <DashboardNavbar userData={userData} />
+        <Navbar userData={userData} />
       </header>
       <div className="flex">
-        <DashboardSidebar userData={userData} />
+        <Sidebar userData={userData} />
         <main className="w-full">{children}</main>
       </div>
     </div>

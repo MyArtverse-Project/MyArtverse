@@ -15,6 +15,7 @@ import {
 } from "react-icons/lu"
 import type { UserRoles, UserType } from "@/types/users"
 
+// TODO: Remove all props to be retrieved directly from Jotai or react-query
 export default function ProfileMasthead({
   profileData,
   hasEditAccess
@@ -72,10 +73,13 @@ export default function ProfileMasthead({
         <Masthead.Avatar profileOnly src={profileData.avatarUrl || null} />
         <Masthead.Details>
           <Masthead.Layer spaceBetween>
-            <h2 className="not-prose font-inter mt-4 flex items-center gap-x-1.5 text-3xl font-bold">
-              <span>{name}</span>
-              <span aria-hidden></span>
-            </h2>
+            <div
+              className="not-prose font-inter mt-4 flex items-center gap-x-1.5 text-3xl font-bold"
+              translate="no"
+            >
+              <div>{name}</div>
+              <span aria-hidden>{/* badges */}</span>
+            </div>
             <div className="relative z-[6] mt-4 flex items-start gap-x-2.5">
               <Button
                 prefixIcon={<BrushIcon size={20} />}
@@ -102,8 +106,12 @@ export default function ProfileMasthead({
                   <>
                     <DropdownItem link="/">Share</DropdownItem>
                     <DropdownItem link="/">Manage trades</DropdownItem>
-                    <DropdownItem link="/">Report {name}</DropdownItem>
-                    <DropdownItem link="/">Block {name}</DropdownItem>
+                    <DropdownItem link="/">
+                      Report <span translate="no">{name}</span>
+                    </DropdownItem>
+                    <DropdownItem link="/">
+                      Block <span translate="no">{name}</span>
+                    </DropdownItem>
                   </>
                 }
               />

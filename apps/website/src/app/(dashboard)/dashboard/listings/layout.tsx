@@ -1,6 +1,6 @@
 import { Tabs } from "@/components/ui"
 import { Button } from "@/components/ui/Buttons"
-import { Container } from "@/components/ui/Dashboard"
+import { Container } from "@/components/dashboard"
 import { LuArrowDownAZ, LuMoreVertical, LuSearch } from "react-icons/lu"
 
 export default function ListingLayout({

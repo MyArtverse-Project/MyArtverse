@@ -3,8 +3,8 @@ import clsx from "clsx"
 import { useAtom } from "jotai"
 import { LuPencil } from "react-icons/lu"
 import type { UserType } from "@/types/users"
-import { Button } from "../Buttons"
-import MFImage from "../MFImage"
+import { Button } from "../ui/Buttons"
+import MFImage from "../ui/MFImage"
 
 export default function SidebarProfile({ userData }: { userData: UserType }) {
   const [isToggled] = useAtom(dashboardSidebarToggle)

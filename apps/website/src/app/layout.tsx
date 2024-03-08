@@ -1,15 +1,24 @@
 import "@myfursona/biro-ui/styles/globals.scss"
 import "react-quill/dist/quill.snow.css"
 import type { Metadata, Viewport } from "next"
+import dynamic from "next/dynamic"
 import { Inter, Open_Sans } from "next/font/google"
 import { headers } from "next/headers"
 import Script from "next/script"
-import { ClientInit } from "@/components/base"
-import NoJSReminder from "@/components/base/NoJSReminder"
+import { NoJSReminder } from "@/components/base"
 import Providers from "@/context"
 import { BRAND } from "@myfursona-internal/config"
+import { QueryClient, QueryClientProvider } from "@tanstack/react-query"
+import { ReactQueryDevtools } from "@tanstack/react-query-devtools"
 import clsx from "clsx"
 import PreconnectResources from "./preconnect-resources"
+
+const SecretMessage = dynamic(
+  () => import("@/components/base").then((c) => c.SecretMessage),
+  {
+    ssr: false
+  }
+)
 
 const inter = Inter({
   subsets: ["latin", "cyrillic-ext"],
@@ -29,18 +38,8 @@ export const metadata: Metadata = {
     default: BRAND
   },
   formatDetection: { telephone: false, address: false },
-  keywords: [
-    "fur",
-    "furries",
-    "furry",
-    "fursona",
-    "mascot",
-    "furry fandom",
-    "toyhouse",
-    "furaffinity",
-    "fur affinity",
-    "weasyl"
-  ],
+  // prettier-ignore
+  keywords: ["fur", "furries", "furry", "fursona", "mascot", "furry fandom", "toyhouse", "furaffinity", "fur affinity", "weasyl"],
   openGraph: {
     type: "website",
     siteName: BRAND
@@ -61,6 +60,8 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
   const umamiId = process.env.UMAMI_ID || ""
   const clarityId = process.env.MS_CLARITY_ID || ""
 
+  const queryMeDaddy = new QueryClient()
+
   return (
     <html
       lang="en"
@@ -80,8 +81,11 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
         <PreconnectResources />
         <Providers>
           <NoJSReminder />
-          {children}
-          <ClientInit />
+          <QueryClientProvider client={queryMeDaddy}>
+            {children}
+            <ReactQueryDevtools />
+          </QueryClientProvider>
+          <SecretMessage />
         </Providers>
         {/* Site analytics - Umami */}
         <Script
