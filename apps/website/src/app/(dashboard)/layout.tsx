@@ -1,8 +1,7 @@
 import dynamic from "next/dynamic"
 import { redirect } from "next/navigation"
-import { fetchUserData } from "@/utils/api"
-import { DashboardNavbar } from "@/components/dashboard"
 import { Note } from "@/components/ui"
+import { fetchUserData } from "@/utils/api"
 
 const Navbar = dynamic(() =>
   import("@/components/dashboard").then((c) => c.DashboardNavbar)
@@ -25,7 +24,7 @@ export default async function DashboardLayout({
         <Navbar userData={userData} />
       </header>
       <div className="flex">
-        <DashboardSidebar userData={userData} />
+        <Sidebar userData={userData} />
         <main className="w-full">
           <noscript>
             <div className="p-4">

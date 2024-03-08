@@ -13,7 +13,6 @@ import NavbarLogo from "./NavbarLogo"
 import NavbarUserActions from "./NavbarUserActions"
 import ProfileBreadcrumb from "./ProfileBreadcrumb"
 
-
 export default function Navbar({ userData }: { userData: UserType }) {
   const [open, setOpen] = useAtom(sidebarToggle)
   // TODO: Implement User Data onto sidebar

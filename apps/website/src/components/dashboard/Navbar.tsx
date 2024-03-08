@@ -11,8 +11,7 @@ import {
   LuFileLock,
   LuShare,
   LuMenu as MenuIcon,
-  LuPlus as PlusIcon,
-  LuSearch as SearchIcon
+  LuPlus as PlusIcon
 } from "react-icons/lu"
 import type { UserType } from "@/types/users"
 import NavbarLogo from "./NavbarLogo"
@@ -50,10 +49,7 @@ export default function DashboardNavbar({ userData }: { userData: UserType }) {
           Create
         </Button>
         <span className="ml-3">
-          <Avatar
-            src={userData.avatarUrl || "/UserProfile.png"}
-            size={32}
-          />
+          <Avatar src={userData.avatarUrl || "/UserProfile.png"} size={32} />
         </span>
       </div>
     </nav>

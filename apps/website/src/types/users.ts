@@ -1,4 +1,3 @@
-
 import type { LinkedString } from "./utils"
 
 export type UserRoles = ("artist" | "admin" | "contributor" | "early-tester")[]

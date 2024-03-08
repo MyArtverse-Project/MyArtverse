@@ -1,12 +1,9 @@
 "use client"
 
 import { Fragment } from "react"
-import { ItemIterator } from "@/components/ui"
-import { useAtom } from "jotai"
-import type { IconType } from "react-icons"
 import { sidebarToggleDashboard } from "@/atoms"
 import { ItemIterator } from "@/components/ui"
-import { useAtom } from "jotai"
+import { useAtom, useAtomValue } from "jotai"
 import {
   LuBrush,
   LuCat,
@@ -23,7 +20,7 @@ import type { UserType } from "@/types/users"
 import SidebarProfile from "./SidebarProfile"
 
 export default function DashboardSidebar({ userData }: { userData: UserType }) {
-  const [isToggled] = useAtom(sidebarToggleDashboard)
+  const toggleState = useAtomValue(sidebarToggleDashboard)
 
   const menuItems = {
     top: [
@@ -52,9 +49,9 @@ export default function DashboardSidebar({ userData }: { userData: UserType }) {
 
   return (
     <div
-      style={{ width: isToggled ? 290 : 85 }}
+      style={{ width: toggleState ? 290 : 85 }}
       className="border-r-mute sticky top-16 h-[calc(100dvh-4.15rem)] flex-shrink-0 overflow-hidden border-r transition-[width] duration-[420ms] ease-in-out [align-self:flex-start]"
-      aria-expanded={isToggled ? "true" : undefined}
+      aria-expanded={toggleState ? "true" : undefined}
     >
       <nav className="flex h-full flex-col justify-between px-3.5 py-3.5">
         <div>

@@ -9,7 +9,7 @@ import MFImage from "../ui/MFImage"
 export default function SidebarProfile({ userData }: { userData: UserType }) {
   const [isToggled] = useAtom(dashboardSidebarToggle)
   const name = userData.displayName ? userData.displayName : userData.handle
-  
+
   return (
     <div
       className={clsx(
