@@ -32,7 +32,14 @@ const nextConfig = {
   images: {
     dangerouslyAllowSVG: true,
     contentDispositionType: "attachment",
-    domains: ["localhost"]
+    remotePatterns: [
+      {
+        protocol: "http",
+        hostname: "localhost",
+        port: "8080",
+        pathname: "/**"
+      }
+    ]
   },
   async rewrites() {
     return [

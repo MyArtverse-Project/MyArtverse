@@ -1,8 +1,8 @@
 import type { Metadata } from "next"
 import { MarginClamp } from "@/components/ui"
+import { fetchUserCharacters } from "@/utils/api"
 import { BRAND } from "@myfursona-internal/config"
 import CharacterView from "./CharacterView"
-import { fetchUserCharacters } from "@/utils/api"
 
 export async function generateMetadata(): Promise<Metadata> {
   return {

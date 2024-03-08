@@ -17,6 +17,6 @@ export interface Character {
 }
 
 export interface CharacterResponse {
-  characters: Character[],
+  characters: Character[]
   mainCharacter: Character | null
 }

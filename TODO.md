@@ -9,6 +9,9 @@
 - [ ] Character Description
 - [ ] Art Modal
 - [ ] General Purpose Modal (Can be used to make reporting modals, block/confirm modals, vice versa)
+- [ ] Tooltip
+- [x] Comments
+- [ ] Button group
 
 ### Pages
 
@@ -20,14 +23,3 @@
 - [ ] Art Page
 - [x] Character Shop Page
 - [ ] Character Gallery Page
-
-### Functionality
-
-- [ ] Avatar Cropper (Appears when Uploading Images for Characters/Characters)
-
-_Tasks listed below are just waiting to get the backend setup_
-
-- [ ] Authentication, Signing In, Out, Registering, Email Verification
-- [ ] Ability to create a Fursona
-- [ ] Ability to upload images
-- [ ] Access Control on Characters

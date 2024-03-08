@@ -15,7 +15,7 @@ export type SlugRouteProps<
   }
 > = {
   params: Params
-  searchParams: SearchParams
+  searchParams?: SearchParams
 }
 
 type IntrinsicElements = React.JSX.IntrinsicElements

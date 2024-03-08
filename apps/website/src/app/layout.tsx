@@ -2,13 +2,13 @@ import "@myfursona/biro-ui/styles/globals.scss"
 import "react-quill/dist/quill.snow.css"
 import type { Metadata, Viewport } from "next"
 import { Inter, Open_Sans } from "next/font/google"
+import { headers } from "next/headers"
 import Script from "next/script"
 import { ClientInit } from "@/components/base"
 import NoJSReminder from "@/components/base/NoJSReminder"
 import Providers from "@/context"
 import { BRAND } from "@myfursona-internal/config"
 import clsx from "clsx"
-import dedent from "dedent"
 import PreconnectResources from "./preconnect-resources"
 
 const inter = Inter({
@@ -56,6 +56,8 @@ export const viewport: Viewport = {
 }
 
 export default function RootLayout({ children }: { children: React.ReactNode }) {
+  const nonce = headers().get("x-nonce")
+
   const umamiId = process.env.UMAMI_ID || ""
   const clarityId = process.env.MS_CLARITY_ID || ""
 
@@ -89,15 +91,13 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
           data-website-id={umamiId}
         />
         {/* Behavior analytics - Microsoft Clarity */}
-        <Script id="clarity" strategy="afterInteractive">
-          {dedent`
-          (function(c,l,a,r,i,t,y){
-            c[a]=c[a]||function(){(c[a].q=c[a].q||[]).push(arguments)};
-            t=l.createElement(r);t.async=1;t.src="https://www.clarity.ms/tag/"+i;
-            y=l.getElementsByTagName(r)[0];y.parentNode.insertBefore(t,y);
-          })(window, document, "clarity", "script", "${clarityId}");
-          `}
-        </Script>
+        <Script
+          id="clarity"
+          nonce={nonce}
+          async
+          strategy="lazyOnload"
+          src={`https://www.clarity.ms/tag/${clarityId}`}
+        />
       </body>
     </html>
   )

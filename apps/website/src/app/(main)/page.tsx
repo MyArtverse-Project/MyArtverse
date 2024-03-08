@@ -1,6 +1,5 @@
 import type { Metadata } from "next"
 import LandingHero from "@/components/landing/LandingHero"
-import LandingIntegration from "@/components/landing/LandingIntegration"
 import { config } from "@/constants"
 import { BRAND } from "@myfursona-internal/config"
 
@@ -23,7 +22,6 @@ export default function Home() {
   return (
     <>
       <LandingHero />
-      <LandingIntegration />
     </>
   )
 }

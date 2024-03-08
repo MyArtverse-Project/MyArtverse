@@ -8,6 +8,7 @@ export default async function DashboardLayout({
   const userData = await fetchUserData().catch(() => {
     return redirect("/login")
   })
+
   return (
     <div>
       <header className="sticky top-0 z-20">

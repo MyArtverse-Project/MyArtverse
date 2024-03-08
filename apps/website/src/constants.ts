@@ -1,4 +1,4 @@
-import { BRAND } from "@myfursona-internal/config/index"
+import { BRAND } from "@myfursona-internal/config"
 
 export const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/
 export const config = {

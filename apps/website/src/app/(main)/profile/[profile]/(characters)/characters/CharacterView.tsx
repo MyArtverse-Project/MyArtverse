@@ -13,9 +13,15 @@ import {
   LuFolderPlus as FolderPlus,
   LuX as XIcon
 } from "react-icons/lu"
-import { Character, CharacterResponse } from "@/types/characters"
+import type { CharacterResponse } from "@/types/characters"
 
-export default function CharacterView({ handle, characters }: { handle: string, characters: CharacterResponse }) {
+export default function CharacterView({
+  handle,
+  characters
+}: {
+  handle: string
+  characters: CharacterResponse
+}) {
   const [createFolderModal, setFolderModalState] = useState(false)
 
   const toggleCreateFolderModal = () => {

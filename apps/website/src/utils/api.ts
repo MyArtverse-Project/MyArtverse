@@ -1,7 +1,7 @@
 import { cookies } from "next/headers"
-import type { UserType } from "@/types/users"
+import type { CharacterResponse } from "@/types/characters"
+import type { UserType as UserResponse } from "@/types/users"
 import { BACKEND_URL } from "./env"
-import { CharacterResponse } from "@/types/characters"
 
 type APIMethods = "GET" | "POST" | "DELETE" | "PUT"
 
@@ -103,12 +103,12 @@ export const refreshToken = () => {
 }
 
 export const fetchUserData = async () => {
-  const data = await apiWithAuth<UserType>("GET", `/v1/profile/me`)
+  const data = await apiWithAuth<UserResponse>("GET", `/v1/profile/me`)
   return data
 }
 
 export const fetchUser = async (handle: string) => {
-  const data = await apiWithoutAuth<UserType>("GET", `/v1/profile/${handle}`)
+  const data = await apiWithoutAuth<UserResponse>("GET", `/v1/profile/${handle}`)
   return data
 }
 

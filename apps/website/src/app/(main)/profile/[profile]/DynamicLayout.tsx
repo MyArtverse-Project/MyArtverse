@@ -1,17 +1,17 @@
 "use client"
 
 import { usePathname } from "next/navigation"
+import { type Character } from "@/types/characters"
 import type { UserType } from "@/types/users"
 import CharacterMasthead from "./CharacterMasthead"
 import ProfileMasthead from "./ProfileMasthead"
-import { Character, CharacterResponse } from "@/types/characters"
 
 export default function DynamicMasthead({
   profile,
   character
 }: {
   profile?: UserType
-  character?: Character
+  character?: Partial<Character>
 }) {
   const path = usePathname()
   const isRouteCharacter = path.includes("character/")
