@@ -75,9 +75,11 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
       </head>
       <body className="bg-100 text-700 bg-background prose-headings:font-bold prose-headings:font-inter font-open-sans !overflow-x-hidden text-sm font-medium">
         <PreconnectResources />
-        <NoJSReminder />
-        <QueryClientWrapper>{children}</QueryClientWrapper>
-        <SecretMessage />
+        <div>
+          <SecretMessage />
+          <NoJSReminder />
+          <QueryClientWrapper>{children}</QueryClientWrapper>
+        </div>
         {/* Site analytics - Umami */}
         <Script
           id="umami"

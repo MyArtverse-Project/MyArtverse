@@ -1,6 +1,7 @@
 import type { Metadata } from "next"
 import { redirect } from "next/navigation"
-import { fetchUser, fetchUserData } from "@/utils/api"
+import { fetchUserData } from "@/utils/api"
+import AuthWall from "../AuthWall"
 import RegisterForm from "./RegisterForm"
 
 export const metadata: Metadata = {
@@ -12,5 +13,10 @@ export default async function SignUp() {
     return null
   })
   if (user) redirect("/")
-  return <RegisterForm />
+
+  return (
+    <AuthWall heading="Register a new account">
+      <RegisterForm />
+    </AuthWall>
+  )
 }
