@@ -1,11 +1,14 @@
 "use client"
 
-import { createContext } from "react"
+import { atom, useAtom, useSetAtom } from "jotai"
 
-export const MastheadContext = createContext<{
-  hasEditAccess: boolean
-  setEditAccess: React.Dispatch<React.SetStateAction<boolean>>
-}>({ hasEditAccess: false, setEditAccess: () => {} })
+const mastheadEditAccess = atom(false)
+
+export function useMastheadAccessAtom() {
+  const [hasAccess, setHasAccess] = useAtom(mastheadEditAccess)
+
+  return [hasAccess, setHasAccess]
+}
 
 export default function MastheadRoot({
   children,
@@ -14,11 +17,9 @@ export default function MastheadRoot({
   children?: React.ReactNode
   hasEditAccess?: boolean
 }) {
-  return (
-    <>
-      {/* <MastheadContext.Provider> */}
-      {children}
-      {/* </MastheadContext.Provider> */}
-    </>
-  )
+  const setHasAccess = useSetAtom(mastheadEditAccess)
+
+  if (hasEditAccess) setHasAccess(true)
+
+  return <div masthead-root="">{children}</div>
 }

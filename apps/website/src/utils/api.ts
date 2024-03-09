@@ -4,14 +4,14 @@ import type { UserType as UserResponse } from "@/types/users"
 import type { APIMethods } from "@/types/utils"
 import { BACKEND_URL as endpoint } from "./env"
 
-export const refreshToken = () => {
+export const refreshToken = async () => {
   const cookiesHeaders = cookies()
   if (!cookiesHeaders.has("refreshToken")) {
     return Promise.resolve(false)
   }
 
   const refreshToken = cookiesHeaders.get("refreshToken").value
-  return fetch(`${endpoint}/v1/auth/refresh-token`, {
+  return await fetch(`${endpoint}/v1/auth/refresh-token`, {
     method: "POST",
     headers: {
       "Content-Type": "application/json",
@@ -21,19 +21,16 @@ export const refreshToken = () => {
     credentials: "include",
     cache: "no-cache"
   })
-    .then((response) => {
-      if (!response.ok) {
-        throw new Error("Failed to refresh token")
-      }
-
-      return true
+    .then((res) => {
+      if (!res.ok) return true
+      throw new Error("Failed to refresh token")
     })
     .catch(() => {
       return false
     })
 }
 
-export const apiWithAuth = async <Data>(
+export const fetchWithAuth = async <Data>(
   method: APIMethods,
   route: string
 ): Promise<Data> => {
@@ -57,7 +54,7 @@ export const apiWithAuth = async <Data>(
     })
   }
 
-  return makeRequest()
+  return await makeRequest()
     .then((res) => {
       if (res.ok) return res.json()
       if (res.status === 401) {
@@ -76,7 +73,7 @@ export const apiWithAuth = async <Data>(
     })
 }
 
-export const apiWithoutAuth = async <Data>(
+export const fetchWithoutAuth = async <Data>(
   method: APIMethods,
   route: string,
   body?: object
@@ -102,16 +99,16 @@ export const apiWithoutAuth = async <Data>(
 }
 
 export const fetchUserData = async () => {
-  const data = await apiWithAuth<UserResponse>("GET", `/v1/profile/me`)
+  const data = await fetchWithAuth<UserResponse>("GET", `/v1/profile/me`)
   return data
 }
 
 export const fetchUser = async (handle: string) => {
-  const data = await apiWithoutAuth<UserResponse>("GET", `/v1/profile/${handle}`)
+  const data = await fetchWithoutAuth<UserResponse>("GET", `/v1/profile/${handle}`)
   return data
 }
 
 export const fetchUserCharacters = async (handle: string) => {
-  const data = await apiWithoutAuth<CharacterResponse>("GET", `/v1/character/${handle}`)
+  const data = await fetchWithoutAuth<CharacterResponse>("GET", `/v1/character/${handle}`)
   return data
 }

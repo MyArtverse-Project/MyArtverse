@@ -1,7 +1,8 @@
 import dynamic from "next/dynamic"
-import { redirect } from "next/navigation"
 import { Note } from "@/components/ui"
-import { fetchUserData } from "@/utils/api"
+
+// import { redirect } from "next/navigation"
+// import { fetchUserData } from "@/utils/api"
 
 const Navbar = dynamic(() =>
   import("@/components/dashboard").then((c) => c.DashboardNavbar)
@@ -14,17 +15,17 @@ const Sidebar = dynamic(() =>
 export default async function DashboardLayout({
   children
 }: Readonly<{ children?: React.ReactNode }>) {
-  const userData = await fetchUserData().catch(() => {
-    return redirect("/login")
-  })
+  // const userData = await fetchUserData().catch(() => {
+  //   return redirect("/login")
+  // })
 
   return (
     <div>
       <header className="sticky top-0 z-20">
-        <Navbar userData={userData} />
+        <Navbar />
       </header>
       <div className="flex">
-        <Sidebar userData={userData} />
+        <Sidebar />
         <main className="w-full">
           <noscript>
             <div className="p-4">

@@ -2,13 +2,12 @@ import { sidebarToggleDashboard } from "@/atoms"
 import clsx from "clsx"
 import { useAtom } from "jotai"
 import { LuPencil } from "react-icons/lu"
-import type { UserType } from "@/types/users"
+// import type { UserType } from "@/types/users"
 import { Button } from "../ui/Buttons"
 import MFImage from "../ui/MFImage"
 
-export default function SidebarProfile({ userData }: { userData: UserType }) {
-  const [isToggled] = useAtom(dashboardSidebarToggle)
-  const name = userData.displayName ? userData.displayName : userData.handle
+export default function SidebarProfile() {
+  const [isToggled] = useAtom(sidebarToggleDashboard)
 
   return (
     <div
@@ -24,7 +23,7 @@ export default function SidebarProfile({ userData }: { userData: UserType }) {
         )}
       >
         <MFImage
-          src={userData.avatarUrl || "/UserProfile.png"}
+          src={"/UserProfile.png"}
           aspectRatio="1"
           width="100%"
           height="100%"
@@ -32,8 +31,8 @@ export default function SidebarProfile({ userData }: { userData: UserType }) {
         />
       </span>
       <span className="flex w-full flex-col">
-        <span className="-mb-0.5 text-lg font-bold">{name}</span>
-        <span className="text-subtext text-xs">@{userData.handle}</span>
+        <span className="-mb-0.5 text-lg font-bold">{"temp"}</span>
+        <span className="text-subtext text-xs">@{"temp"}</span>
       </span>
       <span className="flex-shrink-0">
         <Button iconOnly variant="tritery" size="small">

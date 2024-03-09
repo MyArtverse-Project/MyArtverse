@@ -27,15 +27,19 @@ export default function Badge({
   children,
   prefixIcon,
   size,
-  variant = "default"
+  variant = "default",
+  className
 }: {
   children: React.ReactNode
   prefixIcon?: React.ReactElement<IconType>
+  className?: string
 } & VariantProps<typeof badgeStyles>) {
   return (
     <div id="badge" className={badgeStyles({ variant, size })}>
       {prefixIcon}
-      <span className={clsx("font-inter", size !== "big" ? "text-xs" : "text-sm")}>
+      <span
+        className={clsx("font-inter", size !== "big" ? "text-xs" : "text-sm", className)}
+      >
         {children}
       </span>
     </div>

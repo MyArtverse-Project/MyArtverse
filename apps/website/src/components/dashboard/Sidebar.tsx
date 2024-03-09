@@ -3,7 +3,7 @@
 import { Fragment } from "react"
 import { sidebarToggleDashboard } from "@/atoms"
 import { ItemIterator } from "@/components/ui"
-import { useAtom, useAtomValue } from "jotai"
+import { useAtomValue } from "jotai"
 import {
   LuBrush,
   LuCat,
@@ -16,13 +16,17 @@ import {
   LuSettings,
   LuSparkles
 } from "react-icons/lu"
-import type { UserType } from "@/types/users"
+import type { ItemIteratorType } from "../ui/Layouts/ItemIterator"
+// import type { UserType } from "@/types/users"
 import SidebarProfile from "./SidebarProfile"
 
-export default function DashboardSidebar({ userData }: { userData: UserType }) {
+export default function DashboardSidebar() {
   const toggleState = useAtomValue(sidebarToggleDashboard)
 
-  const menuItems = {
+  const menuItems: {
+    top: ItemIteratorType[]
+    bottom: ItemIteratorType[]
+  } = {
     top: [
       { icon: LuLayoutDashboard, text: "Overview" },
       {
@@ -55,7 +59,7 @@ export default function DashboardSidebar({ userData }: { userData: UserType }) {
     >
       <nav className="flex h-full flex-col justify-between px-3.5 py-3.5">
         <div>
-          <SidebarProfile userData={userData} />
+          <SidebarProfile />
           <ItemIterator as={Fragment} baseUrl="/dashboard/" items={menuItems.top} />
         </div>
         <ItemIterator items={menuItems.bottom} />

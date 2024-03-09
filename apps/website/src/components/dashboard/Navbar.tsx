@@ -13,11 +13,10 @@ import {
   LuMenu as MenuIcon,
   LuPlus as PlusIcon
 } from "react-icons/lu"
-import type { UserType } from "@/types/users"
 import NavbarLogo from "./NavbarLogo"
 import NavbarSearch from "./NavbarSearch"
 
-export default function DashboardNavbar({ userData }: { userData: UserType }) {
+export default function DashboardNavbar() {
   const [isToggled, setIsToggled] = useAtom(sidebarToggleDashboard)
   const createNewItems = [
     { icon: LuCat, name: "New fursona" },
@@ -49,7 +48,7 @@ export default function DashboardNavbar({ userData }: { userData: UserType }) {
           Create
         </Button>
         <span className="ml-3">
-          <Avatar src={userData.avatarUrl || "/UserProfile.png"} size={32} />
+          <Avatar src={"/UserProfile.png"} size={32} />
         </span>
       </div>
     </nav>

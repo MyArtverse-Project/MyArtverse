@@ -88,7 +88,7 @@ const Button = forwardRef(
         href={href ?? undefined}
         type={!href ? type ?? "button" : undefined}
         aria-disabled={disabled ?? undefined}
-        role={!href ? undefined : "button"}
+        role={href ? undefined : "button"}
         className={clsx(
           buttonVars({
             positions: position,

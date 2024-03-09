@@ -9,6 +9,7 @@ import {
   LuFileLock,
   LuHelpCircle,
   LuLanguages,
+  LuLogIn,
   LuMessageSquarePlus,
   LuMoreVertical,
   LuShare
@@ -46,8 +47,8 @@ export default function NavbarUserActions({
         <Button iconOnly variant="secondary" aria-label="Site options">
           <LuMoreVertical size={20} />
         </Button>
-        <Button variant="primary" href="/login">
-          Sign in
+        <Button variant="primary" href="/login" prefixIcon={<LuLogIn size={19} />}>
+          Login
         </Button>
       </>
     )

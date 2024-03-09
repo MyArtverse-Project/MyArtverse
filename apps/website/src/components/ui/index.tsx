@@ -1,10 +1,10 @@
 import Author from "./Author"
-import BuiLink from "./BuiLink"
 import Carousel from "./Carousel"
 import EmptySection from "./EmptySection"
 import Fieldset from "./Fieldset"
 import FolderView from "./Folders"
 import Group from "./Group"
+import Hyperlink from "./Hyperlink"
 import Field from "./Layouts/Field"
 import GridResponsive from "./Layouts/GridResponsive"
 import ItemIterator from "./Layouts/ItemIterator"
@@ -21,7 +21,7 @@ export {
   Author,
   ItemIterator,
   MFImage,
-  BuiLink,
+  Hyperlink,
   EmptySection,
   Modal,
   Note,

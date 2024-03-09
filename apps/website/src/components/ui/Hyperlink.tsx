@@ -3,26 +3,24 @@ import { LuExternalLink as ExternalLinkIcon } from "react-icons/lu"
 import type { UrlObject } from "url"
 import type { ReactMapElement } from "@/types/utils"
 
-export default function BuiLink({
+export default function Hyperlink({
   children,
   href,
   ...others
 }: {
   children?: React.ReactNode
 } & ReactMapElement<"a">) {
-  const hasHTTPInUrl = href.startsWith("http")
+  const hasHttpUrl = href.startsWith("http")
 
   return (
     <Link
-      className="inline-flex w-fit items-center text-blue-400 underline hover:text-blue-500"
+      className="inline-flex w-fit  flex-wrap items-center text-blue-400 underline hover:text-blue-500"
       href={href as unknown as UrlObject}
-      target={hasHTTPInUrl ? "_blank" : undefined}
+      target={hasHttpUrl ? "_blank" : undefined}
       {...others}
     >
       {children}
-      {hasHTTPInUrl ? (
-        <ExternalLinkIcon size={16} style={{ marginLeft: "0.25rem" }} />
-      ) : null}
+      {hasHttpUrl ? <ExternalLinkIcon size={16} className="ml-1" /> : null}
     </Link>
   )
 }

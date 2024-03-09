@@ -12,5 +12,6 @@ export default async function SignIn() {
     return null
   })
   if (user) redirect("/")
+
   return <SignInForm />
 }

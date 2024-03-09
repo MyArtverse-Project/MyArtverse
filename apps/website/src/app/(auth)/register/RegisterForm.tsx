@@ -3,10 +3,11 @@
 import { useRouter } from "next/navigation"
 import { type FormEvent, useState } from "react"
 import { Facebook, Google, XTwitter } from "@/components/icons"
-import { BuiLink } from "@/components/ui"
+import { Hyperlink } from "@/components/ui"
 import { Button } from "@/components/ui/Buttons"
 import { InputField } from "@/components/ui/Forms"
 import Separator from "@/components/ui/Separator"
+import { BACKEND_URL as endpoint } from "@/utils/env"
 import clsx from "clsx"
 
 export default function RegisterForm() {
@@ -27,7 +28,7 @@ export default function RegisterForm() {
       setPasswordError("Password must match")
       return
     }
-    const endpoint = process.env.NEXT_PUBLIC_BACKEND_URL;
+
     fetch(`${endpoint}/v1/auth/register`, {
       method: "POST",
       credentials: "include",
@@ -41,22 +42,20 @@ export default function RegisterForm() {
           router.push("/verify")
         })
       }
-      return res.json().then((data) => {
 
+      return res.json().then((data) => {
         switch (res.status) {
           case 400:
             // Email/Username Taken
             setUsername(data.username)
             setEmailError(data.email)
             setPasswordError(data.error)
-            break;
+            break
           case 401:
-            break;
+            break
         }
       })
     })
-
-
   }
 
   return (
@@ -201,7 +200,7 @@ export default function RegisterForm() {
           </form>
           <div className="mt-6 text-center">
             {"Already have an account? "}
-            <BuiLink href="/login">Sign in</BuiLink>
+            <Hyperlink href="/login">Sign in</Hyperlink>
           </div>
         </div>
       </div>
