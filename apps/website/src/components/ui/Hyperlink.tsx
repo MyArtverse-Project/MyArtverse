@@ -14,7 +14,7 @@ export default function Hyperlink({
 
   return (
     <Link
-      className="inline-flex w-fit  flex-wrap items-center text-blue-400 underline hover:text-blue-500"
+      className="inline-flex w-fit  flex-wrap items-center text-blue-400 hover:text-blue-500 hover:underline"
       href={href as unknown as UrlObject}
       target={hasHttpUrl ? "_blank" : undefined}
       {...others}

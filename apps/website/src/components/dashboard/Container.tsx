@@ -1,4 +1,4 @@
-import clsx from "clsx"
+import cn from "@/utils/cn"
 
 export default function DashboardContainer({
   children,
@@ -16,7 +16,7 @@ export default function DashboardContainer({
   return (
     <div data-dashboard-container="" className="relative">
       <section
-        className={clsx(
+        className={cn(
           "sticky top-0 flex h-[4.5rem] items-center justify-between px-8 py-4",
           !headingTransparent ? "bg-200 bg-opacity-75" : ""
         )}

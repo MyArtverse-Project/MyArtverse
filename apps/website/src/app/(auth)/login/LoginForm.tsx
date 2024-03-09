@@ -3,14 +3,16 @@
 import Link from "next/link"
 import { useRouter } from "next/navigation"
 import { type FormEvent, useState } from "react"
+import { Hyperlink, Separator } from "@/components/ui"
 import AuthWall from "@/components/ui/AuthWall"
 import { Button } from "@/components/ui/Buttons"
 // import { InputField } from "@/components/ui/Forms"
 import { emailRegex } from "@/constants"
+import cn from "@/utils/cn"
 import { BACKEND_URL } from "@/utils/env"
 import { BRAND } from "@myfursona-internal/config"
-import clsx from "clsx"
 import { LuChevronLeft } from "react-icons/lu"
+import ThirdPartyProviders from "../ThirdPartyProviders"
 
 export default function LoginForm() {
   const router = useRouter()
@@ -76,10 +78,16 @@ export default function LoginForm() {
   return (
     <main className="absolute inset-0 m-auto grid place-items-center px-8">
       <AuthWall heading="Log in">
+        <div className="flex w-full gap-3">
+          <ThirdPartyProviders />
+        </div>
         <div className="w-full">
-          <form onSubmit={submitLogin} className="relative mb-96">
+          <Separator dir="horizontal" padding="0.15rem" />
+        </div>
+        <div className="w-full">
+          <form onSubmit={submitLogin} className="relative mb-44">
             <div
-              className={clsx(
+              className={cn(
                 "absolute left-0 top-0 w-full transform transition-all duration-500",
                 emailEntered ? "-translate-x-full opacity-0" : "translate-x-0 opacity-100"
               )}
@@ -88,7 +96,7 @@ export default function LoginForm() {
               <div className="w-full">
                 <label htmlFor="email" className="flex flex-col gap-y-1.5">
                   <span
-                    className={clsx(
+                    className={cn(
                       "text-600 mt-4 flex gap-x-0.5 font-bold uppercase",
                       errors.length > 0 ? "text-error" : null
                     )}
@@ -123,7 +131,7 @@ export default function LoginForm() {
               </div>
             </div>
             <div
-              className={clsx(
+              className={cn(
                 "absolute left-0 top-0 w-full transform transition-all duration-500",
                 emailEntered ? "translate-x-0 opacity-100" : "translate-x-full opacity-0"
               )}
@@ -140,7 +148,7 @@ export default function LoginForm() {
                 </Button>
                 <label htmlFor="password" className="flex flex-col gap-y-1.5">
                   <span
-                    className={clsx(
+                    className={cn(
                       "text-600 mt-0 flex gap-x-0.5 font-bold uppercase",
                       errors.length > 0 ? "text-error" : null
                     )}
@@ -176,12 +184,7 @@ export default function LoginForm() {
         </div>
         <div>
           <span className="mr-2">New to {BRAND}?</span>
-          <Link
-            href="/register?from=login-prompt"
-            className="text-blue-400 hover:underline"
-          >
-            Create a new account
-          </Link>
+          <Hyperlink href="/register?from=login-prompt">Create a new account</Hyperlink>
         </div>
       </AuthWall>
     </main>

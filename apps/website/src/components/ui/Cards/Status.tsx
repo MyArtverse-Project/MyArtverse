@@ -1,4 +1,4 @@
-import clsx from "clsx"
+import cn from "@/utils/cn"
 import type { IconType } from "react-icons"
 import {
   LuLock as LockIcon,
@@ -48,7 +48,7 @@ export default function Status({ status }: { status: FursonaStatus }) {
   const isOwnedLabel = !StatusIcon && !StatusLabel && !StatusClassName
 
   return isOwnedLabel ? null : (
-    <span className={clsx(StatusClassName, base)}>
+    <span className={cn(StatusClassName, base)}>
       {StatusIcon ? <StatusIcon size={19} className="mr-2" /> : null}
       {StatusLabel ? StatusLabel : null}
     </span>

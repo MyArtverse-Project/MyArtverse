@@ -7,7 +7,7 @@ import { Fieldset, Note, Separator } from "@/components/ui"
 import { Button } from "@/components/ui/Buttons"
 import DropZone from "@/components/ui/Drop/DropZone"
 import { FormWithProgress, InputField } from "@/components/ui/Forms"
-import clsx from "clsx"
+import cn from "@/utils/cn"
 import { LuCreditCard as CreditCardIcon, LuLock as LockIcon } from "react-icons/lu"
 import type { UserType } from "@/types/users"
 
@@ -63,7 +63,7 @@ export default function CreateProfileForm({ userData }: { userData: UserType }) 
               <div className="w-full">
                 <label htmlFor="email" className="flex flex-col gap-y-1.5">
                   <span
-                    className={clsx("text-600 mt-4 flex gap-x-0.5 font-bold uppercase")}
+                    className={cn("text-600 mt-4 flex gap-x-0.5 font-bold uppercase")}
                   >
                     Display Name
                   </span>

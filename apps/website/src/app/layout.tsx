@@ -6,8 +6,8 @@ import { Inter, Open_Sans } from "next/font/google"
 import { headers } from "next/headers"
 import Script from "next/script"
 import { NoJSReminder } from "@/components/base"
+import cn from "@/utils/cn"
 import { BRAND } from "@myfursona-internal/config"
-import clsx from "clsx"
 import QueryClientWrapper from "./QueryClientWrapper"
 import PreconnectResources from "./preconnect-resources"
 
@@ -62,7 +62,7 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
     <html
       lang="en"
       dir="ltr"
-      className={clsx(
+      className={cn(
         inter.variable,
         open_sans.variable,
         "theme-system",

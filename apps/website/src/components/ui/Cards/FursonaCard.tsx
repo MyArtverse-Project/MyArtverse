@@ -1,6 +1,6 @@
 /* eslint-disable @typescript-eslint/no-explicit-any */
 import Link from "next/link"
-import clsx from "clsx"
+import cn from "@/utils/cn"
 import { LuHeart as Heart } from "react-icons/lu"
 import type {
   FursonaStatus as AdoptionStatus,
@@ -38,7 +38,7 @@ export default function FursonaCard({
     <DynamicElement
       href={!href ? null : (href as any)}
       aria-label={`Character item: ${name}, ${species}`}
-      className={clsx(
+      className={cn(
         "hover:bg-mute flex flex-col gap-y-2 rounded-md p-4 transition-all",
         href ? "cursor-pointer" : ""
       )}

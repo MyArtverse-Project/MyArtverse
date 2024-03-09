@@ -1,7 +1,7 @@
 /* eslint-disable @typescript-eslint/no-explicit-any */
 import Link from "next/link"
 import { Menu } from "@headlessui/react"
-import clsx from "clsx"
+import cn from "@/utils/cn"
 import type { ReactMapElement } from "@/types/utils"
 
 export default function DropdownItem({
@@ -23,7 +23,7 @@ export default function DropdownItem({
       {({ active }) => (
         <Link
           href={link as any}
-          className={clsx(
+          className={cn(
             "w-full rounded-md transition-colors",
             active && "bg-400 text-700"
           )}

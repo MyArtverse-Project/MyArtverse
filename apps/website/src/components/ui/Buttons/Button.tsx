@@ -3,8 +3,8 @@
 /* eslint-disable @typescript-eslint/no-explicit-any */
 import Link from "next/link"
 import { forwardRef } from "react"
+import cn from "@/utils/cn"
 import { cva } from "class-variance-authority"
-import clsx from "clsx"
 import type { IconType } from "react-icons"
 import type { UrlObject } from "url"
 import type { ReactMapElement, Variants } from "@/types/utils"
@@ -27,6 +27,7 @@ const Button = forwardRef(
       suffixIcon,
       href,
       count,
+      className,
       ...attributes
     }: Readonly<
       Partial<{
@@ -89,12 +90,13 @@ const Button = forwardRef(
         type={!href ? type ?? "button" : undefined}
         aria-disabled={disabled ?? undefined}
         role={href ? undefined : "button"}
-        className={clsx(
+        className={cn(
           buttonVars({
             positions: position,
             intent: variant,
             size
-          })
+          }),
+          className
         )}
         {...attributes}
       >

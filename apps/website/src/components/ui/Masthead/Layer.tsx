@@ -1,6 +1,6 @@
 "use client"
 
-import clsx from "clsx"
+import cn from "@/utils/cn"
 import type { MapElement } from "@/types/utils"
 
 export default function MastheadLayer({
@@ -12,10 +12,7 @@ export default function MastheadLayer({
 } & Partial<Pick<MapElement<"div">, "className">>) {
   return (
     <div
-      className={clsx(
-        "flex flex-wrap items-center",
-        spaceBetween ? "justify-between" : ""
-      )}
+      className={cn("flex flex-wrap items-center", spaceBetween ? "justify-between" : "")}
     >
       {children}
     </div>

@@ -2,7 +2,7 @@
 
 import Image from "next/image"
 import { useState } from "react"
-import clsx from "clsx"
+import cn from "@/utils/cn"
 import type { ReactMapElement } from "@/types/utils"
 
 type ImgLoadStrategy = "lazy" | "neutral" | "important"
@@ -86,7 +86,7 @@ export default function MFImage({
       />
       <div
         id="loading-skeleton"
-        className={clsx(
+        className={cn(
           "absolute inset-0 -z-[2] animate-pulse bg-red-500",
           !imgLoaded ? "" : "hidden"
         )}

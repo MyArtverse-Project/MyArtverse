@@ -2,13 +2,13 @@
 
 import { useRouter } from "next/navigation"
 import { type FormEvent, useState } from "react"
-import { Facebook, Google, XTwitter } from "@/components/icons"
 import { Hyperlink } from "@/components/ui"
+import AuthWall from "@/components/ui/AuthWall"
 import { Button } from "@/components/ui/Buttons"
 import { InputField } from "@/components/ui/Forms"
 import Separator from "@/components/ui/Separator"
+import cn from "@/utils/cn"
 import { BACKEND_URL as endpoint } from "@/utils/env"
-import clsx from "clsx"
 
 export default function RegisterForm() {
   // TODO: Switch to using actions instead of event form after MVP
@@ -59,23 +59,11 @@ export default function RegisterForm() {
   }
 
   return (
-    <main className="absolute inset-0 m-auto grid max-w-md place-items-center px-8">
-      <div className="w-full">
-        <h2 className="not-prose font-inter my-4 text-center text-3xl font-bold">
-          Sign Up
-        </h2>
-        <div className="grid w-full gap-y-1.5">
-          <Button variant="secondary" prefixIcon={<Google />} position="center">
-            Continue with Google
-          </Button>
-          <Button variant="secondary" prefixIcon={<Facebook />} position="center">
-            Continue with Facebook
-          </Button>
-          <Button variant="secondary" prefixIcon={<XTwitter />} position="center">
-            Continue with X
-          </Button>
+    <main className="absolute inset-0 m-auto grid place-items-center px-8">
+      <AuthWall heading="Register a new account">
+        <div className="w-full">
+          <Separator dir="horizontal" padding="0.15rem" />
         </div>
-        <Separator dir="horizontal" padding="1.25rem" />
         <div className="relative w-full">
           <form
             onSubmit={submitRegister}
@@ -85,8 +73,8 @@ export default function RegisterForm() {
             <div>
               <label htmlFor="username" className="flex flex-col gap-y-1.5">
                 <span
-                  className={clsx(
-                    "text-600 mt-4 flex gap-x-0.5 font-bold uppercase",
+                  className={cn(
+                    "text-600 mt-1 flex gap-x-0.5 font-bold uppercase",
                     usernameError ? "text-error" : null
                   )}
                 >
@@ -113,8 +101,8 @@ export default function RegisterForm() {
             <div>
               <label htmlFor="email" className="flex flex-col gap-y-1.5">
                 <span
-                  className={clsx(
-                    "text-600 mt-4 flex gap-x-0.5 font-bold uppercase",
+                  className={cn(
+                    "text-600 mt-1 flex gap-x-0.5 font-bold uppercase",
                     emailError ? "text-error" : null
                   )}
                 >
@@ -141,8 +129,8 @@ export default function RegisterForm() {
             <div>
               <label htmlFor="password" className="flex flex-col gap-y-1.5">
                 <span
-                  className={clsx(
-                    "text-600 mt-4 flex gap-x-0.5 font-bold uppercase",
+                  className={cn(
+                    "text-600 mt-1 flex gap-x-0.5 font-bold uppercase",
                     passwordError ? "text-error" : null
                   )}
                 >
@@ -169,8 +157,8 @@ export default function RegisterForm() {
             <div>
               <label htmlFor="passwordConfirm" className="flex flex-col gap-y-1.5">
                 <span
-                  className={clsx(
-                    "text-600 mt-4 flex gap-x-0.5 font-bold uppercase",
+                  className={cn(
+                    "text-600 mt-1 flex gap-x-0.5 font-bold uppercase",
                     passwordError ? "text-error" : null
                   )}
                 >
@@ -203,7 +191,7 @@ export default function RegisterForm() {
             <Hyperlink href="/login">Sign in</Hyperlink>
           </div>
         </div>
-      </div>
+      </AuthWall>
     </main>
   )
 }

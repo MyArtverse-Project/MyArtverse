@@ -1,7 +1,7 @@
 "use client"
 
 import { usePathname } from "next/navigation"
-import clsx from "clsx"
+import cn from "@/utils/cn"
 import { kebabCase } from "lodash"
 import type { IconType } from "react-icons"
 import type { LinkedString } from "@/types/utils"
@@ -40,7 +40,7 @@ export default function ItemIterator({
             href={parsedUrl}
             aria-current={isMatchingRoute ? "page" : null}
             aria-label={item.text}
-            className={clsx(
+            className={cn(
               "flex items-center gap-x-1.5 rounded-md border-[2px] border-transparent px-4 py-2",
               isActiveRoute || (item.matchStartingRoute && isMatchingRoute)
                 ? "bg-500 text-active"

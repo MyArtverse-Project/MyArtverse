@@ -1,6 +1,6 @@
 "use client"
 
-import clsx from "clsx"
+import cn from "@/utils/cn"
 import { motion } from "framer-motion"
 import type { MapElement } from "@/types/utils"
 import Overlay from "./Overlay"
@@ -39,7 +39,7 @@ export default function Modal({
           type: "tween",
           duration: 0.22
         }}
-        className={clsx(
+        className={cn(
           "border-300 bg-200 fixed left-1/2 top-1/2 overflow-hidden rounded-md border",
           className
         )}

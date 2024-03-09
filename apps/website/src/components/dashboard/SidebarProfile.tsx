@@ -1,5 +1,5 @@
 import { sidebarToggleDashboard } from "@/atoms"
-import clsx from "clsx"
+import cn from "@/utils/cn"
 import { useAtom } from "jotai"
 import { LuPencil } from "react-icons/lu"
 // import type { UserType } from "@/types/users"
@@ -11,13 +11,13 @@ export default function SidebarProfile() {
 
   return (
     <div
-      className={clsx(
+      className={cn(
         "font-inter flex items-center gap-x-2.5 gap-y-3.5 overflow-hidden rounded-md bg-opacity-75 transition-[margin,padding,background-color] duration-[420ms] ease-in-out",
         isToggled ? "bg-300 mb-3 px-4 py-2.5" : "hover:bg-300 mb-0 px-3.5 py-1"
       )}
     >
       <span
-        className={clsx(
+        className={cn(
           "flex-shrink-0 transition-[width] duration-[420ms] ease-in-out",
           isToggled ? "w-10" : "w-8"
         )}

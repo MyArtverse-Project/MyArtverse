@@ -6,7 +6,7 @@ import { Button } from "@/components/ui/Buttons"
 import { FursonaCard, PinnedCharacter } from "@/components/ui/Cards"
 import { InputField } from "@/components/ui/Forms"
 import SearchBox from "@/components/ui/Forms/SearchBox"
-import clsx from "clsx"
+import cn from "@/utils/cn"
 import {
   LuCheckCircle2 as CheckCircle2Icon,
   LuFilter as FilterIcon,
@@ -121,10 +121,7 @@ export default function CharacterView({
               {colors.map((color, i) => (
                 <Button
                   key={i}
-                  className={clsx(
-                    "grid h-10 w-10 place-items-center rounded-full",
-                    color
-                  )}
+                  className={cn("grid h-10 w-10 place-items-center rounded-full", color)}
                   onClick={() => setSelectedIndex(i)}
                 >
                   {selectedIndex == i ? <CheckCircle2Icon className="text-100" /> : null}

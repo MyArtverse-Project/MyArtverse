@@ -1,4 +1,4 @@
-import clsx from "clsx"
+import cn from "@/utils/cn"
 import type { IconType } from "react-icons"
 import { LuAlertTriangle, LuCheckCircle2, LuInfo, LuXCircle } from "react-icons/lu"
 import type { Variants as NoteVariants, PartialRecord } from "@/types/utils"
@@ -62,7 +62,7 @@ export default function Note({
     >
       <StatusIcon
         size={!inline ? 23 : 19}
-        className={clsx("flex-shrink-0", statusIconColor)}
+        className={cn("flex-shrink-0", statusIconColor)}
       />
       <div className={!inline ? "flex flex-col justify-center" : null}>
         {heading && (
