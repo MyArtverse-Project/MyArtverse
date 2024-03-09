@@ -7,9 +7,8 @@ import { headers } from "next/headers"
 import Script from "next/script"
 import { NoJSReminder } from "@/components/base"
 import { BRAND } from "@myfursona-internal/config"
-import { QueryClient, QueryClientProvider } from "@tanstack/react-query"
-import { ReactQueryDevtools } from "@tanstack/react-query-devtools"
 import clsx from "clsx"
+import QueryClientWrapper from "./QueryClientWrapper"
 import PreconnectResources from "./preconnect-resources"
 
 const SecretMessage = dynamic(
@@ -59,8 +58,6 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
   const umamiId = process.env.UMAMI_ID || ""
   const clarityId = process.env.MS_CLARITY_ID || ""
 
-  const queryMeDaddy = new QueryClient()
-
   return (
     <html
       lang="en"
@@ -79,10 +76,7 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
       <body className="bg-100 text-700 bg-background prose-headings:font-bold prose-headings:font-inter font-open-sans !overflow-x-hidden text-sm font-medium">
         <PreconnectResources />
         <NoJSReminder />
-        <QueryClientProvider client={queryMeDaddy}>
-          {children}
-          <ReactQueryDevtools />
-        </QueryClientProvider>
+        <QueryClientWrapper>{children}</QueryClientWrapper>
         <SecretMessage />
         {/* Site analytics - Umami */}
         <Script

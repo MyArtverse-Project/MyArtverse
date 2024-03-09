@@ -95,7 +95,9 @@ export const apiWithoutAuth = async <Data>(
       throw new Error("Unable to provide data")
     })
     .catch((err) => {
-      throw new Error(err)
+      throw new Error(
+        `${err}; please check to see if you have a local backend server running and/or have setup properly`
+      )
     })
 }
 

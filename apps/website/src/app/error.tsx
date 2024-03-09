@@ -20,10 +20,12 @@ export default function Error({ error, reset }: { error: Error; reset: () => voi
             Oh no! Something goof'd up!
           </h2>
         </div>
-        <div className="mb-5 w-full whitespace-break-spaces text-center text-lg opacity-75">{`${error.name}: ${error.message}`}</div>
-        <div className="border-400 bg-300 rounded-md border bg-opacity-30">
+        <div className="mb-10 w-full whitespace-break-spaces text-center text-lg opacity-75">
+          {error.message}
+        </div>
+        <div className="border-400 bg-300 overflow-hidden rounded-md border bg-opacity-30">
           <div className="border-b-400 font-inter border-b px-6 pb-3.5 pt-4">
-            Stack trace (for developers only)
+            Stack trace (for nerds only)
           </div>
           <div className="bg-100 bg-opacity-100">
             <pre className="!select-text overflow-auto p-4 font-mono">{error.stack}</pre>

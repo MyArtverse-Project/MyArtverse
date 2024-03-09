@@ -16,7 +16,7 @@ export function middleware(request: NextRequest) {
       "https://*.hcaptcha.com",
       "https://www.clarity.ms"
     ],
-    "img-src": ["self", "https://image.ctfassets.net"],
+    "img-src": ["self", "unsafe-eval", "https://image.ctfassets.net"],
     "connect-src": ["self", "https://hcaptcha.com", "https://*.hcaptcha.com"],
     "frame-ancestors": ["none"],
     "upgrade-insecure-requests": true
