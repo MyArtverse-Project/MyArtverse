@@ -9,6 +9,8 @@ import {
   LuAlbum,
   LuCat,
   LuFileLock,
+  LuPanelLeftClose,
+  LuPanelLeftOpen,
   LuShare,
   LuMenu as MenuIcon,
   LuPlus as PlusIcon
@@ -30,7 +32,7 @@ export default function DashboardNavbar() {
       {/* Left side */}
       <div className="font-inter relative flex items-center gap-x-2.5">
         <Button iconOnly variant="tritery" onClick={() => setIsToggled(!isToggled)}>
-          <MenuIcon size={21} />
+          {isToggled ? <LuPanelLeftClose size={21} /> : <LuPanelLeftOpen size={21} />}
         </Button>
         <NavbarLogo />
       </div>

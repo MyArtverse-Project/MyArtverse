@@ -7,7 +7,7 @@ import { Button } from "@/components/ui/Buttons"
 import Separator from "@/components/ui/Separator"
 import cn from "@/utils/cn"
 import { BACKEND_URL as endpoint } from "@/utils/env"
-import ThirdPartyProviders from "../ThirdPartyProviders"
+import AuthThirdPartyProviders from "../AuthThirdPartyProviders"
 
 export default function RegisterForm() {
   // TODO: Switch to using actions instead of event form after MVP
@@ -60,7 +60,7 @@ export default function RegisterForm() {
   return (
     <>
       <div className="flex w-full gap-3">
-        <ThirdPartyProviders />
+        <AuthThirdPartyProviders />
       </div>
       <div className="w-full">
         <Separator dir="horizontal" padding="0.15rem" />

@@ -10,12 +10,12 @@ export default function AuthWall({
 }) {
   return (
     <main
-      className="absolute inset-0 m-auto grid place-items-center bg-gradient-to-tr 
+      className="grid h-[100dvh] place-items-center bg-gradient-to-tr 
       from-purple-500 via-violet-400 to-violet-700 px-8
     "
     >
-      <div className="bg-100 relative flex w-full max-w-2xl flex-col items-center gap-y-2.5 overflow-hidden rounded-xl px-8 py-8">
-        <div className="my-8 flex flex-col items-center">
+      <div className="bg-100 relative flex w-full max-w-xl flex-col items-center gap-y-2.5 overflow-hidden rounded-xl px-8 py-6">
+        <div className="mb-6 mt-2 flex flex-col items-center">
           <Link href="/">
             <MyFursonaIcon logoOnly size={1.125} />
           </Link>

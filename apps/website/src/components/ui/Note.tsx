@@ -66,7 +66,14 @@ export default function Note({
       />
       <div className={!inline ? "flex flex-col justify-center" : null}>
         {heading && (
-          <div className="font-inter -translate-y-0.5 text-xl font-bold">{heading}</div>
+          <div
+            className={cn(
+              "font-inter text-xl font-bold",
+              inline ? "" : "-translate-y-0.5"
+            )}
+          >
+            {heading}
+          </div>
         )}
         {children}
       </div>

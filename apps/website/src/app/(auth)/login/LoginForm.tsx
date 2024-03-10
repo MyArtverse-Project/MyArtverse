@@ -1,50 +1,81 @@
 "use client"
 
 import { useRouter } from "next/navigation"
-import { type FormEvent, useState } from "react"
+import { type FormEvent, useRef, useState } from "react"
 import { Hyperlink, Separator } from "@/components/ui"
 import { Button } from "@/components/ui/Buttons"
-// import { InputField } from "@/components/ui/Forms"
+import { InputField } from "@/components/ui/Forms"
 import { emailRegex } from "@/constants"
-import cn from "@/utils/cn"
-import { BACKEND_URL } from "@/utils/env"
+import { BACKEND_URL as endpoint } from "@/utils/env"
 import { BRAND } from "@myfursona-internal/config"
-import { LuChevronLeft } from "react-icons/lu"
-import ThirdPartyProviders from "../ThirdPartyProviders"
+import { motion } from "framer-motion"
+import { LuChevronLeft, LuLogIn } from "react-icons/lu"
+import type { MapElement } from "@/types/utils"
+import AuthThirdPartyProviders from "../AuthThirdPartyProviders"
+
+interface LoginFormData {
+  email: string
+  emailErrorMsg?: string
+  password: string
+  passwordErrorMsg?: string
+}
 
 export default function LoginForm() {
   const router = useRouter()
 
-  const [emailEntered, setEmailEntered] = useState(false)
-  const [errors, setErrors] = useState<string[]>([])
-  const [email, setEmail] = useState("")
-  const [emailError, setEmailError] = useState(null)
-  const [password, setPassword] = useState("")
-  const [passwordError, setPasswordError] = useState(null)
+  const [isValidEmail, setValidEmail] = useState(false)
+  const [formData, setFormData] = useState<LoginFormData>({
+    email: "",
+    emailErrorMsg: null,
+    password: "",
+    passwordErrorMsg: null
+  })
 
-  // TODO export this function as a custom hook as `useValidateEmail()` so it can be used to the signup page as well
+  const clearEmailError = () => {
+    setFormData((prevData) => ({ ...prevData, emailErrorMsg: null }))
+  }
+
+  const handleInputChange = (e: React.ChangeEvent<MapElement<"input">>) => {
+    const { name, value } = e.target
+
+    if (formData.emailErrorMsg) clearEmailError()
+
+    setFormData((prevData) => ({ ...prevData, [name]: value }))
+  }
+
   const validateEmail = () => {
-    if (!email) return
+    const { email } = formData
 
-    if (emailRegex.exec(email)?.length === 1) {
-      setErrors([])
-      return setEmailEntered(true)
+    if (!email) {
+      setFormData((prevData) => ({
+        ...prevData,
+        emailErrorMsg: "This field cannot be blank"
+      }))
+      return
     }
 
-    return setErrors(["Email is invalid!"])
+    if (emailRegex.exec(email)?.length !== 1) {
+      setFormData((prevData) => ({ ...prevData, emailErrorMsg: "Invalid email!" }))
+      return
+    }
+
+    clearEmailError()
+    setValidEmail(true)
+    return
   }
+
+  const passwordFieldRef = useRef<React.ElementRef<"input">>(null)
 
   const submitLogin = (e: FormEvent<HTMLFormElement>) => {
     e.preventDefault()
 
-    const endpoint = BACKEND_URL
     fetch(`${endpoint}/v1/auth/login`, {
       method: "POST",
       credentials: "include",
       headers: {
         "Content-Type": "application/json"
       },
-      body: JSON.stringify({ email, password })
+      body: JSON.stringify({ email: formData.email, password: formData.password })
     }).then((res) => {
       const jsonResponse = res.json()
 
@@ -59,129 +90,145 @@ export default function LoginForm() {
         switch (res.status) {
           case 400:
             // Invalid Login
-            if (data.email) setEmailEntered(false)
-            setEmailError(data.email)
-            setPasswordError(data.password)
+            if (data.email) setValidEmail(false)
+            setFormData((prevData) => ({ ...prevData, passwordErrorMsg: data.password }))
             break
           case 401:
             // Unauthorized -- Must need to be verified
-            setEmailError(data.error)
-            setEmailEntered(false)
+            setFormData((prevData) => ({ ...prevData, emailErrorMsg: data.email }))
+            setValidEmail(false)
             break
         }
       })
     })
   }
 
+  const handleClearFormOnTransitionEnd = () => {
+    if (!isValidEmail) {
+      setFormData((prevData) => ({
+        ...prevData,
+        email: "",
+        password: ""
+      }))
+
+      passwordFieldRef.current.value = ""
+    }
+  }
+
+  const allRequiredFields = {
+    required: true,
+    noLabel: true
+  }
+
+  const fmDelay = 0.15
+  const fmRelativeTransform = 25
+  const fmTransition = {
+    ease: "easeInOut",
+    duration: 0.17
+  }
+
   return (
     <>
-      <div className="flex w-full gap-3">
-        <ThirdPartyProviders />
+      <div className="w-full">
+        <div className="mb-2">Login with</div>
+        <div className="flex gap-1">
+          <AuthThirdPartyProviders />
+        </div>
       </div>
       <div className="w-full">
         <Separator dir="horizontal" padding="0.15rem" />
       </div>
       <div className="w-full">
-        <form onSubmit={submitLogin} className="relative mb-44">
-          <div
-            className={cn(
-              "absolute left-0 top-0 w-full transform transition-all duration-500",
-              emailEntered ? "-translate-x-full opacity-0" : "translate-x-0 opacity-100"
-            )}
+        <motion.form
+          className="relative"
+          onSubmit={submitLogin}
+          animate={{ marginBottom: !isValidEmail ? "0rem" : "2.5rem" }}
+        >
+          {/* Email */}
+          <motion.div
+            animate={{
+              x: !isValidEmail ? "0%" : `-${fmRelativeTransform}%`,
+              opacity: !isValidEmail ? 100 : 0
+            }}
+            transition={{
+              delay: !isValidEmail ? fmDelay : 0,
+              ...fmTransition
+            }}
           >
-            {/* TODO: Temporary */}
-            <div className="w-full">
-              <label htmlFor="email" className="flex flex-col gap-y-1.5">
-                <span
-                  className={cn(
-                    "text-600 mt-4 flex gap-x-0.5 font-bold uppercase",
-                    errors.length > 0 ? "text-error" : null
-                  )}
-                >
-                  Email
-                </span>
-                <input
-                  className="text-700 border-400 bg-100 mb-4 w-full rounded-md border px-4 py-2"
-                  id="email"
-                  type="email"
-                  aria-placeholder="Email"
-                  required
-                  onChange={(e) => setEmail(e.target.value)}
-                  value={email}
-                  autoCapitalize="off"
-                  autoComplete="off"
-                  autoCorrect="off"
-                  spellCheck={false}
-                />
-              </label>
-              <div>{emailError}</div>
-            </div>
-            <div className="text-center">
-              <Button
-                variant="primary"
-                position="center"
-                onClick={validateEmail}
-                href="/login"
+            <InputField
+              {...allRequiredFields}
+              type="email"
+              inputName="Email"
+              placeholder="Email"
+              error={formData.emailErrorMsg}
+              value={formData.email}
+              onChange={handleInputChange}
+              onKeyDown={(e) => {
+                if (e.key === "Enter") validateEmail()
+              }}
+            />
+            <div className="mt-3 flex items-center justify-between">
+              <span
+                className="cursor-pointer text-blue-400 hover:text-blue-500 hover:underline"
+                role="link"
               >
+                Sign-in options
+              </span>
+              <Button type="button" onClick={validateEmail}>
                 Next
               </Button>
             </div>
-          </div>
-          <div
-            className={cn(
-              "absolute left-0 top-0 w-full transform transition-all duration-500",
-              emailEntered ? "translate-x-0 opacity-100" : "translate-x-full opacity-0"
-            )}
+          </motion.div>
+          {/* Password */}
+          <motion.div
+            initial={{
+              x: `${fmRelativeTransform}%`,
+              opacity: 0
+            }}
+            animate={{
+              x: !isValidEmail ? `${fmRelativeTransform}%` : "0%",
+              opacity: !isValidEmail ? 0 : 100,
+              pointerEvents: !isValidEmail ? "none" : "auto"
+            }}
+            transition={{
+              delay: !isValidEmail ? 0 : fmDelay,
+              ...fmTransition
+            }}
+            onTransitionEnd={handleClearFormOnTransitionEnd}
+            className="absolute inset-x-0 top-0"
           >
-            {/* TODO: Temporary */}
-            <div className="w-full">
+            <div className="mb-1.5 flex items-center gap-x-1">
               <Button
-                className="bg-300 hover:bg-400 focus:bg-400 my-2 flex w-full items-center gap-x-1.5 rounded-md border-[2px] border-transparent px-4 py-2 transition-[border,background-color]"
-                prefixIcon={<LuChevronLeft />}
-                onClick={() => setEmailEntered(false)}
-                variant="secondary"
+                variant="tritery"
+                iconOnly
+                onClick={() => setValidEmail(false)}
+                className="p-1"
               >
-                {email}
+                <LuChevronLeft size={19} />
               </Button>
-              <label htmlFor="password" className="flex flex-col gap-y-1.5">
-                <span
-                  className={cn(
-                    "text-600 mt-0 flex gap-x-0.5 font-bold uppercase",
-                    errors.length > 0 ? "text-error" : null
-                  )}
-                >
-                  Password
-                </span>
-                <input
-                  className="text-700 border-400 bg-100 mb-2 w-full rounded-md border px-4 py-2"
-                  id="password"
-                  name="password"
-                  type="password"
-                  placeholder="Password"
-                  aria-placeholder="Password"
-                  required
-                  onChange={(e) => setPassword(e.target.value)}
-                  value={password}
-                  autoCapitalize="off"
-                  autoComplete="off"
-                  autoCorrect="off"
-                  spellCheck={false}
-                />
-              </label>
-              <div>{passwordError}</div>
+              <span className="select-none opacity-75">{formData.email}</span>
             </div>
-            <Button
-              className="bg-300 hover:bg-400 focus:bg-400 my-2 flex w-full items-center gap-x-1.5 rounded-md border-[2px] border-transparent px-4 py-2 transition-[border,background-color]"
-              type="submit"
-            >
-              Login
-            </Button>
-          </div>
-        </form>
+            <InputField
+              ref={passwordFieldRef}
+              {...allRequiredFields}
+              type="password"
+              placeholder="Password"
+              inputName="Password"
+              onChange={handleInputChange}
+            />
+            <div className="mt-3 flex items-center justify-between">
+              <Hyperlink href="/forgot-password">Forgot password?</Hyperlink>
+              <Button type="submit" prefixIcon={<LuLogIn size={20} />}>
+                Login
+              </Button>
+            </div>
+          </motion.div>
+        </motion.form>
       </div>
-      <div>
-        <span className="mr-2">New to {BRAND}?</span>
-        <Hyperlink href="/register?from=login-prompt">Create a new account</Hyperlink>
+      {/* Register link */}
+      <div className="mt-3 flex items-center">
+        <span className="mr-2">{`New to ${BRAND}?`}</span>
+        <Hyperlink href="/register?from=login-prompt">Create an account!</Hyperlink>
       </div>
     </>
   )

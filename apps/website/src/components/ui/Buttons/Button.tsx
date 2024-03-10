@@ -48,14 +48,12 @@ const Button = forwardRef(
     ref
   ) => {
     const buttonVars = cva(
-      [
-        "rounded-md flex items-center gap-x-1.5 transition-[border,background-color] border-[2px]"
-      ],
+      ["flex items-center gap-x-1.5 rounded-md transition-[border,background-color]"],
       {
         variants: {
           intent: {
             primary: "border-transparent bg-300 hover:bg-400",
-            secondary: "bg-100 border-300 hover:bg-400 hover:border-400",
+            secondary: "!border-[2px] bg-100 border-300 hover:bg-400 hover:border-400",
             tritery: "border-transparent bg-transparent hover:bg-400",
             warning: "bg-transparent",
             error: "bg-error text-active hover:bg-opacity-70 border-transparent",
@@ -89,7 +87,6 @@ const Button = forwardRef(
         href={href ?? undefined}
         type={!href ? type ?? "button" : undefined}
         aria-disabled={disabled ?? undefined}
-        role={href ? undefined : "button"}
         className={cn(
           buttonVars({
             positions: position,
