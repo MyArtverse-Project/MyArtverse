@@ -2,7 +2,6 @@
 
 import Image from "next/image"
 import { useState } from "react"
-import cn from "@/utils/cn"
 import type { ReactMapElement } from "@/types/utils"
 
 type ImgLoadStrategy = "lazy" | "neutral" | "important"
@@ -57,20 +56,19 @@ export default function MFImage({
 
   return (
     <div
-      className="relative before:absolute before:inset-0 before:z-[2]"
+      className="relative overflow-hidden before:absolute before:inset-0 before:z-[2]"
       style={{
         aspectRatio,
         height,
         width,
-        overflow: "hidden",
         borderRadius: rounded
       }}
       draggable="false"
       {...attributes}
     >
       <Image
+        className="select-none"
         style={{
-          userSelect: "none",
           objectFit,
           ...style
         }}
@@ -84,13 +82,9 @@ export default function MFImage({
         onLoad={() => setImgLoaded(true)}
         quality={quality}
       />
-      <div
-        id="loading-skeleton"
-        className={cn(
-          "absolute inset-0 -z-[2] animate-pulse bg-red-500",
-          !imgLoaded ? "" : "hidden"
-        )}
-      />
+      {!imgLoaded ? (
+        <div className="bg-400 absolute inset-0 -z-[1] animate-pulse" />
+      ) : null}
     </div>
   )
 }

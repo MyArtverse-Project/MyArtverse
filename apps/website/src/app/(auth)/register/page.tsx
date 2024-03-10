@@ -1,8 +1,10 @@
 import type { Metadata } from "next"
+import dynamic from "next/dynamic"
 import { redirect } from "next/navigation"
 import { fetchUserData } from "@/utils/api"
 import AuthWall from "../AuthWall"
-import RegisterForm from "./RegisterForm"
+
+const RegisterForm = dynamic(() => import("./RegisterForm"))
 
 export const metadata: Metadata = {
   title: "Register an account"

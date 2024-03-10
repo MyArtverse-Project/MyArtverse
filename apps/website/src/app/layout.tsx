@@ -72,12 +72,12 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
     >
       <head>
         <link rel="mask-icon" href="./safari-pinned-tab.svg" color="9e00ff" />
+        <PreconnectResources />
       </head>
       <body className="bg-100 text-700 bg-background prose-headings:font-bold prose-headings:font-inter font-open-sans !overflow-x-hidden text-sm font-medium">
-        <PreconnectResources />
-        <div>
-          <SecretMessage />
+        <div className="contents">
           <NoJSReminder />
+          <SecretMessage />
           <QueryClientWrapper>{children}</QueryClientWrapper>
         </div>
         {/* Site analytics - Umami */}

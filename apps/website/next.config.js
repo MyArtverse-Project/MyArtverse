@@ -20,14 +20,10 @@ const nextConfig = {
   swcMinify: true,
   poweredByHeader: false,
   experimental: {
-    typedRoutes: true,
     mdxRs: true
   },
   typescript: {
     ignoreBuildErrors: true
-  },
-  eslint: {
-    ignoreDuringBuilds: true
   },
   images: {
     dangerouslyAllowSVG: true,

@@ -13,7 +13,7 @@ export default function ThirdPartyProviders() {
         <Button
           key={index}
           prefixIcon={<provider.icon size={21} />}
-          variant="secondary"
+          variant="primary"
           className="w-full"
         >
           {provider.platform}
