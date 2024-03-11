@@ -1,6 +1,8 @@
-import DashboardTitle from "@/utils/DashboardTitle"
+import type { Metadata } from "next"
 
-export const metadata = DashboardTitle("Ref sheets")
+export const metadata: Metadata = {
+  title: "Ref sheets"
+}
 
 export default function RefSheetsPage() {
   return <>ref sheet page</>

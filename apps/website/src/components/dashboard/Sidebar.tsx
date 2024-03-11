@@ -14,6 +14,7 @@ import {
   LuLineChart,
   LuMessagesSquare,
   LuSettings,
+  LuShield,
   LuSparkles
 } from "react-icons/lu"
 import type { ItemIteratorType } from "../ui/Layouts/ItemIterator"
@@ -21,6 +22,7 @@ import type { ItemIteratorType } from "../ui/Layouts/ItemIterator"
 import SidebarProfile from "./SidebarProfile"
 
 export default function DashboardSidebar() {
+  // TODO check for localStorage to persist state of collapse/expand sidebar
   const toggleState = useAtomValue(sidebarToggleDashboard)
 
   const menuItems: {
@@ -38,7 +40,8 @@ export default function DashboardSidebar() {
       { icon: LuBrush, text: "Listings" },
       { icon: LuMessagesSquare, text: "Messages" },
       { icon: LuKanbanSquare, text: "Queue board" },
-      { icon: LuLineChart, text: "Analytics" }
+      { icon: LuLineChart, text: "Analytics" },
+      { icon: LuShield, text: "Artist Requests" }
     ],
     bottom: [
       { icon: LuSparkles, text: "Upgrade", link: "/plus" },

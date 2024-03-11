@@ -17,12 +17,12 @@ export default function DashboardContainer({
     <div data-dashboard-container="" className="relative">
       <section
         className={cn(
-          "sticky top-0 flex h-[4.5rem] items-center justify-between px-8 py-4",
+          "sticky top-0 flex h-[4rem] items-center justify-between px-6 pb-2.5 pt-4",
           !headingTransparent ? "bg-200 bg-opacity-75" : ""
         )}
       >
         <span className="font-inter text-2xl font-bold">{heading}</span>
-        <div className="flex items-center gap-x-1">{actions}</div>
+        {!actions ? <div className="flex items-center gap-x-1">{actions}</div> : null}
       </section>
       <div className={!noChildrenPadding ? "px-8 py-3.5" : null}>{children}</div>
     </div>

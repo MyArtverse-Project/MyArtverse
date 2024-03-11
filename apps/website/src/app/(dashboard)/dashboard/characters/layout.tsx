@@ -6,7 +6,7 @@ export default function CharactersLayout({
 }: Readonly<{ children: React.ReactNode }>) {
   return (
     <Container headingTransparent noChildrenPadding heading="Your characters">
-      <div className="flex items-center justify-start px-3">
+      <div className="after:border-b-mute relative flex items-center justify-start px-3 after:absolute after:inset-x-0 after:bottom-0 after:h-[1px] after:border-b">
         <Tabs
           baseURL="/dashboard"
           items={[

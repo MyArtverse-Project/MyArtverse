@@ -1,8 +1,15 @@
+import type { Metadata } from "next"
 import dynamic from "next/dynamic"
-import { Note } from "@/components/ui"
 
 // import { redirect } from "next/navigation"
 // import { fetchUserData } from "@/utils/api"
+
+export const metadata: Metadata = {
+  title: {
+    default: "Main",
+    template: "%s | Dashboard"
+  }
+}
 
 const Navbar = dynamic(() =>
   import("@/components/dashboard").then((c) => c.DashboardNavbar)
@@ -20,23 +27,14 @@ export default async function DashboardLayout({
   // })
 
   return (
-    <div>
+    <>
       <header className="sticky top-0 z-20">
         <Navbar />
       </header>
       <div className="flex">
         <Sidebar />
-        <main className="w-full">
-          <noscript>
-            <div className="p-4">
-              <Note type="warning">
-                You'll need to enable JavaScript to access the dashboard.
-              </Note>
-            </div>
-          </noscript>
-          {children}
-        </main>
+        <main className="w-full">{children}</main>
       </div>
-    </div>
+    </>
   )
 }

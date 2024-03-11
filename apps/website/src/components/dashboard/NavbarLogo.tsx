@@ -63,7 +63,7 @@ export default function NavbarLogo() {
         }
       >
         <div className="border-600 mx-1 block h-6 rotate-[18deg] border-[2px] border-b-0 border-l-0 opacity-70" />
-        <span className="text-2xl font-bold">Studio</span>
+        <span className="text-2xl font-bold">Dashboard</span>
       </motion.div>
       <motion.span
         id={RETURN_LABEL}

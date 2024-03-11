@@ -24,30 +24,31 @@ export default function Tabs({
   const pathname = usePathname()
 
   return (
-    <div className="flex items-center gap-x-1 py-2">
+    <div className="flex items-center gap-x-1 py-1">
       {items.map(({ text, link, icon: Icon, countIndicator }, i) => (
         <Link
           key={i}
           prefetch
           href={`${baseURL}${link}` as any}
           className={cn(
-            "group relative flex items-center gap-x-2 rounded-md px-4 py-2 transition-colors before:absolute before:-bottom-2 before:left-0 before:right-0 before:block before:h-0.5",
+            "group relative flex items-center gap-x-2 rounded-md px-4 py-2 transition-colors before:absolute before:-bottom-[0.2rem] before:left-0 before:right-0 before:block before:h-0.5",
             pathname === `${baseURL}${link}`
               ? "text-500 hover:bg-200 before:bg-500"
               : "hover:bg-300"
           )}
+          aria-current={pathname === `${baseURL}${link}` ? "page" : undefined}
           aria-label={!countIndicator ? text : `${text}, ${countIndicator} items`}
         >
           {Icon && <Icon size={20} aria-hidden />}
           <span>{text}</span>
-          {countIndicator && (
+          {countIndicator ? (
             <span
               aria-hidden
               className="bg-300 rounded-2xl px-2 py-0.5 text-xs group-hover:bg-opacity-100"
             >
               {countIndicator}
             </span>
-          )}
+          ) : null}
         </Link>
       ))}
     </div>

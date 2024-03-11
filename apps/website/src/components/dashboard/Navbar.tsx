@@ -4,27 +4,29 @@ import { sidebarToggleDashboard } from "@/atoms"
 import { Avatar, Button } from "@/components/ui/Buttons"
 import { useAtom } from "jotai"
 import {
-  LuBell as BellIcon,
-  LuHelpCircle as HelpCircleIcon,
   LuAlbum,
+  LuBell,
   LuCat,
   LuFileLock,
+  LuHelpCircle,
+  LuMegaphone,
   LuPanelLeftClose,
   LuPanelLeftOpen,
-  LuShare,
-  LuMenu as MenuIcon,
-  LuPlus as PlusIcon
+  LuPlus,
+  LuShare
 } from "react-icons/lu"
 import NavbarLogo from "./NavbarLogo"
 import NavbarSearch from "./NavbarSearch"
 
 export default function DashboardNavbar() {
   const [isToggled, setIsToggled] = useAtom(sidebarToggleDashboard)
+
   const createNewItems = [
     { icon: LuCat, name: "New fursona" },
     { icon: LuShare, name: "Upload image(s)" },
     { icon: LuAlbum, name: "New collection" },
-    { icon: LuFileLock, name: "New private note" }
+    { icon: LuFileLock, name: "New private note" },
+    { icon: LuFileLock, name: "New announcements" }
   ]
 
   return (
@@ -41,12 +43,12 @@ export default function DashboardNavbar() {
       {/* Right side: actions */}
       <div className="flex items-center gap-x-1.5">
         <Button iconOnly variant="tritery">
-          <HelpCircleIcon size={21} />
+          <LuHelpCircle size={21} />
         </Button>
         <Button iconOnly variant="tritery">
-          <BellIcon size={21} />
+          <LuBell size={21} />
         </Button>
-        <Button variant="secondary" prefixIcon={<PlusIcon size={21} />}>
+        <Button variant="secondary" prefixIcon={<LuPlus size={21} />}>
           Create
         </Button>
         <span className="ml-3">

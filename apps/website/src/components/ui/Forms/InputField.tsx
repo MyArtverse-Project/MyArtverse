@@ -15,6 +15,7 @@ const InputField = forwardRef(
       required,
       error,
       noLabel,
+      className,
       ...attrs
     }: {
       inputName?: string
@@ -29,14 +30,22 @@ const InputField = forwardRef(
       | "value"
       | "readOnly"
       | "onKeyDown"
+      | "className"
     >,
     ref: React.ForwardedRef<MapElement<"input">>
   ) => {
     const kebabedInputName = kebabCase(inputName)
 
+    const LABEL_TAG = "label" as const
+    const DIV_TAG = "div" as const
+    const DynamicElement = !noLabel ? LABEL_TAG : DIV_TAG
+
     return (
       <div className="w-full">
-        <label htmlFor={kebabCase(inputName)} className="flex flex-col gap-y-1.5">
+        <DynamicElement
+          htmlFor={!noLabel ? kebabCase(inputName) : null}
+          className="flex flex-col gap-y-1.5"
+        >
           {!noLabel ? (
             <span
               className={cn(
@@ -53,7 +62,8 @@ const InputField = forwardRef(
             ref={ref}
             className={cn(
               "text-700 border-400 bg-100 w-full rounded-md border px-4 py-2",
-              error ? "border-error" : null
+              error ? "border-error" : null,
+              className
             )}
             id={kebabedInputName}
             name={kebabedInputName}
@@ -65,7 +75,7 @@ const InputField = forwardRef(
             spellCheck={false}
             {...attrs}
           />
-        </label>
+        </DynamicElement>
         {error ? (
           <div className="text-error mt-2">
             <Note inline type="error">

@@ -2,7 +2,7 @@ import { LuSearch } from "react-icons/lu"
 
 export default function NavbarSearch() {
   return (
-    <div className="relative w-1/3">
+    <div className="relative w-5/12">
       <span className="pointer-events-none absolute bottom-0 left-3.5 top-0 inline-flex items-center">
         <LuSearch size={19} />
       </span>
