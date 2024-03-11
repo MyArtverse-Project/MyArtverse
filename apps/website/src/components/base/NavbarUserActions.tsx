@@ -44,9 +44,11 @@ export default function NavbarUserActions({
   if (!isRegistered) {
     return (
       <>
-        <Button iconOnly variant="secondary" aria-label="Site options">
-          <LuMoreVertical size={20} />
-        </Button>
+        <Button
+          icon={<LuMoreVertical size={20} />}
+          variant="secondary"
+          aria-label="Site options"
+        />
         <Button variant="primary" href="/login" prefixIcon={<LuLogIn size={19} />}>
           Login
         </Button>

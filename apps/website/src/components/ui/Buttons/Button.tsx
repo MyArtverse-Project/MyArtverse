@@ -5,7 +5,6 @@ import Link from "next/link"
 import { forwardRef } from "react"
 import cn from "@/utils/cn"
 import { cva } from "class-variance-authority"
-import type { IconType } from "react-icons"
 import type { UrlObject } from "url"
 import type { ReactMapElement, Variants } from "@/types/utils"
 
@@ -17,7 +16,7 @@ const Button = forwardRef(
   (
     {
       children,
-      iconOnly,
+      icon,
       disabled,
       type,
       variant,
@@ -32,14 +31,14 @@ const Button = forwardRef(
     }: Readonly<
       Partial<{
         children: React.ReactNode
-        iconOnly: boolean
+        icon: NonNullable<React.ReactElement>
         disabled: boolean
         type: ReactMapElement<"button">["type"]
         variant: ButtonVariants
         position: Positions
         size: Sizes
-        prefixIcon: React.ReactElement<IconType>
-        suffixIcon: React.ReactElement<IconType>
+        prefixIcon: React.ReactElement
+        suffixIcon: React.ReactElement
         href: string | UrlObject
         count: number
       }> &
@@ -60,9 +59,9 @@ const Button = forwardRef(
             "error-secondary": "border-error hover:border-opacity-50"
           },
           size: {
-            small: !iconOnly ? "px-2.5 py-1.5" : "p-2",
-            medium: !iconOnly ? "px-3.5 py-2" : "p-2",
-            big: !iconOnly ? "px-5 py-2.5" : "p-3"
+            small: !icon ? "px-2.5 py-1.5" : "p-2",
+            medium: !icon ? "px-3.5 py-2" : "p-2",
+            big: !icon ? "px-5 py-2.5" : "p-3"
           },
           positions: {
             left: "text-left justify-start",
@@ -83,7 +82,6 @@ const Button = forwardRef(
     return (
       <DynamicElement
         ref={ref as any}
-        // @ts-ignore
         href={href ?? undefined}
         type={!href ? type ?? "button" : undefined}
         aria-disabled={disabled ?? undefined}
@@ -98,8 +96,9 @@ const Button = forwardRef(
         {...attributes}
       >
         {prefixIcon}
-        {children && (
-          <span className="inline-block select-none overflow-hidden overflow-ellipsis whitespace-nowrap">
+        {icon}
+        {children ? (
+          <span className="select-none overflow-hidden whitespace-nowrap">
             {children}
             {count && (
               <span className="bg-100 text-700 ml-1.5 rounded-xl p-2 font-semibold">
@@ -107,7 +106,7 @@ const Button = forwardRef(
               </span>
             )}
           </span>
-        )}
+        ) : null}
         {suffixIcon}
       </DynamicElement>
     )

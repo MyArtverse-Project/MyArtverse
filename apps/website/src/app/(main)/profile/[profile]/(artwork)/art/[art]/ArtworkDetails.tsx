@@ -37,12 +37,8 @@ export default function ArtworkDetails({
               >
                 1.4k
               </Button>
-              <Button aria-label="Share" iconOnly>
-                <LuShare size={21} />
-              </Button>
-              <Button aria-label="More" iconOnly>
-                <LuMoreVertical size={21} />
-              </Button>
+              <Button aria-label="Share" icon={<LuShare size={21} />} />
+              <Button aria-label="More" icon={<LuMoreVertical size={21} />} />
             </div>
           </div>
           {/* Artist info */}

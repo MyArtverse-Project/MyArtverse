@@ -200,12 +200,10 @@ export default function LoginForm() {
             <div className="mb-1.5 flex items-center gap-x-1">
               <Button
                 variant="tritery"
-                iconOnly
+                icon={<LuChevronLeft size={19} />}
                 onClick={() => setValidEmail(false)}
                 className="p-1"
-              >
-                <LuChevronLeft size={19} />
-              </Button>
+              />
               <span className="select-none opacity-75">{formData.email}</span>
             </div>
             <InputField

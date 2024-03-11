@@ -15,18 +15,14 @@ export default function CommentItem({
       </div>
       <div className="flex -translate-x-2 items-center gap-x-1">
         <Button
-          iconOnly
+          icon={<LuThumbsUp size={18} />}
           className="hover:bg-300 flex items-center justify-center rounded-full p-2 transition-colors duration-150"
-        >
-          <LuThumbsUp size={18} />
-        </Button>
+        />
         <span className="-ml-1 mr-1 text-[0.85rem]">12k</span>
         <Button
-          iconOnly
+          icon={<LuHeart size={18} className="translate-y-[1px]" />}
           className="hover:bg-300 flex items-center justify-center rounded-full p-2 transition-colors duration-150"
-        >
-          <LuHeart size={18} className="translate-y-[1px]" />
-        </Button>
+        />
         <Button
           size="small"
           prefixIcon={<LuReply size={18} />}

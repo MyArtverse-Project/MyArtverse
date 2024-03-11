@@ -28,13 +28,11 @@ export default function Navbar({ userData }: { userData: UserType }) {
       <div className="flex h-5 items-center gap-x-3">
         {!disableSidebar ? (
           <Button
-            iconOnly
+            icon={<LuMenu size={20} />}
             variant="tritery"
             onClick={() => setOpen(!open)}
             aria-label="Toggle sidebar"
-          >
-            <LuMenu size={20} />
-          </Button>
+          />
         ) : null}
         <NavbarLogo />
         <ProfileBreadcrumb />

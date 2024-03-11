@@ -35,9 +35,7 @@ export default function SidebarProfile() {
         <span className="text-subtext text-xs">@{"temp"}</span>
       </span>
       <span className="flex-shrink-0">
-        <Button iconOnly variant="tritery" size="small">
-          <LuPencil size={18} />
-        </Button>
+        <Button icon={<LuPencil size={18} />} variant="tritery" size="small" />
       </span>
     </div>
   )

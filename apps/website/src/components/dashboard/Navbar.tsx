@@ -33,21 +33,21 @@ export default function DashboardNavbar() {
     <nav className="font-inter bg-100 border-b-mute relative z-20 flex select-none items-center justify-between border-b px-5 py-3 text-sm font-medium">
       {/* Left side */}
       <div className="font-inter relative flex items-center gap-x-2.5">
-        <Button iconOnly variant="tritery" onClick={() => setIsToggled(!isToggled)}>
-          {isToggled ? <LuPanelLeftClose size={21} /> : <LuPanelLeftOpen size={21} />}
-        </Button>
+        <Button
+          icon={
+            isToggled ? <LuPanelLeftClose size={21} /> : <LuPanelLeftOpen size={21} />
+          }
+          variant="tritery"
+          onClick={() => setIsToggled(!isToggled)}
+        ></Button>
         <NavbarLogo />
       </div>
       {/* Search input */}
       <NavbarSearch />
       {/* Right side: actions */}
       <div className="flex items-center gap-x-1.5">
-        <Button iconOnly variant="tritery">
-          <LuHelpCircle size={21} />
-        </Button>
-        <Button iconOnly variant="tritery">
-          <LuBell size={21} />
-        </Button>
+        <Button icon={<LuHelpCircle size={21} />} variant="tritery" />
+        <Button icon={<LuBell size={21} />} variant="tritery" />
         <Button variant="secondary" prefixIcon={<LuPlus size={21} />}>
           Create
         </Button>

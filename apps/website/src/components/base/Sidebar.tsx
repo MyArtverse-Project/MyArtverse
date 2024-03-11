@@ -77,9 +77,7 @@ export default function Sidebar() {
         }
       >
         <div className="flex w-full items-center gap-x-2.5 px-5 py-4">
-          <Button variant="tritery" iconOnly onClick={toggleSidebar}>
-            <XIcon size={20} />
-          </Button>
+          <Button variant="tritery" icon={<XIcon size={20} />} onClick={toggleSidebar} />
           <Link href="/" aria-label="Home" title="Home">
             <MyFursonaIcon />
           </Link>
@@ -92,7 +90,7 @@ export default function Sidebar() {
                   <Menu.Item
                     key={index}
                     name={item.name}
-                    prefix={<item.icon size={20} />}
+                    prefixIcon={<item.icon size={20} />}
                     href="/"
                   />
                 ))}

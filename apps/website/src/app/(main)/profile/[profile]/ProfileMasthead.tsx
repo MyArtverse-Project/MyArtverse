@@ -96,11 +96,7 @@ export default function ProfileMasthead({
               </Button>
               <Dropdown
                 button={
-                  <Button
-                    iconOnly
-                    prefixIcon={<MoreVerticalIcon size={20} />}
-                    aria-label="More"
-                  ></Button>
+                  <Button icon={<MoreVerticalIcon size={20} />} aria-label="More" />
                 }
                 items={
                   <>

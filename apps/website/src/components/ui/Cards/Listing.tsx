@@ -62,12 +62,8 @@ export default function Listing({
         <div className="flex justify-between">
           <div></div>
           <div className="flex items-center gap-x-1">
-            <Button iconOnly>
-              <MoreIcon size={20} />
-            </Button>
-            <Button iconOnly>
-              <StarIcon size={20} />
-            </Button>
+            <Button icon={<MoreIcon size={20} />} />
+            <Button icon={<StarIcon size={20} />} />
             <Button>Purchase</Button>
           </div>
         </div>

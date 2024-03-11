@@ -105,11 +105,9 @@ export default function CharacterView({
             <Button
               size="small"
               variant="tritery"
-              iconOnly
+              icon={<XIcon size={18} />}
               onClick={toggleCreateFolderModal}
-            >
-              <XIcon size={18} />
-            </Button>
+            />
           </div>
         </Modal.Title>
         <div className="flex flex-col gap-y-1 px-4 pb-3">

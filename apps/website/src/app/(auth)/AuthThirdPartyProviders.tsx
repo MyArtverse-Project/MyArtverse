@@ -10,14 +10,14 @@ const providers = [
 export default function AuthThirdPartyProviders() {
   return (
     <>
-      {providers.map((provider, index) => (
+      {providers.map(({ icon: Icon, platform }, index) => (
         <Button
           key={index}
-          prefixIcon={<provider.icon size={21} />}
+          prefixIcon={<Icon size={21} />}
           variant="primary"
           className="w-full"
         >
-          {provider.platform}
+          {platform}
         </Button>
       ))}
     </>
