@@ -27,28 +27,28 @@ export default function ItemIterator({
 
   return (
     <Component>
-      {items.map((item, index) => {
-        const parsedUrl = `${baseUrl}${kebabCase(item.text)}`
-        const isMatchingRoute = path.startsWith(parsedUrl)
-        const isActiveRoute = path === parsedUrl
+      {items.map(({ icon: Icon, text, link, matchStartingRoute }, index) => {
+        const parsedUrl = `${baseUrl}${link ? link.slice(1) : kebabCase(text)}`
+
+        const isRouteMatches = path.startsWith(parsedUrl)
+        const isRouteActive = path === parsedUrl
 
         return (
           <Button
             key={index}
             variant="tritery"
-            prefixIcon={<item.icon size={20} className="flex-shrink-0" aria-hidden />}
+            prefixIcon={<Icon size={20} className="flex-shrink-0" aria-hidden />}
             href={parsedUrl}
-            aria-current={isMatchingRoute ? "page" : null}
-            aria-label={item.text}
+            aria-label={text}
             className={cn(
               "flex items-center gap-x-1.5 rounded-md border-[2px] border-transparent px-4 py-2",
-              isActiveRoute || (item.matchStartingRoute && isMatchingRoute)
+              isRouteActive || (matchStartingRoute && isRouteMatches)
                 ? "bg-500 text-active"
                 : "hover:bg-300 transition-[border,background-color]"
             )}
           >
             <span className="ml-0.5" aria-hidden>
-              {item.text}
+              {text}
             </span>
           </Button>
         )

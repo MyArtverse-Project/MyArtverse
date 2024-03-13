@@ -41,7 +41,7 @@ export default function DashboardSidebar() {
       { icon: LuMessagesSquare, text: "Messages" },
       { icon: LuKanbanSquare, text: "Queue board" },
       { icon: LuLineChart, text: "Analytics" },
-      { icon: LuShield, text: "Artist Requests" }
+      { icon: LuShield, text: "Artist Requests", link: "/admin/artist-requests" }
     ],
     bottom: [
       { icon: LuSparkles, text: "Upgrade", link: "/plus" },

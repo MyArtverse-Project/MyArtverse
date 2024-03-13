@@ -3,11 +3,10 @@ import "react-quill/dist/quill.snow.css"
 import type { Metadata, Viewport } from "next"
 import dynamic from "next/dynamic"
 import { Inter, Open_Sans } from "next/font/google"
-import { headers } from "next/headers"
-import Script from "next/script"
 import { NoJSReminder } from "@/components/base"
 import cn from "@/utils/cn"
 import { BRAND } from "@myfursona-internal/config"
+import Analytics from "./Analytics"
 import QueryClientWrapper from "./QueryClientWrapper"
 import PreconnectResources from "./preconnect-resources"
 
@@ -53,11 +52,6 @@ export const viewport: Viewport = {
 }
 
 export default function RootLayout({ children }: { children: React.ReactNode }) {
-  const nonce = headers().get("x-nonce")
-
-  const umamiId = process.env.UMAMI_ID || ""
-  const clarityId = process.env.MS_CLARITY_ID || ""
-
   return (
     <html
       lang="en"
@@ -80,21 +74,7 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
           <SecretMessage />
           <QueryClientWrapper>{children}</QueryClientWrapper>
         </div>
-        {/* Site analytics - Umami */}
-        <Script
-          id="umami"
-          async
-          src="https://cloud.umami.is/script.js"
-          data-website-id={umamiId}
-        />
-        {/* Behavior analytics - Microsoft Clarity */}
-        <Script
-          id="clarity"
-          nonce={nonce}
-          async
-          strategy="lazyOnload"
-          src={`https://www.clarity.ms/tag/${clarityId}`}
-        />
+        <Analytics />
       </body>
     </html>
   )

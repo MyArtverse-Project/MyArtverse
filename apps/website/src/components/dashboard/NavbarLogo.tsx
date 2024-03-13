@@ -1,33 +1,14 @@
 import Link from "next/link"
-import { useEffect, useRef, useState } from "react"
+import { useState } from "react"
 import { MyFursonaIcon } from "@/components/icons"
 import { BRAND } from "@myfursona-internal/config"
 import { type AnimationProps, motion } from "framer-motion"
 
 export default function NavbarLogo() {
   const [logoHover, setLogoHover] = useState(false)
-  const logoRef = useRef<React.ElementRef<"a">>(null)
 
-  useEffect(() => {
-    const logoElement = logoRef.current
-
-    const handleLogoOn = () => setLogoHover(true)
-    const handleLogoOff = () => setLogoHover(false)
-
-    logoElement.addEventListener("mouseenter", handleLogoOn)
-    logoElement.addEventListener("focusin", handleLogoOn)
-
-    logoElement.addEventListener("mouseleave", handleLogoOff)
-    logoElement.addEventListener("focusout", handleLogoOff)
-
-    return () => {
-      logoElement.removeEventListener("mouseenter", handleLogoOn)
-      logoElement.removeEventListener("focusin", handleLogoOn)
-
-      logoElement.removeEventListener("mouseleave", handleLogoOff)
-      logoElement.removeEventListener("focusout", handleLogoOff)
-    }
-  }, [])
+  const handleLogoOn = () => setLogoHover(true)
+  const handleLogoOff = () => setLogoHover(false)
 
   const RETURN_LABEL = "back-to-home" as const
   const FRAMER_TRANSITION = {
@@ -38,7 +19,10 @@ export default function NavbarLogo() {
   return (
     <>
       <Link
-        ref={logoRef}
+        onMouseEnter={handleLogoOn}
+        onMouseLeave={handleLogoOff}
+        onFocus={handleLogoOn}
+        onBlur={handleLogoOff}
         href="/"
         draggable={false}
         className="relative z-[11]"
@@ -63,13 +47,13 @@ export default function NavbarLogo() {
         }
       >
         <div className="border-600 mx-1 block h-6 rotate-[18deg] border-[2px] border-b-0 border-l-0 opacity-70" />
-        <span className="text-2xl font-bold">Dashboard</span>
+        <span className="text-[1.5rem] font-bold">Dashboard</span>
       </motion.div>
       <motion.span
         id={RETURN_LABEL}
         transition={FRAMER_TRANSITION}
         initial={{
-          x: "9rem",
+          x: "8rem",
           opacity: 0
         }}
         animate={

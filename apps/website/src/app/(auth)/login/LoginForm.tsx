@@ -13,18 +13,16 @@ import { LuChevronLeft, LuLogIn } from "react-icons/lu"
 import type { MapElement } from "@/types/utils"
 import AuthThirdPartyProviders from "../AuthThirdPartyProviders"
 
-interface LoginFormData {
-  email: string
-  emailErrorMsg?: string
-  password: string
-  passwordErrorMsg?: string
-}
-
 export default function LoginForm() {
   const router = useRouter()
 
   const [isValidEmail, setValidEmail] = useState(false)
-  const [formData, setFormData] = useState<LoginFormData>({
+  const [formData, setFormData] = useState<{
+    email: string
+    emailErrorMsg?: string
+    password: string
+    passwordErrorMsg?: string
+  }>({
     email: "",
     emailErrorMsg: null,
     password: "",
@@ -66,17 +64,19 @@ export default function LoginForm() {
 
   const passwordFieldRef = useRef<React.ElementRef<"input">>(null)
 
-  const submitLogin = (e: FormEvent<HTMLFormElement>) => {
+  const submitLogin = async (e: FormEvent<HTMLFormElement>) => {
     e.preventDefault()
 
-    fetch(`${endpoint}/v1/auth/login`, {
+    const requestOptions: RequestInit = {
       method: "POST",
       credentials: "include",
       headers: {
         "Content-Type": "application/json"
       },
       body: JSON.stringify({ email: formData.email, password: formData.password })
-    }).then((res) => {
+    }
+
+    await fetch(`${endpoint}/v1/auth/login`, requestOptions).then((res) => {
       const jsonResponse = res.json()
 
       if (res.ok) {
@@ -86,20 +86,25 @@ export default function LoginForm() {
         })
       }
 
-      return jsonResponse.then((data) => {
-        switch (res.status) {
-          case 400:
-            // Invalid Login
-            if (data.email) setValidEmail(false)
-            setFormData((prevData) => ({ ...prevData, passwordErrorMsg: data.password }))
-            break
-          case 401:
-            // Unauthorized -- Must need to be verified
-            setFormData((prevData) => ({ ...prevData, emailErrorMsg: data.email }))
-            setValidEmail(false)
-            break
-        }
-      })
+      return jsonResponse
+        .then((data) => {
+          switch (res.status) {
+            case 400:
+              // Invalid Login
+              if (data.email) setValidEmail(false)
+              setFormData((prevData) => ({
+                ...prevData,
+                passwordErrorMsg: data.password
+              }))
+              break
+            case 401:
+              // Unauthorized -- Must need to be verified
+              setFormData((prevData) => ({ ...prevData, emailErrorMsg: data.email }))
+              setValidEmail(false)
+              break
+          }
+        })
+        .catch((e) => console.error(e))
     })
   }
 
@@ -148,7 +153,8 @@ export default function LoginForm() {
           <motion.div
             animate={{
               x: !isValidEmail ? "0%" : `-${fmRelativeTransform}%`,
-              opacity: !isValidEmail ? 100 : 0
+              opacity: !isValidEmail ? 100 : 0,
+              pointerEvents: !isValidEmail ? "auto" : "none"
             }}
             transition={{
               delay: !isValidEmail ? fmDelay : 0,

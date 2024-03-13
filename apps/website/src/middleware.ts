@@ -1,40 +1,53 @@
 import { type NextRequest, NextResponse } from "next/server"
-import { isProduction } from "./utils/env"
 import { generateCSP } from "./utils/generateCSP"
 
 export function middleware(request: NextRequest) {
-  // Enable these CSP rules on production and not on dev servers
-  if (isProduction) {
-    const nonce = Buffer.from(crypto.randomUUID()).toString("base64")
-    const cspRules = generateCSP({
-      "script-src": [
-        "self",
-        "unsafe-eval",
-        `nonce-${nonce}`,
-        "https://*.umami.is",
-        "https://hcaptcha.com",
-        "https://*.hcaptcha.com",
-        "https://www.clarity.ms"
-      ],
-      "img-src": ["self", "unsafe-eval", "https://image.ctfassets.net"],
-      "connect-src": ["self", "https://hcaptcha.com", "https://*.hcaptcha.com"],
-      "frame-ancestors": ["none"],
-      "upgrade-insecure-requests": true
-    })
+  // Content-Security-Policy stuff
+  const nonce = Buffer.from(crypto.randomUUID()).toString("base64")
+  const cspRules = generateCSP({
+    "script-src": [
+      "self",
+      "unsafe-eval",
+      `nonce-${nonce}`,
+      "https://*.umami.is",
+      "https://hcaptcha.com",
+      "https://*.hcaptcha.com",
+      "https://www.clarity.ms"
+    ],
+    "img-src": ["self", "data:", "unsafe-eval", "https://image.ctfassets.net"],
+    "connect-src": [
+      "self",
+      "unsafe-eval",
+      "https://hcaptcha.com",
+      "https://*.hcaptcha.com",
+      "http://localhost:*"
+    ],
+    "object-src": ["none"],
+    "base-uri": ["self"],
+    "frame-ancestors": ["none"],
+    "upgrade-insecure-requests": true
+  })
 
-    const requestHeaders = new Headers(request.headers)
-    requestHeaders.set("Content-Security-Policy", cspRules)
+  const requestHeaders = new Headers(request.headers)
+  requestHeaders.set("Content-Security-Policy", cspRules)
+  requestHeaders.set("x-nonce", nonce)
 
-    const response = NextResponse.next({
-      request: {
-        headers: requestHeaders
-      }
-    })
+  const res = NextResponse.next({
+    request: {
+      headers: requestHeaders
+    }
+  })
 
-    response.headers.set("Content-Security-Policy", cspRules)
+  res.headers.set("Content-Security-Policy", cspRules)
+  res.headers.append("Access-Control-Allow-Credentials", "true")
+  res.headers.append("Access-Control-Allow-Origin", "*")
+  res.headers.append("Access-Control-Allow-Methods", "GET,DELETE,PATCH,POST,PUT")
+  res.headers.append(
+    "Access-Control-Allow-Headers",
+    "X-CSRF-Token, X-Requested-With, Accept, Accept-Version, Content-Length, Content-MD5, Content-Type, Date, X-Api-Version"
+  )
 
-    return response
-  }
+  return res
 }
 
 export const config = {

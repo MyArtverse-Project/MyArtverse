@@ -1,5 +1,4 @@
 import type { Metadata } from "next"
-import LandingHero from "@/components/landing/LandingHero"
 import { config } from "@/constants"
 import { BRAND } from "@myfursona-internal/config"
 
@@ -21,7 +20,11 @@ export const metadata: Metadata = {
 export default function Home() {
   return (
     <>
-      <LandingHero />
+      <div className="w-full p-8">
+        <div className="border-separator  rounded-md border border-dashed px-6 py-20 text-center text-lg">
+          Front page needs a redesign, this is only temporary
+        </div>
+      </div>
     </>
   )
 }
