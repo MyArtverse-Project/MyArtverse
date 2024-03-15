@@ -11,7 +11,8 @@ export default function CharactersLayout({
           baseURL="/dashboard"
           items={[
             { link: "/characters", text: "Characters" },
-            { link: "/characters/refsheets", text: "Ref sheets" }
+            { link: "/characters/refsheets", text: "Ref sheets" },
+            { link: "/characters/create", text: "Create Character" }
           ]}
         />
       </div>

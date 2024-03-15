@@ -34,7 +34,7 @@ export default async function Layout({
   return (
     <>
       {/* TODO: Remove all props to be retrieved directly from Jotai or react-query */}
-      <DynamicLayout profile={userData} character={characterData.mainCharacter} />
+      <DynamicLayout profile={userData} character={null} />
       <div>{children}</div>
     </>
   )
