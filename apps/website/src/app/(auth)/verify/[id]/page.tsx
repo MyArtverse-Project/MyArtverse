@@ -1,5 +1,4 @@
 import { redirect } from "next/navigation"
-import React from "react"
 import { BACKEND_URL } from "@/utils/env"
 
 export default function Page({ params }) {

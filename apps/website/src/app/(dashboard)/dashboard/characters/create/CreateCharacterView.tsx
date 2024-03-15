@@ -1,7 +1,6 @@
 "use client"
 
-import { Input } from "postcss"
-import React from "react"
+import { useState } from "react"
 import { Container, Heading } from "@/components/dashboard"
 import { MFImage } from "@/components/ui"
 import DropZone from "@/components/ui/Drop/DropZone"
@@ -9,7 +8,7 @@ import { InputField } from "@/components/ui/Forms"
 import Checkbox from "@/components/ui/Forms/Checkbox"
 
 export default function CreateCharacterView() {
-  const [mainCharacter, setMainCharacter] = React.useState(false)
+  const [mainCharacter, setMainCharacter] = useState(false)
 
   return (
     <Container headingTransparent={false} noChildrenPadding heading="Character Details">

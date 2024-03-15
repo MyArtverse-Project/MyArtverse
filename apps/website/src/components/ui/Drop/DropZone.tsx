@@ -1,9 +1,11 @@
 "use client"
 
 import { useEffect, useState } from "react"
-import { LuUpload as UploadIcon } from "react-icons/lu"
+import cn from "@/utils/cn"
+import { LuUpload } from "react-icons/lu"
+import MFImage from "../MFImage"
 
-const allowedTypes = ["image/png", "image/jpeg", "image/jpg"]
+const allowedTypes = ["image/png", "image/jpeg", "image/jpg"] as const
 const maxFileSize = 25 * 1024 * 1024 // 25 MB
 
 export default function DropZone() {
@@ -62,7 +64,10 @@ export default function DropZone() {
 
   return (
     <div
-      className={`${isDragging ? "bg-400" : "bg-300"} border-600 rounded-[10px] border-4 border-dashed px-10 py-10 text-center`}
+      className={cn(
+        isDragging ? "bg-400" : "bg-300",
+        "border-600 rounded-md border-4 border-dashed p-10 text-center"
+      )}
       onDragEnter={handleDrag}
       onDragOver={handleDrag}
       onDragLeave={handleDrag}
@@ -71,14 +76,14 @@ export default function DropZone() {
       {file ? (
         <div className="flex flex-col items-center justify-center">
           <input type="file" className="hidden" onChange={handleFileInputChange} />
-          <img src={imageUrl} width={200} height={200} />
+          <MFImage alt="" src={imageUrl} width={200} height={200} />
           <h4 className="text-sm">Uploaded!</h4>
         </div>
       ) : (
         <div className="flex flex-col items-center justify-center">
           <input type="file" className="hidden" onChange={handleFileInputChange} />
           <span className="bg-100 mb-6 flex items-center justify-center rounded-full p-6">
-            <UploadIcon size={64} />
+            <LuUpload size={64} />
           </span>
           <h4 className="text-sm">Drag Files Here</h4>
           <p className="mt-4 text-xl">Max size: 25MB, Supported: PNG, JPG</p>
