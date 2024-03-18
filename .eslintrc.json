@@ -1,7 +1,8 @@
 {
   "root": true,
   "env": {
-    "es6": true
+    "es2021": true,
+    "browser": true
   },
   "extends": ["next", "eslint:recommended", "plugin:@typescript-eslint/recommended"],
   "plugins": ["unused-imports", "@stylistic"],
@@ -64,12 +65,32 @@
     ]
   },
   "parser": "@typescript-eslint/parser",
-  "ignorePatterns": [
-    "dist",
-    "apps/website/public/sw.js",
-    "apps/website/public/workbox-*",
-    "apps/website/public/worker-*",
-    "*.tsbuildinfo"
+  "overrides": [
+    {
+      "files": ["apps/website/src/**", "apps/widget/src/**", "apps/desktop/src/**"],
+      "rules": {
+        "react/iframe-missing-sandbox": "warn",
+        "react/no-deprecated": "warn",
+        "react/jsx-no-script-url": "error"
+      }
+    },
+    {
+      "files": ["apps/website/src/app/**", "apps/website/src/components/**"],
+      "rules": {
+        "@next/next/no-img-element": "off",
+        "react/forbid-elements": [
+          "error",
+          {
+            "forbid": [
+              {
+                "element": "img",
+                "message": "use <MFImage> as a better alternative"
+              }
+            ]
+          }
+        ]
+      }
+    }
   ],
   "settings": {
     "next": {
