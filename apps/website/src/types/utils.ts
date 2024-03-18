@@ -30,3 +30,9 @@ export type Variants = "primary" | "secondary" | "tritery" | "success" | "warnin
 
 export type Visibility = "public" | "private" | "secret" | "unlisted"
 export type StatusIndicator = "blocked" | "failed" | "canceled" | "pending" | "success" | "finished"
+
+export type FormFieldWithErrors<T extends object> = Partial<
+  T & {
+    [K in keyof T as `${string & K}ErrorMsg`]: string | null
+  }
+>

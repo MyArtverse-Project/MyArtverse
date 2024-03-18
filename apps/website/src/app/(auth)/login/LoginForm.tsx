@@ -30,7 +30,7 @@ export default function LoginForm() {
   })
 
   const clearEmailError = () => {
-    setFormData((prevData) => ({ ...prevData, emailErrorMsg: null }))
+    setFormData((prevValue) => ({ ...prevValue, emailErrorMsg: null }))
   }
 
   const handleInputChange = (e: React.ChangeEvent<MapElement<"input">>) => {
@@ -38,22 +38,22 @@ export default function LoginForm() {
 
     if (formData.emailErrorMsg) clearEmailError()
 
-    setFormData((prevData) => ({ ...prevData, [name]: value }))
+    setFormData((prevValue) => ({ ...prevValue, [name]: value }))
   }
 
   const validateEmail = () => {
     const { email } = formData
 
     if (!email) {
-      setFormData((prevData) => ({
-        ...prevData,
+      setFormData((prevValue) => ({
+        ...prevValue,
         emailErrorMsg: "This field cannot be blank"
       }))
       return
     }
 
     if (emailRegex.exec(email)?.length !== 1) {
-      setFormData((prevData) => ({ ...prevData, emailErrorMsg: "Invalid email!" }))
+      setFormData((prevValue) => ({ ...prevValue, emailErrorMsg: "Invalid email!" }))
       return
     }
 
@@ -64,7 +64,7 @@ export default function LoginForm() {
 
   const passwordFieldRef = useRef<React.ElementRef<"input">>(null)
 
-  const submitLogin = async (e: FormEvent<HTMLFormElement>) => {
+  const submitLogin = async (e: FormEvent<MapElement<"form">>) => {
     e.preventDefault()
 
     const requestOptions: RequestInit = {
@@ -92,14 +92,14 @@ export default function LoginForm() {
             case 400:
               // Invalid Login
               if (data.email) setValidEmail(false)
-              setFormData((prevData) => ({
-                ...prevData,
+              setFormData((prevValue) => ({
+                ...prevValue,
                 passwordErrorMsg: data.password
               }))
               break
             case 401:
               // Unauthorized -- Must need to be verified
-              setFormData((prevData) => ({ ...prevData, emailErrorMsg: data.email }))
+              setFormData((prevValue) => ({ ...prevValue, emailErrorMsg: data.email }))
               setValidEmail(false)
               break
           }
@@ -110,8 +110,8 @@ export default function LoginForm() {
 
   const handleClearFormOnTransitionEnd = () => {
     if (!isValidEmail) {
-      setFormData((prevData) => ({
-        ...prevData,
+      setFormData((prevValue) => ({
+        ...prevValue,
         email: "",
         password: ""
       }))
@@ -122,7 +122,8 @@ export default function LoginForm() {
 
   const allRequiredFields = {
     required: true,
-    noLabel: true
+    noLabel: true,
+    onChange: handleInputChange
   }
 
   const fmDelay = 0.15
@@ -140,99 +141,98 @@ export default function LoginForm() {
           <AuthThirdPartyProviders />
         </div>
       </div>
-      <div className="w-full">
+      <div className="my-3 w-full">
         <Separator dir="horizontal" padding="0.15rem" />
       </div>
       <div className="w-full">
-        <motion.form
-          className="relative"
-          onSubmit={submitLogin}
-          animate={{ marginBottom: !isValidEmail ? "0rem" : "2.5rem" }}
-        >
-          {/* Email */}
+        <form onSubmit={submitLogin}>
           <motion.div
-            animate={{
-              x: !isValidEmail ? "0%" : `-${fmRelativeTransform}%`,
-              opacity: !isValidEmail ? 100 : 0,
-              pointerEvents: !isValidEmail ? "auto" : "none"
-            }}
-            transition={{
-              delay: !isValidEmail ? fmDelay : 0,
-              ...fmTransition
-            }}
+            className="relative"
+            animate={{ marginBottom: !isValidEmail ? "0rem" : "2.5rem" }}
           >
-            <InputField
-              {...allRequiredFields}
-              type="email"
-              inputName="Email"
-              placeholder="Email"
-              error={formData.emailErrorMsg}
-              value={formData.email}
-              onChange={handleInputChange}
-              onKeyDown={(e) => {
-                if (e.key === "Enter") validateEmail()
+            {/* Email field */}
+            <motion.div
+              animate={{
+                x: !isValidEmail ? "0%" : `-${fmRelativeTransform}%`,
+                opacity: !isValidEmail ? 100 : 0,
+                pointerEvents: !isValidEmail ? "auto" : "none"
               }}
-            />
-            <div className="mt-3 flex items-center justify-between">
-              <span
-                className="cursor-pointer text-blue-400 hover:text-blue-500 hover:underline"
-                role="link"
-              >
-                Sign-in options
-              </span>
-              <Button type="button" onClick={validateEmail}>
-                Next
-              </Button>
-            </div>
-          </motion.div>
-          {/* Password */}
-          <motion.div
-            initial={{
-              x: `${fmRelativeTransform}%`,
-              opacity: 0
-            }}
-            animate={{
-              x: !isValidEmail ? `${fmRelativeTransform}%` : "0%",
-              opacity: !isValidEmail ? 0 : 100,
-              pointerEvents: !isValidEmail ? "none" : "auto"
-            }}
-            transition={{
-              delay: !isValidEmail ? 0 : fmDelay,
-              ...fmTransition
-            }}
-            onTransitionEnd={handleClearFormOnTransitionEnd}
-            className="absolute inset-x-0 top-0"
-          >
-            <div className="mb-1.5 flex items-center gap-x-1">
-              <Button
-                variant="tritery"
-                icon={<LuChevronLeft size={19} />}
-                onClick={() => setValidEmail(false)}
-                className="p-1"
+              transition={{
+                delay: !isValidEmail ? fmDelay : 0,
+                ...fmTransition
+              }}
+            >
+              <InputField
+                {...allRequiredFields}
+                type="email"
+                inputName="Email"
+                placeholder="Email"
+                error={formData.emailErrorMsg}
+                value={formData.email}
+                onKeyDown={(e) => {
+                  if (e.key === "Enter") validateEmail()
+                }}
               />
-              <span className="select-none opacity-75">{formData.email}</span>
-            </div>
-            <InputField
-              ref={passwordFieldRef}
-              {...allRequiredFields}
-              type="password"
-              placeholder="Password"
-              inputName="Password"
-              onChange={handleInputChange}
-            />
-            <div className="mt-3 flex items-center justify-between">
-              <Hyperlink href="/forgot-password">Forgot password?</Hyperlink>
-              <Button type="submit" prefixIcon={<LuLogIn size={20} />}>
-                Login
-              </Button>
-            </div>
+              <div className="mt-3 flex items-center justify-between">
+                <span
+                  className="cursor-pointer text-blue-400 hover:text-blue-500 hover:underline"
+                  role="link"
+                >
+                  Sign-in options
+                </span>
+                <Button type="button" onClick={validateEmail}>
+                  Next
+                </Button>
+              </div>
+            </motion.div>
+            {/* Password field */}
+            <motion.div
+              initial={{
+                x: `${fmRelativeTransform}%`,
+                opacity: 0
+              }}
+              animate={{
+                x: !isValidEmail ? `${fmRelativeTransform}%` : "0%",
+                opacity: !isValidEmail ? 0 : 100,
+                pointerEvents: !isValidEmail ? "none" : "auto"
+              }}
+              transition={{
+                delay: !isValidEmail ? 0 : fmDelay,
+                ...fmTransition
+              }}
+              onTransitionEnd={handleClearFormOnTransitionEnd}
+              className="absolute inset-x-0 top-0"
+            >
+              <div className="mb-1.5 flex items-center gap-x-1">
+                <Button
+                  variant="tritery"
+                  icon={<LuChevronLeft size={19} />}
+                  onClick={() => setValidEmail(false)}
+                  className="p-1"
+                />
+                <span className="select-none opacity-75">{formData.email}</span>
+              </div>
+              <InputField
+                ref={passwordFieldRef}
+                {...allRequiredFields}
+                type="password"
+                placeholder="Password"
+                inputName="Password"
+              />
+              <div className="mt-3 flex items-center justify-between">
+                <Hyperlink href="/forgot-password">Forgot password?</Hyperlink>
+                <Button type="submit" prefixIcon={<LuLogIn size={20} />}>
+                  Login
+                </Button>
+              </div>
+            </motion.div>
           </motion.div>
-        </motion.form>
+        </form>
       </div>
       {/* Register link */}
-      <div className="mt-3 flex items-center">
+      <div className="mt-3 flex justify-center">
         <span className="mr-2">{`New to ${BRAND}?`}</span>
-        <Hyperlink href="/register?from=login-prompt">Create an account!</Hyperlink>
+        <Hyperlink href="/register">Create an account!</Hyperlink>
       </div>
     </>
   )

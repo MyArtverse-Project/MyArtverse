@@ -25,7 +25,7 @@ export default function Footer() {
   const copyrightOwner = "Fusky Labs Software Ltd and the MyArtverse contributors"
 
   return (
-    <div className="border-t-400 mt-12 border-t py-8">
+    <div className="border-t-400 border-t py-8">
       <footer className="font-inter mx-auto flex max-w-screen-xl flex-col gap-y-10 px-8">
         <div className="flex items-center gap-x-3.5">
           <Link href="/" className="hover:opacity-60">

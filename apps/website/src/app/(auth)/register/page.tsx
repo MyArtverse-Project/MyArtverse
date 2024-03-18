@@ -17,7 +17,7 @@ export default async function SignUp() {
   if (user) redirect("/")
 
   return (
-    <AuthWall heading="Register a new account">
+    <AuthWall heading="Register a new account" noFixed>
       <RegisterForm />
     </AuthWall>
   )

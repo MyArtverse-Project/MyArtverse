@@ -4,27 +4,50 @@ import { useRouter } from "next/navigation"
 import { type FormEvent, useState } from "react"
 import { Hyperlink } from "@/components/ui"
 import { Button } from "@/components/ui/Buttons"
+import { InputField } from "@/components/ui/Forms"
 import Separator from "@/components/ui/Separator"
-import cn from "@/utils/cn"
 import { BACKEND_URL as endpoint } from "@/utils/env"
+import type { FormFieldWithErrors, MapElement } from "@/types/utils"
 import AuthThirdPartyProviders from "../AuthThirdPartyProviders"
 
 export default function RegisterForm() {
   // TODO: Switch to using actions instead of event form after MVP
   const router = useRouter()
-  const [usernameError, setUsernameError] = useState("")
-  const [username, setUsername] = useState("")
-  const [emailError, setEmailError] = useState("")
-  const [email, setEmail] = useState("")
-  const [passwordError, setPasswordError] = useState("")
-  const [password, setPassword] = useState("")
-  const [confirmPassword, setConfirmPassword] = useState("")
 
-  // dud function
-  const submitRegister = async (e: FormEvent<HTMLFormElement>) => {
+  const [registerFormData, setRegisterFormData] = useState<
+    FormFieldWithErrors<{
+      username: string
+      email: string
+      password: string
+      confirmPassword: string
+    }>
+  >({
+    username: "",
+    usernameErrorMsg: null,
+    email: "",
+    emailErrorMsg: null,
+    password: "",
+    passwordErrorMsg: null,
+    confirmPassword: "",
+    confirmPasswordErrorMsg: null
+  })
+
+  const handleInputChange = (e: React.ChangeEvent<MapElement<"input">>) => {
+    const { name, value } = e.target
+
+    setRegisterFormData((prevValue) => ({ ...prevValue, [name]: value }))
+  }
+
+  const submitRegister = async (e: FormEvent<MapElement<"form">>) => {
     e.preventDefault()
+
+    const { email, username, password, confirmPassword } = registerFormData
+
     if (password !== confirmPassword) {
-      setPasswordError("Password must match")
+      setRegisterFormData((prevValue) => ({
+        ...prevValue,
+        passwordErrorMsg: "Password must match"
+      }))
       return
     }
 
@@ -36,19 +59,22 @@ export default function RegisterForm() {
       },
       body: JSON.stringify({ email, username, password })
     }).then((res) => {
+      const jsonRes = res.json()
+
       if (res.ok) {
-        return res.json().then((data) => {
-          router.push("/verify")
-        })
+        return jsonRes.then((data) => router.push("/verify"))
       }
 
-      return res.json().then((data) => {
+      return jsonRes.then((data) => {
         switch (res.status) {
           case 400:
             // Email/Username Taken
-            setUsername(data.username)
-            setEmailError(data.email)
-            setPasswordError(data.error)
+            setRegisterFormData((prevData) => ({
+              ...prevData,
+              username: data.username,
+              email: data.email,
+              password: data.password
+            }))
             break
           case 401:
             break
@@ -57,136 +83,64 @@ export default function RegisterForm() {
     })
   }
 
+  const requiredFields = {
+    required: true,
+    onChange: handleInputChange
+  }
+
   return (
     <>
       <div className="flex w-full gap-3">
         <AuthThirdPartyProviders />
       </div>
-      <div className="w-full">
+      <div className="my-3 w-full">
         <Separator dir="horizontal" padding="0.15rem" />
       </div>
       <div className="relative w-full">
         <form onSubmit={submitRegister} className="flex flex-col justify-center gap-y-2">
-          {/* TODO: Temporary */}
-          <div>
-            <label htmlFor="username" className="flex flex-col gap-y-1.5">
-              <span
-                className={cn(
-                  "text-600 mt-1 flex gap-x-0.5 font-bold uppercase",
-                  usernameError ? "text-error" : null
-                )}
-              >
-                Username
-              </span>
-              <input
-                className="text-700 border-400 bg-100  w-full rounded-md border px-4 py-2"
-                id="username"
-                name="username"
-                type="text"
-                placeholder="Usernmae"
-                aria-placeholder="Username"
-                required
-                onChange={(e) => setUsername(e.target.value)}
-                value={username}
-                autoCapitalize="off"
-                autoComplete="off"
-                autoCorrect="off"
-                spellCheck={false}
-              />
-            </label>
-            <div>{usernameError}</div>
-          </div>
-          <div>
-            <label htmlFor="email" className="flex flex-col gap-y-1.5">
-              <span
-                className={cn(
-                  "text-600 mt-1 flex gap-x-0.5 font-bold uppercase",
-                  emailError ? "text-error" : null
-                )}
-              >
-                Email
-              </span>
-              <input
-                className="text-700 border-400 bg-100  w-full rounded-md border px-4 py-2"
-                id="email"
-                name="email"
-                type="email"
-                placeholder="Email"
-                aria-placeholder="Email"
-                required
-                onChange={(e) => setEmail(e.target.value)}
-                value={email}
-                autoCapitalize="off"
-                autoComplete="off"
-                autoCorrect="off"
-                spellCheck={false}
-              />
-            </label>
-            <div>{emailError}</div>
-          </div>
-          <div>
-            <label htmlFor="password" className="flex flex-col gap-y-1.5">
-              <span
-                className={cn(
-                  "text-600 mt-1 flex gap-x-0.5 font-bold uppercase",
-                  passwordError ? "text-error" : null
-                )}
-              >
-                Password
-              </span>
-              <input
-                className="text-700 border-400 bg-100  w-full rounded-md border px-4 py-2"
-                id="password"
-                name="password"
-                type="password"
-                placeholder="Password"
-                aria-placeholder="Password"
-                required
-                onChange={(e) => setPassword(e.target.value)}
-                value={password}
-                autoCapitalize="off"
-                autoComplete="off"
-                autoCorrect="off"
-                spellCheck={false}
-              />
-            </label>
-            <div>{passwordError}</div>
-          </div>
-          <div>
-            <label htmlFor="passwordConfirm" className="flex flex-col gap-y-1.5">
-              <span
-                className={cn(
-                  "text-600 mt-1 flex gap-x-0.5 font-bold uppercase",
-                  passwordError ? "text-error" : null
-                )}
-              >
-                Confirm password
-              </span>
-              <input
-                className="text-700 border-400 bg-100  w-full rounded-md border px-4 py-2"
-                id="password"
-                name="password"
-                type="password"
-                placeholder="Password"
-                aria-placeholder="Password"
-                required
-                onChange={(e) => setConfirmPassword(e.target.value)}
-                value={confirmPassword}
-                autoCapitalize="off"
-                autoComplete="off"
-                autoCorrect="off"
-                spellCheck={false}
-              />
-            </label>
-            <div>{passwordError}</div>
-          </div>
-          <Button type="submit" position="center">
-            Sign Up
+          <InputField
+            {...requiredFields}
+            inputName="Username"
+            type="text"
+            value={registerFormData.username}
+            error={registerFormData.usernameErrorMsg}
+          />
+          <InputField
+            {...requiredFields}
+            inputName="Email"
+            type="email"
+            value={registerFormData.email}
+            error={registerFormData.emailErrorMsg}
+          />
+          <InputField
+            {...requiredFields}
+            inputName="Password"
+            type="password"
+            error={registerFormData.passwordErrorMsg}
+          />
+          <InputField
+            required
+            inputName="Confirm password"
+            type="password"
+            onChange={(e) =>
+              setRegisterFormData((prevValue) => ({
+                ...prevValue,
+                confirmPassword: e.target.value
+              }))
+            }
+            error={registerFormData.passwordErrorMsg}
+          />
+          <Button type="submit" className="mx-auto">
+            Register
           </Button>
         </form>
         <div className="mt-6 text-center">
           {"Already have an account? "}
           <Hyperlink href="/login">Sign in</Hyperlink>
+        </div>
+        <div id="accept-tos-msg">
+          By creating an account, you adhere to the Community Guidelines and Terms of
+          Service
         </div>
       </div>
     </>

@@ -40,14 +40,24 @@ const InputField = forwardRef(
     const DIV_TAG = "div" as const
     const DynamicElement = !noLabel ? LABEL_TAG : DIV_TAG
 
+    const randomNum = Math.round(Math.random() * 16 * 2048)
+    const parsedStrForAria = randomNum.toString(24).padStart(4, "d")
+
+    const ariaLabelledBy = `${kebabedInputName}-${parsedStrForAria}`
+
     return (
-      <div className="w-full">
+      <div data-bui-input-field="" className="w-full">
+        <span className="sr-only" id={ariaLabelledBy}>
+          {inputName}
+        </span>
         <DynamicElement
           htmlFor={!noLabel ? kebabCase(inputName) : null}
           className="flex flex-col gap-y-1.5"
+          aria-labelledby={ariaLabelledBy}
         >
           {!noLabel ? (
             <span
+              aria-labelledby={ariaLabelledBy}
               className={cn(
                 "text-600 flex gap-x-0.5 font-bold uppercase",
                 required
@@ -60,6 +70,7 @@ const InputField = forwardRef(
           ) : null}
           <input
             ref={ref}
+            aria-labelledby={ariaLabelledBy}
             className={cn(
               "text-700 border-400 bg-100 w-full rounded-md border px-4 py-2",
               error ? "border-error" : null,
@@ -76,13 +87,14 @@ const InputField = forwardRef(
             {...attrs}
           />
         </DynamicElement>
-        {error ? (
-          <div className="text-error mt-2">
-            <Note inline type="error">
-              {error}
-            </Note>
-          </div>
-        ) : null}
+        <div
+          id="field-error-boundary"
+          className={cn("text-error mt-2", !error ? "hidden" : "")}
+        >
+          <Note inline type="error">
+            {error}
+          </Note>
+        </div>
       </div>
     )
   }
