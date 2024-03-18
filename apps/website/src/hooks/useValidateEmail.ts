@@ -1,6 +1,6 @@
 import { emailRegex } from "@/constants"
 
-export function useEmailValidation(email: string) {
+export function useValidateEmail(email: string) {
   const emailMatch = emailRegex.exec(email)
 
   const validateDatShit = () => {

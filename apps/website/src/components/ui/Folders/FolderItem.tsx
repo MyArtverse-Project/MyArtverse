@@ -1,7 +1,7 @@
 "use client"
 
 import { Children, useEffect, useRef, useState } from "react"
-import { useScrollBounds } from "@/hooks/useScrollBounds"
+import { useScrollBounds } from "@/hooks"
 import cn from "@/utils/cn"
 import { motion } from "framer-motion"
 import {
