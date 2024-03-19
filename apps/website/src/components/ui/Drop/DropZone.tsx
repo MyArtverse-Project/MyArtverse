@@ -2,17 +2,18 @@
 
 import { useEffect, useState } from "react"
 import cn from "@/utils/cn"
+import { BACKEND_URL } from "@/utils/env"
 import { LuUpload } from "react-icons/lu"
-import MFImage from "../MFImage"
 
 const allowedTypes = ["image/png", "image/jpeg", "image/jpg"] as const
-const maxFileSize = 25 * 1024 * 1024 // 25 MB
+const maxFileSize = 10 * 1024 * 1024 // 10 MB
 
-export default function DropZone() {
+export default function DropZone({ setData }) {
   const [isDragging, setIsDragging] = useState(false)
   const [error, setError] = useState(null)
   const [file, setFile] = useState(null)
   const [imageUrl, setImageUrl] = useState(null)
+  const [uploading, setUploading] = useState(false)
 
   useEffect(() => {
     const handleDragOver = (e) => {
@@ -47,19 +48,37 @@ export default function DropZone() {
 
   const handleFile = (uploadedFile) => {
     if (!uploadedFile) return
-
-    if (allowedTypes.includes(uploadedFile.type) && uploadedFile.size <= maxFileSize) {
-      setFile(uploadedFile)
-      setError(null)
-
-      const reader = new FileReader()
-      reader.onload = () => setImageUrl(reader.result)
-      reader.readAsDataURL(uploadedFile)
-    } else {
-      setError("Invalid file type or size. Max size: 25MB, Supported: PNG, JPG")
+    if (!allowedTypes.includes(uploadedFile.type) || uploadedFile.size > maxFileSize) {
+      setError("Invalid file type or size. Max size: 10MB, Supported: PNG, JPG")
       setFile(null)
       setImageUrl(null)
+      return
     }
+
+    setError("")
+    setUploading(true)
+    setFile(uploadedFile)
+
+    const formData = new FormData()
+    formData.append("file", uploadedFile)
+    setUploading(true)
+
+    fetch(`${BACKEND_URL}/v1/profile/upload`, {
+      method: "POST",
+      body: formData,
+      credentials: "include"
+    }).then((res) => {
+      if (!res.ok) throw new Error("Failed to upload image")
+      res
+        .json()
+        .then((data) => {
+          setData(data.url)
+          setImageUrl(data.url)
+        })
+        .catch((err) => {
+          setError(err.message)
+        })
+    })
   }
 
   return (
@@ -76,8 +95,13 @@ export default function DropZone() {
       {file ? (
         <div className="flex flex-col items-center justify-center">
           <input type="file" className="hidden" onChange={handleFileInputChange} />
-          <MFImage alt="" src={imageUrl} width={200} height={200} />
+          {/* eslint-disable-next-line */}
+          <img alt="" src={imageUrl} width={200} height={200} />
           <h4 className="text-sm">Uploaded!</h4>
+        </div>
+      ) : uploading ? (
+        <div className="flex flex-col items-center justify-center">
+          <h4 className="text-sm">Uploading...</h4>
         </div>
       ) : (
         <div className="flex flex-col items-center justify-center">
@@ -86,7 +110,7 @@ export default function DropZone() {
             <LuUpload size={64} />
           </span>
           <h4 className="text-sm">Drag Files Here</h4>
-          <p className="mt-4 text-xl">Max size: 25MB, Supported: PNG, JPG</p>
+          <p className="mt-4 text-xl">Max size: 10MB, Supported: PNG, JPG</p>
           {error && <p className="text-red-500">{error}</p>}
         </div>
       )}

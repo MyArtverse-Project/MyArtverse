@@ -1,14 +1,12 @@
 "use client"
 
-import Link from "next/link"
 import { useRouter } from "next/navigation"
 import { useState } from "react"
-import { Fieldset, Note, Separator } from "@/components/ui"
+import { Fieldset } from "@/components/ui"
 import { Button } from "@/components/ui/Buttons"
 import DropZone from "@/components/ui/Drop/DropZone"
 import { FormWithProgress, InputField } from "@/components/ui/Forms"
-import cn from "@/utils/cn"
-import { LuCreditCard as CreditCardIcon, LuLock as LockIcon } from "react-icons/lu"
+import { BACKEND_URL } from "@/utils/env"
 import type { UserType } from "@/types/users"
 
 export default function CreateProfileForm({ userData }: { userData: UserType }) {
@@ -17,8 +15,31 @@ export default function CreateProfileForm({ userData }: { userData: UserType }) 
   if (userData.displayName) router.push(`/profile/${userData.handle}`)
 
   const [displayName, setDisplayName] = useState("")
-  const [errors, setErrors] = useState(null)
-  const [isProfileComplete, setProfileComplete] = useState(false)
+  const [pronouns, setPronouns] = useState("")
+  const [birthday, setBirthday] = useState("")
+  const [avatarLink, setAvatarLink] = useState("")
+
+  const submitProfile = async () => {
+    const res = await fetch(`${BACKEND_URL}/v1/profile/me`, {
+      method: "PATCH",
+      headers: {
+        "Content-Type": "application/json"
+      },
+      credentials: "include",
+      body: JSON.stringify({
+        displayName,
+        pronouns,
+        birthday,
+        avatarLink
+      })
+    })
+
+    if (res.ok) {
+      router.push(`/profile/${userData.handle}`)
+    } else {
+      throw new Error("Failed to submit profile")
+    }
+  }
 
   // const [isConnectionsComplete, setConnectionsComplete] = useState(false)
   // const [isAuthComplete, setAuthComplete] = useState(false)
@@ -27,7 +48,7 @@ export default function CreateProfileForm({ userData }: { userData: UserType }) 
   const progress = [
     {
       item: "Profile information",
-      isComplete: isProfileComplete
+      isComplete: true
     }
     // {
     //   item: "Connections",
@@ -50,7 +71,7 @@ export default function CreateProfileForm({ userData }: { userData: UserType }) 
           Welcome to MyArtverse!
         </h1>
         <p className="text-base xl:text-lg xl:!leading-8">
-          {`Hello, ${userData.handle}—we're so glad to have you on board! You're almost there,
+          {`Hello, ${displayName ? displayName : userData.handle}—we're so glad to have you on board! You're almost there,
           all we need is to get some of the nitty-gritty stuff done first. 
           Don't worry, you can change these anytime!`}
         </p>
@@ -60,37 +81,30 @@ export default function CreateProfileForm({ userData }: { userData: UserType }) 
           {/* Profile field */}
           <Fieldset heading="Profile information">
             <div className="flex flex-row justify-between gap-6">
-              <div className="w-full">
-                <label htmlFor="email" className="flex flex-col gap-y-1.5">
-                  <span
-                    className={cn("text-600 mt-4 flex gap-x-0.5 font-bold uppercase")}
-                  >
-                    Display Name
-                  </span>
-                  <input
-                    className="text-700 border-400 bg-100 mb-4 w-full rounded-md border px-4 py-2"
-                    id="displayName"
-                    name="displayName"
-                    type="string"
-                    placeholder="Display Name"
-                    aria-placeholder="Display name"
-                    required
-                    onChange={(e) => setDisplayName(e.target.value)}
-                    value={displayName}
-                    autoCapitalize="off"
-                    autoComplete="off"
-                    autoCorrect="off"
-                    spellCheck={false}
-                  />
-                </label>
+              <div className="w-full space-y-4">
+                <InputField
+                  type="text"
+                  inputName="Display Name"
+                  onChange={(e) => setDisplayName(e.currentTarget.value)}
+                />
                 <InputField
                   type="text"
                   inputName="Username"
                   value={`@${userData.handle}`}
                 />
+                <InputField
+                  type="date"
+                  inputName="Birthday"
+                  onChange={(e) => setBirthday(e.currentTarget.value)}
+                />
+                <InputField
+                  type="text"
+                  inputName="Pronouns"
+                  onChange={(e) => setPronouns(e.currentTarget.value)}
+                />
               </div>
               <div className="flex-shrink-0">
-                <DropZone />
+                <DropZone setData={setAvatarLink} />
               </div>
             </div>
           </Fieldset>
@@ -167,7 +181,7 @@ export default function CreateProfileForm({ userData }: { userData: UserType }) 
             <Button prefixIcon={<LockIcon size={21} />}>Setup 2FA</Button>
           </Fieldset> */}
           <div className="flex justify-end">
-            <Button>Okay, I'm all set!</Button>
+            <Button onClick={submitProfile}>Okay, I'm all set!</Button>
           </div>
         </main>
       </FormWithProgress>
