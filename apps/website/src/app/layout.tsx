@@ -7,11 +7,17 @@ import { NoJSReminder } from "@/components/base"
 import cn from "@/utils/cn"
 import { BRAND } from "@myfursona-internal/config"
 import Analytics from "./Analytics"
-import QueryClientWrapper from "./QueryClientWrapper"
 import PreconnectResources from "./preconnect-resources"
 
 const SecretMessage = dynamic(
   () => import("@/components/base").then((c) => c.SecretMessage),
+  {
+    ssr: false
+  }
+)
+
+const CheckLocalSettings = dynamic(
+  () => import("@/components/base").then((c) => c.CheckLocalSettings),
   {
     ssr: false
   }
@@ -41,7 +47,7 @@ export const metadata: Metadata = {
     type: "website",
     siteName: BRAND
   },
-  manifest: "/manifest.json",
+  robots: "/robots.txt",
   other: {
     "apple-mobile-web-app-status-bar": "#9e00ff"
   }
@@ -56,24 +62,17 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
     <html
       lang="en"
       dir="ltr"
-      className={cn(
-        inter.variable,
-        open_sans.variable,
-        "theme-system",
-        "a11y-animations-all",
-        "a11y-high-contrast-off"
-      )}
+      className={cn(inter.variable, open_sans.variable, "theme-system")}
     >
       <head>
         <link rel="mask-icon" href="./safari-pinned-tab.svg" color="9e00ff" />
-        <PreconnectResources />
       </head>
       <body className="bg-100 text-700 bg-background prose-headings:font-bold prose-headings:font-inter font-open-sans !overflow-x-hidden text-sm font-medium">
-        <div className="contents">
-          <NoJSReminder />
-          <SecretMessage />
-          <QueryClientWrapper>{children}</QueryClientWrapper>
-        </div>
+        <PreconnectResources />
+        <CheckLocalSettings />
+        <SecretMessage />
+        <NoJSReminder />
+        <div className="contents">{children}</div>
         <Analytics />
       </body>
     </html>

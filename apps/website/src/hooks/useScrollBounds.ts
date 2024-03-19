@@ -2,20 +2,24 @@
 
 import { useEffect, useState } from "react"
 
-export function useScrollBounds<T extends HTMLElement>(el: React.MutableRefObject<T>) {
-  const [{ width, height }, setScrollStates] = useState({
+export function useScrollBounds<T extends HTMLElement>(
+  element: React.MutableRefObject<T>
+) {
+  const [dims, setScrollStates] = useState({
     width: 0,
     height: 0
   })
 
+  const { width, height } = dims
+
   useEffect(() => {
-    const scrollEl = el.current
+    const scrollElement = element.current!
 
     setScrollStates({
-      width: scrollEl.scrollWidth,
-      height: scrollEl.scrollHeight
+      width: scrollElement.scrollWidth,
+      height: scrollElement.scrollHeight
     })
-  }, [el, setScrollStates])
+  }, [element, setScrollStates])
 
   return { width, height }
 }

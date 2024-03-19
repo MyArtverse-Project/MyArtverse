@@ -2,6 +2,7 @@
 
 import { forwardRef } from "react"
 import cn from "@/utils/cn"
+import generateRandomString from "@/utils/generateRandomString"
 import { kebabCase } from "lodash"
 import type { MapElement, ReactMapElement } from "@/types/utils"
 import Note from "../Note"
@@ -40,10 +41,9 @@ const InputField = forwardRef(
     const DIV_TAG = "div" as const
     const DynamicElement = !noLabel ? LABEL_TAG : DIV_TAG
 
-    const randomNum = Math.round(Math.random() * 16 * 2048)
-    const parsedStrForAria = randomNum.toString(24).padStart(4, "d")
+    const rndString = generateRandomString()
 
-    const ariaLabelledBy = `${kebabedInputName}-${parsedStrForAria}`
+    const ariaLabelledBy = `${kebabedInputName}-${rndString}`
 
     return (
       <div data-bui-input-field="" className="w-full">
