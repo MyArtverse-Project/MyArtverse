@@ -34,7 +34,7 @@ export default function LoginForm() {
   }
 
   const handleInputChange = (e: React.ChangeEvent<MapElement<"input">>) => {
-    const { name, value } = e.target
+    const { name, value } = e.currentTarget
 
     if (formData.emailErrorMsg) clearEmailError()
 
