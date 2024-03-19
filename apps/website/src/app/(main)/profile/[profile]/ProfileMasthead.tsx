@@ -46,7 +46,7 @@ export default function ProfileMasthead({
       icon: CatIcon,
       text: "Characters",
       link: "/characters",
-      countIndicator: 4
+      countIndicator: profileData.characters ? profileData.characters.length : 0
     },
     {
       icon: BrushIcon,
