@@ -105,6 +105,7 @@ export default function CreateCharacterView() {
             <UploadRefsheet
               toggleUploadRefSheetModal={toggleUploadRefSheetModal}
               uploadRefsheetModal={refSheetUploadModal}
+              newRefSheetData={null}
             />
             <Button className="mt-4" onClick={() => setRefSheetUploadModal(true)}>
               New Reference Sheet
