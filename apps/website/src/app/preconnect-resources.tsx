@@ -17,9 +17,9 @@ export default function PreconnectResources() {
   const _LOCALHOST_URL = "http://localhost" as const
 
   if (isDevelopment) {
-    ReactDOM.prefetchDNS(`${_LOCALHOST_URL}:8080`)
+    ReactDOM.prefetchDNS(`${_LOCALHOST_URL}:8081`)
 
-    ReactDOM.preload(`${_LOCALHOST_URL}:8080`, { as: "fetch", fetchPriority: "high" })
+    ReactDOM.preload(`${_LOCALHOST_URL}:8081`, { as: "fetch", fetchPriority: "high" })
     ReactDOM.preconnect(`${_LOCALHOST_URL}:9000`)
   }
 

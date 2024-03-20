@@ -10,6 +10,12 @@ export default function Attribute({ attribute, setAttributes, attributes }) {
     setAttributes([...attributes])
   }
 
+  const deleteAttribute = () => {
+    const index = attributes.findIndex((attr) => attr.heading === attribute.heading)
+    attributes.splice(index, 1)
+    setAttributes([...attributes])
+  }
+
   return (
     <div className="mb-6 flex w-full flex-row items-center justify-center space-x-4">
       <LuMenu size={50} height={20} width={20} />
@@ -27,7 +33,11 @@ export default function Attribute({ attribute, setAttributes, attributes }) {
         value={attribute.value}
         onChange={(e) => change(e.currentTarget.value, "value")}
       />
-      <Button icon={<LuDelete size={20} />} variant="error" />
+      <Button
+        onClick={() => deleteAttribute()}
+        icon={<LuDelete size={20} />}
+        variant="error"
+      />
     </div>
   )
 }

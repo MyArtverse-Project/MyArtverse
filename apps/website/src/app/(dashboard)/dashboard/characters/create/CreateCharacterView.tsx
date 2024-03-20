@@ -1,45 +1,76 @@
 "use client"
 
 import { useState } from "react"
-import { Container, Heading } from "@/components/dashboard"
-import { MFImage } from "@/components/ui"
+import { Container } from "@/components/dashboard"
 import { Button } from "@/components/ui/Buttons"
 import DropZone from "@/components/ui/Drop/DropZone"
 import { InputField } from "@/components/ui/Forms"
+import Attribute from "@/components/ui/Forms/Attribute"
 import Checkbox from "@/components/ui/Forms/Checkbox"
-import Attribute from "./Attribute"
-import ReferenceCard from "./ReferenceCard"
+import RichTextField from "@/components/ui/Forms/RichTextField"
+import SelectField from "@/components/ui/Forms/SelectField"
+import ReferenceCard from "@/components/ui/ReferenceCard"
+import UploadRefsheet from "./UploadRefsheet"
 
 export default function CreateCharacterView() {
   const [mainCharacter, setMainCharacter] = useState(false)
   const [characterAvatar, setCharacterAvatar] = useState(null)
   const [attributes, setAttributes] = useState<{ heading: string; value: string }[]>([])
+  const [refSheetUploadModal, setRefSheetUploadModal] = useState(false)
+
+  const toggleUploadRefSheetModal = () => {
+    setRefSheetUploadModal(!refSheetUploadModal)
+    return
+  }
+
+  const visibilityOptions = [
+    { value: "public", label: "Public" },
+    { value: "follower", label: "Follower" },
+    { value: "private", label: "Private" }
+  ]
+
+  // TODO: Grab pronouns from API
+  const pronounsOptions = [
+    { value: "hehim", label: "He/Him" },
+    { value: "sheher", label: "She/Her" },
+    { value: "theythem", label: "They/Them" }
+  ]
+
+  // TODO: Grab species from API
+  const speiciesOptions = [
+    { value: "otter", label: "Otter" },
+    { value: "husky", label: "Husky" },
+    { value: "custom", label: "Custom" }
+  ]
+
+  const genderOptions = [
+    {
+      value: "male",
+      label: "Male"
+    },
+    {
+      value: "female",
+      label: "Female"
+    },
+    {
+      value: "non-binary",
+      label: "Non-Binary"
+    }
+  ]
 
   return (
     <Container headingTransparent={false} noChildrenPadding heading="Character Details">
-      <div className="mx-auto w-3/4">
+      <div className="w-3/4">
         <h1 className="px-7 py-6 text-2xl">Basic Info</h1>
-        <section className="flex w-3/4 flex-row px-7">
+        <section className="flex w-full flex-row px-7">
           <div className="pr-20">
             <p className="text-600 mb-2 text-sm font-bold uppercase">Avatar</p>
             <DropZone setData={setCharacterAvatar} />
           </div>
           <div className="w-full">
-            <div className="mb-4 flex flex-row items-center justify-between">
+            <div className="mb-4 flex flex-row items-center justify-between space-x-4">
               <InputField inputName="Character Name" required />
-              <div className="ml-4 flex w-full flex-col gap-y-1.5">
-                <span className="text-600 gap-x-0.5 font-bold uppercase ">
-                  Visibility
-                </span>
-                <select className="text-700 border-400 bg-100 rounded-md border px-4 py-2">
-                  <option value="none" disabled>
-                    Visbility
-                  </option>
-                  <option value="public">Public</option>
-                  <option value="follower">Followers Only</option>
-                  <option value="private">Private</option>
-                </select>
-              </div>
+              <SelectField inputName="Visibility" options={visibilityOptions} />
             </div>
             <InputField inputName="Nickname" required />
             <div className="my-3">
@@ -50,18 +81,7 @@ export default function CreateCharacterView() {
                 onChange={(e) => setMainCharacter(e.target.checked)}
               />
             </div>
-            {/* TODO: Folders */}
-            {/* <div className="flex w-full flex-col gap-y-1.5">
-            <span className="text-600 gap-x-0.5 font-bold uppercase ">Folder</span>
-            <select
-              multiple
-              className="text-700 border-400 bg-100 rounded-md border px-4 py-2"
-            >
-              <option value="hehim">He/Him</option>
-              <option value="hehim">She/Her</option>
-              <option value="hehim">They/Them</option>
-            </select>
-          </div> */}
+            {/* TODO: Folders Option Menu */}
           </div>
         </section>
         <section>
@@ -74,16 +94,22 @@ export default function CreateCharacterView() {
               be useful if a character is sold as an adoptable. You can manage all of your
               character’s reference sheets here. Learn more
             </p>
-            <div>
-              <ReferenceCard
-                src={"/DefaultRefrenceSheet.png"}
-                alt="Placeholder"
-                label="Character Name"
-                artist="Artist Name"
-                varients={1}
-              />
-              <Button className="mt-4">New Reference Sheet</Button>
-            </div>
+            {/* TODO: Grab reference sheets from API */}
+            <ReferenceCard
+              src={"/DefaultRefrenceSheet.png"}
+              alt="Placeholder"
+              label="Character Name"
+              artist="Artist Name"
+              varients={1}
+            />
+            <UploadRefsheet
+              toggleUploadRefSheetModal={toggleUploadRefSheetModal}
+              uploadRefsheetModal={refSheetUploadModal}
+              newRefSheetData={null}
+            />
+            <Button className="mt-4" onClick={() => setRefSheetUploadModal(true)}>
+              New Reference Sheet
+            </Button>
           </div>
         </section>
         <section className="mb-5">
@@ -95,49 +121,11 @@ export default function CreateCharacterView() {
             </p>
             <div className="space-y-3">
               <div className="flex w-full flex-row space-x-6">
-                <div className="flex w-full flex-col gap-y-1.5">
-                  <span className="text-600 gap-x-0.5 font-bold uppercase ">Species</span>
-                  <select className="text-700 border-400 bg-100 rounded-md border px-4 py-2">
-                    <option value="none" disabled>
-                      Species
-                    </option>
-                    <option value="public">Otter</option>
-                    <option value="follower">Husky</option>
-                    <option value="private">Custom</option>
-                  </select>
-                </div>
-                <div className="flex w-full flex-col gap-y-1.5">
-                  <span className="text-600 gap-x-0.5 font-bold uppercase ">
-                    Pronouns
-                  </span>
-                  <select className="text-700 border-400 bg-100 rounded-md border px-4 py-2">
-                    <option value="none" disabled>
-                      Pronouns
-                    </option>
-                    <option value="public">He/Him</option>
-                    <option value="follower">She/Her</option>
-                    <option value="private">They/Them</option>
-                  </select>
-                </div>
-                <div className="flex w-full flex-col gap-y-1.5">
-                  <span className="text-600 gap-x-0.5 font-bold uppercase ">Gender</span>
-                  <select className="text-700 border-400 bg-100 rounded-md border px-4 py-2">
-                    <option value="none" disabled>
-                      Gender
-                    </option>
-                    <option value="public">Male</option>
-                    <option value="follower">Female</option>
-                    <option value="private">Non-Binary</option>
-                  </select>
-                </div>
+                <SelectField inputName="Species" options={speiciesOptions} />
+                <SelectField inputName="Pronouns" options={pronounsOptions} />
+                <SelectField inputName="Gender" options={genderOptions} />
               </div>
-              <div className="h-32 w-full space-y-2">
-                <span className="text-600 flex gap-x-0.5 font-bold uppercase">Bio</span>
-                <textarea
-                  id="likes"
-                  className="text-700 border-400 bg-100 h-32 w-full rounded-md border px-4 py-2"
-                />
-              </div>
+              <RichTextField inputName="Bio" />
             </div>
           </div>
         </section>
@@ -148,22 +136,8 @@ export default function CreateCharacterView() {
               The like/dislikes can be in list form or in sentence form! Learn more
             </p>
             <div className="flex w-full flex-row items-center justify-center space-x-3">
-              <div className="h-32 w-full space-y-2">
-                <span className="text-600 flex gap-x-0.5 font-bold uppercase">Likes</span>
-                <textarea
-                  id="likes"
-                  className="text-700 border-400 bg-100 h-32 w-full rounded-md border px-4 py-2"
-                />
-              </div>
-              <div className="h-32 w-full space-y-2">
-                <span className="text-600 flex gap-x-0.5 font-bold uppercase">
-                  Dislikes
-                </span>
-                <textarea
-                  id="dislikes"
-                  className="text-700 border-400 bg-100 h-32 w-full rounded-md border px-4 py-2"
-                />
-              </div>
+              <RichTextField inputName="Likes" />
+              <RichTextField inputName="Dislikes" />
             </div>
           </div>
         </section>
