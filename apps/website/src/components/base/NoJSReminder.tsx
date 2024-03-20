@@ -10,10 +10,9 @@ export default function NoJSReminder() {
           <span>JavaScript disabled</span>
         </h1>
         <p>
-          {BRAND} heavily relies on JavaScript - most modern browsers have JavaScript
-          enabled and it looks like you're browsing {BRAND} with either JavaScript
-          disabled with the use of a third-party extension via an ad blocker or from an
-          outdated and/or unsupported browser.
+          {`${BRAND} heavily relies on JavaScript; it looks like you're browsing ${BRAND} with
+          either JavaScript disabled with the use of a browser extension via an ad blocker
+          or from an outdated and/or unsupported browser.`}
         </p>
       </div>
     </noscript>

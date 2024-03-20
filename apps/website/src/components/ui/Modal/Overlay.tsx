@@ -3,7 +3,7 @@
 /* eslint-disable @typescript-eslint/no-explicit-any */
 import dynamic from "next/dynamic"
 import { useEffect } from "react"
-import clsx from "clsx"
+import cn from "@/utils/cn"
 
 const Portal = dynamic(() => import("./Portal"), { ssr: false })
 
@@ -31,7 +31,7 @@ export default function Overlay({
     <Portal>
       <div
         onClick={toggler as () => any}
-        className={clsx(
+        className={cn(
           "fixed inset-0 z-[99] bg-black/60 transition-all duration-[350ms]",
           state ? "opacity-100" : "pointer-events-none opacity-0"
         )}

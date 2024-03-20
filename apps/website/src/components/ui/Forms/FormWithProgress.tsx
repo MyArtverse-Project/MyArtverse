@@ -1,5 +1,5 @@
 import Link from "next/link"
-import clsx from "clsx"
+import cn from "@/utils/cn"
 
 export default function FormWithProgress({
   children,
@@ -21,7 +21,7 @@ export default function FormWithProgress({
         {progress.map(({ item, isComplete }, i) => (
           <div key={i} className="flex items-center gap-x-4 px-5 pb-1.5 pt-3">
             <div
-              className={clsx(
+              className={cn(
                 "h-4 w-4 flex-shrink-0 rounded-full",
                 i !== 0
                   ? "before:relative before:bottom-10 before:left-[0.4rem] before:-z-[1] before:block before:h-14 before:w-[0.133rem]"
@@ -31,10 +31,7 @@ export default function FormWithProgress({
               aria-hidden
             />
             <span
-              className={clsx(
-                "font-inter text-lg",
-                !isComplete ? "text-mute" : "text-500"
-              )}
+              className={cn("font-inter text-lg", !isComplete ? "text-mute" : "text-500")}
             >
               {item}
             </span>

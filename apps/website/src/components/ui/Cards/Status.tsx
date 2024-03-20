@@ -1,11 +1,11 @@
-import clsx from "clsx"
+import cn from "@/utils/cn"
 import type { IconType } from "react-icons"
 import {
   LuLock as LockIcon,
   LuSparkles as SparklesIcon,
   LuStar as StarIcon
 } from "react-icons/lu"
-import { FursonaStatus } from "@/types/characters"
+import type { FursonaStatus } from "@/types/characters"
 
 export default function Status({ status }: { status: FursonaStatus }) {
   const base = "flex flex-row items-center text-md font-semibold my-1"
@@ -48,7 +48,7 @@ export default function Status({ status }: { status: FursonaStatus }) {
   const isOwnedLabel = !StatusIcon && !StatusLabel && !StatusClassName
 
   return isOwnedLabel ? null : (
-    <span className={clsx(StatusClassName, base)}>
+    <span className={cn(StatusClassName, base)}>
       {StatusIcon ? <StatusIcon size={19} className="mr-2" /> : null}
       {StatusLabel ? StatusLabel : null}
     </span>

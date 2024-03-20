@@ -2,7 +2,6 @@
 
 import Image from "next/image"
 import { useState } from "react"
-import clsx from "clsx"
 import type { ReactMapElement } from "@/types/utils"
 
 type ImgLoadStrategy = "lazy" | "neutral" | "important"
@@ -18,6 +17,7 @@ export default function MFImage({
   objectFit,
   rounded,
   style,
+  quality = 75,
   ...attributes
 }: {
   src: string
@@ -28,6 +28,7 @@ export default function MFImage({
   strategy?: ImgLoadStrategy
   objectFit?: React.CSSProperties["objectFit"]
   rounded?: number
+  quality?: number
 } & Pick<ReactMapElement<"img">, "alt" | "onClick" | "onContextMenu" | "style">) {
   const [imgLoaded, setImgLoaded] = useState(false)
 
@@ -55,20 +56,19 @@ export default function MFImage({
 
   return (
     <div
-      className="relative before:absolute before:inset-0 before:z-[2]"
+      className="relative overflow-hidden before:absolute before:inset-0 before:z-[2]"
       style={{
         aspectRatio,
         height,
         width,
-        overflow: "hidden",
         borderRadius: rounded
       }}
       draggable="false"
       {...attributes}
     >
       <Image
+        className="select-none"
         style={{
-          userSelect: "none",
           objectFit,
           ...style
         }}
@@ -80,14 +80,11 @@ export default function MFImage({
         fetchPriority={setStrategy.fetchPriority}
         priority={setStrategy.priority}
         onLoad={() => setImgLoaded(true)}
+        quality={quality}
       />
-      <div
-        id="loading-skeleton"
-        className={clsx(
-          "absolute inset-0 -z-[2] animate-pulse bg-red-500",
-          !imgLoaded ? "" : "hidden"
-        )}
-      />
+      {!imgLoaded ? (
+        <div className="bg-400 absolute inset-0 -z-[1] animate-pulse" />
+      ) : null}
     </div>
   )
 }

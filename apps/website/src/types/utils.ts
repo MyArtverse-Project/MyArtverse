@@ -1,5 +1,7 @@
 /* eslint-disable @typescript-eslint/no-explicit-any */
-import React from "react"
+import type React from "react"
+
+export type APIMethods = "GET" | "POST" | "DELETE" | "PUT"
 
 export type PartialRecord<K extends PropertyKey, T = string> = Partial<Record<K, T>>
 export type PartialArray<T> = Partial<T>[]
@@ -15,7 +17,7 @@ export type SlugRouteProps<
   }
 > = {
   params: Params
-  searchParams: SearchParams
+  searchParams?: SearchParams
 }
 
 type IntrinsicElements = React.JSX.IntrinsicElements
@@ -25,3 +27,12 @@ export type ReactMapElement<T extends keyof IntrinsicElements> = IntrinsicElemen
 
 export type Theme = "system" | "light" | "dark"
 export type Variants = "primary" | "secondary" | "tritery" | "success" | "warning" | "error" | "info"
+
+export type Visibility = "public" | "private" | "secret" | "unlisted"
+export type StatusIndicator = "blocked" | "failed" | "canceled" | "pending" | "success" | "finished"
+
+export type FormFieldWithErrors<T extends object> = Partial<
+  T & {
+    [K in keyof T as `${string & K}ErrorMsg`]: string | null
+  }
+>

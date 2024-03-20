@@ -1,6 +1,5 @@
-import { Metadata } from "next"
-import { MFImage } from "@/components/ui"
-import { Button } from "@/components/ui/Buttons"
+import type { Metadata } from "next"
+import { NotFoundWrapper } from "@/components/misc"
 
 export const metadata: Metadata = {
   title: "404'd",
@@ -9,26 +8,6 @@ export const metadata: Metadata = {
   }
 }
 
-export default function NotFoundCatchAll() {
-  return (
-    <div className="mx-auto max-w-screen-lg px-12 pb-5 pt-32">
-      <article className="text-center">
-        <div className="flex flex-col items-center justify-center">
-          <MFImage src="/kuro_confused.png" aspectRatio="1" width={250} />
-          <h2 className="not-prose font-inter my-5 text-center text-4xl font-bold">
-            404 Not Found
-          </h2>
-        </div>
-        <p className="text-lg opacity-75">
-          Unless you've traveled back in time, the page you're looking for doesn't exist
-          anymore.
-        </p>
-        <div className="mx-auto mt-6 w-fit">
-          <Button href="/" size="big">
-            Go home
-          </Button>
-        </div>
-      </article>
-    </div>
-  )
+export default function GlobalNotFoundCatchAll() {
+  return <NotFoundWrapper />
 }

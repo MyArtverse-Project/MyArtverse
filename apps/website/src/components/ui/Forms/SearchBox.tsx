@@ -1,5 +1,6 @@
 import { forwardRef } from "react"
 import { LuSearch as SearchIcon } from "react-icons/lu"
+import type { MapElement } from "@/types/utils"
 
 const SearchBox = forwardRef(
   (
@@ -8,7 +9,7 @@ const SearchBox = forwardRef(
     }: {
       placeholder?: string
     },
-    ref: React.LegacyRef<HTMLInputElement>
+    ref: React.ForwardedRef<MapElement<"input">>
   ) => {
     return (
       <div className="relative w-full">

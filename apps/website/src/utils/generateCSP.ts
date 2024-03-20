@@ -20,6 +20,8 @@ type Policies = Partial<{
   "style-src": Directive
   "font-src": Directive
   "frame-src": Directive
+  "object-src": Directive
+  "base-uri": Directive
   "frame-ancestors": "none"[] | string[]
   "img-src": Directive
   "worker-src": Directive

@@ -1,15 +1,27 @@
 import "@myfursona/biro-ui/styles/globals.scss"
 import "react-quill/dist/quill.snow.css"
 import type { Metadata, Viewport } from "next"
+import dynamic from "next/dynamic"
 import { Inter, Open_Sans } from "next/font/google"
-import Script from "next/script"
-import { ClientInit } from "@/components/base"
-import NoJSReminder from "@/components/base/NoJSReminder"
-import Providers from "@/context"
+import { NoJSReminder } from "@/components/base"
+import cn from "@/utils/cn"
 import { BRAND } from "@myfursona-internal/config"
-import clsx from "clsx"
-import dedent from "dedent"
+import Analytics from "./Analytics"
 import PreconnectResources from "./preconnect-resources"
+
+const SecretMessage = dynamic(
+  () => import("@/components/base").then((c) => c.SecretMessage),
+  {
+    ssr: false
+  }
+)
+
+const CheckLocalSettings = dynamic(
+  () => import("@/components/base").then((c) => c.CheckLocalSettings),
+  {
+    ssr: false
+  }
+)
 
 const inter = Inter({
   subsets: ["latin", "cyrillic-ext"],
@@ -29,23 +41,13 @@ export const metadata: Metadata = {
     default: BRAND
   },
   formatDetection: { telephone: false, address: false },
-  keywords: [
-    "fur",
-    "furries",
-    "furry",
-    "fursona",
-    "mascot",
-    "furry fandom",
-    "toyhouse",
-    "furaffinity",
-    "fur affinity",
-    "weasyl"
-  ],
+  // prettier-ignore
+  keywords: ["fur", "furries", "furry", "fursona", "mascot", "furry fandom", "toyhouse", "furaffinity", "fur affinity", "weasyl"],
   openGraph: {
     type: "website",
     siteName: BRAND
   },
-  manifest: "/manifest.json",
+  robots: "/robots.txt",
   other: {
     "apple-mobile-web-app-status-bar": "#9e00ff"
   }
@@ -56,48 +58,30 @@ export const viewport: Viewport = {
 }
 
 export default function RootLayout({ children }: { children: React.ReactNode }) {
-  const umamiId = process.env.UMAMI_ID || ""
-  const clarityId = process.env.MS_CLARITY_ID || ""
-
   return (
     <html
       lang="en"
       dir="ltr"
-      className={clsx(
-        inter.variable,
-        open_sans.variable,
-        "theme-system",
-        "a11y-animations-all",
-        "a11y-high-contrast-off"
-      )}
+      className={cn(inter.variable, open_sans.variable, "theme-system")}
     >
       <head>
         <link rel="mask-icon" href="./safari-pinned-tab.svg" color="9e00ff" />
       </head>
-      <body className="bg-100 text-700 bg-background prose-headings:font-bold prose-headings:font-inter font-open-sans select-none !overflow-x-hidden text-sm font-medium">
+      <body className="bg-100 text-700 bg-background prose-headings:font-bold prose-headings:font-inter font-open-sans !overflow-x-hidden text-sm font-medium">
         <PreconnectResources />
-        <Providers>
+        <CheckLocalSettings />
+        <SecretMessage />
+        <a
+          className="bg-500 text-active pointer-events-none fixed left-3 top-3 z-30 rounded-lg px-6 py-2.5 opacity-0 focus:pointer-events-auto focus:opacity-100"
+          href="#skip-to-content"
+        >
+          Skip to content?
+        </a>
+        <div id="__myartverse">
           <NoJSReminder />
           {children}
-          <ClientInit />
-        </Providers>
-        {/* Site analytics - Umami */}
-        <Script
-          id="umami"
-          async
-          src="https://cloud.umami.is/script.js"
-          data-website-id={umamiId}
-        />
-        {/* Behavior analytics - Microsoft Clarity */}
-        <Script id="clarity" strategy="afterInteractive">
-          {dedent`
-          (function(c,l,a,r,i,t,y){
-            c[a]=c[a]||function(){(c[a].q=c[a].q||[]).push(arguments)};
-            t=l.createElement(r);t.async=1;t.src="https://www.clarity.ms/tag/"+i;
-            y=l.getElementsByTagName(r)[0];y.parentNode.insertBefore(t,y);
-          })(window, document, "clarity", "script", "${clarityId}");
-          `}
-        </Script>
+        </div>
+        <Analytics />
       </body>
     </html>
   )

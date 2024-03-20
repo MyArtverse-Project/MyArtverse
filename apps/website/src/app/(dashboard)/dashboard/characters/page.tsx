@@ -1,7 +1,10 @@
-import DashboardTitle from "@/utils/DashboardTitle"
+import type { Metadata } from "next"
+import CharacterView from "./CharacterView"
 
-export const metadata = DashboardTitle("Characters")
+export const metadata: Metadata = {
+  title: "Characters"
+}
 
 export default function CharacterPage() {
-  return <div>characters page</div>
+  return <CharacterView />
 }

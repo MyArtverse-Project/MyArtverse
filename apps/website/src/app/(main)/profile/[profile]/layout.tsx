@@ -1,30 +1,41 @@
-import { Metadata } from "next"
+import type { Metadata } from "next"
+import { fetchUser, fetchUserCharacters } from "@/utils/api"
+import { BRAND } from "@myfursona-internal/config"
 import type { SlugRouteProps } from "@/types/utils"
-import DynamicMasthead from "./DynamicMasthead"
+import DynamicLayout from "./DynamicLayout"
 
 export async function generateMetadata({ params }: SlugRouteProps): Promise<Metadata> {
-  // !! NOTE: For testing only, actual user data is going to be fetched through the API
-  const userHandleParam = params.profile!
+  const userHandleParam = params.profile
 
   return {
     title: {
       template: `%s (@${userHandleParam}) - MyFursona`,
       default: "Profile layout"
     },
-    description: `Follow @${userHandleParam} on MyFursona by creating an account!`
+    description: `Follow @${userHandleParam} on ${BRAND} by creating an account!`
   }
 }
 
-export default function Layout({
-  params,
-  children
-}: SlugRouteProps & { children: React.ReactNode }) {
-  const profile = params.profile
+export default async function Layout({
+  children,
+  params
+}: {
+  children: React.ReactNode
+} & SlugRouteProps<{ profile: string; character: string }>) {
+  const { character, profile } = params
+
+  // Fetch user data from the API
+  const userData = await fetchUser(profile)
+  if (!userData) return null
+
+  const characterData = character ? await fetchUserCharacters(profile) : null
+  if (character && !characterData) return null
 
   return (
     <>
-      <DynamicMasthead handle={profile} />
-      <div className="py-4">{children}</div>
+      {/* TODO: Remove all props to be retrieved directly from Jotai or react-query */}
+      <DynamicLayout profile={userData} character={null} />
+      <div>{children}</div>
     </>
   )
 }

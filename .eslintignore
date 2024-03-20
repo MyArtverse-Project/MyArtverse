@@ -1,0 +1,5 @@
+dist/
+apps/website/public/sw.js
+apps/website/public/workbox-*
+apps/website/public/worker-*
+.tsbuildinfo

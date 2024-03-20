@@ -1,8 +1,5 @@
 "use client"
 
-import Image from "next/image"
-import { useEffect, useRef } from "react"
-import { Tabs } from "@/components/ui"
 import { Button } from "@/components/ui/Buttons"
 import { Masthead } from "@/components/ui/Masthead"
 import {
@@ -12,24 +9,18 @@ import {
   LuHeart as HeartIcon,
   LuHistory as HistoryIcon,
   LuHome as HomeIcon,
-  LuLayoutGrid as LayoutGridIcon,
   LuImage
 } from "react-icons/lu"
 
 export default function CharacterMasthead({
   handle,
-  character,
   name,
   species,
   pronouns,
   owner,
-  creator,
-  toyhouseLink,
-  status,
-  favoriteCount = 0
+  creator
 }: {
   handle: string
-  character: string
   name: string
   species: string
   pronouns: string
@@ -81,7 +72,7 @@ export default function CharacterMasthead({
         </Masthead.Details>
       </Masthead.Wrapper>
       <Masthead.Tabs
-        baseURL={`/@${handle}/character/${character}`}
+        baseURL={`/@${handle}/character/${name}`}
         items={[
           {
             icon: HomeIcon,

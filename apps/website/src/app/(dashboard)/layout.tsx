@@ -1,17 +1,40 @@
-import { DashboardNavbar, DashboardSidebar } from "@/components/ui/Dashboard"
+import type { Metadata } from "next"
+import dynamic from "next/dynamic"
 
-export default function DashboardLayout({
+// import { redirect } from "next/navigation"
+// import { fetchUserData } from "@/utils/api"
+
+export const metadata: Metadata = {
+  title: {
+    default: "Unset title",
+    template: "%s | MyArtverse Dashboard"
+  }
+}
+
+const Navbar = dynamic(() =>
+  import("@/components/dashboard").then((c) => c.DashboardNavbar)
+)
+
+const Sidebar = dynamic(() =>
+  import("@/components/dashboard").then((c) => c.DashboardSidebar)
+)
+
+export default async function DashboardLayout({
   children
 }: Readonly<{ children?: React.ReactNode }>) {
+  // const userData = await fetchUserData().catch(() => {
+  //   return redirect("/login")
+  // })
+
   return (
-    <div>
+    <>
       <header className="sticky top-0 z-20">
-        <DashboardNavbar />
+        <Navbar />
       </header>
       <div className="flex">
-        <DashboardSidebar />
+        <Sidebar />
         <main className="w-full">{children}</main>
       </div>
-    </div>
+    </>
   )
 }

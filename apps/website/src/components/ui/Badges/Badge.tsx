@@ -1,5 +1,5 @@
+import cn from "@/utils/cn"
 import { type VariantProps, cva } from "class-variance-authority"
-import clsx from "clsx"
 import type { IconType } from "react-icons"
 
 const badgeStyles = cva(["inline-flex items-center border border-solid rounded-full"], {
@@ -27,15 +27,19 @@ export default function Badge({
   children,
   prefixIcon,
   size,
-  variant = "default"
+  variant = "default",
+  className
 }: {
   children: React.ReactNode
   prefixIcon?: React.ReactElement<IconType>
+  className?: string
 } & VariantProps<typeof badgeStyles>) {
   return (
     <div id="badge" className={badgeStyles({ variant, size })}>
       {prefixIcon}
-      <span className={clsx("font-inter", size !== "big" ? "text-xs" : "text-sm")}>
+      <span
+        className={cn("font-inter", size !== "big" ? "text-xs" : "text-sm", className)}
+      >
         {children}
       </span>
     </div>

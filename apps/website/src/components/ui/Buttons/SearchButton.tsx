@@ -1,5 +1,5 @@
 import { LuSearch as SearchIcon } from "react-icons/lu"
-import { MapElement } from "@/types/utils"
+import type { MapElement } from "@/types/utils"
 import Button from "./Button"
 
 export default function SearchButton({
@@ -10,7 +10,7 @@ export default function SearchButton({
   return (
     <Button
       className="border-separator hover:border-dropdowns-text-field border:border-dropdowns-text-field flex items-center gap-x-1.5 rounded-md border py-2 pl-3 pr-24 lg:pr-32 xl:pr-48"
-      prefixIcon={<SearchIcon size={20} />}
+      prefixIcon={<SearchIcon size={19} />}
       onClick={onClick}
     >
       Search

@@ -8,12 +8,16 @@ export default function robots(): MetadataRoute.Robots {
         allow: "/"
       },
       {
+        userAgent: "*",
+        disallow: ["/dashboard", "/dashboard/", "/settings", "/settings/"]
+      },
+      {
         userAgent: "Petalbot",
         disallow: "*"
       },
       {
-        userAgent: "*",
-        disallow: "/dashboard/*"
+        userAgent: "nsa",
+        disallow: "/"
       }
     ]
   }

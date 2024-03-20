@@ -1,12 +1,18 @@
 "use client"
 
-/* eslint-disable @typescript-eslint/no-explicit-any */
 import { usePathname } from "next/navigation"
-import clsx from "clsx"
+import cn from "@/utils/cn"
 import { kebabCase } from "lodash"
 import type { IconType } from "react-icons"
 import type { LinkedString } from "@/types/utils"
 import { Button } from "../Buttons"
+
+export interface ItemIteratorType {
+  icon: IconType
+  text: string
+  link?: LinkedString
+  matchStartingRoute?: boolean
+}
 
 export default function ItemIterator({
   as: Component = "div",
@@ -14,36 +20,36 @@ export default function ItemIterator({
   baseUrl = "/"
 }: {
   as?: keyof HTMLElementTagNameMap | React.ComponentType
-  items: {
-    icon: IconType
-    text: string
-    link?: LinkedString
-    matchStartingRoute?: boolean
-  }[]
+  items: ItemIteratorType[]
   baseUrl?: string
 }) {
   const path = usePathname()
 
   return (
     <Component>
-      {items.map((item, index) => {
-        const isMatchingRoute = path === `${baseUrl}${kebabCase(item.text)}`
+      {items.map(({ icon: Icon, text, link, matchStartingRoute }, index) => {
+        const parsedUrl = `${baseUrl}${link ? link.slice(1) : kebabCase(text)}`
+
+        const isRouteMatches = path.startsWith(parsedUrl)
+        const isRouteActive = path === parsedUrl
 
         return (
           <Button
             key={index}
             variant="tritery"
-            prefixIcon={<item.icon size={21} className="flex-shrink-0" />}
-            href={`${baseUrl}${kebabCase(item.text)}`}
-            aria-current={isMatchingRoute ? "page" : null}
-            className={clsx(
+            prefixIcon={<Icon size={20} className="flex-shrink-0" aria-hidden />}
+            href={parsedUrl}
+            aria-label={text}
+            className={cn(
               "flex items-center gap-x-1.5 rounded-md border-[2px] border-transparent px-4 py-2",
-              isMatchingRoute
+              isRouteActive || (matchStartingRoute && isRouteMatches)
                 ? "bg-500 text-active"
                 : "hover:bg-300 transition-[border,background-color]"
             )}
           >
-            <span className="ml-0.5">{item.text}</span>
+            <span className="ml-0.5" aria-hidden>
+              {text}
+            </span>
           </Button>
         )
       })}

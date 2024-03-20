@@ -1,4 +1,4 @@
-import clsx from "clsx"
+import cn from "@/utils/cn"
 import type { IconType } from "react-icons"
 import { LuAlertTriangle, LuCheckCircle2, LuInfo, LuXCircle } from "react-icons/lu"
 import type { Variants as NoteVariants, PartialRecord } from "@/types/utils"
@@ -46,11 +46,11 @@ export default function Note({
       css: "border-info",
       iconColor: "text-info"
     }
-  }
+  } as const
 
-  const statusStyles = status[type]?.css
-  const statusIconColor = status[type]?.iconColor
-  const StatusIcon = status[type]?.icon as IconType
+  const statusStyles = status[type].css
+  const statusIconColor = status[type].iconColor
+  const StatusIcon = status[type].icon
 
   return (
     <div
@@ -61,12 +61,19 @@ export default function Note({
       }
     >
       <StatusIcon
-        size={!inline ? 25 : 19}
-        className={clsx("flex-shrink-0", statusIconColor)}
+        size={!inline ? 23 : 19}
+        className={cn("flex-shrink-0", statusIconColor)}
       />
       <div className={!inline ? "flex flex-col justify-center" : null}>
         {heading && (
-          <div className="font-inter -translate-y-0.5 text-xl font-bold">{heading}</div>
+          <div
+            className={cn(
+              "font-inter text-xl font-bold",
+              inline ? "" : "-translate-y-0.5"
+            )}
+          >
+            {heading}
+          </div>
         )}
         {children}
       </div>

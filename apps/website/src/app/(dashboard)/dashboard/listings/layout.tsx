@@ -1,6 +1,6 @@
+import { Container } from "@/components/dashboard"
 import { Tabs } from "@/components/ui"
 import { Button } from "@/components/ui/Buttons"
-import { Container } from "@/components/ui/Dashboard"
 import { LuArrowDownAZ, LuMoreVertical, LuSearch } from "react-icons/lu"
 
 export default function ListingLayout({
@@ -14,9 +14,7 @@ export default function ListingLayout({
       actions={
         <>
           <Button>Manage blacklists</Button>
-          <Button iconOnly>
-            <LuMoreVertical size={19} />
-          </Button>
+          <Button icon={<LuMoreVertical size={19} />} />
         </>
       }
     >
@@ -29,12 +27,8 @@ export default function ListingLayout({
           ]}
         />
         <div className="flex gap-x-1">
-          <Button iconOnly variant="tritery">
-            <LuArrowDownAZ size={19} />
-          </Button>
-          <Button iconOnly variant="tritery">
-            <LuSearch size={19} />
-          </Button>
+          <Button icon={<LuArrowDownAZ size={19} />} variant="tritery" />
+          <Button icon={<LuSearch size={19} />} variant="tritery" />
         </div>
       </div>
       {children}

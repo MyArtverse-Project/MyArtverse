@@ -1,7 +1,8 @@
 {
   "root": true,
   "env": {
-    "es6": true
+    "es2021": true,
+    "browser": true
   },
   "extends": ["next", "eslint:recommended", "plugin:@typescript-eslint/recommended"],
   "plugins": ["unused-imports", "@stylistic"],
@@ -11,10 +12,18 @@
     "no-else-return": ["error", { "allowElseIf": false }],
     "no-duplicate-imports": "error",
     "max-depth": ["error", 3],
+
     "unused-imports/no-unused-imports": "warn",
+
     "react/no-unescaped-entities": "off",
+
     "@typescript-eslint/ban-ts-comment": "off",
     "@typescript-eslint/no-unused-vars": "warn",
+    "@typescript-eslint/consistent-type-imports": ["error", { "prefer": "type-imports" }],
+
+    "@stylistic/function-call-spacing": ["error", "never"],
+    "@stylistic/space-before-blocks": "error",
+    "@stylistic/keyword-spacing": ["error", { "before": true }],
     "@stylistic/newline-per-chained-call": ["error", { "ignoreChainWithDepth": 3 }],
     "@stylistic/no-confusing-arrow": ["error", { "onlyOneSimpleParam": true }],
     "@stylistic/no-floating-decimal": "error",
@@ -31,9 +40,6 @@
         "consistent": true
       }
     ],
-    "@stylistic/function-call-spacing": ["error", "never"],
-    "@stylistic/space-before-blocks": "error",
-    "@stylistic/keyword-spacing": ["error", { "before": true }],
     "@stylistic/padding-line-between-statements": [
       "error",
       {
@@ -59,12 +65,32 @@
     ]
   },
   "parser": "@typescript-eslint/parser",
-  "ignorePatterns": [
-    "dist",
-    "apps/website/public/sw.js",
-    "apps/website/public/workbox-*",
-    "apps/website/public/worker-*",
-    "*.tsbuildinfo"
+  "overrides": [
+    {
+      "files": ["apps/website/src/**", "apps/widget/src/**", "apps/desktop/src/**"],
+      "rules": {
+        "react/iframe-missing-sandbox": "warn",
+        "react/no-deprecated": "warn",
+        "react/jsx-no-script-url": "error"
+      }
+    },
+    {
+      "files": ["apps/website/src/app/**", "apps/website/src/components/**"],
+      "rules": {
+        "@next/next/no-img-element": "off",
+        "react/forbid-elements": [
+          "error",
+          {
+            "forbid": [
+              {
+                "element": "img",
+                "message": "use <MFImage> as a better alternative"
+              }
+            ]
+          }
+        ]
+      }
+    }
   ],
   "settings": {
     "next": {

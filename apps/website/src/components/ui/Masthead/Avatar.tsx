@@ -1,4 +1,4 @@
-import clsx from "clsx"
+import cn from "@/utils/cn"
 import MFImage from "../MFImage"
 
 export default function MastheadAvatar({
@@ -11,19 +11,19 @@ export default function MastheadAvatar({
 }) {
   return (
     <div
-      className={clsx(
+      className={cn(
         "relative size-32 flex-shrink-0  lg:size-44",
         !profileOnly ? "" : "-mt-12"
       )}
     >
       <div
-        className={clsx(
+        className={cn(
           "border-100 bg-100 absolute aspect-square size-32 overflow-hidden border-4 lg:size-44",
           !profileOnly ? "rounded-xl" : "rounded-full"
         )}
       >
         <MFImage
-          src={src ?? "/img/examples/kuro/kuro-example2.png"}
+          src={src ?? "/UserProfile.png"}
           alt={`Avatar of Username`}
           aspectRatio="1"
           width="100%"

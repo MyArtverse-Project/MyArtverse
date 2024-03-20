@@ -6,15 +6,22 @@ import { Button } from "@/components/ui/Buttons"
 import { FursonaCard, PinnedCharacter } from "@/components/ui/Cards"
 import { InputField } from "@/components/ui/Forms"
 import SearchBox from "@/components/ui/Forms/SearchBox"
-import clsx from "clsx"
+import cn from "@/utils/cn"
 import {
   LuCheckCircle2 as CheckCircle2Icon,
   LuFilter as FilterIcon,
   LuFolderPlus as FolderPlus,
   LuX as XIcon
 } from "react-icons/lu"
+import type { CharacterResponse } from "@/types/characters"
 
-export default function CharacterView() {
+export default function CharacterView({
+  handle,
+  characters
+}: {
+  handle: string
+  characters: CharacterResponse
+}) {
   const [createFolderModal, setFolderModalState] = useState(false)
 
   const toggleCreateFolderModal = () => {
@@ -55,29 +62,31 @@ export default function CharacterView() {
           <SearchBox placeholder="Search for characters" />
           <Button prefixIcon={<FilterIcon size={20} />}>Filter</Button>
         </div>
-        <PinnedCharacter
-          artist="Ratking"
-          colors={[
-            { color: "cyan", name: "cyan" },
-            { color: "yellow", name: "yellow" },
-            { color: "purple", name: "purple" },
-            { color: "white", name: "white" }
-          ]}
-          avatar="/img/hero/renzo-snowglobe.jpg"
-          name="Kuroji"
-          species="Raccoon-Fox-Dragon"
-          refSheetImg="/img/examples/kuro/kuro-refsheet.png"
-        />
+        {characters.mainCharacter && (
+          <PinnedCharacter
+            artist="Ratking"
+            colors={[
+              { color: "cyan", name: "cyan" },
+              { color: "yellow", name: "yellow" },
+              { color: "purple", name: "purple" },
+              { color: "white", name: "white" }
+            ]}
+            avatar={characters.mainCharacter.avatar_url || "/UserProfile.png"}
+            name={characters.mainCharacter.name}
+            species={characters.mainCharacter.species}
+            refSheetImg={characters.mainCharacter.reference_sheet_url || "/GenericBG.png"}
+          />
+        )}
+
         <GridResponsive breakpoint={250} className="gap-1.5" role="listbox">
-          {[...Array(10)].map((_, i) => (
+          {characters.characters.map((character, index) => (
             <FursonaCard
-              key={i}
-              name={"Renzo"}
-              img={"/img/hero/renzo-snowglobe.jpg"}
-              species="Raccoon-Fox-Dragon"
+              key={index}
+              img={character.avatar_url || "/UserProfile.png"}
+              name={character.name}
+              species={character.species}
               status="owned"
-              role="listitem"
-              href={`/@username/character/renzo`}
+              href={`/profile/${handle}/character/${character.name}`}
             />
           ))}
         </GridResponsive>
@@ -96,11 +105,9 @@ export default function CharacterView() {
             <Button
               size="small"
               variant="tritery"
-              iconOnly
+              icon={<XIcon size={18} />}
               onClick={toggleCreateFolderModal}
-            >
-              <XIcon size={18} />
-            </Button>
+            />
           </div>
         </Modal.Title>
         <div className="flex flex-col gap-y-1 px-4 pb-3">
@@ -112,10 +119,7 @@ export default function CharacterView() {
               {colors.map((color, i) => (
                 <Button
                   key={i}
-                  className={clsx(
-                    "grid h-10 w-10 place-items-center rounded-full",
-                    color
-                  )}
+                  className={cn("grid h-10 w-10 place-items-center rounded-full", color)}
                   onClick={() => setSelectedIndex(i)}
                 >
                   {selectedIndex == i ? <CheckCircle2Icon className="text-100" /> : null}

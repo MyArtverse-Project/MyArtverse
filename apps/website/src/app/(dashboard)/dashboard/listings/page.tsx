@@ -1,7 +1,9 @@
-import DashboardTitle from "@/utils/DashboardTitle"
+import type { Metadata } from "next"
 
-export const metadata = DashboardTitle("Characters")
+export const metadata: Metadata = {
+  title: "Listings"
+}
 
-export default function CommissionsPage() {
+export default function ListingsOverviewPage() {
   return <>I love space</>
 }

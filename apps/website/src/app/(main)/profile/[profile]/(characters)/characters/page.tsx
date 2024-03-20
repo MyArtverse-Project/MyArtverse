@@ -1,22 +1,21 @@
-import { Metadata, ResolvingMetadata } from "next"
+import type { Metadata } from "next"
 import { MarginClamp } from "@/components/ui"
-import type { SlugRouteProps } from "@/types/utils"
+import { fetchUserCharacters } from "@/utils/api"
+import { BRAND } from "@myfursona-internal/config"
 import CharacterView from "./CharacterView"
 
-export async function generateMetadata(
-  { params, searchParams }: SlugRouteProps,
-  parent: ResolvingMetadata
-): Promise<Metadata> {
+export async function generateMetadata(): Promise<Metadata> {
   return {
     title: `User's characters`,
-    description: `See User's characters and others on MyFursona by creating an account!`
+    description: `See User's characters and others on ${BRAND} by creating an account!`
   }
 }
 
-export default function Page({ params }: SlugRouteProps) {
+export default async function Page({ params }) {
+  const characters = await fetchUserCharacters(params.profile)
   return (
     <MarginClamp>
-      <CharacterView />
+      <CharacterView handle={params.profile} characters={characters} />
     </MarginClamp>
   )
 }

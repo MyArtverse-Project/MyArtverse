@@ -20,18 +20,22 @@ const nextConfig = {
   swcMinify: true,
   poweredByHeader: false,
   experimental: {
-    typedRoutes: true,
     mdxRs: true
   },
   typescript: {
     ignoreBuildErrors: true
   },
-  eslint: {
-    ignoreDuringBuilds: true
-  },
   images: {
     dangerouslyAllowSVG: true,
-    contentDispositionType: "attachment"
+    contentDispositionType: "attachment",
+    remotePatterns: [
+      {
+        protocol: "http",
+        hostname: "localhost",
+        port: "9000",
+        pathname: "/**"
+      }
+    ]
   },
   async rewrites() {
     return [

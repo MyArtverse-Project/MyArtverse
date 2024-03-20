@@ -86,8 +86,7 @@ export default function FolderShelf({
           <div>
             <Button
               aria-label={panelStateAria}
-              iconOnly
-              prefixIcon={<PanelIconDynamic size={21} />}
+              icon={<PanelIconDynamic size={21} />}
               className="hover:bg-200 hover:text-500 rounded-md p-2 transition-colors"
               onClick={handleExpandDetails}
             />

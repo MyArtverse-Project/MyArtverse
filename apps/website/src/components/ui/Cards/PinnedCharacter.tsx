@@ -1,5 +1,5 @@
 import { LuCat as CatIcon, LuPalette as Palette } from "react-icons/lu"
-import { ColorPalette as Colors } from "@/types/characters"
+import type { ColorPalette as Colors } from "@/types/characters"
 import { Button } from "../Buttons"
 import MFImage from "../MFImage"
 import ColorPalette from "./ColorPalette"
@@ -32,10 +32,10 @@ export default function PinnedCharacter({
             </div>
           </div>
           <div className="flex flex-col">
-            <Button variant="primary" prefixIcon={<CatIcon />}>
+            <Button variant="primary" prefixIcon={<CatIcon size={19} />}>
               View character details
             </Button>
-            <Button variant="primary" prefixIcon={<Palette />}>
+            <Button variant="primary" prefixIcon={<Palette size={19} />}>
               Export ref sheet
             </Button>
           </div>

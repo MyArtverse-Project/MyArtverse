@@ -1,19 +1,30 @@
-export type UserRoles = ("artist" | "admin" | "contributor")[]
+import type { LinkedString } from "./utils"
 
-export type UserType = {
+export type UserRoles = ("artist" | "admin" | "contributor" | "early-tester")[]
+
+export interface UserType {
   id: number
   handle: string
   displayName: string | null
   bio: string | null
-  avatarUrl: string | null
-  bannerUrl: string | null
+  avatarUrl: LinkedString
+  bannerUrl: LinkedString
   dateRegistered: Date
   dateUpdated: Date
-  hasArtistAccess: boolean
+  roles: UserRoles
   hasBetaAccess: boolean
-  links: string | null
-  badges: string | null
+  links: {
+    url: string
+    label: string
+  }[]
+  badges: {
+    roleName: string
+    rewardDate: Date
+  }
   onlineStatus: "offline" | "online"
   customStatus: string | null
   previousAliases: string | null
+  pronouns: string
+  nationaility: string
+  birthday: Date
 }

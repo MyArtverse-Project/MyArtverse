@@ -1,4 +1,4 @@
-import clsx from "clsx"
+import cn from "@/utils/cn"
 
 export default function Field({
   title,
@@ -13,7 +13,7 @@ export default function Field({
 }) {
   return (
     <div
-      className={clsx(
+      className={cn(
         "inline-flex flex-col gap-y-1 px-2 py-1.5",
         !full ? "w-1/2" : "w-full"
       )}

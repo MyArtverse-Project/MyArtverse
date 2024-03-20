@@ -35,12 +35,16 @@ export default function Page() {
           />
           <div className="ml-auto flex items-center gap-x-1">
             <Separator dir="vertical" size="2rem" padding={5} />
-            <Button variant="tritery" iconOnly aria-label="Search">
-              <SearchIcon size={21} />
-            </Button>
-            <Button variant="tritery" iconOnly aria-label="RSS Feed">
-              <RssIcon size={21} />
-            </Button>
+            <Button
+              variant="tritery"
+              icon={<SearchIcon size={21} />}
+              aria-label="Search"
+            />
+            <Button
+              variant="tritery"
+              icon={<RssIcon size={21} />}
+              aria-label="RSS Feed"
+            />
           </div>
         </div>
       </div>

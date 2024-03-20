@@ -4,13 +4,13 @@ import type { IconType } from "react-icons"
 import type { UrlObject } from "url"
 
 export default function MenuItem({
-  prefix,
-  suffix,
+  prefixIcon,
+  suffixIcon,
   name,
   href
 }: {
-  prefix: ReactElement<IconType> | ReactElement
-  suffix?: ReactElement<IconType> | ReactElement
+  prefixIcon: ReactElement<IconType> | ReactElement
+  suffixIcon?: ReactElement<IconType> | ReactElement
   name: string
   href: string
 }) {
@@ -20,10 +20,10 @@ export default function MenuItem({
       href={href as unknown as UrlObject}
     >
       <span className="flex items-center gap-x-3 text-sm">
-        {prefix}
+        {prefixIcon}
         {name}
       </span>
-      {suffix}
+      {suffixIcon}
     </Link>
   )
 }

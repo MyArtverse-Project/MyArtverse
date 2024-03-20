@@ -1,6 +1,8 @@
 export const isProduction = process.env.NODE_ENV === "production"
 export const isDevelopment = process.env.NODE_ENV === "development"
 
+export const BACKEND_URL = process.env.NEXT_PUBLIC_BACKEND_URL || "http://localhost:8081/"
+
 export const UMAMI_ID = process.env.UMAMI_ID || "xxx"
 export const MS_CLARITY_ID = process.env.MS_CLARITY_ID || "xxx"
 

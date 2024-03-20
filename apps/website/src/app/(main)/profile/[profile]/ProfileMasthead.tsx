@@ -1,6 +1,5 @@
 "use client"
 
-import { useEffect, useState } from "react"
 import { Button } from "@/components/ui/Buttons"
 import { Dropdown, DropdownItem } from "@/components/ui/Dropdown"
 import { Masthead } from "@/components/ui/Masthead"
@@ -10,19 +9,19 @@ import {
   LuCat as CatIcon,
   LuHeart as HeartIcon,
   LuHome as HomeIcon,
-  LuLayoutGrid as LayoutGridIcon,
   LuImage,
   LuMoreVertical as MoreVerticalIcon,
   LuUserPlus as UserPlusIcon
 } from "react-icons/lu"
 import type { UserRoles, UserType } from "@/types/users"
 
+// TODO: Remove all props to be retrieved directly from Jotai or react-query
 export default function ProfileMasthead({
-  handle,
+  profileData,
   hasEditAccess
 }: {
   username?: string
-  handle: string
+  profileData: UserType
   badges?: UserRoles
   /** Only for logged in users that should be set to `true` */
   hasEditAccess?: boolean
@@ -36,6 +35,7 @@ export default function ProfileMasthead({
     icon: IconType
   }[]
 }) {
+  const name = profileData.displayName ? profileData.displayName : profileData.handle
   const profileTabs = [
     {
       icon: HomeIcon,
@@ -68,53 +68,58 @@ export default function ProfileMasthead({
 
   return (
     <Masthead hasEditAccess={hasEditAccess}>
-      <Masthead.Banner />
+      <Masthead.Banner src={profileData.bannerUrl || null} />
       <Masthead.Wrapper>
-        <Masthead.Avatar profileOnly />
+        <Masthead.Avatar profileOnly src={profileData.avatarUrl || null} />
         <Masthead.Details>
           <Masthead.Layer spaceBetween>
-            <h2 className="not-prose font-inter mt-4 flex items-center gap-x-1.5 text-3xl font-bold">
-              <span>Username</span>
-              <span aria-hidden></span>
-            </h2>
+            <div
+              className="not-prose font-inter mt-4 flex items-center gap-x-1.5 text-3xl font-bold"
+              translate="no"
+            >
+              <div>{name}</div>
+              <span aria-hidden>{/* badges */}</span>
+            </div>
             <div className="relative z-[6] mt-4 flex items-start gap-x-2.5">
               <Button
                 prefixIcon={<BrushIcon size={20} />}
-                aria-label="View Username's Commissions"
+                aria-label={`View ${name}'s Commissions`}
                 variant="secondary"
               >
                 View Commission ToS
               </Button>
               <Button
                 prefixIcon={<UserPlusIcon size={20} />}
-                aria-label="Follow Username"
+                aria-label={`Follow ${name}`}
               >
                 Follow
               </Button>
               <Dropdown
                 button={
-                  <Button
-                    iconOnly
-                    prefixIcon={<MoreVerticalIcon size={20} />}
-                    aria-label="More"
-                  ></Button>
+                  <Button icon={<MoreVerticalIcon size={20} />} aria-label="More" />
                 }
                 items={
                   <>
                     <DropdownItem link="/">Share</DropdownItem>
                     <DropdownItem link="/">Manage trades</DropdownItem>
-                    <DropdownItem link="/">Report Username</DropdownItem>
-                    <DropdownItem link="/">Block Username</DropdownItem>
+                    <DropdownItem link="/">
+                      Report <span translate="no">{name}</span>
+                    </DropdownItem>
+                    <DropdownItem link="/">
+                      Block <span translate="no">{name}</span>
+                    </DropdownItem>
                   </>
                 }
               />
             </div>
           </Masthead.Layer>
-          <Masthead.Layer>following</Masthead.Layer>
-          <Masthead.Layer>socials</Masthead.Layer>
+          {/* TODO: Figure out mutuals through backend */}
+          {/* <Masthead.Layer>following</Masthead.Layer> */}
+          {/* TODO: Figure out links through backend */}
+          {/* <Masthead.Layer>{profileData.links}</Masthead.Layer> */}
         </Masthead.Details>
       </Masthead.Wrapper>
-      <Masthead.Tabs baseURL={`/@${handle}`} items={profileTabs} />
+      <Masthead.Tabs baseURL={`/@${profileData.handle}`} items={profileTabs} />
     </Masthead>
   )
 }

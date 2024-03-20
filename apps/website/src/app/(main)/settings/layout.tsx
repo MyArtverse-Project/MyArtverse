@@ -64,11 +64,7 @@ const SettingList = ({ items }: { items?: SettingContents[] }) => {
       key={index}
       variant="tritery"
       prefixIcon={<item.icon size={19} />}
-      href={
-        !item.slug
-          ? `/settings/${kebabCase(item.text)}`
-          : `/settings/${kebabCase(item.slug)}`
-      }
+      href={`/settings/${kebabCase(!item.slug ? item.text : item.slug)}`}
     >
       {item.text}
     </Button>
