@@ -1,3 +1,4 @@
+/* eslint-disable import/no-internal-modules */
 import { sidebarToggleDashboard } from "@/atoms"
 import cn from "@/utils/cn"
 import { useAtom } from "jotai"

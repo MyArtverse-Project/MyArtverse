@@ -100,7 +100,7 @@ export default function CreateCharacterView() {
               alt="Placeholder"
               label="Character Name"
               artist="Artist Name"
-              varients={1}
+              variantCount={1}
             />
             <UploadRefsheet
               toggleUploadRefSheetModal={toggleUploadRefSheetModal}

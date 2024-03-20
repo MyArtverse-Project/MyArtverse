@@ -1,3 +1,4 @@
+/* eslint-disable import/no-internal-modules */
 import { type NextRequest, NextResponse } from "next/server"
 import { generateCSP } from "./utils/generateCSP"
 
@@ -9,7 +10,7 @@ export function middleware(request: NextRequest) {
       "self",
       "unsafe-eval",
       `nonce-${nonce}`,
-      "https://*.umami.is",
+      "https://eu.umami.is",
       "https://hcaptcha.com",
       "https://*.hcaptcha.com",
       "https://www.clarity.ms"
@@ -28,9 +29,8 @@ export function middleware(request: NextRequest) {
       "https://*.hcaptcha.com",
       "http://localhost:*"
     ],
-    "object-src": ["none"],
     "base-uri": ["self"],
-    "frame-ancestors": ["none"],
+    "frame-ancestors": ["self", "https://www.youtube-nocookie.com/"],
     "upgrade-insecure-requests": true
   })
 

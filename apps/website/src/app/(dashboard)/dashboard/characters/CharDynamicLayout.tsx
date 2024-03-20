@@ -3,6 +3,7 @@
 import { Container } from "@/components/dashboard"
 import { Tabs } from "@/components/ui"
 import { usePathStartsWith } from "@/hooks"
+import cn from "@/utils/cn"
 
 export default function CharDynamicLayout({ children }: { children?: React.ReactNode }) {
   const charEditPageRoute = usePathStartsWith("/dashboard/characters/edit")
@@ -13,7 +14,7 @@ export default function CharDynamicLayout({ children }: { children?: React.React
       noChildrenPadding={!charEditPageRoute}
       heading={charEditPageRoute ? "Edit <name>" : "Your characters"}
     >
-      <div className={charEditPageRoute ? "hidden" : undefined}>
+      <div className={cn("bg-100 sticky top-16 z-10", charEditPageRoute ? "hidden" : "")}>
         <div className="after:border-b-mute relative flex items-center justify-start px-3 after:absolute after:inset-x-0 after:bottom-0 after:h-[1px] after:border-b">
           <Tabs
             baseURL="/dashboard"

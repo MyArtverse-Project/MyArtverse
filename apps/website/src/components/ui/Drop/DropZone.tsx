@@ -1,11 +1,13 @@
 "use client"
 
-import { useEffect, useState } from "react"
+/* eslint-disable react/forbid-elements */
+import { useEffect, useRef, useState } from "react"
 import cn from "@/utils/cn"
 import { BACKEND_URL } from "@/utils/env"
 import { LuUpload } from "react-icons/lu"
+import type { MapElement } from "@/types/utils"
 
-const allowedTypes = ["image/png", "image/jpeg", "image/jpg"] as const
+const allowedTypes = ["image/png", "image/jpeg", "image/jpg"]
 const maxFileSize = 10 * 1024 * 1024 // 10 MB
 
 export default function DropZone({ setData }) {
@@ -15,43 +17,60 @@ export default function DropZone({ setData }) {
   const [imageUrl, setImageUrl] = useState(null)
   const [uploading, setUploading] = useState(false)
 
+  const fileUploadRef = useRef<React.ElementRef<"input">>(null)
+
   useEffect(() => {
-    const handleDragOver = (e) => {
+    const handleDragOver = (e: DragEvent) => {
       e.preventDefault()
     }
 
-    document.addEventListener("dragover", handleDragOver)
+    window.addEventListener("dragover", handleDragOver)
 
     return () => {
-      document.removeEventListener("dragover", handleDragOver)
+      window.removeEventListener("dragover", handleDragOver)
     }
   }, [])
 
   const handleDrag = (e) => {
     e.preventDefault()
     e.stopPropagation()
+
     setIsDragging(e.type === "dragenter" || e.type === "dragover")
   }
 
-  const handleImageDrop = (e) => {
+  const handleImageDrop = (e: React.DragEvent<MapElement<"div">>) => {
     e.preventDefault()
     e.stopPropagation()
+
     setIsDragging(false)
     const uploadedFile = e.dataTransfer.files[0]
     handleFile(uploadedFile)
   }
 
-  const handleFileInputChange = (e) => {
+  const handleFileInputChange = (e: React.ChangeEvent<MapElement<"input">>) => {
     const uploadedFile = e.target.files[0]
     handleFile(uploadedFile)
   }
 
-  const handleFile = (uploadedFile) => {
+  const setStateToNull = () => {
+    setFile(null)
+    setImageUrl(null)
+  }
+
+  const handleFile = (uploadedFile: File) => {
     if (!uploadedFile) return
-    if (!allowedTypes.includes(uploadedFile.type) || uploadedFile.size > maxFileSize) {
-      setError("Invalid file type or size. Max size: 10MB, Supported: PNG, JPG")
-      setFile(null)
-      setImageUrl(null)
+
+    const invalidFileType = !allowedTypes.includes(uploadedFile.type)
+    if (invalidFileType) {
+      setError("Invalid file type.")
+      setStateToNull()
+      return
+    }
+
+    const exceedFileSize = uploadedFile.size > maxFileSize
+    if (exceedFileSize) {
+      setError("File type must not exceed higher than 10MB!")
+      setStateToNull()
       return
     }
 
@@ -84,34 +103,46 @@ export default function DropZone({ setData }) {
   return (
     <div
       className={cn(
-        isDragging ? "bg-400" : "bg-300",
-        "border-600 rounded-md border-4 border-dashed p-10 text-center"
+        isDragging ? "bg-300" : "bg-100",
+        "border-600 rounded-md border-2 border-dashed bg-opacity-75 p-10 text-center transition-colors"
       )}
       onDragEnter={handleDrag}
       onDragOver={handleDrag}
       onDragLeave={handleDrag}
       onDrop={handleImageDrop}
     >
+      {/* 
+      TODO: needs rewrite
+      TODO: - too confusing to read and code duplication
+      TODO: - causes rerenders when a file is uploaded locally
+      */}
       {file ? (
         <div className="flex flex-col items-center justify-center">
           <input type="file" className="hidden" onChange={handleFileInputChange} />
-          {/* eslint-disable-next-line */}
           <img alt="" src={imageUrl} width={200} height={200} />
-          <h4 className="text-sm">Uploaded!</h4>
+          <span className="text-lg font-bold">Uploaded!</span>
         </div>
       ) : uploading ? (
         <div className="flex flex-col items-center justify-center">
-          <h4 className="text-sm">Uploading...</h4>
+          <span className="text-lg font-bold">Uploading...</span>
         </div>
       ) : (
         <div className="flex flex-col items-center justify-center">
-          <input type="file" className="hidden" onChange={handleFileInputChange} />
-          <span className="bg-100 mb-6 flex items-center justify-center rounded-full p-6">
-            <LuUpload size={64} />
-          </span>
-          <h4 className="text-sm">Drag Files Here</h4>
-          <p className="mt-4 text-xl">Max size: 10MB, Supported: PNG, JPG</p>
-          {error && <p className="text-red-500">{error}</p>}
+          <input
+            ref={fileUploadRef}
+            type="file"
+            className="hidden"
+            onChange={handleFileInputChange}
+          />
+          <button
+            className="bg-200 mb-6 flex items-center justify-center rounded-full p-8"
+            onClick={() => fileUploadRef.current.click()}
+          >
+            <LuUpload size={48} />
+          </button>
+          <span className="text-lg font-bold">Drag and drop files here</span>
+          <span className="mt-4">Max size: 10MB, Supported formats: .jpg, .png</span>
+          <span className={cn("text-red-500", !error ? "hidden" : "")}>{error}</span>
         </div>
       )}
     </div>

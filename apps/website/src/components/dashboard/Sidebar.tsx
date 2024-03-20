@@ -1,5 +1,6 @@
 "use client"
 
+/* eslint-disable import/no-internal-modules */
 import { Fragment } from "react"
 import { sidebarToggleDashboard } from "@/atoms"
 import { ItemIterator, MFImage, Separator } from "@/components/ui"
@@ -62,7 +63,7 @@ export default function DashboardSidebar() {
   const fmTransition = { ease: "circInOut", duration: 0.275 }
 
   return (
-    <div aria-expanded={toggleState ? "true" : undefined}>
+    <span aria-expanded={toggleState ? "true" : undefined}>
       <LazyMotion features={domAnimation}>
         <m.nav
           animate={{ width: toggleState ? 290 : 85 }}
@@ -71,6 +72,7 @@ export default function DashboardSidebar() {
           {/* Main navigation */}
           <m.div
             id="main-nav"
+            initial={{ x: "0%" }}
             animate={{
               x: !editCharacterRoute ? "0%" : "-25%",
               pointerEvents: !editCharacterRoute ? "auto" : "none"
@@ -87,6 +89,7 @@ export default function DashboardSidebar() {
 
           {/* Show if character/listing edit or user msg route is present */}
           <m.div
+            initial={{ x: "100%" }}
             animate={{
               x: !editCharacterRoute ? "100%" : "0%",
               pointerEvents: !editCharacterRoute ? "none" : "auto"
@@ -145,6 +148,6 @@ export default function DashboardSidebar() {
           </m.div>
         </m.nav>
       </LazyMotion>
-    </div>
+    </span>
   )
 }

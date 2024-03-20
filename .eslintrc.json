@@ -24,11 +24,9 @@
         "allow": [
           "tailwindcss/*",
           "@tailwindcss/**",
-          "next/*",
           "mdx/*",
-          "react-dom/*",
-          "react-icons/*",
-          "**/src/components/ui/**",
+          "next/**",
+          "react-*/**",
           "@myfursona/biro-ui/**",
           "@myfursona-internal/**",
           "**/assets/*"

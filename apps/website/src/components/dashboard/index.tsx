@@ -2,17 +2,19 @@ import DashboardContainer from "./Container"
 import * as GroupRoot from "./Group"
 import GroupNested from "./GroupNested"
 import Heading from "./Heading"
-import DashboardNavbar from "./Navbar"
-import DashboardSidebar from "./Sidebar"
+import Navbar from "./Navbar"
+import Sidebar from "./Sidebar"
+import SidebarSkeleton from "./SidebarSkeleton"
 
 const Group = Object.assign(GroupRoot, {
   Nested: GroupNested
 })
 
 export {
+  SidebarSkeleton,
   Heading,
-  DashboardNavbar,
-  DashboardSidebar,
+  Navbar,
+  Sidebar,
   Group,
   DashboardContainer as Container
 }

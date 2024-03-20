@@ -1,5 +1,3 @@
-import { Input } from "postcss"
-import React, { type Dispatch, type SetStateAction } from "react"
 import { Button } from "@/components/ui/Buttons"
 import DropZone from "@/components/ui/Drop/DropZone"
 import { InputField } from "@/components/ui/Forms"
@@ -7,19 +5,16 @@ import Modal from "@/components/ui/Modal"
 import { FaFolderPlus } from "react-icons/fa6"
 import { LuXCircle } from "react-icons/lu"
 
-interface IUploadRefsheetProps {
-  toggleUploadRefSheetModal: () => void
-  uploadRefsheetModal: boolean
-  // TODO: Figire out the type for newRefSheetData
-  // eslint-disable-next-line @typescript-eslint/no-explicit-any
-  newRefSheetData: any
-}
-
 export default function UploadRefsheet({
   toggleUploadRefSheetModal,
   uploadRefsheetModal,
   newRefSheetData
-}: IUploadRefsheetProps) {
+}: {
+  toggleUploadRefSheetModal: () => void
+  uploadRefsheetModal: boolean
+  // TODO: Figire out the type for newRefSheetData
+  newRefSheetData: unknown
+}) {
   return (
     <Modal
       className="w-3/4"

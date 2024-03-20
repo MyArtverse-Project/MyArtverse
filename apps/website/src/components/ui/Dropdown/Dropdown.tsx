@@ -1,3 +1,4 @@
+/* eslint-disable import/no-internal-modules */
 import { Menu } from "@headlessui/react"
 import { Fragment } from "react"
 import TransitionWrapper from "../Layouts/TransitionWrapper"

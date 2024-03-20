@@ -1,3 +1,4 @@
+/* eslint-disable import/no-internal-modules */
 import Author from "./Author"
 import Carousel from "./Carousel"
 import EmptySection from "./EmptySection"
