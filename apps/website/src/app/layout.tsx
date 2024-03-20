@@ -16,12 +16,12 @@ const SecretMessage = dynamic(
   }
 )
 
-const CheckLocalSettings = dynamic(
-  () => import("@/components/base").then((c) => c.CheckLocalSettings),
-  {
-    ssr: false
-  }
-)
+// const CheckLocalSettings = dynamic(
+//   () => import("@/components/base").then((c) => c.CheckLocalSettings),
+//   {
+//     ssr: false
+//   }
+// )
 
 const inter = Inter({
   subsets: ["latin", "cyrillic-ext"],
@@ -69,7 +69,7 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
       </head>
       <body className="bg-100 text-700 bg-background prose-headings:font-bold prose-headings:font-inter font-open-sans !overflow-x-hidden text-sm font-medium">
         <PreconnectResources />
-        <CheckLocalSettings />
+        {/* <CheckLocalSettings /> */}
         <SecretMessage />
         <a
           className="bg-500 text-active pointer-events-none fixed left-3 top-3 z-30 rounded-lg px-6 py-2.5 opacity-0 focus:pointer-events-auto focus:opacity-100"

@@ -17,7 +17,8 @@
     "build:all": "turbo build --concurrency 3",
     "format:check": "prettier --check .",
     "format:write": "prettier --write .",
-    "prepare": "husky || true"
+    "prepare": "husky || true",
+    "knip": "knip"
   },
   "lint-staged": {
     "**/*.{js,ts,tsx,md,mdx,json}": [
@@ -35,8 +36,10 @@
     "dotenv-cli": "^7.3.0",
     "eslint": "^8.57.0",
     "eslint-config-next": "^14.1.0",
+    "eslint-plugin-import": "^2.29.1",
     "eslint-plugin-unused-imports": "^3.1.0",
     "husky": "^9.0.0",
+    "knip": "^5.1.4",
     "lint-staged": "^14.0.1",
     "prettier": "^3.0.3",
     "prettier-plugin-tailwindcss": "^0.5.11",
