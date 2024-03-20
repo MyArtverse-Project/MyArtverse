@@ -22,7 +22,7 @@ function THead({
   ...attrs
 }: { children?: React.ReactNode } & Pick<ReactMapElement<"th">, "colSpan">) {
   return (
-    <th className="border-separator h-11 border-b px-4 text-left" {...attrs}>
+    <th className="border-separator h-11 border-b px-5 text-left" {...attrs}>
       {children}
     </th>
   )
@@ -64,7 +64,7 @@ function TCell({
   "colSpan" | "className"
 >) {
   return (
-    <td className={cn("px-4 py-2.5", className)} {...attrs}>
+    <td className={cn("px-5 py-2.5", className)} {...attrs}>
       {children}
     </td>
   )

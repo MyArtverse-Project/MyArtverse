@@ -5,18 +5,22 @@ import ReactDOM from "react-dom"
 import { isDevelopment } from "@/utils/env"
 
 export default function PreconnectResources() {
-  const p = usePathname()
+  const path = usePathname()
 
-  if (p.startsWith("/blog") || p.startsWith("/dashboard/overview")) {
+  ReactDOM.prefetchDNS("https://eu.umami.is/")
+
+  if (path.startsWith("/blog") || path.startsWith("/dashboard/overview")) {
     ReactDOM.preconnect("https://images.ctfassets.net/")
   }
 
-  const _LOCALHOST_URL = "http://localhost:8081/"
+  // Preconnect resources from localhost during development
+  const _LOCALHOST_URL = "http://localhost" as const
 
-  // Preconnect resources localhost during development
   if (isDevelopment) {
-    ReactDOM.prefetchDNS(_LOCALHOST_URL)
-    ReactDOM.preconnect(_LOCALHOST_URL)
+    ReactDOM.prefetchDNS(`${_LOCALHOST_URL}:8080`)
+
+    ReactDOM.preload(`${_LOCALHOST_URL}:8080`, { as: "fetch", fetchPriority: "high" })
+    ReactDOM.preconnect(`${_LOCALHOST_URL}:9000`)
   }
 
   return null

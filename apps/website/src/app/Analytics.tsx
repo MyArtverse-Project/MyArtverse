@@ -13,7 +13,7 @@ export default function Analytics() {
       <Script
         id="umami"
         async
-        src="https://cloud.umami.is/script.js"
+        src="https://eu.umami.is/script.js"
         data-website-id={umamiId}
       />
       {/* Behavior analytics - Microsoft Clarity */}

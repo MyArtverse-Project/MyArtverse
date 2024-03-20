@@ -6,8 +6,8 @@ import dynamic from "next/dynamic"
 
 export const metadata: Metadata = {
   title: {
-    default: "Main",
-    template: "%s | Dashboard"
+    default: "Unset title",
+    template: "%s | MyArtverse Dashboard"
   }
 }
 

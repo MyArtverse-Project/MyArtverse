@@ -15,17 +15,19 @@ export default function CharacterView() {
   return (
     <div className="w-full">
       <div className="after:border-mute relative flex items-center px-2 after:absolute after:inset-x-0 after:bottom-0 after:z-[3] after:h-[1px] after:border-b">
-        <Button
-          variant="tritery"
-          className="group absolute inset-y-1 left-3 z-[2] px-2.5 hover:bg-transparent"
-        >
-          <LuFilter size={19} className="group-hover:stroke-500" />
-        </Button>
         <InputField
           noLabel
+          inputName="Type to filter characters"
           placeholder="Filter characters"
           className="font-inter relative w-full rounded-none border-none py-3 pl-12 text-sm focus:outline-none focus:ring-0"
         />
+        <Button
+          variant="tritery"
+          className="group absolute inset-y-1 left-3 z-[2] px-2.5 hover:bg-transparent"
+          aria-label="Filter or sort items"
+        >
+          <LuFilter size={19} className="group-hover:stroke-500" />
+        </Button>
       </div>
       <div className="w-full">
         <CharacterTable>

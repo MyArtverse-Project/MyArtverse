@@ -1,5 +1,6 @@
 "use client"
 
+import Link from "next/link"
 import { MFImage } from "@/components/ui"
 import Table from "../../ui/Table"
 
@@ -7,11 +8,11 @@ export function CharacterTable({ children }: { children?: React.ReactNode }) {
   return (
     <Table>
       <Table.ColGroup>
-        <Table.Col width="1%" />
+        <Table.Col width="0.1%" />
         <Table.Col width="33%" />
         <Table.Col width="15%" />
-        <Table.Col width="12.5%" />
-        <Table.Col width="12.5%" />
+        <Table.Col width="12.75%" />
+        <Table.Col width="12.75%" />
       </Table.ColGroup>
       <Table.Header>
         <Table.Row>
@@ -27,21 +28,30 @@ export function CharacterTable({ children }: { children?: React.ReactNode }) {
 }
 
 export function CharacterItem() {
+  const charLink = "/dashboard/characters/edit/name"
+
   return (
     <Table.Row>
       <Table.Cell>chkbox</Table.Cell>
       <Table.Cell className="flex items-center gap-x-4">
-        <MFImage
-          src="/img/examples/ozzy/testing.png"
-          aspectRatio="1"
-          alt=""
-          rounded={8}
-          objectFit="cover"
-          width="3.75rem"
-        />
+        <Link href={charLink}>
+          <MFImage
+            src="/img/examples/ozzy/testing.png"
+            aspectRatio="1"
+            alt=""
+            rounded={8}
+            objectFit="cover"
+            width="3.75rem"
+          />
+        </Link>
         <div>
-          <div className="font-inter w-full text-lg font-bold">Name</div>
-          <div className="mt-0.5 w-full">Char attrs</div>
+          <Link
+            href={charLink}
+            className="font-inter block w-full text-lg font-bold hover:underline"
+          >
+            Name
+          </Link>
+          <span className="mt-0.5 w-full">Char attrs</span>
         </div>
       </Table.Cell>
       <Table.Cell>Visibility field</Table.Cell>
