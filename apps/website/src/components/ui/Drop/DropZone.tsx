@@ -10,7 +10,7 @@ import type { MapElement } from "@/types/utils"
 const allowedTypes = ["image/png", "image/jpeg", "image/jpg"]
 const maxFileSize = 10 * 1024 * 1024 // 10 MB
 
-export default function DropZone({ setData }) {
+export default function DropZone({ setData, className = "" }) {
   const [isDragging, setIsDragging] = useState(false)
   const [error, setError] = useState(null)
   const [file, setFile] = useState(null)
@@ -104,7 +104,8 @@ export default function DropZone({ setData }) {
     <div
       className={cn(
         isDragging ? "bg-300" : "bg-100",
-        "border-600 rounded-md border-2 border-dashed bg-opacity-75 p-10 text-center transition-colors"
+        "border-600 rounded-md border-2 border-dashed bg-opacity-75 p-10 text-center transition-colors",
+        className
       )}
       onDragEnter={handleDrag}
       onDragOver={handleDrag}

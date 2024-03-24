@@ -67,7 +67,7 @@ export default function CreateCharacterView() {
             <p className="text-600 mb-2 text-sm font-bold uppercase">Avatar</p>
             <DropZone setData={setCharacterAvatar} />
           </div>
-          <div className="w-full">
+          <div className="w-3/5">
             <div className="mb-4 flex flex-row items-center justify-between space-x-4">
               <InputField inputName="Character Name" required />
               <SelectField inputName="Visibility" options={visibilityOptions} />
