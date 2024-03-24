@@ -1,9 +1,8 @@
 import React from "react"
 import { MFImage } from "@/components/ui"
-import { InputField } from "@/components/ui/Forms"
-import Checkbox from "@/components/ui/Forms/Checkbox"
+import { Checkbox, InputField } from "@/components/ui/Forms"
 
-export default function ModalRefVarient() {
+export default function ModalRefVariant() {
   return (
     <div className="my-4 flex flex-row justify-between px-3">
       <MFImage
@@ -13,7 +12,7 @@ export default function ModalRefVarient() {
         height={100}
       />
       <div className="mx-10 w-3/5">
-        <InputField noLabel placeholder="Varient Name" required className="my-3" />
+        <InputField noLabel placeholder="Variant Name" required className="my-3" />
         <Checkbox
           label="Mark ref as NSFW"
           checked={false}

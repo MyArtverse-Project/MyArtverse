@@ -15,6 +15,7 @@ export default function Checkbox({
   disabled?: boolean
 }) {
   return (
+    // TODO: add accessibility hints
     <div className="flex items-center gap-x-2">
       <input
         type="checkbox"

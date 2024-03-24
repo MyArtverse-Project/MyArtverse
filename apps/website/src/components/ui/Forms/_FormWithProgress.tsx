@@ -1,6 +1,9 @@
 import Link from "next/link"
 import cn from "@/utils/cn"
 
+/**
+ * @deprecated Don't use; will be removed soon
+ */
 export default function FormWithProgress({
   children,
   progress

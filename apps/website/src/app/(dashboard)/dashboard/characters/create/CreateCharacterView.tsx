@@ -3,14 +3,16 @@
 import { useState } from "react"
 import { Container } from "@/components/dashboard"
 import { Button } from "@/components/ui/Buttons"
-import DropZone from "@/components/ui/Drop/DropZone"
-import { InputField } from "@/components/ui/Forms"
-import Attribute from "@/components/ui/Forms/Attribute"
-import Checkbox from "@/components/ui/Forms/Checkbox"
-import RichTextField from "@/components/ui/Forms/RichTextField"
-import SelectField from "@/components/ui/Forms/SelectField"
-import ReferenceCard from "@/components/ui/ReferenceCard"
-import UploadRefsheet from "./UploadRefsheet"
+import { ReferenceCard } from "@/components/ui/Cards"
+import {
+  Checkbox,
+  FieldAttribute,
+  InputField,
+  RichTextField,
+  SelectField
+} from "@/components/ui/Forms"
+import DropZone from "@/components/ui/Forms/DropZone"
+import UploadRefsheetModal from "./UploadRefsheet"
 
 export default function CreateCharacterView() {
   const [mainCharacter, setMainCharacter] = useState(false)
@@ -88,11 +90,11 @@ export default function CreateCharacterView() {
           <h1 className="px-7 pt-6 text-2xl">Reference sheets</h1>
           <div className="pl-7 pr-24">
             <p>
-              Instead of traditional way of adding an image of a character’s reference
-              image, you’ll need to create a ref sheet item that contains the image
+              Instead of traditional way of adding an image of a character's reference
+              image, you'll need to create a ref sheet item that contains the image
               itself, the proper art credit and color palettes that can be reused and can
               be useful if a character is sold as an adoptable. You can manage all of your
-              character’s reference sheets here. Learn more
+              character's reference sheets here. Learn more
             </p>
             {/* TODO: Grab reference sheets from API */}
             <ReferenceCard
@@ -102,10 +104,9 @@ export default function CreateCharacterView() {
               artist="Artist Name"
               variantCount={1}
             />
-            <UploadRefsheet
+            <UploadRefsheetModal
               toggleUploadRefSheetModal={toggleUploadRefSheetModal}
               uploadRefsheetModal={refSheetUploadModal}
-              newRefSheetData={null}
             />
             <Button className="mt-4" onClick={() => setRefSheetUploadModal(true)}>
               New Reference Sheet
@@ -150,7 +151,7 @@ export default function CreateCharacterView() {
             </p>
             <div>
               {attributes.map((attribute, index) => (
-                <Attribute
+                <FieldAttribute
                   key={index}
                   attribute={attribute}
                   setAttributes={setAttributes}

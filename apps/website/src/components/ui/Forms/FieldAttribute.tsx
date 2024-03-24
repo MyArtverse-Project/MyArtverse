@@ -1,9 +1,9 @@
-import React from "react"
 import { Button } from "@/components/ui/Buttons"
 import { InputField } from "@/components/ui/Forms"
 import { LuDelete, LuMenu } from "react-icons/lu"
 
-export default function Attribute({ attribute, setAttributes, attributes }) {
+// TODO add a wrapper element to track the limit of adding custom attributes
+export default function FieldAttribute({ attribute, setAttributes, attributes }) {
   const change = (value: string, type: "heading" | "value") => {
     const index = attributes.findIndex((attr) => attr[type] === attribute[type])
     attributes[index][type] = value

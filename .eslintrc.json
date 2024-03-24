@@ -14,7 +14,7 @@
     "max-depth": ["error", 3],
 
     "unused-imports/no-unused-imports": "warn",
-    "import/no-deprecated": "error",
+    "import/no-deprecated": "warn",
     "import/no-duplicates": "error",
     "import/no-relative-packages": "error",
     "import/newline-after-import": ["error"],

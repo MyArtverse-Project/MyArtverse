@@ -1,9 +1,10 @@
-interface ISelectFieldProps {
+export default function SelectField({
+  inputName,
+  options
+}: {
   inputName: string
   options: { value: string; label: string }[]
-}
-
-export default function SelectField({ inputName, options }: ISelectFieldProps) {
+}) {
   return (
     <div className="flex w-full flex-col gap-y-1.5">
       <span className="text-600 gap-x-0.5 font-bold uppercase">{inputName}</span>

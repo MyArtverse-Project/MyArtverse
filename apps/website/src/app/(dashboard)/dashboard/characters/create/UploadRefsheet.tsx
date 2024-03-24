@@ -1,22 +1,21 @@
+import { ModalRefVariant } from "@/components/modals"
 import { MFImage } from "@/components/ui"
 import { Button } from "@/components/ui/Buttons"
-import DropZone from "@/components/ui/Drop/DropZone"
 import { InputField } from "@/components/ui/Forms"
-import Checkbox from "@/components/ui/Forms/Checkbox"
+import DropZone from "@/components/ui/Forms/DropZone"
 import Modal from "@/components/ui/Modal"
 import { FaFolderPlus } from "react-icons/fa6"
 import { LuXCircle } from "react-icons/lu"
-import ModalRefVarient from "./ModalRefVarient"
 
-export default function UploadRefsheet({
+export default function UploadRefsheetModal({
   toggleUploadRefSheetModal,
   uploadRefsheetModal,
-  newRefSheetData
+  newRefSheetData = null
 }: {
   toggleUploadRefSheetModal: () => void
   uploadRefsheetModal: boolean
   // TODO: Figire out the type for newRefSheetData
-  newRefSheetData: unknown
+  newRefSheetData?: unknown
 }) {
   return (
     <Modal
@@ -79,7 +78,7 @@ export default function UploadRefsheet({
           </div>
           <div className="w-full py-5">
             <span className="text-600 mb-2 mt-4 flex gap-x-0.5 font-bold uppercase">
-              Additional Varients
+              Additional Variants
             </span>
             <div className="border-400 hover:bg-400 relative flex flex-row justify-between rounded-md border border-solid px-3">
               <input
@@ -94,11 +93,11 @@ export default function UploadRefsheet({
                   height={100}
                 />
                 <div className="mx-10 w-3/5">
-                  <span className="text-2xl">Upload a new varient</span>
+                  <span className="text-2xl">Upload a new variant</span>
                 </div>
               </div>
             </div>
-            <ModalRefVarient />
+            <ModalRefVariant />
           </div>
         </div>
       </section>
