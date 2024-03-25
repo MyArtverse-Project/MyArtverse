@@ -57,6 +57,20 @@ export interface Character {
   }
 }
 
+export interface Varient {
+  name: string
+  url: string
+  nsfw: boolean
+  main: boolean
+}
+
+export interface ReferenceSheet {
+  name: string
+  artist: string
+  colors: string[]
+  varients: Varient[]
+}
+
 export interface CharacterResponse {
   characters: Character[]
   mainCharacter: Character | null

@@ -1,22 +1,95 @@
+import { useEffect, useState } from "react"
 import { ModalRefVariant } from "@/components/modals"
 import { MFImage } from "@/components/ui"
 import { Button } from "@/components/ui/Buttons"
 import { InputField } from "@/components/ui/Forms"
 import DropZone from "@/components/ui/Forms/DropZone"
 import Modal from "@/components/ui/Modal"
+import { BACKEND_URL } from "@/utils/env"
 import { FaFolderPlus } from "react-icons/fa6"
 import { LuXCircle } from "react-icons/lu"
+import type { ReferenceSheet, Varient } from "@/types/characters"
 
 export default function UploadRefsheetModal({
   toggleUploadRefSheetModal,
   uploadRefsheetModal,
-  newRefSheetData = null
+  newRefSheetData
 }: {
   toggleUploadRefSheetModal: () => void
   uploadRefsheetModal: boolean
   // TODO: Figire out the type for newRefSheetData
-  newRefSheetData?: unknown
+  newRefSheetData?: ReferenceSheet
 }) {
+  const [saved, setSaved] = useState(true)
+  const [mainRefURL, setMainRefUrl] = useState(null)
+  const [name, setName] = useState("")
+  const [artist, setArtist] = useState("")
+  const [colors, setColors] = useState<string[]>([])
+  const [refVariants, setRefVariants] = useState<Varient[]>([])
+
+  useEffect(() => {
+    if (mainRefURL) {
+      setRefVariants((prev) => {
+        const newMain = { ...prev[0], url: mainRefURL, main: true }
+        return [newMain, ...prev.slice(1)]
+      })
+    }
+  }, [mainRefURL])
+
+  useEffect(() => {
+    setSaved(false)
+  }, [name, artist, colors, refVariants])
+
+  const addVariant = async (e: React.ChangeEvent<HTMLInputElement>) => {
+    const formData = new FormData()
+    const uploadedFile = e.target.files[0]
+    formData.append("file", uploadedFile)
+
+    try {
+      const response = await fetch(`${BACKEND_URL}/v1/profile/upload`, {
+        method: "POST",
+        body: formData,
+        credentials: "include"
+      })
+
+      if (!response.ok) {
+        throw new Error("Failed to upload image")
+      }
+
+      const data = await response.json()
+
+      const newVariant = {
+        name: "New Variant",
+        url: data.url,
+        nsfw: false,
+        main: false
+      }
+
+      const newVariants = [newVariant, ...refVariants]
+      setRefVariants(newVariants)
+    } catch (error) {
+      throw new Error(error.message)
+    }
+  }
+
+  const save = () => {
+    // TODO: Update the newRefSheetData with the new data
+    setSaved(true)
+  }
+
+  const close = () => {
+    setName("")
+    setArtist("")
+    setColors([])
+    setRefVariants([])
+    toggleUploadRefSheetModal()
+  }
+
+  const saveAndClose = () => {
+    save()
+    close()
+  }
+
   return (
     <Modal
       className="w-3/4"
@@ -38,9 +111,16 @@ export default function UploadRefsheetModal({
         </div>
       </Modal.Title>
       <section className="flex flex-row justify-around p-4">
-        <DropZone setData={newRefSheetData} className="h-full w-2/5" />
+        <div className="w-2/5">
+          <span className="mb-4 text-2xl">Primary Ref Sheet</span>
+          <DropZone setData={setMainRefUrl} className="h-full w-full" />
+        </div>
         <div>
-          <InputField inputName="Name" required />
+          <InputField
+            inputName="Name"
+            required
+            onChange={(e) => setName(e.currentTarget.value)}
+          />
           <span className="text-600 mb-2 mt-4 flex gap-x-0.5 font-bold uppercase">
             Color Palette (User Selectable)
           </span>
@@ -83,6 +163,7 @@ export default function UploadRefsheetModal({
             <div className="border-400 hover:bg-400 relative flex flex-row justify-between rounded-md border border-solid px-3">
               <input
                 type="file"
+                onChange={addVariant}
                 className="absolute bottom-0 left-0 right-0 top-0 h-full w-full opacity-0"
               />
               <div className="my-3 flex flex-row items-center justify-between">
@@ -97,11 +178,21 @@ export default function UploadRefsheetModal({
                 </div>
               </div>
             </div>
-            <ModalRefVariant />
+            {refVariants.map((variant, index) => (
+              <ModalRefVariant {...variant} key={index} />
+            ))}
           </div>
         </div>
       </section>
-      <Button className="float-right m-4">Save</Button>
+      <div className="flex flex-row items-center justify-end p-4">
+        {saved ? null : "You have unsaved changes*"}
+        <Button className="float-right mx-4" onClick={save}>
+          Save
+        </Button>
+        <Button className="x-4 float-right" onClick={saveAndClose}>
+          Save & Close
+        </Button>
+      </div>
     </Modal>
   )
 }

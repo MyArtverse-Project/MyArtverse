@@ -12,6 +12,7 @@ import {
   SelectField
 } from "@/components/ui/Forms"
 import DropZone from "@/components/ui/Forms/DropZone"
+import type { ReferenceSheet } from "@/types/characters"
 import UploadRefsheetModal from "./UploadRefsheet"
 
 export default function CreateCharacterView() {
@@ -19,6 +20,7 @@ export default function CreateCharacterView() {
   const [characterAvatar, setCharacterAvatar] = useState(null)
   const [attributes, setAttributes] = useState<{ heading: string; value: string }[]>([])
   const [refSheetUploadModal, setRefSheetUploadModal] = useState(false)
+  const [refSheetsData, setRefSheetsData] = useState<ReferenceSheet>()
 
   const toggleUploadRefSheetModal = () => {
     setRefSheetUploadModal(!refSheetUploadModal)
@@ -96,7 +98,7 @@ export default function CreateCharacterView() {
               be useful if a character is sold as an adoptable. You can manage all of your
               character's reference sheets here. Learn more
             </p>
-            {/* TODO: Grab reference sheets from API */}
+
             <ReferenceCard
               src={"/DefaultRefrenceSheet.png"}
               alt="Placeholder"
@@ -107,6 +109,7 @@ export default function CreateCharacterView() {
             <UploadRefsheetModal
               toggleUploadRefSheetModal={toggleUploadRefSheetModal}
               uploadRefsheetModal={refSheetUploadModal}
+              newRefSheetData={refSheetsData}
             />
             <Button className="mt-4" onClick={() => setRefSheetUploadModal(true)}>
               New Reference Sheet
