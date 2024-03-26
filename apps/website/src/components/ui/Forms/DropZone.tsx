@@ -14,8 +14,16 @@ export default function DropZone({ setData, className = "" }) {
   const [isDragging, setIsDragging] = useState(false)
   const [error, setError] = useState(null)
   const [file, setFile] = useState(null)
+  const [success, setSuccess] = useState(false)
   const [imageUrl, setImageUrl] = useState(null)
   const [uploading, setUploading] = useState(false)
+
+  // Clear file input value per render
+  useEffect(() => {
+    if (fileUploadRef.current) {
+      fileUploadRef.current.value = ""
+    }
+  })
 
   const fileUploadRef = useRef<React.ElementRef<"input">>(null)
 
@@ -86,18 +94,31 @@ export default function DropZone({ setData, className = "" }) {
       method: "POST",
       body: formData,
       credentials: "include"
-    }).then((res) => {
-      if (!res.ok) throw new Error("Failed to upload image")
-      res
-        .json()
-        .then((data) => {
-          setData(data.url)
-          setImageUrl(data.url)
-        })
-        .catch((err) => {
-          setError(err.message)
-        })
     })
+      .then((res) => {
+        if (!res.ok)
+          throw new Error(
+            `Failed to upload image, ${res.status == 401 ? "Are you logged in?" : "."}`
+          )
+        res
+          .json()
+          .then((data) => {
+            setData(data.url)
+            setImageUrl(data.url)
+            setUploading(false)
+            setSuccess(true)
+          })
+          .catch((err) => {
+            setSuccess(false)
+            setUploading(false)
+            setError(err.message)
+          })
+      })
+      .catch((err) => {
+        setSuccess(false)
+        setUploading(false)
+        setError(err.message)
+      })
   }
 
   return (
@@ -117,7 +138,7 @@ export default function DropZone({ setData, className = "" }) {
       TODO: - too confusing to read and code duplication
       TODO: - causes rerenders when a file is uploaded locally
       */}
-      {file ? (
+      {success ? (
         <div className="flex flex-col items-center justify-center">
           <input type="file" className="hidden" onChange={handleFileInputChange} />
           <img alt="" src={imageUrl} width={200} height={200} />
@@ -126,6 +147,12 @@ export default function DropZone({ setData, className = "" }) {
       ) : uploading ? (
         <div className="flex flex-col items-center justify-center">
           <span className="text-lg font-bold">Uploading...</span>
+        </div>
+      ) : file ? (
+        <div className="flex flex-col items-center justify-center">
+          <span className="text-lg font-bold">Failed to upload</span>
+          <span>Try again, if issue continues try again later</span>
+          <span>Error: {error}</span>
         </div>
       ) : (
         <div className="flex flex-col items-center justify-center">

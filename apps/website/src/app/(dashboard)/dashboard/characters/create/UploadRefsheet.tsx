@@ -1,4 +1,4 @@
-import { useEffect, useState } from "react"
+import { type Dispatch, type SetStateAction, useEffect, useState } from "react"
 import { ModalRefVariant } from "@/components/modals"
 import { MFImage } from "@/components/ui"
 import { Button } from "@/components/ui/Buttons"
@@ -8,41 +8,65 @@ import Modal from "@/components/ui/Modal"
 import { BACKEND_URL } from "@/utils/env"
 import { FaFolderPlus } from "react-icons/fa6"
 import { LuXCircle } from "react-icons/lu"
-import type { ReferenceSheet, Varient } from "@/types/characters"
+import type { ReferenceSheet } from "@/types/characters"
 
 export default function UploadRefsheetModal({
   toggleUploadRefSheetModal,
   uploadRefsheetModal,
-  newRefSheetData
+  setNewRefSheetData,
+  refSheetData,
+  editingRefSheet
 }: {
   toggleUploadRefSheetModal: () => void
   uploadRefsheetModal: boolean
   // TODO: Figire out the type for newRefSheetData
-  newRefSheetData?: ReferenceSheet
+  setNewRefSheetData: Dispatch<SetStateAction<ReferenceSheet[]>>
+  refSheetData: ReferenceSheet[]
+  editingRefSheet?: ReferenceSheet | undefined
 }) {
+  const [mainRefUrl, setMainRefUrl] = useState("")
   const [saved, setSaved] = useState(true)
-  const [mainRefURL, setMainRefUrl] = useState(null)
-  const [name, setName] = useState("")
-  const [artist, setArtist] = useState("")
-  const [colors, setColors] = useState<string[]>([])
-  const [refVariants, setRefVariants] = useState<Varient[]>([])
+  const [formData, setFormData] = useState({
+    name: "",
+    artist: "",
+    colors: [],
+    variants: []
+  })
 
   useEffect(() => {
-    if (mainRefURL) {
-      setRefVariants((prev) => {
-        const newMain = { ...prev[0], url: mainRefURL, main: true }
-        return [newMain, ...prev.slice(1)]
-      })
+    if (editingRefSheet) {
+      setFormData(editingRefSheet)
+      if (editingRefSheet.variants && editingRefSheet.variants.length > 0) {
+        setMainRefUrl(editingRefSheet.variants.find((v) => v.main)?.url || "")
+      }
     }
-  }, [mainRefURL])
+  }, [editingRefSheet])
+
+  useEffect(() => {
+    if (mainRefUrl) {
+      setFormData((prevFormData) => ({
+        ...prevFormData,
+        variants: [
+          { name: "Main", url: mainRefUrl, nsfw: false, main: true },
+          ...prevFormData.variants.filter((v) => !v.main)
+        ]
+      }))
+    }
+  }, [mainRefUrl])
 
   useEffect(() => {
     setSaved(false)
-  }, [name, artist, colors, refVariants])
+  }, [formData])
 
-  const addVariant = async (e: React.ChangeEvent<HTMLInputElement>) => {
-    const formData = new FormData()
+  const handleChange = (key, value) => {
+    setFormData((prev) => ({ ...prev, [key]: value }))
+  }
+
+  const addVariant = async (e) => {
     const uploadedFile = e.target.files[0]
+    if (!uploadedFile) return
+
+    const formData = new FormData()
     formData.append("file", uploadedFile)
 
     try {
@@ -52,36 +76,30 @@ export default function UploadRefsheetModal({
         credentials: "include"
       })
 
-      if (!response.ok) {
-        throw new Error("Failed to upload image")
-      }
+      if (!response.ok) throw new Error("Failed to upload image")
 
-      const data = await response.json()
-
-      const newVariant = {
-        name: "New Variant",
-        url: data.url,
-        nsfw: false,
-        main: false
-      }
-
-      const newVariants = [newVariant, ...refVariants]
-      setRefVariants(newVariants)
+      const { url } = await response.json()
+      setFormData((prev) => ({
+        ...prev,
+        variants: [
+          ...prev.variants,
+          { name: "New Variant", url, nsfw: false, main: false }
+        ]
+      }))
     } catch (error) {
-      throw new Error(error.message)
+      console.error("Error uploading file:", error.message)
     }
   }
 
   const save = () => {
-    // TODO: Update the newRefSheetData with the new data
+    // Use currentEditIndex or similar logic to update or add new refSheet
+    setNewRefSheetData([...refSheetData, formData])
     setSaved(true)
   }
 
   const close = () => {
-    setName("")
-    setArtist("")
-    setColors([])
-    setRefVariants([])
+    setFormData({ name: "", artist: "", colors: [], variants: [] })
+    setMainRefUrl("")
     toggleUploadRefSheetModal()
   }
 
@@ -119,7 +137,7 @@ export default function UploadRefsheetModal({
           <InputField
             inputName="Name"
             required
-            onChange={(e) => setName(e.currentTarget.value)}
+            onChange={(e) => handleChange("name", e.currentTarget.value)}
           />
           <span className="text-600 mb-2 mt-4 flex gap-x-0.5 font-bold uppercase">
             Color Palette (User Selectable)
@@ -178,7 +196,7 @@ export default function UploadRefsheetModal({
                 </div>
               </div>
             </div>
-            {refVariants.map((variant, index) => (
+            {formData.variants.map((variant, index) => (
               <ModalRefVariant {...variant} key={index} />
             ))}
           </div>

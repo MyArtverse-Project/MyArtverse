@@ -1,10 +1,10 @@
 import React from "react"
-import type { Varient } from "@/app/(dashboard)/dashboard/characters/create/CreateCharacterView"
 import { MFImage } from "@/components/ui"
 import { Checkbox, InputField } from "@/components/ui/Forms"
 import cn from "@/utils/cn"
+import type { Variant } from "@/types/characters"
 
-export default function ModalRefVariant({ main, name, nsfw, url }: Varient) {
+export default function ModalRefVariant({ main, name, nsfw, url }: Variant) {
   return (
     <div
       className={cn(
@@ -19,7 +19,7 @@ export default function ModalRefVariant({ main, name, nsfw, url }: Varient) {
           placeholder="Variant Name"
           required
           className="my-3"
-          value={main ? "MAIN VARIENT" : name}
+          value={main ? "MAIN VARIANT" : name}
           readOnly={main}
         />
         <Checkbox

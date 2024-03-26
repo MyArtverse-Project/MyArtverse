@@ -1,6 +1,6 @@
 "use client"
 
-import { useState } from "react"
+import { useEffect, useState } from "react"
 import { Container } from "@/components/dashboard"
 import { Button } from "@/components/ui/Buttons"
 import { ReferenceCard } from "@/components/ui/Cards"
@@ -16,11 +16,33 @@ import type { ReferenceSheet } from "@/types/characters"
 import UploadRefsheetModal from "./UploadRefsheet"
 
 export default function CreateCharacterView() {
+  const [name, setName] = useState("")
+  const [nickname, setNickname] = useState("")
+  const [visibility, setVisibility] = useState("public")
+  const [species, setSpecies] = useState("")
+  const [pronouns, setPronouns] = useState("")
+  const [gender, setGender] = useState("")
+  const [bio, setBio] = useState("")
+  const [likes, setLikes] = useState("")
+  const [dislikes, setDislikes] = useState("")
   const [mainCharacter, setMainCharacter] = useState(false)
   const [characterAvatar, setCharacterAvatar] = useState(null)
   const [attributes, setAttributes] = useState<{ heading: string; value: string }[]>([])
   const [refSheetUploadModal, setRefSheetUploadModal] = useState(false)
-  const [refSheetsData, setRefSheetsData] = useState<ReferenceSheet>()
+  const [refSheetsData, setRefSheetsData] = useState<ReferenceSheet[]>([])
+  const [editingData, setEditingData] = useState<ReferenceSheet | null>(null)
+  const [saved, setSaved] = useState(true)
+
+  useEffect(() => {
+    if (
+      characterAvatar ||
+      mainCharacter ||
+      attributes.length > 0 ||
+      refSheetsData.length > 0
+    ) {
+      setSaved(false)
+    }
+  }, [characterAvatar, mainCharacter, attributes, refSheetsData])
 
   const toggleUploadRefSheetModal = () => {
     setRefSheetUploadModal(!refSheetUploadModal)
@@ -64,7 +86,13 @@ export default function CreateCharacterView() {
 
   return (
     <Container headingTransparent={false} noChildrenPadding heading="Character Details">
-      <div className="w-3/4">
+      <div className="relative w-3/4">
+        {!saved && (
+          <div className="bg-600 fixed bottom-10 right-10 z-20 flex w-1/2 flex-row items-center py-3 text-center">
+            <span className="mx-5">You got unsaved changes save?</span>
+            <Button>Save</Button>
+          </div>
+        )}
         <h1 className="px-7 py-6 text-2xl">Basic Info</h1>
         <section className="flex w-full flex-row px-7">
           <div className="pr-20">
@@ -73,10 +101,22 @@ export default function CreateCharacterView() {
           </div>
           <div className="w-3/5">
             <div className="mb-4 flex flex-row items-center justify-between space-x-4">
-              <InputField inputName="Character Name" required />
-              <SelectField inputName="Visibility" options={visibilityOptions} />
+              <InputField
+                inputName="Character Name"
+                onChange={(e) => setName(e.currentTarget.value)}
+                required
+              />
+              <SelectField
+                inputName="Visibility"
+                options={visibilityOptions}
+                onChange={(e) => setVisibility(e.currentTarget.value)}
+              />
             </div>
-            <InputField inputName="Nickname" required />
+            <InputField
+              inputName="Nickname"
+              required
+              onChange={(e) => setNickname(e.currentTarget.value)}
+            />
             <div className="my-3">
               <Checkbox
                 checked={mainCharacter}
@@ -98,18 +138,20 @@ export default function CreateCharacterView() {
               be useful if a character is sold as an adoptable. You can manage all of your
               character's reference sheets here. Learn more
             </p>
-
-            <ReferenceCard
-              src={"/DefaultRefrenceSheet.png"}
-              alt="Placeholder"
-              label="Character Name"
-              artist="Artist Name"
-              variantCount={1}
-            />
+            {refSheetsData.map((refSheet, index) => (
+              <ReferenceCard
+                key={index}
+                data={refSheet}
+                toggleUploadRefSheetModal={toggleUploadRefSheetModal}
+                setEditingData={setEditingData}
+              />
+            ))}
             <UploadRefsheetModal
               toggleUploadRefSheetModal={toggleUploadRefSheetModal}
               uploadRefsheetModal={refSheetUploadModal}
-              newRefSheetData={refSheetsData}
+              refSheetData={refSheetsData}
+              editingRefSheet={editingData}
+              setNewRefSheetData={setRefSheetsData}
             />
             <Button className="mt-4" onClick={() => setRefSheetUploadModal(true)}>
               New Reference Sheet
@@ -125,9 +167,21 @@ export default function CreateCharacterView() {
             </p>
             <div className="space-y-3">
               <div className="flex w-full flex-row space-x-6">
-                <SelectField inputName="Species" options={speiciesOptions} />
-                <SelectField inputName="Pronouns" options={pronounsOptions} />
-                <SelectField inputName="Gender" options={genderOptions} />
+                <SelectField
+                  onChange={(e) => setSpecies(e.currentTarget.value)}
+                  inputName="Species"
+                  options={speiciesOptions}
+                />
+                <SelectField
+                  onChange={(e) => setPronouns(e.currentTarget.value)}
+                  inputName="Pronouns"
+                  options={pronounsOptions}
+                />
+                <SelectField
+                  onChange={(e) => setGender(e.currentTarget.value)}
+                  inputName="Gender"
+                  options={genderOptions}
+                />
               </div>
               <RichTextField inputName="Bio" />
             </div>
@@ -140,8 +194,14 @@ export default function CreateCharacterView() {
               The like/dislikes can be in list form or in sentence form! Learn more
             </p>
             <div className="flex w-full flex-row items-center justify-center space-x-3">
-              <RichTextField inputName="Likes" />
-              <RichTextField inputName="Dislikes" />
+              <RichTextField
+                onChange={(e) => setLikes(e.currentTarget.value)}
+                inputName="Likes"
+              />
+              <RichTextField
+                onChange={(e) => setDislikes(e.currentTarget.value)}
+                inputName="Dislikes"
+              />
             </div>
           </div>
         </section>
