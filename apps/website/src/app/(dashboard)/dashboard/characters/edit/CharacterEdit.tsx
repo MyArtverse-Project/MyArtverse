@@ -15,7 +15,8 @@ import DropZone from "@/components/ui/Forms/DropZone"
 import type { ReferenceSheet } from "@/types/characters"
 import UploadRefsheetModal from "./UploadRefsheet"
 
-export default function CreateCharacterView() {
+export default function EditCharacterView() {
+  // TODO: Convert this to a object form
   const [name, setName] = useState("")
   const [nickname, setNickname] = useState("")
   const [visibility, setVisibility] = useState("public")
@@ -38,11 +39,26 @@ export default function CreateCharacterView() {
       characterAvatar ||
       mainCharacter ||
       attributes.length > 0 ||
-      refSheetsData.length > 0
+      refSheetsData.length > 0 ||
+      name ||
+      nickname ||
+      visibility ||
+      species ||
+      pronouns
     ) {
       setSaved(false)
     }
-  }, [characterAvatar, mainCharacter, attributes, refSheetsData])
+  }, [
+    characterAvatar,
+    mainCharacter,
+    attributes,
+    refSheetsData,
+    name,
+    nickname,
+    visibility,
+    species,
+    pronouns
+  ])
 
   const toggleUploadRefSheetModal = () => {
     setRefSheetUploadModal(!refSheetUploadModal)
@@ -84,16 +100,35 @@ export default function CreateCharacterView() {
     }
   ]
 
+  const save = () => {
+    // TODO: Create Character -- If exists, update
+    const data = {
+      name,
+      nickname,
+      visibility,
+      species,
+      pronouns,
+      gender,
+      bio,
+      likes,
+      dislikes,
+      mainCharacter
+    }
+  }
+
   return (
     <Container headingTransparent={false} noChildrenPadding heading="Character Details">
       <div className="relative w-3/4">
         {!saved && (
-          <div className="bg-600 fixed bottom-10 right-10 z-20 flex w-1/2 flex-row items-center py-3 text-center">
-            <span className="mx-5">You got unsaved changes save?</span>
-            <Button>Save</Button>
+          <div className="bg-400 fixed bottom-10 right-10 z-20 flex w-1/2 flex-row items-center py-3 text-center">
+            <span className="mx-5">You got unsaved changes!</span>
+            <Button onClick={save}>Save</Button>
           </div>
         )}
-        <h1 className="px-7 py-6 text-2xl">Basic Info</h1>
+
+        <h1 className="px-7 py-6 text-2xl after:absolute after:inset-x-0 after:bottom-0 after:h-[1px] after:border-b">
+          Basic Info
+        </h1>
         <section className="flex w-full flex-row px-7">
           <div className="pr-20">
             <p className="text-600 mb-2 text-sm font-bold uppercase">Avatar</p>
@@ -183,7 +218,10 @@ export default function CreateCharacterView() {
                   options={genderOptions}
                 />
               </div>
-              <RichTextField inputName="Bio" />
+              <RichTextField
+                onChange={(e) => setBio(e.currentTarget.value)}
+                inputName="Bio"
+              />
             </div>
           </div>
         </section>

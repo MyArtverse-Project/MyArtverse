@@ -22,7 +22,7 @@ export default function DashboardContainer({
         )}
       >
         <span className="font-inter text-2xl font-bold">{heading}</span>
-        {!actions ? <div className="flex items-center gap-x-1">{actions}</div> : null}
+        {actions ? <div className="flex items-center gap-x-1">{actions}</div> : null}
       </section>
       <div className={!noChildrenPadding ? "px-6 py-3.5" : null}>{children}</div>
     </div>

@@ -30,6 +30,8 @@ export interface Character {
   id: string
   name: string
   visibility: Visibility
+  main: boolean
+  mainCharacter: boolean
   fullName: string
   species: string
   isHybrid: boolean
