@@ -1,5 +1,6 @@
 "use client"
 
+/* eslint-disable import/no-internal-modules */
 import Link from "next/link"
 import { Fragment, useCallback, useEffect } from "react"
 import { sidebarToggle } from "@/atoms"
@@ -47,31 +48,38 @@ export default function Sidebar() {
     }
   ]
 
-  const [open, setOpen] = useAtom(sidebarToggle)
+  const [isSidebarOpen, setSidebarState] = useAtom(sidebarToggle)
 
-  const toggleSidebar = useCallback(() => setOpen(!open), [setOpen, open])
+  const toggleSidebar = useCallback(
+    () => setSidebarState(!isSidebarOpen),
+    [setSidebarState, isSidebarOpen]
+  )
 
   useEffect(() => {
     const handleKeyDown = (e: KeyboardEvent) => {
-      if (open && e.key === "Escape") toggleSidebar()
+      if (isSidebarOpen && e.key === "Escape") toggleSidebar()
     }
 
     window.addEventListener("keydown", handleKeyDown)
 
     return () => window.removeEventListener("keydown", handleKeyDown)
-  }, [toggleSidebar, open])
+  }, [toggleSidebar, isSidebarOpen])
+
+  const fmDuration = {
+    duration: 0.2
+  }
 
   return (
-    <Overlay state={open} toggler={toggleSidebar}>
+    <Overlay state={isSidebarOpen} toggler={toggleSidebar}>
       <motion.div
         className="bg-context-menu fixed inset-0 right-[unset] flex w-full flex-col ease-out md:w-[325px]"
         initial={{ x: "-100%", display: "none" }}
         animate={
-          open
-            ? { x: 0, display: "block", transition: { ease: "easeOut", duration: 0.2 } }
+          isSidebarOpen
+            ? { x: 0, display: "block", transition: { ...fmDuration, ease: "easeOut" } }
             : {
                 x: "-100%",
-                transition: { ease: "easeIn", duration: 0.2 },
+                transition: { ...fmDuration, ease: "easeIn" },
                 transitionEnd: { display: "none" }
               }
         }

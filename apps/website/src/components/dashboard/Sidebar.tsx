@@ -1,5 +1,6 @@
 "use client"
 
+/* eslint-disable import/no-internal-modules */
 import { Fragment } from "react"
 import { sidebarToggleDashboard } from "@/atoms"
 import { ItemIterator, MFImage, Separator } from "@/components/ui"
@@ -20,11 +21,18 @@ import {
   LuShield,
   LuSparkles
 } from "react-icons/lu"
+import type { Character } from "@/types/characters"
 import { Button } from "../ui/Buttons"
 import type { ItemIteratorType } from "../ui/Layouts/ItemIterator"
 import SidebarProfile from "./SidebarProfile"
 
-export default function DashboardSidebar() {
+export default function DashboardSidebar({
+  characters,
+  toggleModal
+}: {
+  characters: Character[]
+  toggleModal: () => void
+}) {
   // TODO check for localStorage to persist state of collapse/expand sidebar
   const toggleState = useAtomValue(sidebarToggleDashboard)
 
@@ -62,7 +70,7 @@ export default function DashboardSidebar() {
   const fmTransition = { ease: "circInOut", duration: 0.275 }
 
   return (
-    <div aria-expanded={toggleState ? "true" : undefined}>
+    <span aria-expanded={toggleState ? "true" : undefined}>
       <LazyMotion features={domAnimation}>
         <m.nav
           animate={{ width: toggleState ? 290 : 85 }}
@@ -71,6 +79,7 @@ export default function DashboardSidebar() {
           {/* Main navigation */}
           <m.div
             id="main-nav"
+            initial={{ x: "0%" }}
             animate={{
               x: !editCharacterRoute ? "0%" : "-25%",
               pointerEvents: !editCharacterRoute ? "auto" : "none"
@@ -87,6 +96,7 @@ export default function DashboardSidebar() {
 
           {/* Show if character/listing edit or user msg route is present */}
           <m.div
+            initial={{ x: "100%" }}
             animate={{
               x: !editCharacterRoute ? "100%" : "0%",
               pointerEvents: !editCharacterRoute ? "none" : "auto"
@@ -94,57 +104,47 @@ export default function DashboardSidebar() {
             transition={fmTransition}
             className="bg-100 relative -top-full bottom-0 flex h-full flex-col px-3.5 py-3.5"
           >
+            <Button
+              href="/dashboard/characters"
+              prefixIcon={<LuArrowLeft size={19} />}
+              variant="tritery"
+            >
+              Back
+            </Button>
+            <div className="my-2">
+              <Separator dir="horizontal" />
+            </div>
             <div>
-              {/* TODO: This is temporary; will be using url checks to populate data without using a shit ton of divs */}
-              <Button
-                href="/dashboard/characters"
-                prefixIcon={<LuArrowLeft size={19} />}
-                variant="tritery"
-              >
-                Back
-              </Button>
-              <div className="my-2">
-                <Separator dir="horizontal" />
-              </div>
-              <Button
-                prefixIcon={
-                  <MFImage
-                    src="/img/examples/ozzy/testing.png"
-                    aspectRatio="1"
-                    alt=""
-                    rounded={50}
-                    objectFit="cover"
-                    width="1.75rem"
-                  />
-                }
-                variant="tritery"
-                className="bg-500 text-active w-full gap-x-2.5 py-1.5"
-              >
-                Name
-              </Button>
-              {[...Array(3)].map((_, i) => (
+              {characters.length == 0 && (
+                <div className="flex flex-col items-center justify-center">
+                  <span className="text-lg">It's empty in here</span>
+                  <span>Create a Character</span>
+                </div>
+              )}
+              {characters.map((character, index) => (
                 <Button
-                  key={i}
+                  href={`/dashboard/characters/edit/${character.name}`}
+                  key={index}
+                  variant="tritery"
+                  className="w-full gap-x-2.5 py-1.5"
                   prefixIcon={
                     <MFImage
-                      src="/img/examples/ozzy/testing.png"
+                      src={character.avatarUrl || "/UserProfile.png"}
                       aspectRatio="1"
                       alt=""
                       rounded={50}
                       objectFit="cover"
-                      width="1.75rem"
+                      width="2rem"
                     />
                   }
-                  variant="tritery"
-                  className="w-full gap-x-2.5 py-1.5"
                 >
-                  Name
+                  {character.name}
                 </Button>
               ))}
             </div>
           </m.div>
         </m.nav>
       </LazyMotion>
-    </div>
+    </span>
   )
 }

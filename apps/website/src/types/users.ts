@@ -1,3 +1,4 @@
+import { type Character } from "./characters"
 import type { LinkedString } from "./utils"
 
 export type UserRoles = ("artist" | "admin" | "contributor" | "early-tester")[]
@@ -9,6 +10,7 @@ export interface UserType {
   bio: string | null
   avatarUrl: LinkedString
   bannerUrl: LinkedString
+  characters: Character[]
   dateRegistered: Date
   dateUpdated: Date
   roles: UserRoles

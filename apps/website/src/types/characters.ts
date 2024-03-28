@@ -18,7 +18,8 @@ interface CustomAttributes {
 
 interface CharacterAttributes {
   bio: string
-  pronouns: Pronouns
+  pronouns: string
+  gender: string
   preferences: {
     likes: string
     dislikes: string
@@ -29,12 +30,14 @@ interface CharacterAttributes {
 export interface Character {
   id: string
   name: string
+  nickname: string
   visibility: Visibility
+  mainCharacter: boolean
   fullName: string
   species: string
   isHybrid: boolean
   avatarUrl: string
-  reference_sheet_url?: string | null
+  refSheets: ReferenceSheet[]
   attributes: CharacterAttributes
   migration: {
     url: string
@@ -55,6 +58,20 @@ export interface Character {
     adoptionDate: Date
     adoptee: UserType
   }
+}
+
+export interface Variant {
+  name: string
+  url: string
+  nsfw: boolean
+  active: boolean
+}
+
+export interface ReferenceSheet {
+  refSheetName: string
+  artist: string
+  colors: string[]
+  variants: Variant[]
 }
 
 export interface CharacterResponse {

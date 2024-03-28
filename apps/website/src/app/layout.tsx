@@ -3,7 +3,7 @@ import "react-quill/dist/quill.snow.css"
 import type { Metadata, Viewport } from "next"
 import dynamic from "next/dynamic"
 import { Inter, Open_Sans } from "next/font/google"
-import { NoJSReminder } from "@/components/base"
+import { NoJSReminder, SkipNav } from "@/components/base"
 import cn from "@/utils/cn"
 import { BRAND } from "@myfursona-internal/config"
 import Analytics from "./Analytics"
@@ -71,12 +71,7 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
         <PreconnectResources />
         <CheckLocalSettings />
         <SecretMessage />
-        <a
-          className="bg-500 text-active pointer-events-none fixed left-3 top-3 z-30 rounded-lg px-6 py-2.5 opacity-0 focus:pointer-events-auto focus:opacity-100"
-          href="#skip-to-content"
-        >
-          Skip to content?
-        </a>
+        <SkipNav />
         <div id="__myartverse">
           <NoJSReminder />
           {children}

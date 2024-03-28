@@ -7,7 +7,7 @@ export default function MastheadBanner({ src }: { src: string }) {
         aspectRatio="15/3"
         width="100%"
         objectFit="cover"
-        src={src ?? "/UserBanner.png"}
+        src={src ?? "/UserBanner.svg"}
         strategy="important"
         style={{
           objectPosition: "0 calc(50% * 1))"

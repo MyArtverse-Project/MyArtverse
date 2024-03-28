@@ -2,7 +2,15 @@
 
 import Link from "next/link"
 import { MFImage } from "@/components/ui"
-import Table from "../../ui/Table"
+import Table from "@/components/ui/Table"
+import { LuGlobe, LuLock, LuUsers } from "react-icons/lu"
+import type { Character } from "@/types/characters"
+
+const VisibilityIcons = {
+  public: <LuGlobe size={20} className="mr-2" />,
+  follower: <LuUsers size={20} className="mr-2" />,
+  private: <LuLock size={20} className="mr-2" />
+}
 
 export function CharacterTable({ children }: { children?: React.ReactNode }) {
   return (
@@ -27,16 +35,18 @@ export function CharacterTable({ children }: { children?: React.ReactNode }) {
   )
 }
 
-export function CharacterItem() {
-  const charLink = "/dashboard/characters/edit/name"
+export function CharacterItem({ character }: { character: Character }) {
+  const charLink = `/dashboard/characters/edit/${character.name}`
 
   return (
     <Table.Row>
-      <Table.Cell>chkbox</Table.Cell>
+      <Table.Cell>
+        <input type="checkbox" />
+      </Table.Cell>
       <Table.Cell className="flex items-center gap-x-4">
         <Link href={charLink}>
           <MFImage
-            src="/img/examples/ozzy/testing.png"
+            src={character.avatarUrl || "/UserProfile.png"}
             aspectRatio="1"
             alt=""
             rounded={8}
@@ -49,12 +59,18 @@ export function CharacterItem() {
             href={charLink}
             className="font-inter block w-full text-lg font-bold hover:underline"
           >
-            Name
+            {character.name} {character.mainCharacter && "(Main)"}
           </Link>
-          <span className="mt-0.5 w-full">Char attrs</span>
+          <span className="mt-0.5 w-full">
+            {character.species ? character.species : `Needs Attention`}
+          </span>
         </div>
       </Table.Cell>
-      <Table.Cell>Visibility field</Table.Cell>
+      <Table.Cell>
+        <span className="flex flex-row items-center">
+          {VisibilityIcons[character.visibility]} {character.visibility.toUpperCase()}
+        </span>
+      </Table.Cell>
       <Table.Cell>Date field</Table.Cell>
       <Table.Cell>
         <span>Full</span>

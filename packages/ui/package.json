@@ -6,10 +6,7 @@
   "workspaces": {
     "nohoist": [
       "react",
-      "react-dom",
-      "class-variance-authority",
-      "@types/react",
-      "@types/react-dom"
+      "react-dom"
     ]
   },
   "dependencies": {
@@ -18,13 +15,9 @@
     "@headlessui/react": "^1.7.17"
   },
   "devDependencies": {
-    "@myfursona-internal/config": "*",
     "@myfursona-internal/tsconfig": "*",
     "@types/react": "^18.2.0",
-    "@types/react-dom": "^18.2.0",
     "class-variance-authority": "^0.7.0",
-    "clsx": "^2.0.0",
-    "eslint": "^8.55.0",
     "react": "^18.2.0",
     "typescript": "^5.2.2"
   }

@@ -71,7 +71,7 @@ export default function CharacterView({
               { color: "purple", name: "purple" },
               { color: "white", name: "white" }
             ]}
-            avatar={characters.mainCharacter.avatar_url || "/UserProfile.png"}
+            avatar={characters.mainCharacter.avatarUrl || "/UserProfile.png"}
             name={characters.mainCharacter.name}
             species={characters.mainCharacter.species}
             refSheetImg={characters.mainCharacter.reference_sheet_url || "/GenericBG.png"}
@@ -82,7 +82,7 @@ export default function CharacterView({
           {characters.characters.map((character, index) => (
             <FursonaCard
               key={index}
-              img={character.avatar_url || "/UserProfile.png"}
+              img={character.avatarUrl || "/UserProfile.png"}
               name={character.name}
               species={character.species}
               status="owned"

@@ -1,9 +1,29 @@
-import type { Metadata } from "next"
+import type { Metadata, ResolvingMetadata } from "next"
+import { redirect } from "next/navigation"
+import { fetchSelfCharacter, fetchUserCharacters } from "@/utils/api"
+import EditCharacterView from "../CharacterEdit"
 
-export const metadata: Metadata = {
-  title: "Edit <character name>"
+export async function generateMetadata({
+  params
+}: {
+  params: { name: string }
+}): Promise<Metadata> {
+  const { name } = params
+  return {
+    title: `Edit ${name}`
+  }
 }
 
-export default function CharacterEditPage() {
-  return <>edit character page</>
+export default async function CharacterEditPage({
+  params
+}: {
+  params: { name: string }
+}) {
+  const { name } = params
+  const character = await fetchSelfCharacter(name)
+  if (!character) {
+    return redirect("/dashboard/characters?error=notFound")
+  }
+
+  return <EditCharacterView character={character} />
 }

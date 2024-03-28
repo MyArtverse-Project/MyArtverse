@@ -5,7 +5,7 @@
     "browser": true
   },
   "extends": ["next", "eslint:recommended", "plugin:@typescript-eslint/recommended"],
-  "plugins": ["unused-imports", "@stylistic"],
+  "plugins": ["import", "unused-imports", "@stylistic"],
   "rules": {
     "no-var": "error",
     "no-console": "warn",
@@ -14,6 +14,25 @@
     "max-depth": ["error", 3],
 
     "unused-imports/no-unused-imports": "warn",
+    "import/no-deprecated": "warn",
+    "import/no-duplicates": "error",
+    "import/no-relative-packages": "error",
+    "import/newline-after-import": ["error"],
+    "import/no-internal-modules": [
+      "warn",
+      {
+        "allow": [
+          "tailwindcss/*",
+          "@tailwindcss/**",
+          "mdx/*",
+          "next/**",
+          "react-*/**",
+          "@myfursona/biro-ui/**",
+          "@myfursona-internal/**",
+          "**/assets/*"
+        ]
+      }
+    ],
 
     "react/no-unescaped-entities": "off",
 
