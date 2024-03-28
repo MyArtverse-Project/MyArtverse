@@ -33,6 +33,14 @@ export default function EditCharacterView({ character }: { character: Character 
     }
   }, [character])
 
+  useEffect(() => {
+    if (characterAvatar) {
+      const formDataCopy = { ...formData }
+      formDataCopy.avatarUrl = characterAvatar
+      setFormData(formDataCopy)
+    }
+  }, [characterAvatar, formData])
+
   const updateFormData = ({ key, value }: { key: string; value: string | boolean }) => {
     setFormData((prev) => {
       if (prev) {

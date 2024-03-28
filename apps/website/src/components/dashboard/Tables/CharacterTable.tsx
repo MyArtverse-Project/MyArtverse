@@ -59,7 +59,7 @@ export function CharacterItem({ character }: { character: Character }) {
             href={charLink}
             className="font-inter block w-full text-lg font-bold hover:underline"
           >
-            {character.name} ({character.mainCharacter && "Main"})
+            {character.name} {character.mainCharacter && "(Main)"}
           </Link>
           <span className="mt-0.5 w-full">
             {character.species ? character.species : `Needs Attention`}
