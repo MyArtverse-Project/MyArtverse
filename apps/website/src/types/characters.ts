@@ -37,7 +37,7 @@ export interface Character {
   species: string
   isHybrid: boolean
   avatarUrl: string
-  reference_sheet_url?: string | null
+  refSheets: ReferenceSheet[]
   attributes: CharacterAttributes
   migration: {
     url: string
@@ -64,11 +64,11 @@ export interface Variant {
   name: string
   url: string
   nsfw: boolean
-  main: boolean
+  active: boolean
 }
 
 export interface ReferenceSheet {
-  name: string
+  refSheetName: string
   artist: string
   colors: string[]
   variants: Variant[]

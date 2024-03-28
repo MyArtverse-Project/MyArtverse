@@ -15,7 +15,8 @@ export default function UploadRefsheetModal({
   uploadRefsheetModal,
   setNewRefSheetData,
   refSheetData,
-  editingRefSheet
+  editingRefSheet,
+  characterID
 }: {
   toggleUploadRefSheetModal: () => void
   uploadRefsheetModal: boolean
@@ -23,11 +24,12 @@ export default function UploadRefsheetModal({
   setNewRefSheetData: Dispatch<SetStateAction<ReferenceSheet[]>>
   refSheetData: ReferenceSheet[]
   editingRefSheet?: ReferenceSheet | undefined
+  characterID: string
 }) {
   const [mainRefUrl, setMainRefUrl] = useState("")
   const [saved, setSaved] = useState(true)
   const [formData, setFormData] = useState({
-    name: "",
+    refSheetName: "",
     artist: "",
     colors: [],
     variants: []
@@ -37,7 +39,7 @@ export default function UploadRefsheetModal({
     if (editingRefSheet) {
       setFormData(editingRefSheet)
       if (editingRefSheet.variants && editingRefSheet.variants.length > 0) {
-        setMainRefUrl(editingRefSheet.variants.find((v) => v.main)?.url || "")
+        setMainRefUrl(editingRefSheet.variants.find((v) => v.active)?.url || "")
       }
     }
   }, [editingRefSheet])
@@ -47,8 +49,8 @@ export default function UploadRefsheetModal({
       setFormData((prevFormData) => ({
         ...prevFormData,
         variants: [
-          { name: "Main", url: mainRefUrl, nsfw: false, main: true },
-          ...prevFormData.variants.filter((v) => !v.main)
+          { name: "Main", url: mainRefUrl, nsfw: false, active: true },
+          ...prevFormData.variants.filter((v) => !v.active)
         ]
       }))
     }
@@ -83,7 +85,7 @@ export default function UploadRefsheetModal({
         ...prev,
         variants: [
           ...prev.variants,
-          { name: "New Variant", url, nsfw: false, main: false }
+          { name: "New Variant", url, nsfw: false, active: false }
         ]
       }))
     } catch (error) {
@@ -93,7 +95,14 @@ export default function UploadRefsheetModal({
 
   const save = () => {
     setNewRefSheetData([...refSheetData, formData])
-
+    fetch(`${BACKEND_URL}/v1/character/upload-ref`, {
+      method: "POST",
+      headers: {
+        "Content-Type": "application/json"
+      },
+      credentials: "include",
+      body: JSON.stringify({ refSheet: formData, characterId: characterID })
+    })
     setSaved(true)
   }
 
@@ -136,7 +145,7 @@ export default function UploadRefsheetModal({
           <InputField
             inputName="Name"
             required
-            onChange={(e) => handleChange("name", e.currentTarget.value)}
+            onChange={(e) => handleChange("refSheetName", e.currentTarget.value)}
           />
           <span className="text-600 mb-2 mt-4 flex gap-x-0.5 font-bold uppercase">
             Color Palette (User Selectable)

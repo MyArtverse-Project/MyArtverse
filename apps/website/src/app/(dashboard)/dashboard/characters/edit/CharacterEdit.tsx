@@ -31,6 +31,11 @@ export default function EditCharacterView({ character }: { character: Character 
     if (character) {
       setFormData(character)
     }
+
+    if (character.refSheets) {
+      console.log(character.refSheets)
+      setRefSheetsData(character.refSheets)
+    }
   }, [character])
 
   useEffect(() => {
@@ -219,20 +224,24 @@ export default function EditCharacterView({ character }: { character: Character 
               be useful if a character is sold as an adoptable. You can manage all of your
               character's reference sheets here. Learn more
             </p>
-            {refSheetsData.map((refSheet, index) => (
-              <ReferenceCard
-                key={index}
-                data={refSheet}
-                toggleUploadRefSheetModal={toggleUploadRefSheetModal}
-                setEditingData={setEditingData}
-              />
-            ))}
+            {refSheetsData.length > 0 &&
+              refSheetsData.map((refSheet, index) => (
+                <>
+                  <ReferenceCard
+                    key={index}
+                    data={refSheet}
+                    toggleUploadRefSheetModal={toggleUploadRefSheetModal}
+                    setEditingData={setEditingData}
+                  />
+                </>
+              ))}
             <UploadRefsheetModal
               toggleUploadRefSheetModal={toggleUploadRefSheetModal}
               uploadRefsheetModal={refSheetUploadModal}
               refSheetData={refSheetsData}
               editingRefSheet={editingData}
               setNewRefSheetData={setRefSheetsData}
+              characterID={character.id}
             />
             <Button className="mt-4" onClick={() => setRefSheetUploadModal(true)}>
               New Reference Sheet
