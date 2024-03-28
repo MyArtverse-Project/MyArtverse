@@ -18,7 +18,8 @@ interface CustomAttributes {
 
 interface CharacterAttributes {
   bio: string
-  pronouns: Pronouns
+  pronouns: string
+  gender: string
   preferences: {
     likes: string
     dislikes: string
@@ -29,8 +30,8 @@ interface CharacterAttributes {
 export interface Character {
   id: string
   name: string
+  nickname: string
   visibility: Visibility
-  main: boolean
   mainCharacter: boolean
   fullName: string
   species: string

@@ -12,21 +12,13 @@ import {
   SelectField
 } from "@/components/ui/Forms"
 import DropZone from "@/components/ui/Forms/DropZone"
-import type { ReferenceSheet } from "@/types/characters"
+import { BACKEND_URL } from "@/utils/env"
+import { update } from "lodash"
+import type { Character, ReferenceSheet } from "@/types/characters"
 import UploadRefsheetModal from "./UploadRefsheet"
 
-export default function EditCharacterView() {
-  // TODO: Convert this to a object form
-  const [name, setName] = useState("")
-  const [nickname, setNickname] = useState("")
-  const [visibility, setVisibility] = useState("public")
-  const [species, setSpecies] = useState("")
-  const [pronouns, setPronouns] = useState("")
-  const [gender, setGender] = useState("")
-  const [bio, setBio] = useState("")
-  const [likes, setLikes] = useState("")
-  const [dislikes, setDislikes] = useState("")
-  const [mainCharacter, setMainCharacter] = useState(false)
+export default function EditCharacterView({ character }: { character: Character }) {
+  const [formData, setFormData] = useState<Character | null>(null)
   const [characterAvatar, setCharacterAvatar] = useState(null)
   const [attributes, setAttributes] = useState<{ heading: string; value: string }[]>([])
   const [refSheetUploadModal, setRefSheetUploadModal] = useState(false)
@@ -34,33 +26,84 @@ export default function EditCharacterView() {
   const [editingData, setEditingData] = useState<ReferenceSheet | null>(null)
   const [saved, setSaved] = useState(true)
 
+  // Merge character data with form data
   useEffect(() => {
-    if (
-      characterAvatar ||
-      mainCharacter ||
-      attributes.length > 0 ||
-      refSheetsData.length > 0 ||
-      name ||
-      nickname ||
-      visibility ||
-      species ||
-      pronouns
-    ) {
+    if (character) {
+      setFormData(character)
+    }
+  }, [character])
+
+  const updateFormData = ({ key, value }: { key: string; value: string | boolean }) => {
+    setFormData((prev) => {
+      if (prev) {
+        return { ...prev, [key]: value }
+      }
+
+      return null
+    })
+  }
+
+  const updateAttributes = ({ key, value }: { key: string; value: string }) => {
+    setFormData((prev) => {
+      if (prev) {
+        return { ...prev, attributes: { ...prev.attributes, [key]: value } }
+      }
+
+      return null
+    })
+  }
+
+  const updatePreference = ({ key, value }: { key: string; value: string }) => {
+    // Likes/Dislikes Split by new line
+    setFormData((prev) => {
+      if (prev) {
+        return {
+          ...prev,
+          attributes: {
+            ...prev.attributes,
+            preferences: { ...prev.attributes.preferences, [key]: value.split("\n") }
+          }
+        }
+      }
+
+      return null
+    })
+  }
+
+  useEffect(() => {
+    if (formData) {
       setSaved(false)
     }
-  }, [
-    characterAvatar,
-    mainCharacter,
-    attributes,
-    refSheetsData,
-    name,
-    nickname,
-    visibility,
-    species,
-    pronouns
-  ])
+  }, [formData])
+
+  const save = () => {
+    const updatedData = {}
+    for (const key in formData) {
+      if (formData[key] !== character[key]) {
+        updatedData[key] = formData[key]
+      }
+    }
+
+    fetch(`${BACKEND_URL}/v1/character/update/${character.id}`, {
+      method: "PUT",
+      headers: {
+        "Content-Type": "application/json"
+      },
+      credentials: "include",
+      body: JSON.stringify(updatedData)
+    })
+      .then((res) => {
+        if (res.ok) {
+          setSaved(true)
+        }
+      })
+      .catch((err) => {
+        console.error(err)
+      })
+  }
 
   const toggleUploadRefSheetModal = () => {
+    save()
     setRefSheetUploadModal(!refSheetUploadModal)
     return
   }
@@ -100,22 +143,6 @@ export default function EditCharacterView() {
     }
   ]
 
-  const save = () => {
-    // TODO: Create Character -- If exists, update
-    const data = {
-      name,
-      nickname,
-      visibility,
-      species,
-      pronouns,
-      gender,
-      bio,
-      likes,
-      dislikes,
-      mainCharacter
-    }
-  }
-
   return (
     <Container headingTransparent={false} noChildrenPadding heading="Character Details">
       <div className="relative w-3/4">
@@ -132,32 +159,43 @@ export default function EditCharacterView() {
         <section className="flex w-full flex-row px-7">
           <div className="pr-20">
             <p className="text-600 mb-2 text-sm font-bold uppercase">Avatar</p>
-            <DropZone setData={setCharacterAvatar} />
+            <DropZone setData={setCharacterAvatar} value={formData?.avatarUrl || null} />
           </div>
           <div className="w-3/5">
             <div className="mb-4 flex flex-row items-center justify-between space-x-4">
               <InputField
                 inputName="Character Name"
-                onChange={(e) => setName(e.currentTarget.value)}
+                value={formData?.name || ""}
+                onChange={(e) =>
+                  updateFormData({ key: "name", value: e.currentTarget.value })
+                }
                 required
               />
               <SelectField
                 inputName="Visibility"
+                value={formData?.visibility}
                 options={visibilityOptions}
-                onChange={(e) => setVisibility(e.currentTarget.value)}
+                onChange={(e) =>
+                  updateFormData({ key: "visibility", value: e.currentTarget.value })
+                }
               />
             </div>
             <InputField
               inputName="Nickname"
+              value={formData?.nickname || ""}
               required
-              onChange={(e) => setNickname(e.currentTarget.value)}
+              onChange={(e) =>
+                updateFormData({ key: "nickname", value: e.currentTarget.value })
+              }
             />
             <div className="my-3">
               <Checkbox
-                checked={mainCharacter}
+                checked={formData?.mainCharacter}
                 inputName="Main Character"
                 label="Set this character as my main character"
-                onChange={(e) => setMainCharacter(e.target.checked)}
+                onChange={(e) =>
+                  updateFormData({ key: "mainCharacter", value: e.currentTarget.checked })
+                }
               />
             </div>
             {/* TODO: Folders Option Menu */}
@@ -203,24 +241,36 @@ export default function EditCharacterView() {
             <div className="space-y-3">
               <div className="flex w-full flex-row space-x-6">
                 <SelectField
-                  onChange={(e) => setSpecies(e.currentTarget.value)}
+                  onChange={(e) =>
+                    updateFormData({ key: "species", value: e.currentTarget.value })
+                  }
                   inputName="Species"
                   options={speiciesOptions}
+                  value={formData?.species}
                 />
                 <SelectField
-                  onChange={(e) => setPronouns(e.currentTarget.value)}
+                  onChange={(e) =>
+                    updateAttributes({ key: "pronouns", value: e.currentTarget.value })
+                  }
                   inputName="Pronouns"
                   options={pronounsOptions}
+                  value={formData?.attributes.pronouns}
                 />
                 <SelectField
-                  onChange={(e) => setGender(e.currentTarget.value)}
+                  onChange={(e) =>
+                    updateAttributes({ key: "gender", value: e.currentTarget.value })
+                  }
                   inputName="Gender"
                   options={genderOptions}
+                  value={formData?.attributes.gender}
                 />
               </div>
               <RichTextField
-                onChange={(e) => setBio(e.currentTarget.value)}
+                onChange={(e) =>
+                  updateAttributes({ key: "bio", value: e.currentTarget.value })
+                }
                 inputName="Bio"
+                value={formData?.attributes.bio}
               />
             </div>
           </div>
@@ -233,12 +283,18 @@ export default function EditCharacterView() {
             </p>
             <div className="flex w-full flex-row items-center justify-center space-x-3">
               <RichTextField
-                onChange={(e) => setLikes(e.currentTarget.value)}
+                onChange={(e) =>
+                  updatePreference({ key: "likes", value: e.currentTarget.value })
+                }
                 inputName="Likes"
+                value={formData?.attributes.preferences.likes}
               />
               <RichTextField
-                onChange={(e) => setDislikes(e.currentTarget.value)}
+                onChange={(e) =>
+                  updatePreference({ key: "dislikes", value: e.currentTarget.value })
+                }
                 inputName="Dislikes"
+                value={formData?.attributes.preferences.dislikes}
               />
             </div>
           </div>

@@ -1,5 +1,6 @@
 "use client"
 
+import { usePathname } from "next/navigation"
 import { useState } from "react"
 import { Container } from "@/components/dashboard"
 import { Tabs } from "@/components/ui"
@@ -9,7 +10,9 @@ import cn from "@/utils/cn"
 import CreateCharacterView from "./CreateCharacterModal"
 
 export default function CharDynamicLayout({ children }: { children?: React.ReactNode }) {
+  const path = usePathname()
   const charEditPageRoute = usePathStartsWith("/dashboard/characters/edit")
+  const name = charEditPageRoute ? path.split("/").pop() : ""
   const [createCharacterModal, setCreateCharacterModal] = useState(false)
 
   const toggleCreateCharacterModal = () => {
@@ -21,8 +24,12 @@ export default function CharDynamicLayout({ children }: { children?: React.React
     <Container
       headingTransparent
       noChildrenPadding={!charEditPageRoute}
-      heading={charEditPageRoute ? "Edit <name>" : "Your characters"}
-      actions={<Button onClick={toggleCreateCharacterModal}>Create Character</Button>}
+      heading={charEditPageRoute ? `Edit ${name}` : "Your characters"}
+      actions={
+        !charEditPageRoute ? (
+          <Button onClick={toggleCreateCharacterModal}>Create Character</Button>
+        ) : null
+      }
     >
       <div className={cn("bg-100 sticky top-16 z-10", charEditPageRoute ? "hidden" : "")}>
         <div className="after:border-b-mute relative flex items-center justify-start px-3 after:absolute after:inset-x-0 after:bottom-0 after:h-[1px] after:border-b">

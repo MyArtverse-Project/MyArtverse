@@ -1,5 +1,5 @@
 import { cookies } from "next/headers"
-import type { CharacterResponse } from "@/types/characters"
+import type { Character, CharacterResponse } from "@/types/characters"
 import type { UserType } from "@/types/users"
 import { BACKEND_URL } from "./env"
 
@@ -66,7 +66,7 @@ export const apiWithoutAuth = async <Data>(
   })
     .then((res) => {
       if (res.ok) return res.json()
-      throw new Error("Unable to provide data")
+      throw new Error(`Unable to provide data ${res.status}`)
     })
     .catch((err) => {
       throw new Error(err)
@@ -115,4 +115,18 @@ export const fetchUser = async (handle: string) => {
 export const fetchUserCharacters = async (handle: string) => {
   const data = await apiWithoutAuth<CharacterResponse>("GET", `/v1/character/${handle}`)
   return data
+}
+
+export const fetchSelfCharacters = async () => {
+  const characters = await apiWithAuth<Character[]>("GET", "/v1/character/")
+  return characters
+}
+
+export const fetchSelfCharacter = async (characterName: string) => {
+  const character = await apiWithAuth<Character>(
+    "GET",
+    `/v1/character/me/${characterName}`
+  )
+
+  return character
 }

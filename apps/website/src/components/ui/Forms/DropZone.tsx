@@ -6,11 +6,12 @@ import cn from "@/utils/cn"
 import { BACKEND_URL } from "@/utils/env"
 import { LuUpload } from "react-icons/lu"
 import type { MapElement } from "@/types/utils"
+import MFImage from "../MFImage"
 
 const allowedTypes = ["image/png", "image/jpeg", "image/jpg"]
 const maxFileSize = 10 * 1024 * 1024 // 10 MB
 
-export default function DropZone({ setData, className = "" }) {
+export default function DropZone({ setData, className = "", value = undefined }) {
   const [isDragging, setIsDragging] = useState(false)
   const [error, setError] = useState(null)
   const [file, setFile] = useState(null)
@@ -162,13 +163,20 @@ export default function DropZone({ setData, className = "" }) {
             className="hidden"
             onChange={handleFileInputChange}
           />
-          <button
-            className="bg-200 mb-6 flex items-center justify-center rounded-full p-8"
-            onClick={() => fileUploadRef.current.click()}
-          >
-            <LuUpload size={48} />
-          </button>
-          <span className="text-lg font-bold">Drag and drop files here</span>
+
+          {value ? (
+            <MFImage alt="" src={value} width={128} height={128} />
+          ) : (
+            <>
+              <button
+                className="bg-200 mb-6 flex items-center justify-center rounded-full p-8"
+                onClick={() => fileUploadRef.current.click()}
+              >
+                <LuUpload size={48} />
+              </button>
+              <span className="text-lg font-bold">Drag and drop files here</span>
+            </>
+          )}
           <span className="mt-4">Max size: 10MB, Supported formats: .jpg, .png</span>
           <span className={cn("text-red-500", !error ? "hidden" : "")}>{error}</span>
         </div>

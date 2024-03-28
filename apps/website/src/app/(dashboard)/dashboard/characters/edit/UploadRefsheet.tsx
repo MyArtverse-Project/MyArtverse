@@ -92,15 +92,14 @@ export default function UploadRefsheetModal({
   }
 
   const save = () => {
-    // Use currentEditIndex or similar logic to update or add new refSheet
     setNewRefSheetData([...refSheetData, formData])
+
     setSaved(true)
   }
 
   const close = () => {
-    setFormData({ name: "", artist: "", colors: [], variants: [] })
-    setMainRefUrl("")
     toggleUploadRefSheetModal()
+    window.location.reload()
   }
 
   const saveAndClose = () => {
