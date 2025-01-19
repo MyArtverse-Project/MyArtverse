@@ -6,7 +6,7 @@ import {
   useEffect,
   useImperativeHandle,
   useRef,
-  useState
+  useState,
 } from "react"
 import type { ReactHTMLElement } from "@mav/shared/types"
 import { cn } from "@mav/shared/utils"
@@ -39,7 +39,11 @@ interface _InputPrefixLabelProps {
 }
 
 const InputPrefixLabel = (props: _InputPrefixLabelProps) => {
-  return <div className="bg-300 flex select-none items-center px-3">{props.label}</div>
+  return (
+    <div className="bg-300 flex select-none items-center px-3">
+      {props.label}
+    </div>
+  )
 }
 
 // TODO add a caps lock warning
@@ -68,22 +72,31 @@ const InputField = forwardRef<HTMLInputElement, Partial<InputFieldProps>>(
     useEffect(() => {
       const inputBox = internalRef.current!
 
+      const controller = new AbortController()
+
       const focusTrue = () => setIsFocused(true)
       const focusFalse = () => setIsFocused(false)
 
-      inputBox.addEventListener("focus", focusTrue)
-      inputBox.addEventListener("blur", focusFalse)
+      inputBox.addEventListener("focus", focusTrue, {
+        signal: controller.signal,
+      })
+      inputBox.addEventListener("blur", focusFalse, {
+        signal: controller.signal,
+      })
 
       return () => {
-        inputBox.removeEventListener("focus", focusTrue)
-        inputBox.removeEventListener("blur", focusFalse)
+        controller.abort()
       }
     }, [internalRef])
 
     const DynamicElement = !noLabel ? LABEL_TAG : DIV_TAG
 
     return (
-      <div data-mav-input-field="" data-is-focused={isFocused} className="w-full">
+      <div
+        data-mav-input-field=""
+        data-is-focused={isFocused}
+        className="w-full"
+      >
         <span className="sr-only empty:hidden" id={uniqueId}>
           {inputName}
         </span>
@@ -96,7 +109,7 @@ const InputField = forwardRef<HTMLInputElement, Partial<InputFieldProps>>(
           <div
             className={cn(
               "flex overflow-hidden rounded-md !border transition-colors",
-              !isFocused ? "border-400" : "border-500 bg-200"
+              !isFocused ? "border-400" : "border-500 bg-200",
             )}
           >
             {prefix && <InputPrefixLabel label={prefix} />}
@@ -105,7 +118,7 @@ const InputField = forwardRef<HTMLInputElement, Partial<InputFieldProps>>(
               aria-labelledby={inputName ? uniqueId : undefined}
               className={cn(
                 "text-700 w-full border-0 bg-transparent px-3.5 py-2 text-sm focus:ring-0",
-                error ? "border-alert" : null
+                error ? "border-alert" : null,
               )}
               id={uniqueId}
               name={uniqueId ?? undefined}
@@ -133,7 +146,7 @@ const InputField = forwardRef<HTMLInputElement, Partial<InputFieldProps>>(
         </div>
       </div>
     )
-  }
+  },
 )
 
 InputField.displayName = "InputField"
