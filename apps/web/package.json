@@ -12,7 +12,7 @@
   "dependencies": {
     "@headlessui/react": "^2.0.3",
     "@mdx-js/loader": "^3.0.1",
-    "@next/mdx": "^14.2.3",
+    "@next/mdx": "15.2.1",
     "autoprefixer": "^10.4.19",
     "class-variance-authority": "^0.7.0",
     "dompurify": "^3.1.4",
@@ -21,10 +21,10 @@
     "isomorphic-dompurify": "^2.10.0",
     "jotai": "^2.8.0",
     "lodash": "^4.17.21",
-    "next": "14.2.3",
+    "next": "15.2.1",
     "next-pwa": "^5.6.0",
-    "react": "^18",
-    "react-dom": "^18.3.1",
+    "react": "19.0.0",
+    "react-dom": "19.0.0",
     "react-dropzone": "^14.2.3",
     "react-icons": "^5.2.1",
     "react-markdown": "^9.0.1",
@@ -39,14 +39,18 @@
     "@types/lodash": "^4.17.4",
     "@types/mdx": "^2.0.13",
     "@types/node": "^20",
-    "@types/react": "^18",
-    "@types/react-dom": "^18",
+    "@types/react": "19.0.10",
+    "@types/react-dom": "19.0.4",
     "dedent": "^1.5.3",
     "eslint": "^8",
-    "eslint-config-next": "14.2.3",
+    "eslint-config-next": "15.2.1",
     "postcss": "^8",
     "tailwind-merge": "^2.3.0",
     "tailwindcss": "^3.4.1",
     "typescript": "^5"
+  },
+  "resolutions": {
+    "@types/react": "19.0.10",
+    "@types/react-dom": "19.0.4"
   }
 }

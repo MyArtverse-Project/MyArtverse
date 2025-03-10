@@ -1,9 +1,9 @@
-import { headers } from "next/headers"
+import { headers, type UnsafeUnwrappedHeaders } from "next/headers";
 import Script from "next/script"
 import dedent from "dedent"
 
 export function Analytics() {
-  const nonce = headers().get("x-nonce")
+  const nonce = (headers() as unknown as UnsafeUnwrappedHeaders).get("x-nonce")
 
   const umamiId = process.env.UMAMI_ID || ""
   const clarityId = process.env.MS_CLARITY_ID || ""

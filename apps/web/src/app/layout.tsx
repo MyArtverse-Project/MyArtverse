@@ -9,38 +9,35 @@ import { cn } from "@mav/shared/utils"
 import { Provider } from "jotai"
 import PreconnectResources from "./preconnect-resources"
 
-const CheckLocalSettings = dynamic(
-  () => import("@/components").then((c) => c.CheckLocalSettings),
-  {
-    ssr: false
-  }
+const CheckLocalSettings = dynamic(() =>
+  import("@/components").then((c) => c.CheckLocalSettings),
 )
 
 const inter = Inter({
   subsets: ["latin", "cyrillic-ext"],
   preload: true,
-  variable: "--font-inter"
+  variable: "--font-inter",
 })
 
 export const metadata: Metadata = {
   title: {
     template: `%s - ${BRAND}`,
-    default: BRAND
+    default: BRAND,
   },
   formatDetection: { telephone: false, address: false },
   // prettier-ignore
   keywords: ["fur", "furries", "furry", "fursona", "mascot", "furry fandom", "toyhouse", "furaffinity", "fur affinity", "weasyl"],
   openGraph: {
     type: "website",
-    siteName: BRAND
+    siteName: BRAND,
   },
   other: {
-    "apple-mobile-web-app-status-bar": "#9e00ff"
-  }
+    "apple-mobile-web-app-status-bar": "#9e00ff",
+  },
 }
 
 export const viewport: Viewport = {
-  themeColor: "#9e00ff"
+  themeColor: "#9e00ff",
 }
 
 export default function RootLayout({ children }: PropsWithChildren) {
