@@ -1,10 +1,19 @@
+"use client"
+
 import Image from "next/image"
 import { ProfileMasthead } from "@/components/layouts/Mastheads"
 import { Button } from "@mav/ui/components/buttons"
 import { UserComment, UserCommentInput } from "@mav/ui/components/comments"
 import { Group } from "@mav/ui/components/layouts"
+import { useAuth } from "@/app/context/AuthContext"
+import { useRouter } from "next/navigation"
 
 export default function ProfilePage() {
+  const { user, isLoading } = useAuth()
+  const router = useRouter()
+  if (!user && !isLoading) router.push("/login")
+  
+
   return (
     <>
       <ProfileMasthead />

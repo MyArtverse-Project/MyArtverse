@@ -48,7 +48,7 @@ const InputPrefixLabel = (props: _InputPrefixLabelProps) => {
 
 // TODO add a caps lock warning
 const InputField = forwardRef<HTMLInputElement, Partial<InputFieldProps>>(
-  (props, ref) => {
+  (props, ref): JSX.Element => {
     const {
       inputName,
       error,
