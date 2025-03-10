@@ -8,6 +8,7 @@ import { BRAND } from "@mav/shared"
 import { cn } from "@mav/shared/utils"
 import { Provider } from "jotai"
 import PreconnectResources from "./preconnect-resources"
+import { AuthProvider } from "./context/AuthContext"
 
 const CheckLocalSettings = dynamic(() =>
   import("@/components").then((c) => c.CheckLocalSettings),
@@ -53,7 +54,9 @@ export default function RootLayout({ children }: PropsWithChildren) {
         <div data-mav-root-layout-slot="" className="contents">
           <SkipNav />
           <NoJSMessage />
-          <Provider>{children}</Provider>
+          <Provider>
+            <AuthProvider>{children}</AuthProvider>
+          </Provider>
         </div>
       </body>
     </html>

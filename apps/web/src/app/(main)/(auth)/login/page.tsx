@@ -1,14 +1,41 @@
-import Image from 'next/image';
-import Link from 'next/link';
-import React, { useActionState } from 'react';
-import { loginAction } from '@/app/actions/login';
-import ThirdPartyButtons from '@/components/layouts/Auth/ThirdPartyButtons';
-import { Button } from '@mav/ui/components/buttons';
-import { Form, InputField } from '@mav/ui/components/fields';
-import { z } from 'zod';
-import { type FormState } from '@/app/lib/definition';
+"use client"
+
+import Image from "next/image"
+import Link from "next/link"
+import { useRouter } from "next/navigation"
+import React, { useEffect, useState } from "react"
+import { loginAction } from "@/app/actions/login"
+import { useAuth } from "@/app/context/AuthContext"
+import ThirdPartyButtons from "@/components/layouts/Auth/ThirdPartyButtons"
+import { Button } from "@mav/ui/components/buttons"
+import { Form, type FormState, InputField } from "@mav/ui/components/fields"
 
 export default function Page() {
+  const [errors, setErrors] = useState<FormState>()
+  const router = useRouter()
+  const { user, isLoading } = useAuth()
+  if (user && !isLoading) router.push(`/`)
+  
+
+  // TODO: Figure out how to handle this in the action file
+  async function handleSubmit(event: React.FormEvent<HTMLFormElement>) {
+    event.preventDefault()
+    const formData = new FormData(event.target as HTMLFormElement)
+    const res = await loginAction(formData)
+
+    if (res.success) {
+      router.push(`/`)
+    } else {
+      setErrors({
+        message: res.message.error || "Something went wrong. Please try again.",
+        errors: {
+          email: res.message.email ?? [],
+          password: res.message.password ?? [],
+        },
+      })
+    }
+  }
+
   return (
     <div className="bg-100 relative mx-auto flex h-1/2 w-screen flex-col items-center gap-y-6 py-12">
       <Image
@@ -22,21 +49,23 @@ export default function Page() {
         <h1 className="text-700 z-10 text-2xl">Sign in to MyArtverse</h1>
         <ThirdPartyButtons />
         <p>or</p>
-        <Form action={loginAction} className="w-2/3">
-          <InputField type="text" inputName="email" placeholder="Email" key={"email"} />
-          {/* TODO: Implement Login Animations */}
+
+        <Form onSubmit={handleSubmit} className="flex w-2/3 flex-col gap-y-4">
+          {errors && <p className="text-red-500">{errors.message}</p>}
           <InputField
-            type="password"
-            key={"password"}
-            inputName="password"
-            placeholder="Password"
+            type="email"
+            inputName="Email"
+            placeholder="Email"
+            error={errors?.errors?.email?.[0]}
           />
-          <Button
-            variant="primary"
-            position="center"
-            className="mt-4 w-full text-center"
-          >
-            <span className="w-max">Next</span>
+          <InputField
+            inputName="password"
+            type="password"
+            placeholder="Password"
+            error={errors?.errors?.password?.[0]}
+          />
+          <Button type="submit" className="mt-4 w-full text-center">
+            <span className="w-max">Sign in</span>
           </Button>
         </Form>
         <div className="flex flex-row gap-x-6">
