@@ -2,22 +2,22 @@
 
 /* eslint-disable @typescript-eslint/no-explicit-any */
 import Link from "next/link"
-import React, { type PropsWithChildren, forwardRef } from "react"
+import React from "react"
 import type { ReactHTMLElement } from "@mav/shared/types"
 import { cn } from "@mav/shared/utils"
 import { cva } from "class-variance-authority"
 import type { ButtonProps } from "./Button.types"
 
-const Button = forwardRef<
-  HTMLButtonElement,
-  Partial<
-    PropsWithChildren<
-      ButtonProps &
-        Pick<ReactHTMLElement<"button">, "className" | "onClick"> &
-        Pick<ReactHTMLElement<"a">, "aria-current">
-    >
+export function Button({
+  ref,
+  ...props
+}: { ref?: React.RefObject<HTMLButtonElement> } & Partial<
+  React.PropsWithChildren<
+    ButtonProps &
+      Pick<ReactHTMLElement<"button">, "className" | "onClick"> &
+      Pick<ReactHTMLElement<"a">, "aria-current">
   >
->((props, ref) => {
+>) {
   const {
     disabled,
     icon,
@@ -81,8 +81,8 @@ const Button = forwardRef<
 
   return (
     <DynamicElement
-      data-mav-dynamic-button=""
-      ref={ref as any}
+      data-mav-button=""
+      ref={ref}
       href={href ?? null}
       type={!href ? (type ?? null) : null}
       // The use of "aria-disabled" here to let the screen reader know it's a disabled button,
@@ -108,8 +108,4 @@ const Button = forwardRef<
       {suffix}
     </DynamicElement>
   )
-})
-
-Button.displayName = "Button"
-
-export { Button }
+}
