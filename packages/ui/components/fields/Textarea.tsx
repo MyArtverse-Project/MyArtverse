@@ -1,7 +1,7 @@
 "use client"
 
 import React from "react"
-import type { ReactHTMLElement } from "@mav/shared/types"
+import type { ReactForwardRef, ReactHTMLElement } from "@mav/shared/types"
 import { cn } from "@mav/shared/utils"
 import FieldLabel from "./FieldLabel"
 import { DIV_TAG, LABEL_TAG } from "./fields.constants"
@@ -30,7 +30,7 @@ interface TextAreaProps extends PickedTextareaProps, MAVFields {
 export function Textarea({
   ref,
   ...props
-}: { ref?: React.RefObject<HTMLTextAreaElement> } & Partial<TextAreaProps>) {
+}: ReactForwardRef<HTMLTextAreaElement, Partial<TextAreaProps>>) {
   const {
     error,
     initialHeight,
@@ -65,7 +65,10 @@ export function Textarea({
         <textarea
           ref={ref}
           aria-labelledby={inputName ? uniqueId : undefined}
-          className={cn("text-700 border-500 bg-100 w-full rounded-md px-3.5 py-2 text-sm", className)}
+          className={cn(
+            "text-700 border-500 bg-100 w-full rounded-md px-3.5 py-2 text-sm",
+            className,
+          )}
           id={uniqueId}
           name={uniqueId}
           placeholder={placeholder}

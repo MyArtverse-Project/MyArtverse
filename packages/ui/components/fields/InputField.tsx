@@ -1,7 +1,7 @@
 "use client"
 
 import { useEffect, useImperativeHandle, useRef, useState } from "react"
-import type { ReactHTMLElement } from "@mav/shared/types"
+import type { ReactForwardRef, ReactHTMLElement } from "@mav/shared/types"
 import { cn } from "@mav/shared/utils"
 import FieldLabel from "./FieldLabel"
 import { DIV_TAG, LABEL_TAG } from "./fields.constants"
@@ -43,7 +43,7 @@ const InputPrefixLabel = (props: _InputPrefixLabelProps) => {
 export function InputField({
   ref,
   ...props
-}: { ref?: React.RefObject<HTMLInputElement> } & Partial<InputFieldProps>) {
+}: ReactForwardRef<HTMLInputElement, Partial<InputFieldProps>>) {
   const {
     inputName,
     error,

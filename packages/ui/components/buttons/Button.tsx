@@ -3,21 +3,21 @@
 /* eslint-disable @typescript-eslint/no-explicit-any */
 import Link from "next/link"
 import React from "react"
-import type { ReactHTMLElement } from "@mav/shared/types"
+import type { ReactForwardRef, ReactHTMLElement } from "@mav/shared/types"
 import { cn } from "@mav/shared/utils"
 import { cva } from "class-variance-authority"
-import type { ButtonProps } from "./Button.types"
+import type { ButtonProps as SharedButtonProps } from "./Button.types"
+
+type ButtonProps = React.PropsWithChildren<
+  SharedButtonProps &
+    Pick<ReactHTMLElement<"button">, "className" | "onClick"> &
+    Pick<ReactHTMLElement<"a">, "aria-current">
+>
 
 export function Button({
   ref,
   ...props
-}: { ref?: React.RefObject<HTMLButtonElement> } & Partial<
-  React.PropsWithChildren<
-    ButtonProps &
-      Pick<ReactHTMLElement<"button">, "className" | "onClick"> &
-      Pick<ReactHTMLElement<"a">, "aria-current">
-  >
->) {
+}: ReactForwardRef<HTMLButtonElement, Partial<ButtonProps>>) {
   const {
     disabled,
     icon,
