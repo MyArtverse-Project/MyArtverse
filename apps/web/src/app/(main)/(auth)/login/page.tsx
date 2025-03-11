@@ -11,11 +11,11 @@ import { Button } from "@mav/ui/components/buttons"
 import { Form, type FormState, InputField } from "@mav/ui/components/fields"
 
 export default function Page() {
-  const [errors, setErrors] = useState<FormState>()
   const router = useRouter()
+
+  const [errors, setErrors] = useState<FormState>()
   const { user, isLoading } = useAuth()
   if (user && !isLoading) router.push(`/`)
-  
 
   // TODO: Figure out how to handle this in the action file
   async function handleSubmit(event: React.FormEvent<HTMLFormElement>) {
@@ -48,8 +48,7 @@ export default function Page() {
       <div className="bg-100 border-200 absolute z-10 flex w-1/2 flex-col items-center justify-center gap-y-6 rounded-lg border-2 p-12 shadow-md">
         <h1 className="text-700 z-10 text-2xl">Sign in to MyArtverse</h1>
         <ThirdPartyButtons />
-        <p>or</p>
-
+        <span>or</span>
         <Form onSubmit={handleSubmit} className="flex w-2/3 flex-col gap-y-4">
           {errors && <p className="text-red-500">{errors.message}</p>}
           <InputField
@@ -58,20 +57,26 @@ export default function Page() {
             placeholder="Email"
             error={errors?.errors?.email?.[0]}
           />
-          <InputField
-            inputName="password"
-            type="password"
-            placeholder="Password"
-            error={errors?.errors?.password?.[0]}
-          />
+          <div className="space-y-2">
+            <InputField
+              inputName="Password"
+              type="password"
+              placeholder="Password"
+              error={errors?.errors?.password?.[0]}
+            />
+            <Link
+              href="/forgot-password"
+              className="text-500 inline-block text-sm underline hover:no-underline"
+            >
+              Forgot password?
+            </Link>
+          </div>
+
           <Button type="submit" className="mt-4 w-full text-center">
             <span className="w-max">Sign in</span>
           </Button>
         </Form>
         <div className="flex flex-row gap-x-6">
-          <Link href="/forgot-password" className="text-500 text-sm">
-            Forgot password?
-          </Link>
           <Link href="/register" className="text-500 text-sm">
             Create an account
           </Link>
