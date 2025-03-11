@@ -1,4 +1,4 @@
-import type { PropsWithChildren } from "react"
+import { cn } from "@mav/shared/utils"
 
 export interface FormState {
   errors: Record<string, string[]>
@@ -11,12 +11,12 @@ interface FormProps {
   action?: (formData: FormData) => void | string
 }
 
-export function Form(props: PropsWithChildren<FormProps>) {
+export function Form(props: React.PropsWithChildren<FormProps>) {
   return (
     <form
       data-mav-form-wrapper=""
       onSubmit={props.onSubmit}
-      className={`flex flex-col gap-y-2.5 ${props.className}`}
+      className={cn("flex flex-col gap-y-2.5", props.className)}
       // @ts-expect-error: Temporary fix for the action prop
       action={props.action}
     >
