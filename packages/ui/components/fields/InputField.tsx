@@ -131,9 +131,7 @@ export function InputField({
         id="field-alert-boundary"
         className={cn("text-alert mt-2", !error ? "hidden" : "")}
       >
-        {/* <Note inline type="error">
-            {error}
-          </Note> */}
+        <p>{error}</p>
       </div>
     </div>
   )

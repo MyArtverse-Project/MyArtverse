@@ -1,0 +1,82 @@
+"use server"
+
+import { cookies } from "next/headers"
+import { LoginFormSchema, RegisterFormSchema } from "@/app/lib/definition"
+import { removeSuffixes } from "@/utils/removeSuffix"
+import { BACKEND_URL } from "@/utils/constants"
+
+export async function registerAction(formData: FormData) {
+  const processedData = removeSuffixes(formData)
+  const { email, username, password, confirm } = processedData
+
+  const validatedFields = RegisterFormSchema.safeParse({
+    email,
+    password,
+    username,
+    confirm
+  })
+
+  if (!validatedFields.success) {
+    return {
+      success: false,
+      message: {
+        error: null,
+        email: validatedFields.error.flatten().fieldErrors?.email,
+        password: validatedFields.error.flatten().fieldErrors?.password,
+        username: validatedFields.error.flatten().fieldErrors?.username,
+        confirm: validatedFields.error.flatten().fieldErrors?.confirm,
+      },
+    }
+  }
+
+  if (password !== confirm) {
+    return {
+      success: false,
+      message: {
+        username: null,
+        email: null,
+        error: "Passwords do not match",
+        confirm: ["Passwords do not match"],
+      },
+    }
+  }
+
+  try {
+    const res = await fetch(`${BACKEND_URL}/v1/auth/register`, {
+      method: "POST",
+      headers: {
+        "Content-Type": "application/json",
+      },
+      body: JSON.stringify({ email, password, username }),
+    })
+
+    const data = await res.json()
+    if (res.status === 400) {
+      return {
+        success: false,
+        message: {
+          email: data.email || null,
+          username: data.username || null,
+        },
+      }
+    }
+
+    if (res.ok) {
+      return { success: true, message: data.message }
+    }
+
+    return {
+      success: false,
+      message: {
+        error: "Something went wrong. Please try again later.",
+      },
+    }
+  } catch (error) {
+    return {
+      success: false,
+      message: {
+        error: "Something went wrong in our end! Please try again later.",
+      },
+    }
+  }
+}

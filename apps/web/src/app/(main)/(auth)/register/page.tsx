@@ -1,51 +1,103 @@
+"use client"
+
 import Image from "next/image"
 import Link from "next/link"
-import React from "react"
+import { useRouter } from "next/navigation"
+import React, { useEffect, useState } from "react"
+import { useAuth } from "@/app/context/AuthContext"
 import ThirdPartyButtons from "@/components/layouts/Auth/ThirdPartyButtons"
 import { Button } from "@mav/ui/components/buttons"
-import { InputField } from "@mav/ui/components/fields"
+import { Form, type FormState, InputField } from "@mav/ui/components/fields"
+import { registerAction } from "@/app/actions/register"
 
 export default function Page() {
+  const router = useRouter()
+
+  const [errors, setErrors] = useState<FormState>()
+  const { user, isLoading } = useAuth()
+
+  // TODO: Figure out how to handle this in the action file
+  async function handleSubmit(event: React.FormEvent<HTMLFormElement>) {
+    event.preventDefault()
+    const formData = new FormData(event.target as HTMLFormElement)
+    const res = await registerAction(formData)
+
+    if (res.success) {
+      router.push(`/verify`)
+    } else {
+      setErrors({
+        message: res.message.error,
+        errors: {
+          email: res.message.email ?? [],
+          password: res.message.password ?? [],
+          username: res.message.username ?? [],
+          confirm: res.message.confirm ?? [],
+        },
+      })
+    }
+  }
+
+  useEffect(() => {
+    if (user && !isLoading) {
+      router.push(`/`)
+    }
+  }, [user, isLoading, router])
+
   return (
-    <div className="bg-100 relative mx-auto flex h-1/2 w-screen flex-col items-center gap-y-6 py-12">
+    <div className="bg-100 relative flex min-h-screen w-full items-start justify-center px-6 pt-36">
       <Image
         src="/Backdrop.png"
         alt="Backdrop"
         height={250}
         width={2000}
-        className="z-0 h-1/4"
+        className="absolute left-0 top-0 z-0 h-1/4 w-full object-cover"
       />
-      <div className="bg-100 border-200 absolute z-10 flex w-1/2 flex-col items-center justify-center gap-y-6 rounded-lg border-2 p-12 shadow-md">
-        <h1 className="text-700 z-10 text-2xl">Register a new account</h1>
+      <div className="bg-100 border-200 relative z-10 flex w-full max-w-2xl flex-col items-center justify-center gap-y-6 rounded-lg border-2 p-12 shadow-md">
+        <h1 className="text-700 text-2xl">Register a new account</h1>
         <ThirdPartyButtons />
-        <p>or</p>
-        <div className="flex w-2/3 flex-col gap-y-4">
-          <InputField placeholder="Email" type="email" inputName="Email" />
-          <InputField placeholder="Username" type="text" inputName="Username" />
-          <span className="text-600 text-xs">
+        <span>or</span>
+        <Form onSubmit={handleSubmit} className="flex w-full flex-col gap-y-4">
+          {errors && (
+            <p className="text-center text-red-500">{errors.message}</p>
+          )}
+          <InputField
+            type="email"
+            inputName="Email"
+            placeholder="Email"
+            error={errors?.errors?.email}
+          />
+          <InputField
+            type="name"
+            inputName="Username"
+            placeholder="Username"
+            error={errors?.errors?.username}
+          />
+          <span className="text-600 ">
             Username must contain [A-Z][a-z][0-9], underscore, and periods.
           </span>
           <InputField
-            placeholder="Password"
-            type="password"
             inputName="Password"
+            type="password"
+            placeholder="Password"
+            error={errors?.errors?.password}
           />
           <InputField
-            placeholder="Repeat Password"
+            inputName="Confirm"
             type="password"
-            inputName="Repeat Password"
+            placeholder="Confirm Password"
+            error={errors?.errors?.confirm}
           />
           <Button
-            variant="primary"
-            position="center"
+            type="submit"
             className="mt-4 w-full text-center"
+            position="center"
           >
-            <span className="w-max">Register</span>
+            Register
           </Button>
-        </div>
+        </Form>
         <div className="flex flex-row gap-x-6">
           <Link href="/login" className="text-500 text-sm">
-            Already have an account? Sign in
+            Sign in
           </Link>
         </div>
       </div>

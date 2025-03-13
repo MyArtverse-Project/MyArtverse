@@ -30,6 +30,8 @@ export default function Page() {
         errors: {
           email: res.message.email ?? [],
           password: res.message.password ?? [],
+          username: res.message.username ?? [],
+          confirm: res.message.confirm ?? [],
         },
       })
     }
@@ -39,7 +41,7 @@ export default function Page() {
     if (user && !isLoading) {
       router.push(`/`)
     }
-  }, [user, isLoading])
+  }, [user, isLoading, router])
 
   return (
     <div className="bg-100 relative flex min-h-screen w-full items-start justify-center px-6 pt-36">
@@ -62,24 +64,24 @@ export default function Page() {
             type="email"
             inputName="Email"
             placeholder="Email"
-            error={errors?.errors?.email?.[0]}
+            error={errors?.errors.email}
           />
           <div className="space-y-2">
             <InputField
               inputName="Password"
               type="password"
               placeholder="Password"
-              error={errors?.errors?.password?.[0]}
+              error={errors?.errors.password}
             />
             <Link
               href="/forgot-password"
-              className="text-500 inline-block text-sm underline hover:no-underline"
+              className="text-600 inline-block text-sm underline hover:no-underline"
             >
               Forgot password?
             </Link>
           </div>
-          <Button type="submit" className="mt-4 w-full text-center">
-            <span className="w-max">Sign in</span>
+          <Button position="center" type="submit" className="mt-4 w-full text-center">
+            Sign in
           </Button>
         </Form>
         <div className="flex flex-row gap-x-6">

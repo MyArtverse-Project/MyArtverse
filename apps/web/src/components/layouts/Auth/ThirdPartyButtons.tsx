@@ -11,7 +11,7 @@ const providers = [
 
 export default function AuthThirdPartyProviders() {
   return (
-    <div className="w-2/3 space-y-2">
+    <div className="w-full space-y-2">
       {providers.map(({ icon: Icon, label }, index) => (
         <Button
           key={index}

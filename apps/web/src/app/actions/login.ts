@@ -3,6 +3,7 @@
 import { cookies } from "next/headers"
 import { LoginFormSchema } from "@/app/lib/definition"
 import { removeSuffixes } from "@/utils/removeSuffix"
+import { BACKEND_URL } from "@/utils/constants"
 
 export async function loginAction(formData: FormData) {
   const processedData = removeSuffixes(formData)
@@ -25,7 +26,7 @@ export async function loginAction(formData: FormData) {
   }
 
   try {
-    const res = await fetch("http://localhost:8081/v1/auth/login", {
+    const res = await fetch(`${BACKEND_URL}/v1/auth/login`, {
       method: "POST",
       headers: {
         "Content-Type": "application/json",
@@ -57,7 +58,7 @@ export async function loginAction(formData: FormData) {
     return {
       success: false,
       message: {
-        error: data.message || "Invalid email or password",
+        error: data.error || "Invalid email or password",
       },
     }
   } catch (error) {

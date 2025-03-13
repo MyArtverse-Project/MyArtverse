@@ -3,6 +3,7 @@
 import React, { createContext, useContext, useEffect, useState } from "react";
 import { useRouter } from "next/navigation";
 import { fetcher } from "@/app/lib/fetcher"; // Import the fetch helper
+import { BACKEND_URL } from "@/utils/constants";
 
 type User = {
   id: string;
@@ -32,7 +33,7 @@ export const AuthProvider = ({ children }: { children: React.ReactNode }) => {
   useEffect(() => {
     const getUser = async () => {
       try {
-        const data = await fetcher<User>("http://localhost:8081/v1/auth/whoami");
+        const data = await fetcher<User>(`${BACKEND_URL}/v1/auth/whoami`);
         setUser(data);
       } catch (error) {
         setUser(null);
@@ -50,7 +51,7 @@ export const AuthProvider = ({ children }: { children: React.ReactNode }) => {
       setUser(null);
       router.push("/login");
     } catch (err) {
-      console.error("Logout failed", err);
+      throw new Error("Failed to logout");
     }
   };
 

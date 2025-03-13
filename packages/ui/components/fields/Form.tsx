@@ -1,7 +1,7 @@
 import { cn } from "@mav/shared/utils"
 
 export interface FormState {
-  errors: Record<string, string[]>
+  errors: Record<string, string>
   message: string
 }
 
