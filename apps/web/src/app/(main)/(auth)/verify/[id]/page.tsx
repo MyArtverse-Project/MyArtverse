@@ -20,8 +20,9 @@ async function verifyEmail(id: string): Promise<boolean> {
   }
 }
 
-export default async function Page({ params }: { params: { id: string } }) {
-  const isVerified = await verifyEmail(params.id)
+export default async function Page({ params }: { params: Promise<{ id: string }> }) {
+  const { id } = await params 
+  const isVerified = await verifyEmail(id)
 
   if (isVerified) {
     redirect("/login")
