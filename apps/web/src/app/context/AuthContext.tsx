@@ -36,7 +36,6 @@ export const AuthProvider = ({ children }: { children: React.ReactNode }) => {
         setUser(data);
       } catch (error) {
         setUser(null);
-        router.push("/login");
       } finally {
         setIsLoading(false);
       }

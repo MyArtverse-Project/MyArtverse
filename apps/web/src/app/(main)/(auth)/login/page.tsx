@@ -15,7 +15,6 @@ export default function Page() {
 
   const [errors, setErrors] = useState<FormState>()
   const { user, isLoading } = useAuth()
-  if (user && !isLoading) router.push(`/`)
 
   // TODO: Figure out how to handle this in the action file
   async function handleSubmit(event: React.FormEvent<HTMLFormElement>) {
@@ -36,21 +35,29 @@ export default function Page() {
     }
   }
 
+  useEffect(() => {
+    if (user && !isLoading) {
+      router.push(`/`)
+    }
+  }, [user, isLoading])
+
   return (
-    <div className="bg-100 relative mx-auto flex h-1/2 w-screen flex-col items-center gap-y-6 py-12">
+    <div className="bg-100 relative flex min-h-screen w-full items-start justify-center px-6 pt-36">
       <Image
         src="/Backdrop.png"
         alt="Backdrop"
         height={250}
         width={2000}
-        className="z-0 h-1/4"
+        className="absolute left-0 top-0 z-0 h-1/4 w-full object-cover"
       />
-      <div className="bg-100 border-200 absolute z-10 flex w-1/2 flex-col items-center justify-center gap-y-6 rounded-lg border-2 p-12 shadow-md">
-        <h1 className="text-700 z-10 text-2xl">Sign in to MyArtverse</h1>
+      <div className="bg-100 border-200 relative z-10 flex w-full max-w-2xl flex-col items-center justify-center gap-y-6 rounded-lg border-2 p-12 shadow-md">
+        <h1 className="text-700 text-2xl">Sign in to MyArtverse</h1>
         <ThirdPartyButtons />
         <span>or</span>
-        <Form onSubmit={handleSubmit} className="flex w-2/3 flex-col gap-y-4">
-          {errors && <p className="text-red-500">{errors.message}</p>}
+        <Form onSubmit={handleSubmit} className="flex w-full flex-col gap-y-4">
+          {errors && (
+            <p className="text-center text-red-500">{errors.message}</p>
+          )}
           <InputField
             type="email"
             inputName="Email"
@@ -71,7 +78,6 @@ export default function Page() {
               Forgot password?
             </Link>
           </div>
-
           <Button type="submit" className="mt-4 w-full text-center">
             <span className="w-max">Sign in</span>
           </Button>
