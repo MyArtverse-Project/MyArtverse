@@ -1,6 +1,4 @@
-import type { PropsWithChildren } from "react"
-
-export function MastheadBanner(props: PropsWithChildren) {
+export function MastheadBanner(props: React.PropsWithChildren) {
   return (
     <div data-mh-banner="" className="relative aspect-[15/3] w-full">
       {props.children}

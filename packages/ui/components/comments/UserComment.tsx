@@ -1,11 +1,10 @@
-import type { ComponentProps, PropsWithChildren } from "react"
 import { AiFillPushpin } from "react-icons/ai"
 import { LuMoreVertical, LuThumbsUp } from "react-icons/lu"
 import { Badge } from "../badges"
 import { Button } from "../buttons"
 import { CommentBase } from "./CommentBase"
 
-interface CommentProps extends ComponentProps<typeof CommentBase> {
+interface CommentProps extends React.ComponentProps<typeof CommentBase> {
   handle: string
   isOP?: true
   userRole?: string
@@ -13,7 +12,7 @@ interface CommentProps extends ComponentProps<typeof CommentBase> {
   upvotes?: string
 }
 
-export function UserComment(props: PropsWithChildren<CommentProps>) {
+export function UserComment(props: React.PropsWithChildren<CommentProps>) {
   return (
     <CommentBase
       avatar={props.avatar}

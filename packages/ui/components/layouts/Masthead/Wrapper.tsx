@@ -1,11 +1,10 @@
-import { type PropsWithChildren } from "react"
 import { useValidateChildrenComponents } from "../useValidateChildrenComponents"
 import { MastheadDetails } from "./Details"
 
 /**
  * @internal Used for the main `<Masthead>` namespaced component
  */
-export function MastheadWrapper(props: PropsWithChildren) {
+export function MastheadWrapper(props: React.PropsWithChildren) {
   const mhWrapperChildren = useValidateChildrenComponents(props.children, [
     MastheadDetails
   ])

@@ -2,13 +2,12 @@ import "@mav/shared/styles/index.scss"
 import type { Metadata, Viewport } from "next"
 import dynamic from "next/dynamic"
 import { Inter } from "next/font/google"
-import type { PropsWithChildren } from "react"
 import { Analytics, NoJSMessage, SkipNav } from "@/components"
 import { BRAND } from "@mav/shared"
 import { cn } from "@mav/shared/utils"
 import { Provider } from "jotai"
-import PreconnectResources from "./preconnect-resources"
 import { AuthProvider } from "./context/AuthContext"
+import PreconnectResources from "./preconnect-resources"
 
 const CheckLocalSettings = dynamic(() =>
   import("@/components").then((c) => c.CheckLocalSettings),
@@ -41,7 +40,7 @@ export const viewport: Viewport = {
   themeColor: "#9e00ff",
 }
 
-export default function RootLayout({ children }: PropsWithChildren) {
+export default function RootLayout({ children }: React.PropsWithChildren) {
   return (
     <html lang="en" dir="ltr" className={cn(inter.variable, "theme-system")}>
       <head>

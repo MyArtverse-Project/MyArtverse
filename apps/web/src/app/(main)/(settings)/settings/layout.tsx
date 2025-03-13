@@ -1,5 +1,4 @@
 import type { Metadata } from "next"
-import type { PropsWithChildren } from "react"
 import { SidebarSettingsList } from "@/components/layouts/AppLayout/Sidebar/SidebarSettingsList"
 import { BRAND } from "@mav/shared"
 
@@ -10,7 +9,7 @@ export const metadata: Metadata = {
   }
 }
 
-export default function SettingsLayout(props: Readonly<PropsWithChildren>) {
+export default function SettingsLayout(props: Readonly<React.PropsWithChildren>) {
   return (
     <div className="mx-auto mb-20 max-w-[1400px] px-4">
       {/* User info */}

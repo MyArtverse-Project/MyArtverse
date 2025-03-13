@@ -1,5 +1,4 @@
 import dynamic from "next/dynamic"
-import type { PropsWithChildren } from "react"
 import Navbar from "./Navbar"
 import { SidebarFallback } from "./Sidebar"
 
@@ -7,7 +6,7 @@ const Sidebar = dynamic(() => import("./Sidebar"), {
   loading: () => <SidebarFallback />
 })
 
-export function StudioLayout(props: PropsWithChildren) {
+export function StudioLayout(props: React.PropsWithChildren) {
   return (
     <>
       <Navbar />

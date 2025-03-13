@@ -1,4 +1,3 @@
-import type { PropsWithChildren } from "react"
 import type { IconType } from "react-icons"
 
 interface EmptySectionProps {
@@ -7,7 +6,7 @@ interface EmptySectionProps {
 }
 
 export default function EmptySection(
-  props: Partial<PropsWithChildren<EmptySectionProps>>
+  props: Partial<React.PropsWithChildren<EmptySectionProps>>,
 ) {
   const { icon: Icon } = props
 

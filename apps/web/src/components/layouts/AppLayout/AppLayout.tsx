@@ -1,8 +1,7 @@
-import type { PropsWithChildren } from "react"
 import { Footer } from "./Footer"
 import { Navbar } from "./Navbar"
 
-export default function AppLayout(props: PropsWithChildren) {
+export default function AppLayout(props: React.PropsWithChildren) {
   return (
     <>
       <Navbar />

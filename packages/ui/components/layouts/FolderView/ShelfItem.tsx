@@ -1,6 +1,5 @@
 "use client"
 
-import { type PropsWithChildren, type ReactElement, useState } from "react"
 import type { IconType } from "react-icons"
 
 interface FolderViewShelfItemProps {
@@ -8,10 +7,12 @@ interface FolderViewShelfItemProps {
   baseUrl?: string
   as?: "a" | "button"
   title: string
-  prefix: IconType | ReactElement
+  prefix: IconType | React.ReactElement
 }
 
-export function FolderViewShelfItem(props: PropsWithChildren<FolderViewShelfItemProps>) {
+export function FolderViewShelfItem(
+  props: React.PropsWithChildren<FolderViewShelfItemProps>,
+) {
   const DynamicElement = props.as || "button"
 
   return <DynamicElement></DynamicElement>

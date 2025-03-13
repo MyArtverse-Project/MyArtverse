@@ -1,19 +1,13 @@
 /* eslint-disable @typescript-eslint/no-explicit-any */
-import type {
-  ForwardRefExoticComponent,
-  PropsWithChildren,
-  ReactNode,
-} from "react"
-
 interface CommentBaseProps {
   // TODO: Attempt to fix the type of imgTag
   imgTag?: any
   avatar: string
-  outerContainer?: ReactNode
+  outerContainer?: React.ReactNode
 }
 
 /** @internal This is a shared component */
-export function CommentBase(props: PropsWithChildren<CommentBaseProps>) {
+export function CommentBase(props: React.PropsWithChildren<CommentBaseProps>) {
   const ImageTag = props.imgTag ?? ("img" as const)
 
   return (
