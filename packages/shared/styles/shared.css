@@ -1,0 +1,41 @@
+@import "tailwindcss";
+
+@theme {
+  --color-warning: 46, 99.3%, 54.6%;
+  --color-info: 212, 95.4%, 46.3%;
+  --color-alert: 0, 100%, 61.2%;
+  --color-hyperlink: 219, 100%, 50%;
+  --color-success: 136, 87.7%, 40.4%;
+
+  --color-light-100: 256, 100%, 99%;
+  --color-light-200: 248, 88.8%, 94.6%;
+  --color-light-300: 251, 96.4%, 85.9%;
+  --color-light-400: 250, 95.5%, 75%;
+  --color-light-500: 266, 100%, 40.6%;
+  --color-light-600: 260, 81.8%, 16.5%;
+  --color-light-700: 260, 81.8%, 5.5%;
+  --color-light-mute: 260, 34.7%, 83.4%;
+  --color-light-separator: 255, 27.6%, 59.7%;
+  --color-light-subtext: 265, 5.7%, 52.2%;
+  --color-light-skeleton: 256.6, 100%, 93.5%;
+  --color-light-alert-highlight: 0, 100%, 87.4%;
+  --color-light-warning-highlight: 46, 100%, 87.6%;
+  --color-light-info-highlight: 212, 100%, 87.5%;
+  --color-light-success-highlight: 136, 90.5%, 89.3%;
+
+  --color-dark-100: 260, 76.5%, 4.3%;
+  --color-dark-200: 260, 86.4%, 7.5%;
+  --color-dark-300: 260, 83.4%, 18.2%;
+  --color-dark-400: 253, 65.7%, 36.7%;
+  --color-dark-500: 267, 100%, 50%;
+  --color-dark-600: 250, 100%, 85.1%;
+  --color-dark-700: 260, 100%, 97.5%;
+  --color-dark-mute: 252, 27.4%, 18.7%;
+  --color-dark-separator: 247, 27.8%, 42.1%;
+  --color-dark-subtext: 260, 40.8%, 86.5%;
+  --color-dark-skeleton: 260, 86.8%, 13.1%;
+  --color-dark-alert-highlight: 0, 100%, 15%;
+  --color-dark-warning-highlight: 46, 100%, 15.2%;
+  --color-dark-info-highlight: 212, 100%, 15.2%;
+  --color-dark-success-highlight: 136, 100%, 15%;
+}
