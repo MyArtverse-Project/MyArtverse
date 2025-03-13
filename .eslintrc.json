@@ -31,6 +31,7 @@
 
     "no-duplicate-imports": "error",
     "max-depth": ["error", 3],
+    "@next/next/no-html-link-for-pages": "off",
 
     "@typescript-eslint/no-unused-vars": "off",
 
@@ -55,7 +56,7 @@
     ],
     "@typescript-eslint/ban-ts-comment": "off",
     "@typescript-eslint/consistent-type-imports": [
-      "warn",
+      "off",
       {
         "prefer": "type-imports"
       }

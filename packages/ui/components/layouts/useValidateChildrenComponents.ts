@@ -36,6 +36,7 @@ export function useValidateChildrenComponents<
       intentional, convert the expression to 'unknown' first. 
       Type 'Promise<AwaitedReactNode>' is missing the following properties from type 
       'ReactElement<unknown, string | JSXElementConstructor<any>>': type, props, key **/
+      // eslint-disable-next-line @typescript-eslint/no-explicit-any
       allowedComponents.some((allowedType) => (child as any).type === allowedType) 
     )
       return child
