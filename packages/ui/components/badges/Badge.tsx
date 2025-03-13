@@ -26,9 +26,11 @@ const badgeVariants = cva(["rounded-full inline-flex items-center cursor-default
 })
 
 interface BadgeProps extends VariantProps<typeof badgeVariants> {
-  icon: IconType
-  avatar: string
+  icon?: IconType
+  avatar?: string
+  children?: React.ReactNode
 }
+
 
 export function Badge(props: Partial<PropsWithChildren<BadgeProps>>) {
   const iconSizes = {

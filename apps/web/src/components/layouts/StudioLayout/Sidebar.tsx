@@ -13,7 +13,7 @@ export default function Sidebar() {
       <motion.aside
         data-mav-studio-sidebar=""
         data-expanded={isSidebarExpanded}
-        className="border-r-mute bg-100 z-[2] h-full flex-shrink-0 overflow-hidden border-r"
+        // className="border-r-mute bg-100 z-[2] h-full flex-shrink-0 overflow-hidden border-r"
         initial={{ width: 300 }}
         animate={{ width: isSidebarExpanded ? 300 : 80 }}
       >

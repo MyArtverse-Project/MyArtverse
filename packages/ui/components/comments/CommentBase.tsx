@@ -6,7 +6,8 @@ import type {
 } from "react"
 
 interface CommentBaseProps {
-  imgTag?: ForwardRefExoticComponent<any>
+  // TODO: Attempt to fix the type of imgTag
+  imgTag?: any
   avatar: string
   outerContainer?: ReactNode
 }

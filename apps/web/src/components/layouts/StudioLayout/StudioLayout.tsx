@@ -4,7 +4,6 @@ import Navbar from "./Navbar"
 import { SidebarFallback } from "./Sidebar"
 
 const Sidebar = dynamic(() => import("./Sidebar"), {
-  ssr: false,
   loading: () => <SidebarFallback />
 })
 

@@ -29,7 +29,14 @@ export function useValidateChildrenComponents<
 
     if (
       isValidChildElement ||
-      allowedComponents.some((allowedType) => (child as ReactElement).type === allowedType)
+     /* TODO: child leads to error Type error: Conversion of type 
+      'string | number | bigint | boolean | Iterable<ReactNode> | Promise<AwaitedReactNode> | 
+      null | undefined' to type 'ReactElement<unknown, string | JSXElementConstructor<any>>' 
+      may be a mistake because neither type sufficiently overlaps with the other. If this was 
+      intentional, convert the expression to 'unknown' first. 
+      Type 'Promise<AwaitedReactNode>' is missing the following properties from type 
+      'ReactElement<unknown, string | JSXElementConstructor<any>>': type, props, key **/
+      allowedComponents.some((allowedType) => (child as any).type === allowedType) 
     )
       return child
 
