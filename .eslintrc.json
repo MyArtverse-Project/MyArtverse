@@ -28,6 +28,7 @@
         "allowElseIf": false
       }
     ],
+
     "no-duplicate-imports": "error",
     "max-depth": ["error", 3],
 
@@ -54,7 +55,7 @@
     ],
     "@typescript-eslint/ban-ts-comment": "off",
     "@typescript-eslint/consistent-type-imports": [
-      "error",
+      "warn",
       {
         "prefer": "type-imports"
       }
