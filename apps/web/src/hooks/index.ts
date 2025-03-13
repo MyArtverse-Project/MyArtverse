@@ -1,4 +1,3 @@
-export * from "./useValidateEmail"
 export * from "./useGSAPContext"
 export * from "./usePathStartsWith"
 export * from "./useScrollBounds"
