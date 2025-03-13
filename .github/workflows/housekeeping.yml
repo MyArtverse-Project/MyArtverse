@@ -1,0 +1,39 @@
+name: Format / Lint / Dependency Checks
+on:
+  push:
+
+jobs:
+  check-code-format:
+    name: "Check code format and lint"
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with:
+          node-version: 20
+          cache: "yarn"
+
+      - name: Install deps
+        run: yarn
+
+      - name: "Formatting: Prettier"
+        run: yarn prettier --check .
+
+      - name: "Formatting: ESLint"
+        run: yarn eslint .
+
+  knip-deps:
+    name: "Unused code & dependencies"
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with:
+          node-version: 20
+          cache: "yarn"
+
+      - name: Install deps without lockfile
+        run: yarn
+
+      - name: "Dependencies: Knip"
+        run: yarn knip
