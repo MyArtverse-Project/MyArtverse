@@ -9,6 +9,8 @@ import { useAuth } from "@/app/context/AuthContext"
 import ThirdPartyButtons from "@/components/layouts/Auth/ThirdPartyButtons"
 import { Button } from "@mav/ui/components/buttons"
 import { Form, type FormState, InputField } from "@mav/ui/components/fields"
+import { LuKey, LuKeyRound } from "react-icons/lu"
+import { forgotAction } from "@/app/actions/recover"
 
 export default function Page() {
   const router = useRouter()
@@ -20,19 +22,14 @@ export default function Page() {
   async function handleSubmit(event: React.FormEvent<HTMLFormElement>) {
     event.preventDefault()
     const formData = new FormData(event.target as HTMLFormElement)
-    const res = await loginAction(formData)
+    const res = await forgotAction(formData)
 
     if (res.success) {
-      router.push(`/`)
+      router.push(`/recover/check`)
     } else {
       setErrors({
         message: res.message.error || "Something went wrong. Please try again.",
-        errors: {
-          email: res.message.email ?? [],
-          password: res.message.password ?? [],
-          username: res.message.username ?? [],
-          confirm: res.message.confirm ?? [],
-        },
+        errors: {},
       })
     }
   }
@@ -53,9 +50,8 @@ export default function Page() {
         className="absolute left-0 top-0 z-0 h-1/4 w-full object-cover"
       />
       <div className="bg-100 border-200 relative z-10 flex w-full max-w-2xl flex-col items-center justify-center gap-y-6 rounded-lg border-2 p-12 shadow-md">
-        <h1 className="text-700 text-2xl">Sign in to MyArtverse</h1>
-        <ThirdPartyButtons />
-        <span>or</span>
+        <LuKeyRound size={45} />
+        <h1 className="text-700 text-2xl">Forgot Password</h1>
         <Form onSubmit={handleSubmit} className="flex w-full flex-col gap-y-4">
           {errors && (
             <p className="text-center text-red-500">{errors.message}</p>
@@ -66,27 +62,20 @@ export default function Page() {
             placeholder="Email"
             error={errors?.errors.email}
           />
-          <div className="space-y-2">
-            <InputField
-              inputName="Password"
-              type="password"
-              placeholder="Password"
-              error={errors?.errors.password}
-            />
-            <Link
-              href="/recover"
-              className="text-600 inline-block text-sm underline hover:no-underline"
-            >
-              Forgot password?
-            </Link>
-          </div>
-          <Button position="center" type="submit" className="mt-4 w-full text-center">
-            Sign in
+          <Button
+            position="center"
+            type="submit"
+            className="mt-4 w-full text-center"
+          >
+            Continue
           </Button>
         </Form>
-        <div className="flex flex-row gap-x-6">
-          <Link href="/register" className="text-500 text-sm">
+        <div className="flex flex-row items-center justify-center gap-x-6">
+          <Link href="/register" className="text-600 text-sm">
             Create an account
+          </Link>
+          <Link href="/login" className="text-600 text-sm">
+            Login
           </Link>
         </div>
       </div>

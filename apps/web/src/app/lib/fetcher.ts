@@ -1,6 +1,7 @@
 "use server"
 
 import { cookies } from "next/headers"
+import { redirect } from "next/navigation"
 
 export const fetcher = async <T>(
   url: string,
@@ -19,7 +20,8 @@ export const fetcher = async <T>(
 
   if (!response.ok) {
     if (response.status === 401) {
-      throw new Error("Unauthorized")
+      // Handle unauthorized access
+      redirect("/login")
     }
 
     throw new Error(`Error: ${response.status}`)

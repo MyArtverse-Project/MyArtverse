@@ -11,3 +11,12 @@ export const RegisterFormSchema = z.object({
   password: z.string().min(8, "Password must be at least 8 characters"),
   confirm: z.string().min(8, "Password must be at least 8 characters"),
 })
+
+export const ForgotFormSchema = z.object({
+  email: z.string().email("Must be a valid email"),
+})
+
+export const RecoverFormSchema = z.object({
+  password: z.string().min(8, "Password must be at least 8 characters"),
+  confirm: z.string().min(8, "Password must be at least 8 characters"),
+})
