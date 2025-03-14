@@ -1,6 +1,5 @@
 name: Format / Lint / Dependency Checks
-on:
-  push:
+on: [push]
 
 jobs:
   check-code-format:
@@ -11,16 +10,28 @@ jobs:
       - uses: actions/setup-node@v4
         with:
           node-version: 20
-          cache: "yarn"
+          cache: yarn
 
       - name: Install deps
         run: yarn
 
       - name: "Formatting: Prettier"
+        id: prettier
         run: yarn prettier --check .
+        continue-on-error: true
 
       - name: "Formatting: ESLint"
+        id: eslint
         run: yarn eslint .
+        continue-on-error: true
+
+      - name: "Check outcomes"
+        if: always()
+        run: |
+          if [[ "${{ steps.prettier.outcome }}" != "success" || "${{ steps.eslint.outcome }}" != "success" ]]; then
+            echo "Formatting checks failed; make sure to format and lint your code accordingly!"
+            exit 1
+          fi
 
   knip-deps:
     name: "Unused code & dependencies"
@@ -30,9 +41,9 @@ jobs:
       - uses: actions/setup-node@v4
         with:
           node-version: 20
-          cache: "yarn"
+          cache: yarn
 
-      - name: Install deps without lockfile
+      - name: Install deps
         run: yarn
 
       - name: "Dependencies: Knip"
