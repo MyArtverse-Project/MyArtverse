@@ -1,27 +1,18 @@
 /* eslint-disable @typescript-eslint/no-explicit-any */
 interface CommentBaseProps {
-  // TODO: Attempt to fix the type of imgTag
-  imgTag?: any
+  imgTag: React.ReactNode
   avatar: string
   outerContainer?: React.ReactNode
 }
 
 /** @internal This is a shared component */
 export function CommentBase(props: React.PropsWithChildren<CommentBaseProps>) {
-  const ImageTag = props.imgTag ?? ("img" as const)
-
   return (
     <div
       data-mav-comment-node=""
       className="flex items-start gap-x-4 rounded-md"
     >
-      <ImageTag
-        src={props.avatar}
-        alt=""
-        width="40"
-        height="40"
-        className="aspect-square flex-shrink-0 rounded-full object-cover"
-      />
+      {props.imgTag}
       <div className="relative flex-1">
         <span
           className="bg-100 border-400 absolute -left-1.5 top-[1.05rem] z-10 block size-3 rotate-45 border border-r-0 border-t-0"

@@ -1,4 +1,4 @@
-import { useValidateChildrenComponents } from "../useValidateChildrenComponents"
+import { useValidateChildrenComponents } from "../../../hooks"
 import { MastheadDetails } from "./Details"
 
 /**
@@ -6,10 +6,12 @@ import { MastheadDetails } from "./Details"
  */
 export function MastheadWrapper(props: React.PropsWithChildren) {
   const mhWrapperChildren = useValidateChildrenComponents(props.children, [
-    MastheadDetails
+    MastheadDetails,
   ])
 
   return (
-    <div className="mx-auto flex max-w-screen-2xl gap-x-4 px-9">{mhWrapperChildren}</div>
+    <div className="mx-auto flex max-w-screen-2xl gap-x-4 px-9">
+      {mhWrapperChildren}
+    </div>
   )
 }
