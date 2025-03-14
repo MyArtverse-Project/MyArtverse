@@ -1,3 +1,6 @@
+import Image from "next/image"
+import { useValidateChildrenComponents } from "../../hooks"
+
 /* eslint-disable @typescript-eslint/no-explicit-any */
 interface CommentBaseProps {
   imgTag: React.ReactNode
@@ -7,12 +10,17 @@ interface CommentBaseProps {
 
 /** @internal This is a shared component */
 export function CommentBase(props: React.PropsWithChildren<CommentBaseProps>) {
+  const validImgTags = useValidateChildrenComponents(props.children, [
+    Image,
+    <img />,
+  ])
+
   return (
     <div
       data-mav-comment-node=""
       className="flex items-start gap-x-4 rounded-md"
     >
-      {props.imgTag}
+      {validImgTags}
       <div className="relative flex-1">
         <span
           className="bg-100 border-400 absolute -left-1.5 top-[1.05rem] z-10 block size-3 rotate-45 border border-r-0 border-t-0"
