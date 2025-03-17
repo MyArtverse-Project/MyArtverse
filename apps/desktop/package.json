@@ -21,6 +21,7 @@
     "@mav/config": "*",
     "@mav/shared": "*",
     "@mav/ui": "*",
+    "@tailwindcss/vite": "^4.0.14",
     "@tauri-apps/cli": "^1",
     "@types/react": "^19.0.0",
     "@types/react-dom": "^19.0.0",
