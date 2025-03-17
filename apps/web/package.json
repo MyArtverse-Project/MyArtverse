@@ -13,7 +13,6 @@
     "@headlessui/react": "^2.0.3",
     "@mdx-js/loader": "^3.0.1",
     "@next/mdx": "15.2.1",
-    "autoprefixer": "^10.4.19",
     "class-variance-authority": "^0.7.0",
     "dompurify": "^3.1.4",
     "framer-motion": "^11.2.4",
@@ -34,6 +33,7 @@
     "@mav/config": "*",
     "@mav/shared": "*",
     "@mav/ui": "*",
+    "@tailwindcss/postcss": "^4.0.14",
     "@types/dompurify": "^3.0.5",
     "@types/lodash": "^4.17.4",
     "@types/mdx": "^2.0.13",
@@ -42,10 +42,9 @@
     "@types/react-dom": "^19.0.0",
     "dedent": "^1.5.3",
     "eslint": "^8",
-    "eslint-config-next": "15.2.1",
     "postcss": "^8",
     "tailwind-merge": "^2.3.0",
-    "tailwindcss": "^3.4.1",
+    "tailwindcss": "^4.0.13",
     "typescript": "^5"
   },
   "resolutions": {

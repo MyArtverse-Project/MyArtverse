@@ -20,7 +20,7 @@ export default defineConfig(async () => ({
       "TAURI_DEBUG"
     ],
     fs: {
-      allow: ["../../node_modules/@fontsource"]
+      allow: ["../../node_modules/@fontsource", "../.."]
     },
     build: {
       // Tauri uses Chromium on Windows and WebKit on macOS and Linux
