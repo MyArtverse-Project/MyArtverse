@@ -5,10 +5,28 @@ import { useRouter } from "next/navigation";
 import { fetcher } from "@/app/lib/fetcher"; // Import the fetch helper
 import { BACKEND_URL } from "@/utils/constants";
 
-type User = {
+export type User = {
   id: string;
   handle: string;
-  email: string;
+  displayName: string;
+  bio: string;
+  avatarUrl: string;
+  bannerUrl: string;
+  dateRegistered: string; 
+  dateUpdated: string; 
+  hasArtistAccess: boolean;
+  hasBetaAccess: boolean;
+  links: { url: string, label: string }[];
+  pronouns: string;
+  nationality: string;
+  birthday: string; 
+  characters: {
+    id: string;
+    name: string;
+    avatarUrl: string;
+    species: string;
+
+  }[]
 };
 
 type AuthContextType = {
