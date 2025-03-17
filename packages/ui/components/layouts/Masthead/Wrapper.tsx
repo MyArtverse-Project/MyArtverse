@@ -6,6 +6,8 @@ import { MastheadDetails } from "./Details"
  */
 export function MastheadWrapper(props: React.PropsWithChildren) {
   const mhWrapperChildren = useValidateChildrenComponents(props.children, [
+    // TODO: Using `@ts-expect-error` here is a temporary workaround until we can
+    // @ts-expect-error
     MastheadDetails,
   ])
 

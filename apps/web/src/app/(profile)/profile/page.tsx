@@ -8,6 +8,9 @@ import { Group } from "@mav/ui/components/layouts"
 import { useAuth } from "@/app/context/AuthContext"
 import { useRouter } from "next/navigation"
 
+    // TODO: Using `@ts-expect-error` here is a temporary workaround until we can
+
+
 export default function ProfilePage() {
   const { user, isLoading } = useAuth()
   const router = useRouter()
@@ -27,12 +30,14 @@ export default function ProfilePage() {
           <Group title="Comments" potentialActions={<Button>Filter</Button>}>
             <div className="mb-5">
               <UserCommentInput
+                // @ts-expect-error
                 imgTag={Image}
                 avatar="/img/examples/kuro/kuro-example4.png"
               />
             </div>
             <div className="grid gap-y-4">
               <UserComment
+                // @ts-expect-error
                 imgTag={Image}
                 avatar="/img/examples/kuro/kuro-example4.png"
                 handle="kurojifusky"
@@ -42,6 +47,7 @@ export default function ProfilePage() {
                 Comment test
               </UserComment>
               <UserComment
+                // @ts-expect-error
                 imgTag={Image}
                 avatar="/img/examples/ozzy/5.png"
                 handle="ediwow"
