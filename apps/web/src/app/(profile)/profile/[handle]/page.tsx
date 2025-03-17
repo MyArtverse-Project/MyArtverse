@@ -8,7 +8,7 @@ import { Group } from "@mav/ui/components/layouts"
 import { useAuth } from "@/app/context/AuthContext"
 import { useRouter } from "next/navigation"
 
-    // TODO: Using `@ts-expect-error` here is a temporary workaround until we can
+// TODO: Using `@ts-expect-error` here is a temporary workaround until we can
 
 
 export default function ProfilePage() {
