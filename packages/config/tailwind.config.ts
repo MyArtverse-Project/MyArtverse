@@ -1,6 +1,6 @@
 import type { Config } from "tailwindcss"
-import formsPlugin from "@tailwindcss/forms"
-import typographyPlugin from "@tailwindcss/typography"
+import forms from "@tailwindcss/forms"
+import typography from "@tailwindcss/typography"
 
 const TW_PREFIX = "mav"
 const COLORS = {
@@ -50,29 +50,26 @@ const iterateColorVars = (
   return JSON.parse(`{${parseCols}}`)
 }
 
-const gridResizable = {
-  resizable: "minmax(0, 1fr) auto"
-}
+// const gridResizable = {
+//   resizable: "minmax(0, 1fr) auto"
+// }
 
 export default {
   content: [],
   darkMode: "class",
-  theme: {
-    extend: {
-      gridTemplateRows: gridResizable,
-      gridTemplateColumns: gridResizable,
-      fontFamily: {
-        inter: "var(--font-inter)"
-      },
-      colors: {
-        current: "currentColor",
-        ...iterateColorVars("--tw-bg-opacity", [...COLORS.GLOBAL, ...COLORS.OVERRIDE])
-      },
-      borderColor: {
-        current: "currentColor",
-        ...iterateColorVars("--tw-border-opacity", COLORS.GLOBAL)
-      }
-    }
-  },
-  plugins: [formsPlugin, typographyPlugin]
+  // theme: {
+  //   extend: {
+  //     gridTemplateRows: gridResizable,
+  //     gridTemplateColumns: gridResizable,
+  //     colors: {
+  //       current: "currentColor",
+  //       ...iterateColorVars("--tw-bg-opacity", [...COLORS.GLOBAL, ...COLORS.OVERRIDE])
+  //     },
+  //     borderColor: {
+  //       current: "currentColor",
+  //       ...iterateColorVars("--tw-border-opacity", COLORS.GLOBAL)
+  //     }
+  //   }
+  // },
+  plugins: [forms, typography]
 } satisfies Config

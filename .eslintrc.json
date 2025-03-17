@@ -46,6 +46,7 @@
         "allow": [
           "tailwindcss/*",
           "@tailwindcss/**",
+          "@fontsource/**",
           "mdx/*",
           "next/**",
           "react-*/**",

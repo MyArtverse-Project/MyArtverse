@@ -1,12 +1,17 @@
+/* Global Tailwind CSS for both web and desktop */
 @import "tailwindcss";
 
 @theme {
+  --font-inter: "Inter", var(--default-font-family);
+  --font-code: "JetBrains Mono", var(--default-mono-font-family);
+
   --color-warning: 46, 99.3%, 54.6%;
   --color-info: 212, 95.4%, 46.3%;
   --color-alert: 0, 100%, 61.2%;
   --color-hyperlink: 219, 100%, 50%;
   --color-success: 136, 87.7%, 40.4%;
 
+  /* Migrated from v3; will rework on a new swatch of colors that will coincide with light/dark themes in the near future */
   --color-light-100: 256, 100%, 99%;
   --color-light-200: 248, 88.8%, 94.6%;
   --color-light-300: 251, 96.4%, 85.9%;
@@ -38,4 +43,15 @@
   --color-dark-warning-highlight: 46, 100%, 15.2%;
   --color-dark-info-highlight: 212, 100%, 15.2%;
   --color-dark-success-highlight: 136, 100%, 15%;
+
+  /* Migrated from _overrides.scss: --mav-context-menu */
+  --color-light-context-menu: var(--color-light-100);
+  --color-dark-context-menu: var(--color-dark-200);
+
+  /* Migrated from _overrides.scss: --mav-active */
+  --color-light-active: var(--color-light-100);
+  --color-light-active-invert: var(--color-light-700);
+
+  --color-dark-active: var(--color-dark-700);
+  --color-dark-active-invert: var(--color-dark-100);
 }

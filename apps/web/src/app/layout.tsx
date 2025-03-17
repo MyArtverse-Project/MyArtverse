@@ -1,4 +1,4 @@
-import "@mav/shared/styles/index.scss"
+import "@mav/shared/styles.css"
 import type { Metadata, Viewport } from "next"
 import dynamic from "next/dynamic"
 import { Inter } from "next/font/google"
