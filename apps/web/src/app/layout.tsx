@@ -6,8 +6,8 @@ import { Analytics, NoJSMessage, SkipNav } from "@/components"
 import { BRAND } from "@mav/shared"
 import { cn } from "@mav/shared/utils"
 import { Provider } from "jotai"
-import { AuthProvider } from "./context/AuthContext"
 import PreconnectResources from "./preconnect-resources"
+import { AuthProvider } from "@/app/context/AuthContext"
 
 const CheckLocalSettings = dynamic(() =>
   import("@/components").then((c) => c.CheckLocalSettings),
