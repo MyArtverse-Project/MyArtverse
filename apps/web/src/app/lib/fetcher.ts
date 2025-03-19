@@ -8,9 +8,10 @@ export const fetcher = async <T>(
   options: RequestInit = {},
 ): Promise<T> => {
   const token = (await cookies()).get("accessToken")?.value || ""
+  const refresh = (await cookies()).get("refreshToken")?.value || ""
   const headers = new Headers(options.headers || {})
   // Send cookies
-  headers.set("Cookie", `accessToken=${token}`)
+  headers.set("Cookie", `accessToken=${token};refreshToken=${refresh}`)
 
   const response = await fetch(url, {
     ...options,

@@ -1,6 +1,7 @@
 "use client"
 
 import { Masthead, type MastheadTabItems } from "@mav/ui/components/layouts"
+import Image from "next/image"
 import { LuCat, LuHeart, LuHome } from "react-icons/lu"
 
 interface ProfileMastheadProps {
@@ -18,19 +19,28 @@ export function ProfileMasthead(props: Partial<ProfileMastheadProps>) {
     {
       icon: LuCat,
       text: "Characters",
-      link: "/characters",
+      link: "characters",
       countIndicator: 5
     },
     {
       icon: LuHeart,
       text: "Favorites",
-      link: "/favorites"
+      link: "favorites"
     }
   ]
 
   return (
     <Masthead>
-      <Masthead.Banner></Masthead.Banner>
+      <Masthead.Banner>
+        {/* TODO */}
+        {/* <Image
+          src={props.bannerUrl || "/img/examples/kuro/kuro-example4.png"}
+          alt="Banner"
+          width={2000}
+          height={500}
+        /> */}
+
+      </Masthead.Banner>
       <Masthead.Wrapper>
         <Masthead.Details>
           <Masthead.Layer spaceBetween>

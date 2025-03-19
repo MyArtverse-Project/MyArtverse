@@ -54,7 +54,7 @@ export const AuthProvider = ({ children }: { children: React.ReactNode }) => {
         setUser(data);
       } catch (error) {
         try {
-          await fetcher(`${BACKEND_URL}/v1/auth/refresh-token`, { method: "POST" });
+          await fetcher(`${BACKEND_URL}/v1/auth/refresh-token`, { method: "POST",  });
           const data = await fetcher<User>(`${BACKEND_URL}/v1/auth/whoami`);
           setUser(data);
         } catch (refreshError) {

@@ -28,11 +28,11 @@ const footerLinks = [
   {
     category: "Company",
     links: [
-      { text: "About", link: "/client" },
-      { text: "Blog", link: "/plus" },
-      { text: "FAQ", link: "/playground" },
-      { text: "Open Source", link: "/playground" },
-      { text: "Changelog", link: "/playground" },
+      { text: "About", link: "/about" },
+      { text: "Blog", link: "/blog" },
+      { text: "FAQ", link: "/faq" },
+      { text: "Open Source", link: "/opensource" },
+      { text: "Changelog", link: "/changelog" },
       { text: "Design", link: "/design" },
     ],
   },
@@ -41,7 +41,7 @@ const footerLinks = [
     links: [
       { text: "Community Guidelines", link: "/guidelines" },
       { text: "Use of AI", link: "/ai" },
-      { text: "Privacy Policy", link: "/privacypolicy" },
+      { text: "Privacy Policy", link: "/privacy" },
       { text: "Terms of Service", link: "/tos" },
     ],
   },
