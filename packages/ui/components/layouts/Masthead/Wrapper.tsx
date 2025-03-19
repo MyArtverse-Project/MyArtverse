@@ -12,7 +12,7 @@ export function MastheadWrapper(props: React.PropsWithChildren) {
   ])
 
   return (
-    <div className="mx-auto flex max-w-screen-2xl gap-x-4 px-9">
+    <div className="mx-auto flex items-center max-w-screen-2xl gap-x-4 px-9">
       {mhWrapperChildren}
     </div>
   )

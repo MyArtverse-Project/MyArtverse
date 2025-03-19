@@ -12,7 +12,6 @@ interface CommentBaseProps {
 export function CommentBase(props: React.PropsWithChildren<CommentBaseProps>) {
   const validImgTags = useValidateChildrenComponents(props.children, [
     Image,
-    <img />,
   ])
 
   return (

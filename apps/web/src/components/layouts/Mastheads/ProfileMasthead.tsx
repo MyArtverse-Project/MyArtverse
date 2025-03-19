@@ -1,12 +1,17 @@
 "use client"
 
-import { Masthead, type MastheadTabItems } from "@mav/ui/components/layouts"
 import Image from "next/image"
+import { Masthead, type MastheadTabItems } from "@mav/ui/components/layouts"
 import { LuCat, LuHeart, LuHome } from "react-icons/lu"
 
 interface ProfileMastheadProps {
+  handle: string
+  displayName: string
   bannerUrl: string
   avatarUrl: string
+  profileBio: string
+  followerCount: number
+  followingCount: number
 }
 
 export function ProfileMasthead(props: Partial<ProfileMastheadProps>) {
@@ -14,41 +19,41 @@ export function ProfileMasthead(props: Partial<ProfileMastheadProps>) {
     {
       icon: LuHome,
       text: "Overview",
-      link: ""
+      link: "",
     },
     {
       icon: LuCat,
       text: "Characters",
       link: "characters",
-      countIndicator: 5
+      countIndicator: 5,
     },
     {
       icon: LuHeart,
       text: "Favorites",
-      link: "favorites"
-    }
+      link: "favorites",
+    },
   ]
 
   return (
     <Masthead>
-      <Masthead.Banner>
-        {/* TODO */}
-        {/* <Image
-          src={props.bannerUrl || "/img/examples/kuro/kuro-example4.png"}
-          alt="Banner"
-          width={2000}
-          height={500}
-        /> */}
-
-      </Masthead.Banner>
+      <Masthead.Banner src={props.bannerUrl} />
       <Masthead.Wrapper>
+        <Masthead.Avatar
+          src={props.avatarUrl}
+          profileOnly
+          banner={props.bannerUrl != null}
+        />
         <Masthead.Details>
-          <Masthead.Layer spaceBetween>
-            <div>username and badges</div>
-            <div>buttons</div>
+          <Masthead.Layer>
+            <span className="text-4xl">{props.displayName || props.handle}</span>
           </Masthead.Layer>
-          <Masthead.Layer>following and others</Masthead.Layer>
-          <Masthead.Layer>social links</Masthead.Layer>
+          <Masthead.Layer className="gap-x-4 flex flex-row">
+            <span className="text-lg">{props.handle ? `@${props.handle}` : ""}</span>
+            <span className="text-lg">{props.followerCount || "???"} followers</span>
+            <span className="text-lg">{props.followingCount || "???"} following</span>
+          </Masthead.Layer>
+          <Masthead.Layer></Masthead.Layer>
+          <Masthead.Layer>{props.profileBio}</Masthead.Layer>
         </Masthead.Details>
       </Masthead.Wrapper>
       <Masthead.Tabs items={profileTabs} />
