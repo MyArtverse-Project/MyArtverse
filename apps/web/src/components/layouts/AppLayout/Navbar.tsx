@@ -33,7 +33,7 @@ export function Navbar() {
             <MyArtverseIcon size={0.69} />
           </Link>
         </div>
-        <div className="flex items-center gap-x-2">
+        <div className="flex items-center gap-x-4">
           <Button
             prefix={<LuSearch size={18} />}
             className="hover:!bg-100 w-64"
@@ -41,7 +41,7 @@ export function Navbar() {
           >
             Search
           </Button>
-          {!isLoading && (user ? <ActionsLoggedIn /> : <ActionsLoggedOut />)}
+          {!isLoading && (user ? <ActionsLoggedIn user={user} isRegistered={true} /> : <ActionsLoggedOut />)}
         </div>
       </nav>
     </div>
