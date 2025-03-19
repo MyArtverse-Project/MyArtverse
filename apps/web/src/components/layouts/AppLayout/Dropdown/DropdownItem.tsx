@@ -9,6 +9,7 @@ export default function DropdownItem({
   prefixIcon,
   suffixIcon,
   component,
+  special = false,
   ...attrs
 }: {
   children?: React.ReactNode
@@ -16,7 +17,8 @@ export default function DropdownItem({
   disabled?: boolean
   prefixIcon?: React.ReactElement
   suffixIcon?: React.ReactElement
-  component?: React.ReactElement
+  component?: React.ReactElement,
+  special?: boolean
 } & Pick<
   React.HTMLProps<HTMLButtonElement>,
   "onClick" | "onKeyDown" | "aria-label"
@@ -29,9 +31,10 @@ export default function DropdownItem({
           className={cn(
             "w-full rounded-md transition-colors",
             active && "bg-400 text-700",
+            special && "bg-gradient-to-b from-[#FFE5D2] to-[#DDB5FD] w-full text-black"
           )}
         >
-          <div className={cn("flex w-full select-none items-center justify-between gap-x-2 px-3 font-medium", !component ? "py-2" : "")}>
+          <div className={cn("flex w-max select-none items-center justify-between gap-x-2 px-3 font-medium", !component ? "py-2" : "w-full")}>
             <span className="flex items-center gap-x-2">
               {prefixIcon}
               {children}

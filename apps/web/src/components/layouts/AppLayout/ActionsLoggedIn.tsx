@@ -104,6 +104,8 @@ export function ActionsLoggedIn({
                   link={item.link}
                   prefixIcon={<item.icon size={22} />}
                   component={item.component}
+                  special={item.special}
+
                 >
                   {item.name}
                 </DropdownItem>

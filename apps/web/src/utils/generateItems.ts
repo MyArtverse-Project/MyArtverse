@@ -16,7 +16,8 @@ import {
   LuMinusCircle,
   LuShare,
   LuSun,
-  LuUser
+  LuUser,
+  LuPaintbrush
 } from "react-icons/lu"
 
 export const generateSiteSettingItems = (isRegistered: boolean, handle: string | null) => [
@@ -40,6 +41,8 @@ export const generateSiteSettingItems = (isRegistered: boolean, handle: string |
     name: "Theme",
     component: React.createElement(ThemeToggle),
   },
+  {},
+  { icon: LuPaintbrush, name: "Request Artist Access", link: "/settings", special: true },
   {},
   { icon: LuAccessibility, name: "Accessibility", link: "/settings" },
   { icon: LuHelpCircle, name: "Help", link: "/settings" },
