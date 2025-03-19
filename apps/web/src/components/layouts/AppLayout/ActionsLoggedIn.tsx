@@ -89,7 +89,7 @@ export function ActionsLoggedIn({
                 />
                 <div className="flex flex-col">
                   {/* TODO: Display Badges */}
-                  <span className="text-xl font-bold">{user.displayName} </span>
+                  <span className="text-xl font-bold">{user.displayName || user.handle} </span>
                   <span>@{user.handle}</span>
                 </div>
               </div>
@@ -103,6 +103,7 @@ export function ActionsLoggedIn({
                   key={index}
                   link={item.link}
                   prefixIcon={<item.icon size={22} />}
+                  component={item.component}
                 >
                   {item.name}
                 </DropdownItem>

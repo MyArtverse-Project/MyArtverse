@@ -9,6 +9,7 @@ import { LuMenu, LuSearch } from "react-icons/lu"
 import { ActionsLoggedIn } from "./ActionsLoggedIn"
 import { ActionsLoggedOut } from "./ActionsLoggedOut"
 import { Sidebar } from "@/components/layouts/AppLayout/Sidebar/Sidebar"
+import ThemeToggle from "@/components/ThemeToggle"
 
 export function Navbar() {
   const { user, isLoading } = useAuth()

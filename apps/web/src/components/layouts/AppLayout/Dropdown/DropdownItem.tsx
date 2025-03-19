@@ -8,6 +8,7 @@ export default function DropdownItem({
   link,
   prefixIcon,
   suffixIcon,
+  component,
   ...attrs
 }: {
   children?: React.ReactNode
@@ -15,23 +16,30 @@ export default function DropdownItem({
   disabled?: boolean
   prefixIcon?: React.ReactElement
   suffixIcon?: React.ReactElement
-} & Pick<React.HTMLProps<HTMLButtonElement>, "onClick" | "onKeyDown" | "aria-label">) {
-
+  component?: React.ReactElement
+} & Pick<
+  React.HTMLProps<HTMLButtonElement>,
+  "onClick" | "onKeyDown" | "aria-label"
+>) {
   return (
     <MenuItem>
       {({ active }) => (
         <Link
-          href={link as any}
+          href={link ? link : "#"}
           className={cn(
             "w-full rounded-md transition-colors",
-            active && "bg-400 text-700"
+            active && "bg-400 text-700",
           )}
         >
-          <span className="flex w-max select-none items-center justify-between gap-x-2 px-3 py-2 font-medium">
-            {prefixIcon}
-            {children}
-            {suffixIcon}
-          </span>
+          <div className="flex w-full select-none items-center justify-between gap-x-2 px-3 py-2 font-medium">
+            <span className="flex items-center gap-x-2">
+              {prefixIcon}
+              {children}
+              {suffixIcon}
+            </span>
+            {/* TODO: Remove extra padding it adds to the button */}
+            {component ? component : null}
+          </div>
         </Link>
       )}
     </MenuItem>
