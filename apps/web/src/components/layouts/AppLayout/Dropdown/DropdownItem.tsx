@@ -31,7 +31,7 @@ export default function DropdownItem({
             active && "bg-400 text-700",
           )}
         >
-          <div className="flex w-full select-none items-center justify-between gap-x-2 px-3 py-2 font-medium">
+          <div className={cn("flex w-full select-none items-center justify-between gap-x-2 px-3 font-medium", !component ? "py-2" : "")}>
             <span className="flex items-center gap-x-2">
               {prefixIcon}
               {children}
