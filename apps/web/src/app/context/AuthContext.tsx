@@ -25,7 +25,6 @@ export type User = {
     name: string;
     avatarUrl: string;
     species: string;
-
   }[]
 };
 
@@ -54,7 +53,13 @@ export const AuthProvider = ({ children }: { children: React.ReactNode }) => {
         const data = await fetcher<User>(`${BACKEND_URL}/v1/auth/whoami`);
         setUser(data);
       } catch (error) {
-        setUser(null);
+        try {
+          await fetcher(`${BACKEND_URL}/v1/auth/refresh-token`, { method: "POST" });
+          const data = await fetcher<User>(`${BACKEND_URL}/v1/auth/whoami`);
+          setUser(data);
+        } catch (refreshError) {
+          setUser(null);
+        }
       } finally {
         setIsLoading(false);
       }
