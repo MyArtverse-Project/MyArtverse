@@ -92,7 +92,7 @@ export interface Variant {
   main?: boolean
   onChangeCheck?: (e: React.ChangeEvent<HTMLInputElement>) => void
   onChangeName?: (e: React.ChangeEvent<HTMLInputElement>) => void
-  deleteVarient?: (e: React.MouseEvent<HTMLDivElement>) => void
+  deleteVariant?: (e: React.MouseEvent<HTMLDivElement>) => void
 }
 
 export interface ReferenceSheet {
