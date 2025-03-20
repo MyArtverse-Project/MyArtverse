@@ -123,6 +123,7 @@ export const fetchUser = async (handle: string) => {
 }
 
 export const fetchUserCharacters = async (handle: string) => {
+  
   const data = await apiWithoutAuth<CharacterResponse>("GET", `/v1/character/${handle}`)
   return data
 }
