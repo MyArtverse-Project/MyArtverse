@@ -1,8 +1,9 @@
 "use client"
 
 import Image from "next/image"
+import { Button } from "@mav/ui/components/buttons"
 import { Masthead, type MastheadTabItems } from "@mav/ui/components/layouts"
-import { LuCat, LuHeart, LuHome } from "react-icons/lu"
+import { LuCat, LuFileEdit, LuHeart, LuHome } from "react-icons/lu"
 
 interface ProfileMastheadProps {
   handle: string
@@ -44,19 +45,31 @@ export function ProfileMasthead(props: Partial<ProfileMastheadProps>) {
           banner={props.bannerUrl != null}
         />
         <Masthead.Details>
+          <Masthead.Layer spaceBetween>
+            <span className="text-4xl">
+              {props.displayName || props.handle}
+            </span>
+            <Button href="/settings/profile" icon={<LuFileEdit size={18} />}>
+              Edit Profile
+            </Button>
+          </Masthead.Layer>
           <Masthead.Layer>
-            <span className="text-4xl">{props.displayName || props.handle}</span>
+            <div className="gap-x-4 flex">
+              <span className="text-lg">
+                {props.handle ? `@${props.handle}` : ""}
+              </span>
+              <span className="text-lg">
+                {props.followerCount || "???"} followers
+              </span>
+              <span className="text-lg">
+                {props.followingCount || "???"} following
+              </span>
+            </div>
           </Masthead.Layer>
-          <Masthead.Layer className="gap-x-4 flex flex-row">
-            <span className="text-lg">{props.handle ? `@${props.handle}` : ""}</span>
-            <span className="text-lg">{props.followerCount || "???"} followers</span>
-            <span className="text-lg">{props.followingCount || "???"} following</span>
-          </Masthead.Layer>
-          <Masthead.Layer></Masthead.Layer>
           <Masthead.Layer>{props.profileBio}</Masthead.Layer>
         </Masthead.Details>
       </Masthead.Wrapper>
-      <Masthead.Tabs items={profileTabs} />
+      <Masthead.Tabs baseURL={`/@${props.handle}/`} items={profileTabs} />
     </Masthead>
   )
 }

@@ -11,17 +11,9 @@ import { Group } from "@mav/ui/components/layouts"
 // TODO: Using `@ts-expect-error` here is a temporary workaround until we can
 
 export default function ProfilePage() {
-  const { user, isLoading } = useAuth()
-  const router = useRouter()
-  if (!user && !isLoading) return router.push("/login")
-
   return (
     <>
-      <ProfileMasthead
-        handle={user?.handle}
-        displayName={user?.displayName || user?.handle}
-        avatarUrl={user?.avatarUrl}
-      />
+
       <div className="mx-auto grid max-w-screen-2xl grid-cols-2 gap-4 px-8 py-6">
         {/* <div className="col-span-2">main editable content</div> */}
         <div className="flex flex-col gap-y-3">
