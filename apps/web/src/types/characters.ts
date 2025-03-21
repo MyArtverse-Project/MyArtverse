@@ -90,9 +90,9 @@ export interface Variant {
   url: string
   nsfw: boolean
   main?: boolean
-  onChangeCheck?: (e: React.ChangeEvent<HTMLInputElement>) => void
-  onChangeName?: (e: React.ChangeEvent<HTMLInputElement>) => void
-  deleteVariant?: (e: React.MouseEvent<HTMLDivElement>) => void
+  onChangeCheck: (e: React.ChangeEvent<HTMLInputElement>) => void
+  onChangeName: (e: React.ChangeEvent<HTMLInputElement>) => void
+  deleteVariant: (e: React.MouseEvent<HTMLDivElement>) => void
 }
 
 export interface ReferenceSheet {

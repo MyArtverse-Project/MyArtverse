@@ -8,7 +8,7 @@ import FolderView from "@/components/layouts/Folders"
 import GridResponsive from "@/components/layouts/Layouts/GridResponsive"
 import { Button } from "@mav/ui/components/buttons"
 import { FursonaCard, PinnedCharacter } from "@/components/layouts/Cards"
-import { SearchBox } from "@/components/Forms"
+import { SearchBox } from "@/components/layouts/Forms"
 
 export default function CharacterView({
   handle,

@@ -33,7 +33,7 @@ export default function FolderShelf({
     const handleShelfDrag = (e: MouseEvent) => {
       if (!isDragging) return
 
-      const rect = folderView.getBoundingClientRect()
+      const rect = folderView!.getBoundingClientRect()
       const calcMousePosition = e.x - rect.x + 13
 
       if (calcMousePosition < 250 || calcMousePosition > 600) return

@@ -110,6 +110,7 @@ export default function FolderItem({
         animate={{
           height: !isExpand ? 0 : expandedHeight
         }}
+        // @ts-expect-error
         className={cn(children ? "relative overflow-hidden pl-6" : "")}
       >
         {children}

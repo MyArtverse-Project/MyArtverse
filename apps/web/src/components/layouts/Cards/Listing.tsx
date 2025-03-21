@@ -1,4 +1,5 @@
 import { Badge } from "@mav/ui/components/badges";
+import { Button } from "@mav/ui/components/buttons";
 import Image from "next/image";
 import type { IconType } from "react-icons"
 import { LuMoreVertical as MoreIcon, LuStar as StarIcon } from "react-icons/lu"
