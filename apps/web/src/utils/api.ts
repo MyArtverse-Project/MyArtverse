@@ -1,8 +1,15 @@
+"use server"
+
 import type { ReadonlyRequestCookies } from "next/dist/server/web/spec-extension/adapters/request-cookies"
 import { cookies } from "next/headers"
-import { BACKEND_URL } from "./constants"
-import { CharacterResponse, Character, Artwork, ReferenceSheet } from "@/types/characters"
+import {
+  Artwork,
+  Character,
+  CharacterResponse,
+  ReferenceSheet,
+} from "@/types/characters"
 import { UserType } from "@/types/users"
+import { BACKEND_URL } from "./constants"
 
 type APIMethods = "GET" | "POST" | "DELETE" | "PUT"
 
@@ -17,7 +24,8 @@ export const getCookies = async () => {
 
 export const apiWithAuth = async <Data>(
   method: APIMethods,
-  route: string
+  route: string,
+  body: object = {},
 ): Promise<Data> => {
   const makeRequest = async () => {
     const cookiesHeaders = (await getCookies()) as ReadonlyRequestCookies
@@ -29,10 +37,13 @@ export const apiWithAuth = async <Data>(
       method: method,
       headers: {
         "Content-Type": "application/json",
-        Cookie: `accessToken=${accessToken}; refreshToken=${refreshToken}`
+        Cookie: `accessToken=${accessToken}; refreshToken=${refreshToken}`,
       },
+      body: method === "GET" ? undefined : JSON.stringify(body),
       cache: "no-cache",
-      credentials: "include"
+      credentials: "include",
+    }).catch((err) => {
+      throw new Error(`Unable to connect to the server: ${err}`)
     })
   }
 
@@ -58,16 +69,16 @@ export const apiWithAuth = async <Data>(
 export const apiWithoutAuth = async <Data>(
   method: APIMethods,
   route: string,
-  body?: object
+  body?: object,
 ): Promise<Data> => {
   return fetch(`${endpoint}${route}`, {
     method: method,
     headers: {
-      "Content-Type": "application/json"
+      "Content-Type": "application/json",
     },
     body: JSON.stringify(body),
     cache: "no-cache",
-    credentials: "include"
+    credentials: "include",
   })
     .then((res) => {
       if (res.ok) return res.json()
@@ -84,16 +95,16 @@ export const refreshToken = async () => {
     return Promise.resolve(false)
   }
 
-  const refreshToken = cookiesHeaders.get("refreshToken").value
+  const refreshToken = cookiesHeaders.get("refreshToken")!.value
   return fetch(`${endpoint}/v1/auth/refresh-token`, {
     method: "POST",
     headers: {
       "Content-Type": "application/json",
-      Cookie: `refreshToken=${refreshToken}`
+      Cookie: `refreshToken=${refreshToken}`,
     },
     body: JSON.stringify({}),
     credentials: "include",
-    cache: "no-cache"
+    cache: "no-cache",
   })
     .then((response) => {
       if (!response.ok) {
@@ -113,7 +124,10 @@ export const fetchUserData = async () => {
 }
 
 export const getArtistOpenComissions = async () => {
-  const comissions = await apiWithoutAuth<UserType[]>("GET", "/v1/profile/artists/open")
+  const comissions = await apiWithoutAuth<UserType[]>(
+    "GET",
+    "/v1/profile/artists/open",
+  )
   return comissions
 }
 
@@ -123,8 +137,10 @@ export const fetchUser = async (handle: string) => {
 }
 
 export const fetchUserCharacters = async (handle: string) => {
-  
-  const data = await apiWithoutAuth<CharacterResponse>("GET", `/v1/character/${handle}`)
+  const data = await apiWithoutAuth<CharacterResponse>(
+    "GET",
+    `/v1/character/${handle}`,
+  )
   return data
 }
 
@@ -136,7 +152,7 @@ export const fetchSelfCharacters = async () => {
 export const fetchSelfCharacter = async (characterName: string) => {
   const character = await apiWithAuth<Character>(
     "GET",
-    `/v1/character/me/${characterName}`
+    `/v1/character/me/${characterName}`,
   )
 
   return character
@@ -145,46 +161,55 @@ export const fetchSelfCharacter = async (characterName: string) => {
 export const fetchCharacter = async (handle: string, characterName: string) => {
   const character = await apiWithoutAuth<Character>(
     "GET",
-    `/v1/character/name/${handle}/${characterName}`
+    `/v1/character/name/${handle}/${characterName}`,
   )
 
   return character
 }
 
 export const fetchArtistRequests = async () => {
-  const requests = await apiWithAuth<UserType[]>("GET", "/v1/staff/artist-requests")
+  const requests = await apiWithAuth<UserType[]>(
+    "GET",
+    "/v1/staff/artist-requests",
+  )
   return requests
 }
 
 export const getArtworks = async (profile: string, character: string) => {
   const artworks = await apiWithoutAuth<Artwork[]>(
     "GET",
-    `/v1/art/characters/${profile}/${character}`
+    `/v1/art/characters/${profile}/${character}`,
   )
 
   return artworks
 }
 
 export const getFeatured = async () => {
-  const characters = await apiWithoutAuth<Character[]>("GET", "/v1/character/featured")
+  const characters = await apiWithoutAuth<Character[]>(
+    "GET",
+    "/v1/character/featured",
+  )
   return characters
 }
 
 export const getNewCharacters = async () => {
-  const characters = await apiWithoutAuth<Character[]>("GET", "/v1/character/new")
+  const characters = await apiWithoutAuth<Character[]>(
+    "GET",
+    "/v1/character/new",
+  )
   return characters
 }
 
 export const getFavorites = async (handle: string) => {
   const characters = await apiWithoutAuth<Character[]>(
     "GET",
-    `/v1/profile/favorites/${handle}`
+    `/v1/profile/favorites/${handle}`,
   )
 
   return characters
 }
 
-export const getArtwork = async (artworkId) => {
+export const getArtwork = async (artworkId: string) => {
   const artwork = await apiWithoutAuth<Artwork>("GET", `/v1/art/${artworkId}`)
   return artwork
 }
@@ -197,8 +222,29 @@ export const setRefAsMain = async (refId: string) => {
 export const getRefSheets = async (handle: string) => {
   const refSheets = await apiWithoutAuth<ReferenceSheet[]>(
     "GET",
-    `/v1/character/${handle}/refSheets`
+    `/v1/character/${handle}/refSheets`,
   )
 
   return refSheets
+}
+
+export const createFolder = async (body: {
+  name: string
+  contentType: "characters" | "artworks"
+  parentId: string | null
+  color: string
+}) => {
+  return apiWithAuth("POST", "/v1/folders/create", body)
+}
+
+export const getFolders = async (folderId: string) => {
+  return apiWithAuth("GET", `/v1/folders/${folderId}`)
+}
+
+export const getFolderByHandle = async (handle: string) => {
+  return apiWithAuth("GET", `/v1/folders/handle/${handle}`)
+}
+
+export const getFoldersRecursively = async (folderId: string) => {
+  return apiWithAuth("GET", `/v1/folders/${folderId}/recursive`)
 }

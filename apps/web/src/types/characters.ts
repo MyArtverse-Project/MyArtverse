@@ -105,6 +105,16 @@ export interface ReferenceSheet {
   variants: Variant[]
 }
 
+export type Folder = {
+  id: string
+  name: string
+  color?: string
+  children?: Folder[]
+  parentId?: string
+  characters?: Character[]
+  artworks?: Artwork[]
+}
+
 export interface CharacterResponse {
   characters: Character[]
   mainCharacter: Character | null

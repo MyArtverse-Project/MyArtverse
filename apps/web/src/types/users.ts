@@ -1,4 +1,4 @@
-import type { Artwork, Character } from "./characters"
+import type { Artwork, Character, Folder } from "./characters"
 import type { LinkedString } from "./utils"
 
 type NullableString = string | null
@@ -26,6 +26,7 @@ export interface UserType {
   bannerUrl: LinkedString
   following: UserType[]
   followers: UserType[]
+  folders: Folder[]
   favoriteCharacters: Character[]
   characters: Character[]
   dateRegistered: Date

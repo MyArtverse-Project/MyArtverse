@@ -1,23 +1,56 @@
 import React from "react"
-import { LuCheckCircle, LuFolderPlus, LuXCircle } from "react-icons/lu"
-import Modal from "../layouts/Modal"
 import { cn } from "@mav/shared/utils"
-import { InputField } from "@mav/ui/components/fields"
 import { Button } from "@mav/ui/components/buttons"
+import { InputField } from "@mav/ui/components/fields"
+import { LuCheckCircle, LuFolderPlus, LuXCircle } from "react-icons/lu"
+import { createFolder } from "../../utils/api"
+import Modal from "../layouts/Modal"
 
 export default function CreateFolderModal({
   createFolderModal,
   toggleCreateFolderModal,
-  colors: colors,
   selectedIndex,
-  setSelectedIndex
+  setSelectedIndex,
+  parentId = null,
+  category,
+  colors,
 }: {
   createFolderModal: boolean
   toggleCreateFolderModal: () => void
   colors: string[]
   selectedIndex: number
   setSelectedIndex: (index: number) => void
+  parentId: string | null
+  category: "artworks" | "characters"
 }) {
+  const [folderName, setFolderName] = React.useState<string>("")
+  const [color, setColor] = React.useState<string>("");
+  const onSubmit = async () => {
+    if (!folderName) {
+      return alert("Please enter a folder name")
+    }
+
+
+    const data = await createFolder({
+      name: folderName,
+      contentType: category,
+      parentId,
+      color: color,
+    })
+
+    
+
+    if (data) {
+      toggleCreateFolderModal()
+      alert("Folder created")
+      // TODO: Update the folder list
+      window.location.reload();
+    }
+
+    alert("Folder successfully failed")
+    return
+  }
+
   return (
     <Modal
       state={createFolderModal}
@@ -39,7 +72,7 @@ export default function CreateFolderModal({
         </div>
       </Modal.Title>
       <Modal.Body>
-        <InputField inputName="Folder name" />
+        <InputField inputName="Folder name" onChange={(e) => setFolderName(e.target.value)} value={folderName} />
         <div className="flex flex-col gap-y-1">
           {/* TODO export as a <SelectField /> component */}
           <span className="text-600 font-bold uppercase">Color</span>
@@ -47,10 +80,15 @@ export default function CreateFolderModal({
             {colors.map((color, i) => (
               <Button
                 key={i}
-                className={cn("grid h-10 w-10 place-items-center rounded-full", color)}
+                className={cn(
+                  "grid h-10 w-10 place-items-center rounded-full",
+                  color,
+                )}
                 onClick={() => setSelectedIndex(i)}
               >
-                {selectedIndex == i ? <LuCheckCircle className="text-100" /> : null}
+                {selectedIndex == i ? (
+                  <LuCheckCircle className="text-100" />
+                ) : null}
               </Button>
             ))}
           </div>
@@ -58,7 +96,7 @@ export default function CreateFolderModal({
       </Modal.Body>
       <div className="flex justify-end gap-x-2 px-4 pb-3">
         <Button variant="secondary">Cancel</Button>
-        <Button>Create</Button>
+        <Button onClick={onSubmit}>Create</Button>
       </div>
     </Modal>
   )
