@@ -11,11 +11,12 @@ export async function generateMetadata(): Promise<Metadata> {
   }
 }
 
-export default async function Page({ params } : { params: { handle: string } }) {
-  const characters = await fetchUserCharacters(params.handle)
+export default async function Page({ params } : { params: Promise<{ handle: string }> }) {
+  const { handle } = await params
+  const characters = await fetchUserCharacters(handle)
   return (
     <MarginClamp>
-      <CharacterView handle={params.handle} characters={characters} />
+      <CharacterView handle={handle} characters={characters} />
     </MarginClamp>
   )
 }

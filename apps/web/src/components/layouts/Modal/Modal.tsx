@@ -1,9 +1,9 @@
 "use client"
 
-import cn from "@/utils/cn"
 import { motion } from "framer-motion"
 import type { MapElement } from "@/types/utils"
 import Overlay from "./Overlay"
+import { cn } from "@mav/shared/utils"
 
 export default function Modal({
   children,
@@ -39,6 +39,7 @@ export default function Modal({
           type: "tween",
           duration: 0.22
         }}
+        // @ts-expect-error
         className={cn(
           "border-300 bg-200 fixed left-1/2 top-1/2 overflow-hidden rounded-md border",
           className
