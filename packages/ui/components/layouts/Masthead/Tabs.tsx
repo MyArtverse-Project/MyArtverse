@@ -5,7 +5,7 @@ import type { MastheadTabs } from "./Masthead.types"
 
 export function MastheadTabs(props: MastheadTabs) {
   return (
-    <div className="bg-100 sticky top-[3.75rem] z-[3] overflow-x-auto">
+    <div className="bg-100 sticky top-[3.75rem] z-[3] overflow-x-auto mt-2.5">
       <div className="mx-auto max-w-screen-2xl px-9">
         <Tabs {...props} />
       </div>

@@ -31,6 +31,7 @@ export default function CharacterView({
   const activeRefSheets = characters.mainCharacter?.refSheets
     .find((r) => r.active)
     ?.variants.find((v) => v.main)
+    
   const mainCharacter = characters.mainCharacter
 
   return (
