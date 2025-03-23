@@ -57,7 +57,7 @@ export function Sidebar({
               onClick={toggleSidebar}
             />
             <Link href="/" aria-label="Home" title="Home">
-              <MyArtverseIcon />
+              <MyArtverseIcon size={0.8} />
             </Link>
           </div>
           <div className="h-full px-2.5" role="menu">

@@ -31,7 +31,7 @@ export function Navbar() {
             user={user}
           />
           <Link href="/" aria-label="Home" draggable={false}>
-            <MyArtverseIcon size={0.69} />
+            <MyArtverseIcon size={0.8} />
           </Link>
         </div>
         <div className="flex items-center gap-x-4">
