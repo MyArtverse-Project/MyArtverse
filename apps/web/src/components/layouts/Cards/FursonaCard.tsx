@@ -1,19 +1,19 @@
 /* eslint-disable @typescript-eslint/no-explicit-any */
+import Image from "next/image"
 import Link from "next/link"
+import { cn } from "@mav/shared/utils"
 import { LuHeart as Heart } from "react-icons/lu"
 import type {
   FursonaStatus as AdoptionStatus,
-  ColorPalette as Palette
+  ColorPalette as Palette,
 } from "@/types/characters"
 import type { MapElement } from "@/types/utils"
-import Status from "./Status"
-import { cn } from "@mav/shared/utils"
-import Image from "next/image"
 import ColorPalette from "./ColorPalette"
+import Status from "./Status"
 
 export default function FursonaCard({
   name,
-  img = "",
+  img = "/UserProfile.png",
   species,
   loading,
   isHybrid,
@@ -41,24 +41,23 @@ export default function FursonaCard({
       aria-label={`Character item: ${name}, ${species}`}
       className={cn(
         "hover:bg-mute flex flex-col gap-y-2 rounded-md p-4 transition-all",
-        href ? "cursor-pointer" : ""
+        href ? "cursor-pointer" : "",
       )}
       {...attributes}
     >
-      <div className="h-full overflow-hidden rounded-md">
+      <div className="relative h-0 w-full overflow-hidden rounded-md pb-[100%]">
         {loading && <div className="bg-400 h-full w-full animate-pulse" />}
         <Image
           src={img}
-          objectFit="cover"
           alt={`Avatar of ${name}`}
-          sizes="(max-width: 1280px) 400px, 640px"
-          className="h-full w-full object-cover transition-transform duration-300 ease-in-out hover:scale-105"
+          className="absolute inset-0 h-full w-full transition-transform duration-300 object-cover ease-in-out hover:scale-105"
           width={640}
           height={640}
         />
       </div>
+
       <ColorPalette
-           palette={
+        palette={
           loading
             ? [
                 "#FF0000",
@@ -67,7 +66,7 @@ export default function FursonaCard({
                 "#008000",
                 "#0000FF",
                 "#4B0082",
-                "#EE82EE"
+                "#EE82EE",
               ]
             : []
         }

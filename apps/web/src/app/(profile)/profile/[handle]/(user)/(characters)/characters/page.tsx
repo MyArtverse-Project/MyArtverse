@@ -1,7 +1,7 @@
 import type { Metadata } from "next"
 import MarginClamp from "@/components/layouts/Layouts/MarginClamp"
 import { DefineRouteParams } from "@/types"
-import { fetchUserCharacters, fetchUserData } from "@/utils/api"
+import { fetchUser, fetchUserCharacters, fetchUserData } from "@/utils/api"
 import { BRAND } from "@mav/shared"
 import CharacterView from "./CharacterView"
 
@@ -21,14 +21,15 @@ export async function generateMetadata(): Promise<Metadata> {
 export default async function Page({ params }: AsyncProps) {
   const { handle } = await params
   const characters = await fetchUserCharacters(handle)
-  const { folders } = await fetchUserData()
-
+  const { folders, id } = await fetchUser(handle)
+  const self = await fetchUserData()
   return (
     <MarginClamp>
       <CharacterView
         handle={handle}
         characters={characters}
         folders={folders}
+        owner={self.id === id}
       />
     </MarginClamp>
   )

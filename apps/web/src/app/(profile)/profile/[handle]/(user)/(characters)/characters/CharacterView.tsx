@@ -16,10 +16,12 @@ export default function CharacterView({
   handle,
   characters,
   folders,
+  owner = false,
 }: {
   handle: string
   characters: CharacterResponse
   folders: Folder[]
+  owner: boolean
 }) {
   const router = useRouter()
   const [createFolderModal, setFolderModalState] = useState(false)
@@ -29,6 +31,7 @@ export default function CharacterView({
   const activeRefSheets = characters.mainCharacter?.refSheets
     .find((r) => r.active)
     ?.variants.find((v) => v.main)
+  const mainCharacter = characters.mainCharacter
 
   return (
     <FolderView>
@@ -63,25 +66,30 @@ export default function CharacterView({
       </FolderView.Shelf>
       <FolderView.Contents>
         <div className="mb-4 flex w-full gap-x-2.5">
-          <SearchBox placeholder="Search for characters" />
+          <div className="max-w-full flex-grow">
+            <SearchBox placeholder="Search for characters" />
+          </div>
           <Button icon={<FilterIcon size={20} />}>Filter</Button>
-          {/* TODO: Display if logged in */}
-          <Button
-            onClick={() => router.push("/dashboard/characters")}
-            icon={<LuCog size={20} />}
-          >
-            Manage Character
-          </Button>
-          <Button
-            onClick={() =>
-              router.push("/dashboard/characters?createModal=true")
-            }
-            icon={<LuPlus size={20} />}
-          >
-            Create Character
-          </Button>
+          {owner && (
+            <>
+              <Button
+                onClick={() => router.push("/dashboard/characters")}
+                icon={<LuCog size={20} />}
+              >
+                Manage Character
+              </Button>
+              <Button
+                onClick={() =>
+                  router.push("/dashboard/characters?createModal=true")
+                }
+                icon={<LuPlus size={20} />}
+              >
+                Create Character
+              </Button>
+            </>
+          )}
         </div>
-        {characters.mainCharacter && (
+        {/* {characters.mainCharacter && (
           <PinnedCharacter
             artist={"Unknown artist"}
             colors={characters.mainCharacter.refSheets[0].colors}
@@ -94,7 +102,7 @@ export default function CharacterView({
                 : "/DefaultRefrenceSheet.png"
             }
           />
-        )}
+        )} */}
 
         <GridResponsive breakpoint={250} className="gap-1.5" role="listbox">
           {characters.characters.map((character, index) => (
@@ -109,7 +117,7 @@ export default function CharacterView({
                   : []
               }
               status="owned"
-              href={`/profile/${handle}/character/${character.name}`}
+              href={`/@${handle}/${character.name}`}
             />
           ))}
         </GridResponsive>
