@@ -15,7 +15,7 @@ export default function ProfilePage() {
     <>
 
       <div className="mx-auto grid max-w-screen-2xl grid-cols-2 gap-4 px-8 py-6">
-        {/* <div className="col-span-2">main editable content</div> */}
+        <div className="col-span-2">main editable content</div>
         <div className="flex flex-col gap-y-3">
           <Group title="Dynamic content"></Group>
         </div>

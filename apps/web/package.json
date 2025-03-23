@@ -15,7 +15,7 @@
     "@next/mdx": "15.2.1",
     "autoprefixer": "^10.4.19",
     "class-variance-authority": "^0.7.0",
-    "dompurify": "^3.1.4",
+    "isomorphic-dompurify": "2.22.0",
     "framer-motion": "^11.2.4",
     "gsap": "^3.12.5",
     "isomorphic-dompurify": "^2.10.0",
