@@ -2,7 +2,6 @@ import AppLayout from "@/components/layouts/AppLayout/AppLayout"
 import { ProfileMasthead } from "@/components/layouts/Mastheads"
 import { DefineRouteParams } from "@/types"
 import { fetchUser, fetchUserData } from "@/utils/api"
-import { usePathname } from "next/navigation"
 
 type AsyncProps = DefineRouteParams<{ handle: string }>
 

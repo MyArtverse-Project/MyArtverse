@@ -1,8 +1,10 @@
 import { getPanels } from "@/utils/api"
 import OverviewContent from "./OverviewContent"
-import { DashboardPanel } from "@/types/users"
+import { DefineRouteParams } from "@/types"
 
-export default async function ProfilePage({ params }: { params: { handle: string } }) {
+type AsyncProps = DefineRouteParams<{ handle: string }>
+
+export default async function ProfilePage({ params }: AsyncProps) {
   const { handle } = await params
   const panels = await getPanels(handle)
   return (

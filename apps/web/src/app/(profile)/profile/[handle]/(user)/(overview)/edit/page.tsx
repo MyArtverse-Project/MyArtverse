@@ -5,11 +5,13 @@ import EditHTMLModal from "@/components/Modals/EditHTML"
 import EditPanelModal from "@/components/Modals/EditPanel"
 import { getPanels } from "@/utils/api"
 import { Button } from "@mav/ui/components/buttons"
+import { DefineRouteParams } from "@/types"
 
 // TODO: Using `@ts-expect-error` here is a temporary workaround until we can
 type Position = { row: number; col: number }
+type AsyncProps = DefineRouteParams<{ handle: string }>
 
-export default function Page({ params }: { params: { handle: string } }) {
+export default function Page({ params }: AsyncProps) {
   const [editHTMLModal, setEditHTMLModal] = useState(false)
   const toggleEditHTMLModal = () => setEditHTMLModal(!editHTMLModal)
   const [position, setPosition] = useState<Position| null>(null)
