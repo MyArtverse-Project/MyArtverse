@@ -66,7 +66,10 @@ export default {
       },
       colors: {
         current: "currentColor",
-        ...iterateColorVars("--tw-bg-opacity", [...COLORS.GLOBAL, ...COLORS.OVERRIDE])
+        ...iterateColorVars("--tw-bg-opacity", [
+          ...COLORS.GLOBAL,
+          ...COLORS.OVERRIDE
+        ])
       },
       borderColor: {
         current: "currentColor",

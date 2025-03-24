@@ -15,7 +15,7 @@ import {
   LuHeart,
   LuHome,
   LuLock,
-  LuMoreVertical,
+  LuMoreVertical
 } from "react-icons/lu"
 import { Visibility } from "@/types/utils"
 
@@ -34,23 +34,23 @@ export function CharacterMasthead(props: Partial<ProfileMastheadProps>) {
     {
       icon: LuHome,
       text: "Overview",
-      link: "",
+      link: ""
     },
     {
       icon: LuGalleryThumbnails,
       text: "Gallery",
-      link: "gallery",
+      link: "gallery"
     },
     {
       icon: LuBook,
       text: "Biography",
-      link: "biography",
+      link: "biography"
     },
     {
       icon: LuClock,
       text: "Activity",
-      link: "activity",
-    },
+      link: "activity"
+    }
   ]
 
   return (
@@ -59,15 +59,14 @@ export function CharacterMasthead(props: Partial<ProfileMastheadProps>) {
         <Masthead.Avatar src={props.avatarUrl} />
         <Masthead.Details>
           <Masthead.Layer spaceBetween>
-            <div className="flex flex-row gap-x-4 items-center">
+            <div className="flex flex-row items-center gap-x-4">
               <span className="text-4xl">{props.characterName}</span>
               <span className="text-700">
-
-              {props.visibility === "private" && (
-                <div className="flex items-center gap-x-2 border border-1 border-400 px-6 py-1 rounded-full">
-                  <LuLock /> Visible for followers
-                </div>
-              )}
+                {props.visibility === "private" && (
+                  <div className="border-1 border-400 flex items-center gap-x-2 rounded-full border px-6 py-1">
+                    <LuLock /> Visible for followers
+                  </div>
+                )}
               </span>
             </div>
             <div className="flex gap-x-2">
@@ -99,7 +98,10 @@ export function CharacterMasthead(props: Partial<ProfileMastheadProps>) {
           </Masthead.Layer>
         </Masthead.Details>
       </Masthead.Wrapper>
-      <Masthead.Tabs baseURL={`/@${props.ownerHandle}/${props.characterName}/`} items={profileTabs} />
+      <Masthead.Tabs
+        baseURL={`/@${props.ownerHandle}/${props.characterName}/`}
+        items={profileTabs}
+      />
     </Masthead>
   )
 }

@@ -9,7 +9,7 @@ export type ReactHTMLElement<T extends keyof IntrinsicElements> = IntrinsicEleme
 /**
  * Since React 19, `forwardRef` has been deprecated and now natively passes `ref` from any element,
  * this type helps with this
- * 
+ *
  * @template R The native element its being passed
  * @template P Component props
  */

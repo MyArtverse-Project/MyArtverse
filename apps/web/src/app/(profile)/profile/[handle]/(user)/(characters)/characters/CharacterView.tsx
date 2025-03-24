@@ -16,7 +16,7 @@ export default function CharacterView({
   handle,
   characters,
   folders,
-  owner = false,
+  owner = false
 }: {
   handle: string
   characters: CharacterResponse
@@ -31,7 +31,7 @@ export default function CharacterView({
   const activeRefSheets = characters.mainCharacter?.refSheets
     .find((r) => r.active)
     ?.variants.find((v) => v.main)
-    
+
   const mainCharacter = characters.mainCharacter
 
   return (

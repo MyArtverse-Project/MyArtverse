@@ -7,7 +7,7 @@ const providers = [
   // TODO: Uncomment when X and TikTok is available
   // { icon: RiTwitterXFill, label: "X" },
   // { icon: FaTiktok, label: "TikTok" },
-  { icon: FaFacebook, label: "Facebook" },
+  { icon: FaFacebook, label: "Facebook" }
 ]
 
 export default function AuthThirdPartyProviders() {

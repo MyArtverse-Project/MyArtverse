@@ -14,14 +14,14 @@ import Note from "../layouts/Note"
 
 export default function EditHTMLModal({
   toggleEditHTMLModal,
-  editHTMLModalShown,
+  editHTMLModalShown
 }: {
   toggleEditHTMLModal: () => void
   editHTMLModalShown: boolean
 }) {
   const [errors, setErrors] = useState<string>()
   const [htmlContent, setHtmlContent] = useState<string>(
-    "<div>\n   <p>Write your HTML Here</p>\n</div>",
+    "<div>\n   <p>Write your HTML Here</p>\n</div>"
   )
 
   const submitHTML = async () => {
@@ -30,7 +30,7 @@ export default function EditHTMLModal({
       setErrors("Unable to save HTML")
       return
     }
-    
+
     setErrors(undefined)
     toggleEditHTMLModal()
   }

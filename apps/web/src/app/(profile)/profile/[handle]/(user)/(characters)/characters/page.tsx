@@ -14,7 +14,7 @@ export async function generateMetadata(): Promise<Metadata> {
 
   return {
     title: `${userPlaceholder}'s characters`,
-    description: `See ${userPlaceholder}'s characters and others on ${BRAND} by creating an account!`,
+    description: `See ${userPlaceholder}'s characters and others on ${BRAND} by creating an account!`
   }
 }
 

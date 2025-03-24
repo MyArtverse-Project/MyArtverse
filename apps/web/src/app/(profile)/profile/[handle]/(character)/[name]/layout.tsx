@@ -1,13 +1,12 @@
 import AppLayout from "@/components/layouts/AppLayout/AppLayout"
-import {  } from "@/components/layouts/Mastheads"
 import { CharacterMasthead } from "@/components/layouts/Mastheads/CharacterMasthead"
 import { DefineRouteParams } from "@/types"
 import { fetchCharacter, fetchUser, fetchUserData } from "@/utils/api"
 
-type AsyncProps = DefineRouteParams<{ handle: string, name: string }>
+type AsyncProps = DefineRouteParams<{ handle: string; name: string }>
 
 export default async function MainProfileLayout(
-  props: React.PropsWithChildren & AsyncProps,
+  props: React.PropsWithChildren & AsyncProps
 ) {
   const { handle, name } = await props.params
 

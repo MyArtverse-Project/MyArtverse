@@ -2,8 +2,8 @@
 
 import { cookies } from "next/headers"
 import { LoginFormSchema } from "@/app/lib/definition"
-import { removeSuffixes } from "@/utils/removeSuffix"
 import { BACKEND_URL } from "@/utils/constants"
+import { removeSuffixes } from "@/utils/removeSuffix"
 
 export async function loginAction(formData: FormData) {
   const processedData = removeSuffixes(formData)
@@ -11,7 +11,7 @@ export async function loginAction(formData: FormData) {
 
   const validatedFields = LoginFormSchema.safeParse({
     email,
-    password,
+    password
   })
 
   if (!validatedFields.success) {
@@ -20,8 +20,8 @@ export async function loginAction(formData: FormData) {
       message: {
         error: "Invalid fields",
         email: validatedFields.error.flatten().fieldErrors?.email,
-        password: validatedFields.error.flatten().fieldErrors?.password,
-      },
+        password: validatedFields.error.flatten().fieldErrors?.password
+      }
     }
   }
 
@@ -29,27 +29,26 @@ export async function loginAction(formData: FormData) {
     const res = await fetch(`${BACKEND_URL}/v1/auth/login`, {
       method: "POST",
       headers: {
-        "Content-Type": "application/json",
+        "Content-Type": "application/json"
       },
       credentials: "include",
-      body: JSON.stringify({ email, password }),
+      body: JSON.stringify({ email, password })
     })
 
     const data = await res.json()
 
     if (res.ok) {
-      (await cookies()).set("accessToken", data.accessToken, {
+      ;(await cookies()).set("accessToken", data.accessToken, {
         httpOnly: true,
         secure: process.env.NODE_ENV === "production",
         sameSite: "lax",
-        path: "/",
-      });
-
-      (await cookies()).set("refreshToken", data.refreshToken, {
+        path: "/"
+      })
+      ;(await cookies()).set("refreshToken", data.refreshToken, {
         httpOnly: true,
         secure: process.env.NODE_ENV === "production",
         sameSite: "lax",
-        path: "/",
+        path: "/"
       })
 
       return { success: true, message: data.message }
@@ -58,15 +57,15 @@ export async function loginAction(formData: FormData) {
     return {
       success: false,
       message: {
-        error: data.error || "Invalid email or password",
-      },
+        error: data.error || "Invalid email or password"
+      }
     }
   } catch (error) {
     return {
       success: false,
       message: {
-        error: "Something went wrong. Please try again later.",
-      },
+        error: "Something went wrong. Please try again later."
+      }
     }
   }
 }

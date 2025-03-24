@@ -4,7 +4,7 @@ import Avatar from "@/components/Avatar"
 import Separator from "@/components/Separator"
 import {
   generateCreateItems,
-  generateSiteSettingItems,
+  generateSiteSettingItems
 } from "@/utils/generateItems"
 import { Button } from "@mav/ui/components/buttons"
 import { LuBell, LuChevronDown, LuPlus } from "react-icons/lu"
@@ -19,7 +19,7 @@ const ICON = (
 
 export function ActionsLoggedIn({
   user,
-  isRegistered,
+  isRegistered
 }: {
   user: User | null
   isRegistered: boolean
@@ -28,7 +28,7 @@ export function ActionsLoggedIn({
   const createNewItems = generateCreateItems()
   const siteSettingsItems = generateSiteSettingItems(
     isRegistered,
-    user ? user.handle : null,
+    user ? user.handle : null
   )
 
   return (
@@ -54,7 +54,7 @@ export function ActionsLoggedIn({
                 <div className="my-2" key={index}>
                   <Separator dir="horizontal" />
                 </div>
-              ),
+              )
             )}
           </>
         }
@@ -77,10 +77,7 @@ export function ActionsLoggedIn({
         }
         items={
           <>
-            <DropdownItem
-              link={`/@${user.handle}`}
-              aria-label={user.handle}
-            >
+            <DropdownItem link={`/@${user.handle}`} aria-label={user.handle}>
               <div className="flex flex-row items-center space-x-5 pr-24">
                 <Avatar
                   username={user.handle}
@@ -89,7 +86,9 @@ export function ActionsLoggedIn({
                 />
                 <div className="flex flex-col">
                   {/* TODO: Display Badges */}
-                  <span className="text-xl font-bold">{user.displayName || user.handle} </span>
+                  <span className="text-xl font-bold">
+                    {user.displayName || user.handle}{" "}
+                  </span>
                   <span>@{user.handle}</span>
                 </div>
               </div>
@@ -105,7 +104,6 @@ export function ActionsLoggedIn({
                   prefixIcon={<item.icon size={22} />}
                   component={item.component}
                   special={item.special}
-
                 >
                   {item.name}
                 </DropdownItem>
@@ -113,7 +111,7 @@ export function ActionsLoggedIn({
                 <div className="my-2" key={index}>
                   <Separator dir="horizontal" />
                 </div>
-              ),
+              )
             )}
           </>
         }

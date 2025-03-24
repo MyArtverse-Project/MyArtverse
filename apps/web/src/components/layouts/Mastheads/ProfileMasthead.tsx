@@ -20,19 +20,19 @@ export function ProfileMasthead(props: Partial<ProfileMastheadProps>) {
     {
       icon: LuHome,
       text: "Overview",
-      link: "",
+      link: ""
     },
     {
       icon: LuCat,
       text: "Characters",
       link: "characters",
-      countIndicator: 5,
+      countIndicator: 5
     },
     {
       icon: LuHeart,
       text: "Favorites",
-      link: "favorites",
-    },
+      link: "favorites"
+    }
   ]
 
   return (
@@ -54,7 +54,7 @@ export function ProfileMasthead(props: Partial<ProfileMastheadProps>) {
             </Button>
           </Masthead.Layer>
           <Masthead.Layer>
-            <div className="gap-x-4 flex">
+            <div className="flex gap-x-4">
               <span className="text-lg">
                 {props.handle ? `@${props.handle}` : ""}
               </span>

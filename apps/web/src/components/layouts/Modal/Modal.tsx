@@ -1,9 +1,9 @@
 "use client"
 
+import { cn } from "@mav/shared/utils"
 import { motion } from "framer-motion"
 import type { MapElement } from "@/types/utils"
 import Overlay from "./Overlay"
-import { cn } from "@mav/shared/utils"
 
 export default function Modal({
   children,

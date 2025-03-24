@@ -6,7 +6,7 @@ import {
   Artwork,
   Character,
   CharacterResponse,
-  ReferenceSheet,
+  ReferenceSheet
 } from "@/types/characters"
 import { DashboardPanel, UserType } from "@/types/users"
 import { BACKEND_URL } from "./constants"
@@ -25,7 +25,7 @@ export const getCookies = async () => {
 export const apiWithAuth = async <Data>(
   method: APIMethods,
   route: string,
-  body: object = {},
+  body: object = {}
 ): Promise<Data> => {
   const makeRequest = async () => {
     const cookiesHeaders = (await getCookies()) as ReadonlyRequestCookies
@@ -37,11 +37,11 @@ export const apiWithAuth = async <Data>(
       method: method,
       headers: {
         "Content-Type": "application/json",
-        Cookie: `accessToken=${accessToken}; refreshToken=${refreshToken}`,
+        Cookie: `accessToken=${accessToken}; refreshToken=${refreshToken}`
       },
       body: method === "GET" ? undefined : JSON.stringify(body),
       cache: "no-cache",
-      credentials: "include",
+      credentials: "include"
     }).catch((err) => {
       throw new Error(`Unable to connect to the server: ${err}`)
     })
@@ -69,16 +69,16 @@ export const apiWithAuth = async <Data>(
 export const apiWithoutAuth = async <Data>(
   method: APIMethods,
   route: string,
-  body?: object,
+  body?: object
 ): Promise<Data> => {
   return fetch(`${endpoint}${route}`, {
     method: method,
     headers: {
-      "Content-Type": "application/json",
+      "Content-Type": "application/json"
     },
     body: JSON.stringify(body),
     cache: "no-cache",
-    credentials: "include",
+    credentials: "include"
   })
     .then((res) => {
       if (res.ok) return res.json()
@@ -100,11 +100,11 @@ export const refreshToken = async () => {
     method: "POST",
     headers: {
       "Content-Type": "application/json",
-      Cookie: `refreshToken=${refreshToken}`,
+      Cookie: `refreshToken=${refreshToken}`
     },
     body: JSON.stringify({}),
     credentials: "include",
-    cache: "no-cache",
+    cache: "no-cache"
   })
     .then((response) => {
       if (!response.ok) {
@@ -126,9 +126,9 @@ export const fetchUserData = async () => {
 export const getArtistOpenComissions = async () => {
   const comissions = await apiWithoutAuth<UserType[]>(
     "GET",
-    "/v1/profile/artists/open",
+    "/v1/profile/artists/open"
   )
-  
+
   return comissions
 }
 
@@ -140,7 +140,7 @@ export const fetchUser = async (handle: string) => {
 export const fetchUserCharacters = async (handle: string) => {
   const data = await apiWithoutAuth<CharacterResponse>(
     "GET",
-    `/v1/character/${handle}`,
+    `/v1/character/${handle}`
   )
 
   return data
@@ -154,7 +154,7 @@ export const fetchSelfCharacters = async () => {
 export const fetchSelfCharacter = async (characterName: string) => {
   const character = await apiWithAuth<Character>(
     "GET",
-    `/v1/character/me/${characterName}`,
+    `/v1/character/me/${characterName}`
   )
 
   return character
@@ -163,7 +163,7 @@ export const fetchSelfCharacter = async (characterName: string) => {
 export const fetchCharacter = async (handle: string, characterName: string) => {
   const character = await apiWithoutAuth<Character>(
     "GET",
-    `/v1/character/name/${handle}/${characterName}`,
+    `/v1/character/name/${handle}/${characterName}`
   )
 
   return character
@@ -172,7 +172,7 @@ export const fetchCharacter = async (handle: string, characterName: string) => {
 export const fetchArtistRequests = async () => {
   const requests = await apiWithAuth<UserType[]>(
     "GET",
-    "/v1/staff/artist-requests",
+    "/v1/staff/artist-requests"
   )
 
   return requests
@@ -181,7 +181,7 @@ export const fetchArtistRequests = async () => {
 export const getArtworks = async (profile: string, character: string) => {
   const artworks = await apiWithoutAuth<Artwork[]>(
     "GET",
-    `/v1/art/characters/${profile}/${character}`,
+    `/v1/art/characters/${profile}/${character}`
   )
 
   return artworks
@@ -190,7 +190,7 @@ export const getArtworks = async (profile: string, character: string) => {
 export const getFeatured = async () => {
   const characters = await apiWithoutAuth<Character[]>(
     "GET",
-    "/v1/character/featured",
+    "/v1/character/featured"
   )
 
   return characters
@@ -199,7 +199,7 @@ export const getFeatured = async () => {
 export const getNewCharacters = async () => {
   const characters = await apiWithoutAuth<Character[]>(
     "GET",
-    "/v1/character/new",
+    "/v1/character/new"
   )
 
   return characters
@@ -208,7 +208,7 @@ export const getNewCharacters = async () => {
 export const getFavorites = async (handle: string) => {
   const characters = await apiWithoutAuth<Character[]>(
     "GET",
-    `/v1/profile/favorites/${handle}`,
+    `/v1/profile/favorites/${handle}`
   )
 
   return characters
@@ -227,7 +227,7 @@ export const setRefAsMain = async (refId: string) => {
 export const getRefSheets = async (handle: string) => {
   const refSheets = await apiWithoutAuth<ReferenceSheet[]>(
     "GET",
-    `/v1/character/${handle}/refSheets`,
+    `/v1/character/${handle}/refSheets`
   )
 
   return refSheets
@@ -269,5 +269,8 @@ export const setHTMLPanel = async (body: { html: string }) => {
 }
 
 export const getPanels = async (handle: string) => {
-  return apiWithoutAuth<DashboardPanel[]>("GET", `/v1/dashboard/panels/${handle}`)
+  return apiWithoutAuth<DashboardPanel[]>(
+    "GET",
+    `/v1/dashboard/panels/${handle}`
+  )
 }

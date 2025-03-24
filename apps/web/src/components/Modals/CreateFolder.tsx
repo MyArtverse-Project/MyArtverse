@@ -13,7 +13,7 @@ export default function CreateFolderModal({
   setSelectedIndex,
   parentId = null,
   category,
-  colors,
+  colors
 }: {
   createFolderModal: boolean
   toggleCreateFolderModal: () => void
@@ -24,27 +24,24 @@ export default function CreateFolderModal({
   category: "artworks" | "characters"
 }) {
   const [folderName, setFolderName] = React.useState<string>("")
-  const [color, setColor] = React.useState<string>("");
+  const [color, setColor] = React.useState<string>("")
   const onSubmit = async () => {
     if (!folderName) {
       return alert("Please enter a folder name")
     }
 
-
     const data = await createFolder({
       name: folderName,
       contentType: category,
       parentId,
-      color: color,
+      color: color
     })
-
-    
 
     if (data) {
       toggleCreateFolderModal()
       alert("Folder created")
       // TODO: Update the folder list
-      window.location.reload();
+      window.location.reload()
     }
 
     alert("Folder successfully failed")
@@ -72,7 +69,11 @@ export default function CreateFolderModal({
         </div>
       </Modal.Title>
       <Modal.Body>
-        <InputField inputName="Folder name" onChange={(e) => setFolderName(e.target.value)} value={folderName} />
+        <InputField
+          inputName="Folder name"
+          onChange={(e) => setFolderName(e.target.value)}
+          value={folderName}
+        />
         <div className="flex flex-col gap-y-1">
           {/* TODO export as a <SelectField /> component */}
           <span className="text-600 font-bold uppercase">Color</span>
@@ -82,7 +83,7 @@ export default function CreateFolderModal({
                 key={i}
                 className={cn(
                   "grid h-10 w-10 place-items-center rounded-full",
-                  color,
+                  color
                 )}
                 onClick={() => setSelectedIndex(i)}
               >

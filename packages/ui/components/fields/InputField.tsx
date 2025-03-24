@@ -73,10 +73,10 @@ export function InputField({
     const focusFalse = () => setIsFocused(false)
 
     inputBox.addEventListener("focus", focusTrue, {
-      signal: controller.signal,
+      signal: controller.signal
     })
     inputBox.addEventListener("blur", focusFalse, {
-      signal: controller.signal,
+      signal: controller.signal
     })
 
     return () => {
@@ -100,7 +100,7 @@ export function InputField({
         <div
           className={cn(
             "flex overflow-hidden rounded-md !border transition-colors",
-            !isFocused ? "border-400" : "border-500 bg-200",
+            !isFocused ? "border-400" : "border-500 bg-200"
           )}
         >
           {prefix && <InputPrefixLabel label={prefix} />}
@@ -109,7 +109,7 @@ export function InputField({
             aria-labelledby={inputName ? uniqueId : undefined}
             className={cn(
               "text-700 w-full border-0 bg-transparent px-3.5 py-2 text-sm focus:ring-0",
-              error ? "border-alert" : null,
+              error ? "border-alert" : null
             )}
             id={uniqueId}
             name={uniqueId ?? undefined}

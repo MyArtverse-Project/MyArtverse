@@ -1,6 +1,5 @@
 import Image from "next/image"
 import { useValidateChildrenComponents } from "../../hooks"
-import React from "react"
 
 /* eslint-disable @typescript-eslint/no-explicit-any */
 interface CommentBaseProps {
@@ -12,7 +11,7 @@ interface CommentBaseProps {
 /** @internal This is a shared component */
 export function CommentBase(props: React.PropsWithChildren<CommentBaseProps>) {
   const validImgTags = useValidateChildrenComponents(props.children, [
-    'img',
+    "img",
     "Image"
   ])
 
@@ -26,7 +25,7 @@ export function CommentBase(props: React.PropsWithChildren<CommentBaseProps>) {
           {React.cloneElement(props.imgTag as React.ReactElement<any>, {
             src: props.avatar,
             alt: "Avatar",
-            className: "h-10 w-10 rounded-full",
+            className: "h-10 w-10 rounded-full"
           })}
         </span>
       )}

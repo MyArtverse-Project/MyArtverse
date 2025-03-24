@@ -17,7 +17,7 @@ import Note from "../layouts/Note"
 export default function EditPanelModal({
   toggleEditPanel,
   editPanelModalShown,
-  position,
+  position
 }: {
   toggleEditPanel: (position: { row: number; col: number } | null) => void
   editPanelModalShown: boolean
@@ -30,14 +30,14 @@ export default function EditPanelModal({
       label: "Comments",
       description: "Add comments to your panel",
       value: "comments",
-      icon: <FaComment size={18} />,
+      icon: <FaComment size={18} />
     },
     {
       label: "Information",
       description: `Add information to your panel. Information including when you joined ${BRAND}, your birthday, nationality, and more.`,
       value: "information",
-      icon: <FaInfoCircle size={18} />,
-    },
+      icon: <FaInfoCircle size={18} />
+    }
   ]
 
   const updatePanel = async () => {

@@ -1,9 +1,17 @@
-import type { IconType } from "react-icons"
-import { LuAlertTriangle, LuCheckCircle2, LuInfo, LuXCircle } from "react-icons/lu"
-import type { Variants as NoteVariants, PartialRecord } from "@/types/utils"
 import { cn } from "@mav/shared/utils"
+import type { IconType } from "react-icons"
+import {
+  LuAlertTriangle,
+  LuCheckCircle2,
+  LuInfo,
+  LuXCircle
+} from "react-icons/lu"
+import type { Variants as NoteVariants, PartialRecord } from "@/types/utils"
 
-type NoteStatus = Extract<NoteVariants, "success" | "warning" | "error" | "info">
+type NoteStatus = Extract<
+  NoteVariants,
+  "success" | "warning" | "error" | "info"
+>
 
 export default function Note({
   children,

@@ -67,7 +67,7 @@ export function Textarea({
           aria-labelledby={inputName ? uniqueId : undefined}
           className={cn(
             "text-700 border-500 bg-100 w-full rounded-md px-3.5 py-2 text-sm",
-            className,
+            className
           )}
           id={uniqueId}
           name={uniqueId}

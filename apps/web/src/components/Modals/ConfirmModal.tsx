@@ -1,12 +1,12 @@
 "use client"
 
-import { BACKEND_URL } from "@/utils/constants"
 import { redirect } from "next/navigation"
 import { useState } from "react"
+import { BACKEND_URL } from "@/utils/constants"
+import { Button } from "@mav/ui/components/buttons"
 import { FaTrash } from "react-icons/fa6"
 import { LuXCircle } from "react-icons/lu"
 import Modal from "../layouts/Modal"
-import { Button } from "@mav/ui/components/buttons"
 import Note from "../layouts/Note"
 
 export default function DeleteConfirmModal({
@@ -20,10 +20,13 @@ export default function DeleteConfirmModal({
 }) {
   const [errors, setErrors] = useState<string>()
   const deleteCharacter = async () => {
-    const data = await fetch(`${BACKEND_URL}/v1/character/delete/${characterId}`, {
-      method: "DELETE",
-      credentials: "include"
-    })
+    const data = await fetch(
+      `${BACKEND_URL}/v1/character/delete/${characterId}`,
+      {
+        method: "DELETE",
+        credentials: "include"
+      }
+    )
 
     if (data.ok) {
       toggleDeleteConfirmModal()
@@ -59,10 +62,16 @@ export default function DeleteConfirmModal({
         </div>
       )}
       <div className="flex flex-col gap-y-1 px-4 pb-3">
-        <p>Are you sure you want to delete this character? (This is irreversable)</p>
+        <p>
+          Are you sure you want to delete this character? (This is irreversable)
+        </p>
       </div>
       <div className="flex flex-row items-center justify-end p-4">
-        <Button variant="alert" className="x-4 float-right" onClick={deleteCharacter}>
+        <Button
+          variant="alert"
+          className="x-4 float-right"
+          onClick={deleteCharacter}
+        >
           Delete
         </Button>
       </div>

@@ -7,7 +7,7 @@ interface IconProps {
 export function MyArtverseIcon({
   logoOnly = false,
   wordmarkOnly = false,
-  size = 0.675,
+  size = 0.675
 }: IconProps) {
   const WIDTH = 210 * size
   const HEIGHT = 44 * size

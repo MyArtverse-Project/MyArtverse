@@ -7,7 +7,7 @@ interface MastheadDetailsProps {
 }
 
 export function MastheadDetails(
-  props: React.PropsWithChildren<MastheadDetailsProps>,
+  props: React.PropsWithChildren<MastheadDetailsProps>
 ) {
   const detailWrapperRef = useRef<React.ElementRef<"div">>(null)
 
@@ -18,7 +18,7 @@ export function MastheadDetails(
       ([entry]) => {
         console.log(entry.isIntersecting)
       },
-      { rootMargin: "-7% 0%" },
+      { rootMargin: "-7% 0%" }
     )
 
     io.observe(profileDetails)

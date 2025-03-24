@@ -1,6 +1,6 @@
-import { Badge } from "@mav/ui/components/badges";
-import { Button } from "@mav/ui/components/buttons";
-import Image from "next/image";
+import Image from "next/image"
+import { Badge } from "@mav/ui/components/badges"
+import { Button } from "@mav/ui/components/buttons"
 import type { IconType } from "react-icons"
 import { LuMoreVertical as MoreIcon, LuStar as StarIcon } from "react-icons/lu"
 
@@ -30,7 +30,12 @@ export default function Listing({
   return (
     <div className="overflow-hidden rounded-md">
       <div className="mb-3">
-        <Image src={img} alt="" objectFit="cover" className="h-64 w-full object-cover rounded-md" />
+        <Image
+          src={img}
+          alt=""
+          objectFit="cover"
+          className="h-64 w-full rounded-md object-cover"
+        />
       </div>
       {/* Commission info */}
       <div className="flex flex-col gap-y-1.5">
@@ -50,9 +55,9 @@ export default function Listing({
         </div>
         <div className="px-0.5 pt-1">
           <p>
-            Lorem, ipsum dolor sit amet consectetur adipisicing elit. Officia alias, vel
-            debitis voluptates numquam dolores commodi? Corporis alias perspiciatis autem
-            quidem!
+            Lorem, ipsum dolor sit amet consectetur adipisicing elit. Officia
+            alias, vel debitis voluptates numquam dolores commodi? Corporis
+            alias perspiciatis autem quidem!
           </p>
           <div className="mt-2 inline-block cursor-pointer text-blue-600 hover:underline">
             See more

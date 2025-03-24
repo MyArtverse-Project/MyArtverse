@@ -1,7 +1,7 @@
 "use client"
 
-import { cn } from "@mav/shared/utils"
 import { useState } from "react"
+import { cn } from "@mav/shared/utils"
 
 export default function ColorPalette({
   palette,

@@ -17,10 +17,17 @@ export default function Sidebar() {
         initial={{ width: 300 }}
         animate={{ width: isSidebarExpanded ? 300 : 80 }}
       >
-        <div data-mav-list-renderer="" className="flex h-full flex-col px-2 py-1.5">
+        <div
+          data-mav-list-renderer=""
+          className="flex h-full flex-col px-2 py-1.5"
+        >
           <div className="flex-1">lol</div>
           <div>
-            <Button href="/#" variant="tritery" prefix={<LuSettings size={20} />}>
+            <Button
+              href="/#"
+              variant="tritery"
+              prefix={<LuSettings size={20} />}
+            >
               Settings
             </Button>
           </div>

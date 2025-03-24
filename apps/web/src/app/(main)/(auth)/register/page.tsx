@@ -4,11 +4,11 @@ import Image from "next/image"
 import Link from "next/link"
 import { useRouter } from "next/navigation"
 import React, { useEffect, useState } from "react"
+import { registerAction } from "@/app/actions/register"
 import { useAuth } from "@/app/context/AuthContext"
 import ThirdPartyButtons from "@/components/layouts/Auth/ThirdPartyButtons"
 import { Button } from "@mav/ui/components/buttons"
 import { Form, type FormState, InputField } from "@mav/ui/components/fields"
-import { registerAction } from "@/app/actions/register"
 
 export default function Page() {
   const router = useRouter()
@@ -31,8 +31,8 @@ export default function Page() {
           email: res.message.email ?? [],
           password: res.message.password ?? [],
           username: res.message.username ?? [],
-          confirm: res.message.confirm ?? [],
-        },
+          confirm: res.message.confirm ?? []
+        }
       })
     }
   }

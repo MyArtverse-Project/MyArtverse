@@ -16,15 +16,15 @@ type MakePropsOptional<P> = React.FC<Partial<P>>
  * @internal Used for the main `<Masthead>` namespaced component
  */
 export function MastheadRoot(
-  props: React.PropsWithChildren<MastheadRootProps>,
+  props: React.PropsWithChildren<MastheadRootProps>
 ) {
-    // TODO: Using `@ts-expect-error` here is a temporary workaround until we can
+  // TODO: Using `@ts-expect-error` here is a temporary workaround until we can
 
   const validMastheadChildrens = useValidateChildrenComponents(props.children, [
     MastheadBanner,
     MastheadTabs as MakePropsOptional<typeof MastheadTabs>,
     MastheadWrapper,
-    MastheadAvatar,
+    MastheadAvatar
   ])
 
   return (

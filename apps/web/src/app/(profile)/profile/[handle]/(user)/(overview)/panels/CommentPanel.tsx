@@ -10,7 +10,7 @@ export default function CommentPanel() {
     <Group title="Comments" potentialActions={<Button>Filter</Button>}>
       <div className="my-5">
         <UserCommentInput
-          imgTag={<img  />}
+          imgTag={<img />}
           avatar="/img/examples/kuro/kuro-example4.png"
         />
       </div>

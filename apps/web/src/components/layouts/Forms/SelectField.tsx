@@ -1,4 +1,4 @@
-import { cn } from "@mav/shared/utils";
+import { cn } from "@mav/shared/utils"
 
 export default function SelectField({
   inputName,
@@ -18,7 +18,9 @@ export default function SelectField({
   return (
     <div className={cn("flex w-full flex-col gap-y-1.5", className)}>
       {noLabel ? null : (
-        <label className="text-600 gap-x-0.5 font-bold uppercase">{inputName}</label>
+        <label className="text-600 gap-x-0.5 font-bold uppercase">
+          {inputName}
+        </label>
       )}
       <select
         className="text-700 border-400 bg-100 rounded-md border px-4 py-2"

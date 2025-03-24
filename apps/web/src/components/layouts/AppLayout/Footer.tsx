@@ -18,8 +18,8 @@ const footerLinks = [
       { text: "Developers", link: "/features/developers" },
       { text: "Beta Testing", link: "/features/beta" },
       { text: "MyArtverse+", link: "/pricing" },
-      { text: "Playground", link: "/playground" },
-    ],
+      { text: "Playground", link: "/playground" }
+    ]
   },
   {
     heading: "Company",
@@ -29,8 +29,8 @@ const footerLinks = [
       { text: "Contact Us", link: "/contact" },
       { text: "Changelog", link: "/changelog" },
       { text: "Open Source", link: "/opensource" },
-      { text: "Branding", link: "/design" },
-    ],
+      { text: "Branding", link: "/design" }
+    ]
   },
   {
     heading: "Policies",
@@ -39,14 +39,14 @@ const footerLinks = [
       { text: "Use of AI", link: "/legal/ai" },
       { text: "Acknowledgements", link: "/legal/acknowledgements" },
       { text: "Privacy Policy", link: "/legal/privacy" },
-      { text: "Terms of Service", link: "/legal/tos" },
-    ],
-  },
+      { text: "Terms of Service", link: "/legal/tos" }
+    ]
+  }
 ]
 
 // TODO: Pass the operation status as a prop to the Footer component
 export function Footer({
-  operationStatus = "Operational",
+  operationStatus = "Operational"
 }: {
   operationStatus?: "Operational" | "Maintenance" | "Outage"
 }) {
@@ -73,7 +73,7 @@ export function Footer({
                     ? "text-success"
                     : operationStatus == "Maintenance"
                       ? "text-warning"
-                      : "text-alert",
+                      : "text-alert"
                 )}
               >
                 <FaCircle />

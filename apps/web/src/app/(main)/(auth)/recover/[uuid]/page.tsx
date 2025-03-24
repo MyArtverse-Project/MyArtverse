@@ -1,8 +1,12 @@
 import Image from "next/image"
-import RecoverForm from "./RecoverForm"
 import { LuLock } from "react-icons/lu"
+import RecoverForm from "./RecoverForm"
 
-export default async function Page({ params }: { params: Promise<{ uuid: string }> }) {
+export default async function Page({
+  params
+}: {
+  params: Promise<{ uuid: string }>
+}) {
   const { uuid } = await params
   return (
     <div className="bg-100 relative flex min-h-screen w-full items-start justify-center px-6 pt-36">

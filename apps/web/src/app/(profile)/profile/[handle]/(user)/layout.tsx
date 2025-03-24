@@ -6,7 +6,7 @@ import { fetchUser, fetchUserData } from "@/utils/api"
 type AsyncProps = DefineRouteParams<{ handle: string }>
 
 export default async function MainProfileLayout(
-  props: React.PropsWithChildren & AsyncProps,
+  props: React.PropsWithChildren & AsyncProps
 ) {
   const { handle } = await props.params
 

@@ -1,6 +1,6 @@
-import { FursonaCard } from "@/components/layouts/Cards";
-import GridResponsive from "@/components/layouts/Layouts/GridResponsive";
-import MarginClamp from "@/components/layouts/Layouts/MarginClamp";
+import { FursonaCard } from "@/components/layouts/Cards"
+import GridResponsive from "@/components/layouts/Layouts/GridResponsive"
+import MarginClamp from "@/components/layouts/Layouts/MarginClamp"
 
 export default function Loading() {
   return (

@@ -5,7 +5,7 @@ import { cn } from "@mav/shared/utils"
 import { LuHeart as Heart } from "react-icons/lu"
 import type {
   FursonaStatus as AdoptionStatus,
-  ColorPalette as Palette,
+  ColorPalette as Palette
 } from "@/types/characters"
 import type { MapElement } from "@/types/utils"
 import ColorPalette from "./ColorPalette"
@@ -41,7 +41,7 @@ export default function FursonaCard({
       aria-label={`Character item: ${name}, ${species}`}
       className={cn(
         "hover:bg-mute flex flex-col gap-y-2 rounded-md p-4 transition-all",
-        href ? "cursor-pointer" : "",
+        href ? "cursor-pointer" : ""
       )}
       {...attributes}
     >
@@ -50,7 +50,7 @@ export default function FursonaCard({
         <Image
           src={img}
           alt={`Avatar of ${name}`}
-          className="absolute inset-0 h-full w-full transition-transform duration-300 object-cover ease-in-out hover:scale-105"
+          className="absolute inset-0 h-full w-full object-cover transition-transform duration-300 ease-in-out hover:scale-105"
           width={640}
           height={640}
         />
@@ -66,7 +66,7 @@ export default function FursonaCard({
                 "#008000",
                 "#0000FF",
                 "#4B0082",
-                "#EE82EE",
+                "#EE82EE"
               ]
             : []
         }

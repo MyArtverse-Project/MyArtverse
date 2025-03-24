@@ -2,8 +2,8 @@
 
 import { cookies } from "next/headers"
 import { LoginFormSchema, RegisterFormSchema } from "@/app/lib/definition"
-import { removeSuffixes } from "@/utils/removeSuffix"
 import { BACKEND_URL } from "@/utils/constants"
+import { removeSuffixes } from "@/utils/removeSuffix"
 
 export async function registerAction(formData: FormData) {
   const processedData = removeSuffixes(formData)
@@ -24,8 +24,8 @@ export async function registerAction(formData: FormData) {
         email: validatedFields.error.flatten().fieldErrors?.email,
         password: validatedFields.error.flatten().fieldErrors?.password,
         username: validatedFields.error.flatten().fieldErrors?.username,
-        confirm: validatedFields.error.flatten().fieldErrors?.confirm,
-      },
+        confirm: validatedFields.error.flatten().fieldErrors?.confirm
+      }
     }
   }
 
@@ -36,8 +36,8 @@ export async function registerAction(formData: FormData) {
         username: null,
         email: null,
         error: "Passwords do not match",
-        confirm: ["Passwords do not match"],
-      },
+        confirm: ["Passwords do not match"]
+      }
     }
   }
 
@@ -45,9 +45,9 @@ export async function registerAction(formData: FormData) {
     const res = await fetch(`${BACKEND_URL}/v1/auth/register`, {
       method: "POST",
       headers: {
-        "Content-Type": "application/json",
+        "Content-Type": "application/json"
       },
-      body: JSON.stringify({ email, password, username }),
+      body: JSON.stringify({ email, password, username })
     })
 
     const data = await res.json()
@@ -56,8 +56,8 @@ export async function registerAction(formData: FormData) {
         success: false,
         message: {
           email: data.email || null,
-          username: data.username || null,
-        },
+          username: data.username || null
+        }
       }
     }
 
@@ -68,15 +68,15 @@ export async function registerAction(formData: FormData) {
     return {
       success: false,
       message: {
-        error: "Something went wrong. Please try again later.",
-      },
+        error: "Something went wrong. Please try again later."
+      }
     }
   } catch (error) {
     return {
       success: false,
       message: {
-        error: "Something went wrong in our end! Please try again later.",
-      },
+        error: "Something went wrong in our end! Please try again later."
+      }
     }
   }
 }

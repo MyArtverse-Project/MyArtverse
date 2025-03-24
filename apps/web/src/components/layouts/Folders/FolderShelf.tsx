@@ -1,14 +1,14 @@
 "use client"
 
 import { useEffect, useRef, useState } from "react"
+import Separator from "@/components/Separator"
+import { Button } from "@mav/ui/components/buttons"
 import {
   LuPanelLeftClose as PanelLeftClose,
   LuPanelLeftOpen as PanelLeftOpen
 } from "react-icons/lu"
-import { useFolderViewContext } from "./FolderView"
-import Separator from "@/components/Separator"
 import FolderItem from "./FolderItem"
-import { Button } from "@mav/ui/components/buttons"
+import { useFolderViewContext } from "./FolderView"
 
 export default function FolderShelf({
   children,
@@ -72,7 +72,9 @@ export default function FolderShelf({
   }
 
   const PanelIconDynamic = expandThreshold ? PanelLeftClose : PanelLeftOpen
-  const panelStateAria = !expandThreshold ? "Expand folder menu" : "Collapse folder menu"
+  const panelStateAria = !expandThreshold
+    ? "Expand folder menu"
+    : "Collapse folder menu"
 
   return (
     <div

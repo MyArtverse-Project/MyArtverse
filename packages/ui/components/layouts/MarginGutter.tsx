@@ -6,11 +6,11 @@ interface MarginGutterProps {
 }
 
 export function MarginGutter(
-  props: React.PropsWithChildren<MarginGutterProps>,
+  props: React.PropsWithChildren<MarginGutterProps>
 ) {
   const screenSizes: Record<MarginGutterProps["screenSize"], string> = {
     lg: "max-w-screen-lg",
-    xl: "max-w-screen-xl",
+    xl: "max-w-screen-xl"
   }
 
   return (

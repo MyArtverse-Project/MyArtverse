@@ -14,7 +14,7 @@ export default function DropZone({
   setData,
   className = "",
   value = "",
-  aspectRatio = "1",
+  aspectRatio = "1"
 }: {
   setData: (url: string) => void
   className?: string
@@ -82,12 +82,12 @@ export default function DropZone({
       const res = await fetch(`${BACKEND_URL}/v1/profile/upload`, {
         method: "POST",
         body: formData,
-        credentials: "include",
+        credentials: "include"
       })
 
       if (!res.ok)
         throw new Error(
-          res.status === 401 ? "Are you logged in?" : "Upload failed",
+          res.status === 401 ? "Are you logged in?" : "Upload failed"
         )
 
       const data = await res.json()
@@ -106,7 +106,7 @@ export default function DropZone({
       className={cn(
         "rounded-md border-2 border-dashed p-10 text-center transition-colors",
         isDragging ? "bg-gray-300" : "bg-gray-100",
-        className,
+        className
       )}
       onDragEnter={handleDrag}
       onDragOver={handleDrag}

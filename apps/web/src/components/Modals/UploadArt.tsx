@@ -60,7 +60,11 @@ export default function UploadArtModal({
   }
 
   return (
-    <Modal className="w-3/5 px-4" toggler={toggleUploadArtModal} state={uploadArtModal}>
+    <Modal
+      className="w-3/5 px-4"
+      toggler={toggleUploadArtModal}
+      state={uploadArtModal}
+    >
       <Modal.Title>
         <div className="flex w-full items-center justify-between">
           <span className="font-inter flex items-center gap-x-2 text-xl font-bold">

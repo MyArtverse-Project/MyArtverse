@@ -1,11 +1,11 @@
 import { Metadata, ResolvingMetadata } from "next"
 import { Suspense } from "react"
-import { BRAND } from "@mav/shared"
-import Loading from "./loading"
 import { FursonaCard } from "@/components/layouts/Cards"
 import GridResponsive from "@/components/layouts/Layouts/GridResponsive"
 import MarginClamp from "@/components/layouts/Layouts/MarginClamp"
 import { getFavorites } from "@/utils/api"
+import { BRAND } from "@mav/shared"
+import Loading from "./loading"
 
 export async function generateMetadata(): Promise<Metadata> {
   // TODO add a simple check if their name ends with an "s"; for example "Dennis"
@@ -14,12 +14,12 @@ export async function generateMetadata(): Promise<Metadata> {
 
   return {
     title: `${userPlaceholder}'s characters`,
-    description: `See ${userPlaceholder}'s characters and others on ${BRAND} by creating an account!`,
+    description: `See ${userPlaceholder}'s characters and others on ${BRAND} by creating an account!`
   }
 }
 
 export default async function Page({
-  params,
+  params
 }: {
   params: Promise<{ handle: string }>
 }) {

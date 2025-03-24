@@ -11,18 +11,18 @@ import {
   LuMessageSquarePlus,
   LuPalette,
   LuSettings,
-  LuSparkle,
+  LuSparkle
 } from "react-icons/lu"
 
 export const fmDuration = {
-  duration: 0.2,
+  duration: 0.2
 }
 
 export const SidebarItems = (user: User | null) => {
   const SIDEBAR_ITEMS_SIGNED_OUT = [
     {
       heading: "",
-      items: [{ name: "Home", icon: <LuHome size={20} />, href: "/" }],
+      items: [{ name: "Home", icon: <LuHome size={20} />, href: "/" }]
     },
     {
       heading: "Explore",
@@ -30,16 +30,16 @@ export const SidebarItems = (user: User | null) => {
         {
           name: "Available Adoptables",
           icon: <LuSparkle size={20} />,
-          href: "/adoptables",
+          href: "/adoptables"
         },
         {
           name: "Open for Commissions",
           icon: <LuBrush size={20} />,
-          href: "/commissions",
-        },
+          href: "/commissions"
+        }
         // TODO: 3D Models Coming Soon
         // { name: "3D Models", icon: BoxIcon, href: "/3d-models" }
-      ],
+      ]
     },
     {
       heading: "",
@@ -49,21 +49,21 @@ export const SidebarItems = (user: User | null) => {
         {
           name: "Send feedback",
           icon: <LuMessageSquarePlus size={20} />,
-          href: "/feedback",
+          href: "/feedback"
         },
         {
           name: "Report Issue",
           icon: <LuAlertTriangle size={20} />,
-          href: "/report",
-        },
-      ],
-    },
+          href: "/report"
+        }
+      ]
+    }
   ]
 
   const SIDEBAR_ITEMS_SIGNED_IN = [
     {
       heading: "",
-      items: [{ name: "Home", icon: <LuHome size={20} />, href: "/" }],
+      items: [{ name: "Home", icon: <LuHome size={20} />, href: "/" }]
     },
     {
       heading: "Activity",
@@ -72,14 +72,14 @@ export const SidebarItems = (user: User | null) => {
         {
           name: "Your Comissions",
           icon: <LuPalette size={20} />,
-          href: `/activity/commissions`,
+          href: `/activity/commissions`
         },
         {
           name: "Your Adopts",
           icon: <LuSparkle size={20} />,
-          href: `/activity/adoptables`,
-        },
-      ],
+          href: `/activity/adoptables`
+        }
+      ]
     },
     {
       heading: "Your Characters",
@@ -91,9 +91,9 @@ export const SidebarItems = (user: User | null) => {
             ) : (
               <LuCat size={20} />
             ),
-            href: `/@${user.handle}/character/${character.name}`,
+            href: `/@${user.handle}/character/${character.name}`
           }))
-        : [],
+        : []
     },
     {
       heading: "Explore",
@@ -101,16 +101,16 @@ export const SidebarItems = (user: User | null) => {
         {
           name: "Available Adoptables",
           icon: <LuSparkle size={20} />,
-          href: "/adoptables",
+          href: "/adoptables"
         },
         {
           name: "Open for Commissions",
           icon: <LuBrush size={20} />,
-          href: "/commissions",
-        },
+          href: "/commissions"
+        }
         // TODO: 3D Models Coming Soon
         // { name: "3D Models", icon: BoxIcon, href: "/3d-models" }
-      ],
+      ]
     },
     {
       heading: "",
@@ -118,21 +118,21 @@ export const SidebarItems = (user: User | null) => {
         {
           name: "Settings",
           icon: <LuSettings size={20} />,
-          href: "/settings",
+          href: "/settings"
         },
         { name: "Help", icon: <LuHelpCircle size={20} />, href: "/help" },
         {
           name: "Send feedback",
           icon: <LuMessageSquarePlus size={20} />,
-          href: "/feedback",
+          href: "/feedback"
         },
         {
           name: "Report Issue",
           icon: <LuAlertTriangle size={20} />,
-          href: "/report",
-        },
-      ],
-    },
+          href: "/report"
+        }
+      ]
+    }
   ]
 
   return user ? SIDEBAR_ITEMS_SIGNED_IN : SIDEBAR_ITEMS_SIGNED_OUT

@@ -13,7 +13,9 @@ export default function RichTextField({
 }) {
   return (
     <div className="h-32 w-full space-y-2">
-      <span className="text-600 flex gap-x-0.5 font-bold uppercase">{inputName}</span>
+      <span className="text-600 flex gap-x-0.5 font-bold uppercase">
+        {inputName}
+      </span>
       <textarea
         onChange={onChange}
         id={inputName.toLowerCase()}

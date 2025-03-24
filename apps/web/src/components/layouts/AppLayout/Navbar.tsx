@@ -2,14 +2,14 @@
 
 import Link from "next/link"
 import { useState } from "react"
-import { useAuth, AuthProvider } from "@/app/context/AuthContext"
+import { AuthProvider, useAuth } from "@/app/context/AuthContext"
+import ThemeToggle from "@/components/ThemeToggle"
+import { Sidebar } from "@/components/layouts/AppLayout/Sidebar/Sidebar"
 import { Button } from "@mav/ui/components/buttons"
 import { MyArtverseIcon } from "@mav/ui/icons"
 import { LuMenu, LuSearch } from "react-icons/lu"
 import { ActionsLoggedIn } from "./ActionsLoggedIn"
 import { ActionsLoggedOut } from "./ActionsLoggedOut"
-import { Sidebar } from "@/components/layouts/AppLayout/Sidebar/Sidebar"
-import ThemeToggle from "@/components/ThemeToggle"
 
 export function Navbar() {
   const { user, isLoading } = useAuth()
@@ -42,7 +42,12 @@ export function Navbar() {
           >
             Search
           </Button>
-          {!isLoading && (user ? <ActionsLoggedIn user={user} isRegistered={true} /> : <ActionsLoggedOut />)}
+          {!isLoading &&
+            (user ? (
+              <ActionsLoggedIn user={user} isRegistered={true} />
+            ) : (
+              <ActionsLoggedOut />
+            ))}
         </div>
       </nav>
     </div>

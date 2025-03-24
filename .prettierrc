@@ -1,7 +1,11 @@
 {
   "semi": false,
   "endOfLine": "lf",
-  "plugins": ["@trivago/prettier-plugin-sort-imports", "prettier-plugin-tailwindcss"],
+  "trailingComma": "none",
+  "plugins": [
+    "@trivago/prettier-plugin-sort-imports",
+    "prettier-plugin-tailwindcss"
+  ],
   "importOrder": [
     ".scss$|.css$",
     "next|^next/(.*)",
