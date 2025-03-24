@@ -1,7 +1,7 @@
 import AppLayout from "@/components/layouts/AppLayout/AppLayout"
-import { CharacterMasthead } from "@/components/layouts/Mastheads/CharacterMasthead"
-import { DefineRouteParams } from "@/types"
-import { fetchCharacter, fetchUser, fetchUserData } from "@/utils/api"
+import { CharacterMasthead } from "@/components/layouts/Mastheads"
+import type { DefineRouteParams } from "@/types"
+import { fetchCharacter, fetchUserData } from "@/utils/api"
 
 type AsyncProps = DefineRouteParams<{ handle: string; name: string }>
 

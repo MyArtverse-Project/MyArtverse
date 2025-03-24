@@ -3,11 +3,11 @@
 import Image from "next/image"
 import { Button } from "@headlessui/react"
 import React from "react"
+import { postComment } from "@/utils/api"
 import { USER_DEFAULT_AVATAR } from "@/utils/constants"
 import { UserComment, UserCommentInput } from "@mav/ui/components/comments"
 import { Group } from "@mav/ui/components/layouts"
-import { Comments, UserType } from "@/types/users"
-import { postComment } from "@/utils/api"
+import type { Comments, UserType } from "@/types/users"
 
 export default function CommentPanel({
   comments,
@@ -24,25 +24,22 @@ export default function CommentPanel({
           avatar={user?.avatarUrl || USER_DEFAULT_AVATAR}
           postComment={postComment}
           commentType="user"
-          
           username={user.handle}
-          
         />
       </div>
       <div className="grid gap-y-4">
-
-      {comments.map((comment, index) => (
-        <UserComment
-          key={index}
-          imgTag={<img />}
-          avatar={comment.author.avatarUrl || USER_DEFAULT_AVATAR}
-          handle={comment.author.handle}
-          // isPinned={comment.isPinned} // TODO: Will implement on backend first
-          isOP={comment.author.id == user.id}
-        >
-          {comment.content}
-        </UserComment>
-      ))}
+        {comments.map((comment, index) => (
+          <UserComment
+            key={index}
+            imgTag={<img />}
+            avatar={comment.author.avatarUrl || USER_DEFAULT_AVATAR}
+            handle={comment.author.handle}
+            // isPinned={comment.isPinned} // TODO: Will implement on backend first
+            isOP={comment.author.id == user.id}
+          >
+            {comment.content}
+          </UserComment>
+        ))}
       </div>
     </Group>
   )

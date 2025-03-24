@@ -2,13 +2,13 @@
 
 import type { ReadonlyRequestCookies } from "next/dist/server/web/spec-extension/adapters/request-cookies"
 import { cookies } from "next/headers"
-import {
+import type {
   Artwork,
   Character,
   CharacterResponse,
   ReferenceSheet
 } from "@/types/characters"
-import { DashboardPanel, UserType } from "@/types/users"
+import type { DashboardPanel, UserType } from "@/types/users"
 import { BACKEND_URL } from "./constants"
 import { redirect } from "next/navigation"
 
@@ -283,13 +283,13 @@ export const postComment = async (
   characterName: string | null,
   content: string
 ) => {
-    const route = `/v1/${commentType}/${artworkId ? artworkId : username}${characterName ? `/${characterName}` : ""}/comment`;
-    const data = await apiWithAuth("POST", route, { content });
-    if (!data) {
-      throw new Error("Unable to post comment");
-    }
-    
-    return redirect(`/profile/${username}/${commentType === "art" ? "artworks" : "characters"}/${characterName ? characterName : ""}`);
+  const route = `/v1/${commentType}/${artworkId ? artworkId : username}${characterName ? `/${characterName}` : ""}/comment`;
+  const data = await apiWithAuth("POST", route, { content });
+  if (!data) {
+    throw new Error("Unable to post comment");
+  }
+
+  return redirect(`/profile/${username}/${commentType === "art" ? "artworks" : "characters"}/${characterName ? characterName : ""}`);
 
 };
 

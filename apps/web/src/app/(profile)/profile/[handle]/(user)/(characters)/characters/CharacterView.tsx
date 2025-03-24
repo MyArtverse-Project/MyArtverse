@@ -10,7 +10,7 @@ import GridResponsive from "@/components/layouts/Layouts/GridResponsive"
 import { folderColors } from "@/utils/constants"
 import { Button } from "@mav/ui/components/buttons"
 import { LuFilter as FilterIcon, LuCog, LuPlus } from "react-icons/lu"
-import type { Character, CharacterResponse, Folder } from "@/types/characters"
+import type { CharacterResponse, Folder } from "@/types/characters"
 
 export default function CharacterView({
   handle,

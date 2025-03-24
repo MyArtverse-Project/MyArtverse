@@ -1,5 +1,5 @@
-import { DefineRouteParams } from "@/types"
-import { fetchUser, fetchUserData, getPanels } from "@/utils/api"
+import type { DefineRouteParams } from "@/types"
+import { fetchUser, getPanels } from "@/utils/api"
 import OverviewContent from "./OverviewContent"
 
 type AsyncProps = DefineRouteParams<{ handle: string }>

@@ -4,7 +4,7 @@ import { Button } from "@mav/ui/components/buttons"
 import { UserComment, UserCommentInput } from "@mav/ui/components/comments"
 import { Group } from "@mav/ui/components/layouts"
 import { sanitize } from "isomorphic-dompurify"
-import { DashboardPanel, UserType } from "@/types/users"
+import type { DashboardPanel, UserType } from "@/types/users"
 import CommentPanel from "./panels/CommentPanel"
 import InformationPanel from "./panels/InformationPanel"
 

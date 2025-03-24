@@ -6,18 +6,14 @@ import { Masthead, type MastheadTabItems } from "@mav/ui/components/layouts"
 import { FaCircle } from "react-icons/fa"
 import {
   LuBook,
-  LuCat,
-  LuCircle,
-  LuCircleDot,
   LuClock,
-  LuFileEdit,
   LuGalleryThumbnails,
   LuHeart,
   LuHome,
   LuLock,
   LuMoreVertical
 } from "react-icons/lu"
-import { Visibility } from "@/types/utils"
+import type { Visibility } from "@/types/utils"
 
 interface ProfileMastheadProps {
   characterName: string
@@ -30,7 +26,7 @@ interface ProfileMastheadProps {
 }
 
 export function CharacterMasthead(props: Partial<ProfileMastheadProps>) {
-  const profileTabs: MastheadTabItems = [
+  const profileTabs = [
     {
       icon: LuHome,
       text: "Overview",
@@ -51,7 +47,7 @@ export function CharacterMasthead(props: Partial<ProfileMastheadProps>) {
       text: "Activity",
       link: "activity"
     }
-  ]
+  ] satisfies MastheadTabItems
 
   return (
     <Masthead>

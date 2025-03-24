@@ -3,10 +3,7 @@ import Image from "next/image"
 import Link from "next/link"
 import { cn } from "@mav/shared/utils"
 import { LuHeart as Heart } from "react-icons/lu"
-import type {
-  FursonaStatus as AdoptionStatus,
-  ColorPalette as Palette
-} from "@/types/characters"
+import type { FursonaStatus as AdoptionStatus } from "@/types/characters"
 import type { MapElement } from "@/types/utils"
 import ColorPalette from "./ColorPalette"
 import Status from "./Status"

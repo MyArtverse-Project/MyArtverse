@@ -1,6 +1,6 @@
 import AppLayout from "@/components/layouts/AppLayout/AppLayout"
 import { ProfileMasthead } from "@/components/layouts/Mastheads"
-import { DefineRouteParams } from "@/types"
+import type { DefineRouteParams } from "@/types"
 import { fetchUser, fetchUserData } from "@/utils/api"
 
 type AsyncProps = DefineRouteParams<{ handle: string }>

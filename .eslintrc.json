@@ -56,7 +56,7 @@
     ],
     "@typescript-eslint/ban-ts-comment": "off",
     "@typescript-eslint/consistent-type-imports": [
-      "off",
+      "warn",
       {
         "prefer": "type-imports"
       }
