@@ -20,6 +20,10 @@ export default async function MainProfileLayout(
         handle={user?.handle}
         displayName={user?.displayName || user?.handle}
         avatarUrl={user?.avatarUrl}
+        followerCount={user.followers.length}
+        followingCount={user.following.length}
+        profileBio={user?.bio || ""}
+        bannerUrl={user?.bannerUrl || undefined}
       />
       {props.children}
     </AppLayout>
