@@ -8,7 +8,7 @@ import {
   CharacterResponse,
   ReferenceSheet,
 } from "@/types/characters"
-import { UserType } from "@/types/users"
+import { DashboardPanel, UserType } from "@/types/users"
 import { BACKEND_URL } from "./constants"
 
 type APIMethods = "GET" | "POST" | "DELETE" | "PUT"
@@ -128,6 +128,7 @@ export const getArtistOpenComissions = async () => {
     "GET",
     "/v1/profile/artists/open",
   )
+  
   return comissions
 }
 
@@ -141,6 +142,7 @@ export const fetchUserCharacters = async (handle: string) => {
     "GET",
     `/v1/character/${handle}`,
   )
+
   return data
 }
 
@@ -172,6 +174,7 @@ export const fetchArtistRequests = async () => {
     "GET",
     "/v1/staff/artist-requests",
   )
+
   return requests
 }
 
@@ -189,6 +192,7 @@ export const getFeatured = async () => {
     "GET",
     "/v1/character/featured",
   )
+
   return characters
 }
 
@@ -197,6 +201,7 @@ export const getNewCharacters = async () => {
     "GET",
     "/v1/character/new",
   )
+
   return characters
 }
 
@@ -247,4 +252,22 @@ export const getFolderByHandle = async (handle: string) => {
 
 export const getFoldersRecursively = async (folderId: string) => {
   return apiWithAuth("GET", `/v1/folders/${folderId}/recursive`)
+}
+
+export const setPanel = async (body: {
+  position: {
+    row: number
+    col: number
+  }
+  component: string
+}) => {
+  return apiWithAuth("POST", "/v1/dashboard/panels", body)
+}
+
+export const setHTMLPanel = async (body: { html: string }) => {
+  return apiWithAuth("PUT", "/v1/dashboard/panels/html", body)
+}
+
+export const getPanels = async (handle: string) => {
+  return apiWithoutAuth<DashboardPanel[]>("GET", `/v1/dashboard/panels/${handle}`)
 }

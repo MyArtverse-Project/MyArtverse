@@ -2,12 +2,13 @@
 
 import { redirect } from "next/navigation"
 import { useState } from "react"
+import { setHTMLPanel } from "@/utils/api"
 import { BACKEND_URL } from "@/utils/constants"
 import { Button } from "@mav/ui/components/buttons"
+import { sanitize } from "isomorphic-dompurify"
+import { FaCode } from "react-icons/fa"
 import { FaTrash } from "react-icons/fa6"
 import { LuXCircle } from "react-icons/lu"
-import { FaCode } from "react-icons/fa"
-import { sanitize } from "isomorphic-dompurify"
 import Modal from "../layouts/Modal"
 import Note from "../layouts/Note"
 
@@ -19,7 +20,20 @@ export default function EditHTMLModal({
   editHTMLModalShown: boolean
 }) {
   const [errors, setErrors] = useState<string>()
-  const [htmlContent, setHtmlContent] = useState<string>("<div>\n   <p>Write your HTML Here</p>\n</div>")
+  const [htmlContent, setHtmlContent] = useState<string>(
+    "<div>\n   <p>Write your HTML Here</p>\n</div>",
+  )
+
+  const submitHTML = async () => {
+    const data = await setHTMLPanel({ html: htmlContent })
+    if (!data) {
+      setErrors("Unable to save HTML")
+      return
+    }
+    
+    setErrors(undefined)
+    toggleEditHTMLModal()
+  }
 
   return (
     <Modal
@@ -48,18 +62,18 @@ export default function EditHTMLModal({
       )}
       <div className="flex flex-row gap-4 p-4">
         <textarea
-          className="w-1/2 h-40 border p-2 bg-200 font-mono"
+          className="bg-200 h-40 w-1/2 border p-2 font-mono"
           placeholder="Enter HTML here..."
           value={htmlContent}
           onChange={(e) => setHtmlContent(e.target.value)}
         />
         <div
-          className="w-1/2 h-40 border p-2 overflow-auto"
+          className="h-40 w-1/2 overflow-auto border p-2"
           dangerouslySetInnerHTML={{ __html: sanitize(htmlContent) }}
         />
       </div>
       <div className="flex flex-row items-center justify-end p-4">
-        <Button>Save HTML</Button>
+        <Button onClick={submitHTML}>Save HTML</Button>
       </div>
     </Modal>
   )
