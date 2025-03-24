@@ -1,34 +1,74 @@
 import Image from "next/image"
-import { Button } from "@headlessui/react"
 import React from "react"
+import { Button } from "@mav/ui/components/buttons"
 import { UserComment, UserCommentInput } from "@mav/ui/components/comments"
 import { Group } from "@mav/ui/components/layouts"
 import { sanitize } from "isomorphic-dompurify"
-import { DashboardPanel } from "@/types/users"
+import { DashboardPanel, UserType } from "@/types/users"
 import CommentPanel from "./panels/CommentPanel"
+
+function renderPanel(panel: DashboardPanel, userData: UserType) {
+  switch (panel.type) {
+    case "customHTML":
+      return null // Custom HTML panel is handled separately
+    case "comments":
+      return <CommentPanel comments={userData.comments} user={userData} />
+    case "information":
+      return <div>Information Panel Placeholder</div> // Placeholder until implemented
+    default:
+      return <div>Unknown Panel Type</div>
+  }
+}
 
 export default function OverviewContent({
   handle,
-  panels
+  panels,
+  userData
 }: {
   handle: string
   panels: DashboardPanel[]
+  userData: UserType
 }) {
-  const html = panels.find((panel) => panel.type == "customHTML")?.settings
-    ?.html
+  const customHTMLPanel = panels.find((panel) => panel.type === "customHTML")
+  const htmlContent = customHTMLPanel?.settings?.html
+    ? sanitize(customHTMLPanel.settings.html)
+    : ""
 
   return (
-    <>
-      <div className="mx-auto grid max-w-screen-2xl grid-cols-2 gap-4 px-8 py-6">
-        <div
-          dangerouslySetInnerHTML={{ __html: sanitize(html || "") }}
-          className="col-span-2 w-full"
-        ></div>
-        <aside className="flex flex-col gap-y-3">
-          <Group title="About user"></Group>
-          <CommentPanel />
-        </aside>
+    <div className="mx-auto max-w-screen-2xl px-8 py-6">
+      <div className="bg-100 col-span-2 mb-4 flex w-full flex-col gap-4 rounded-lg ">
+        <Button
+          variant="secondary"
+          className="mb-4 self-end"
+          href={`/@${handle}/edit`}
+        >
+          Edit Panels
+        </Button>
+        {htmlContent && (
+          <div
+            dangerouslySetInnerHTML={{ __html: htmlContent }}
+            className="w-full"
+          />
+        )}
       </div>
-    </>
+      <div className="mb-4 grid w-full grid-cols-2 gap-4">
+        {panels
+          .filter((panel) => panel.position.row === 2)
+          .map((panel, index) => (
+            <div key={index} className="p-4">
+              {renderPanel(panel, userData)}
+            </div>
+          ))}
+      </div>
+      <div className="grid w-full grid-cols-3 gap-4">
+        {panels
+          .filter((panel) => panel.position.row === 3)
+          .map((panel, index) => (
+            <div key={index} className="p-4">
+              {renderPanel(panel, userData)}
+            </div>
+          ))}
+      </div>
+    </div>
   )
 }

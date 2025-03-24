@@ -1,7 +1,12 @@
 import type { Comments, UserType } from "./users"
 import type { StatusIndicator, Visibility } from "./utils"
 
-export type FursonaStatus = "adopted" | "upForAdopt" | "owned" | "hidden" | "main"
+export type FursonaStatus =
+  | "adopted"
+  | "upForAdopt"
+  | "owned"
+  | "hidden"
+  | "main"
 
 export interface ColorPalette {
   name: string
@@ -46,7 +51,10 @@ export interface Character {
   migration: {
     url: string
     migrateDate: Date
-    migrationStatus: Extract<StatusIndicator, "failed" | "canceled" | "pending" | "finished">
+    migrationStatus: Extract<
+      StatusIndicator,
+      "failed" | "canceled" | "pending" | "finished"
+    >
     migrationReason: string
   }
   adoptionStatus: {

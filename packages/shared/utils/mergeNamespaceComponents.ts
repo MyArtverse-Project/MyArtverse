@@ -10,5 +10,6 @@ export const mergeNamespaceComponents = <NC extends object>(
   rootComponent: FC,
   childComponents: NC
 ) => {
-  return Object.assign(rootComponent, childComponents) as typeof rootComponent & NC
+  return Object.assign(rootComponent, childComponents) as typeof rootComponent &
+    NC
 }

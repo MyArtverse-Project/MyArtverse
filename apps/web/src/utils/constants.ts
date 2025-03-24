@@ -3,6 +3,8 @@ import { BRAND } from "@mav/shared"
 /* eslint-disable no-useless-escape */
 export const BACKEND_URL = process.env.NEXT_PUBLIC_BACKEND_URL
 
+export const USER_DEFAULT_AVATAR = "/UserProfile.png"
+
 export const emailRegex =
   /^[^@#$%^&*()_+=\[{\\};:<>|\s,\/?]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,3}$/
 

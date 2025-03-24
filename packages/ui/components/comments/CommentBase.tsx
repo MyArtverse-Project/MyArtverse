@@ -1,4 +1,5 @@
 import Image from "next/image"
+import React from "react"
 import { useValidateChildrenComponents } from "../../hooks"
 
 /* eslint-disable @typescript-eslint/no-explicit-any */

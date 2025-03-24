@@ -256,8 +256,8 @@ export const getFoldersRecursively = async (folderId: string) => {
 
 export const setPanel = async (body: {
   position: {
-    row: number
     col: number
+    row: number
   }
   component: string
 }) => {

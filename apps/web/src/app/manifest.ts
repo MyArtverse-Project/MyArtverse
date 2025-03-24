@@ -7,7 +7,8 @@ export default function manifest(): MetadataRoute.Manifest {
     short_name: BRAND,
     start_url: "/login?utm_source=from_pwa",
     display: "standalone",
-    description: "An open source platform for your fursonas, commissions, and adopts!",
+    description:
+      "An open source platform for your fursonas, commissions, and adopts!",
     lang: "en",
     dir: "ltr",
     theme_color: "#080313",
