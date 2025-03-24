@@ -41,7 +41,7 @@ export interface UserType {
   customStatus: NullableString
   previousAliases: NullableString
   pronouns: NullableString
-  nationaility: NullableString
+  nationality: NullableString
   commissionStatus: "open" | "closed" | "limited"
   requestStatus: "open" | "closed" | "limited"
   artTradeStatus: "open" | "closed" | "limited"

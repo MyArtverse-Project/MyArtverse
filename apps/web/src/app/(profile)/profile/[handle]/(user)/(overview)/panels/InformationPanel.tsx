@@ -1,7 +1,7 @@
 import Field from "@/components/layouts/Layouts/Field"
 import { Button } from "@mav/ui/components/buttons"
 import { Group } from "@mav/ui/components/layouts"
-import { UserType } from "@/types/users"
+import type { UserType } from "@/types/users"
 
 export default function InformationPanel({ user }: { user: UserType }) {
   return (
@@ -27,7 +27,7 @@ export default function InformationPanel({ user }: { user: UserType }) {
       />
       <Field
         title="Nationality"
-        content={user.nationaility ? user.nationaility : "Not Set"}
+        content={user.nationality ? user.nationality : "Not Set"}
       />
       {/* <Field title="Nationality" content="Murica" /> */}
     </Group>
