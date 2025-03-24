@@ -75,3 +75,9 @@ export interface Comments {
   artwork?: Artwork
   character?: Character
 }
+
+export interface DashboardPanel {
+  type: string
+  position: { row: number; col: number }
+  settings?: { [key: string]: string }
+}

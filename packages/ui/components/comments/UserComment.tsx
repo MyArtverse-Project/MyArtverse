@@ -10,6 +10,7 @@ interface CommentProps extends React.ComponentProps<typeof CommentBase> {
   userRole?: string
   isPinned?: true
   upvotes?: string
+  reply?: CommentProps[]
 }
 
 export function UserComment(props: React.PropsWithChildren<CommentProps>) {
@@ -18,18 +19,12 @@ export function UserComment(props: React.PropsWithChildren<CommentProps>) {
       avatar={props.avatar}
       imgTag={props.imgTag}
       outerContainer={
-        <div className="mt-0.5 flex -translate-x-2 items-center gap-x-1">
-          <span className="inline-flex items-center pr-1.5">
-            <Button
-              size="small"
-              className="rounded-full transition-none"
-              variant="tritery"
-              icon={<LuThumbsUp size={18} />}
-            />
-            <span className="text-sm">{props.upvotes || "1.9k"}</span>
-          </span>
+        <div className="mt-0.5 flex flex-col items-start gap-y-1">
           <Button size="small" className="transition-none" variant="tritery">
             Reply
+          </Button>
+          <Button size="small" className="transition-none" variant="primary">
+            View {props.reply?.length} Replies
           </Button>
         </div>
       }

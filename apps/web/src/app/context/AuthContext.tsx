@@ -50,16 +50,10 @@ export const AuthProvider = ({ children }: { children: React.ReactNode }) => {
   useEffect(() => {
     const getUser = async () => {
       try {
-        const data = await fetcher<User>(`${BACKEND_URL}/v1/auth/whoami`);
+        const data = await fetcher<User>(`${BACKEND_URL}/v1/auth/whoami`, {}, false);
         setUser(data);
       } catch (error) {
-        try {
-          await fetcher(`${BACKEND_URL}/v1/auth/refresh-token`, { method: "POST",  });
-          const data = await fetcher<User>(`${BACKEND_URL}/v1/auth/whoami`);
-          setUser(data);
-        } catch (refreshError) {
-          setUser(null);
-        }
+        setUser(null);
       } finally {
         setIsLoading(false);
       }
@@ -74,7 +68,7 @@ export const AuthProvider = ({ children }: { children: React.ReactNode }) => {
       setUser(null);
       router.push("/login");
     } catch (err) {
-      throw new Error("Failed to logout");
+      throw new Error("Logout failed");
     }
   };
 
@@ -84,3 +78,4 @@ export const AuthProvider = ({ children }: { children: React.ReactNode }) => {
     </AuthContext.Provider>
   );
 };
+

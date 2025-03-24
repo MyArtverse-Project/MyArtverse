@@ -2,7 +2,7 @@
 
 import Link from "next/link"
 import { useState } from "react"
-import { useAuth } from "@/app/context/AuthContext"
+import { useAuth, AuthProvider } from "@/app/context/AuthContext"
 import { Button } from "@mav/ui/components/buttons"
 import { MyArtverseIcon } from "@mav/ui/icons"
 import { LuMenu, LuSearch } from "react-icons/lu"
