@@ -6,7 +6,7 @@ import { CommentBase } from "./CommentBase"
 
 interface CommentProps extends React.ComponentProps<typeof CommentBase> {
   handle: string
-  isOP?: true
+  isOP?: boolean
   userRole?: string
   isPinned?: true
   upvotes?: string

@@ -6,15 +6,16 @@ import { Group } from "@mav/ui/components/layouts"
 import { sanitize } from "isomorphic-dompurify"
 import { DashboardPanel, UserType } from "@/types/users"
 import CommentPanel from "./panels/CommentPanel"
+import InformationPanel from "./panels/InformationPanel"
 
 function renderPanel(panel: DashboardPanel, userData: UserType) {
   switch (panel.type) {
     case "customHTML":
-      return null // Custom HTML panel is handled separately
+      return null
     case "comments":
       return <CommentPanel comments={userData.comments} user={userData} />
     case "information":
-      return <div>Information Panel Placeholder</div> // Placeholder until implemented
+      return <InformationPanel user={userData} />
     default:
       return <div>Unknown Panel Type</div>
   }

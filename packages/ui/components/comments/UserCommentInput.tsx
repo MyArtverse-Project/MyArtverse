@@ -4,9 +4,35 @@ import { CommentBase } from "./CommentBase"
 
 interface CommentInputProps extends ComponentProps<typeof CommentBase> {
   disabled?: true | string
+  commentType: string
+  artworkId?: string | undefined
+  username?: string | undefined
+  characterName: string | undefined,
+  postComment?: (
+    commentType: string,
+    artworkId: string | undefined,
+    username: string | undefined,
+    characterName: string | undefined,
+    content: string
+  ) => void
 }
 
 export function UserCommentInput(props: CommentInputProps) {
+  const post = async () => {
+    if (!props.postComment) return
+    props.postComment(
+      props.commentType,
+      props.artworkId,
+      props.username,
+      props.characterName,
+      (
+        document.querySelector(
+          "[data-mav-comment-input]"
+        ) as HTMLTextAreaElement
+      )?.value
+    )
+  }
+
   return (
     <CommentBase
       avatar={props.avatar}
@@ -16,7 +42,9 @@ export function UserCommentInput(props: CommentInputProps) {
           <Button size="small" variant="tritery">
             Cancel
           </Button>
-          <Button size="small">Post</Button>
+          <Button size="small" onClick={post}>
+            Post
+          </Button>
         </div>
       }
     >

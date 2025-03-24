@@ -1,4 +1,4 @@
-import cn from "@/utils/cn"
+import { cn } from "@mav/shared/utils"
 
 export default function Field({
   title,

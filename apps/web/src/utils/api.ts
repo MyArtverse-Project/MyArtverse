@@ -10,6 +10,7 @@ import {
 } from "@/types/characters"
 import { DashboardPanel, UserType } from "@/types/users"
 import { BACKEND_URL } from "./constants"
+import { redirect } from "next/navigation"
 
 type APIMethods = "GET" | "POST" | "DELETE" | "PUT"
 
@@ -274,3 +275,21 @@ export const getPanels = async (handle: string) => {
     `/v1/dashboard/panels/${handle}`
   )
 }
+
+export const postComment = async (
+  commentType: string,
+  artworkId: string | null,
+  username: string,
+  characterName: string | null,
+  content: string
+) => {
+    const route = `/v1/${commentType}/${artworkId ? artworkId : username}${characterName ? `/${characterName}` : ""}/comment`;
+    const data = await apiWithAuth("POST", route, { content });
+    if (!data) {
+      throw new Error("Unable to post comment");
+    }
+    
+    return redirect(`/profile/${username}/${commentType === "art" ? "artworks" : "characters"}/${characterName ? characterName : ""}`);
+
+};
+

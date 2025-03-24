@@ -7,6 +7,7 @@ import { USER_DEFAULT_AVATAR } from "@/utils/constants"
 import { UserComment, UserCommentInput } from "@mav/ui/components/comments"
 import { Group } from "@mav/ui/components/layouts"
 import { Comments, UserType } from "@/types/users"
+import { postComment } from "@/utils/api"
 
 export default function CommentPanel({
   comments,
@@ -21,25 +22,27 @@ export default function CommentPanel({
         <UserCommentInput
           imgTag={<img />}
           avatar={user?.avatarUrl || USER_DEFAULT_AVATAR}
+          postComment={postComment}
+          commentType="user"
+          
+          username={user.handle}
+          
         />
       </div>
       <div className="grid gap-y-4">
+
+      {comments.map((comment, index) => (
         <UserComment
+          key={index}
           imgTag={<img />}
-          avatar="/img/examples/kuro/kuro-example4.png"
-          handle="kurojifusky"
-          isPinned
-          isOP
+          avatar={comment.author.avatarUrl || USER_DEFAULT_AVATAR}
+          handle={comment.author.handle}
+          // isPinned={comment.isPinned} // TODO: Will implement on backend first
+          isOP={comment.author.id == user.id}
         >
-          Comment test
+          {comment.content}
         </UserComment>
-        <UserComment
-          imgTag={<img />}
-          avatar="/img/examples/ozzy/5.png"
-          handle="ediwow"
-        >
-          Gamer moment
-        </UserComment>
+      ))}
       </div>
     </Group>
   )
