@@ -17,24 +17,13 @@
     "format:write": "biome format --write",
     "lint": "biome lint",
     "lint:write": "biome lint",
-    "lint:format": "biome format --write && biome lint --write",
     "knip": "knip"
   },
   "devDependencies": {
     "@biomejs/biome": "1.9.4",
-    "@stylistic/eslint-plugin": "^2.1.0",
-    "@trivago/prettier-plugin-sort-imports": "^4.3.0",
-    "@typescript-eslint/eslint-plugin": "^7.9.0",
-    "@typescript-eslint/parser": "^7.9.0",
     "dotenv": "^16.4.5",
     "dotenv-cli": "^7.4.2",
-    "eslint": "^8.56.0",
-    "eslint-config-import": "^0.13.0",
-    "eslint-config-next": "^15.2.3",
-    "eslint-plugin-unused-imports": "^3.2.0",
     "knip": "^5.16.0",
-    "prettier": "^3.2.5",
-    "prettier-plugin-tailwindcss": "^0.5.14",
     "turbo": "^1.13.3"
   }
 }
