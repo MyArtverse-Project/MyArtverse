@@ -12,11 +12,14 @@ type AsyncProps = DefineRouteParams<{ handle: string }>
 
 export default function Page({ params }: AsyncProps) {
   const [editHTMLModal, setEditHTMLModal] = useState(false)
-  const toggleEditHTMLModal = () => setEditHTMLModal(!editHTMLModal)
-  const [position, setPosition] = useState<Position | null>(null)
   const [editPanelModal, setEditPanelModal] = useState(false)
+
+  const [panelPosition, setPanelPosition] = useState<Position | null>(null)
+
+  const toggleEditHTMLModal = () => setEditHTMLModal(!editHTMLModal)
+
   const toggleEditPanelModal = (position: Position | null) => {
-    setPosition(position)
+    setPanelPosition(position)
     setEditPanelModal(!editPanelModal)
   }
 
@@ -63,7 +66,7 @@ export default function Page({ params }: AsyncProps) {
       <EditPanelModal
         editPanelModalShown={editPanelModal}
         toggleEditPanel={toggleEditPanelModal}
-        position={position}
+        position={panelPosition}
       />
     </>
   )

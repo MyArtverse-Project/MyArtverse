@@ -15,26 +15,26 @@ interface ProfileMastheadProps {
   followingCount: number
 }
 
-export function ProfileMasthead(props: Partial<ProfileMastheadProps>) {
-  const profileTabs: MastheadTabItems = [
-    {
-      icon: LuHome,
-      text: "Overview",
-      link: ""
-    },
-    {
-      icon: LuCat,
-      text: "Characters",
-      link: "characters",
-      countIndicator: 5
-    },
-    {
-      icon: LuHeart,
-      text: "Favorites",
-      link: "favorites"
-    }
-  ]
+const profileTabs = [
+  {
+    icon: LuHome,
+    text: "Overview",
+    link: ""
+  },
+  {
+    icon: LuCat,
+    text: "Characters",
+    link: "characters",
+    countIndicator: 5
+  },
+  {
+    icon: LuHeart,
+    text: "Favorites",
+    link: "favorites"
+  }
+] satisfies MastheadTabItems
 
+export function ProfileMasthead(props: Partial<ProfileMastheadProps>) {
   return (
     <Masthead>
       <Masthead.Banner src={props.bannerUrl} />
