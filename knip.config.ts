@@ -2,7 +2,7 @@ import type { KnipConfig } from "knip"
 
 export default {
   eslint: {
-    config: [".eslintrc.cjs"]
+    config: ["biome.json"]
   },
   entry: ["apps/**/src/**/*.{ts,tsx}!", "packages/**/*.{js,ts,tsx}!"],
   project: ["**/*.{ts,tsx}!"],
