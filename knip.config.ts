@@ -12,14 +12,8 @@ export default {
     types: "warn",
     dependencies: "warn",
     unlisted: "off",
-    devDependencies: "off",
+    devDependencies: "warn",
     binaries: "off",
     duplicates: "error"
-  },
-  ignore: [
-    // Symlink file to SidebarGlobal.constants.ts
-    "apps/web/src/app/(main)/(settings)/settings/setting-routes.ts",
-
-    "packages/ui/tailwind.config.ts"
-  ]
+  }
 } satisfies KnipConfig

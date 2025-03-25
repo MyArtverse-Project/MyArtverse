@@ -1,6 +1,6 @@
 {
   "$schema": "https://biomejs.dev/schemas/1.9.4/schema.json",
-  "vcs": { "enabled": false, "clientKind": "git", "useIgnoreFile": false },
+  "vcs": { "enabled": false, "clientKind": "git", "useIgnoreFile": true },
   "files": { "ignoreUnknown": false, "ignore": [] },
   "formatter": {
     "enabled": true,
@@ -13,12 +13,11 @@
     "attributePosition": "auto",
     "bracketSpacing": true,
     "ignore": [
-      "**/.next/",
-      "**/.turbo/",
-      "**/.output/",
-      "**/dist/",
+      ".next/**",
+      "**/.turbo/**",
+      "**/.output/**",
+      "**/dist/**",
       "**/config/",
-      "**/out/",
       "**/public/",
       "**/sw.js",
       "**/workbox-*.js",
@@ -52,9 +51,6 @@
         "noGlobalObjectCalls": "error",
         "noInnerDeclarations": "error",
         "noInvalidConstructorSuper": "error",
-        "noNewSymbol": "error",
-        "noNonoctalDecimalEscape": "error",
-        "noPrecisionLoss": "error",
         "noSelfAssign": "error",
         "noSetterReturn": "error",
         "noSwitchDeclarations": "error",
@@ -63,9 +59,9 @@
         "noUnreachableSuper": "error",
         "noUnsafeFinally": "error",
         "noUnsafeOptionalChaining": "error",
-        "noUnusedImports": "off",
-        "noUnusedLabels": "error",
-        "noUnusedVariables": "error",
+        "noUnusedImports": "warn",
+        "noUnusedLabels": "warn",
+        "noUnusedVariables": "warn",
         "useArrayLiterals": "off",
         "useIsNan": "error",
         "useValidForDirection": "error",
@@ -109,9 +105,8 @@
     },
     "ignore": [
       "**/node_modules/",
-      "**/dist/",
-      "**/.next/",
-      "apps/web/public/*.js",
+      "dist/**",
+      ".next/**",
       "apps/desktop/src-tauri/target/release/build",
       "**/.tsbuildinfo",
       "**/NOTICE",
@@ -121,6 +116,8 @@
     ]
   },
   "javascript": {
+    "globals": ["React"],
+    "jsxRuntime":"transparent",
     "formatter": {
       "jsxQuoteStyle": "double",
       "quoteProperties": "asNeeded",
@@ -128,18 +125,9 @@
       "semicolons": "asNeeded",
       "arrowParentheses": "always",
       "bracketSameLine": false,
-      "quoteStyle": "single",
+      "quoteStyle": "double",
       "attributePosition": "auto",
       "bracketSpacing": true
     }
-  },
-  "overrides": [
-    { "include": ["apps/web/**"] },
-    {
-      "include": ["apps/**/*.tsx", "packages/**/*.tsx"],
-      "linter": { "rules": {} }
-    },
-    { "include": ["apps/web/**.tsx"], "linter": { "rules": {} } },
-    { "include": ["packages/ui/*.tsx"], "linter": { "rules": {} } }
-  ]
+  }
 }
