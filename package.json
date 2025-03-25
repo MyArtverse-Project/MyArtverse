@@ -13,9 +13,10 @@
     "dev:desktop": "cd ./apps/desktop && tauri dev",
     "build": "turbo build --filter=web",
     "build:all": "turbo build --concurrency 2",
-    "format:check": "biome format",
+    "format": "biome format",
     "format:write": "biome format --write",
     "lint": "biome lint",
+    "lint:write": "biome lint",
     "lint:format": "biome format --write && biome lint --write",
     "knip": "knip"
   },
