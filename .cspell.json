@@ -1,0 +1,25 @@
+{
+  "$schema": "https://raw.githubusercontent.com/streetsidesoftware/cspell/main/cspell.schema.json",
+  "allowCompoundWords": true,
+  "dictionaries": [
+    "lexicon"
+  ],
+  "dictionaryDefinitions": [
+    {
+      "name": "lexicon",
+      "path": "./.cspell/lexicon.txt",
+      "useCompounds": true
+    }
+  ],
+  "ignorePaths": [
+    "**/node_modules/**",
+    "**/dist/**",
+    "**/.turbo/**",
+    "**/.next/**",
+    "**/*.tsbuildinfo",
+    "**/*.svg",
+    "apps/desktop/src-tauri/Cargo.toml",
+    "apps/desktop/src-tauri/tauri.conf.json",
+    "AUTHORS.md",
+  ],
+}
