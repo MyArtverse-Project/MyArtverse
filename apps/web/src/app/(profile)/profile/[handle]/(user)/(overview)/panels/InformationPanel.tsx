@@ -7,7 +7,7 @@ export default function InformationPanel({ user }: { user: UserType }) {
   return (
     <Group
       title={`About ${user.displayName ? user.displayName : user.handle}`}
-      potentialActions={<Button size="small">Edit</Button>}
+      potentialActions={<Button size="small" href="/settings/profile">Edit</Button>}
       containerStyle="border-padding"
     >
       <Field

@@ -90,7 +90,7 @@ export function UserComment(props: React.PropsWithChildren<CommentProps>) {
             size="small"
             className="absolute right-2 top-2 rounded-full p-0 transition-none"
             variant="tritery"
-            icon={<LuMoreVertical size={14} />}
+            icon={<LuMoreVertical size={14} />}     
           />
           {/* Comment contents */}
           <div data-mav-comment-contents="" className="mt-1 font-normal">
