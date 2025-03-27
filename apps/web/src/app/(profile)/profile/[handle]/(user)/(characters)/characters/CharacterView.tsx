@@ -53,17 +53,21 @@ export default function CharacterView({
                   nestedItem
                 />
               ))}
-              <FolderView.Item
-                newItem
-                nestedItem
-                onClick={() => {
-                  setParentFolderId(folder.id)
-                  toggleCreateFolderModal()
-                }}
-              />
+              {owner && (
+                <FolderView.Item
+                  newItem
+                  nestedItem
+                  onClick={() => {
+                    setParentFolderId(folder.id)
+                    toggleCreateFolderModal()
+                  }}
+                />
+              )}
             </FolderView.Item>
           ))}
-        <FolderView.Item newItem onClick={toggleCreateFolderModal} />
+        {owner && (
+          <FolderView.Item newItem onClick={toggleCreateFolderModal} />
+        )}
       </FolderView.Shelf>
       <FolderView.Contents>
         <div className="mb-4 flex w-full gap-x-2.5">

@@ -296,6 +296,5 @@ export const postComment = async (
   if (!data) throw new Error("Unable to post comment");
 
   return redirect(redirectRoute);
-
 };
 

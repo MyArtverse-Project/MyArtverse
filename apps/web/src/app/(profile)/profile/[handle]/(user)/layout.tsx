@@ -10,8 +10,8 @@ export default async function MainProfileLayout(
 ) {
   const { handle } = await props.params
 
-  const self = await fetchUserData()
-  const user = handle === self.handle ? self : await fetchUser(handle)
+  const self = await fetchUserData().catch(() => {})
+  const user = await fetchUser(handle) 
 
   return (
     <AppLayout>
@@ -23,6 +23,7 @@ export default async function MainProfileLayout(
         followingCount={user.following.length}
         profileBio={user?.bio || ""}
         bannerUrl={user?.bannerUrl || undefined}
+        isOwnProfile={self ? self.handle === user.handle : false}
       />
       {props.children}
     </AppLayout>

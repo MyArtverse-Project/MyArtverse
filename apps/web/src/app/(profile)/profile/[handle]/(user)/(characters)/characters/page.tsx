@@ -22,14 +22,14 @@ export default async function Page({ params }: AsyncProps) {
   const { handle } = await params
   const characters = await fetchUserCharacters(handle)
   const { folders, id } = await fetchUser(handle)
-  const self = await fetchUserData()
+  const self = await fetchUserData().catch(() => {})
   return (
     <MarginClamp>
       <CharacterView
         handle={handle}
         characters={characters}
         folders={folders}
-        owner={self.id === id}
+        owner={self ? self.id === id : false}
       />
     </MarginClamp>
   )

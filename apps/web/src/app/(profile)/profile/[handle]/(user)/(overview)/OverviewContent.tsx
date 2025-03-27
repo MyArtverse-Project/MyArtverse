@@ -1,3 +1,5 @@
+'use client'
+
 import Image from "next/image"
 import React from "react"
 import { Button } from "@mav/ui/components/buttons"
@@ -7,13 +9,14 @@ import { sanitize } from "isomorphic-dompurify"
 import type { DashboardPanel, UserType } from "@/types/users"
 import CommentPanel from "./panels/Comments/CommentPanel"
 import InformationPanel from "./panels/InformationPanel"
+import { useAuth, type User } from "@/app/context/AuthContext"
 
-function renderPanel(panel: DashboardPanel, userData: UserType) {
+function renderPanel(panel: DashboardPanel, userData: UserType, self?: User | null) {
   switch (panel.type) {
     case "customHTML":
       return null
     case "comments":
-      return <CommentPanel comments={userData.comments} user={userData} />
+      return <CommentPanel comments={userData.comments} user={userData} self={self} />
     case "information":
       return <InformationPanel user={userData} />
     default:
@@ -30,6 +33,7 @@ export default function OverviewContent({
   panels: DashboardPanel[]
   userData: UserType
 }) {
+  const { user: self } = useAuth()
   const customHTMLPanel = panels.find((panel) => panel.type === "customHTML")
   const htmlContent = customHTMLPanel?.settings?.html
     ? sanitize(customHTMLPanel.settings.html)
@@ -57,7 +61,7 @@ export default function OverviewContent({
           .filter((panel) => panel.position.row === 2)
           .map((panel, index) => (
             <div key={index} className="p-4">
-              {renderPanel(panel, userData)}
+              {renderPanel(panel, userData, self)}
             </div>
           ))}
       </div>
@@ -66,7 +70,7 @@ export default function OverviewContent({
           .filter((panel) => panel.position.row === 3)
           .map((panel, index) => (
             <div key={index} className="p-4">
-              {renderPanel(panel, userData)}
+              {renderPanel(panel, userData, self)}
             </div>
           ))}
       </div>

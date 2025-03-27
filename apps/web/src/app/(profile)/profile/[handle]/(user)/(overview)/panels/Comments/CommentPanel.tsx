@@ -9,26 +9,33 @@ import { UserComment, UserCommentInput } from "@mav/ui/components/comments"
 import { Group } from "@mav/ui/components/layouts"
 import type { Comments, UserType } from "@/types/users"
 import CommentThread from "./Thread"
+import { type User } from "@/app/context/AuthContext"
+
 
 export default function CommentPanel({
   comments,
-  user
+  user,
+  self
 }: {
   comments: Comments[]
-  user: UserType
+  user: UserType,
+  self: User
 }) {
   return (
     <Group title="Comments" potentialActions={<Button>Filter</Button>}>
-      <div className="my-5">
-        <UserCommentInput
-          postComment={postComment}
-          imgTag={<img />}
-          avatar={user?.avatarUrl || USER_DEFAULT_AVATAR}
-          commentType="user"
-          redirectRoute={`/@${user.handle}`}
-          username={user.handle}
-        />
-      </div>
+      {self && (
+        <div className="my-5">
+          <UserCommentInput
+            postComment={postComment}
+            imgTag={<img />}
+            avatar={user?.avatarUrl || USER_DEFAULT_AVATAR}
+            commentType="user"
+            redirectRoute={`/@${user.handle}`}
+            username={user.handle}
+          />
+        </div>
+      )}
+
 
       <div className="grid gap-y-4">
         {comments.map((comment) => (
