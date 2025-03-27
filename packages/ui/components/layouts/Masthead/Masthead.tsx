@@ -1,8 +1,6 @@
 "use client"
 
 /* eslint-disable @typescript-eslint/no-unused-vars */
-import { mergeNamespaceComponents } from "@mav/shared/utils"
-import { Tabs } from "../../Tabs"
 import { MastheadAvatar } from "./Avatar"
 import { MastheadBanner } from "./Banner"
 import { MastheadDetails } from "./Details"
