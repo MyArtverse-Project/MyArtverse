@@ -14,9 +14,10 @@ interface CommentProps extends React.ComponentProps<typeof CommentBase> {
   userRole?: string
   isPinned?: true
   upvotes?: string
-  reply?: CommentProps[]
   parentId?: string
-  replies?: CommentProps[]
+  replies?: number
+  toggleViewReplies?: () => void
+  viewReplies?: boolean
   date?: string
   onReply: (
     commentType: string,
@@ -31,7 +32,6 @@ interface CommentProps extends React.ComponentProps<typeof CommentBase> {
 
 export function UserComment(props: React.PropsWithChildren<CommentProps>) {
   const [showReplyInput, setShowReplyInput] = useState(false)
-  const [replyText, setReplyText] = useState("")
   const toggleReplyInput = () => setShowReplyInput(!showReplyInput)
 
   const date = new Date(props.date || "")
@@ -49,9 +49,9 @@ export function UserComment(props: React.PropsWithChildren<CommentProps>) {
           <Button size="small" className="transition-none" variant="tritery" onClick={toggleReplyInput}>
             Reply
           </Button>
-          {props.reply && props.reply?.length > 0 && (
-            <Button size="small" className="transition-none" variant="primary">
-              View {props.reply?.length} Replies
+          {(props.replies || 0)  > 0 && props.toggleViewReplies && (
+            <Button size="small" className="transition-none" variant="primary" onClick={props.toggleViewReplies}>
+              View {props.replies} Replies
             </Button>
           )}
           <div className="w-full">
