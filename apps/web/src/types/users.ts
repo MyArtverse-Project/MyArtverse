@@ -70,10 +70,15 @@ export interface Notification {
 export interface Comments {
   id: string
   content: string
+  parentId: string | null
+  isPinned: boolean
+  replies: Comments[]
   author: UserType
   user: UserType
   artwork?: Artwork
   character?: Character
+  createdAt: string
+  updatedAt: string
 }
 
 export interface DashboardPanel {

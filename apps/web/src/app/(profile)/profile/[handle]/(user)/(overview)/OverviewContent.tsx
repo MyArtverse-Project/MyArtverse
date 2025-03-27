@@ -5,7 +5,7 @@ import { UserComment, UserCommentInput } from "@mav/ui/components/comments"
 import { Group } from "@mav/ui/components/layouts"
 import { sanitize } from "isomorphic-dompurify"
 import type { DashboardPanel, UserType } from "@/types/users"
-import CommentPanel from "./panels/CommentPanel"
+import CommentPanel from "./panels/Comments/CommentPanel"
 import InformationPanel from "./panels/InformationPanel"
 
 function renderPanel(panel: DashboardPanel, userData: UserType) {

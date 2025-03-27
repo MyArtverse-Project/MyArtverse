@@ -1,8 +1,12 @@
+"use client"
+
 import { AiFillPushpin } from "react-icons/ai"
 import { LuMoreVertical, LuThumbsUp } from "react-icons/lu"
 import { Badge } from "../badges"
 import { Button } from "../buttons"
 import { CommentBase } from "./CommentBase"
+import { useState } from "react"
+import { UserCommentInput } from "./UserCommentInput"
 
 interface CommentProps extends React.ComponentProps<typeof CommentBase> {
   handle: string
@@ -11,21 +15,59 @@ interface CommentProps extends React.ComponentProps<typeof CommentBase> {
   isPinned?: true
   upvotes?: string
   reply?: CommentProps[]
+  parentId?: string
+  replies?: CommentProps[]
+  date?: string
+  onReply: (
+    commentType: string,
+    content: string,
+    redirectRoute: string,
+    artworkId?: string | null,
+    username?: string,
+    characterName?: string | null,
+    replyId?: string | null
+  ) => void
 }
 
 export function UserComment(props: React.PropsWithChildren<CommentProps>) {
+  const [showReplyInput, setShowReplyInput] = useState(false)
+  const [replyText, setReplyText] = useState("")
+  const toggleReplyInput = () => setShowReplyInput(!showReplyInput)
+
+  const date = new Date(props.date || "")
+  const now = new Date()
+  const diff = Math.floor((now.getTime() - date.getTime()) / 1000 / 60 / 60 / 24)
+  const diffString = diff > 0 ? `${diff} day${diff > 1 ? "s" : ""} ago` : "Earlier Today"
+
   return (
     <CommentBase
       avatar={props.avatar}
       imgTag={props.imgTag}
+      parentId={props.parentId}
       outerContainer={
         <div className="mt-0.5 flex flex-col items-start gap-y-1">
-          <Button size="small" className="transition-none" variant="tritery">
+          <Button size="small" className="transition-none" variant="tritery" onClick={toggleReplyInput}>
             Reply
           </Button>
-          <Button size="small" className="transition-none" variant="primary">
-            View {props.reply?.length} Replies
-          </Button>
+          {props.reply && props.reply?.length > 0 && (
+            <Button size="small" className="transition-none" variant="primary">
+              View {props.reply?.length} Replies
+            </Button>
+          )}
+          <div className="w-full">
+            {showReplyInput && (
+              <UserCommentInput
+                imgTag={<img />}
+                avatar={props.avatar}
+                parentId={props.commentId}
+                commentType="user"
+                redirectRoute={`/@${props.handle}`}
+                username={props.handle}
+                toggleReply={toggleReplyInput}
+                postComment={props.onReply}
+              />
+            )}
+          </div>
         </div>
       }
     >
@@ -42,7 +84,7 @@ export function UserComment(props: React.PropsWithChildren<CommentProps>) {
                 <span>Pinned</span>
               </div>
             )}
-            <span className="text-xs opacity-75">3 days ago</span>
+            <span className="text-xs opacity-75">{diffString}</span>
           </div>
           <Button
             size="small"

@@ -1,10 +1,13 @@
 import Image from "next/image"
 import React from "react"
+import { cn } from "@mav/shared/utils"
 import { useValidateChildrenComponents } from "../../hooks"
 
 /* eslint-disable @typescript-eslint/no-explicit-any */
 interface CommentBaseProps {
   imgTag: React.ReactNode
+  parentId?: string
+  commentId?: string
   avatar: string
   outerContainer?: React.ReactNode
 }
@@ -19,7 +22,10 @@ export function CommentBase(props: React.PropsWithChildren<CommentBaseProps>) {
   return (
     <div
       data-mav-comment-node=""
-      className="flex items-start gap-x-4 rounded-md"
+      className={cn(
+        "flex items-start gap-x-4 rounded-md" ,
+        props.parentId && "ml-14 mt-2",
+      )}
     >
       {validImgTags && (
         <span className="flex-shrink-0">

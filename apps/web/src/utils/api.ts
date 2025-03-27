@@ -278,18 +278,24 @@ export const getPanels = async (handle: string) => {
 
 export const postComment = async (
   commentType: string,
-  artworkId: string | null,
-  username: string,
-  characterName: string | null,
-  content: string
+  content: string,
+  redirectRoute: string,
+  artworkId?: string | null,
+  username?: string,
+  characterName?: string | null,
+  replyId?: string | null
 ) => {
-  const route = `/v1/${commentType}/${artworkId ? artworkId : username}${characterName ? `/${characterName}` : ""}/comment`;
-  const data = await apiWithAuth("POST", route, { content });
-  if (!data) {
-    throw new Error("Unable to post comment");
-  }
+  if (!content.trim()) throw new Error("Comment content cannot be empty.");
 
-  return redirect(`/profile/${username}/${commentType === "art" ? "artworks" : "characters"}/${characterName ? characterName : ""}`);
+  const identifier = artworkId ?? username;
+  if (!identifier) throw new Error("Either artworkId or username is required.");
+
+  const route = `/v1/${commentType}/${identifier}${characterName ? `/${characterName}` : ""}/comment`;
+
+  const data = await apiWithAuth("POST", route, { content, parentCommentId: replyId ?? null });
+  if (!data) throw new Error("Unable to post comment");
+
+  return redirect(redirectRoute);
 
 };
 
