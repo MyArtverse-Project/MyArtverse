@@ -3,7 +3,7 @@ import { redirect, useRouter } from "next/navigation"
 import { useEffect, useState } from "react"
 import { fetcher } from "@/app/lib/fetcher"
 import { BACKEND_URL } from "@/utils/constants"
-import { User, useAuth } from "./AuthContext"
+import { type User, useAuth } from "./AuthContext"
 
 export const useAuthRedirect = (redirectTo: string = "/login") => {
   "use client"

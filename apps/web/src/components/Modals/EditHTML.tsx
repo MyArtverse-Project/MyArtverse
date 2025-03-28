@@ -5,7 +5,7 @@ import { useState } from "react"
 import { setHTMLPanel } from "@/utils/api"
 import { BACKEND_URL } from "@/utils/constants"
 import { Button } from "@mav/ui/components/buttons"
-import { sanitize } from "isomorphic-dompurify"
+import DOMPurify from "isomorphic-dompurify"
 import { FaCode } from "react-icons/fa"
 import { FaTrash } from "react-icons/fa6"
 import { LuXCircle } from "react-icons/lu"
@@ -69,7 +69,7 @@ export default function EditHTMLModal({
         />
         <div
           className="h-40 w-1/2 overflow-auto border p-2"
-          dangerouslySetInnerHTML={{ __html: sanitize(htmlContent) }}
+          dangerouslySetInnerHTML={{ __html: DOMPurify.sanitize(htmlContent) }}
         />
       </div>
       <div className="flex flex-row items-center justify-end p-4">

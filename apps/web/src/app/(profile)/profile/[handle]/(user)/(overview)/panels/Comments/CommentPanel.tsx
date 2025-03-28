@@ -19,7 +19,7 @@ export default function CommentPanel({
 }: {
   comments: Comments[]
   user: UserType,
-  self: User
+  self?: User | null
 }) {
   return (
     <Group title="Comments" potentialActions={<Button>Filter</Button>}>

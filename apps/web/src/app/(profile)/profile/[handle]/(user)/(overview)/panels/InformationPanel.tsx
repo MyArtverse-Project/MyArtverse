@@ -2,12 +2,13 @@ import Field from "@/components/layouts/Layouts/Field"
 import { Button } from "@mav/ui/components/buttons"
 import { Group } from "@mav/ui/components/layouts"
 import type { UserType } from "@/types/users"
+import { type User } from "@/app/context/AuthContext"
 
-export default function InformationPanel({ user }: { user: UserType }) {
+export default function InformationPanel({ user, self }: { user: UserType, self?: User | null }) {
   return (
     <Group
       title={`About ${user.displayName ? user.displayName : user.handle}`}
-      potentialActions={<Button size="small" href="/settings/profile">Edit</Button>}
+      potentialActions={self?.id == user.id ? <Button size="small" href="/settings/profile">Edit</Button> : undefined}
       containerStyle="border-padding"
     >
       <Field
