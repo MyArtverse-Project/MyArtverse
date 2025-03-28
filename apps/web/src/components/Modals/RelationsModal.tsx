@@ -22,7 +22,7 @@ export default function RelationModal({
   followers: UserType[]
   following: UserType[]
   displayRelationsModal: boolean
-  toggleRelationsModal: (type?: string) => void,
+  toggleRelationsModal: (type?: string) => void
   startingTab: string
 }) {
   const [tab, setTab] = useState(startingTab)
@@ -34,8 +34,24 @@ export default function RelationModal({
     >
       <Modal.Body>
         <div className="flex flex-row gap-x-4 ">
-          <span className={cn(tab == 'follower' && 'border border-b-2  border-500 text-500', ' text-lg cursor-pointer')} onClick={() => setTab("follower")}>Followers</span>
-          <span className={cn(tab == 'following' && 'border border-b-2 border-500 text-500', 'text-lg cursor-pointer')} onClick={() => setTab("following")}>Following</span>
+          <span
+            className={cn(
+              tab == "follower" && "border border-b-2  border-500 text-500",
+              " text-lg cursor-pointer"
+            )}
+            onClick={() => setTab("follower")}
+          >
+            Followers
+          </span>
+          <span
+            className={cn(
+              tab == "following" && "border border-b-2 border-500 text-500",
+              "text-lg cursor-pointer"
+            )}
+            onClick={() => setTab("following")}
+          >
+            Following
+          </span>
         </div>
         <div className="flex flex-col gap-y-2 mt-5">
           {tab == "follower" && (
@@ -72,7 +88,6 @@ export default function RelationModal({
           )}
         </div>
       </Modal.Body>
-
     </Modal>
   )
 }

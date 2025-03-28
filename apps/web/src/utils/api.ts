@@ -285,16 +285,18 @@ export const postComment = async (
   characterName?: string | null,
   replyId?: string | null
 ) => {
-  if (!content.trim()) throw new Error("Comment content cannot be empty.");
+  if (!content.trim()) throw new Error("Comment content cannot be empty.")
 
-  const identifier = artworkId ?? username;
-  if (!identifier) throw new Error("Either artworkId or username is required.");
+  const identifier = artworkId ?? username
+  if (!identifier) throw new Error("Either artworkId or username is required.")
 
-  const route = `/v1/${commentType}/${identifier}${characterName ? `/${characterName}` : ""}/comment`;
+  const route = `/v1/${commentType}/${identifier}${characterName ? `/${characterName}` : ""}/comment`
 
-  const data = await apiWithAuth("POST", route, { content, parentCommentId: replyId ?? null });
-  if (!data) throw new Error("Unable to post comment");
+  const data = await apiWithAuth("POST", route, {
+    content,
+    parentCommentId: replyId ?? null
+  })
+  if (!data) throw new Error("Unable to post comment")
 
-  return redirect(redirectRoute);
-};
-
+  return redirect(redirectRoute)
+}

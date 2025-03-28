@@ -26,7 +26,18 @@ export const metadata: Metadata = {
   },
   formatDetection: { telephone: false, address: false },
   // prettier-ignore
-  keywords: ["fur", "furries", "furry", "fursona", "mascot", "furry fandom", "toyhouse", "furaffinity", "fur affinity", "weasyl"],
+  keywords: [
+    "fur",
+    "furries",
+    "furry",
+    "fursona",
+    "mascot",
+    "furry fandom",
+    "toyhouse",
+    "furaffinity",
+    "fur affinity",
+    "weasyl"
+  ],
   openGraph: {
     type: "website",
     siteName: BRAND

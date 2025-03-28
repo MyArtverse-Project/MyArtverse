@@ -11,14 +11,13 @@ import type { Comments, UserType } from "@/types/users"
 import CommentThread from "./Thread"
 import { type User } from "@/app/context/AuthContext"
 
-
 export default function CommentPanel({
   comments,
   user,
   self
 }: {
   comments: Comments[]
-  user: UserType,
+  user: UserType
   self?: User | null
 }) {
   return (
@@ -35,7 +34,6 @@ export default function CommentPanel({
           />
         </div>
       )}
-
 
       <div className="grid gap-y-4">
         {comments.map((comment) => (

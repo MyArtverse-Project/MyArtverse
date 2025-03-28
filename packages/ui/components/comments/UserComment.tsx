@@ -36,8 +36,11 @@ export function UserComment(props: React.PropsWithChildren<CommentProps>) {
 
   const date = new Date(props.date || "")
   const now = new Date()
-  const diff = Math.floor((now.getTime() - date.getTime()) / 1000 / 60 / 60 / 24)
-  const diffString = diff > 0 ? `${diff} day${diff > 1 ? "s" : ""} ago` : "Earlier Today"
+  const diff = Math.floor(
+    (now.getTime() - date.getTime()) / 1000 / 60 / 60 / 24
+  )
+  const diffString =
+    diff > 0 ? `${diff} day${diff > 1 ? "s" : ""} ago` : "Earlier Today"
 
   return (
     <CommentBase
@@ -46,11 +49,21 @@ export function UserComment(props: React.PropsWithChildren<CommentProps>) {
       parentId={props.parentId}
       outerContainer={
         <div className="mt-0.5 flex flex-col items-start gap-y-1">
-          <Button size="small" className="transition-none" variant="tritery" onClick={toggleReplyInput}>
+          <Button
+            size="small"
+            className="transition-none"
+            variant="tritery"
+            onClick={toggleReplyInput}
+          >
             Reply
           </Button>
-          {(props.replies || 0)  > 0 && props.toggleViewReplies && (
-            <Button size="small" className="transition-none" variant="primary" onClick={props.toggleViewReplies}>
+          {(props.replies || 0) > 0 && props.toggleViewReplies && (
+            <Button
+              size="small"
+              className="transition-none"
+              variant="primary"
+              onClick={props.toggleViewReplies}
+            >
               View {props.replies} Replies
             </Button>
           )}
@@ -90,7 +103,7 @@ export function UserComment(props: React.PropsWithChildren<CommentProps>) {
             size="small"
             className="absolute right-2 top-2 rounded-full p-0 transition-none"
             variant="tritery"
-            icon={<LuMoreVertical size={14} />}     
+            icon={<LuMoreVertical size={14} />}
           />
           {/* Comment contents */}
           <div data-mav-comment-contents="" className="mt-1 font-normal">

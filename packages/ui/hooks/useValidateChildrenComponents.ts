@@ -15,8 +15,8 @@ type ExtendElementType = React.ElementType & { name: string }
  */
 export function useValidateChildrenComponents<
   AllowedComponents extends
-  | NonNullable<React.ReactNode>
-  | React.ForwardRefExoticComponent<any>
+    | NonNullable<React.ReactNode>
+    | React.ForwardRefExoticComponent<any>
 >(childrenProp: React.ReactNode, allowedComponents: AllowedComponents[]) {
   return Children.map(childrenProp, (child) => {
     const isValidChildElement = isValidElement(child)

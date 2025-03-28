@@ -4,11 +4,20 @@ import { Group } from "@mav/ui/components/layouts"
 import type { UserType } from "@/types/users"
 import { type User } from "@/app/context/AuthContext"
 
-export default function InformationPanel({ user, self }: { user: UserType, self?: User | null }) {
+export default function InformationPanel({
+  user,
+  self
+}: { user: UserType; self?: User | null }) {
   return (
     <Group
       title={`About ${user.displayName ? user.displayName : user.handle}`}
-      potentialActions={self?.id == user.id ? <Button size="small" href="/settings/profile">Edit</Button> : undefined}
+      potentialActions={
+        self?.id == user.id ? (
+          <Button size="small" href="/settings/profile">
+            Edit
+          </Button>
+        ) : undefined
+      }
       containerStyle="border-padding"
     >
       <Field

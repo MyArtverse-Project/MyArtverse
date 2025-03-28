@@ -65,9 +65,7 @@ export default function CharacterView({
               )}
             </FolderView.Item>
           ))}
-        {owner && (
-          <FolderView.Item newItem onClick={toggleCreateFolderModal} />
-        )}
+        {owner && <FolderView.Item newItem onClick={toggleCreateFolderModal} />}
       </FolderView.Shelf>
       <FolderView.Contents>
         <div className="mb-4 flex w-full gap-x-2.5">

@@ -1,8 +1,7 @@
 import Image from "next/image"
 import { redirect } from "next/navigation"
 import { BACKEND_URL } from "@/utils/constants"
-import { Button } from "@mav/ui/components/buttons"
-import { LuCheck, LuXOctagon } from "react-icons/lu"
+import { LuXOctagon } from "react-icons/lu"
 
 async function verifyEmail(id: string): Promise<boolean> {
   try {

@@ -1,4 +1,4 @@
-'use client'
+"use client"
 
 import Image from "next/image"
 import React from "react"
@@ -11,12 +11,22 @@ import CommentPanel from "./panels/Comments/CommentPanel"
 import InformationPanel from "./panels/InformationPanel"
 import { useAuth, type User } from "@/app/context/AuthContext"
 
-function renderPanel(panel: DashboardPanel, userData: UserType, self?: User | null) {
+function renderPanel(
+  panel: DashboardPanel,
+  userData: UserType,
+  self?: User | null
+) {
   switch (panel.type) {
     case "customHTML":
       return null
     case "comments":
-      return <CommentPanel comments={userData.comments} user={userData} self={self} />
+      return (
+        <CommentPanel
+          comments={userData.comments}
+          user={userData}
+          self={self}
+        />
+      )
     case "information":
       return <InformationPanel user={userData} self={self} />
     default:
@@ -27,7 +37,7 @@ function renderPanel(panel: DashboardPanel, userData: UserType, self?: User | nu
 export default function OverviewContent({
   handle,
   panels,
-  userData,
+  userData
 }: {
   handle: string
   panels: DashboardPanel[]

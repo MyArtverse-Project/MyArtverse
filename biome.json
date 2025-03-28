@@ -117,7 +117,7 @@
   },
   "javascript": {
     "globals": ["React"],
-    "jsxRuntime":"transparent",
+    "jsxRuntime": "transparent",
     "formatter": {
       "jsxQuoteStyle": "double",
       "quoteProperties": "asNeeded",

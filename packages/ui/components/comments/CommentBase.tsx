@@ -23,8 +23,8 @@ export function CommentBase(props: React.PropsWithChildren<CommentBaseProps>) {
     <div
       data-mav-comment-node=""
       className={cn(
-        "flex items-start gap-x-4 rounded-md" ,
-        props.parentId && "ml-14 mt-2",
+        "flex items-start gap-x-4 rounded-md",
+        props.parentId && "ml-14 mt-2"
       )}
     >
       {validImgTags && (

@@ -60,10 +60,7 @@ export function ProfileMasthead(props: Partial<ProfileMastheadProps>) {
               {props.displayName || props.handle}
             </span>
             {props.isOwnProfile ?? (
-
-              <Button href="/settings/profile">
-                Edit Profile
-              </Button>
+              <Button href="/settings/profile">Edit Profile</Button>
             )}
           </Masthead.Layer>
           <Masthead.Layer>
@@ -71,10 +68,16 @@ export function ProfileMasthead(props: Partial<ProfileMastheadProps>) {
               <span className="text-lg">
                 {props.handle ? `@${props.handle}` : ""}
               </span>
-              <span className="text-lg" onClick={() => toggleRelationsModal("followers")}>
+              <span
+                className="text-lg"
+                onClick={() => toggleRelationsModal("followers")}
+              >
                 {props.followerCount} followers
               </span>
-              <span className="text-lg" onClick={() => toggleRelationsModal("following")}>
+              <span
+                className="text-lg"
+                onClick={() => toggleRelationsModal("following")}
+              >
                 {props.followingCount} following
               </span>
             </div>
@@ -83,7 +86,13 @@ export function ProfileMasthead(props: Partial<ProfileMastheadProps>) {
         </Masthead.Details>
       </Masthead.Wrapper>
       <Masthead.Tabs baseURL={`/@${props.handle}/`} items={profileTabs} />
-      <RelationModal followers={[]} following={[]} displayRelationsModal={displayRelationsModal} toggleRelationsModal={toggleRelationsModal} startingTab={startingRelationTab} />
+      <RelationModal
+        followers={[]}
+        following={[]}
+        displayRelationsModal={displayRelationsModal}
+        toggleRelationsModal={toggleRelationsModal}
+        startingTab={startingRelationTab}
+      />
     </Masthead>
   )
 }

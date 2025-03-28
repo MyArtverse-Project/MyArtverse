@@ -2,7 +2,7 @@
 
 import Image from "next/image"
 import { useRouter } from "next/navigation"
-import React, { useEffect, useState } from "react"
+import React, { useEffect } from "react"
 import { useAuth } from "@/app/context/AuthContext"
 import { Button } from "@mav/ui/components/buttons"
 import { LuMail } from "react-icons/lu"
