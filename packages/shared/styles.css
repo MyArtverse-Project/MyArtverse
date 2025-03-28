@@ -1,9 +1,97 @@
 /* Global Tailwind CSS for both web and desktop */
-@import "tailwindcss";
+@import 'tailwindcss';
+
+@plugin '@tailwindcss/forms';
+@plugin '@tailwindcss/typography';
+
+@custom-variant dark (&:is(.dark *));
 
 @theme {
-  --font-inter: "Inter", var(--default-font-family);
-  --font-code: "JetBrains Mono", var(--default-mono-font-family);
+  --grid-template-rows-resizable: minmax(0, 1fr) auto;
+
+  --grid-template-columns-resizable: minmax(0, 1fr) auto;
+
+  --color-100: hsla(var(--mav-100), var(--tw-bg-opacity, 1));
+  --color-200: hsla(var(--mav-200), var(--tw-bg-opacity, 1));
+  --color-300: hsla(var(--mav-300), var(--tw-bg-opacity, 1));
+  --color-400: hsla(var(--mav-400), var(--tw-bg-opacity, 1));
+  --color-500: hsla(var(--mav-500), var(--tw-bg-opacity, 1));
+  --color-600: hsla(var(--mav-600), var(--tw-bg-opacity, 1));
+  --color-700: hsla(var(--mav-700), var(--tw-bg-opacity, 1));
+  --color-current: currentColor;
+  --color-mute: hsla(var(--mav-mute), var(--tw-bg-opacity, 1));
+  --color-subtext: hsla(var(--mav-subtext), var(--tw-bg-opacity, 1));
+  --color-skeleton: hsla(var(--mav-skeleton), var(--tw-bg-opacity, 1));
+  --color-separator: hsla(var(--mav-separator), var(--tw-bg-opacity, 1));
+  --color-alert: hsla(var(--mav-alert), var(--tw-bg-opacity, 1));
+  --color-warning: hsla(var(--mav-warning), var(--tw-bg-opacity, 1));
+  --color-info: hsla(var(--mav-info), var(--tw-bg-opacity, 1));
+  --color-success: hsla(var(--mav-success), var(--tw-bg-opacity, 1));
+  --color-hyperlink: hsla(var(--mav-hyperlink), var(--tw-bg-opacity, 1));
+  --color-alert-hl: hsla(var(--mav-alert-highlight), var(--tw-bg-opacity, 1));
+  --color-warning-hl: hsla(
+    var(--mav-warning-highlight),
+    var(--tw-bg-opacity, 1)
+  );
+  --color-info-hl: hsla(var(--mav-info-highlight), var(--tw-bg-opacity, 1));
+  --color-success-hl: hsla(
+    var(--mav-success-highlight),
+    var(--tw-bg-opacity, 1)
+  );
+  --color-context-menu: hsla(var(--mav-context-menu), var(--tw-bg-opacity, 1));
+  --color-active: hsla(var(--mav-active), var(--tw-bg-opacity, 1));
+  --color-active-invert: hsla(
+    var(--mav-active-invert),
+    var(--tw-bg-opacity, 1)
+  );
+
+  --border-color-100: hsla(var(--mav-100), var(--tw-border-opacity, 1));
+  --border-color-200: hsla(var(--mav-200), var(--tw-border-opacity, 1));
+  --border-color-300: hsla(var(--mav-300), var(--tw-border-opacity, 1));
+  --border-color-400: hsla(var(--mav-400), var(--tw-border-opacity, 1));
+  --border-color-500: hsla(var(--mav-500), var(--tw-border-opacity, 1));
+  --border-color-600: hsla(var(--mav-600), var(--tw-border-opacity, 1));
+  --border-color-700: hsla(var(--mav-700), var(--tw-border-opacity, 1));
+  --border-color-current: currentColor;
+  --border-color-mute: hsla(var(--mav-mute), var(--tw-border-opacity, 1));
+  --border-color-subtext: hsla(var(--mav-subtext), var(--tw-border-opacity, 1));
+  --border-color-skeleton: hsla(
+    var(--mav-skeleton),
+    var(--tw-border-opacity, 1)
+  );
+  --border-color-separator: hsla(
+    var(--mav-separator),
+    var(--tw-border-opacity, 1)
+  );
+  --border-color-alert: hsla(var(--mav-alert), var(--tw-border-opacity, 1));
+  --border-color-warning: hsla(var(--mav-warning), var(--tw-border-opacity, 1));
+  --border-color-info: hsla(var(--mav-info), var(--tw-border-opacity, 1));
+  --border-color-success: hsla(var(--mav-success), var(--tw-border-opacity, 1));
+  --border-color-hyperlink: hsla(
+    var(--mav-hyperlink),
+    var(--tw-border-opacity, 1)
+  );
+  --border-color-alert-hl: hsla(
+    var(--mav-alert-highlight),
+    var(--tw-border-opacity, 1)
+  );
+  --border-color-warning-hl: hsla(
+    var(--mav-warning-highlight),
+    var(--tw-border-opacity, 1)
+  );
+  --border-color-info-hl: hsla(
+    var(--mav-info-highlight),
+    var(--tw-border-opacity, 1)
+  );
+  --border-color-success-hl: hsla(
+    var(--mav-success-highlight),
+    var(--tw-border-opacity, 1)
+  );
+}
+
+@theme {
+  --font-inter: 'Inter', var(--default-font-family);
+  --font-code: 'JetBrains Mono', var(--default-mono-font-family);
 
   --color-warning: 46, 99.3%, 54.6%;
   --color-info: 212, 95.4%, 46.3%;
@@ -54,4 +142,22 @@
 
   --color-dark-active: var(--color-dark-700);
   --color-dark-active-invert: var(--color-dark-100);
+}
+
+/*
+  The default border color has changed to `currentColor` in Tailwind CSS v4,
+  so we've added these compatibility styles to make sure everything still
+  looks the same as it did with Tailwind CSS v3.
+
+  If we ever want to remove these styles, we need to add an explicit border
+  color utility to any element that depends on these defaults.
+*/
+@layer base {
+  *,
+  ::after,
+  ::before,
+  ::backdrop,
+  ::file-selector-button {
+    border-color: var(--color-gray-200, currentColor);
+  }
 }
