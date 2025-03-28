@@ -10,7 +10,7 @@ export default async function MainProfileLayout(
 ) {
   const { handle } = await props.params
 
-  const self = await fetchUserData().catch(() => {})
+  const self = await fetchUserData().catch(() => null)
   const user = await fetchUser(handle)
 
   return (
