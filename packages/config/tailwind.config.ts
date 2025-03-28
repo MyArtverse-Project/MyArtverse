@@ -50,26 +50,26 @@ const iterateColorVars = (
   return JSON.parse(`{${parseCols}}`)
 }
 
-// const gridResizable = {
-//   resizable: "minmax(0, 1fr) auto"
-// }
+const gridResizable = {
+  resizable: "minmax(0, 1fr) auto"
+}
 
 export default {
   content: [],
   darkMode: "class",
-  // theme: {
-  //   extend: {
-  //     gridTemplateRows: gridResizable,
-  //     gridTemplateColumns: gridResizable,
-  //     colors: {
-  //       current: "currentColor",
-  //       ...iterateColorVars("--tw-bg-opacity", [...COLORS.GLOBAL, ...COLORS.OVERRIDE])
-  //     },
-  //     borderColor: {
-  //       current: "currentColor",
-  //       ...iterateColorVars("--tw-border-opacity", COLORS.GLOBAL)
-  //     }
-  //   }
-  // },
+  theme: {
+    extend: {
+      gridTemplateRows: gridResizable,
+      gridTemplateColumns: gridResizable,
+      colors: {
+        current: "currentColor",
+        ...iterateColorVars("--tw-bg-opacity", [...COLORS.GLOBAL, ...COLORS.OVERRIDE])
+      },
+      borderColor: {
+        current: "currentColor",
+        ...iterateColorVars("--tw-border-opacity", COLORS.GLOBAL)
+      }
+    }
+  },
   plugins: [forms, typography]
 } satisfies Config
