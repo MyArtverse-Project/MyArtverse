@@ -9,7 +9,6 @@ import {
 import { Button } from "@mav/ui/components/buttons"
 import { LuBell, LuCheck, LuChevronDown, LuMinusCircle, LuPlus } from "react-icons/lu"
 import { Dropdown, DropdownItem } from "./Dropdown"
-import Image from "next/image"
 import Notification from "@/components/Notification"
 
 const ICON = (
@@ -72,27 +71,31 @@ export function ActionsLoggedIn({
           variant="tritery"
         />}
         items={
-          <div className="flex flex-col items-center px-4 w-80">
+          <div className="flex flex-col items-center px-4 w-[500px]">
             <div className="flex flex-row items-center justify-between w-full">
               <span className="text-xl">Notifications</span>
               <div className="flex flex-row">
-                <Button variant="tritery" size={"big"} icon={<LuMinusCircle />} />
-                <Button variant="tritery" size={"big"} icon={<LuCheck />} />
+                <Button variant="tritery"  icon={<LuMinusCircle size={20} />} />
+                <Button variant="tritery" icon={<LuCheck size={20} />} />
               </div>
             </div>
             {user.notifications.length === 0 ? (
-              <span className="text-gray-500 text-sm">No new notifications</span>
+              <span className="text-500 text-sm">No new notifications</span>
             ) : (
               user.notifications.slice(0, 5).map((notification) => (
                 <Notification
                   key={notification.id}
                   content={notification.content}
+                  senderHandle={notification.sender ? notification.sender.handle : undefined}
                   createdAt={notification.createdAt}
                   read={notification.read}
                   userAvatar={user.avatarUrl || "/UserProfile.png"}
                   senderAvatar={
                     notification.sender ? notification.sender.avatarUrl : null
                   }
+                  comment={notification.comment}
+                  artwork={notification.artwork}
+                  character={notification.character}
                   url={
                     notification.artwork
                       ? `/artworks/${notification.artwork.id}`

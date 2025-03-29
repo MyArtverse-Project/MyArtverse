@@ -10,6 +10,7 @@ import { MyArtverseIcon } from "@mav/ui/icons"
 import { LuMenu, LuSearch } from "react-icons/lu"
 import { ActionsLoggedIn } from "./ActionsLoggedIn"
 import { ActionsLoggedOut } from "./ActionsLoggedOut"
+import SearchBar from "@/components/SearchBar"
 
 export function Navbar() {
   const { user, isLoading } = useAuth()
@@ -35,13 +36,7 @@ export function Navbar() {
           </Link>
         </div>
         <div className="flex items-center gap-x-4">
-          <Button
-            prefix={<LuSearch size={18} />}
-            className="hover:!bg-100 w-64"
-            variant="secondary"
-          >
-            Search
-          </Button>
+          <SearchBar />
           {!isLoading &&
             (user ? (
               <ActionsLoggedIn user={user} isRegistered={true} />
