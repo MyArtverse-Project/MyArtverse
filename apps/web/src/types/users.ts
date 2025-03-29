@@ -16,6 +16,7 @@ type Badge = {
   rewardDate: Date
 }
 
+
 export interface UserType {
   id: string
   handle: string
@@ -63,6 +64,7 @@ export interface Notification {
   user: UserType
   sender: UserType | null
   artwork: Artwork | null
+  character: Character | null
   comment: Comments | null
   createdAt: Date
 }

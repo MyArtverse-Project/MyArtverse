@@ -7,8 +7,10 @@ import {
   generateSiteSettingItems
 } from "@/utils/generateItems"
 import { Button } from "@mav/ui/components/buttons"
-import { LuBell, LuChevronDown, LuPlus } from "react-icons/lu"
+import { LuBell, LuCheck, LuChevronDown, LuMinusCircle, LuPlus } from "react-icons/lu"
 import { Dropdown, DropdownItem } from "./Dropdown"
+import Image from "next/image"
+import Notification from "@/components/Notification"
 
 const ICON = (
   <>
@@ -59,12 +61,54 @@ export function ActionsLoggedIn({
           </>
         }
       />
+      <Dropdown
+        button={<Button
+          prefix={<div className="relative">
+            <LuBell size={22} />
+            {user.notifications.length > 0 && !user.notifications.some(n => n.read) && (
+              <span className="absolute -top-1 -right-1 inline-block w-2 h-2 bg-500 rounded-full animate-pulse" />
+            )}
+          </div>}
+          variant="tritery"
+        />}
+        items={
+          <div className="flex flex-col items-center px-4 w-80">
+            <div className="flex flex-row items-center justify-between w-full">
+              <span className="text-xl">Notifications</span>
+              <div className="flex flex-row">
+                <Button variant="tritery" size={"big"} icon={<LuMinusCircle />} />
+                <Button variant="tritery" size={"big"} icon={<LuCheck />} />
+              </div>
+            </div>
+            {user.notifications.length === 0 ? (
+              <span className="text-gray-500 text-sm">No new notifications</span>
+            ) : (
+              user.notifications.slice(0, 5).map((notification) => (
+                <Notification
+                  key={notification.id}
+                  content={notification.content}
+                  createdAt={notification.createdAt}
+                  read={notification.read}
+                  userAvatar={user.avatarUrl || "/UserProfile.png"}
+                  senderAvatar={
+                    notification.sender ? notification.sender.avatarUrl : null
+                  }
+                  url={
+                    notification.artwork
+                      ? `/artworks/${notification.artwork.id}`
+                      : notification.character
+                        ? `/characters/${notification.character.id}`
+                        : null
+                  }
+                />
+              ))
+            )}
 
-      <Button
-        prefix={<LuBell size={22} />}
-        className="hover:!bg-100"
-        variant="tritery"
+          </div>
+        }
+
       />
+
       <Dropdown
         button={
           <Link href={`/@${user.handle}`}>

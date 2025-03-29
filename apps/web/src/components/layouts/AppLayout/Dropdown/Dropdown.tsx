@@ -22,7 +22,7 @@ export default function Dropdown({
         // @ts-expect-error
         className="translate-x-0"
       >
-        <MenuItems className="bg-context-menu border-300 absolute right-0 top-2.5 z-[9] grid rounded-md border p-2 shadow-md">
+        <MenuItems className="bg-context-menu border-300 absolute right-0 top-7 z-[9] grid rounded-md border p-2 shadow-md">
           {items}
         </MenuItems>
       </Transition>

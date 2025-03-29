@@ -5,12 +5,14 @@ import React, { createContext, useContext, useEffect, useState } from "react"
 import { fetcher } from "@/app/lib/fetcher"
 // Import the fetch helper
 import { BACKEND_URL } from "@/utils/constants"
+import { Notification } from "@/types/users"
 
 export type User = {
   id: string
   handle: string
   displayName: string
   bio: string
+  notifications: Notification[]
   avatarUrl: string
   bannerUrl: string
   dateRegistered: string
@@ -38,7 +40,7 @@ type AuthContextType = {
 const AuthContext = createContext<AuthContextType>({
   user: null,
   isLoading: true,
-  logout: () => {}
+  logout: () => null
 })
 
 export const useAuth = () => useContext(AuthContext)

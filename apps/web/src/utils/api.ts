@@ -138,6 +138,11 @@ export const fetchUser = async (handle: string) => {
   return data
 }
 
+export const getNotifications = async () => {
+  const data = await apiWithAuth<Notification[]>("GET", `/v1/profile/notifications`)
+  return data
+}
+
 export const fetchUserCharacters = async (handle: string) => {
   const data = await apiWithoutAuth<CharacterResponse>(
     "GET",
