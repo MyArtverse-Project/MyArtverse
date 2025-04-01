@@ -106,9 +106,9 @@ export default function SearchBar({ recentSearches = [], characters = [] }: { re
           </div>
           <div className="mt-4">
             {loading && <div className="text-center text-gray-500 py-4">Loading results...</div>}
-            {!loading && results.user?.length > 0 && <SearchSection title="USER RESULTS" items={results} />}
-            {!loading && results.artwork?.length > 0 && <SearchSection title="ARTWORK RESULTS" items={results} />}
-            {!loading && results.character?.length > 0 && <SearchSection title="CHARACTER RESULTS" items={results} isCharacter />}
+            {!loading && (results.user ?? []).length > 0 && <SearchSection title="USER RESULTS" items={results} />}
+            {!loading && (results.artwork ?? []).length > 0 && <SearchSection title="ARTWORK RESULTS" items={results} />}
+            {!loading && (results.character ?? []).length > 0 && <SearchSection title="CHARACTER RESULTS" items={results} isCharacter />}
             {!loading && query.trim() && results.user?.length === 0 && results.artwork?.length === 0 && results.character?.length === 0 && (
               <>
                 <div className="text-center text-gray-500 py-4">No results found for "<strong>{query}</strong>"</div>
