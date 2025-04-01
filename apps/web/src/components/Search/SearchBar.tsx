@@ -10,10 +10,20 @@ import { SearchSection } from "./Section"
 import { search } from "@/utils/api"
 import { SearchResult } from "@/types/utils"
 
-export default function SearchBar({ recentSearches = [], characters = [] }: { recentSearches?: string[], characters?: { name: string; image: string }[] }) {
+export default function SearchBar({
+  recentSearches = [],
+  characters = []
+}: {
+  recentSearches?: string[]
+  characters?: { name: string; image: string }[]
+}) {
   const [isOpen, setIsOpen] = useState(false)
   const [loading, setLoading] = useState(false)
-  const [results, setResults] = useState<SearchResult>({ user: [], artwork: [], character: [] })
+  const [results, setResults] = useState<SearchResult>({
+    user: [],
+    artwork: [],
+    character: []
+  })
   const [query, setQuery] = useState("")
   const inputRef = useRef<HTMLInputElement>(null)
 
@@ -23,10 +33,10 @@ export default function SearchBar({ recentSearches = [], characters = [] }: { re
         event.preventDefault()
         setIsOpen(true)
       } else if (event.key === "Escape") {
-        redirect("/search/?q=" + encodeURIComponent(query.trim()))
+        redirect(`/search/?q=${encodeURIComponent(query.trim())}`)
       } else if (event.key === "Enter" && isOpen) {
-        redirect("/search/?q=" + encodeURIComponent(query.trim()))
         setIsOpen(false)
+        redirect(`/search/?q=${encodeURIComponent(query.trim())}`)
       }
     }
     document.addEventListener("keydown", handleKeyDown)
@@ -105,17 +115,44 @@ export default function SearchBar({ recentSearches = [], characters = [] }: { re
             </form>
           </div>
           <div className="mt-4">
-            {loading && <div className="text-center text-gray-500 py-4">Loading results...</div>}
-            {!loading && (results.user ?? []).length > 0 && <SearchSection title="USER RESULTS" items={results} />}
-            {!loading && (results.artwork ?? []).length > 0 && <SearchSection title="ARTWORK RESULTS" items={results} />}
-            {!loading && (results.character ?? []).length > 0 && <SearchSection title="CHARACTER RESULTS" items={results} isCharacter />}
-            {!loading && query.trim() && results.user?.length === 0 && results.artwork?.length === 0 && results.character?.length === 0 && (
-              <>
-                <div className="text-center text-gray-500 py-4">No results found for "<strong>{query}</strong>"</div>
-                <SearchSection title="RECENT SEARCHES" items={recentSearches} />
-                <SearchSection title="CHARACTERS" items={characters} isCharacter />
-              </>
+            {loading && (
+              <div className="text-center text-gray-500 py-4">
+                Loading results...
+              </div>
             )}
+            {!loading && (results.user ?? []).length > 0 && (
+              <SearchSection title="USER RESULTS" items={results} />
+            )}
+            {!loading && (results.artwork ?? []).length > 0 && (
+              <SearchSection title="ARTWORK RESULTS" items={results} />
+            )}
+            {!loading && (results.character ?? []).length > 0 && (
+              <SearchSection
+                title="CHARACTER RESULTS"
+                items={results}
+                isCharacter
+              />
+            )}
+            {!loading &&
+              query.trim() &&
+              results.user?.length === 0 &&
+              results.artwork?.length === 0 &&
+              results.character?.length === 0 && (
+                <>
+                  <div className="text-center text-gray-500 py-4">
+                    No results found for "<strong>{query}</strong>"
+                  </div>
+                  <SearchSection
+                    title="RECENT SEARCHES"
+                    items={recentSearches}
+                  />
+                  <SearchSection
+                    title="CHARACTERS"
+                    items={characters}
+                    isCharacter
+                  />
+                </>
+              )}
           </div>
         </Dialog>
       </Transition>

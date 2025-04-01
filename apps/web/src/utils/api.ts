@@ -310,7 +310,10 @@ export const postComment = async (
   return redirect(redirectRoute)
 }
 
-export const search = async (query: string, type?: "character" | "user" | "artwork") => {
+export const search = async (
+  query: string,
+  type?: "character" | "user" | "artwork"
+) => {
   if (!query.trim()) {
     return {
       user: [],

@@ -36,7 +36,7 @@ export function Navbar() {
           </Link>
         </div>
         <div className="flex items-center gap-x-4">
-          <SearchBar recentSearches={ user ? user.recentSearches : []} />
+          <SearchBar recentSearches={user ? user.recentSearches : []} />
           {!isLoading &&
             (user ? (
               <ActionsLoggedIn user={user} isRegistered={true} />
