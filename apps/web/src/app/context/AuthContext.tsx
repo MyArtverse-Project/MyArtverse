@@ -14,6 +14,7 @@ export type User = {
   bio: string
   notifications: Notification[]
   avatarUrl: string
+  recentSearches: string[]
   bannerUrl: string
   dateRegistered: string
   dateUpdated: string

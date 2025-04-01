@@ -1,12 +1,22 @@
-import { Artwork, Character } from "@/types/characters";
-import { Comments } from "@/types/users";
-import { USER_DEFAULT_AVATAR } from "@/utils/constants";
-import { Button } from "@mav/ui/components/buttons";
-import Image from "next/image";
-import { LuCheck } from "react-icons/lu";
+import { Artwork, Character } from "@/types/characters"
+import { Comments } from "@/types/users"
+import { USER_DEFAULT_AVATAR } from "@/utils/constants"
+import { Button } from "@mav/ui/components/buttons"
+import Image from "next/image"
+import { LuCheck } from "react-icons/lu"
 
-
-export default function Notification({ content, createdAt, read, senderAvatar, senderHandle, url, userAvatar, artwork, character, comment }: {
+export default function Notification({
+  content,
+  createdAt,
+  read,
+  senderAvatar,
+  senderHandle,
+  url,
+  userAvatar,
+  artwork,
+  character,
+  comment
+}: {
   content: string
   read: boolean
   userAvatar: string | null
@@ -27,7 +37,6 @@ export default function Notification({ content, createdAt, read, senderAvatar, s
     diff > 0 ? `${diff} day${diff > 1 ? "s" : ""} ago` : "Earlier Today"
 
   // TODO: Read implementation
-
 
   return (
     <div className="flex flex-row justify-between items-center gap-x-5 w-full">
@@ -51,17 +60,14 @@ export default function Notification({ content, createdAt, read, senderAvatar, s
         <div className="flex flex-col w-full gap-y-3">
           <span>{content.replace("%user%", senderHandle || "Someone")}</span>
           {comment && (
-            <div className="bg-100 border-400 border rounded-md w-full px-3 py-2">{comment.content}</div>
+            <div className="bg-100 border-400 border rounded-md w-full px-3 py-2">
+              {comment.content}
+            </div>
           )}
           <span>{diffString}</span>
         </div>
       </div>
-      <Button
-        icon={
-          <LuCheck size={20} />
-        }
-        variant="tritery"
-      />
+      <Button icon={<LuCheck size={20} />} variant="tritery" />
     </div>
   )
 }

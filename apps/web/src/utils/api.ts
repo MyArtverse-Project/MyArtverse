@@ -11,6 +11,7 @@ import type {
 import type { DashboardPanel, UserType } from "@/types/users"
 import { BACKEND_URL } from "./constants"
 import { redirect } from "next/navigation"
+import { SearchResult } from "@/types/utils"
 
 type APIMethods = "GET" | "POST" | "DELETE" | "PUT"
 
@@ -139,7 +140,10 @@ export const fetchUser = async (handle: string) => {
 }
 
 export const getNotifications = async () => {
-  const data = await apiWithAuth<Notification[]>("GET", `/v1/profile/notifications`)
+  const data = await apiWithAuth<Notification[]>(
+    "GET",
+    `/v1/profile/notifications`
+  )
   return data
 }
 
@@ -304,4 +308,21 @@ export const postComment = async (
   if (!data) throw new Error("Unable to post comment")
 
   return redirect(redirectRoute)
+}
+
+export const search = async (query: string, type?: "character" | "user" | "artwork") => {
+  if (!query.trim()) {
+    return {
+      user: [],
+      artwork: [],
+      character: []
+    }
+  }
+
+  const data = await apiWithAuth<SearchResult>(
+    "GET",
+    `/v1/search?query=${encodeURIComponent(query)}&type=${type}`
+  )
+
+  return data
 }

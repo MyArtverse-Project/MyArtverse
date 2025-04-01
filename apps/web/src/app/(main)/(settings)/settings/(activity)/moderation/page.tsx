@@ -1,5 +1,3 @@
-import Link from "next/link"
-import { Button } from "@mav/ui/components/buttons"
 import { Group, GroupContainer } from "@mav/ui/components/layouts"
 
 export const metadata = {

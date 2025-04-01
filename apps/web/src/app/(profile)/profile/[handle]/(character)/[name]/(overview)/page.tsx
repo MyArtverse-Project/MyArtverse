@@ -4,8 +4,6 @@ import type { DefineRouteParams } from "@/types"
 import { fetchUser, fetchUserCharacters, fetchUserData } from "@/utils/api"
 import { BRAND } from "@mav/shared"
 
-type AsyncProps = DefineRouteParams<{ handle: string }>
-
 export async function generateMetadata(): Promise<Metadata> {
   // TODO add a simple check if their name ends with an "s"; for example "Dennis"
   // TODO it should display: "Dennis' characters", etc
@@ -17,11 +15,7 @@ export async function generateMetadata(): Promise<Metadata> {
   }
 }
 
-export default async function Page({ params }: AsyncProps) {
-  const { handle } = await params
-  const characters = await fetchUserCharacters(handle)
-  const { folders, id } = await fetchUser(handle)
-  const self = await fetchUserData()
+export default async function Page() {
   return (
     <MarginClamp>
       <div>e</div>

@@ -1,5 +1,7 @@
 /* eslint-disable @typescript-eslint/no-explicit-any */
 import type React from "react"
+import { UserType } from "./users"
+import { Artwork, Character } from "./characters"
 
 export type APIMethods = "GET" | "POST" | "DELETE" | "PUT"
 
@@ -55,3 +57,9 @@ export type FormFieldWithErrors<T extends object> = Partial<
     [K in keyof T as `${string & K}ErrorMsg`]: string | null
   }
 >
+
+export interface SearchResult {
+  user: UserType[]
+  artwork: Artwork[]
+  character: Character[]
+}
