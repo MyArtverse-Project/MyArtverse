@@ -13,7 +13,7 @@
     "format": "biome format",
     "format:write": "biome format --write",
     "lint": "biome lint",
-    "lint:write": "biome lint",
+    "lint:write": "biome check . --apply",
     "knip": "knip"
   },
   "devDependencies": {

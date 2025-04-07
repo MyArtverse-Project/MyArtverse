@@ -1,3 +1,4 @@
+import type { Variants as NoteVariants, PartialRecord } from "@/types/utils"
 import { cn } from "@mav/shared/utils"
 import type { IconType } from "react-icons"
 import {
@@ -6,7 +7,6 @@ import {
   LuInfo,
   LuXCircle
 } from "react-icons/lu"
-import type { Variants as NoteVariants, PartialRecord } from "@/types/utils"
 
 type NoteStatus = Extract<
   NoteVariants,
@@ -68,7 +68,7 @@ export default function Note({
           : `inline-flex gap-2 ${statusStyles}`
       }
     >
-      {/* @ts-expect-error */}
+      {/* @ts-expect-error: Fix Icon  */}
       <StatusIcon
         size={!inline ? 23 : 19}
         className={cn("flex-shrink-0", statusIconColor)}

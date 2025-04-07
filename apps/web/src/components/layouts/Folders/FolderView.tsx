@@ -7,6 +7,7 @@ const FolderViewContext = createContext<{
   setFolderWidth: React.Dispatch<React.SetStateAction<number>>
 }>({
   folderWidth: 270,
+  // biome-ignore lint/suspicious/noEmptyBlockStatements: <explanation>
   setFolderWidth: () => {}
 })
 

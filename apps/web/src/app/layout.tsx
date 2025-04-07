@@ -1,12 +1,12 @@
 import "@mav/shared/styles/index.scss"
-import type { Metadata, Viewport } from "next"
-import dynamic from "next/dynamic"
-import { Inter } from "next/font/google"
 import { AuthProvider } from "@/app/context/AuthContext"
 import { Analytics, NoJSMessage, SkipNav } from "@/components"
 import { BRAND } from "@mav/shared"
 import { cn } from "@mav/shared/utils"
 import { Provider } from "jotai"
+import type { Metadata, Viewport } from "next"
+import dynamic from "next/dynamic"
+import { Inter } from "next/font/google"
 import PreconnectResources from "./preconnect-resources"
 
 const CheckLocalSettings = dynamic(() =>

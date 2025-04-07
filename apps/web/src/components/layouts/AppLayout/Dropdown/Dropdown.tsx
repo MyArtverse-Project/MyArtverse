@@ -19,7 +19,7 @@ export default function Dropdown({
         leave="transition duration-[200ms] ease"
         leaveTo="transform -translate-y-1 opacity-0"
         leaveFrom="transform translate-y-0 opacity-100"
-        // @ts-expect-error
+        // @ts-expect-error: Motion div errors with className prop
         className="translate-x-0"
       >
         <MenuItems className="bg-context-menu border-300 absolute right-0 top-7 z-[9] grid rounded-md border p-2 shadow-md">

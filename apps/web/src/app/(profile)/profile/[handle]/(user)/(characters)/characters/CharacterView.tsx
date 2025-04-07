@@ -1,16 +1,16 @@
 "use client"
 
-import { useRouter } from "next/navigation"
-import { useState } from "react"
 import CreateFolderModal from "@/components/Modals/CreateFolder"
-import { FursonaCard, PinnedCharacter } from "@/components/layouts/Cards"
+import { FursonaCard } from "@/components/layouts/Cards"
 import FolderView from "@/components/layouts/Folders"
 import { SearchBox } from "@/components/layouts/Forms"
 import GridResponsive from "@/components/layouts/Layouts/GridResponsive"
+import type { CharacterResponse, Folder } from "@/types/characters"
 import { folderColors } from "@/utils/constants"
 import { Button } from "@mav/ui/components/buttons"
+import { useRouter } from "next/navigation"
+import { useState } from "react"
 import { LuFilter as FilterIcon, LuCog, LuPlus } from "react-icons/lu"
-import type { CharacterResponse, Folder } from "@/types/characters"
 
 export default function CharacterView({
   handle,
@@ -28,11 +28,11 @@ export default function CharacterView({
   const toggleCreateFolderModal = () => setFolderModalState(!createFolderModal)
   const [selectedIndex, setSelectedIndex] = useState(0)
   const [parentFolderId, setParentFolderId] = useState<string | null>(null)
-  const activeRefSheets = characters.mainCharacter?.refSheets
-    .find((r) => r.active)
-    ?.variants.find((v) => v.main)
+  // const activeRefSheets = characters.mainCharacter?.refSheets
+  //   .find((r) => r.active)
+  //   ?.variants.find((v) => v.main)
 
-  const mainCharacter = characters.mainCharacter
+  // const mainCharacter = characters.mainCharacter
 
   return (
     <FolderView>

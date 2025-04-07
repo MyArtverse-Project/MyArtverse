@@ -1,7 +1,7 @@
 import AppLayout from "@/components/layouts/AppLayout/AppLayout"
 import { CharacterMasthead } from "@/components/layouts/Mastheads"
 import type { DefineRouteParams } from "@/types"
-import { fetchCharacter, fetchUserData } from "@/utils/api"
+import { fetchCharacter } from "@/utils/api"
 
 type AsyncProps = DefineRouteParams<{ handle: string; name: string }>
 
@@ -10,7 +10,7 @@ export default async function MainProfileLayout(
 ) {
   const { handle, name } = await props.params
 
-  const self = await fetchUserData()
+  // const self = await fetchUserData()
   const character = await fetchCharacter(handle, name)
 
   return (

@@ -1,10 +1,10 @@
-/* eslint-disable @typescript-eslint/no-explicit-any */
-import Image from "next/image"
-import Link from "next/link"
-import { cn } from "@mav/shared/utils"
-import { LuHeart as Heart } from "react-icons/lu"
+import { Url } from "url"
 import type { FursonaStatus as AdoptionStatus } from "@/types/characters"
 import type { MapElement } from "@/types/utils"
+import { cn } from "@mav/shared/utils"
+import Image from "next/image"
+import Link from "next/link"
+import { LuHeart as Heart } from "react-icons/lu"
 import ColorPalette from "./ColorPalette"
 import Status from "./Status"
 
@@ -34,7 +34,7 @@ export default function FursonaCard({
 
   return (
     <DynamicElement
-      href={!href ? null : (href as any)}
+      href={!href ? null : (href as Url)}
       aria-label={`Character item: ${name}, ${species}`}
       className={cn(
         "hover:bg-mute flex flex-col gap-y-2 rounded-md p-4 transition-all",

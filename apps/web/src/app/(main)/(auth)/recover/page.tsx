@@ -1,13 +1,13 @@
 "use client"
 
-import Image from "next/image"
-import Link from "next/link"
-import { useRouter } from "next/navigation"
-import React, { useEffect, useState } from "react"
 import { forgotAction } from "@/app/actions/recover"
 import { useAuth } from "@/app/context/AuthContext"
 import { Button } from "@mav/ui/components/buttons"
 import { Form, type FormState, InputField } from "@mav/ui/components/fields"
+import Image from "next/image"
+import Link from "next/link"
+import { useRouter } from "next/navigation"
+import React, { useEffect, useState } from "react"
 import { LuKeyRound } from "react-icons/lu"
 
 export default function Page() {

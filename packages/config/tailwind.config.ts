@@ -1,6 +1,6 @@
-import type { Config } from "tailwindcss"
 import formsPlugin from "@tailwindcss/forms"
 import typographyPlugin from "@tailwindcss/typography"
+import type { Config } from "tailwindcss"
 
 const TW_PREFIX = "mav"
 const COLORS = {

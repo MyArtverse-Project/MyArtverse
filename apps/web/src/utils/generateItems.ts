@@ -1,19 +1,17 @@
-import { createElement } from "react"
 import ThemeToggle from "@/components/ThemeToggle"
+import { createElement } from "react"
 import {
   LuAccessibility,
   LuAlbum,
   LuBrush,
   LuCat,
   LuCog,
-  LuComputer,
   LuFileLock,
   LuHeart,
   LuHelpCircle,
   LuLayoutDashboard,
   LuLogOut,
   LuMessageSquarePlus,
-  LuMinusCircle,
   LuPaintbrush,
   LuShare,
   LuSun,

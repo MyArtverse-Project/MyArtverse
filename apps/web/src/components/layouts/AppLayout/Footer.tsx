@@ -1,8 +1,8 @@
-import Link from "next/link"
 import { COPYRIGHT_ALL_RIGHTS_RESERVED } from "@mav/shared"
 import { cn } from "@mav/shared/utils"
 import { Button } from "@mav/ui/components/buttons"
 import { MyArtverseIcon } from "@mav/ui/icons"
+import Link from "next/link"
 import { FaCircle } from "react-icons/fa"
 
 const commitHashEnv = process.env.NEXT_PUBLIC_VERCEL_GIT_COMMIT_SHA || ""

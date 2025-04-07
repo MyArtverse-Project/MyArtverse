@@ -1,15 +1,10 @@
 "use client"
-
-import Image from "next/image"
-import React from "react"
-import { Button } from "@mav/ui/components/buttons"
-import { UserComment, UserCommentInput } from "@mav/ui/components/comments"
-import { Group } from "@mav/ui/components/layouts"
-import DOMPurify from "isomorphic-dompurify"
+import { type User, useAuth } from "@/app/context/AuthContext"
 import type { DashboardPanel, UserType } from "@/types/users"
+import { Button } from "@mav/ui/components/buttons"
+import DOMPurify from "isomorphic-dompurify"
 import CommentPanel from "./panels/Comments/CommentPanel"
 import InformationPanel from "./panels/InformationPanel"
-import { useAuth, type User } from "@/app/context/AuthContext"
 
 function renderPanel(
   panel: DashboardPanel,

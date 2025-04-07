@@ -1,16 +1,9 @@
-import Image from "next/image"
-import React, { useState } from "react"
-import { cn } from "@mav/shared/utils"
-import { InputField } from "@mav/ui/components/fields"
-import type { Variant } from "@/types/characters"
-import Checkbox from "../layouts/Forms/Checkbox"
-import { Button } from "@headlessui/react"
-import { LuFolderPlus, LuXCircle, LuCheckCircle } from "react-icons/lu"
-import colors from "tailwindcss/colors"
-import Modal from "../layouts/Modal"
-import { start } from "repl"
 import { UserType } from "@/types/users"
 import { USER_DEFAULT_AVATAR } from "@/utils/constants"
+import { cn } from "@mav/shared/utils"
+import Image from "next/image"
+import { useState } from "react"
+import Modal from "../layouts/Modal"
 
 export default function RelationModal({
   followers,

@@ -3,12 +3,12 @@ import { cn } from "@mav/shared/utils"
 export default function Field({
   title,
   content,
-  custom,
+  // custom,
   full
 }: {
   title?: string
   content?: string
-  custom?: boolean
+  // custom?: boolean
   full?: boolean
 }) {
   return (

@@ -1,9 +1,9 @@
 "use client"
 
-import { redirect } from "next/navigation"
-import { useState } from "react"
 import { BACKEND_URL } from "@/utils/constants"
 import { Button } from "@mav/ui/components/buttons"
+import { redirect } from "next/navigation"
+import { useState } from "react"
 import { FaTrash } from "react-icons/fa6"
 import { LuXCircle } from "react-icons/lu"
 import Modal from "../layouts/Modal"

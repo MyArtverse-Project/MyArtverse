@@ -1,7 +1,7 @@
+import { MenuItem } from "@headlessui/react"
+import { cn } from "@mav/shared/utils"
 /* eslint-disable @typescript-eslint/no-explicit-any */
 import Link from "next/link"
-import { Menu, MenuItem } from "@headlessui/react"
-import { cn } from "@mav/shared/utils"
 
 export default function DropdownItem({
   children,
@@ -9,8 +9,8 @@ export default function DropdownItem({
   prefixIcon,
   suffixIcon,
   component,
-  special = false,
-  ...attrs
+  special = false
+  // ...attrs
 }: {
   children?: React.ReactNode
   link?: string

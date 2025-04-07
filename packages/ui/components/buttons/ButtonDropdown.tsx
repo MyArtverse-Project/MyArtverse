@@ -2,6 +2,6 @@
 
 import type { ButtonProps } from "./Button.types"
 
-export function ButtonDropdown(props: ButtonProps) {
+export function ButtonDropdown(_props: ButtonProps) {
   return <></>
 }

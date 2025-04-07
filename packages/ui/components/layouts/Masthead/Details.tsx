@@ -14,12 +14,9 @@ export function MastheadDetails(
   useEffect(() => {
     const profileDetails = detailWrapperRef.current!
 
-    const io = new IntersectionObserver(
-      ([entry]) => {
-        console.log(entry.isIntersecting)
-      },
-      { rootMargin: "-7% 0%" }
-    )
+    const io = new IntersectionObserver(([_entry]) => {}, {
+      rootMargin: "-7% 0%"
+    })
 
     io.observe(profileDetails)
   }, [])

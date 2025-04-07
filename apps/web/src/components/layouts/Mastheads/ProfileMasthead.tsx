@@ -1,11 +1,10 @@
 "use client"
 
-import Image from "next/image"
+import RelationModal from "@/components/Modals/RelationsModal"
 import { Button } from "@mav/ui/components/buttons"
 import { Masthead, type MastheadTabItems } from "@mav/ui/components/layouts"
-import { LuCat, LuFileEdit, LuHeart, LuHome } from "react-icons/lu"
 import { useState } from "react"
-import RelationModal from "@/components/Modals/RelationsModal"
+import { LuCat, LuHeart, LuHome } from "react-icons/lu"
 
 interface ProfileMastheadProps {
   handle: string

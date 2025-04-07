@@ -1,3 +1,4 @@
+import type { FursonaStatus } from "@/types/characters"
 import { cn } from "@mav/shared/utils"
 import type { IconType } from "react-icons"
 import {
@@ -5,7 +6,6 @@ import {
   LuSparkles as SparklesIcon,
   LuStar as StarIcon
 } from "react-icons/lu"
-import type { FursonaStatus } from "@/types/characters"
 
 export default function Status({ status }: { status: FursonaStatus }) {
   const base = "flex flex-row items-center text-md font-semibold my-1"

@@ -1,9 +1,9 @@
 "use client"
 
-import { usePathname } from "next/navigation"
 import { cn } from "@mav/shared/utils"
 import { Button } from "@mav/ui/components/buttons"
 import { kebabCase } from "lodash"
+import { usePathname } from "next/navigation"
 import settingRoutes from "./SidebarSettingsList.constants"
 
 export function SidebarSettingsList() {

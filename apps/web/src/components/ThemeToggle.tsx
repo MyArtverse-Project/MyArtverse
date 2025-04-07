@@ -1,5 +1,5 @@
-import { useState } from "react"
 import { cn } from "@mav/shared/utils"
+import { useState } from "react"
 import { LuComputer, LuMoon, LuSun } from "react-icons/lu"
 
 const ThemeToggle = () => {

@@ -1,7 +1,7 @@
 /* eslint-disable @typescript-eslint/no-explicit-any */
 import type React from "react"
-import { UserType } from "./users"
 import { Artwork, Character } from "./characters"
+import { UserType } from "./users"
 
 export type APIMethods = "GET" | "POST" | "DELETE" | "PUT"
 

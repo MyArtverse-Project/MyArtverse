@@ -1,17 +1,17 @@
 "use client"
 
-import { Children, useEffect, useRef, useState } from "react"
 import { useScrollBounds } from "@/hooks"
+import type { MapElement } from "@/types/utils"
 import { cn } from "@mav/shared/utils"
 import { Button } from "@mav/ui/components/buttons"
 import { motion } from "framer-motion"
+import { Children, useEffect, useRef, useState } from "react"
 import {
   LuFolder as Folder,
   LuFolderClosed as FolderClosed,
   LuFolderOpen as FolderOpen,
   LuFolderPlus as FolderPlus
 } from "react-icons/lu"
-import type { MapElement } from "@/types/utils"
 
 export default function FolderItem({
   children,
@@ -110,7 +110,7 @@ export default function FolderItem({
         animate={{
           height: !isExpand ? 0 : expandedHeight
         }}
-        // @ts-expect-error
+        // @ts-expect-error: Motion div errors with className prop
         className={cn(children ? "relative overflow-hidden pl-6" : "")}
       >
         {children}

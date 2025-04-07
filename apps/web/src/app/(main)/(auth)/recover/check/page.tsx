@@ -1,10 +1,10 @@
 "use client"
 
+import { useAuth } from "@/app/context/AuthContext"
+import { Button } from "@mav/ui/components/buttons"
 import Image from "next/image"
 import { useRouter } from "next/navigation"
 import { useEffect } from "react"
-import { useAuth } from "@/app/context/AuthContext"
-import { Button } from "@mav/ui/components/buttons"
 import { LuMail } from "react-icons/lu"
 
 export default function Page() {
@@ -31,7 +31,7 @@ export default function Page() {
         <h1 className="text-700 text-2xl">Check your email!</h1>
         <p className="text-center">
           You should get an email with a link to recover your account. If you
-          don't see it, check your spam folder.
+          don{"'"}t see it, check your spam folder.
         </p>
         <Button
           position="center"

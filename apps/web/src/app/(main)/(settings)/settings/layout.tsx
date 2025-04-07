@@ -1,6 +1,6 @@
-import type { Metadata } from "next"
 import { SidebarSettingsList } from "@/components/layouts/AppLayout/Sidebar/SidebarSettingsList"
 import { BRAND } from "@mav/shared"
+import type { Metadata } from "next"
 
 export const metadata: Metadata = {
   title: {

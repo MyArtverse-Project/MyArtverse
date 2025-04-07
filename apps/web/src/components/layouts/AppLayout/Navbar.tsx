@@ -1,16 +1,15 @@
 "use client"
 
-import Link from "next/link"
-import { useState } from "react"
-import { AuthProvider, useAuth } from "@/app/context/AuthContext"
-import ThemeToggle from "@/components/ThemeToggle"
+import { useAuth } from "@/app/context/AuthContext"
+import SearchBar from "@/components/Search/SearchBar"
 import { Sidebar } from "@/components/layouts/AppLayout/Sidebar/Sidebar"
 import { Button } from "@mav/ui/components/buttons"
 import { MyArtverseIcon } from "@mav/ui/icons"
-import { LuMenu, LuSearch } from "react-icons/lu"
+import Link from "next/link"
+import { useState } from "react"
+import { LuMenu } from "react-icons/lu"
 import { ActionsLoggedIn } from "./ActionsLoggedIn"
 import { ActionsLoggedOut } from "./ActionsLoggedOut"
-import SearchBar from "@/components/Search/SearchBar"
 
 export function Navbar() {
   const { user, isLoading } = useAuth()
@@ -36,7 +35,7 @@ export function Navbar() {
           </Link>
         </div>
         <div className="flex items-center gap-x-4">
-          <SearchBar recentSearches={ user ? user.recentSearches : []} />
+          <SearchBar recentSearches={user ? user.recentSearches : []} />
           {!isLoading &&
             (user ? (
               <ActionsLoggedIn user={user} isRegistered={true} />

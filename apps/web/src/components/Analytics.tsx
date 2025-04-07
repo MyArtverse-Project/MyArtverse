@@ -1,6 +1,6 @@
+import dedent from "dedent"
 import { headers } from "next/headers"
 import Script from "next/script"
-import dedent from "dedent"
 
 export async function Analytics() {
   const nonce = (await headers()).get("x-nonce")

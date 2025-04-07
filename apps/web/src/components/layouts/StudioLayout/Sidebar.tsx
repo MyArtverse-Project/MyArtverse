@@ -2,7 +2,7 @@
 
 import { Button } from "@mav/ui/components/buttons"
 import { motion } from "framer-motion"
-import { LuArrowLeft, LuSettings } from "react-icons/lu"
+import { LuSettings } from "react-icons/lu"
 import { useSidebarOpenAtom } from "./Sidebar.atom"
 
 export default function Sidebar() {

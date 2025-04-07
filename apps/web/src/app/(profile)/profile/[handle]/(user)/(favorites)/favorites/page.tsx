@@ -1,10 +1,10 @@
-import { Metadata, ResolvingMetadata } from "next"
-import { Suspense } from "react"
 import { FursonaCard } from "@/components/layouts/Cards"
 import GridResponsive from "@/components/layouts/Layouts/GridResponsive"
 import MarginClamp from "@/components/layouts/Layouts/MarginClamp"
 import { getFavorites } from "@/utils/api"
 import { BRAND } from "@mav/shared"
+import { Metadata } from "next"
+import { Suspense } from "react"
 import Loading from "./loading"
 
 export async function generateMetadata(): Promise<Metadata> {

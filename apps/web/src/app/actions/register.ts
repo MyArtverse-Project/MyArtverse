@@ -1,7 +1,5 @@
 "use server"
-
-import { cookies } from "next/headers"
-import { LoginFormSchema, RegisterFormSchema } from "@/app/lib/definition"
+import { RegisterFormSchema } from "@/app/lib/definition"
 import { BACKEND_URL } from "@/utils/constants"
 import { removeSuffixes } from "@/utils/removeSuffix"
 
@@ -71,7 +69,7 @@ export async function registerAction(formData: FormData) {
         error: "Something went wrong. Please try again later."
       }
     }
-  } catch (error) {
+  } catch (_error) {
     return {
       success: false,
       message: {

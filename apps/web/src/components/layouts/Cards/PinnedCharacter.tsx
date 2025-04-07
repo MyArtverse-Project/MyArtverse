@@ -1,8 +1,7 @@
-import Image from "next/image"
 import { displaySpecies } from "@/utils/displayer"
 import { Button } from "@mav/ui/components/buttons"
+import Image from "next/image"
 import { LuCat as CatIcon, LuPin, LuPalette as Palette } from "react-icons/lu"
-import type { ColorPalette as Colors } from "@/types/characters"
 import ColorPalette from "./ColorPalette"
 
 export default function PinnedCharacter({

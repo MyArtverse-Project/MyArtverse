@@ -1,8 +1,8 @@
 "use client"
 
-import { useEffect, useRef, useState } from "react"
 import Separator from "@/components/Separator"
 import { Button } from "@mav/ui/components/buttons"
+import { useEffect, useRef, useState } from "react"
 import {
   LuPanelLeftClose as PanelLeftClose,
   LuPanelLeftOpen as PanelLeftOpen

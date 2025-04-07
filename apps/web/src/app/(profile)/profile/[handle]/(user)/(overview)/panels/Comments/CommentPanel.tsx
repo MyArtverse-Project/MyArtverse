@@ -1,15 +1,12 @@
 "use client"
-
-import Image from "next/image"
-import { Button } from "@headlessui/react"
-import React from "react"
+import { type User } from "@/app/context/AuthContext"
+import type { Comments, UserType } from "@/types/users"
 import { postComment } from "@/utils/api"
 import { USER_DEFAULT_AVATAR } from "@/utils/constants"
-import { UserComment, UserCommentInput } from "@mav/ui/components/comments"
+import { Button } from "@headlessui/react"
+import { UserCommentInput } from "@mav/ui/components/comments"
 import { Group } from "@mav/ui/components/layouts"
-import type { Comments, UserType } from "@/types/users"
 import CommentThread from "./Thread"
-import { type User } from "@/app/context/AuthContext"
 
 export default function CommentPanel({
   comments,

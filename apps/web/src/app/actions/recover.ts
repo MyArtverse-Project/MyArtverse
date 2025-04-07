@@ -1,12 +1,5 @@
 "use server"
-
-import { cookies } from "next/headers"
-import {
-  ForgotFormSchema,
-  LoginFormSchema,
-  RecoverFormSchema,
-  RegisterFormSchema
-} from "@/app/lib/definition"
+import { ForgotFormSchema, RecoverFormSchema } from "@/app/lib/definition"
 import { BACKEND_URL } from "@/utils/constants"
 import { removeSuffixes } from "@/utils/removeSuffix"
 
@@ -55,7 +48,7 @@ export async function forgotAction(formData: FormData) {
         error: "Something went wrong. Please try again later."
       }
     }
-  } catch (error) {
+  } catch (_error) {
     return {
       success: false,
       message: {
@@ -122,7 +115,7 @@ export async function recoverAction(formData: FormData, uuid: string) {
         error: "Something went wrong. Please try again later."
       }
     }
-  } catch (error) {
+  } catch (_error) {
     return {
       success: false,
       message: {

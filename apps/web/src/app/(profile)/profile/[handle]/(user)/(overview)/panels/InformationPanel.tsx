@@ -1,8 +1,8 @@
+import { type User } from "@/app/context/AuthContext"
 import Field from "@/components/layouts/Layouts/Field"
+import type { UserType } from "@/types/users"
 import { Button } from "@mav/ui/components/buttons"
 import { Group } from "@mav/ui/components/layouts"
-import type { UserType } from "@/types/users"
-import { type User } from "@/app/context/AuthContext"
 
 export default function InformationPanel({
   user,

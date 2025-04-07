@@ -1,9 +1,9 @@
 "use server"
 
-import { cookies } from "next/headers"
 import { LoginFormSchema } from "@/app/lib/definition"
 import { BACKEND_URL } from "@/utils/constants"
 import { removeSuffixes } from "@/utils/removeSuffix"
+import { cookies } from "next/headers"
 
 export async function loginAction(formData: FormData) {
   const processedData = removeSuffixes(formData)
@@ -60,7 +60,7 @@ export async function loginAction(formData: FormData) {
         error: data.error || "Invalid email or password"
       }
     }
-  } catch (error) {
+  } catch (_error) {
     return {
       success: false,
       message: {

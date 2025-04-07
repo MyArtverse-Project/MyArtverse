@@ -1,6 +1,6 @@
+import { BACKEND_URL } from "@/utils/constants"
 import Image from "next/image"
 import { redirect } from "next/navigation"
-import { BACKEND_URL } from "@/utils/constants"
 import { LuXOctagon } from "react-icons/lu"
 
 async function verifyEmail(id: string): Promise<boolean> {

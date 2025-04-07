@@ -1,5 +1,5 @@
-import type { MetadataRoute } from "next"
 import { BRAND } from "@mav/shared"
+import type { MetadataRoute } from "next"
 
 export default function manifest(): MetadataRoute.Manifest {
   return {

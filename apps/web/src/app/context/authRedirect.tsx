@@ -1,8 +1,8 @@
+import { fetcher } from "@/app/lib/fetcher"
+import { BACKEND_URL } from "@/utils/constants"
 import { cookies } from "next/headers"
 import { redirect, useRouter } from "next/navigation"
 import { useEffect, useState } from "react"
-import { fetcher } from "@/app/lib/fetcher"
-import { BACKEND_URL } from "@/utils/constants"
 import { type User, useAuth } from "./AuthContext"
 
 export const useAuthRedirect = (redirectTo: string = "/login") => {
@@ -36,7 +36,7 @@ export const serverAuthRedirect = async () => {
   try {
     const user = await fetcher<User>(`${BACKEND_URL}/v1/auth/whoami`)
     return user
-  } catch (error) {
+  } catch (_error) {
     redirect("/login")
   }
 }

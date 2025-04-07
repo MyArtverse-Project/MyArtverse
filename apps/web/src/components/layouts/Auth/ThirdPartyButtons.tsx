@@ -1,6 +1,5 @@
 import { Button } from "@mav/ui/components/buttons"
-import { FaApple, FaFacebook, FaGoogle, FaTiktok } from "react-icons/fa"
-import { RiTwitterXFill } from "react-icons/ri"
+import { FaFacebook, FaGoogle } from "react-icons/fa"
 
 const providers = [
   { icon: FaGoogle, label: "Google" },

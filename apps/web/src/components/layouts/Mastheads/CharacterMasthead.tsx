@@ -1,8 +1,9 @@
 "use client"
 
-import Image from "next/image"
+import type { Visibility } from "@/types/utils"
 import { Button } from "@mav/ui/components/buttons"
 import { Masthead, type MastheadTabItems } from "@mav/ui/components/layouts"
+import Image from "next/image"
 import { FaCircle } from "react-icons/fa"
 import {
   LuBook,
@@ -13,7 +14,6 @@ import {
   LuLock,
   LuMoreVertical
 } from "react-icons/lu"
-import type { Visibility } from "@/types/utils"
 
 interface ProfileMastheadProps {
   characterName: string

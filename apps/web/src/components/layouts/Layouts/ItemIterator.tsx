@@ -1,11 +1,11 @@
 "use client"
 
-import { usePathname } from "next/navigation"
+import type { LinkedString } from "@/types/utils"
 import { cn } from "@mav/shared/utils"
 import { Button } from "@mav/ui/components/buttons"
 import { kebabCase } from "lodash"
+import { usePathname } from "next/navigation"
 import type { IconType } from "react-icons"
-import type { LinkedString } from "@/types/utils"
 
 export interface ItemIteratorType {
   icon: IconType

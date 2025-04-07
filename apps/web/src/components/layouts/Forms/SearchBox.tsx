@@ -1,6 +1,6 @@
+import type { MapElement } from "@/types/utils"
 import { forwardRef } from "react"
 import { LuSearch as SearchIcon } from "react-icons/lu"
-import type { MapElement } from "@/types/utils"
 
 const SearchBox = forwardRef(
   (

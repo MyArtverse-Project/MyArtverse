@@ -1,6 +1,6 @@
-import type { ReactElement } from "react"
-import type { ReactHTMLElement, Variants } from "@mav/shared/types"
 import type { UrlObject } from "url"
+import type { ReactHTMLElement, Variants } from "@mav/shared/types"
+import type { ReactElement } from "react"
 
 type ButtonVariants =
   | Exclude<Variants, "success" | "info">

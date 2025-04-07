@@ -1,5 +1,5 @@
-import Image from "next/image"
 import { cn } from "@mav/shared/utils"
+import Image from "next/image"
 
 export function MastheadAvatar({
   src,

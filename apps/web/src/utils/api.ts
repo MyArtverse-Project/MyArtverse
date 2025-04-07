@@ -1,7 +1,5 @@
 "use server"
 
-import type { ReadonlyRequestCookies } from "next/dist/server/web/spec-extension/adapters/request-cookies"
-import { cookies } from "next/headers"
 import type {
   Artwork,
   Character,
@@ -9,9 +7,11 @@ import type {
   ReferenceSheet
 } from "@/types/characters"
 import type { DashboardPanel, UserType } from "@/types/users"
-import { BACKEND_URL } from "./constants"
-import { redirect } from "next/navigation"
 import { SearchResult } from "@/types/utils"
+import type { ReadonlyRequestCookies } from "next/dist/server/web/spec-extension/adapters/request-cookies"
+import { cookies } from "next/headers"
+import { redirect } from "next/navigation"
+import { BACKEND_URL } from "./constants"
 
 type APIMethods = "GET" | "POST" | "DELETE" | "PUT"
 
@@ -310,7 +310,10 @@ export const postComment = async (
   return redirect(redirectRoute)
 }
 
-export const search = async (query: string, type?: "character" | "user" | "artwork") => {
+export const search = async (
+  query: string,
+  type?: "character" | "user" | "artwork"
+) => {
   if (!query.trim()) {
     return {
       user: [],

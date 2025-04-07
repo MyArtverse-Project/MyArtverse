@@ -1,5 +1,5 @@
-import type { PropsWithChildren } from "react"
 import { type VariantProps, cva } from "class-variance-authority"
+import type { PropsWithChildren } from "react"
 import type { IconType } from "react-icons"
 
 const badgeVariants = cva(

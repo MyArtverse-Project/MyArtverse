@@ -1,11 +1,11 @@
 "use client"
 
-import { useEffect, useState } from "react"
 import { Button } from "@/components/ui/Buttons"
 import { Checkbox, InputField } from "@/components/ui/Forms"
 import DropZone from "@/components/ui/Forms/DropZone"
 import Modal from "@/components/ui/Modal"
 import { BACKEND_URL } from "@/utils/env"
+import { useEffect, useState } from "react"
 import { FaFolderPlus } from "react-icons/fa6"
 import { LuXCircle } from "react-icons/lu"
 
@@ -52,7 +52,6 @@ export default function UploadArtModal({
     })
 
     if (!data.ok) {
-      console.error("Failed to upload artwork")
       return
     }
 

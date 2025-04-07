@@ -1,6 +1,4 @@
 "use client"
-
-import React from "react"
 import type { ReactForwardRef, ReactHTMLElement } from "@mav/shared/types"
 import { cn } from "@mav/shared/utils"
 import FieldLabel from "./FieldLabel"

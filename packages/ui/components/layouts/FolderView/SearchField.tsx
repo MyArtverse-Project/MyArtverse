@@ -4,6 +4,6 @@ interface FolderViewSearchFieldProps {
   maxPage: number
 }
 
-export function FolderViewSearchField(props: FolderViewSearchFieldProps) {
+export function FolderViewSearchField(_props: FolderViewSearchFieldProps) {
   return <></>
 }

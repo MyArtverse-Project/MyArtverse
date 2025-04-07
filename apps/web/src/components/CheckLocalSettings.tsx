@@ -3,7 +3,7 @@
 /* eslint-disable @typescript-eslint/no-unused-vars */
 import { useEffect } from "react"
 
-const checkLocalStorage = (key: string, value: unknown): string | void => {
+const _checkLocalStorage = (key: string, value: unknown): string | void => {
   const ls = window.localStorage
   const lsItem = ls.getItem(key)
 
@@ -32,7 +32,7 @@ const checkLocalStorage = (key: string, value: unknown): string | void => {
 
 export function CheckLocalSettings() {
   useEffect(() => {
-    const reducedAnimations = window.matchMedia(
+    const _reducedAnimations = window.matchMedia(
       "(prefers-reduced-motion)"
     ).matches
   }, [])

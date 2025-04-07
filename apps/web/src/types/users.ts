@@ -3,7 +3,7 @@ import type { LinkedString } from "./utils"
 
 type NullableString = string | null
 type UserRole = "developer" | "admin" | "moderator" | "user"
-type UserRoles = UserRole
+// type UserRoles = UserRole
 type OnlineStatus = "offline" | "online"
 
 type Link = {

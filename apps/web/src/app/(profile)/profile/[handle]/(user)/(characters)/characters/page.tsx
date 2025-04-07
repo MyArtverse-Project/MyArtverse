@@ -1,8 +1,8 @@
-import type { Metadata } from "next"
 import MarginClamp from "@/components/layouts/Layouts/MarginClamp"
 import type { DefineRouteParams } from "@/types"
 import { fetchUser, fetchUserCharacters, fetchUserData } from "@/utils/api"
 import { BRAND } from "@mav/shared"
+import type { Metadata } from "next"
 import CharacterView from "./CharacterView"
 
 type AsyncProps = DefineRouteParams<{ handle: string }>

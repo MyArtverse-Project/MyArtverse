@@ -1,5 +1,5 @@
-import { useId } from "react"
 import { kebabCase } from "lodash"
+import { useId } from "react"
 
 /**
  * Used for targetting accessibility tools

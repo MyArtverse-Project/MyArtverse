@@ -1,7 +1,7 @@
-import Image from "next/image"
+import type { ReferenceSheet } from "@/types/characters"
 import { BACKEND_URL } from "@/utils/constants"
 import { cn } from "@mav/shared/utils"
-import type { ReferenceSheet } from "@/types/characters"
+import Image from "next/image"
 
 export default function ReferenceCard({
   data,

@@ -1,8 +1,6 @@
-import type { Metadata } from "next"
 import MarginClamp from "@/components/layouts/Layouts/MarginClamp"
-import type { DefineRouteParams } from "@/types"
-import { fetchUser, fetchUserCharacters, fetchUserData } from "@/utils/api"
 import { BRAND } from "@mav/shared"
+import type { Metadata } from "next"
 
 export async function generateMetadata(): Promise<Metadata> {
   // TODO add a simple check if their name ends with an "s"; for example "Dennis"

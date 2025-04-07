@@ -1,6 +1,5 @@
 import { User } from "@/app/context/AuthContext"
 import Avatar from "@/components/Avatar"
-import { Masthead } from "@mav/ui/components/layouts"
 import {
   LuAlertTriangle,
   LuBrush,

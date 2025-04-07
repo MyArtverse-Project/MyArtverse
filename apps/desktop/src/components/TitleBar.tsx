@@ -1,5 +1,5 @@
-import { useEffect, useRef, useState } from "react"
 import { appWindow } from "@tauri-apps/api/window"
+import { useEffect, useRef, useState } from "react"
 import {
   VscChromeMaximize,
   VscChromeMinimize,

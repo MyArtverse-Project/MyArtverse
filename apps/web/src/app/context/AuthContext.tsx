@@ -1,11 +1,11 @@
 "use client"
 
-import { useRouter } from "next/navigation"
-import React, { createContext, useContext, useEffect, useState } from "react"
 import { fetcher } from "@/app/lib/fetcher"
+import { Notification } from "@/types/users"
 // Import the fetch helper
 import { BACKEND_URL } from "@/utils/constants"
-import { Notification } from "@/types/users"
+import { useRouter } from "next/navigation"
+import React, { createContext, useContext, useEffect, useState } from "react"
 
 export type User = {
   id: string
@@ -60,7 +60,7 @@ export const AuthProvider = ({ children }: { children: React.ReactNode }) => {
           false
         )
         setUser(data)
-      } catch (error) {
+      } catch (_error) {
         setUser(null)
       } finally {
         setIsLoading(false)
@@ -75,7 +75,7 @@ export const AuthProvider = ({ children }: { children: React.ReactNode }) => {
       await fetcher("/api/auth/logout", { method: "POST" })
       setUser(null)
       router.push("/login")
-    } catch (err) {
+    } catch (_err) {
       throw new Error("Logout failed")
     }
   }

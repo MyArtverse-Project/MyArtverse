@@ -1,19 +1,29 @@
 "use client"
 
-import { useState, useEffect, useRef } from "react"
+import { SearchResult } from "@/types/utils"
+import { search } from "@/utils/api"
 import { Dialog, Transition } from "@headlessui/react"
-import { redirect } from "next/navigation"
-import { LuSearch } from "react-icons/lu"
 import { Button } from "@mav/ui/components/buttons"
 import { InputField } from "@mav/ui/components/fields"
+import { redirect } from "next/navigation"
+import { useEffect, useRef, useState } from "react"
+import { LuSearch } from "react-icons/lu"
 import { SearchSection } from "./Section"
-import { search } from "@/utils/api"
-import { SearchResult } from "@/types/utils"
 
-export default function SearchBar({ recentSearches = [], characters = [] }: { recentSearches?: string[], characters?: { name: string; image: string }[] }) {
+export default function SearchBar({
+  recentSearches = [],
+  characters = []
+}: {
+  recentSearches?: string[]
+  characters?: { name: string; image: string }[]
+}) {
   const [isOpen, setIsOpen] = useState(false)
   const [loading, setLoading] = useState(false)
-  const [results, setResults] = useState<SearchResult>({ user: [], artwork: [], character: [] })
+  const [results, setResults] = useState<SearchResult>({
+    user: [],
+    artwork: [],
+    character: []
+  })
   const [query, setQuery] = useState("")
   const inputRef = useRef<HTMLInputElement>(null)
 
@@ -105,17 +115,44 @@ export default function SearchBar({ recentSearches = [], characters = [] }: { re
             </form>
           </div>
           <div className="mt-4">
-            {loading && <div className="text-center text-gray-500 py-4">Loading results...</div>}
-            {!loading && (results.user ?? []).length > 0 && <SearchSection title="USER RESULTS" items={results} />}
-            {!loading && (results.artwork ?? []).length > 0 && <SearchSection title="ARTWORK RESULTS" items={results} />}
-            {!loading && (results.character ?? []).length > 0 && <SearchSection title="CHARACTER RESULTS" items={results} isCharacter />}
-            {!loading && query.trim() && results.user?.length === 0 && results.artwork?.length === 0 && results.character?.length === 0 && (
-              <>
-                <div className="text-center text-gray-500 py-4">No results found for "<strong>{query}</strong>"</div>
-                <SearchSection title="RECENT SEARCHES" items={recentSearches} />
-                <SearchSection title="CHARACTERS" items={characters} isCharacter />
-              </>
+            {loading && (
+              <div className="text-center text-gray-500 py-4">
+                Loading results...
+              </div>
             )}
+            {!loading && (results.user ?? []).length > 0 && (
+              <SearchSection title="USER RESULTS" items={results} />
+            )}
+            {!loading && (results.artwork ?? []).length > 0 && (
+              <SearchSection title="ARTWORK RESULTS" items={results} />
+            )}
+            {!loading && (results.character ?? []).length > 0 && (
+              <SearchSection
+                title="CHARACTER RESULTS"
+                items={results}
+                isCharacter
+              />
+            )}
+            {!loading &&
+              query.trim() &&
+              results.user?.length === 0 &&
+              results.artwork?.length === 0 &&
+              results.character?.length === 0 && (
+                <>
+                  <div className="text-center text-gray-500 py-4">
+                    No results found for "<strong>{query}</strong>"
+                  </div>
+                  <SearchSection
+                    title="RECENT SEARCHES"
+                    items={recentSearches}
+                  />
+                  <SearchSection
+                    title="CHARACTERS"
+                    items={characters}
+                    isCharacter
+                  />
+                </>
+              )}
           </div>
         </Dialog>
       </Transition>

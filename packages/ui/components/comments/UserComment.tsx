@@ -1,11 +1,11 @@
 "use client"
 
+import { useState } from "react"
 import { AiFillPushpin } from "react-icons/ai"
-import { LuMoreVertical, LuThumbsUp } from "react-icons/lu"
+import { LuMoreVertical } from "react-icons/lu"
 import { Badge } from "../badges"
 import { Button } from "../buttons"
 import { CommentBase } from "./CommentBase"
-import { useState } from "react"
 import { UserCommentInput } from "./UserCommentInput"
 
 interface CommentProps extends React.ComponentProps<typeof CommentBase> {

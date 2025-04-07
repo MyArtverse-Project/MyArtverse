@@ -1,12 +1,13 @@
-import Link from "next/link"
 import { User } from "@/app/context/AuthContext"
 import Avatar from "@/components/Avatar"
+import Notification from "@/components/Notification"
 import Separator from "@/components/Separator"
 import {
   generateCreateItems,
   generateSiteSettingItems
 } from "@/utils/generateItems"
 import { Button } from "@mav/ui/components/buttons"
+import Link from "next/link"
 import {
   LuBell,
   LuCheck,
@@ -15,7 +16,6 @@ import {
   LuPlus
 } from "react-icons/lu"
 import { Dropdown, DropdownItem } from "./Dropdown"
-import Notification from "@/components/Notification"
 
 const ICON = (
   <>

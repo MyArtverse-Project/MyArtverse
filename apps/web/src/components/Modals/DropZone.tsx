@@ -1,11 +1,11 @@
 "use client"
 
-import Image from "next/image"
-import { useEffect, useRef, useState } from "react"
+import type { MapElement } from "@/types/utils"
 import { BACKEND_URL } from "@/utils/constants"
 import { cn } from "@mav/shared/utils"
+import Image from "next/image"
+import { useEffect, useRef, useState } from "react"
 import { LuUpload } from "react-icons/lu"
-import type { MapElement } from "@/types/utils"
 
 const allowedTypes = ["image/png", "image/jpeg", "image/jpg"]
 const maxFileSize = 10 * 1024 * 1024 // 10 MB
@@ -26,7 +26,7 @@ export default function DropZone({
   const [imageUrl, setImageUrl] = useState<string | null>(null)
   const [uploading, setUploading] = useState(false)
   const [error, setError] = useState<string | null>(null)
-  const [success, setSuccess] = useState(false)
+  const [_success, setSuccess] = useState(false)
 
   const fileUploadRef = useRef<HTMLInputElement>(null)
 

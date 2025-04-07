@@ -1,8 +1,8 @@
 "use client"
 
+import type { MapElement } from "@/types/utils"
 import { cn } from "@mav/shared/utils"
 import { motion } from "framer-motion"
-import type { MapElement } from "@/types/utils"
 import Overlay from "./Overlay"
 
 export default function Modal({
@@ -39,7 +39,7 @@ export default function Modal({
           type: "tween",
           duration: 0.22
         }}
-        // @ts-expect-error
+        // @ts-expect-error: Motion div errors with className prop
         className={cn(
           "border-300 bg-200 fixed left-1/2 top-1/2 overflow-hidden rounded-md border",
           className

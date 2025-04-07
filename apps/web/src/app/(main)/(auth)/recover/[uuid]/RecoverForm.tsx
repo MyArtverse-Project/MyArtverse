@@ -1,10 +1,10 @@
 "use client"
 
-import { useRouter } from "next/navigation"
-import { useState } from "react"
 import { recoverAction } from "@/app/actions/recover"
 import { Button } from "@mav/ui/components/buttons"
 import { Form, type FormState, InputField } from "@mav/ui/components/fields"
+import { useRouter } from "next/navigation"
+import { useState } from "react"
 
 export default function RecoverForm({ uuid }: { uuid: string }) {
   const router = useRouter()
