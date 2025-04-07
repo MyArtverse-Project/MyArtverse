@@ -1,4 +1,4 @@
-import { headers } from "next/headers";
+import { headers } from "next/headers"
 import Script from "next/script"
 import dedent from "dedent"
 

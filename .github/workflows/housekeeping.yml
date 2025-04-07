@@ -15,20 +15,20 @@ jobs:
       - name: Install deps
         run: yarn
 
-      - name: "Formatting: Prettier"
-        id: prettier
-        run: yarn prettier --check .
+      - name: "Biome: Format"
+        id: formatter
+        run: yarn format
         continue-on-error: true
 
-      - name: "Formatting: ESLint"
-        id: eslint
-        run: yarn eslint .
+      - name: "Biome: Lint"
+        id: linter
+        run: yarn lint
         continue-on-error: true
 
       - name: "Check outcomes"
         if: always()
         run: |
-          if [[ "${{ steps.prettier.outcome }}" != "success" || "${{ steps.eslint.outcome }}" != "success" ]]; then
+          if [[ "${{ steps.formatter.outcome }}" != "success" || "${{ steps.linter.outcome }}" != "success" ]]; then
             echo "Formatting checks failed; make sure to format and lint your code accordingly!"
             exit 1
           fi
@@ -46,5 +46,5 @@ jobs:
       - name: Install deps
         run: yarn
 
-      - name: "Dependencies: Knip"
+      - name: "Knip checks"
         run: yarn knip

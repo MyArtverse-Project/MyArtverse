@@ -1,4 +1,5 @@
 import { useState } from "react"
+import { cn } from "@mav/shared/utils"
 import { LuComputer, LuMoon, LuSun } from "react-icons/lu"
 
 const ThemeToggle = () => {
@@ -6,27 +7,27 @@ const ThemeToggle = () => {
 
   const handleThemeChange = (selectedTheme: string) => {
     setTheme(selectedTheme)
-    
+
     // TODO: Change the theme
   }
 
   return (
-    <div className="flex items-center gap-2 border border-400 rounded-lg bg-purple-50">
-      <div className="flex items-center gap-2 bg-200 p-1 rounded-md">
+    <div className="border-400 flex items-center gap-2 rounded-lg border bg-purple-50">
+      <div className="bg-200 flex items-center gap-2 rounded-md p-1">
         <button
-          className={`p-1 rounded ${theme === "default" ? "bg-400" : ""}`}
+          className={cn("rounded p-1", theme === "default" ? "bg-400" : "")}
           onClick={() => handleThemeChange("default")}
         >
           <LuComputer />
         </button>
         <button
-          className={`p-1 rounded ${theme === "dark" ? "bg-400" : ""}`}
+          className={cn("rounded p-1", theme === "dark" ? "bg-400" : "")}
           onClick={() => handleThemeChange("dark")}
         >
           <LuMoon />
         </button>
         <button
-          className={`p-1 rounded ${theme === "light" ? "bg-400" : ""}`}
+          className={cn("rounded p-1", theme === "light" ? "bg-400" : "")}
           onClick={() => handleThemeChange("light")}
         >
           <LuSun />

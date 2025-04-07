@@ -1,7 +1,12 @@
 "use server"
 
 import { cookies } from "next/headers"
-import { ForgotFormSchema, LoginFormSchema, RecoverFormSchema, RegisterFormSchema } from "@/app/lib/definition"
+import {
+  ForgotFormSchema,
+  LoginFormSchema,
+  RecoverFormSchema,
+  RegisterFormSchema
+} from "@/app/lib/definition"
 import { BACKEND_URL } from "@/utils/constants"
 import { removeSuffixes } from "@/utils/removeSuffix"
 
@@ -10,7 +15,7 @@ export async function forgotAction(formData: FormData) {
   const { email } = processedData
 
   const validatedFields = ForgotFormSchema.safeParse({
-    email,
+    email
   })
 
   if (!validatedFields.success) {
@@ -18,20 +23,18 @@ export async function forgotAction(formData: FormData) {
       success: false,
       message: {
         error: null,
-        email: validatedFields.error.flatten().fieldErrors?.email,
-      },
+        email: validatedFields.error.flatten().fieldErrors?.email
+      }
     }
   }
-
- 
 
   try {
     const res = await fetch(`${BACKEND_URL}/v1/auth/forgot`, {
       method: "POST",
       headers: {
-        "Content-Type": "application/json",
+        "Content-Type": "application/json"
       },
-      body: JSON.stringify({ email }),
+      body: JSON.stringify({ email })
     })
 
     const data = await res.json()
@@ -49,15 +52,15 @@ export async function forgotAction(formData: FormData) {
     return {
       success: false,
       message: {
-        error: "Something went wrong. Please try again later.",
-      },
+        error: "Something went wrong. Please try again later."
+      }
     }
   } catch (error) {
     return {
       success: false,
       message: {
-        error: "Something went wrong in our end! Please try again later.",
-      },
+        error: "Something went wrong in our end! Please try again later."
+      }
     }
   }
 }
@@ -68,7 +71,7 @@ export async function recoverAction(formData: FormData, uuid: string) {
 
   const validatedFields = RecoverFormSchema.safeParse({
     password,
-    confirm,
+    confirm
   })
 
   if (!validatedFields.success) {
@@ -77,8 +80,8 @@ export async function recoverAction(formData: FormData, uuid: string) {
       message: {
         error: null,
         password: validatedFields.error.flatten().fieldErrors?.password,
-        confirm: validatedFields.error.flatten().fieldErrors?.confirm,
-      },
+        confirm: validatedFields.error.flatten().fieldErrors?.confirm
+      }
     }
   }
 
@@ -87,8 +90,8 @@ export async function recoverAction(formData: FormData, uuid: string) {
       success: false,
       message: {
         error: null,
-        password: ["Passwords do not match"],
-      },
+        password: ["Passwords do not match"]
+      }
     }
   }
 
@@ -96,9 +99,9 @@ export async function recoverAction(formData: FormData, uuid: string) {
     const res = await fetch(`${BACKEND_URL}/v1/auth/recover`, {
       method: "POST",
       headers: {
-        "Content-Type": "application/json",
+        "Content-Type": "application/json"
       },
-      body: JSON.stringify({ newPassword: password, uuid }),
+      body: JSON.stringify({ newPassword: password, uuid })
     })
 
     const data = await res.json()
@@ -116,15 +119,15 @@ export async function recoverAction(formData: FormData, uuid: string) {
     return {
       success: false,
       message: {
-        error: "Something went wrong. Please try again later.",
-      },
+        error: "Something went wrong. Please try again later."
+      }
     }
   } catch (error) {
     return {
       success: false,
       message: {
-        error: "Something went wrong in our end! Please try again later.",
-      },
+        error: "Something went wrong in our end! Please try again later."
+      }
     }
   }
 }

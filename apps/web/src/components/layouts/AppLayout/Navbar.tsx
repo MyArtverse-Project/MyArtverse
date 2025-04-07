@@ -2,14 +2,15 @@
 
 import Link from "next/link"
 import { useState } from "react"
-import { useAuth } from "@/app/context/AuthContext"
+import { AuthProvider, useAuth } from "@/app/context/AuthContext"
+import ThemeToggle from "@/components/ThemeToggle"
+import { Sidebar } from "@/components/layouts/AppLayout/Sidebar/Sidebar"
 import { Button } from "@mav/ui/components/buttons"
 import { MyArtverseIcon } from "@mav/ui/icons"
 import { LuMenu, LuSearch } from "react-icons/lu"
 import { ActionsLoggedIn } from "./ActionsLoggedIn"
 import { ActionsLoggedOut } from "./ActionsLoggedOut"
-import { Sidebar } from "@/components/layouts/AppLayout/Sidebar/Sidebar"
-import ThemeToggle from "@/components/ThemeToggle"
+import SearchBar from "@/components/Search/SearchBar"
 
 export function Navbar() {
   const { user, isLoading } = useAuth()
@@ -31,18 +32,17 @@ export function Navbar() {
             user={user}
           />
           <Link href="/" aria-label="Home" draggable={false}>
-            <MyArtverseIcon size={0.69} />
+            <MyArtverseIcon size={0.8} />
           </Link>
         </div>
         <div className="flex items-center gap-x-4">
-          <Button
-            prefix={<LuSearch size={18} />}
-            className="hover:!bg-100 w-64"
-            variant="secondary"
-          >
-            Search
-          </Button>
-          {!isLoading && (user ? <ActionsLoggedIn user={user} isRegistered={true} /> : <ActionsLoggedOut />)}
+          <SearchBar recentSearches={ user ? user.recentSearches : []} />
+          {!isLoading &&
+            (user ? (
+              <ActionsLoggedIn user={user} isRegistered={true} />
+            ) : (
+              <ActionsLoggedOut />
+            ))}
         </div>
       </nav>
     </div>

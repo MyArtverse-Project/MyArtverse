@@ -1,7 +1,7 @@
 "use client"
 
-import { useState } from "react"
 import { useRouter } from "next/navigation"
+import { useState } from "react"
 import { recoverAction } from "@/app/actions/recover"
 import { Button } from "@mav/ui/components/buttons"
 import { Form, type FormState, InputField } from "@mav/ui/components/fields"
@@ -20,7 +20,7 @@ export default function RecoverForm({ uuid }: { uuid: string }) {
     } else {
       setErrors({
         message: res.message.error || "Something went wrong. Please try again.",
-        errors: {},
+        errors: {}
       })
     }
   }
@@ -40,7 +40,11 @@ export default function RecoverForm({ uuid }: { uuid: string }) {
         placeholder="Confirm Password"
         error={errors?.errors.confirm}
       />
-      <Button position="center" type="submit" className="mt-4 w-full text-center">
+      <Button
+        position="center"
+        type="submit"
+        className="mt-4 w-full text-center"
+      >
         Reset Password
       </Button>
     </Form>

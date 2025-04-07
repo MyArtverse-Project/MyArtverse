@@ -12,7 +12,11 @@ export function StudioLayout(props: React.PropsWithChildren) {
       <Navbar />
       <div className="relative flex h-[calc(100dvh-6rem)]">
         <Sidebar />
-        <main data-mav-studio-layout-slot="" className="flex-1" id="skip-to-content">
+        <main
+          data-mav-studio-layout-slot=""
+          className="flex-1"
+          id="skip-to-content"
+        >
           {props.children}
         </main>
       </div>

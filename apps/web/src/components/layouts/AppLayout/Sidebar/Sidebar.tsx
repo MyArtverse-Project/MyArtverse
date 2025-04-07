@@ -1,16 +1,16 @@
 "use client"
 
+import Link from "next/link"
+import { Fragment } from "react"
+import { User } from "@/app/context/AuthContext"
+import Separator from "@/components/Separator"
 import { cn } from "@mav/shared/utils"
 import { Button } from "@mav/ui/components/buttons"
 import { MyArtverseIcon } from "@mav/ui/icons"
 import { motion } from "framer-motion"
-import Link from "next/link"
-import { Fragment } from "react"
 import { LuX } from "react-icons/lu"
-import { fmDuration, SidebarItems } from "./SidebarItems"
-import { User } from "@/app/context/AuthContext"
 import Menu from "../../Menu"
-import Separator from "@/components/Separator"
+import { SidebarItems, fmDuration } from "./SidebarItems"
 
 export function Sidebar({
   toggleSidebar,
@@ -28,7 +28,7 @@ export function Sidebar({
         onClick={toggleSidebar}
         className={cn(
           "fixed inset-0 z-[99] bg-black/60 transition-all duration-[350ms]",
-          sidebarOpened ? "opacity-100" : "pointer-events-none opacity-0",
+          sidebarOpened ? "opacity-100" : "pointer-events-none opacity-0"
         )}
       />
       <div className="fixed z-[100]">
@@ -41,12 +41,12 @@ export function Sidebar({
               ? {
                   x: 0,
                   display: "block",
-                  transition: { ...fmDuration, ease: "easeOut" },
+                  transition: { ...fmDuration, ease: "easeOut" }
                 }
               : {
                   x: "-100%",
                   transition: { ...fmDuration, ease: "easeIn" },
-                  transitionEnd: { display: "none" },
+                  transitionEnd: { display: "none" }
                 }
           }
         >
@@ -57,7 +57,7 @@ export function Sidebar({
               onClick={toggleSidebar}
             />
             <Link href="/" aria-label="Home" title="Home">
-              <MyArtverseIcon />
+              <MyArtverseIcon size={0.8} />
             </Link>
           </div>
           <div className="h-full px-2.5" role="menu">

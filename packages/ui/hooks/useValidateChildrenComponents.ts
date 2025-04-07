@@ -14,14 +14,19 @@ type ExtendElementType = React.ElementType & { name: string }
  * @param allowedComponents An array of allowed components to be passed
  */
 export function useValidateChildrenComponents<
-  AllowedComponents extends NonNullable<React.ReactNode> | React.ForwardRefExoticComponent<any>
+  AllowedComponents extends
+    | NonNullable<React.ReactNode>
+    | React.ForwardRefExoticComponent<unknown>
 >(childrenProp: React.ReactNode, allowedComponents: AllowedComponents[]) {
   return Children.map(childrenProp, (child) => {
     const isValidChildElement = isValidElement(child)
 
     if (
       isValidChildElement ||
-      allowedComponents.some((allowedType) => (child as unknown as React.ReactElement).type === allowedType)
+      allowedComponents.some(
+        (allowedType) =>
+          (child as unknown as React.ReactElement).type === allowedType
+      )
     )
       return child
 
@@ -29,7 +34,8 @@ export function useValidateChildrenComponents<
       .map((type) => (type as ExtendElementType).name || type.toString())
       .join(", ")
 
-    const invalidChildName = isValidChildElement && (child.type as ExtendElementType).name
+    const invalidChildName =
+      isValidChildElement && (child.type as ExtendElementType).name
 
     throw new Error(
       `Component '${invalidChildName}' is not allowed. The allowed components are: ${allowedNames}.`

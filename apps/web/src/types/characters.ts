@@ -1,7 +1,12 @@
 import type { Comments, UserType } from "./users"
 import type { StatusIndicator, Visibility } from "./utils"
 
-export type FursonaStatus = "adopted" | "upForAdopt" | "owned" | "hidden" | "main"
+export type FursonaStatus =
+  | "adopted"
+  | "upForAdopt"
+  | "owned"
+  | "hidden"
+  | "main"
 
 export interface ColorPalette {
   name: string
@@ -46,7 +51,10 @@ export interface Character {
   migration: {
     url: string
     migrateDate: Date
-    migrationStatus: Extract<StatusIndicator, "failed" | "canceled" | "pending" | "finished">
+    migrationStatus: Extract<
+      StatusIndicator,
+      "failed" | "canceled" | "pending" | "finished"
+    >
     migrationReason: string
   }
   adoptionStatus: {
@@ -90,9 +98,9 @@ export interface Variant {
   url: string
   nsfw: boolean
   main?: boolean
-  onChangeCheck?: (e: React.ChangeEvent<HTMLInputElement>) => void
-  onChangeName?: (e: React.ChangeEvent<HTMLInputElement>) => void
-  deleteVariant?: (e: React.MouseEvent<HTMLDivElement>) => void
+  onChangeCheck: (e: React.ChangeEvent<HTMLInputElement>) => void
+  onChangeName: (e: React.ChangeEvent<HTMLInputElement>) => void
+  deleteVariant: (e: React.MouseEvent<HTMLDivElement>) => void
 }
 
 export interface ReferenceSheet {
@@ -103,6 +111,16 @@ export interface ReferenceSheet {
   character?: Character
   colors: string[]
   variants: Variant[]
+}
+
+export type Folder = {
+  id: string
+  name: string
+  color?: string
+  children?: Folder[]
+  parentId?: string
+  characters?: Character[]
+  artworks?: Artwork[]
 }
 
 export interface CharacterResponse {

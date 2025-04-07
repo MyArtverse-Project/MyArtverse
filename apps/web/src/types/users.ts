@@ -1,4 +1,4 @@
-import type { Artwork, Character } from "./characters"
+import type { Artwork, Character, Folder } from "./characters"
 import type { LinkedString } from "./utils"
 
 type NullableString = string | null
@@ -26,6 +26,7 @@ export interface UserType {
   bannerUrl: LinkedString
   following: UserType[]
   followers: UserType[]
+  folders: Folder[]
   favoriteCharacters: Character[]
   characters: Character[]
   dateRegistered: Date
@@ -40,7 +41,7 @@ export interface UserType {
   customStatus: NullableString
   previousAliases: NullableString
   pronouns: NullableString
-  nationaility: NullableString
+  nationality: NullableString
   commissionStatus: "open" | "closed" | "limited"
   requestStatus: "open" | "closed" | "limited"
   artTradeStatus: "open" | "closed" | "limited"
@@ -62,6 +63,7 @@ export interface Notification {
   user: UserType
   sender: UserType | null
   artwork: Artwork | null
+  character: Character | null
   comment: Comments | null
   createdAt: Date
 }
@@ -69,8 +71,19 @@ export interface Notification {
 export interface Comments {
   id: string
   content: string
+  parentId: string | null
+  isPinned: boolean
+  replies: Comments[]
   author: UserType
   user: UserType
   artwork?: Artwork
   character?: Character
+  createdAt: string
+  updatedAt: string
+}
+
+export interface DashboardPanel {
+  type: string
+  position: { row: number; col: number }
+  settings?: { [key: string]: string }
 }

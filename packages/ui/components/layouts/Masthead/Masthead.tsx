@@ -1,15 +1,13 @@
 "use client"
 
 /* eslint-disable @typescript-eslint/no-unused-vars */
-import { mergeNamespaceComponents } from "@mav/shared/utils"
-import { Tabs } from "../../Tabs"
+import { MastheadAvatar } from "./Avatar"
 import { MastheadBanner } from "./Banner"
 import { MastheadDetails } from "./Details"
 import { MastheadLayer } from "./Layer"
 import { MastheadRoot } from "./Root"
 import { MastheadTabs } from "./Tabs"
 import { MastheadWrapper } from "./Wrapper"
-import { MastheadAvatar } from "./Avatar"
 
 /**
  * Used for displaying first-hand info such as profile, characters, events, etc. It's

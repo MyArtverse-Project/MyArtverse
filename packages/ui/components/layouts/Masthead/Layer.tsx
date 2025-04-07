@@ -11,9 +11,14 @@ interface MastheadLayerProps extends PickedDivProps {
 /**
  * @internal For internal use only on field-related components, do not import directly!
  */
-export function MastheadLayer(props: Partial<React.PropsWithChildren<MastheadLayerProps>>) {
+export function MastheadLayer(
+  props: Partial<React.PropsWithChildren<MastheadLayerProps>>
+) {
   return (
-    <div data-mh-layer="" className={cn(props.spaceBetween && "justify-between")}>
+    <div
+      data-mh-layer=""
+      className={cn(props.spaceBetween && "justify-between")}
+    >
       {props.children}
     </div>
   )

@@ -31,8 +31,8 @@ export default function Page() {
           email: res.message.email ?? [],
           password: res.message.password ?? [],
           username: res.message.username ?? [],
-          confirm: res.message.confirm ?? [],
-        },
+          confirm: res.message.confirm ?? []
+        }
       })
     }
   }
@@ -80,7 +80,11 @@ export default function Page() {
               Forgot password?
             </Link>
           </div>
-          <Button position="center" type="submit" className="mt-4 w-full text-center">
+          <Button
+            position="center"
+            type="submit"
+            className="mt-4 w-full text-center"
+          >
             Sign in
           </Button>
         </Form>

@@ -1,8 +1,17 @@
+"use server"
+
 import type { ReadonlyRequestCookies } from "next/dist/server/web/spec-extension/adapters/request-cookies"
 import { cookies } from "next/headers"
+import type {
+  Artwork,
+  Character,
+  CharacterResponse,
+  ReferenceSheet
+} from "@/types/characters"
+import type { DashboardPanel, UserType } from "@/types/users"
 import { BACKEND_URL } from "./constants"
-import { CharacterResponse, Character, Artwork, ReferenceSheet } from "@/types/characters"
-import { UserType } from "@/types/users"
+import { redirect } from "next/navigation"
+import { SearchResult } from "@/types/utils"
 
 type APIMethods = "GET" | "POST" | "DELETE" | "PUT"
 
@@ -17,7 +26,8 @@ export const getCookies = async () => {
 
 export const apiWithAuth = async <Data>(
   method: APIMethods,
-  route: string
+  route: string,
+  body: object = {}
 ): Promise<Data> => {
   const makeRequest = async () => {
     const cookiesHeaders = (await getCookies()) as ReadonlyRequestCookies
@@ -31,8 +41,11 @@ export const apiWithAuth = async <Data>(
         "Content-Type": "application/json",
         Cookie: `accessToken=${accessToken}; refreshToken=${refreshToken}`
       },
+      body: method === "GET" ? undefined : JSON.stringify(body),
       cache: "no-cache",
       credentials: "include"
+    }).catch((err) => {
+      throw new Error(`Unable to connect to the server: ${err}`)
     })
   }
 
@@ -84,7 +97,7 @@ export const refreshToken = async () => {
     return Promise.resolve(false)
   }
 
-  const refreshToken = cookiesHeaders.get("refreshToken").value
+  const refreshToken = cookiesHeaders.get("refreshToken")!.value
   return fetch(`${endpoint}/v1/auth/refresh-token`, {
     method: "POST",
     headers: {
@@ -113,7 +126,11 @@ export const fetchUserData = async () => {
 }
 
 export const getArtistOpenComissions = async () => {
-  const comissions = await apiWithoutAuth<UserType[]>("GET", "/v1/profile/artists/open")
+  const comissions = await apiWithoutAuth<UserType[]>(
+    "GET",
+    "/v1/profile/artists/open"
+  )
+
   return comissions
 }
 
@@ -122,8 +139,20 @@ export const fetchUser = async (handle: string) => {
   return data
 }
 
+export const getNotifications = async () => {
+  const data = await apiWithAuth<Notification[]>(
+    "GET",
+    `/v1/profile/notifications`
+  )
+  return data
+}
+
 export const fetchUserCharacters = async (handle: string) => {
-  const data = await apiWithoutAuth<CharacterResponse>("GET", `/v1/character/${handle}`)
+  const data = await apiWithoutAuth<CharacterResponse>(
+    "GET",
+    `/v1/character/${handle}`
+  )
+
   return data
 }
 
@@ -151,7 +180,11 @@ export const fetchCharacter = async (handle: string, characterName: string) => {
 }
 
 export const fetchArtistRequests = async () => {
-  const requests = await apiWithAuth<UserType[]>("GET", "/v1/staff/artist-requests")
+  const requests = await apiWithAuth<UserType[]>(
+    "GET",
+    "/v1/staff/artist-requests"
+  )
+
   return requests
 }
 
@@ -165,12 +198,20 @@ export const getArtworks = async (profile: string, character: string) => {
 }
 
 export const getFeatured = async () => {
-  const characters = await apiWithoutAuth<Character[]>("GET", "/v1/character/featured")
+  const characters = await apiWithoutAuth<Character[]>(
+    "GET",
+    "/v1/character/featured"
+  )
+
   return characters
 }
 
 export const getNewCharacters = async () => {
-  const characters = await apiWithoutAuth<Character[]>("GET", "/v1/character/new")
+  const characters = await apiWithoutAuth<Character[]>(
+    "GET",
+    "/v1/character/new"
+  )
+
   return characters
 }
 
@@ -183,7 +224,7 @@ export const getFavorites = async (handle: string) => {
   return characters
 }
 
-export const getArtwork = async (artworkId) => {
+export const getArtwork = async (artworkId: string) => {
   const artwork = await apiWithoutAuth<Artwork>("GET", `/v1/art/${artworkId}`)
   return artwork
 }
@@ -200,4 +241,88 @@ export const getRefSheets = async (handle: string) => {
   )
 
   return refSheets
+}
+
+export const createFolder = async (body: {
+  name: string
+  contentType: "characters" | "artworks"
+  parentId: string | null
+  color: string
+}) => {
+  return apiWithAuth("POST", "/v1/folders/create", body)
+}
+
+export const getFolders = async (folderId: string) => {
+  return apiWithAuth("GET", `/v1/folders/${folderId}`)
+}
+
+export const getFolderByHandle = async (handle: string) => {
+  return apiWithAuth("GET", `/v1/folders/handle/${handle}`)
+}
+
+export const getFoldersRecursively = async (folderId: string) => {
+  return apiWithAuth("GET", `/v1/folders/${folderId}/recursive`)
+}
+
+export const setPanel = async (body: {
+  position: {
+    col: number
+    row: number
+  }
+  component: string
+}) => {
+  return apiWithAuth("POST", "/v1/dashboard/panels", body)
+}
+
+export const setHTMLPanel = async (body: { html: string }) => {
+  return apiWithAuth("PUT", "/v1/dashboard/panels/html", body)
+}
+
+export const getPanels = async (handle: string) => {
+  return apiWithoutAuth<DashboardPanel[]>(
+    "GET",
+    `/v1/dashboard/panels/${handle}`
+  )
+}
+
+export const postComment = async (
+  commentType: string,
+  content: string,
+  redirectRoute: string,
+  artworkId?: string | null,
+  username?: string,
+  characterName?: string | null,
+  replyId?: string | null
+) => {
+  if (!content.trim()) throw new Error("Comment content cannot be empty.")
+
+  const identifier = artworkId ?? username
+  if (!identifier) throw new Error("Either artworkId or username is required.")
+
+  const route = `/v1/${commentType}/${identifier}${characterName ? `/${characterName}` : ""}/comment`
+
+  const data = await apiWithAuth("POST", route, {
+    content,
+    parentCommentId: replyId ?? null
+  })
+  if (!data) throw new Error("Unable to post comment")
+
+  return redirect(redirectRoute)
+}
+
+export const search = async (query: string, type?: "character" | "user" | "artwork") => {
+  if (!query.trim()) {
+    return {
+      user: [],
+      artwork: [],
+      character: []
+    }
+  }
+
+  const data = await apiWithAuth<SearchResult>(
+    "GET",
+    `/v1/search?query=${encodeURIComponent(query)}&type=${type}`
+  )
+
+  return data
 }
