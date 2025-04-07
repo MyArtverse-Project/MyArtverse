@@ -329,3 +329,13 @@ export const search = async (
 
   return data
 }
+
+export const updateProfile = async (avatarLink?: string, birthday?: string, displayName?: string, pronouns?: string) => {
+  const data = await apiWithAuth<unknown>('PUT', "/v1/profile/me", {
+    avatarLink: avatarLink,
+    birthday: birthday,
+    displayName: birthday,
+    pronouns: pronouns
+  })
+  return data;
+}

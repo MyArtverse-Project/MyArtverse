@@ -46,6 +46,26 @@ const AuthContext = createContext<AuthContextType>({
 
 export const useAuth = () => useContext(AuthContext)
 
+export const useAuthRedirect = (redirectTo: string = "/login") => {
+  "use client"
+
+  const { user, isLoading } = useAuth()
+  const router = useRouter()
+  const [authUser, setAuthUser] = useState<User | null>(null)
+
+  useEffect(() => {
+    if (!isLoading) {
+      if (!user) {
+        router.push(redirectTo)
+      } else {
+        setAuthUser(user)
+      }
+    }
+  }, [user, isLoading, router, redirectTo])
+
+  return { user: authUser as User, isLoading }
+}
+
 export const AuthProvider = ({ children }: { children: React.ReactNode }) => {
   const [user, setUser] = useState<User | null>(null)
   const [isLoading, setIsLoading] = useState(true)
@@ -79,6 +99,7 @@ export const AuthProvider = ({ children }: { children: React.ReactNode }) => {
       throw new Error("Logout failed")
     }
   }
+  
 
   return (
     <AuthContext.Provider value={{ user, isLoading, logout }}>

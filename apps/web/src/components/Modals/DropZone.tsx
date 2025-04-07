@@ -8,22 +8,23 @@ import { LuUpload } from "react-icons/lu"
 import type { MapElement } from "@/types/utils"
 
 const allowedTypes = ["image/png", "image/jpeg", "image/jpg"]
-const maxFileSize = 10 * 1024 * 1024 // 10 MB
+const maxFileSize = 10 * 1024 * 1024 // 10MB
 
-export default function DropZone({
+export function DropZone({
   setData,
   className = "",
   value = "",
-  aspectRatio = "1"
+  onSuccess
 }: {
   setData: (url: string) => void
+  onSuccess?: () => void
   className?: string
   value?: string
   aspectRatio?: string
 }) {
   const [isDragging, setIsDragging] = useState(false)
   const [file, setFile] = useState<File | null>(null)
-  const [imageUrl, setImageUrl] = useState<string | null>(null)
+  const [imageUrl, setImageUrl] = useState<string | null>(value || null)
   const [uploading, setUploading] = useState(false)
   const [error, setError] = useState<string | null>(null)
   const [success, setSuccess] = useState(false)
@@ -33,12 +34,6 @@ export default function DropZone({
   useEffect(() => {
     if (fileUploadRef.current) fileUploadRef.current.value = ""
   }, [file])
-
-  useEffect(() => {
-    const handleDragOver = (e: DragEvent) => e.preventDefault()
-    window.addEventListener("dragover", handleDragOver)
-    return () => window.removeEventListener("dragover", handleDragOver)
-  }, [])
 
   const handleDrag = (e: React.DragEvent) => {
     e.preventDefault()
@@ -59,7 +54,7 @@ export default function DropZone({
 
   const processFile = (uploadedFile: File) => {
     if (!allowedTypes.includes(uploadedFile.type)) {
-      return setError("Invalid file type.")
+      return setError("Invalid file type. Please upload a PNG or JPEG image.")
     }
 
     if (uploadedFile.size > maxFileSize) {
@@ -85,10 +80,7 @@ export default function DropZone({
         credentials: "include"
       })
 
-      if (!res.ok)
-        throw new Error(
-          res.status === 401 ? "Are you logged in?" : "Upload failed"
-        )
+      if (!res.ok) throw new Error("Upload failed. Please try again.")
 
       const data = await res.json()
       setData(data.url)
@@ -98,47 +90,38 @@ export default function DropZone({
       setError(err instanceof Error ? err.message : "Unknown error occurred")
     } finally {
       setUploading(false)
+      // onSuccess()
     }
   }
 
   return (
     <div
       className={cn(
-        "rounded-md border-2 border-dashed p-10 text-center transition-colors",
-        isDragging ? "bg-gray-300" : "bg-gray-100",
+        "flex flex-col items-center justify-center rounded-lg text-center cursor-pointer z-10 bg-100 w-fit p-8",
         className
       )}
       onDragEnter={handleDrag}
       onDragOver={handleDrag}
       onDragLeave={handleDrag}
       onDrop={handleDrop}
+      onClick={() => fileUploadRef.current?.click()}
     >
       <input
         ref={fileUploadRef}
         type="file"
         className="hidden"
         onChange={handleFileInputChange}
+        accept={allowedTypes.join(", ")}
       />
       {imageUrl ? (
-        <div className="flex flex-col items-center">
-          <Image width={200} height={200} alt="Uploaded" src={imageUrl} />
-          <span className="text-lg font-bold">Uploaded!</span>
-        </div>
+        <Image width={200} height={200} alt="Uploaded" src={imageUrl} className="rounded-md" />
       ) : uploading ? (
         <span className="text-lg font-bold">Uploading...</span>
       ) : (
-        <div className="flex flex-col items-center">
-          <button
-            className="mb-6 flex items-center justify-center rounded-full bg-gray-200 p-8"
-            onClick={() => fileUploadRef.current?.click()}
-          >
-            <LuUpload size={48} />
-          </button>
-          <span className="text-lg font-bold">Drag and drop files here</span>
-          <span className="mt-4">
-            Max size: 10MB, Supported formats: .jpg, .png
-          </span>
-          {error && <span className="text-red-500">{error}</span>}
+        <div className="flex flex-col items-center justify-center text-sm cursor-pointer z-10 border-2 border-dashed aspect-square p-5 bg-100 rounded-lg">
+          <span>Drag and drop files</span>
+          <span>here or browse files</span>
+          {error && <span className="text-red-500 mt-2">{error}</span>}
         </div>
       )}
     </div>
