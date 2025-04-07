@@ -1,8 +1,7 @@
 "use client"
 
 /* eslint-disable @typescript-eslint/no-unused-vars */
-import { mergeNamespaceComponents } from "@mav/shared/utils"
-import { Tabs } from "../../Tabs"
+import { MastheadAvatar } from "./Avatar"
 import { MastheadBanner } from "./Banner"
 import { MastheadDetails } from "./Details"
 import { MastheadLayer } from "./Layer"
@@ -43,7 +42,7 @@ import { MastheadWrapper } from "./Wrapper"
  * ```
  */
 const Masthead = Object.assign(MastheadRoot, {
-  // Avatar: MastheadAvatar,
+  Avatar: MastheadAvatar,
   Banner: MastheadBanner,
   /**
    * A flex `<div>` wrapper for encapsulating {@link Masthead.Details} and

@@ -11,7 +11,7 @@ interface FolderViewShelfItemProps {
 }
 
 export function FolderViewShelfItem(
-  props: React.PropsWithChildren<FolderViewShelfItemProps>,
+  props: React.PropsWithChildren<FolderViewShelfItemProps>
 ) {
   const DynamicElement = props.as || "button"
 

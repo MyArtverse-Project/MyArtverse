@@ -1,3 +1,4 @@
+/* eslint-disable import/no-anonymous-default-export */
 export default [
   { source: "/signup", destination: "/register", permanent: true },
   { source: "/sign-up", destination: "/register", permanent: true },

@@ -6,7 +6,7 @@ interface EmptySectionProps {
 }
 
 export default function EmptySection(
-  props: Partial<React.PropsWithChildren<EmptySectionProps>>,
+  props: Partial<React.PropsWithChildren<EmptySectionProps>>
 ) {
   const { icon: Icon } = props
 

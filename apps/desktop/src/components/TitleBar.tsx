@@ -36,7 +36,10 @@ export function TitleBar() {
   }, [])
 
   return (
-    <div data-tauri-drag-region="" className="flex items-center justify-between">
+    <div
+      data-tauri-drag-region=""
+      className="flex items-center justify-between"
+    >
       <div className="flex items-center gap-x-3 px-5 py-3">
         <div data-tauri-drag-region="">
           {/* <MyArtverseIcon logoOnly size={0.6} /> */}

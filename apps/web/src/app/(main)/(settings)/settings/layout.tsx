@@ -9,7 +9,9 @@ export const metadata: Metadata = {
   }
 }
 
-export default function SettingsLayout(props: Readonly<React.PropsWithChildren>) {
+export default function SettingsLayout(
+  props: Readonly<React.PropsWithChildren>
+) {
   return (
     <div className="mx-auto mb-20 max-w-[1400px] px-4">
       {/* User info */}
@@ -19,7 +21,9 @@ export default function SettingsLayout(props: Readonly<React.PropsWithChildren>)
           <div className="text-lg font-bold">Logged in as USER</div>
           <div className="inline-flex gap-x-1 text-xs">
             <span className="text-subtext">{"Not you? "}</span>
-            <span className="text-hyperlink hover:underline">Switch accounts</span>
+            <span className="text-hyperlink hover:underline">
+              Switch accounts
+            </span>
           </div>
         </div>
       </div>

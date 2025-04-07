@@ -5,10 +5,7 @@
   "main": "./index.tsx",
   "private": true,
   "workspaces": {
-    "nohoist": [
-      "react",
-      "react-dom"
-    ]
+    "nohoist": ["react", "react-dom"]
   },
   "devDependencies": {
     "@types/react": "19.0.10",

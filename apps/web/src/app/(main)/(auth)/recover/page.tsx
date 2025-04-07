@@ -4,13 +4,11 @@ import Image from "next/image"
 import Link from "next/link"
 import { useRouter } from "next/navigation"
 import React, { useEffect, useState } from "react"
-import { loginAction } from "@/app/actions/login"
+import { forgotAction } from "@/app/actions/recover"
 import { useAuth } from "@/app/context/AuthContext"
-import ThirdPartyButtons from "@/components/layouts/Auth/ThirdPartyButtons"
 import { Button } from "@mav/ui/components/buttons"
 import { Form, type FormState, InputField } from "@mav/ui/components/fields"
-import { LuKey, LuKeyRound } from "react-icons/lu"
-import { forgotAction } from "@/app/actions/recover"
+import { LuKeyRound } from "react-icons/lu"
 
 export default function Page() {
   const router = useRouter()
@@ -29,7 +27,7 @@ export default function Page() {
     } else {
       setErrors({
         message: res.message.error || "Something went wrong. Please try again.",
-        errors: {},
+        errors: {}
       })
     }
   }
