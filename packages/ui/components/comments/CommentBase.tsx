@@ -1,32 +1,41 @@
-/* eslint-disable @typescript-eslint/no-explicit-any */
-import type {
-  ForwardRefExoticComponent,
-  PropsWithChildren,
-  ReactNode,
-} from "react"
+import Image from "next/image"
+import React from "react"
+import { cn } from "@mav/shared/utils"
+import { useValidateChildrenComponents } from "../../hooks"
 
+/* eslint-disable @typescript-eslint/no-explicit-any */
 interface CommentBaseProps {
-  imgTag?: ForwardRefExoticComponent<any>
+  imgTag: React.ReactNode
+  parentId?: string
+  commentId?: string
   avatar: string
-  outerContainer?: ReactNode
+  outerContainer?: React.ReactNode
 }
 
 /** @internal This is a shared component */
-export function CommentBase(props: PropsWithChildren<CommentBaseProps>) {
-  const ImageTag = props.imgTag ?? ("img" as const)
+export function CommentBase(props: React.PropsWithChildren<CommentBaseProps>) {
+  const validImgTags = useValidateChildrenComponents(props.children, [
+    "img",
+    "Image"
+  ])
 
   return (
     <div
       data-mav-comment-node=""
-      className="flex items-start gap-x-4 rounded-md"
+      className={cn(
+        "flex items-start gap-x-4 rounded-md",
+        props.parentId && "ml-14 mt-2"
+      )}
     >
-      <ImageTag
-        src={props.avatar}
-        alt=""
-        width="40"
-        height="40"
-        className="aspect-square flex-shrink-0 rounded-full object-cover"
-      />
+      {validImgTags && (
+        <span className="flex-shrink-0">
+          {React.cloneElement(props.imgTag as React.ReactElement<any>, {
+            src: props.avatar,
+            alt: "Avatar",
+            className: "h-10 w-10 rounded-full"
+          })}
+        </span>
+      )}
       <div className="relative flex-1">
         <span
           className="bg-100 border-400 absolute -left-1.5 top-[1.05rem] z-10 block size-3 rotate-45 border border-r-0 border-t-0"

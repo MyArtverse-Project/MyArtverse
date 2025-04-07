@@ -1,14 +1,13 @@
 import Image from "next/image"
-import { BACKEND_URL } from "@/utils/constants"
-import { Button } from "@mav/ui/components/buttons"
-import { LuCheck, LuXOctagon } from "react-icons/lu"
 import { redirect } from "next/navigation"
+import { BACKEND_URL } from "@/utils/constants"
+import { LuXOctagon } from "react-icons/lu"
 
 async function verifyEmail(id: string): Promise<boolean> {
   try {
     const res = await fetch(`${BACKEND_URL}/v1/auth/verify/${id}`, {
       method: "POST",
-      credentials: "include",
+      credentials: "include"
     })
 
     if (!res.ok) return false
@@ -20,8 +19,13 @@ async function verifyEmail(id: string): Promise<boolean> {
   }
 }
 
-export default async function Page({ params }: { params: { id: string } }) {
-  const isVerified = await verifyEmail(params.id)
+export default async function Page({
+  params
+}: {
+  params: Promise<{ id: string }>
+}) {
+  const { id } = await params
+  const isVerified = await verifyEmail(id)
 
   if (isVerified) {
     redirect("/login")

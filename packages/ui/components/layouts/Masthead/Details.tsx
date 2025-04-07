@@ -1,13 +1,15 @@
 "use client"
 
-import { type ElementRef, type PropsWithChildren, useEffect, useRef } from "react"
+import { useEffect, useRef } from "react"
 
 interface MastheadDetailsProps {
   peekToggler?: () => unknown
 }
 
-export function MastheadDetails(props: PropsWithChildren<MastheadDetailsProps>) {
-  const detailWrapperRef = useRef<ElementRef<"div">>(null)
+export function MastheadDetails(
+  props: React.PropsWithChildren<MastheadDetailsProps>
+) {
+  const detailWrapperRef = useRef<React.ElementRef<"div">>(null)
 
   useEffect(() => {
     const profileDetails = detailWrapperRef.current!

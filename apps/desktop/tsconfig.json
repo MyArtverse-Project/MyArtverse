@@ -1,5 +1,6 @@
 {
   "extends": "@mav/config/tsconfig.shared.json",
   "include": ["src", "**/*.ts", "**/*.tsx"],
+  "exclude": ["vite.config.ts", "vite.config.d.ts", "node_modules", "dist"],
   "references": [{ "path": "./tsconfig.node.json" }]
 }

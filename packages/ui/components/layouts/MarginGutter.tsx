@@ -1,4 +1,3 @@
-import type { PropsWithChildren } from "react"
 import { cn } from "@mav/shared/utils"
 
 interface MarginGutterProps {
@@ -6,7 +5,9 @@ interface MarginGutterProps {
   className?: string
 }
 
-export function MarginGutter(props: PropsWithChildren<MarginGutterProps>) {
+export function MarginGutter(
+  props: React.PropsWithChildren<MarginGutterProps>
+) {
   const screenSizes: Record<MarginGutterProps["screenSize"], string> = {
     lg: "max-w-screen-lg",
     xl: "max-w-screen-xl"

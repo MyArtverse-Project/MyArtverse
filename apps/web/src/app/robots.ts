@@ -5,7 +5,14 @@ export default function robots(): MetadataRoute.Robots {
     rules: [
       {
         userAgent: "*",
-        disallow: ["/studio", "/studio/", "/settings", "/settings/", "/embed", "/embed/"]
+        disallow: [
+          "/studio",
+          "/studio/",
+          "/settings",
+          "/settings/",
+          "/embed",
+          "/embed/"
+        ]
       },
       {
         userAgent: "Petalbot",

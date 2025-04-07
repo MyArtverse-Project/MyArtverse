@@ -1,5 +1,4 @@
 import { useEffect, useRef, useState } from "react"
-import { MyArtverseIcon } from "@mav/ui"
 import { appWindow } from "@tauri-apps/api/window"
 import {
   VscChromeMaximize,
@@ -37,10 +36,13 @@ export function TitleBar() {
   }, [])
 
   return (
-    <div data-tauri-drag-region="" className="flex items-center justify-between">
+    <div
+      data-tauri-drag-region=""
+      className="flex items-center justify-between"
+    >
       <div className="flex items-center gap-x-3 px-5 py-3">
         <div data-tauri-drag-region="">
-          <MyArtverseIcon logoOnly size={0.6} />
+          {/* <MyArtverseIcon logoOnly size={0.6} /> */}
         </div>
         <span data-tauri-drag-region="" className="select-none text-lg">
           Window title
