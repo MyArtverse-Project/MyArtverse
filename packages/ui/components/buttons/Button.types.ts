@@ -1,5 +1,5 @@
 import type { UrlObject } from "url"
-import type { ReactHTMLElement, Variants } from "@mav/shared/types"
+import type { ReactHTMLProp, Variants } from "@mav/shared/types"
 import type { ReactElement } from "react"
 
 type ButtonVariants =
@@ -12,7 +12,7 @@ type Sizes = "small" | "big"
 export interface ButtonProps {
   icon: NonNullable<ReactElement>
   disabled: boolean
-  type: ReactHTMLElement<"button">["type"]
+  type: ReactHTMLProp<"button">["type"]
   variant: ButtonVariants
   position: Positions
   size: Sizes

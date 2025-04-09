@@ -1,15 +1,17 @@
-import type { ReactMapElement } from "@/types/utils"
+import type { ExtractReactHTMLProps } from "@mav/shared/types"
+
+interface GridResponsiveProps {
+  constraint?: "auto-fill" | "auto-fit"
+  breakpoint?: number
+}
 
 export function GridResponsive({
   children,
   constraint = "auto-fill",
   breakpoint = 270,
   ...attrs
-}: {
-  children?: React.ReactNode
-  constraint?: "auto-fill" | "auto-fit"
-  breakpoint?: number
-} & Pick<ReactMapElement<"div">, "className" | "role">) {
+}: React.PropsWithChildren<GridResponsiveProps> &
+  ExtractReactHTMLProps<"div", "className" | "role">) {
   const BREAKPOINT_MAX_RANGE = 300
   const BREAKPOINT_MIN_RANGE = 110
 

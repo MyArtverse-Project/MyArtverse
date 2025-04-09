@@ -7,7 +7,6 @@ export type APIMethods = "GET" | "POST" | "DELETE" | "PUT"
 export type PartialRecord<K extends PropertyKey, T = string> = Partial<
   Record<K, T>
 >
-export type PartialArray<T> = Partial<T>[]
 
 export type LinkedString = `/${string}` | `https://${string}`
 
@@ -23,24 +22,8 @@ export type SlugRouteProps<
   searchParams?: SearchParams
 }
 
-type IntrinsicElements = React.JSX.IntrinsicElements
-
 export type MapElement<T extends keyof HTMLElementTagNameMap> =
   HTMLElementTagNameMap[T]
-export type ReactMapElement<T extends keyof IntrinsicElements> =
-  IntrinsicElements[T] extends React.DetailedHTMLProps<infer P, unknown>
-    ? P
-    : IntrinsicElements[T]
-
-export type Theme = "system" | "light" | "dark"
-export type Variants =
-  | "primary"
-  | "secondary"
-  | "tritery"
-  | "success"
-  | "warning"
-  | "error"
-  | "info"
 
 export type Visibility = "public" | "private" | "secret" | "unlisted"
 export type StatusIndicator =

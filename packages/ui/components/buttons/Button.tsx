@@ -1,6 +1,6 @@
 "use client"
 
-import type { ReactForwardRef, ReactHTMLElement } from "@mav/shared/types"
+import type { ExtractReactHTMLProps, ReactForwardRef } from "@mav/shared/types"
 import { cn } from "@mav/shared/utils"
 import { cva } from "class-variance-authority"
 import Link from "next/link"
@@ -9,8 +9,8 @@ import type { ButtonProps as SharedButtonProps } from "./Button.types"
 
 type ButtonProps = React.PropsWithChildren<
   SharedButtonProps &
-    Pick<ReactHTMLElement<"button">, "className" | "onClick"> &
-    Pick<ReactHTMLElement<"a">, "aria-current">
+    ExtractReactHTMLProps<"button", "className" | "onClick"> &
+    ExtractReactHTMLProps<"a", "aria-current">
 >
 
 export function Button({
@@ -76,7 +76,10 @@ export function Button({
     }
   )
 
-  const DynamicElement: any = !props.href ? "button" : Link
+  const DynamicElement = !props.href
+    ? // Tricking TypeScript into thinking at this is a "button"
+      ("button" as React.ElementType)
+    : Link
 
   return (
     <DynamicElement
