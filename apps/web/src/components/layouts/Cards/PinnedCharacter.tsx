@@ -2,23 +2,25 @@ import { displaySpecies } from "@/utils/displayer"
 import { Button } from "@mav/ui/components/buttons"
 import Image from "next/image"
 import { LuCat as CatIcon, LuPin, LuPalette as Palette } from "react-icons/lu"
-import ColorPalette from "./ColorPalette"
+import { ColorPalette } from "./ColorPalette"
 
-export default function PinnedCharacter({
-  avatar,
-  name,
-  species,
-  colors,
-  artist,
-  refSheetImg
-}: {
+interface PinnedCharacterProps {
   avatar: string
   name: string
   species: string
   colors: string[]
   artist: string
   refSheetImg: string
-}) {
+}
+
+export function PinnedCharacter({
+  avatar,
+  name,
+  species,
+  colors,
+  artist,
+  refSheetImg
+}: PinnedCharacterProps) {
   return (
     <section className="border-300 mb-5 flex flex-row justify-between rounded border-4 border-solid p-4">
       <div className="flex w-full flex-col">

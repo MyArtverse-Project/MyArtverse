@@ -3,16 +3,19 @@
 import { cn } from "@mav/shared/utils"
 import { useState } from "react"
 
-export default function ColorPalette({
+interface ColorPaletteProps {
+  palette: string[] | never[]
+  width?: number | string
+  height?: number | string
+}
+
+export function ColorPalette({
   palette,
   width = "100%",
   height = "30px"
-}: {
-  palette: string[] | undefined
-  width?: number | string
-  height?: number | string
-}) {
+}: ColorPaletteProps) {
   const [copied, setCopied] = useState(false)
+
   const copyColor = (color: string) => {
     navigator.clipboard.writeText(color)
     setCopied(true)

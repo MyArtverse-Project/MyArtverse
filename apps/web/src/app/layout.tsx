@@ -25,19 +25,6 @@ export const metadata: Metadata = {
     default: BRAND
   },
   formatDetection: { telephone: false, address: false },
-  // prettier-ignore
-  keywords: [
-    "fur",
-    "furries",
-    "furry",
-    "fursona",
-    "mascot",
-    "furry fandom",
-    "toyhouse",
-    "furaffinity",
-    "fur affinity",
-    "weasyl"
-  ],
   openGraph: {
     type: "website",
     siteName: BRAND

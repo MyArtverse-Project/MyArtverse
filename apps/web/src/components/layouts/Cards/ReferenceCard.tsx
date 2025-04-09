@@ -3,17 +3,20 @@ import { BACKEND_URL } from "@/utils/constants"
 import { cn } from "@mav/shared/utils"
 import Image from "next/image"
 
-export default function ReferenceCard({
-  data,
-  toggleUploadRefSheetModal,
-  setEditingData
-}: {
+interface ReferenceCardProps {
   data: ReferenceSheet
   toggleUploadRefSheetModal: () => void
   setEditingData: (data: ReferenceSheet) => void
-}) {
+}
+
+export function ReferenceCard({
+  data,
+  toggleUploadRefSheetModal,
+  setEditingData
+}: ReferenceCardProps) {
   const clickables = (e: React.MouseEvent<HTMLDivElement, MouseEvent>) => {
     e.stopPropagation()
+
     if (e.shiftKey) {
       fetch(`${BACKEND_URL}/v1/character/assign-ref/${data.id}`, {
         method: "PUT",

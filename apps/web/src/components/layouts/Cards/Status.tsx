@@ -1,4 +1,4 @@
-import type { FursonaStatus } from "@/types/characters"
+import type { CharacterStatus } from "@/types/characters"
 import { cn } from "@mav/shared/utils"
 import type { IconType } from "react-icons"
 import {
@@ -7,11 +7,15 @@ import {
   LuStar as StarIcon
 } from "react-icons/lu"
 
-export default function Status({ status }: { status: FursonaStatus }) {
+interface CharacterStatusProps {
+  status: CharacterStatus
+}
+
+export function Status({ status }: CharacterStatusProps) {
   const base = "flex flex-row items-center text-md font-semibold my-1"
 
   const statusObj: Record<
-    FursonaStatus,
+    CharacterStatus,
     { label: string; className: string; icon: IconType }
   > = {
     adopted: {

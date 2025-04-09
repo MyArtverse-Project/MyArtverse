@@ -1,5 +1,5 @@
 import { Url } from "url"
-import type { FursonaStatus as AdoptionStatus } from "@/types/characters"
+import type { CharacterStatus as AdoptionStatus } from "@/types/characters"
 import type { MapElement } from "@/types/utils"
 import { cn } from "@mav/shared/utils"
 import Image from "next/image"
@@ -8,7 +8,19 @@ import { LuHeart as Heart } from "react-icons/lu"
 import ColorPalette from "./ColorPalette"
 import Status from "./Status"
 
-export default function FursonaCard({
+interface CharacterCardProps {
+  name: string
+  img: string
+  species: string
+  isHybrid: boolean
+  status: AdoptionStatus
+  loading: boolean
+  palette: string[]
+  likes: number
+  href: string
+}
+
+export function CharacterCard({
   name,
   img = "/UserProfile.png",
   species,
@@ -19,17 +31,8 @@ export default function FursonaCard({
   likes,
   status = "owned",
   ...attributes
-}: {
-  name?: string
-  img?: string
-  species?: string
-  isHybrid?: boolean
-  status?: AdoptionStatus
-  loading?: boolean
-  palette?: string[]
-  likes?: number
-  href?: string
-} & Pick<React.HTMLAttributes<MapElement<"div">>, "role">) {
+}: Partial<CharacterCardProps> &
+  Pick<React.HTMLAttributes<MapElement<"div">>, "role">) {
   const DynamicElement = !href ? "div" : Link
 
   return (

@@ -1,7 +1,7 @@
 import type { Comments, UserType } from "./users"
 import type { StatusIndicator, Visibility } from "./utils"
 
-export type FursonaStatus =
+export type CharacterStatus =
   | "adopted"
   | "upForAdopt"
   | "owned"

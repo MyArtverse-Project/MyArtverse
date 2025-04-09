@@ -1,7 +1,7 @@
 "use client"
 
 import CreateFolderModal from "@/components/Modals/CreateFolder"
-import { FursonaCard } from "@/components/layouts/Cards"
+import { CharacterCard } from "@/components/layouts/Cards"
 import FolderView from "@/components/layouts/Folders"
 import { SearchBox } from "@/components/layouts/Forms"
 import GridResponsive from "@/components/layouts/Layouts/GridResponsive"
@@ -24,10 +24,13 @@ export default function CharacterView({
   owner: boolean
 }) {
   const router = useRouter()
-  const [createFolderModal, setFolderModalState] = useState(false)
+
   const toggleCreateFolderModal = () => setFolderModalState(!createFolderModal)
+
+  const [createFolderModal, setFolderModalState] = useState(false)
   const [selectedIndex, setSelectedIndex] = useState(0)
   const [parentFolderId, setParentFolderId] = useState<string | null>(null)
+
   // const activeRefSheets = characters.mainCharacter?.refSheets
   //   .find((r) => r.active)
   //   ?.variants.find((v) => v.main)
@@ -109,7 +112,7 @@ export default function CharacterView({
 
         <GridResponsive breakpoint={250} className="gap-1.5" role="listbox">
           {characters.characters.map((character, index) => (
-            <FursonaCard
+            <CharacterCard
               key={index}
               img={character.avatarUrl || "/UserProfile.png"}
               name={character.name}
