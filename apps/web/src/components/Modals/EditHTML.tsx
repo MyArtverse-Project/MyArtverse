@@ -5,7 +5,7 @@ import DOMPurify from "isomorphic-dompurify"
 import { useState } from "react"
 import { FaCode } from "react-icons/fa"
 import { LuXCircle } from "react-icons/lu"
-import Modal from "../layouts/Modal"
+import Modal from "./ModalBase"
 import Note from "../layouts/Note"
 
 export default function EditHTMLModal({

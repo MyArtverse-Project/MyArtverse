@@ -1,4 +1,4 @@
-import MarginClamp from "@/components/layouts/Layouts/MarginClamp"
+import { MarginClamp } from "@/components/Containers"
 import { BRAND } from "@mav/shared"
 import type { Metadata } from "next"
 

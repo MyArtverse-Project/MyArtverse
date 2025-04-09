@@ -2,7 +2,7 @@ import type { Variant } from "@/types/characters"
 import { cn } from "@mav/shared/utils"
 import { InputField } from "@mav/ui/components/fields"
 import Image from "next/image"
-import Checkbox from "../layouts/Forms/Checkbox"
+import Checkbox from "../Forms/Checkbox"
 
 export default function ModalRefVariant({
   name,

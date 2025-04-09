@@ -1,6 +1,6 @@
 import type { ReactMapElement } from "@/types/utils"
 
-export default function GridResponsive({
+export function GridResponsive({
   children,
   constraint = "auto-fill",
   breakpoint = 270,
@@ -15,13 +15,13 @@ export default function GridResponsive({
 
   const bpRange = `the breakpoint's range is between ${BREAKPOINT_MIN_RANGE}-${BREAKPOINT_MAX_RANGE}`
 
-  if (attrs.className.includes("flex")) {
+  if (attrs.className && attrs.className.includes("flex")) {
     throw new Error(
       `"flex" className detected on a grid component; remove it or use a <div> element instead.`
     )
   }
 
-  if (attrs.className.includes("grid")) {
+  if (attrs.className && attrs.className.includes("grid")) {
     throw new Error(
       `"grid" className detected and already applied! Either remove it or use a <div> element instead.`
     )

@@ -9,7 +9,7 @@ const providers = [
   { icon: FaFacebook, label: "Facebook" }
 ]
 
-export default function AuthThirdPartyProviders() {
+export function AuthThirdPartyProviders() {
   return (
     <div className="w-full space-y-2">
       {providers.map(({ icon: Icon, label }, index) => (

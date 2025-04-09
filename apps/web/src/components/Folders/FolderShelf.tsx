@@ -1,6 +1,6 @@
 "use client"
 
-import Separator from "@/components/Separator"
+import { Separator } from "@/components/Separator"
 import { Button } from "@mav/ui/components/buttons"
 import { useEffect, useRef, useState } from "react"
 import {

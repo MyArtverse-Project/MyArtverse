@@ -2,7 +2,7 @@
 
 import { loginAction } from "@/app/actions/login"
 import { useAuth } from "@/app/context/AuthContext"
-import ThirdPartyButtons from "@/components/layouts/Auth/ThirdPartyButtons"
+import { AuthThirdPartyProviders as ThirdPartyButtons } from "@/components/Auth"
 import { Button } from "@mav/ui/components/buttons"
 import { Form, type FormState, InputField } from "@mav/ui/components/fields"
 import Image from "next/image"

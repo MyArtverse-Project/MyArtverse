@@ -1,16 +1,18 @@
 import { cn } from "@mav/shared/utils"
 
-export default function Field({
-  title,
-  content,
-  // custom,
-  full
-}: {
+interface FieldProps {
   title?: string
   content?: string
   // custom?: boolean
   full?: boolean
-}) {
+}
+
+export function Field({
+  title,
+  content,
+  // custom,
+  full
+}: FieldProps) {
   return (
     <div
       className={cn(

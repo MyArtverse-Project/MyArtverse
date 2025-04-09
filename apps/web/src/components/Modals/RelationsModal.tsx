@@ -3,7 +3,7 @@ import { USER_DEFAULT_AVATAR } from "@/utils/constants"
 import { cn } from "@mav/shared/utils"
 import Image from "next/image"
 import { useState } from "react"
-import Modal from "../layouts/Modal"
+import Modal from "./ModalBase"
 
 export default function RelationModal({
   followers,

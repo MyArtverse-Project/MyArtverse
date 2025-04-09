@@ -1,4 +1,5 @@
-import MarginClamp from "@/components/layouts/Layouts/MarginClamp"
+import { MarginClamp } from "@/components/Containers"
+
 import type { DefineRouteParams } from "@/types"
 import { fetchUser, fetchUserCharacters, fetchUserData } from "@/utils/api"
 import { BRAND } from "@mav/shared"

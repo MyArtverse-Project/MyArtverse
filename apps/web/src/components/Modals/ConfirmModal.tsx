@@ -6,7 +6,7 @@ import { redirect } from "next/navigation"
 import { useState } from "react"
 import { FaTrash } from "react-icons/fa6"
 import { LuXCircle } from "react-icons/lu"
-import Modal from "../layouts/Modal"
+import Modal from "./ModalBase"
 import Note from "../layouts/Note"
 
 export default function DeleteConfirmModal({

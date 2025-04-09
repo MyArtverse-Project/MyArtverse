@@ -4,7 +4,7 @@ import { InputField } from "@mav/ui/components/fields"
 import { useState } from "react"
 import { LuCheckCircle, LuFolderPlus, LuXCircle } from "react-icons/lu"
 import { createFolder } from "../../utils/api"
-import Modal from "../layouts/Modal"
+import Modal from "./ModalBase"
 
 export default function CreateFolderModal({
   createFolderModal,

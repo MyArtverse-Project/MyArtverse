@@ -1,7 +1,7 @@
 "use client"
 
 import { User } from "@/app/context/AuthContext"
-import Separator from "@/components/Separator"
+import { Separator } from "@/components/Separator"
 import { cn } from "@mav/shared/utils"
 import { Button } from "@mav/ui/components/buttons"
 import { MyArtverseIcon } from "@mav/ui/icons"
@@ -9,19 +9,18 @@ import { motion } from "framer-motion"
 import Link from "next/link"
 import { Fragment } from "react"
 import { LuX } from "react-icons/lu"
-import Menu from "../../Menu"
+import Menu from "../../../Menus"
 import { SidebarItems, fmDuration } from "./SidebarItems"
 
-export function Sidebar({
-  toggleSidebar,
-  sidebarOpened,
-  user
-}: {
+interface SidebarProps {
   toggleSidebar: () => void
   sidebarOpened: boolean
   user: User | null
-}) {
+}
+
+export function Sidebar({ toggleSidebar, sidebarOpened, user }: SidebarProps) {
   const SIDEBAR_ITEMS = SidebarItems(user)
+
   return (
     <>
       <div

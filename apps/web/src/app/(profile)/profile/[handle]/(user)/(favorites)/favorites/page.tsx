@@ -1,6 +1,7 @@
-import { FursonaCard } from "@/components/layouts/Cards"
-import GridResponsive from "@/components/layouts/Layouts/GridResponsive"
-import MarginClamp from "@/components/layouts/Layouts/MarginClamp"
+import { FursonaCard } from "@/components/Cards"
+import GridResponsive from "@/components/Containers/GridResponsive"
+import { MarginClamp } from "@/components/Containers"
+
 import { getFavorites } from "@/utils/api"
 import { BRAND } from "@mav/shared"
 import { Metadata } from "next"

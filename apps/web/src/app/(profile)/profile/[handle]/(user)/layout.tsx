@@ -1,5 +1,5 @@
 import AppLayout from "@/components/layouts/AppLayout/AppLayout"
-import { ProfileMasthead } from "@/components/layouts/Mastheads"
+import { ProfileMasthead } from "@/components/Mastheads"
 import type { DefineRouteParams } from "@/types"
 import { fetchUser, fetchUserData } from "@/utils/api"
 

@@ -1,7 +1,7 @@
 import { User } from "@/app/context/AuthContext"
 import Avatar from "@/components/Avatar"
 import Notification from "@/components/Notification"
-import Separator from "@/components/Separator"
+import { Separator } from "@/components/Separator"
 import {
   generateCreateItems,
   generateSiteSettingItems

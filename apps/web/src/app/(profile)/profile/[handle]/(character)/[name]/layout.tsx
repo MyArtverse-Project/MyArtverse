@@ -1,5 +1,5 @@
 import AppLayout from "@/components/layouts/AppLayout/AppLayout"
-import { CharacterMasthead } from "@/components/layouts/Mastheads"
+import { CharacterMasthead } from "@/components/Mastheads"
 import type { DefineRouteParams } from "@/types"
 import { fetchCharacter } from "@/utils/api"
 

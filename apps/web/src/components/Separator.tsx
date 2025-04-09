@@ -2,7 +2,7 @@ import type { CSSProperties } from "react"
 
 type DirectionType = "horizontal" | "vertical"
 
-export default function Separator({
+export function Separator({
   dir,
   size,
   padding

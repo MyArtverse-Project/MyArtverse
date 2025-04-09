@@ -1,4 +1,4 @@
-export default function MarginClamp({
+export function MarginClamp({
   children,
   as: Element = "div"
 }: {
