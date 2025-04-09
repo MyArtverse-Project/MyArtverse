@@ -4,4 +4,6 @@ export * from "./Group/Group"
 export * from "./Group/GroupContainer"
 export * from "./MarginGutter"
 
+export * from "./Portal"
+
 export type * from "./Masthead/Masthead.types"
