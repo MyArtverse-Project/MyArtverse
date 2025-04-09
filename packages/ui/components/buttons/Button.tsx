@@ -3,7 +3,6 @@
 import type { ReactForwardRef, ReactHTMLElement } from "@mav/shared/types"
 import { cn } from "@mav/shared/utils"
 import { cva } from "class-variance-authority"
-/* eslint-disable @typescript-eslint/no-explicit-any */
 import Link from "next/link"
 import React from "react"
 import type { ButtonProps as SharedButtonProps } from "./Button.types"

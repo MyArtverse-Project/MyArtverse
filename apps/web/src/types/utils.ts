@@ -1,4 +1,3 @@
-/* eslint-disable @typescript-eslint/no-explicit-any */
 import type React from "react"
 import { Artwork, Character } from "./characters"
 import { UserType } from "./users"
@@ -29,7 +28,7 @@ type IntrinsicElements = React.JSX.IntrinsicElements
 export type MapElement<T extends keyof HTMLElementTagNameMap> =
   HTMLElementTagNameMap[T]
 export type ReactMapElement<T extends keyof IntrinsicElements> =
-  IntrinsicElements[T] extends React.DetailedHTMLProps<infer P, any>
+  IntrinsicElements[T] extends React.DetailedHTMLProps<infer P, unknown>
     ? P
     : IntrinsicElements[T]
 

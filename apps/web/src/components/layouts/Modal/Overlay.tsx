@@ -1,7 +1,6 @@
 "use client"
 
 import { cn } from "@mav/shared/utils"
-/* eslint-disable @typescript-eslint/no-explicit-any */
 import dynamic from "next/dynamic"
 import { useEffect } from "react"
 

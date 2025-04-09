@@ -1,6 +1,5 @@
 import { BRAND } from "@mav/shared"
 
-/* eslint-disable no-useless-escape */
 export const BACKEND_URL = process.env.NEXT_PUBLIC_BACKEND_URL
 
 export const USER_DEFAULT_AVATAR = "/UserProfile.png"

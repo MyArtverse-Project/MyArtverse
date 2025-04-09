@@ -2,7 +2,6 @@ import { cn } from "@mav/shared/utils"
 import React from "react"
 import { useValidateChildrenComponents } from "../../hooks"
 
-/* eslint-disable @typescript-eslint/no-explicit-any */
 interface CommentBaseProps {
   imgTag: React.ReactNode
   parentId?: string

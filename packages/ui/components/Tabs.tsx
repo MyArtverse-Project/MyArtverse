@@ -1,7 +1,6 @@
 "use client"
 
 import { cn } from "@mav/shared/utils"
-/* eslint-disable @typescript-eslint/no-explicit-any */
 import Link from "next/link"
 import { usePathname } from "next/navigation"
 import type { IconType } from "react-icons"

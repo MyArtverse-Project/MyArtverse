@@ -1,6 +1,5 @@
 "use client"
 
-/* eslint-disable @typescript-eslint/no-explicit-any */
 import { Children, isValidElement } from "react"
 
 // A hacky-fix for the missing `name` property

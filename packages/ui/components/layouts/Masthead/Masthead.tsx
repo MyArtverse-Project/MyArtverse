@@ -1,6 +1,5 @@
 "use client"
 
-/* eslint-disable @typescript-eslint/no-unused-vars */
 import { MastheadAvatar } from "./Avatar"
 import { MastheadBanner } from "./Banner"
 import { MastheadDetails } from "./Details"

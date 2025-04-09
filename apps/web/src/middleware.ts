@@ -1,4 +1,3 @@
-/* eslint-disable import/no-internal-modules */
 import { type NextRequest, NextResponse } from "next/server"
 import { generateCSP } from "./utils"
 

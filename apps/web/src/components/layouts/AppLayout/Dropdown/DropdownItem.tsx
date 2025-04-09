@@ -1,6 +1,5 @@
 import { MenuItem } from "@headlessui/react"
 import { cn } from "@mav/shared/utils"
-/* eslint-disable @typescript-eslint/no-explicit-any */
 import Link from "next/link"
 
 export default function DropdownItem({

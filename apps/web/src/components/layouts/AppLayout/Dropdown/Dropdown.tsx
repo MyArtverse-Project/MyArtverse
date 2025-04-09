@@ -1,4 +1,3 @@
-/* eslint-disable import/no-internal-modules */
 import { Menu, MenuButton, MenuItems, Transition } from "@headlessui/react"
 import { Fragment } from "react"
 
