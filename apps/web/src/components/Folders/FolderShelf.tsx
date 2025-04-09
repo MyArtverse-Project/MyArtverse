@@ -7,10 +7,10 @@ import {
   LuPanelLeftClose as PanelLeftClose,
   LuPanelLeftOpen as PanelLeftOpen
 } from "react-icons/lu"
-import FolderItem from "./FolderItem"
+import { FolderItem } from "./FolderItem"
 import { useFolderViewContext } from "./FolderView"
 
-export default function FolderShelf({
+export function FolderShelf({
   children,
   defaultName
 }: {

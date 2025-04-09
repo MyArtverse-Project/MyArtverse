@@ -13,7 +13,7 @@ import {
   LuFolderPlus as FolderPlus
 } from "react-icons/lu"
 
-export default function FolderItem({
+export function FolderItem({
   children,
   name,
   open = false,
@@ -36,8 +36,8 @@ export default function FolderItem({
   const [isExpand, setIsExpand] = useState(expanded)
   const [expandedHeight, setExpandedHeight] = useState(0)
 
-  const collapsibleRef = useRef<React.ElementRef<"div">>(null)
-  const toggleButtonRef = useRef<React.ElementRef<"button">>(null)
+  const collapsibleRef = useRef<React.ComponentRef<"div">>(null)
+  const toggleButtonRef = useRef<React.ComponentRef<"button">>(null)
 
   const DynamicFolderIcon = children
     ? !isExpand

@@ -1,7 +1,7 @@
-import cn from "@/utils/cn"
+import { cn } from "@/utils/cn"
 import { kebabCase } from "lodash"
 
-export default function Checkbox({
+export function Checkbox({
   inputName,
   label,
   checked,

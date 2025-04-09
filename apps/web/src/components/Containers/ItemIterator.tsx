@@ -14,15 +14,17 @@ export interface ItemIteratorType {
   matchStartingRoute?: boolean
 }
 
-export default function ItemIterator({
-  as: Component = "div",
-  items,
-  baseUrl = "/"
-}: {
+interface ItemIteratorProps {
   as?: keyof HTMLElementTagNameMap | React.ComponentType
   items: ItemIteratorType[]
   baseUrl?: string
-}) {
+}
+
+export function ItemIterator({
+  as: Component = "div",
+  items,
+  baseUrl = "/"
+}: ItemIteratorProps) {
   const path = usePathname()
 
   return (

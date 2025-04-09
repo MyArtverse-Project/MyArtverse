@@ -1,6 +1,6 @@
 import { Transition } from "@headlessui/react"
 
-export default function TransitionWrapper({
+export function TransitionWrapper({
   children
 }: {
   children?: React.ReactNode
@@ -13,6 +13,7 @@ export default function TransitionWrapper({
       leave="transition duration-[200ms] ease"
       leaveTo="transform -translate-y-1 opacity-0"
       leaveFrom="transform translate-y-0 opacity-100"
+      // @ts-expect-error: headlessui/react doesn't support this prop
       className="translate-x-0"
     >
       {children}

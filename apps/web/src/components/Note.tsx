@@ -1,4 +1,4 @@
-import type { Variants as NoteVariants, PartialRecord } from "@/types/utils"
+import type { PartialRecord } from "@/types/utils"
 import { cn } from "@mav/shared/utils"
 import type { IconType } from "react-icons"
 import {
@@ -8,22 +8,20 @@ import {
   LuXCircle
 } from "react-icons/lu"
 
-type NoteStatus = Extract<
-  NoteVariants,
-  "success" | "warning" | "error" | "info"
->
+type NoteStatus = "success" | "warning" | "error" | "info"
 
-export default function Note({
+interface NoteProps {
+  type: NoteStatus
+  heading?: string
+  inline?: true
+}
+
+export function Note({
   children,
   type,
   heading,
   inline
-}: {
-  children?: React.ReactNode
-  type: NoteStatus
-  heading?: string
-  inline?: boolean
-}) {
+}: React.PropsWithChildren<NoteProps>) {
   if (inline && heading) {
     throw new Error(
       "Can't use both `inline` and `heading` at the same time. Pass the message inside the element instead, otherwise, remove the `inline` prop."

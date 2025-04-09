@@ -5,20 +5,9 @@ import { Button } from "@mav/ui/components/buttons"
 import Image from "next/image"
 import { LuCheck } from "react-icons/lu"
 
-export default function Notification({
-  content,
-  createdAt,
-  read,
-  senderAvatar,
-  senderHandle,
-  url,
-  userAvatar,
-  artwork,
-  character,
-  comment
-}: {
+interface NotificationItemProps {
   content: string
-  read: boolean
+  hasRead: boolean
   userAvatar: string | null
   senderHandle?: string
   senderAvatar: string | null
@@ -27,14 +16,23 @@ export default function Notification({
   artwork?: Artwork | null
   character?: Character | null
   createdAt: Date
-}) {
+}
+
+/** @internal */
+export function NotificationItem({
+  content,
+  createdAt,
+  senderAvatar,
+  senderHandle,
+  userAvatar,
+  comment
+}: NotificationItemProps) {
   const date = new Date(createdAt || "")
   const now = new Date()
   const diff = Math.floor(
     (now.getTime() - date.getTime()) / 1000 / 60 / 60 / 24
   )
-  const diffString =
-    diff > 0 ? `${diff} day${diff > 1 ? "s" : ""} ago` : "Earlier Today"
+  const diffString = diff > 0 ? `${diff} day${diff > 1 ? "s" : ""} ago` : "now"
 
   // TODO: Read implementation
 

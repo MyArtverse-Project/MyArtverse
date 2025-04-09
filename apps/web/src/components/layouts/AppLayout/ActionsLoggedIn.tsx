@@ -1,23 +1,16 @@
 import { User } from "@/app/context/AuthContext"
-import Avatar from "@/components/Avatar"
-import Notification from "@/components/Notification"
-import { Separator } from "@/components/Separator"
+import { Avatar, Separator } from "@/components"
+import { NotificationWindow } from "@/components/Notifications"
 import {
   generateCreateItems,
   generateSiteSettingItems
 } from "@/utils/generateItems"
 import { Button } from "@mav/ui/components/buttons"
 import Link from "next/link"
-import {
-  LuBell,
-  LuCheck,
-  LuChevronDown,
-  LuMinusCircle,
-  LuPlus
-} from "react-icons/lu"
+import { LuBell, LuChevronDown, LuPlus } from "react-icons/lu"
 import { Dropdown, DropdownItem } from "./Dropdown"
 
-const ICON = (
+const ICONS = (
   <>
     <LuPlus size={20} />
     <LuChevronDown size={20} />
@@ -43,7 +36,7 @@ export function ActionsLoggedIn({
       <Separator dir="vertical" size={28} />
       <Dropdown
         button={
-          <Button icon={ICON} aria-label="Site options" variant="tritery" />
+          <Button icon={ICONS} aria-label="Site options" variant="tritery" />
         }
         items={
           <>
@@ -81,50 +74,7 @@ export function ActionsLoggedIn({
             variant="tritery"
           />
         }
-        items={
-          <div className="flex flex-col items-center px-4 w-[500px]">
-            <div className="flex flex-row items-center justify-between w-full">
-              <span className="text-xl">Notifications</span>
-              <div className="flex flex-row">
-                <Button variant="tritery" icon={<LuMinusCircle size={20} />} />
-                <Button variant="tritery" icon={<LuCheck size={20} />} />
-              </div>
-            </div>
-            {user.notifications.length === 0 ? (
-              <span className="text-500 text-sm">No new notifications</span>
-            ) : (
-              user.notifications
-                .slice(0, 5)
-                .map((notification) => (
-                  <Notification
-                    key={notification.id}
-                    content={notification.content}
-                    senderHandle={
-                      notification.sender
-                        ? notification.sender.handle
-                        : undefined
-                    }
-                    createdAt={notification.createdAt}
-                    read={notification.read}
-                    userAvatar={user.avatarUrl || "/UserProfile.png"}
-                    senderAvatar={
-                      notification.sender ? notification.sender.avatarUrl : null
-                    }
-                    comment={notification.comment}
-                    artwork={notification.artwork}
-                    character={notification.character}
-                    url={
-                      notification.artwork
-                        ? `/artworks/${notification.artwork.id}`
-                        : notification.character
-                          ? `/characters/${notification.character.id}`
-                          : null
-                    }
-                  />
-                ))
-            )}
-          </div>
-        }
+        items={<NotificationWindow user={user} />}
       />
 
       <Dropdown

@@ -1,16 +1,13 @@
 import Image from "next/image"
 
-export default function Avatar({
-  className,
-  username,
-  src,
-  size = 36
-}: {
+interface AvatarProps {
   className?: string
   username?: string
   src: string
   size?: number
-}) {
+}
+
+export function Avatar({ className, username, src, size = 36 }: AvatarProps) {
   return (
     <div
       data-avatar=""

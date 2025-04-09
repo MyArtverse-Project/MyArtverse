@@ -5,25 +5,21 @@ import { createContext, useContext, useState } from "react"
 const FolderViewContext = createContext<{
   folderWidth: number
   setFolderWidth: React.Dispatch<React.SetStateAction<number>>
-}>({
-  folderWidth: 270,
-  // biome-ignore lint/suspicious/noEmptyBlockStatements: <explanation>
-  setFolderWidth: () => {}
-})
+} | null>(null)
 
 export function useFolderViewContext() {
   const ctx = useContext(FolderViewContext)
 
   if (!ctx) {
     throw new Error(
-      "The useFolderViewContext must be used within the FolderViewProvider, you dumbass"
+      "The useFolderViewContext must be used within the FolderViewProvider"
     )
   }
 
   return ctx
 }
 
-export default function FolderView({
+export function FolderView({
   children
 }: {
   children?: React.ReactNode
