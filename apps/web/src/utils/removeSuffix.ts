@@ -1,8 +1,11 @@
-export const removeSuffixes = (formData: FormData) => {
+export const removeSuffixes = (formData: FormData, delimiter: string = "-«") => {
   const processedData = {} as Record<string, string>
-  Array.from(formData.entries()).forEach(([key, value]) => {
-    const originalKey = key.split("-«")[0]
+
+  for (const [key, value] in Array.from(formData.entries())) {
+    const [originalKey] = key.split(delimiter)
+
     processedData[originalKey] = value as string
-  })
+  }
+
   return processedData
 }
