@@ -10,13 +10,16 @@ import { useEffect, useRef, useState } from "react"
 import { LuSearch } from "react-icons/lu"
 import { SearchSection } from "./Section"
 
+interface SearchBarProps {
+  // TODO store `recentSearches` from localStorage
+  recentSearches?: string[]
+  characters?: { name: string; image: string }[]
+}
+
 export default function SearchBar({
   recentSearches = [],
   characters = []
-}: {
-  recentSearches?: string[]
-  characters?: { name: string; image: string }[]
-}) {
+}: SearchBarProps) {
   const [isOpen, setIsOpen] = useState(false)
   const [loading, setLoading] = useState(false)
   const [results, setResults] = useState<SearchResult>({
@@ -24,24 +27,31 @@ export default function SearchBar({
     artwork: [],
     character: []
   })
-  const [query, setQuery] = useState("")
+
+  const [searchQuery, setSearchQuery] = useState("")
   const inputRef = useRef<HTMLInputElement>(null)
+
+  const searchQueryTrimmed = searchQuery.trim()
 
   useEffect(() => {
     const handleKeyDown = (event: KeyboardEvent) => {
-      if (event.key === "/" && !isOpen) {
+      const key = event.key
+
+      if (key === "/" && !isOpen) {
         event.preventDefault()
         setIsOpen(true)
-      } else if (event.key === "Escape") {
-        redirect("/search/?q=" + encodeURIComponent(query.trim()))
-      } else if (event.key === "Enter" && isOpen) {
-        redirect("/search/?q=" + encodeURIComponent(query.trim()))
+      } else if (key === "Escape") {
+        redirect("/search/?q=" + encodeURIComponent(searchQueryTrimmed))
+      } else if (key === "Enter" && isOpen) {
         setIsOpen(false)
+        redirect("/search/?q=" + encodeURIComponent(searchQueryTrimmed))
       }
     }
+
     document.addEventListener("keydown", handleKeyDown)
+
     return () => document.removeEventListener("keydown", handleKeyDown)
-  }, [isOpen, query])
+  }, [isOpen, searchQuery])
 
   useEffect(() => {
     if (isOpen) {
@@ -51,11 +61,11 @@ export default function SearchBar({
 
   useEffect(() => {
     setLoading(true)
-    if (!query.trim()) return
+    if (!searchQueryTrimmed) return
 
     const delay = setTimeout(async () => {
       try {
-        const newResults = await search(query)
+        const newResults = await search(searchQuery)
         setResults(newResults)
       } finally {
         setLoading(false)
@@ -63,7 +73,11 @@ export default function SearchBar({
     }, 500)
 
     return () => clearTimeout(delay)
-  }, [query])
+  }, [searchQuery])
+
+  const hasNoSearchResults = Object.values(results).some(
+    (item) => item.length === 0
+  )
 
   return (
     <div className="top-full relative">
@@ -100,7 +114,7 @@ export default function SearchBar({
             <form
               onSubmit={(e) => {
                 e.preventDefault()
-                redirect("/search/?q=" + encodeURIComponent(query.trim()))
+                redirect("/search/?q=" + encodeURIComponent(searchQueryTrimmed))
                 setIsOpen(false)
               }}
               className="flex items-center gap-x-2 w-full"
@@ -108,8 +122,8 @@ export default function SearchBar({
               <InputField
                 ref={inputRef}
                 type="text"
-                value={query}
-                onChange={(e) => setQuery(e.target.value)}
+                value={searchQuery}
+                onChange={(e) => setSearchQuery(e.target.value)}
                 placeholder="Search Character, Artist, Artwork, User..."
               />
             </form>
@@ -133,26 +147,19 @@ export default function SearchBar({
                 isCharacter
               />
             )}
-            {!loading &&
-              query.trim() &&
-              results.user?.length === 0 &&
-              results.artwork?.length === 0 &&
-              results.character?.length === 0 && (
-                <>
-                  <div className="text-center text-gray-500 py-4">
-                    No results found for "<strong>{query}</strong>"
-                  </div>
-                  <SearchSection
-                    title="RECENT SEARCHES"
-                    items={recentSearches}
-                  />
-                  <SearchSection
-                    title="CHARACTERS"
-                    items={characters}
-                    isCharacter
-                  />
-                </>
-              )}
+            {!loading && searchQueryTrimmed && hasNoSearchResults && (
+              <>
+                <div className="text-center text-gray-500 py-4">
+                  No results found for "<strong>{searchQuery}</strong>"
+                </div>
+                <SearchSection title="RECENT SEARCHES" items={recentSearches} />
+                <SearchSection
+                  title="CHARACTERS"
+                  items={characters}
+                  isCharacter
+                />
+              </>
+            )}
           </div>
         </Dialog>
       </Transition>
