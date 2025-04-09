@@ -1,4 +1,3 @@
-import type React from "react"
 import { Artwork, Character } from "./characters"
 import { UserType } from "./users"
 

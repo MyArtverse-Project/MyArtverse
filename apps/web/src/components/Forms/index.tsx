@@ -1,5 +1,4 @@
-import RichTextField from "./RichTextField"
-import SearchBox from "./SearchBox"
-import SelectField from "./SelectField"
-
-export { RichTextField, SearchBox, SelectField }
+export * from "./RichTextField"
+export * from "./SearchBox"
+export * from "./SelectField"
+export * from "./Checkbox"
