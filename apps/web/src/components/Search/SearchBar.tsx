@@ -16,7 +16,7 @@ interface SearchBarProps {
   characters?: { name: string; image: string }[]
 }
 
-export default function SearchBar({
+export function SearchBar({
   recentSearches = [],
   characters = []
 }: SearchBarProps) {

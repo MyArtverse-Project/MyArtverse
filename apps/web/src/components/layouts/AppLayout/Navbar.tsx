@@ -1,7 +1,6 @@
 "use client"
 
 import { useAuth } from "@/app/context/AuthContext"
-import SearchBar from "@/components/Search/SearchBar"
 import { Sidebar } from "@/components/layouts/AppLayout/Sidebar/Sidebar"
 import { Button } from "@mav/ui/components/buttons"
 import { MyArtverseIcon } from "@mav/ui/icons"
@@ -10,6 +9,7 @@ import { useState } from "react"
 import { LuMenu } from "react-icons/lu"
 import { ActionsLoggedIn } from "./ActionsLoggedIn"
 import { ActionsLoggedOut } from "./ActionsLoggedOut"
+import { SearchBar } from "@/components/Search"
 
 export function Navbar() {
   const { user, isLoading } = useAuth()
