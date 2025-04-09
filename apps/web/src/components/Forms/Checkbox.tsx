@@ -1,5 +1,13 @@
-import { cn } from "@/utils/cn"
+import { cn } from "@/utils"
 import { kebabCase } from "lodash"
+
+interface CheckboxProps {
+  inputName: string
+  label: string
+  checked: boolean
+  onChange: (event: React.ChangeEvent<HTMLInputElement>) => void
+  disabled?: boolean
+}
 
 export function Checkbox({
   inputName,
@@ -7,13 +15,7 @@ export function Checkbox({
   checked,
   onChange,
   disabled
-}: {
-  inputName: string
-  label: string
-  checked: boolean
-  onChange: (event: React.ChangeEvent<HTMLInputElement>) => void
-  disabled?: boolean
-}) {
+}: CheckboxProps) {
   return (
     // TODO: add accessibility hints
     <div className="flex items-center gap-x-2">
