@@ -31,7 +31,7 @@ export default function Page() {
         <h1 className="text-700 text-2xl">Welcome to MyArtverse</h1>
         <p className="text-center">
           You should get an email with a link to verify your account. If you don
-          {"'"}t see it, check your spam folder.
+          't see it, check your spam folder.
         </p>
         <Button
           position="center"
