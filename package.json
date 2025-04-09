@@ -12,7 +12,7 @@
     "build:all": "turbo build --concurrency 2",
     "format": "biome format",
     "format:write": "biome format --write",
-    "lint": "biome lint",
+    "lint": "biome check",
     "lint:write": "biome check . --apply",
     "knip": "knip"
   },
