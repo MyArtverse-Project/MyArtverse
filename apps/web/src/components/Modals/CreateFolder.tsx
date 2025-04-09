@@ -1,7 +1,7 @@
 import { cn } from "@mav/shared/utils"
 import { Button } from "@mav/ui/components/buttons"
 import { InputField } from "@mav/ui/components/fields"
-import React from "react"
+import { useState } from "react"
 import { LuCheckCircle, LuFolderPlus, LuXCircle } from "react-icons/lu"
 import { createFolder } from "../../utils/api"
 import Modal from "../layouts/Modal"
@@ -23,8 +23,8 @@ export default function CreateFolderModal({
   parentId: string | null
   category: "artworks" | "characters"
 }) {
-  const [folderName, setFolderName] = React.useState<string>("")
-  const [color, _setColor] = React.useState<string>("")
+  const [folderName, setFolderName] = useState<string>("")
+  const [color, _setColor] = useState<string>("")
   const onSubmit = async () => {
     if (!folderName) {
       return alert("Please enter a folder name")
