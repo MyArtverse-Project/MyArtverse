@@ -1,5 +1,5 @@
 import { User } from "@/app/context/AuthContext"
-import Avatar from "@/components/Avatar"
+import { Avatar } from "@/components"
 import {
   LuAlertTriangle,
   LuBrush,

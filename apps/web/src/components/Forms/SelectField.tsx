@@ -1,20 +1,22 @@
 import { cn } from "@mav/shared/utils"
 
-export default function SelectField({
-  inputName,
-  options,
-  onChange,
-  value,
-  className,
-  noLabel
-}: {
+interface SelectFieldProps {
   inputName: string
   options: { value: string; label: string }[]
   onChange?: (e: React.ChangeEvent<HTMLSelectElement>) => void
   value?: string
   className?: string
   noLabel?: boolean
-}) {
+}
+
+export function SelectField({
+  inputName,
+  options,
+  onChange,
+  value,
+  className,
+  noLabel
+}: SelectFieldProps) {
   return (
     <div className={cn("flex w-full flex-col gap-y-1.5", className)}>
       {noLabel ? null : (

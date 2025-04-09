@@ -1,16 +1,18 @@
 import { cn } from "@mav/shared/utils"
 
+interface RichTextFieldProps {
+  inputName: string
+  onChange?: (e: React.ChangeEvent<HTMLTextAreaElement>) => void
+  value?: string
+  code?: boolean
+}
+
 export default function RichTextField({
   inputName,
   onChange,
   value,
   code
-}: {
-  inputName: string
-  onChange?: (e: React.ChangeEvent<HTMLTextAreaElement>) => void
-  value?: string
-  code?: boolean
-}) {
+}: RichTextFieldProps) {
   return (
     <div className="h-32 w-full space-y-2">
       <span className="text-600 flex gap-x-0.5 font-bold uppercase">

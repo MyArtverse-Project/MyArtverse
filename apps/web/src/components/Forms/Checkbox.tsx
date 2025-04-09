@@ -1,4 +1,4 @@
-import { cn } from "@/utils"
+import { cn } from "@mav/shared/utils"
 import { kebabCase } from "lodash"
 
 interface CheckboxProps {
