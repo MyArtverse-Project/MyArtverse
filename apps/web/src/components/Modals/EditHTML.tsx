@@ -6,7 +6,7 @@ import { useState } from "react"
 import { FaCode } from "react-icons/fa"
 import { LuXCircle } from "react-icons/lu"
 import Modal from "./ModalBase"
-import Note from "../layouts/Note"
+import { Note } from "../Note"
 
 export default function EditHTMLModal({
   toggleEditHTMLModal,
