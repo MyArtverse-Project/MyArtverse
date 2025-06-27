@@ -252,6 +252,16 @@ export const createFolder = async (body: {
   return apiWithAuth("POST", "/v1/folders/create", body)
 }
 
+export const createCharacter = async (body: {
+  name: string
+  nickname?: string
+  characterAvatar: string | null
+  visibility: "public" | "private"
+  mainCharacter: boolean
+}) => {
+  return apiWithAuth("POST", "/v1/character/create", body)
+}
+
 export const getFolders = async (folderId: string) => {
   return apiWithAuth("GET", `/v1/folders/${folderId}`)
 }
