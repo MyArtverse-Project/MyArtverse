@@ -105,7 +105,7 @@ export default function DropZone({
     <div
       className={cn(
         "rounded-md border-2 border-dashed p-10 text-center transition-colors",
-        isDragging ? "bg-gray-300" : "bg-gray-100",
+        isDragging ? "bg-300" : "bg-100",
         className
       )}
       onDragEnter={handleDrag}
@@ -129,7 +129,7 @@ export default function DropZone({
       ) : (
         <div className="flex flex-col items-center">
           <button
-            className="mb-6 flex items-center justify-center rounded-full bg-gray-200 p-8"
+            className="mb-6 flex items-center justify-center rounded-full bg-200 p-8"
             onClick={() => fileUploadRef.current?.click()}
           >
             <LuUpload size={48} />

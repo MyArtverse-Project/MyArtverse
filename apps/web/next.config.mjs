@@ -19,6 +19,11 @@ const nextConfig = {
         hostname: "localhost",
         port: "9000",
         pathname: "/**"
+      },
+      {
+        pathname: "https",
+        hostname: "localhost.localstack.cloud",
+        pathname: "/**"
       }
     ]
   },
