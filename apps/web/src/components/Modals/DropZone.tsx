@@ -13,17 +13,17 @@ const maxFileSize = 10 * 1024 * 1024 // 10 MB
 export default function DropZone({
   setData,
   className = "",
-  value = "",
+  value = null,
   aspectRatio = "1"
 }: {
   setData: (url: string) => void
   className?: string
-  value?: string
+  value?: string | null
   aspectRatio?: string
 }) {
   const [isDragging, setIsDragging] = useState(false)
   const [file, setFile] = useState<File | null>(null)
-  const [imageUrl, setImageUrl] = useState<string | null>(null)
+  const [imageUrl, setImageUrl] = useState<string | null>(value)
   const [uploading, setUploading] = useState(false)
   const [error, setError] = useState<string | null>(null)
   const [_success, setSuccess] = useState(false)
@@ -122,7 +122,7 @@ export default function DropZone({
       {imageUrl ? (
         <div className="flex flex-col items-center">
           <Image width={200} height={200} alt="Uploaded" src={imageUrl} />
-          <span className="text-lg font-bold">Uploaded!</span>
+          {/* <span className="text-lg font-bold">Uploaded!</span> */}
         </div>
       ) : uploading ? (
         <span className="text-lg font-bold">Uploading...</span>

@@ -5,15 +5,22 @@ import { motion } from "framer-motion"
 import { LuSettings } from "react-icons/lu"
 import { useSidebarOpenAtom } from "./Sidebar.atom"
 import SidebarItem from "./SidebarItem"
-import { generateSidebarItems } from "./SidebarItems"
+import { generateEditSidebarItems, generateSidebarItems } from "./SidebarItems"
 import { useAuth, User } from "@/app/context/AuthContext"
+import { useRouter, usePathname } from "next/navigation"
 import Image from "next/image"
 import Avatar from "@/components/Avatar"
 import clsx from 'clsx'
 
 export default function Sidebar({ user }: { user: User }) {
   const { sidebarState: isSidebarExpanded } = useSidebarOpenAtom()
-  const sidebarItems = generateSidebarItems()
+  const pathname = usePathname();
+  const isEditingCharacter = pathname.includes('/studio/characters/');
+  const characterId = isEditingCharacter
+    ? pathname.split("/studio/characters/")[1]?.split("/")[0]
+    : null;
+  const sidebarItems = characterId ? generateEditSidebarItems(characterId) : generateSidebarItems();
+
   return (
     <>
       <motion.aside
@@ -42,12 +49,12 @@ export default function Sidebar({ user }: { user: User }) {
           </div>
           <div className="flex flex-col flex-1">
             {Object.entries(sidebarItems)
-              .filter(([sectionKey]) => sectionKey !== "settings")
+              .filter(([key]) => key !== "settings")
               .map(([sectionKey, items]) => (
                 <div key={sectionKey} className="flex flex-col">
                   {isSidebarExpanded && items.length > 0 && (
                     <span className="m-3 text-sm text-subtext capitalize">
-                      {sectionKey}
+                      {sectionKey === "character" ? "Character Editor" : sectionKey}
                     </span>
                   )}
                   {items.map((item) => (

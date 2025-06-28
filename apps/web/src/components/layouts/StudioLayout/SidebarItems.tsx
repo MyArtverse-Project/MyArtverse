@@ -1,5 +1,5 @@
 import { ReactNode } from "react"
-import { LuCat, LuFileQuestion, LuImage, LuKanbanSquare, LuLineChart, LuMessageCircle, LuPaintbrush, LuSettings, LuShield, LuShieldQuestion, LuZap } from "react-icons/lu"
+import { LuCat, LuFileQuestion, LuImage, LuKanbanSquare, LuLayers, LuLineChart, LuList, LuMessageCircle, LuPaintbrush, LuPencil, LuPencilLine, LuSettings, LuShield, LuShieldQuestion, LuZap } from "react-icons/lu"
 
 type SidebarItem = {
   icon: ReactNode
@@ -69,6 +69,27 @@ const generateArtistSidebarItems = (): SidebarItem[] => {
   ]
 }
 
+const generateCharacterEditSidebarItems = (uuid: string): SidebarItem[] => {
+  return [
+    {
+      icon: <LuPencilLine size={20} />,
+      label: "Basic Info",
+      href: `#`
+    },
+    {
+      icon: <LuList size={20} />,
+      label: "Properties",
+      href: `#properties`
+    },
+    {
+      icon: <LuLayers size={20} />,
+      label: "Ref Sheets",
+      href: `#references`
+    }
+  ]
+}
+
+
 const generateStaffSidebarItems = (): SidebarItem[] => {
   // TODO: Call backend to see if user is staff
   return [
@@ -104,3 +125,11 @@ export const generateSidebarItems = (): SidebarItemsByCategory => {
     settings: generateSettingsSidebarItems()
   }
 }
+
+export const generateEditSidebarItems = (characterId: string) => {
+  return {
+    character: generateCharacterEditSidebarItems(characterId),
+    settings: generateSettingsSidebarItems()
+  }
+}
+

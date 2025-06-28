@@ -179,6 +179,15 @@ export const fetchCharacter = async (handle: string, characterName: string) => {
   return character
 }
 
+export const fetchCharacterById = async (id: string) => {
+  const character = await apiWithoutAuth<Character>(
+    "GET",
+    `/v1/character/id/${id}`
+  )
+
+  return character
+}
+
 export const fetchArtistRequests = async () => {
   const requests = await apiWithAuth<UserType[]>(
     "GET",
