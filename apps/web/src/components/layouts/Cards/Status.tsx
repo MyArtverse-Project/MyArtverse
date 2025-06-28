@@ -11,7 +11,7 @@ interface CharacterStatusProps {
   status: CharacterStatus
 }
 
-export function Status({ status }: CharacterStatusProps) {
+export default function Status({ status }: CharacterStatusProps) {
   const base = "flex flex-row items-center text-md font-semibold my-1"
 
   const statusObj: Record<

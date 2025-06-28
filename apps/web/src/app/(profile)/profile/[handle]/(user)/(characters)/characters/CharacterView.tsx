@@ -86,7 +86,7 @@ export default function CharacterView({
               </Button>
               <Button
                 onClick={() =>
-                  router.push("/dashboard/characters?createModal=true")
+                  router.push("/studio/characters?createModal=true")
                 }
                 icon={<LuPlus size={20} />}
               >

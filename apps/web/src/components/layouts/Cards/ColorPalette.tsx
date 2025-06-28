@@ -9,7 +9,7 @@ interface ColorPaletteProps {
   height?: number | string
 }
 
-export function ColorPalette({
+export default function ColorPalette({
   palette,
   width = "100%",
   height = "30px"
