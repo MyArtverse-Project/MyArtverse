@@ -13,11 +13,12 @@ interface ProfileMastheadProps {
   avatarUrl: string
   profileBio: string
   followerCount: number
+  characterCount: number
   followingCount: number
   isOwnProfile?: boolean
 }
 
-const profileTabs = [
+const generateProfileTabs = (characterCount: number = 0) => [
   {
     icon: LuHome,
     text: "Overview",
@@ -27,7 +28,7 @@ const profileTabs = [
     icon: LuCat,
     text: "Characters",
     link: "characters",
-    countIndicator: 5
+    countIndicator: characterCount  
   },
   {
     icon: LuHeart,
@@ -86,7 +87,7 @@ export function ProfileMasthead(props: Partial<ProfileMastheadProps>) {
           <Masthead.Layer>{props.profileBio}</Masthead.Layer>
         </Masthead.Details>
       </Masthead.Wrapper>
-      <Masthead.Tabs baseURL={`/@${props.handle}/`} items={profileTabs} />
+      <Masthead.Tabs baseURL={`/@${props.handle}/`} items={generateProfileTabs(props.characterCount)} />
       <RelationModal
         followers={[]}
         following={[]}
