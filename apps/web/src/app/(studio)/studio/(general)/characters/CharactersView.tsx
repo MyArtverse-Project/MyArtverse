@@ -63,7 +63,7 @@ export default function CharactersView({ characters }: { characters: Character[]
             </thead>
             <tbody>
               {characters.map((characters, index) => (
-                <tr key={characters.name} className="border-b border-100 hover:bg-200" onClick={() => window.location.href = `/studio/characters/${characters.id}`}>
+                <tr key={characters.name} className="border-b border-100 hover:bg-200 cursor-pointer" onClick={() => window.location.href = `/studio/characters/${characters.id}`}>
                   <td className="px-2">
                     <Checkbox
                       inputName={`character-select-${index}`}

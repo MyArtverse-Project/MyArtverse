@@ -156,6 +156,10 @@ export const fetchUserCharacters = async (handle: string) => {
   return data
 }
 
+export const updateCharacter = async (characterId: string, data: Partial<Character>) => {
+  return apiWithAuth("PUT", `/v1/character/update/${characterId}`, data)
+}
+
 export const fetchSelfCharacters = async () => {
   const characters = await apiWithAuth<Character[]>("GET", "/v1/character/")
   return characters

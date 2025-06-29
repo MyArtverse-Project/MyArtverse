@@ -2,7 +2,7 @@
 
 import { Button } from "@mav/ui/components/buttons"
 import { motion } from "framer-motion"
-import { LuSettings } from "react-icons/lu"
+import { LuArrowLeft, LuSettings } from "react-icons/lu"
 import { useSidebarOpenAtom } from "./Sidebar.atom"
 import SidebarItem from "./SidebarItem"
 import { generateEditSidebarItems, generateSidebarItems } from "./SidebarItems"
@@ -11,6 +11,7 @@ import { useRouter, usePathname } from "next/navigation"
 import Image from "next/image"
 import Avatar from "@/components/Avatar"
 import clsx from 'clsx'
+import { SelectField } from "../Forms"
 
 export default function Sidebar({ user }: { user: User }) {
   const { sidebarState: isSidebarExpanded } = useSidebarOpenAtom()
@@ -32,18 +33,32 @@ export default function Sidebar({ user }: { user: User }) {
       >
         <div
           data-mav-list-renderer=""
-          className="flex h-full flex-col px-2 py-1.5 gap-2"
+          className="flex h-full flex-col  py-1.5 gap-2"
         >
-          <div className={clsx("p-3 flex flex-row bg-100 rounded-md", isSidebarExpanded ? "justify-start" : "justify-center")}>
-            <Avatar
-              username={user.handle}
-              size={isSidebarExpanded ? 40 : 30}
-              src={user.avatarUrl || "/UserProfile.png"}
-            />
-            {isSidebarExpanded && (
-              <div className="flex flex-col justify-center ml-2">
-                <span className="text-sm">{user.displayName}</span>
-                <span className="text-sm text-subtext">@{user.handle}</span>
+          <div className={clsx("flex items-center justify-between", isSidebarExpanded ? "px-3" : "pr-2")}>
+            {characterId ? (
+              <div className="flex gap-2 w-full flex-col">
+                <Button href="/studio/characters" icon={<LuArrowLeft size={20} />}>Back to Characters</Button>
+                <SelectField
+                  options={user.characters.map(character => ({ value: character.id, label: character.name }))}
+                  inputName="Editing"
+                  onChange={(e: React.ChangeEvent<HTMLSelectElement>) => window.location.href = `/studio/characters/${e.target.value}`}
+                  value={characterId ?? ""}
+                />
+              </div>
+            ) : (
+              <div className={clsx("p-3 flex flex-row bg-100 rounded-md", isSidebarExpanded ? "justify-start" : "justify-center")}>
+                <Avatar
+                  username={user.handle}
+                  size={isSidebarExpanded ? 40 : 30}
+                  src={user.avatarUrl || "/UserProfile.png"}
+                />
+                {isSidebarExpanded && (
+                  <div className="flex flex-col justify-center ml-2">
+                    <span className="text-sm">{user.displayName}</span>
+                    <span className="text-sm text-subtext">@{user.handle}</span>
+                  </div>
+                )}
               </div>
             )}
           </div>

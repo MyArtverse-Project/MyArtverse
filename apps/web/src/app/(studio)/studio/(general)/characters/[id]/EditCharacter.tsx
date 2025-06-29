@@ -1,6 +1,6 @@
 'use client'
 
-import { useState } from 'react'
+import { useEffect, useState } from 'react'
 import Checkbox from '@/components/layouts/Forms/Checkbox'
 import MarginClamp from '@/components/layouts/Layouts/MarginClamp'
 import DropZone from '@/components/Modals/DropZone'
@@ -9,6 +9,9 @@ import { Group, GroupContainer, MarginGutter } from '@mav/ui/components/layouts'
 import { InputField, Textarea } from '@mav/ui/components/fields'
 import { SelectField } from '@/components/layouts/Forms'
 import { furrySpeciesOptions, pronounOptions } from '@/utils/constants'
+import { Button } from '@mav/ui/components/buttons/Button'
+import { updateCharacter } from '@/utils/api'
+import { redirect } from 'next/navigation'
 
 export default function EditCharacter({ character }: { character: Character }) {
   const [avatarUrl, setAvatarUrl] = useState<string>(character.avatarUrl)
@@ -19,6 +22,49 @@ export default function EditCharacter({ character }: { character: Character }) {
   const [pronouns, setPronouns] = useState<string>(character.attributes.pronouns ?? '')
   const [species, setSpecies] = useState<string>(character.species ?? '')
   const [bio, setBio] = useState<string>(character.attributes.bio ?? '')
+
+  const [isDirty, setIsDirty] = useState(false)
+  const [isSaving, setIsSaving] = useState(false)
+
+  useEffect(() => {
+    const changed =
+      displayName !== (character.name ?? "") ||
+      nickname !== (character.nickname ?? "") ||
+      isMainCharacter !== character.mainCharacter ||
+      characterUrl !== (character.slug ?? "") ||
+      pronouns !== (character.attributes.pronouns ?? "") ||
+      species !== (character.species ?? "") ||
+      bio !== (character.attributes.bio ?? "")
+    setIsDirty(changed)
+  }, [displayName, nickname, isMainCharacter, characterUrl, pronouns, species, bio])
+
+  const handleSave = async () => {
+    setIsSaving(true)
+    try {
+      const attributes = {
+        pronouns,
+        bio,
+        gender: character.attributes.gender ?? "",
+        preferences: character.attributes.preferences ?? { likes: "", dislikes: "" },
+        custom_fields: character.attributes.custom_fields ?? [],
+      }
+      await updateCharacter(character.id, {
+        name: displayName,
+        nickname,
+        mainCharacter: isMainCharacter,
+        slug: characterUrl,
+        attributes,
+        species,
+        avatarUrl
+      })
+      setIsDirty(false)
+      redirect('/studio/characters')
+    } catch (error) {
+      console.error("Failed to save profile settings", error)
+    } finally {
+      setIsSaving(false)
+    }
+  }
 
   return (
     <MarginGutter screenSize="xl" className="px-6 py-5 *:mt-6 *:gap-6 first:*:mt-0">
@@ -82,7 +128,33 @@ export default function EditCharacter({ character }: { character: Character }) {
             />
           </div>
         </Group>
+        <Group title='Reference sheets' description="Reference sheets will appear in the list if you have this character linked and be shown on the public profile. Learn more">
+          <div className='flex flex-row gap-x-2'>
+            <Button
+              variant="primary"
+              onClick={() => {}}
+            >
+              Add Reference Sheet
+            </Button>
+            <Button
+              variant="secondary"
+              onClick={() => {}}
+            >
+              Manage Reference Sheet
+            </Button>
+          </div>
+        </Group>
       </GroupContainer>
+      {isDirty && (
+        <div className="flex justify-end mt-4">
+          <Button
+            onClick={handleSave}
+            disabled={isSaving}
+          >
+            {isSaving ? "Saving..." : "Save Changes"}
+          </Button>
+        </div>
+      )}
     </MarginGutter>
   )
 }
