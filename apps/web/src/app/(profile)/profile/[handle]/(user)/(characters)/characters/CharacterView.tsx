@@ -123,7 +123,7 @@ export default function CharacterView({
                   : []
               }
               status="owned"
-              href={`/@${handle}/${character.name}`}
+              href={`/@${handle}/${character.slug}`}
             />
           ))}
         </GridResponsive>

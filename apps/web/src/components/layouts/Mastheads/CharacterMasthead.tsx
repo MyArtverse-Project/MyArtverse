@@ -17,12 +17,15 @@ import {
 
 interface ProfileMastheadProps {
   characterName: string
+  characterId: string
   species?: string
+  characterSlug: string
   pronouns?: string
   toyhouseMigrationLink?: string
   avatarUrl?: string
   ownerHandle?: string
   visibility?: Visibility
+  isOwner?: boolean
 }
 
 export function CharacterMasthead(props: Partial<ProfileMastheadProps>) {
@@ -69,14 +72,19 @@ export function CharacterMasthead(props: Partial<ProfileMastheadProps>) {
               <Button href="/settings/profile" icon={<LuHeart size={18} />}>
                 Favorite
               </Button>
+              {props.isOwner && (
+                <Button href={`/studio/characters/${props.characterId}`}>
+                  Edit
+                </Button>
+              )}
               <Button icon={<LuMoreVertical size={18} />} />
             </div>
           </Masthead.Layer>
           <Masthead.Layer>
             <div className="relative flex items-center">
-              <span className="text-700 pr-3  text-lg">Species</span>
+              <span className="text-700 pr-3  text-lg capitalize">{props.species}</span>
               <FaCircle size={6} />
-              <span className="text-700 pl-3 text-lg">He/Hum</span>
+              <span className="text-700 pl-3 text-lg">{props.pronouns}</span>
             </div>
           </Masthead.Layer>
           <Masthead.Layer>
@@ -95,7 +103,7 @@ export function CharacterMasthead(props: Partial<ProfileMastheadProps>) {
         </Masthead.Details>
       </Masthead.Wrapper>
       <Masthead.Tabs
-        baseURL={`/@${props.ownerHandle}/${props.characterName}/`}
+        baseURL={`/@${props.ownerHandle}/${props.characterSlug}/`}
         items={profileTabs}
       />
     </Masthead>

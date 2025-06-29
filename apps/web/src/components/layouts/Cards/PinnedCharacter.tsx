@@ -2,7 +2,7 @@ import { displaySpecies } from "@/utils/displayer"
 import { Button } from "@mav/ui/components/buttons"
 import Image from "next/image"
 import { LuCat as CatIcon, LuPin, LuPalette as Palette } from "react-icons/lu"
-import { ColorPalette } from "./ColorPalette"
+import ColorPalette from "./ColorPalette"
 
 interface PinnedCharacterProps {
   avatar: string

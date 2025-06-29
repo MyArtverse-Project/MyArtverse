@@ -41,7 +41,7 @@ export default async function Page({
                   ? character.refSheets[0].colors
                   : []
               }
-              href={`/@${character.owner.handle}/character/${character.name}`}
+              href={`/@${character.owner.handle}/character/${character.slug}`}
             />
           ))}
         </GridResponsive>
