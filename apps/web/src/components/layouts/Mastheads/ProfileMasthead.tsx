@@ -58,9 +58,11 @@ export function ProfileMasthead(props: Partial<ProfileMastheadProps>) {
             <span className="text-4xl">
               {props.displayName || props.handle}
             </span>
-            {props.isOwnProfile ?? (
-              <Button href="/settings/profile">Edit Profile</Button>
-            )}
+            {props.isOwnProfile ? (
+              <>
+                <Button href="/settings/profile">Edit Profile</Button>
+              </>
+            ) : null}
           </Masthead.Layer>
           <Masthead.Layer>
             <div className="flex gap-x-4">

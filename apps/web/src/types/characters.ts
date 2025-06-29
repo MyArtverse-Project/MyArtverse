@@ -35,6 +35,7 @@ export interface CharacterAttributes {
 export interface Character {
   id: string
   name: string
+  slug: string
   nickname: string
   visibility: Visibility
   owner: UserType

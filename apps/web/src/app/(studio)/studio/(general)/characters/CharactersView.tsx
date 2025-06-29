@@ -3,19 +3,32 @@
 import { Character } from '@/types/characters'
 import { Button } from '@mav/ui/components/buttons'
 import { Group } from '@mav/ui/components/layouts'
-import React from 'react'
+import { useEffect, useState } from 'react'
 import { FaEllipsisVertical } from 'react-icons/fa6'
 import CreateCharacterModal from '@/components/Modals/CreateCharacter'
 import { CharacterCard } from '@/components/layouts/Cards'
 import Avatar from '@/components/Avatar'
 import Checkbox from '@/components/layouts/Forms/Checkbox'
 import { LuEye, LuLock } from 'react-icons/lu'
+import { useRouter, useSearchParams } from 'next/navigation'
 
 export default function CharactersView({ characters }: { characters: Character[] }) {
-  const [isCreateModalOpen, setIsCreateModalOpen] = React.useState(false)
+  const [isCreateModalOpen, setIsCreateModalOpen] = useState(false)
+  const router = useRouter()
+  const searchParams = useSearchParams()
   const toggleCreateCharacterModal = () => {
     setIsCreateModalOpen(!isCreateModalOpen)
   }
+  useEffect(() => {
+    const showModal = searchParams.get('createModal') === 'true'
+    if (showModal) {
+      setIsCreateModalOpen(true)
+      const params = new URLSearchParams(Array.from(searchParams.entries()))
+      params.delete('createModal')
+      const newUrl = `${window.location.pathname}?${params.toString()}`
+      router.replace(newUrl, { scroll: false })
+    }
+  }, [searchParams, router])
 
   return (
     <div className="grid">

@@ -1,6 +1,7 @@
 import type { DefineRouteParams } from "@/types"
 import { fetchUser, getPanels } from "@/utils/api"
 import OverviewContent from "./OverviewContent"
+import { redirect } from "next/navigation"
 
 type AsyncProps = DefineRouteParams<{ handle: string }>
 

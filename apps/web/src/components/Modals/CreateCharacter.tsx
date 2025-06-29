@@ -43,7 +43,7 @@ export default function CreateCharacterModal({
 
   return (
     <Modal
-      className="w-1/6 px-4"
+      className="w-fit px-4"
       toggler={toggleCreateCharacterModal}
       state={createCharacterModalShown}
     >

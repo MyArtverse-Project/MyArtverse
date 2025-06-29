@@ -70,11 +70,12 @@ export default function Page() {
             type="name"
             inputName="Username"
             placeholder="Username"
+            regex={/^[a-z0-9_.]+$/}
             error={errors?.errors?.username}
           />
-          <span className="text-600 ">
-            Username must contain [A-Z][a-z][0-9], underscore, and periods.
-          </span>
+          {/* <span className="text-600 ">
+            Username must contain [a-z][0-9], underscore, and periods.
+          </span> */}
           <InputField
             inputName="Password"
             type="password"

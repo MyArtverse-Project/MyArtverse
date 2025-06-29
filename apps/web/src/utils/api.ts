@@ -304,6 +304,15 @@ export const getPanels = async (handle: string) => {
   )
 }
 
+export const updateProfile = async (body: {
+  displayName: string
+  handle: string
+  pronouns: string
+  avatarLink: string
+}) => {
+  return apiWithAuth("PUT", "/v1/user/me", body)
+}
+
 export const postComment = async (
   commentType: string,
   content: string,

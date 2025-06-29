@@ -1,33 +1,16 @@
-import { Button } from "@mav/ui/components/buttons"
-import { Group, GroupContainer } from "@mav/ui/components/layouts"
+import { fetchUserData } from "@/utils/api"
+import ProfileSettings from "./ProfileSettings"
+import { redirect } from "next/navigation"
 
 export const metadata = {
   title: "Profile"
 }
 
-export default function SettingsProfilePage() {
+export default async function SettingsProfilePage() {
+  const user = await fetchUserData()
+  if (!user) return redirect("/login")
+  // TODO: Update API
   return (
-    <GroupContainer>
-      <Group title="Public profile">content</Group>
-      <Group
-        title="Danger zone"
-        description={
-          <>
-            Deleting an account is irreversable and cannot be undone! Once you
-            delete your account—your characters, images, and account history
-            will be completely wiped from our servers to comply with GDPR
-            standards. If you are certain that you'll delete your account,
-            it's important to export your data first before proceeding.
-          </>
-        }
-        learnMoreLink="/lmao"
-      >
-        <div className="flex gap-x-2">
-          <Button>Export data</Button>
-          <Button variant="alert-secondary">Deactivate account</Button>
-          <Button variant="alert">Delete account</Button>
-        </div>
-      </Group>
-    </GroupContainer>
+    <ProfileSettings user={user} />
   )
 }

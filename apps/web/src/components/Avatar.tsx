@@ -3,7 +3,7 @@ import Image from "next/image"
 export default function Avatar({
   className,
   username,
-  src,
+  src = "/UserProfile.png",
   size = 36
 }: {
   className?: string

@@ -9,25 +9,26 @@ export const metadata = {
 export default function SettingsPrivacyPage() {
   return (
     <GroupContainer>
-      <Group title="Change Password">
-        <form className="flex flex-col gap-y-2">
-          <InputField type="password" inputName="Current password" />
-          <InputField type="password" inputName="New password" />
-          <InputField type="password" inputName="Repeat new password" />
-          <span>
-            <Button>Change password</Button>
-          </span>
-        </form>
-      </Group>
       <Group
-        title="Linked accounts"
-        description="Manage your login from third-party authenticators"
+        title="Danger zone"
+        description={
+          <>
+            Deleting an account is irreversable and cannot be undone! Once you
+            delete your account—your characters, images, and account history
+            will be completely wiped from our servers to comply with GDPR
+            standards. If you are certain that you'll delete your account,
+            it's important to export your data first before proceeding.
+          </>
+        }
+        learnMoreLink="/lmao"
       >
-        <Button>Link account via Google</Button>
-        <Button>Link account via X</Button>
-        <Button>Link account via Apple ID</Button>
+        <div className="flex gap-x-2">
+          <Button>Export data</Button>
+          <Button variant="alert-secondary">Deactivate account</Button>
+          <Button variant="alert">Delete account</Button>
+        </div>
       </Group>
-      <Group title="Two-factor authentication">content</Group>
+      
     </GroupContainer>
   )
 }
