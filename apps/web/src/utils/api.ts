@@ -174,6 +174,11 @@ export const fetchSelfCharacter = async (characterName: string) => {
   return character
 }
 
+export const fetchUserGallery = async () => {
+  const gallery = await apiWithAuth<Artwork[]>("GET", "/v1/art/gallery")
+  return gallery
+}
+
 export const fetchCharacter = async (handle: string, characterName: string) => {
   const character = await apiWithoutAuth<Character>(
     "GET",
@@ -236,6 +241,28 @@ export const getFavorites = async (handle: string) => {
 
   return characters
 }
+
+export const uploadArt = async (
+  characterId: string,
+  body: {
+    imageUrl: string
+    title: string
+    description: string
+    tags: string[]
+    userAsArtist: boolean
+    mainCharacterId: string
+    taggedCharacterIds: string[]
+  }
+) => {
+  const res = await apiWithAuth("POST", `/v1/art/upload/${characterId}`, body)
+
+  if (!res) {
+    throw new Error("Art upload failed")
+  }
+
+  return res
+}
+
 
 export const getArtwork = async (artworkId: string) => {
   const artwork = await apiWithoutAuth<Artwork>("GET", `/v1/art/${artworkId}`)

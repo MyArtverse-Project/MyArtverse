@@ -6,7 +6,7 @@ import { Button } from "@mav/ui/components/buttons"
 import Image from "next/image"
 import { useState } from "react"
 import { FaCode, FaComment, FaInfoCircle } from "react-icons/fa"
-import { LuXCircle } from "react-icons/lu"
+import { LuCat, LuGalleryHorizontal, LuSheet, LuXCircle } from "react-icons/lu"
 import Modal from "../layouts/Modal"
 import Note from "../layouts/Note"
 
@@ -30,9 +30,27 @@ export default function EditPanelModal({
     },
     {
       label: "Information",
-      description: `Add information to your panel. Information including when you joined ${BRAND}, your birthday, nationality, and more.`,
+      description: `List of information`,
       value: "information",
       icon: <FaInfoCircle size={18} />
+    },
+    {
+      label: "Featured Gallery",
+      description: `List of featured images`,
+      value: "featured_gallery",
+      icon: <LuGalleryHorizontal size={18} />
+    },
+    {
+      label: "Featured artwork",
+      description: `A artwork featured`,
+      value: "featured_artwork",
+      icon: <LuCat size={18} />
+    },
+    {
+      label: "Reference Sheet",
+      description: `A reference sheet for the character`,
+      value: "reference_sheet",
+      icon: <LuSheet size={18} />
     }
   ]
 
