@@ -4,15 +4,17 @@ import type { UserType } from "@/types/users"
 import { Button } from "@mav/ui/components/buttons"
 import { Group } from "@mav/ui/components/layouts"
 
+// TODO: Make it reusable for Characters as well
+
 export default function InformationPanel({
-  user,
-  self
-}: { user: UserType; self?: User | null }) {
+  information,
+  isOwner
+}: { information: UserType; isOwner?: boolean }) {
   return (
     <Group
-      title={`About ${user.displayName ? user.displayName : user.handle}`}
+      title={`About ${information.displayName ? information.displayName : information.handle}`}
       potentialActions={
-        self?.id == user.id ? (
+        isOwner ? (
           <Button size="small" href="/settings/profile">
             Edit
           </Button>
@@ -22,22 +24,22 @@ export default function InformationPanel({
     >
       <Field
         title="Date joined"
-        content={new Date(user.dateRegistered).toDateString()}
+        content={new Date(information.dateRegistered).toDateString()}
       />
       {/* TODO: Custom attributes for Backend */}
       <Field
         title="Birthday"
         content={
-          user.birthday ? new Date(user.birthday).toDateString() : "Not Set"
+          information.birthday ? new Date(information.birthday).toDateString() : "Not Set"
         }
       />
       <Field
         title="Pronouns"
-        content={user.pronouns ? user.pronouns : "Not Set"}
+        content={information.pronouns ? information.pronouns : "Not Set"}
       />
       <Field
         title="Nationality"
-        content={user.nationality ? user.nationality : "Not Set"}
+        content={information.nationality ? information.nationality : "Not Set"}
       />
       {/* <Field title="Nationality" content="Murica" /> */}
     </Group>

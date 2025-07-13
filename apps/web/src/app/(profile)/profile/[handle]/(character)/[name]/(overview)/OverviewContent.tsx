@@ -1,36 +1,25 @@
-"use client"
+import { User } from "@/app/context/AuthContext";
+import { renderPanel } from "@/components/layouts/Panels/RenderPanel";
+import { Character } from "@/types/characters";
+import { DashboardPanel } from "@/types/users";
+import { Button } from "@mav/ui/components/buttons/Button";
+import DOMPurify from "dompurify";
 
-import { type User, useAuth } from "@/app/context/AuthContext"
-import { renderPanel } from "@/components/layouts/Panels/RenderPanel"
-import type { DashboardPanel, UserType } from "@/types/users"
-import { fetchUserData } from "@/utils/api"
-import { Button } from "@mav/ui/components/buttons"
-import DOMPurify from "isomorphic-dompurify"
 
-export default function OverviewContent({
-  handle,
-  panels,
-  userData
-}: {
-  handle: string
-  panels: DashboardPanel[]
-  userData: UserType
-}) {
-  const { user: self } = useAuth()
+export default function OverviewContent({ character, self, panels }: { character: Character; self: User | null; panels: DashboardPanel[] }) {
   const customHTMLPanel = panels.find((panel) => panel.type === "customHTML")
   const htmlContent = customHTMLPanel?.settings?.html
     ? DOMPurify.sanitize(customHTMLPanel.settings.html)
     : ""
-    
 
   return (
     <div className="mx-auto max-w-screen-2xl px-8 py-6">
       <div className="bg-100 col-span-2 mb-4 flex w-full flex-col gap-4 rounded-lg ">
-        {self?.id === userData.id && (
+        {self?.id === character.owner.id && (
           <Button
             variant="secondary"
             className="mb-4 self-end"
-            href={`/@${handle}/edit`}
+            href={`/@${self?.handle}/${character.slug}/edit`}
           >
             Edit Panels
           </Button>
@@ -43,12 +32,13 @@ export default function OverviewContent({
         )}
       </div>
 
+
       <div className="mb-4 grid w-full grid-cols-2 gap-4">
         {panels
           .filter((panel) => panel.position.row === 2)
           .map((panel, index) => (
             <div key={index} className="p-4">
-              {renderPanel(panel, 'user', userData, self)}
+              {renderPanel(panel, 'character', character, self)}
             </div>
           ))}
       </div>
@@ -58,7 +48,7 @@ export default function OverviewContent({
           .filter((panel) => panel.position.row === 3)
           .map((panel, index) => (
             <div key={index} className="p-4">
-              {renderPanel(panel, 'user', userData, self)}
+              {renderPanel(panel, 'character', character, self)}
             </div>
           ))}
       </div>

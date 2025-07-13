@@ -1,4 +1,4 @@
-import type { Comments, UserType } from "./users"
+import type { Comments, DashboardPanel, UserType } from "./users"
 import type { StatusIndicator, Visibility } from "./utils"
 
 export type CharacterStatus =
@@ -48,7 +48,8 @@ export interface Character {
   comments: Comments[]
   avatarUrl: string
   refSheets: ReferenceSheet[]
-  attributes: CharacterAttributes
+  attributes: CharacterAttributes,
+  dashboards: DashboardPanel[]
   migration: {
     url: string
     migrateDate: Date

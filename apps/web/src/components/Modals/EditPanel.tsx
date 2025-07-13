@@ -13,11 +13,13 @@ import Note from "../layouts/Note"
 export default function EditPanelModal({
   toggleEditPanel,
   editPanelModalShown,
-  position
+  position,
+  characterName
 }: {
   toggleEditPanel: (position: { row: number; col: number } | null) => void
   editPanelModalShown: boolean
   position: { row: number; col: number } | null
+  characterName?: string
 }) {
   const [errors, setErrors] = useState<string>()
   const [choosenComponent, setChoosenComponent] = useState<string>("comments")
@@ -60,7 +62,7 @@ export default function EditPanelModal({
       return
     }
 
-    const data = await setPanel({ component: choosenComponent, position })
+    const data = await setPanel({ component: choosenComponent, position }, characterName)
     if (!data) {
       setErrors("Unable to save panel")
       return
