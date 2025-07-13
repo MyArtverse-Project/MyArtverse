@@ -320,15 +320,29 @@ export const setPanel = async (body: {
     row: number
   }
   component: string
-}) => {
+}, characterName?: string) => {
+  console.log(body.position)
+  if (characterName) {
+    return apiWithAuth("POST", `/v1/dashboard/cpanels/${characterName}`, body)
+  }
   return apiWithAuth("POST", "/v1/dashboard/panels", body)
 }
 
-export const setHTMLPanel = async (body: { html: string }) => {
+
+export const setHTMLPanel = async (body: { html: string }, characterName: string) => {
+  if (characterName) {
+    return apiWithAuth("PUT", `/v1/dashboard/cpanels/${characterName}/html`, body)
+  }
   return apiWithAuth("PUT", "/v1/dashboard/panels/html", body)
 }
 
-export const getPanels = async (handle: string) => {
+export const getPanels = async (handle: string, characterName?: string) => {
+  if (characterName) {
+    return apiWithoutAuth<DashboardPanel[]>(
+      "GET",
+      `/v1/dashboard/cpanels/${characterName}`
+    )
+  }
   return apiWithoutAuth<DashboardPanel[]>(
     "GET",
     `/v1/dashboard/panels/${handle}`
