@@ -1,7 +1,61 @@
+import GridResponsive from '@/components/layouts/Layouts/GridResponsive'
+import { fetchUserGallery } from '@/utils/api'
+import { Button } from '@mav/ui/components/buttons'
+import { Group, MarginGutter } from '@mav/ui/components/layouts'
+import Image from 'next/image'
 import React from 'react'
+import { LuUpload } from 'react-icons/lu'
 
-export default function Page() {
+export default async function Page() {
+  const artworks = await fetchUserGallery()
+
   return (
-    <div>gallery page</div>
+    <MarginGutter screenSize="xl" className="px-6 py-8 space-y-6">
+      <Group
+        title="Gallery"
+        potentialActions={
+          <div className="flex items-center gap-2">
+            <Button
+              variant="secondary"
+              href="/studio/gallery/upload"
+              icon={<LuUpload />}
+            >
+              Upload Artwork
+            </Button>
+          </div>
+        }
+      >
+        {artworks.length > 0 ? (
+          <GridResponsive
+            breakpoint={250}
+            className="gap-4"
+            role="listbox"
+          >
+            {artworks.map((artwork) => {
+              if (!artwork.artworkUrl) return null
+
+              return (
+                <div
+                  key={artwork.id}
+                  className="overflow-hidden rounded-xl border aspect-square"
+                >
+                  <Image
+                    src={artwork.artworkUrl}
+                    alt={artwork.altText ?? 'Artwork'}
+                    width={500}
+                    height={500}
+                    className="object-cover w-full h-full transition-transform duration-300 group-hover:scale-105"
+                    
+                  />
+                  eee
+                </div>
+              )
+            })}
+          </GridResponsive>
+        ) : (
+          <div className="text-muted-foreground text-sm">No artworks found.</div>
+        )}
+      </Group>
+    </MarginGutter>
   )
 }
