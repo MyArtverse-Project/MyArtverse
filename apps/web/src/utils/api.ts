@@ -12,6 +12,7 @@ import type { ReadonlyRequestCookies } from "next/dist/server/web/spec-extension
 import { cookies } from "next/headers"
 import { redirect } from "next/navigation"
 import { BACKEND_URL } from "./constants"
+import { ReferenceVariant } from "@/app/(studio)/studio/(general)/characters/[id]/Ref/ReferenceConfigForm"
 
 type APIMethods = "GET" | "POST" | "DELETE" | "PUT"
 
@@ -281,6 +282,24 @@ export const getRefSheets = async (handle: string) => {
   )
 
   return refSheets
+}
+
+export const createRefSheet = async (body: {
+  characterId: string,
+  refSheet: {
+    name: string
+    description: string
+    variants: {
+      title: string
+      artist: string
+      description: string
+      image: string
+      primary: boolean
+      colors: string[]
+    }[]
+  }
+}) => {
+  return apiWithAuth("POST", "/v1/character/upload-ref", body)
 }
 
 export const createFolder = async (body: {

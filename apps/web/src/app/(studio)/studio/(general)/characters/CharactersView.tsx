@@ -54,7 +54,7 @@ export default function CharactersView({ characters }: { characters: Character[]
           <table className="w-full text-left text-sm">
             <thead className="border-b border-200 text-purple-600">
               <tr>
-                <th></th>
+                <th className='w-10'></th>
                 <th className="py-3">Character</th>
                 <th className="py-3">Date</th>
                 <th className="py-3">Ownership</th>

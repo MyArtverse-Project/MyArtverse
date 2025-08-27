@@ -12,6 +12,8 @@ import { furrySpeciesOptions, pronounOptions } from '@/utils/constants'
 import { Button } from '@mav/ui/components/buttons/Button'
 import { updateCharacter } from '@/utils/api'
 import { redirect } from 'next/navigation'
+import RefSheetModal from './Ref/RefSheetModal'
+import RefSheetThumbnail from './RefSheetThumbnail'
 
 export default function EditCharacter({ character }: { character: Character }) {
   const [avatarUrl, setAvatarUrl] = useState<string>(character.avatarUrl)
@@ -22,7 +24,7 @@ export default function EditCharacter({ character }: { character: Character }) {
   const [pronouns, setPronouns] = useState<string>(character.attributes.pronouns ?? '')
   const [species, setSpecies] = useState<string>(character.species ?? '')
   const [bio, setBio] = useState<string>(character.attributes.bio ?? '')
-
+  const [isRefModalOpen, setIsRefModalOpen] = useState(false)
   const [isDirty, setIsDirty] = useState(false)
   const [isSaving, setIsSaving] = useState(false)
 
@@ -67,94 +69,106 @@ export default function EditCharacter({ character }: { character: Character }) {
   }
 
   return (
-    <MarginGutter screenSize="xl" className="px-6 py-5 *:mt-6 *:gap-6 first:*:mt-0">
-      <GroupContainer>
-        <Group title='Basic Information' description="A nickname field is optional. You can change the name and nickname of your character twice a week. Make sure the name and avatar you chose adheres to the Community Guidelines.">
-          <div className="flex flex-col lg:flex-row justify-between gap-6">
-            <div className="flex flex-col gap-y-4 w-full lg:w-2/3">
-              <InputField
-                inputName="Name"
-                value={displayName}
-                onChange={(e) => setDisplayName(e.target.value)}
-              />
-              <Checkbox
-                inputName=""
-                label="Set this character as my current/main character"
-                checked={isMainCharacter}
-                onChange={() => setIsMainCharacter(!isMainCharacter)}
-              />
-              <InputField
-                inputName="Nickname (optional)"
-                value={nickname}
-                onChange={(e) => setNickname(e.target.value)}
-              />
-            </div>
-            <DropZone
-              value={avatarUrl}
-              setData={setAvatarUrl}
-              className='w-full lg:w-1/3'
-            />
-          </div>
-        </Group>
-        <Group title='Character URL' description="This is a shareable URL of your character. It’s automatically generated based on the name and species you gave it but you can change it at will anytime or you can reset it.">
-          <InputField
-            inputName=""
-            value={characterUrl}
-            onChange={(e) => setCharacterUrl(e.target.value)}
-            prefix={`@${character.owner.handle}/`}
-          />
-        </Group>
-        <Group title='Properties' description="Add an attribute(s) that best represents your character.">
-          <div className="flex flex-col gap-4">
-            <div className='flex flex-row gap-4'>
-              <SelectField
-                inputName="Pronouns"
-                value={pronouns}
-                onChange={(e) => setPronouns(e.target.value)}
-                options={pronounOptions}
-              />
-              <SelectField
-                inputName="Species"
-                value={species}
-                onChange={(e) => setSpecies(e.target.value)}
-                options={furrySpeciesOptions}
+    <>
+      <RefSheetModal
+        isOpen={isRefModalOpen}
+        onClose={() => setIsRefModalOpen(false)}
+        character={character}
+      />
+      <MarginGutter screenSize="xl" className="px-6 py-5 *:mt-6 *:gap-6 first:*:mt-0">
+        <GroupContainer>
+          <Group title='Basic Information' description="A nickname field is optional. You can change the name and nickname of your character twice a week. Make sure the name and avatar you chose adheres to the Community Guidelines.">
+            <div className="flex flex-col lg:flex-row justify-between gap-6">
+              <div className="flex flex-col gap-y-4 w-full lg:w-2/3">
+                <InputField
+                  inputName="Name"
+                  value={displayName}
+                  onChange={(e) => setDisplayName(e.target.value)}
+                />
+                <Checkbox
+                  inputName=""
+                  label="Set this character as my current/main character"
+                  checked={isMainCharacter}
+                  onChange={() => setIsMainCharacter(!isMainCharacter)}
+                />
+                <InputField
+                  inputName="Nickname (optional)"
+                  value={nickname}
+                  onChange={(e) => setNickname(e.target.value)}
+                />
+              </div>
+              <DropZone
+                value={avatarUrl}
+                setData={setAvatarUrl}
+                className='w-full lg:w-1/3'
               />
             </div>
-            <Textarea
-              inputName="Bio"
-              value={bio}
-              heightLimit={5}
-              onChange={(e) => setBio(e.target.value)}
+          </Group>
+          <Group title='Character URL' description="This is a shareable URL of your character. It’s automatically generated based on the name and species you gave it but you can change it at will anytime or you can reset it.">
+            <InputField
+              inputName=""
+              value={characterUrl}
+              onChange={(e) => setCharacterUrl(e.target.value)}
+              prefix={`@${character.owner.handle}/`}
             />
-          </div>
-        </Group>
-        <Group title='Reference sheets' description="Reference sheets will appear in the list if you have this character linked and be shown on the public profile. Learn more">
-          <div className='flex flex-row gap-x-2'>
+          </Group>
+          <Group title='Properties' description="Add an attribute(s) that best represents your character.">
+            <div className="flex flex-col gap-4">
+              <div className='flex flex-row gap-4'>
+                <SelectField
+                  inputName="Pronouns"
+                  value={pronouns}
+                  onChange={(e) => setPronouns(e.target.value)}
+                  options={pronounOptions}
+                />
+                <SelectField
+                  inputName="Species"
+                  value={species}
+                  onChange={(e) => setSpecies(e.target.value)}
+                  options={furrySpeciesOptions}
+                />
+              </div>
+              <Textarea
+                inputName="Bio"
+                value={bio}
+                heightLimit={5}
+                onChange={(e) => setBio(e.target.value)}
+              />
+            </div>
+          </Group>
+           <Group title='Reference sheets' description="Reference sheets will appear in the list if you have this character linked and be shown on the public profile. Learn more">
+            <div className='flex flex-col'>
+                {character.refSheets.map(refSheet => (
+                  <RefSheetThumbnail key={refSheet.id} refSheet={refSheet} />
+                ))}
+              </div>
+            <div className='flex flex-row gap-x-2'>
+              <Button
+                variant="primary"
+                onClick={() => setIsRefModalOpen(true)}
+              >
+                Add Reference Sheet
+              </Button>
+              <Button
+                variant="secondary"
+                onClick={() => {}}
+              >
+                Manage Reference Sheet
+              </Button>
+            </div>
+          </Group>
+        </GroupContainer>
+        {isDirty && (
+          <div className="flex justify-end mt-4">
             <Button
-              variant="primary"
-              onClick={() => {}}
+              onClick={handleSave}
+              disabled={isSaving}
             >
-              Add Reference Sheet
-            </Button>
-            <Button
-              variant="secondary"
-              onClick={() => {}}
-            >
-              Manage Reference Sheet
+              {isSaving ? "Saving..." : "Save Changes"}
             </Button>
           </div>
-        </Group>
-      </GroupContainer>
-      {isDirty && (
-        <div className="flex justify-end mt-4">
-          <Button
-            onClick={handleSave}
-            disabled={isSaving}
-          >
-            {isSaving ? "Saving..." : "Save Changes"}
-          </Button>
-        </div>
-      )}
-    </MarginGutter>
+        )}
+      </MarginGutter>
+    </>
   )
 }

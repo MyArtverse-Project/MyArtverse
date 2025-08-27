@@ -84,7 +84,7 @@ export interface Artwork {
   watermarkUrl?: string
   charactersFeatured?: Character[]
   publishedCharacter?: Character
-  artist?: UserType | null
+  artist?: UserType
   artistUrl?: string
   comments: Comments[]
   description?: string
@@ -107,11 +107,10 @@ export interface Variant {
 
 export interface ReferenceSheet {
   id: string
-  refSheetName: string
+  name: string
   active: boolean
   artist: string
   character?: Character
-  colors: string[]
   variants: Variant[]
 }
 

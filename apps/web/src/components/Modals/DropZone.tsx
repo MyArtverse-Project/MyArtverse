@@ -14,12 +14,14 @@ export default function DropZone({
   setData,
   className = "",
   value = null,
-  aspectRatio = "1"
+  aspectRatio = "1",
+  label = "Drag and drop files here"
 }: {
   setData: (url: string) => void
   className?: string
   value?: string | null
-  aspectRatio?: string
+  aspectRatio?: string,
+  label?: string
 }) {
   const [isDragging, setIsDragging] = useState(false)
   const [file, setFile] = useState<File | null>(null)
@@ -134,7 +136,7 @@ export default function DropZone({
           >
             <LuUpload size={48} />
           </button>
-          <span className="text-lg font-bold">Drag and drop files here</span>
+          <span className="text-lg font-bold">{label}</span>
           <span className="mt-4">
             Max size: 10MB, Supported formats: .jpg, .png
           </span>
