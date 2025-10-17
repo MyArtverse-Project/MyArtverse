@@ -37,12 +37,14 @@ type AuthContextType = {
   user: User | null
   isLoading: boolean
   logout: () => void
+  refreshUser: () => Promise<void>
 }
 
 const AuthContext = createContext<AuthContextType>({
   user: null,
   isLoading: true,
-  logout: () => null
+  logout: () => null,
+  refreshUser: () => Promise.resolve()
 })
 
 export const useAuth = () => useContext(AuthContext)
@@ -81,8 +83,21 @@ export const AuthProvider = ({ children }: { children: React.ReactNode }) => {
     }
   }
 
+  const refreshUser = async () => {
+    try {
+      const data = await fetcher<User>(
+        `${BACKEND_URL}/v1/auth/whoami`,
+        {},
+        false
+      )
+      setUser(data)
+    } catch (_err) {
+      throw new Error("Refresh user failed")
+    }
+  }
+
   return (
-    <AuthContext.Provider value={{ user, isLoading, logout }}>
+    <AuthContext.Provider value={{ user, isLoading, logout, refreshUser }}>
       {children}
     </AuthContext.Provider>
   )
