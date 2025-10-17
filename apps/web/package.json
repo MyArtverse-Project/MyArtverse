@@ -13,11 +13,12 @@
     "@headlessui/react": "^2.0.3",
     "@mdx-js/loader": "^3.0.1",
     "@next/mdx": "15.2.3",
+    "@types/react-dom": "^19.0.0",
     "autoprefixer": "^10.4.19",
     "class-variance-authority": "^0.7.0",
-    "isomorphic-dompurify": "2.22.0",
     "framer-motion": "12.19.1",
     "gsap": "^3.12.5",
+    "isomorphic-dompurify": "2.22.0",
     "jotai": "^2.8.0",
     "lodash": "^4.17.21",
     "next": "15.2.3",
@@ -25,11 +26,11 @@
     "react": "19.0.0",
     "react-dom": "19.0.0",
     "react-dropzone": "^14.2.3",
+    "react-easy-crop": "^5.5.3",
     "react-icons": "^5.2.1",
     "react-markdown": "10.1.0",
     "sass": "^1.77.2",
-    "swiper": "^11.1.3",
-    "@types/react-dom": "^19.0.0"
+    "swiper": "^11.1.3"
   },
   "devDependencies": {
     "@mav/config": "*",

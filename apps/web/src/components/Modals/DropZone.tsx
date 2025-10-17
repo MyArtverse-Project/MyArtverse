@@ -3,38 +3,101 @@
 import type { MapElement } from "@/types/utils"
 import { BACKEND_URL } from "@/utils/constants"
 import { cn } from "@mav/shared/utils"
-import Image from "next/image"
 import { useEffect, useRef, useState } from "react"
 import { LuUpload } from "react-icons/lu"
+import Cropper from "react-easy-crop"
+import { Button } from "@mav/ui/components/buttons/Button"
 
 const allowedTypes = ["image/png", "image/jpeg", "image/jpg"]
 const maxFileSize = 10 * 1024 * 1024 // 10 MB
+
+const getCroppedImg = (imageSrc: string, crop: any, zoom: number, aspect: number): Promise<{base64: string, blob: Blob}> => {
+  return new Promise((resolve, reject) => {
+    const image = new window.Image();
+    image.setAttribute('crossOrigin', 'anonymous');
+    image.onload = () => {
+      const canvas = document.createElement('canvas')
+      const scale = image.naturalWidth / image.width
+      const cropX = crop.x * scale
+      const cropY = crop.y * scale
+      const cropWidth = crop.width * scale
+      const cropHeight = crop.height * scale
+
+      canvas.width = cropWidth
+      canvas.height = cropHeight
+      const ctx = canvas.getContext("2d")
+
+      if (!ctx) {
+        reject(new Error("Could not get Canvas context"))
+        return
+      }
+
+      ctx.drawImage(
+        image,
+        cropX,
+        cropY,
+        cropWidth,
+        cropHeight,
+        0,
+        0,
+        cropWidth,
+        cropHeight
+      )
+
+      canvas.toBlob(blob => {
+        if (!blob) {
+          reject(new Error("Crop canvas is empty"))
+          return
+        }
+
+        const reader = new FileReader()
+        reader.readAsDataURL(blob)
+        reader.onloadend = () => {
+          resolve({
+            base64: reader.result as string,
+            blob
+          })
+        }
+      }, "image/png")
+    }
+    image.onerror = err => reject(new Error("Failed to load image for cropping."))
+    image.src = imageSrc
+  })
+}
 
 export default function DropZone({
   setData,
   className = "",
   value = null,
   aspectRatio = "1",
-  label = "Drag and drop files here"
+  label = "Drag and drop files here",
+  enableCrop = true,
 }: {
   setData: (url: string) => void
   className?: string
   value?: string | null
   aspectRatio?: string,
   label?: string
+  enableCrop?: boolean
 }) {
   const [isDragging, setIsDragging] = useState(false)
-  const [file, setFile] = useState<File | null>(null)
   const [imageUrl, setImageUrl] = useState<string | null>(value)
+  const [base64Src, setBase64Src] = useState<string | null>(null)
+  const [croppedBase64, setCroppedBase64] = useState<string | null>(null)
   const [uploading, setUploading] = useState(false)
   const [error, setError] = useState<string | null>(null)
-  const [_success, setSuccess] = useState(false)
+  const [showCrop, setShowCrop] = useState(false)
+  const [showSaveButton, setShowSaveButton] = useState(false)
+
+  const [crop, setCrop] = useState({ x: 0, y: 0 })
+  const [zoom, setZoom] = useState(1)
+  const [croppedAreaPixels, setCroppedAreaPixels] = useState<any>(null)
 
   const fileUploadRef = useRef<HTMLInputElement>(null)
 
   useEffect(() => {
     if (fileUploadRef.current) fileUploadRef.current.value = ""
-  }, [file])
+  }, [base64Src, imageUrl, croppedBase64])
 
   useEffect(() => {
     const handleDragOver = (e: DragEvent) => e.preventDefault()
@@ -63,45 +126,85 @@ export default function DropZone({
     if (!allowedTypes.includes(uploadedFile.type)) {
       return setError("Invalid file type.")
     }
-
     if (uploadedFile.size > maxFileSize) {
       return setError("File must not exceed 10MB!")
     }
-
     setError(null)
-    setFile(uploadedFile)
-    uploadFile(uploadedFile)
+    setCrop({ x: 0, y: 0 })
+    setZoom(1)
+    setCroppedAreaPixels(null)
+    setCroppedBase64(null)
+    
+    const reader = new FileReader()
+    reader.onload = (e) => {
+      const src = e.target?.result as string
+      setBase64Src(src)
+      if (enableCrop) {
+        setShowCrop(true)
+        setShowSaveButton(false)
+      } else {
+        uploadFile(src)
+      }
+    }
+    reader.readAsDataURL(uploadedFile)
   }
 
-  const uploadFile = async (uploadedFile: File) => {
+  const uploadFile = async (base64Img: string) => {
     setUploading(true)
-    setSuccess(false)
-
-    const formData = new FormData()
-    formData.append("file", uploadedFile)
-
     try {
-      const res = await fetch(`${BACKEND_URL}/v1/profile/upload`, {
+      const formData = new FormData()
+      const res = await fetch(base64Img)
+      const blob = await res.blob()
+      formData.append("file", blob, "cropped.png")
+      const resp = await fetch(`${BACKEND_URL}/v1/profile/upload`, {
         method: "POST",
         body: formData,
         credentials: "include"
       })
-
-      if (!res.ok)
+      if (!resp.ok)
         throw new Error(
-          res.status === 401 ? "Are you logged in?" : "Upload failed"
+          resp.status === 401 ? "Are you logged in?" : "Upload failed"
         )
-
-      const data = await res.json()
+      const data = await resp.json()
       setData(data.url)
       setImageUrl(data.url)
-      setSuccess(true)
+      setCroppedBase64(null)
+      setShowCrop(false)
     } catch (err) {
       setError(err instanceof Error ? err.message : "Unknown error occurred")
     } finally {
       setUploading(false)
     }
   }
+
+  const onCropComplete = async (_: any, croppedAreaPixelsValue: any) => {
+    setCroppedAreaPixels(croppedAreaPixelsValue)
+    if (enableCrop && base64Src && croppedAreaPixelsValue) {
+      try {
+        const aspect = aspectRatio ? parseFloat(aspectRatio) : 1
+        const { base64 } = await getCroppedImg(
+          base64Src,
+          croppedAreaPixelsValue,
+          zoom,
+          aspect
+        )
+        setCroppedBase64(base64)
+        setShowSaveButton(true)
+      } catch (err) {
+        setError("Cropping failed: " + (err as Error).message)
+      }
+    }
+  }
+
+  const handleCropAndSave = async () => {
+    if (!croppedBase64) return
+    setShowCrop(false)
+    setShowSaveButton(false)
+    await uploadFile(croppedBase64)
+  }
+
+  const displayImg = () =>
+    croppedBase64 ? croppedBase64 : imageUrl || base64Src
 
   return (
     <div
@@ -118,21 +221,93 @@ export default function DropZone({
       <input
         ref={fileUploadRef}
         type="file"
+        accept={allowedTypes.join(",")}
         className="hidden"
         onChange={handleFileInputChange}
       />
-      {imageUrl ? (
-        <div className="flex flex-col items-center">
-          <Image width={200} height={200} alt="Uploaded" src={imageUrl} />
-          {/* <span className="text-lg font-bold">Uploaded!</span> */}
+      {showCrop && base64Src && enableCrop ? (
+        <div className="flex flex-col items-center w-full max-w-4xl mx-auto">
+          <div className="w-full mb-6 relative" style={{ height: "min(400px, 60vh)" }}>
+            <Cropper
+              image={base64Src}
+              crop={crop}
+              zoom={zoom}
+              aspect={aspectRatio ? parseFloat(aspectRatio) : 1}
+              cropShape="rect"
+              showGrid={true}
+              onCropChange={setCrop}
+              onZoomChange={setZoom}
+              onCropComplete={onCropComplete}
+              style={{
+                containerStyle: { 
+                  height: "100%", 
+                  width: "100%", 
+                  position: "relative",
+                  maxHeight: "400px",
+                  backgroundColor: "#f3f4f6"
+                }
+              }}
+            />
+          </div>
+          
+          <div className="flex flex-col sm:flex-row items-center justify-center gap-4 w-full px-4">
+            <div className="flex items-center gap-2">
+              <input
+                type="range"
+                min={1}
+                max={3}
+                step={0.01}
+                value={zoom}
+                onChange={e => setZoom(Number(e.target.value))}
+                className="w-32 h-2 bg-gray-200 rounded-lg appearance-none cursor-pointer"
+              />
+              <span className="text-sm font-medium whitespace-nowrap">Zoom: {zoom.toFixed(2)}x</span>
+            </div>
+            
+            <div className="flex items-center gap-2">
+              <Button
+                onClick={handleCropAndSave}
+                disabled={!croppedBase64 || uploading}
+                className="px-4 py-2"
+              >
+                {uploading ? "Saving..." : "Save Image"}
+              </Button>
+              <Button
+                onClick={() => {
+                  setShowCrop(false)
+                  setBase64Src(null)
+                  setCroppedBase64(null)
+                  setShowSaveButton(false)
+                }}
+                variant="secondary"
+                className="px-4 py-2"
+              >
+                Cancel
+              </Button>
+            </div>
+          </div>
+          
         </div>
       ) : uploading ? (
         <span className="text-lg font-bold">Uploading...</span>
+      ) : displayImg() ? (
+        <div className="flex flex-col items-center">
+          <img
+            src={displayImg() as string}
+            alt="Uploaded"
+            style={{
+              maxWidth: 240,
+              maxHeight: 240,
+              objectFit: "contain",
+            }}
+          />
+        </div>
       ) : (
         <div className="flex flex-col items-center">
           <button
             className="mb-6 flex items-center justify-center rounded-full bg-200 p-8"
             onClick={() => fileUploadRef.current?.click()}
+            type="button"
           >
             <LuUpload size={48} />
           </button>

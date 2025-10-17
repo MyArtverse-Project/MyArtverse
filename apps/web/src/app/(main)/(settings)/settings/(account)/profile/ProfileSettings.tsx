@@ -83,7 +83,7 @@ export default function ProfileSettings({ user }: { user: UserType }) {
               options={pronounOptions}
             />
           </div>
-          <DropZone setData={(url) => setAvatarUrl(url)} value={avatarUrl} />
+          <DropZone setData={(url) => setAvatarUrl(url)} value={avatarUrl} enableCrop />
         </div>
       </Group>
     </GroupContainer>
