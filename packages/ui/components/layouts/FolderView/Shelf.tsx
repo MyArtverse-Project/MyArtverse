@@ -1,5 +1,3 @@
-import type { PropsWithChildren } from "react"
-
-export function FolderViewShelf(props: PropsWithChildren) {
+export function FolderViewShelf(props: React.PropsWithChildren) {
   return <>{props.children}</>
 }

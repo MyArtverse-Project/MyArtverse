@@ -1,19 +1,16 @@
 import "@mav/shared/styles/index.scss"
-import type { Metadata, Viewport } from "next"
-import dynamic from "next/dynamic"
-import { Inter } from "next/font/google"
-import type { PropsWithChildren } from "react"
+import { AuthProvider } from "@/app/context/AuthContext"
 import { Analytics, NoJSMessage, SkipNav } from "@/components"
 import { BRAND } from "@mav/shared"
 import { cn } from "@mav/shared/utils"
 import { Provider } from "jotai"
+import type { Metadata, Viewport } from "next"
+import dynamic from "next/dynamic"
+import { Inter } from "next/font/google"
 import PreconnectResources from "./preconnect-resources"
 
-const CheckLocalSettings = dynamic(
-  () => import("@/components").then((c) => c.CheckLocalSettings),
-  {
-    ssr: false
-  }
+const CheckLocalSettings = dynamic(() =>
+  import("@/components").then((c) => c.CheckLocalSettings)
 )
 
 const inter = Inter({
@@ -28,8 +25,6 @@ export const metadata: Metadata = {
     default: BRAND
   },
   formatDetection: { telephone: false, address: false },
-  // prettier-ignore
-  keywords: ["fur", "furries", "furry", "fursona", "mascot", "furry fandom", "toyhouse", "furaffinity", "fur affinity", "weasyl"],
   openGraph: {
     type: "website",
     siteName: BRAND
@@ -43,7 +38,7 @@ export const viewport: Viewport = {
   themeColor: "#9e00ff"
 }
 
-export default function RootLayout({ children }: PropsWithChildren) {
+export default function RootLayout({ children }: React.PropsWithChildren) {
   return (
     <html lang="en" dir="ltr" className={cn(inter.variable, "theme-system")}>
       <head>
@@ -56,7 +51,9 @@ export default function RootLayout({ children }: PropsWithChildren) {
         <div data-mav-root-layout-slot="" className="contents">
           <SkipNav />
           <NoJSMessage />
-          <Provider>{children}</Provider>
+          <Provider>
+            <AuthProvider>{children}</AuthProvider>
+          </Provider>
         </div>
       </body>
     </html>

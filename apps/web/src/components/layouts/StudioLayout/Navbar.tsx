@@ -5,7 +5,6 @@ import { Button } from "@mav/ui/components/buttons"
 import { MyArtverseIcon } from "@mav/ui/icons"
 import {
   LuBell,
-  LuChevronDown,
   LuHelpCircle,
   LuMenu,
   LuPlus,

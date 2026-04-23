@@ -1,9 +1,12 @@
 "use client"
 
-import { useEffect } from "react"
 import gsap from "gsap"
+import { useEffect } from "react"
 
-export function useGSAPContext(callback: gsap.ContextFunc, scope: string | object) {
+export function useGSAPContext(
+  callback: gsap.ContextFunc,
+  scope: string | object
+) {
   useEffect(() => {
     const ctx = gsap.context(callback, scope)
 

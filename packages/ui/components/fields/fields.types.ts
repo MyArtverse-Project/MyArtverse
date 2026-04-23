@@ -27,5 +27,5 @@ export interface MAVFields {
   /**
    * Displays an error below the field and marks it as red unless resolved
    */
-  error: string
+  error?: string
 }

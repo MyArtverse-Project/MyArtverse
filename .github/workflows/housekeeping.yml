@@ -1,0 +1,50 @@
+name: Format / Lint / Dependency Checks
+on: [push]
+
+jobs:
+  check-code-format:
+    name: "Check code format and lint"
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with:
+          node-version: 20
+          cache: yarn
+
+      - name: Install deps
+        run: yarn
+
+      - name: "Biome: Format"
+        id: formatter
+        run: yarn format
+        continue-on-error: true
+
+      - name: "Biome: Lint"
+        id: linter
+        run: yarn lint
+        continue-on-error: true
+
+      - name: "Check outcomes"
+        if: always()
+        run: |
+          if [[ "${{ steps.formatter.outcome }}" != "success" || "${{ steps.linter.outcome }}" != "success" ]]; then
+            echo "Formatting checks failed; make sure to format and lint your code accordingly!"
+            exit 1
+          fi
+
+  knip-deps:
+    name: "Unused code & dependencies"
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with:
+          node-version: 20
+          cache: yarn
+
+      - name: Install deps
+        run: yarn
+
+      - name: "Knip checks"
+        run: yarn knip

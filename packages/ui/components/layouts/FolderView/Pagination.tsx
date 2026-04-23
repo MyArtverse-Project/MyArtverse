@@ -12,6 +12,6 @@ interface FolderViewPaginationProps {
   displayItems?: 25 | 50 | 75
 }
 
-export function FolderViewPagination(props: FolderViewPaginationProps) {
+export function FolderViewPagination(_props: FolderViewPaginationProps) {
   return <></>
 }

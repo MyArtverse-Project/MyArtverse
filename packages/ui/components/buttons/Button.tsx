@@ -1,23 +1,22 @@
 "use client"
 
-/* eslint-disable @typescript-eslint/no-explicit-any */
-import Link from "next/link"
-import React, { type PropsWithChildren, forwardRef } from "react"
-import type { ReactHTMLElement } from "@mav/shared/types"
+import type { ReactForwardRef, ReactHTMLElement } from "@mav/shared/types"
 import { cn } from "@mav/shared/utils"
 import { cva } from "class-variance-authority"
-import type { ButtonProps } from "./Button.types"
+import Link from "next/link"
+import React from "react"
+import type { ButtonProps as SharedButtonProps } from "./Button.types"
 
-const Button = forwardRef<
-  HTMLButtonElement,
-  Partial<
-    PropsWithChildren<
-      ButtonProps &
-        Pick<ReactHTMLElement<"button">, "className" | "onClick"> &
-        Pick<ReactHTMLElement<"a">, "aria-current">
-    >
-  >
->((props, ref) => {
+type ButtonProps = React.PropsWithChildren<
+  SharedButtonProps &
+    Pick<ReactHTMLElement<"button">, "className" | "onClick"> &
+    Pick<ReactHTMLElement<"a">, "aria-current">
+>
+
+export function Button({
+  ref,
+  ...props
+}: ReactForwardRef<HTMLButtonElement, Partial<ButtonProps>>) {
   const {
     disabled,
     icon,
@@ -37,7 +36,7 @@ const Button = forwardRef<
     [
       "flex items-center gap-x-1.5 rounded-md transition-all select-none first:*:flex-shrink-0 last:*:flex-shrink-0",
       disabled && "cursor-not-allowed",
-      className,
+      className
     ],
     {
       variants: {
@@ -56,33 +55,33 @@ const Button = forwardRef<
             "border border-warning hover:bg-warning hover:text-100",
           alert:
             "bg-alert text-active hover:bg-opacity-70 bg-opacity-100 border-transparent",
-          "alert-secondary": "border border-alert hover:bg-alert",
+          "alert-secondary": "border border-alert hover:bg-alert"
         },
         size: {
           small: !icon ? "px-2.5 py-1" : "p-2",
           medium: !icon ? "px-3.5 py-2" : "p-2",
-          big: !icon ? "px-5 py-2" : "p-3",
+          big: !icon ? "px-5 py-2" : "p-3"
         },
         positions: {
           left: "text-left justify-start",
           center: "text-center justify-center",
-          right: "text-right justify-end",
-        },
+          right: "text-right justify-end"
+        }
       },
       compoundVariants: [{ intent: "primary", size: "medium" }],
       defaultVariants: {
         intent: "primary",
-        size: "medium",
-      },
-    },
+        size: "medium"
+      }
+    }
   )
 
   const DynamicElement: any = !props.href ? "button" : Link
 
   return (
     <DynamicElement
-      data-mav-dynamic-button=""
-      ref={ref as any}
+      data-mav-button=""
+      ref={ref}
       href={href ?? null}
       type={!href ? (type ?? null) : null}
       // The use of "aria-disabled" here to let the screen reader know it's a disabled button,
@@ -92,8 +91,8 @@ const Button = forwardRef<
         buttonVars({
           positions: position,
           intent: variant,
-          size: size,
-        }),
+          size: size
+        })
       )}
       {...eventHandlers}
       // This is to prevent conflicts from custom "prefix" and "suffix" props
@@ -108,8 +107,4 @@ const Button = forwardRef<
       {suffix}
     </DynamicElement>
   )
-})
-
-Button.displayName = "Button"
-
-export { Button }
+}

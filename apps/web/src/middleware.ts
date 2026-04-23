@@ -1,4 +1,3 @@
-/* eslint-disable import/no-internal-modules */
 import { type NextRequest, NextResponse } from "next/server"
 import { generateCSP } from "./utils"
 
@@ -51,7 +50,10 @@ export function middleware(request: NextRequest) {
   // CORS stuff
   res.headers.append("Access-Control-Allow-Credentials", "true")
   res.headers.append("Access-Control-Allow-Origin", "*")
-  res.headers.append("Access-Control-Allow-Methods", "GET, DELETE, PATCH, POST, PUT")
+  res.headers.append(
+    "Access-Control-Allow-Methods",
+    "GET, DELETE, PATCH, POST, PUT"
+  )
   res.headers.append(
     "Access-Control-Allow-Headers",
     "X-CSRF-Token, X-Requested-With, Accept, Accept-Version, Content-Length, Content-Type, Date, X-Api-Version"

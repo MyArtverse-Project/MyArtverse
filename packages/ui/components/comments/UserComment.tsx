@@ -1,37 +1,86 @@
-import type { ComponentProps, PropsWithChildren } from "react"
+"use client"
+
+import { useState } from "react"
 import { AiFillPushpin } from "react-icons/ai"
-import { LuMoreVertical, LuThumbsUp } from "react-icons/lu"
+import { LuMoreVertical } from "react-icons/lu"
 import { Badge } from "../badges"
 import { Button } from "../buttons"
 import { CommentBase } from "./CommentBase"
+import { UserCommentInput } from "./UserCommentInput"
 
-interface CommentProps extends ComponentProps<typeof CommentBase> {
+interface CommentProps extends React.ComponentProps<typeof CommentBase> {
   handle: string
-  isOP?: true
+  isOP?: boolean
   userRole?: string
   isPinned?: true
   upvotes?: string
+  parentId?: string
+  replies?: number
+  toggleViewReplies?: () => void
+  viewReplies?: boolean
+  date?: string
+  onReply: (
+    commentType: string,
+    content: string,
+    redirectRoute: string,
+    artworkId?: string | null,
+    username?: string,
+    characterName?: string | null,
+    replyId?: string | null
+  ) => void
 }
 
-export function UserComment(props: PropsWithChildren<CommentProps>) {
+export function UserComment(props: React.PropsWithChildren<CommentProps>) {
+  const [showReplyInput, setShowReplyInput] = useState(false)
+  const toggleReplyInput = () => setShowReplyInput(!showReplyInput)
+
+  const date = new Date(props.date || "")
+  const now = new Date()
+  const diff = Math.floor(
+    (now.getTime() - date.getTime()) / 1000 / 60 / 60 / 24
+  )
+  const diffString =
+    diff > 0 ? `${diff} day${diff > 1 ? "s" : ""} ago` : "Earlier Today"
+
   return (
     <CommentBase
       avatar={props.avatar}
       imgTag={props.imgTag}
+      parentId={props.parentId}
       outerContainer={
-        <div className="mt-0.5 flex -translate-x-2 items-center gap-x-1">
-          <span className="inline-flex items-center pr-1.5">
-            <Button
-              size="small"
-              className="rounded-full transition-none"
-              variant="tritery"
-              icon={<LuThumbsUp size={18} />}
-            />
-            <span className="text-sm">{props.upvotes || "1.9k"}</span>
-          </span>
-          <Button size="small" className="transition-none" variant="tritery">
+        <div className="mt-0.5 flex flex-col items-start gap-y-1">
+          <Button
+            size="small"
+            className="transition-none"
+            variant="tritery"
+            onClick={toggleReplyInput}
+          >
             Reply
           </Button>
+          {(props.replies || 0) > 0 && props.toggleViewReplies && (
+            <Button
+              size="small"
+              className="transition-none"
+              variant="primary"
+              onClick={props.toggleViewReplies}
+            >
+              View {props.replies} Replies
+            </Button>
+          )}
+          <div className="w-full">
+            {showReplyInput && (
+              <UserCommentInput
+                imgTag={<img />}
+                avatar={props.avatar}
+                parentId={props.commentId}
+                commentType="user"
+                redirectRoute={`/@${props.handle}`}
+                username={props.handle}
+                toggleReply={toggleReplyInput}
+                postComment={props.onReply}
+              />
+            )}
+          </div>
         </div>
       }
     >
@@ -48,7 +97,7 @@ export function UserComment(props: PropsWithChildren<CommentProps>) {
                 <span>Pinned</span>
               </div>
             )}
-            <span className="text-xs opacity-75">3 days ago</span>
+            <span className="text-xs opacity-75">{diffString}</span>
           </div>
           <Button
             size="small"

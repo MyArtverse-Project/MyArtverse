@@ -13,11 +13,11 @@ export default function SettingsProfilePage() {
         title="Danger zone"
         description={
           <>
-            Deleting an account is irreversable and cannot be undone! Once you delete your
-            account—your characters, images, and account history will be completely wiped
-            from our servers to comply with GDPR standards. If you are certain that you'll
-            delete your account, it's important to export your data first before
-            proceeding.
+            Deleting an account is irreversable and cannot be undone! Once you
+            delete your account—your characters, images, and account history
+            will be completely wiped from our servers to comply with GDPR
+            standards. If you are certain that you'll delete your account,
+            it's important to export your data first before proceeding.
           </>
         }
         learnMoreLink="/lmao"

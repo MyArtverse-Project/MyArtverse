@@ -1,6 +1,6 @@
-import type { Config } from "tailwindcss"
 import formsPlugin from "@tailwindcss/forms"
 import typographyPlugin from "@tailwindcss/typography"
+import type { Config } from "tailwindcss"
 
 const TW_PREFIX = "mav"
 const COLORS = {
@@ -56,9 +56,6 @@ const gridResizable = {
 
 export default {
   content: [],
-  experimental: {
-    optimizeUniversalDefaults: true
-  },
   darkMode: "class",
   theme: {
     extend: {
@@ -69,7 +66,10 @@ export default {
       },
       colors: {
         current: "currentColor",
-        ...iterateColorVars("--tw-bg-opacity", [...COLORS.GLOBAL, ...COLORS.OVERRIDE])
+        ...iterateColorVars("--tw-bg-opacity", [
+          ...COLORS.GLOBAL,
+          ...COLORS.OVERRIDE
+        ])
       },
       borderColor: {
         current: "currentColor",

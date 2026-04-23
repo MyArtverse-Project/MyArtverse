@@ -1,15 +1,16 @@
 "use client"
 
-/* eslint-disable @typescript-eslint/no-unused-vars */
 import { useEffect } from "react"
 
-const checkLocalStorage = (key: string, value: unknown): string | void => {
+const _checkLocalStorage = (key: string, value: unknown): string | void => {
   const ls = window.localStorage
   const lsItem = ls.getItem(key)
 
   if (!lsItem) {
     if (!value) {
-      throw new Error(`The key "${key}" doesn't exist and a value isn't provided`)
+      throw new Error(
+        `The key "${key}" doesn't exist and a value isn't provided`
+      )
     }
 
     if (typeof value === "object") {
@@ -30,7 +31,9 @@ const checkLocalStorage = (key: string, value: unknown): string | void => {
 
 export function CheckLocalSettings() {
   useEffect(() => {
-    const reducedAnimations = window.matchMedia("(prefers-reduced-motion)").matches
+    const _reducedAnimations = window.matchMedia(
+      "(prefers-reduced-motion)"
+    ).matches
   }, [])
 
   return null

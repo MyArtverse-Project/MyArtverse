@@ -1,30 +1,47 @@
 "use client"
 
-import Link from "next/link"
+import { useAuth } from "@/app/context/AuthContext"
+import { Sidebar } from "@/components/layouts/AppLayout/Sidebar/Sidebar"
 import { Button } from "@mav/ui/components/buttons"
 import { MyArtverseIcon } from "@mav/ui/icons"
-import { LuSearch } from "react-icons/lu"
+import Link from "next/link"
+import { useState } from "react"
+import { LuMenu } from "react-icons/lu"
 import { ActionsLoggedIn } from "./ActionsLoggedIn"
 import { ActionsLoggedOut } from "./ActionsLoggedOut"
-
-const __tmpIsUserLoggedIn = false
+import { SearchBar } from "@/components/Search"
 
 export function Navbar() {
+  const { user, isLoading } = useAuth()
+  const [sidebarOpened, setSidebarOpened] = useState(false)
+  const toggleSidebar = () => setSidebarOpened((prev) => !prev)
+
   return (
     <div className="sticky top-0 z-50">
       <nav className="font-inter bg-100 relative flex select-none items-center justify-between px-5 py-3 text-sm font-medium">
-        <Link href="/" aria-label="Home" draggable={false}>
-          <MyArtverseIcon size={0.69} />
-        </Link>
-        <div className="flex items-center gap-x-2">
+        <div className="flex flex-row items-center gap-x-2">
           <Button
-            prefix={<LuSearch size={18} />}
-            className="hover:!bg-100 w-64"
-            variant="secondary"
-          >
-            Search
-          </Button>
-          {__tmpIsUserLoggedIn ? <ActionsLoggedIn /> : <ActionsLoggedOut />}
+            icon={<LuMenu size={20} />}
+            onClick={toggleSidebar}
+            variant="tritery"
+          />
+          <Sidebar
+            sidebarOpened={sidebarOpened}
+            toggleSidebar={toggleSidebar}
+            user={user}
+          />
+          <Link href="/" aria-label="Home" draggable={false}>
+            <MyArtverseIcon size={0.8} />
+          </Link>
+        </div>
+        <div className="flex items-center gap-x-4">
+          <SearchBar recentSearches={user ? user.recentSearches : []} />
+          {!isLoading &&
+            (user ? (
+              <ActionsLoggedIn user={user} isRegistered={true} />
+            ) : (
+              <ActionsLoggedOut />
+            ))}
         </div>
       </nav>
     </div>

@@ -1,4 +1,3 @@
-import type { PropsWithChildren } from "react"
 import type { ReactHTMLElement } from "@mav/shared/types"
 
 type PickedElementProps = Pick<ReactHTMLElement<"div">, "className">
@@ -11,7 +10,7 @@ interface PanelPaneProps extends PickedElementProps {
   isNavPane?: true
 }
 
-export function PanelPane(props: PropsWithChildren<PanelPaneProps>) {
+export function PanelPane(props: React.PropsWithChildren<PanelPaneProps>) {
   const PaneElement = props.isNavPane ? ("nav" as const) : ("div" as const)
 
   return (

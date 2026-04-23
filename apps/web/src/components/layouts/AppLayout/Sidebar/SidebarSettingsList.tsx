@@ -1,9 +1,9 @@
 "use client"
 
-import { usePathname } from "next/navigation"
 import { cn } from "@mav/shared/utils"
 import { Button } from "@mav/ui/components/buttons"
 import { kebabCase } from "lodash"
+import { usePathname } from "next/navigation"
 import settingRoutes from "./SidebarSettingsList.constants"
 
 export function SidebarSettingsList() {
@@ -32,7 +32,10 @@ export function SidebarSettingsList() {
               >
                 {section.heading}
               </div>
-              <ul className="flex flex-col gap-y-0.5" aria-labelledby={ariaHeading}>
+              <ul
+                className="flex flex-col gap-y-0.5"
+                aria-labelledby={ariaHeading}
+              >
                 {section.items.map((item, i) => {
                   const itemPath = `/settings/${item.slug || kebabCase(item.label)}`
                   const isCurrentPath = currentPath === itemPath

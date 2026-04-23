@@ -1,7 +1,5 @@
 "use client"
-
-import { forwardRef } from "react"
-import type { ReactHTMLElement } from "@mav/shared/types"
+import type { ReactForwardRef, ReactHTMLElement } from "@mav/shared/types"
 import { cn } from "@mav/shared/utils"
 import FieldLabel from "./FieldLabel"
 import { DIV_TAG, LABEL_TAG } from "./fields.constants"
@@ -10,7 +8,15 @@ import { useMemoizeA11yLabel } from "./fields.utils"
 
 type PickedTextareaProps = Pick<
   ReactHTMLElement<"textarea">,
-  "placeholder" | "required" | "value" | "readOnly" | "onKeyDown" | "onClick" | "onBlur" | "className" | "spellCheck"
+  | "placeholder"
+  | "required"
+  | "value"
+  | "readOnly"
+  | "onKeyDown"
+  | "onClick"
+  | "onBlur"
+  | "className"
+  | "spellCheck"
 >
 
 interface TextAreaProps extends PickedTextareaProps, MAVFields {
@@ -19,9 +25,10 @@ interface TextAreaProps extends PickedTextareaProps, MAVFields {
   isResizable: boolean
 }
 
-const rndString = crypto.randomUUID()
-
-const Textarea = forwardRef<HTMLTextAreaElement, Partial<TextAreaProps>>((props, ref) => {
+export function Textarea({
+  ref,
+  ...props
+}: ReactForwardRef<HTMLTextAreaElement, Partial<TextAreaProps>>) {
   const {
     error,
     initialHeight,
@@ -50,11 +57,16 @@ const Textarea = forwardRef<HTMLTextAreaElement, Partial<TextAreaProps>>((props,
         htmlFor={!props.noLabel ? uniqueId : undefined}
         aria-labelledby={inputName ? uniqueId : undefined}
       >
-        {!props.noLabel && <FieldLabel label={inputName} isRequired={props.required} />}
+        {!props.noLabel && (
+          <FieldLabel label={inputName} isRequired={props.required} />
+        )}
         <textarea
           ref={ref}
           aria-labelledby={inputName ? uniqueId : undefined}
-          className={cn("text-700 border-500 bg-100 w-full rounded-md px-3.5 py-2 text-sm", className)}
+          className={cn(
+            "text-700 border-500 bg-100 w-full rounded-md px-3.5 py-2 text-sm",
+            className
+          )}
           id={uniqueId}
           name={uniqueId}
           placeholder={placeholder}
@@ -66,8 +78,4 @@ const Textarea = forwardRef<HTMLTextAreaElement, Partial<TextAreaProps>>((props,
       </DynamicElement>
     </div>
   )
-})
-
-Textarea.displayName = "Textarea"
-
-export { Textarea }
+}

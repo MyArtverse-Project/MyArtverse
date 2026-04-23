@@ -1,7 +1,7 @@
-import type { Config } from "tailwindcss"
 import twShared from "@mav/config/tailwind.config"
+import type { Config } from "tailwindcss"
 
 export default {
-  content: ["/**/*.{ts,tsx}"],
+  content: ["/components/**/*.{ts,tsx}", "/icons/**/*.{ts,tsx}"],
   presets: [twShared]
 } satisfies Config
