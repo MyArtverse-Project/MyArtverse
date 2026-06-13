@@ -2,9 +2,9 @@
 
 import { User } from "@/app/context/AuthContext"
 import Separator from "@/components/Separator"
+import { Button } from "@/components/ui/button"
 import { cn } from "@mav/shared/utils"
-import { Button } from "@mav/ui/components/buttons"
-import { MyArtverseIcon } from "@mav/ui/icons"
+import { MyArtverseIcon } from "@/components/icons/MyArtverse"
 import { motion } from "framer-motion"
 import Link from "next/link"
 import { Fragment } from "react"
@@ -34,7 +34,7 @@ export function Sidebar({
       <div className="fixed z-[100]">
         <motion.div
           // @ts-expect-error
-          className="bg-context-menu fixed inset-0 right-[unset] flex w-full flex-col ease-out md:w-[325px]"
+          className="bg-popover text-popover-foreground border-border fixed inset-0 right-[unset] flex w-full flex-col border-r ease-out md:w-[325px]"
           initial={{ x: "-100%", display: "none" }}
           animate={
             sidebarOpened
@@ -52,10 +52,13 @@ export function Sidebar({
         >
           <div className="flex w-full items-center gap-x-2.5 px-5 py-4">
             <Button
-              variant="tritery"
-              icon={<LuX size={20} />}
+              variant="ghost"
+              size="icon"
               onClick={toggleSidebar}
-            />
+              aria-label="Close menu"
+            >
+              <LuX size={20} />
+            </Button>
             <Link href="/" aria-label="Home" title="Home">
               <MyArtverseIcon size={0.8} />
             </Link>

@@ -1,7 +1,8 @@
 "use client"
 
-import { Button } from "@mav/ui/components/buttons"
+import { Button } from "@/components/ui/button"
 import { motion } from "framer-motion"
+import Link from "next/link"
 import { LuSettings } from "react-icons/lu"
 import { useSidebarOpenAtom } from "./Sidebar.atom"
 
@@ -13,7 +14,6 @@ export default function Sidebar() {
       <motion.aside
         data-mav-studio-sidebar=""
         data-expanded={isSidebarExpanded}
-        // className="border-r-mute bg-100 z-[2] h-full flex-shrink-0 overflow-hidden border-r"
         initial={{ width: 300 }}
         animate={{ width: isSidebarExpanded ? 300 : 80 }}
       >
@@ -24,16 +24,18 @@ export default function Sidebar() {
           <div className="flex-1">lol</div>
           <div>
             <Button
-              href="/#"
-              variant="tritery"
-              prefix={<LuSettings size={20} />}
+              asChild
+              variant="ghost"
+              className="w-full justify-start gap-2"
             >
-              Settings
+              <Link href="/#">
+                <LuSettings size={20} />
+                Settings
+              </Link>
             </Button>
           </div>
         </div>
       </motion.aside>
-      {/* <div className="absolute inset-0 z-[1] bg-black/10 backdrop-blur-sm" aria-hidden /> */}
     </>
   )
 }
@@ -41,7 +43,7 @@ export default function Sidebar() {
 export function SidebarFallback() {
   return (
     <div
-      className="border-r-mute bg-100 z-[2] h-full flex-shrink-0 border-r"
+      className="border-border bg-background z-[2] h-full flex-shrink-0 border-r"
       style={{ width: 300 }}
     ></div>
   )

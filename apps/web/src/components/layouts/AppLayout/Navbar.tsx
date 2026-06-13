@@ -2,8 +2,8 @@
 
 import { useAuth } from "@/app/context/AuthContext"
 import { Sidebar } from "@/components/layouts/AppLayout/Sidebar/Sidebar"
-import { Button } from "@mav/ui/components/buttons"
-import { MyArtverseIcon } from "@mav/ui/icons"
+import { Button } from "@/components/ui/button"
+import { MyArtverseIcon } from "@/components/icons/MyArtverse"
 import Link from "next/link"
 import { useState } from "react"
 import { LuMenu } from "react-icons/lu"
@@ -18,13 +18,16 @@ export function Navbar() {
 
   return (
     <div className="sticky top-0 z-50">
-      <nav className="font-inter bg-100 relative flex select-none items-center justify-between px-5 py-3 text-sm font-medium">
+      <nav className="font-inter bg-background/80 border-border supports-[backdrop-filter]:bg-background/60 relative flex select-none items-center justify-between border-b px-5 py-3 text-sm font-medium backdrop-blur">
         <div className="flex flex-row items-center gap-x-2">
           <Button
-            icon={<LuMenu size={20} />}
+            variant="ghost"
+            size="icon"
             onClick={toggleSidebar}
-            variant="tritery"
-          />
+            aria-label="Open menu"
+          >
+            <LuMenu size={20} />
+          </Button>
           <Sidebar
             sidebarOpened={sidebarOpened}
             toggleSidebar={toggleSidebar}
