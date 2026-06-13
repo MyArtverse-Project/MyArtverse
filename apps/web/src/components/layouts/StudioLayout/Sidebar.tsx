@@ -5,34 +5,62 @@ import { motion } from "framer-motion"
 import Link from "next/link"
 import { LuSettings } from "react-icons/lu"
 import { useSidebarOpenAtom } from "./Sidebar.atom"
+import SidebarItem from "./SidebarItem"
+import { generateSidebarItems } from "./SidebarItems"
 
 export default function Sidebar() {
   const { sidebarState: isSidebarExpanded } = useSidebarOpenAtom()
+  const sidebarItems = generateSidebarItems()
 
   return (
     <>
       <motion.aside
         data-mav-studio-sidebar=""
         data-expanded={isSidebarExpanded}
+        className="border-r-mute bg-100 z-[2] h-full flex-shrink-0 overflow-hidden border-r"
         initial={{ width: 300 }}
         animate={{ width: isSidebarExpanded ? 300 : 80 }}
       >
         <div
           data-mav-list-renderer=""
-          className="flex h-full flex-col px-2 py-1.5"
+          className="flex h-full flex-col px-2 py-1.5 gap-2"
         >
-          <div className="flex-1">lol</div>
+          <div className="flex flex-col flex-1">
+            {Object.entries(sidebarItems)
+              .filter(([sectionKey]) => sectionKey !== "settings")
+              .map(([sectionKey, items]) => (
+                <div key={sectionKey} className="flex flex-col">
+                  {isSidebarExpanded && items.length > 0 && (
+                    <span className="m-3 text-sm capitalize">
+                      {sectionKey}
+                    </span>
+                  )}
+                  {items.map((item) => (
+                    <SidebarItem
+                      key={item.label}
+                      icon={item.icon}
+                      label={item.label}
+                      href={item.href}
+                      isSidebarExpanded={isSidebarExpanded}
+                    />
+                  ))}
+                </div>
+              ))}
+          </div>
           <div>
-            <Button
-              asChild
-              variant="ghost"
-              className="w-full justify-start gap-2"
-            >
-              <Link href="/#">
-                <LuSettings size={20} />
-                Settings
-              </Link>
-            </Button>
+            {sidebarItems.settings && sidebarItems.settings.length > 0 && (
+              <div className="flex flex-col">
+                {sidebarItems.settings.map((item) => (
+                  <SidebarItem
+                    key={item.label}
+                    icon={item.icon}
+                    label={item.label}
+                    href={item.href}
+                    isSidebarExpanded={isSidebarExpanded}
+                  />
+                ))}
+              </div>
+            )}
           </div>
         </div>
       </motion.aside>
