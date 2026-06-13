@@ -1,7 +1,7 @@
 "use client"
 
 import { BACKEND_URL } from "@/utils/constants"
-import { Button } from "@mav/ui/components/buttons"
+import { Button } from "@/components/ui/button"
 import { redirect } from "next/navigation"
 import { useState } from "react"
 import { FaTrash } from "react-icons/fa6"
@@ -49,11 +49,13 @@ export default function DeleteConfirmModal({
             Confirm Delete
           </span>
           <Button
-            size="small"
-            variant="tritery"
-            icon={<LuXCircle size={18} />}
+            size="icon"
+            variant="ghost"
+            aria-label="Close"
             onClick={toggleDeleteConfirmModal}
-          />
+          >
+            <LuXCircle size={18} />
+          </Button>
         </div>
       </Modal.Title>
       {errors && (
@@ -67,11 +69,7 @@ export default function DeleteConfirmModal({
         </p>
       </div>
       <div className="flex flex-row items-center justify-end p-4">
-        <Button
-          variant="alert"
-          className="x-4 float-right"
-          onClick={deleteCharacter}
-        >
+        <Button variant="destructive" onClick={deleteCharacter}>
           Delete
         </Button>
       </div>

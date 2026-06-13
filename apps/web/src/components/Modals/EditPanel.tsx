@@ -2,7 +2,7 @@
 
 import { setPanel } from "@/utils/api"
 import { BRAND } from "@mav/shared"
-import { Button } from "@mav/ui/components/buttons"
+import { Button } from "@/components/ui/button"
 import Image from "next/image"
 import { useState } from "react"
 import { FaCode, FaComment, FaInfoCircle } from "react-icons/fa"
@@ -66,11 +66,13 @@ export default function EditPanelModal({
             Edit Panel
           </span>
           <Button
-            size="small"
-            variant="tritery"
-            icon={<LuXCircle size={18} />}
+            size="icon"
+            variant="ghost"
+            aria-label="Close"
             onClick={() => toggleEditPanel(null)}
-          />
+          >
+            <LuXCircle size={18} />
+          </Button>
         </div>
       </Modal.Title>
       {errors && (
@@ -84,7 +86,7 @@ export default function EditPanelModal({
           alt="Comment"
           width={250}
           height={250}
-          className="mx-auto mb-4 max-h-96 max-w-full rounded-lg border-2 border-gray-300 bg-white p-2 shadow-md"
+          className="border-border mx-auto mb-4 max-h-96 max-w-full rounded-lg border bg-white p-2 shadow-md"
         />
         <div>
           <span className="font-inter text-lg font-bold">Panel Type</span>
@@ -92,12 +94,15 @@ export default function EditPanelModal({
             {components.map((component) => (
               <Button
                 key={component.value}
-                variant="primary"
-                className="flex size-12 items-center gap-x-2"
-                icon={component.icon}
-                position="center"
+                variant={
+                  choosenComponent === component.value ? "default" : "secondary"
+                }
+                size="icon"
+                aria-label={component.label}
                 onClick={() => setChoosenComponent(component.value)}
-              />
+              >
+                {component.icon}
+              </Button>
             ))}
           </div>
           <div className="mt-4">
@@ -105,7 +110,7 @@ export default function EditPanelModal({
               Choosen Option:{" "}
               {components.find((c) => c.value === choosenComponent)?.label}
             </h2>
-            <p className="text-lg text-gray-500">
+            <p className="text-muted-foreground text-lg">
               {
                 components.find((c) => c.value === choosenComponent)
                   ?.description

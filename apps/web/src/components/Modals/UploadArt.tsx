@@ -114,7 +114,7 @@ export default function UploadArtModal({
             {tags.map((tag) => (
               <span
                 key={tag}
-                className="bg-300 hover:bg-error my-4 mr-4 rounded-md px-2 py-1 text-white hover:cursor-not-allowed"
+                className="bg-muted hover:bg-destructive my-4 mr-4 rounded-md px-2 py-1 text-white hover:cursor-not-allowed"
                 onClick={() => setTags(tags.filter((t) => t !== tag))}
               >
                 {tag}
