@@ -5,7 +5,10 @@
   "private": true,
   "packageManager": "npm@10.9.7",
   "type": "module",
-  "workspaces": ["apps/*", "packages/*"],
+  "workspaces": [
+    "apps/*",
+    "packages/*"
+  ],
   "scripts": {
     "dev": "dotenv -- turbo dev --filter=web-client --no-daemon",
     "dev:desktop": "cd ./apps/desktop && tauri dev",
@@ -22,6 +25,10 @@
     "dotenv": "^16.4.5",
     "dotenv-cli": "^7.4.2",
     "knip": "^5.16.0",
-    "turbo": "^1.13.3"
+    "turbo": "^2.9.16"
+  },
+  "dependencies": {
+    "next": "15.5.19",
+    "swiper": "12.2.0"
   }
 }

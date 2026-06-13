@@ -86,3 +86,10 @@ Most of these render plain placeholder text and need real UI + data wiring:
 - Studio overview — renders (scaffold).
 - **Search modal** — works; typing "Tay" returns the TayM user result (server-side, not blocked
   by CORS).
+
+---
+
+## Small Stuff
+
+- Fix issues where during page load, theme flashes white -> dark theme
+- Upon logging into website, make sure that the user's profile icon loads
