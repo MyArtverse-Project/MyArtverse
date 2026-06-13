@@ -2,13 +2,18 @@
 
 import { forgotAction } from "@/app/actions/recover"
 import { useAuth } from "@/app/context/AuthContext"
-import { Button } from "@mav/ui/components/buttons"
-import { Form, type FormState, InputField } from "@mav/ui/components/fields"
+import { Button } from "@/components/ui/button"
+import { Input } from "@/components/ui/input"
+import { Label } from "@/components/ui/label"
 import Image from "next/image"
 import Link from "next/link"
 import { useRouter } from "next/navigation"
 import React, { useEffect, useState } from "react"
 import { LuKeyRound } from "react-icons/lu"
+
+interface FormState {
+  message?: string
+}
 
 export default function Page() {
   const router = useRouter()
@@ -26,8 +31,7 @@ export default function Page() {
       router.push(`/recover/check`)
     } else {
       setErrors({
-        message: res.message.error || "Something went wrong. Please try again.",
-        errors: {}
+        message: res.message.error || "Something went wrong. Please try again."
       })
     }
   }
@@ -39,7 +43,7 @@ export default function Page() {
   }, [user, isLoading, router])
 
   return (
-    <div className="bg-100 relative flex min-h-screen w-full items-start justify-center px-6 pt-36">
+    <div className="bg-background relative flex min-h-screen w-full items-start justify-center px-6 pt-36">
       <Image
         src="/Backdrop.png"
         alt="Backdrop"
@@ -47,32 +51,32 @@ export default function Page() {
         width={2000}
         className="absolute left-0 top-0 z-0 h-1/4 w-full object-cover"
       />
-      <div className="bg-100 border-200 relative z-10 flex w-full max-w-2xl flex-col items-center justify-center gap-y-6 rounded-lg border-2 p-12 shadow-md">
+      <div className="bg-card text-card-foreground border-border relative z-10 flex w-full max-w-2xl flex-col items-center justify-center gap-y-6 rounded-lg border p-12 shadow-md">
         <LuKeyRound size={45} />
-        <h1 className="text-700 text-2xl">Forgot Password</h1>
-        <Form onSubmit={handleSubmit} className="flex w-full flex-col gap-y-4">
-          {errors && (
-            <p className="text-center text-red-500">{errors.message}</p>
+        <h1 className="text-2xl font-semibold">Forgot Password</h1>
+        <form onSubmit={handleSubmit} className="flex w-full flex-col gap-y-4">
+          {errors?.message && (
+            <p className="text-destructive text-center">{errors.message}</p>
           )}
-          <InputField
-            type="email"
-            inputName="Email"
-            placeholder="Email"
-            error={errors?.errors.email}
-          />
-          <Button
-            position="center"
-            type="submit"
-            className="mt-4 w-full text-center"
-          >
+          <div className="space-y-2">
+            <Label htmlFor="email">Email</Label>
+            <Input id="email" name="email" type="email" placeholder="Email" />
+          </div>
+          <Button type="submit" className="mt-4 w-full">
             Continue
           </Button>
-        </Form>
+        </form>
         <div className="flex flex-row items-center justify-center gap-x-6">
-          <Link href="/register" className="text-600 text-sm">
+          <Link
+            href="/register"
+            className="text-muted-foreground text-sm hover:underline"
+          >
             Create an account
           </Link>
-          <Link href="/login" className="text-600 text-sm">
+          <Link
+            href="/login"
+            className="text-muted-foreground text-sm hover:underline"
+          >
             Login
           </Link>
         </div>
