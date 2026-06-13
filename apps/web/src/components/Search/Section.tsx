@@ -48,12 +48,12 @@ export function SearchSection({ title, items }: SearchSectionProps) {
 
   return (
     <div className="mt-4">
-      <h3 className="text-sm text-500 mb-2">{title}</h3>
+      <h3 className="text-muted-foreground mb-2 text-sm">{title}</h3>
       <ul>
         {formattedItems.map((item, index) => (
           <li
             key={index}
-            className="flex items-center gap-2 py-1 cursor-pointer hover:bg-300 px-2 rounded"
+            className="hover:bg-accent hover:text-accent-foreground flex cursor-pointer items-center gap-2 rounded px-2 py-1"
           >
             <Link href={item.href || "#"} className="flex items-center gap-2">
               {item.image && (
