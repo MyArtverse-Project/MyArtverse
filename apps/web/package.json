@@ -61,7 +61,6 @@
   "devDependencies": {
     "@mav/config": "*",
     "@mav/shared": "*",
-    "@mav/ui": "*",
     "@types/dompurify": "^3.0.5",
     "@types/lodash": "^4.17.4",
     "@types/mdx": "^2.0.13",

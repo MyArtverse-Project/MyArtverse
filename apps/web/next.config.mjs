@@ -4,7 +4,7 @@ import redirects from "./lib/redirects.js"
 
 /** @type {import('next').NextConfig} */
 const nextConfig = {
-  transpilePackages: ["gsap", "@mav/config", "@mav/ui", "@mav/shared"],
+  transpilePackages: ["gsap", "@mav/config", "@mav/shared"],
   pageExtensions: ["js", "jsx", "ts", "tsx", "md", "mdx"],
   poweredByHeader: false,
   experimental: {
