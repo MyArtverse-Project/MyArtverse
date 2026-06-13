@@ -1,5 +1,5 @@
-import { Button } from "@mav/ui/components/buttons"
-import { Group, GroupContainer } from "@mav/ui/components/layouts"
+import { Button } from "@/components/ui/button"
+import { Group, GroupContainer } from "@/components/ui/group"
 
 export const metadata = {
   title: "Profile"
@@ -20,12 +20,11 @@ export default function SettingsProfilePage() {
             it's important to export your data first before proceeding.
           </>
         }
-        learnMoreLink="/lmao"
       >
         <div className="flex gap-x-2">
           <Button>Export data</Button>
-          <Button variant="alert-secondary">Deactivate account</Button>
-          <Button variant="alert">Delete account</Button>
+          <Button variant="outline">Deactivate account</Button>
+          <Button variant="destructive">Delete account</Button>
         </div>
       </Group>
     </GroupContainer>

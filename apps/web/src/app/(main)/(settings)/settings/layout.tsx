@@ -15,13 +15,13 @@ export default function SettingsLayout(
   return (
     <div className="mx-auto mb-20 max-w-[1400px] px-4">
       {/* User info */}
-      <div className="bg-200 my-3 flex items-center gap-x-3 rounded-md px-3.5 py-3">
-        <div className="bg-300 size-11 rounded-full" />
+      <div className="bg-muted my-3 flex items-center gap-x-3 rounded-md px-3.5 py-3">
+        <div className="bg-muted-foreground/20 size-11 rounded-full" />
         <div className="flex flex-col">
           <div className="text-lg font-bold">Logged in as USER</div>
           <div className="inline-flex gap-x-1 text-xs">
-            <span className="text-subtext">{"Not you? "}</span>
-            <span className="text-hyperlink hover:underline">
+            <span className="text-muted-foreground">{"Not you? "}</span>
+            <span className="text-primary hover:underline">
               Switch accounts
             </span>
           </div>
