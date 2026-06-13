@@ -1,4 +1,5 @@
 import { BACKEND_URL } from "@/utils/constants"
+import { logError } from "@/utils"
 import Image from "next/image"
 import { redirect } from "next/navigation"
 import { LuXOctagon } from "react-icons/lu"
@@ -10,11 +11,18 @@ async function verifyEmail(id: string): Promise<boolean> {
       credentials: "include"
     })
 
-    if (!res.ok) return false
+    if (!res.ok) {
+      logError(`POST /v1/auth/verify/${id}`, {
+        status: res.status,
+        statusText: res.statusText
+      })
+      return false
+    }
 
     const data = await res.json()
     return data
-  } catch {
+  } catch (error) {
+    logError(`POST /v1/auth/verify/${id}`, error)
     return false
   }
 }

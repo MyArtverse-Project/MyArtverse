@@ -1,6 +1,7 @@
 "use server"
 
 import { LoginFormSchema } from "@/app/lib/definition"
+import { logError } from "@/utils"
 import { BACKEND_URL } from "@/utils/constants"
 import { removeSuffixes } from "@/utils/removeSuffix"
 import { cookies } from "next/headers"
@@ -60,7 +61,9 @@ export async function loginAction(formData: FormData) {
         error: data.error || "Invalid email or password"
       }
     }
-  } catch (_error) {
+  } catch (error) {
+    logError("loginAction", error)
+
     return {
       success: false,
       message: {
