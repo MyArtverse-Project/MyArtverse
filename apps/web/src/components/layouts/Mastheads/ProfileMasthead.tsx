@@ -1,10 +1,18 @@
 "use client"
 
 import RelationModal from "@/components/Modals/RelationsModal"
-import { Button } from "@mav/ui/components/buttons"
-import { Masthead, type MastheadTabItems } from "@mav/ui/components/layouts"
+import { Button } from "@/components/ui/button"
+import Link from "next/link"
 import { useState } from "react"
 import { LuCat, LuHeart, LuHome } from "react-icons/lu"
+import {
+  MastheadAvatar,
+  MastheadBanner,
+  MastheadDetails,
+  MastheadLayer,
+  MastheadWrapper
+} from "./MastheadParts"
+import { MastheadTabs, type MastheadTabItem } from "./MastheadTabs"
 
 interface ProfileMastheadProps {
   handle: string
@@ -17,74 +25,75 @@ interface ProfileMastheadProps {
   isOwnProfile?: boolean
 }
 
-const profileTabs = [
-  {
-    icon: LuHome,
-    text: "Overview",
-    link: ""
-  },
-  {
-    icon: LuCat,
-    text: "Characters",
-    link: "characters",
-    countIndicator: 5
-  },
-  {
-    icon: LuHeart,
-    text: "Favorites",
-    link: "favorites"
-  }
-] satisfies MastheadTabItems
+const profileTabs: MastheadTabItem[] = [
+  { icon: LuHome, text: "Overview", link: "" },
+  { icon: LuCat, text: "Characters", link: "characters", countIndicator: 5 },
+  { icon: LuHeart, text: "Favorites", link: "favorites" }
+]
 
 export function ProfileMasthead(props: Partial<ProfileMastheadProps>) {
   const [displayRelationsModal, setDisplayRelationsModal] = useState(false)
+  const [startingRelationTab, setStartingRelationTab] = useState("follower")
+
   const toggleRelationsModal = (type?: string) => {
     setStartingRelationTab(type || "follower")
     setDisplayRelationsModal(!displayRelationsModal)
   }
 
-  const [startingRelationTab, setStartingRelationTab] = useState("follower")
   return (
-    <Masthead>
-      <Masthead.Banner src={props.bannerUrl} />
-      <Masthead.Wrapper>
-        <Masthead.Avatar
+    <div>
+      <MastheadBanner src={props.bannerUrl} />
+      <MastheadWrapper>
+        <MastheadAvatar
           src={props.avatarUrl}
-          profileOnly
-          banner={props.bannerUrl != null}
+          alt={props.displayName || props.handle || "Profile"}
+          rounded="full"
+          onBanner
         />
-        <Masthead.Details>
-          <Masthead.Layer spaceBetween>
-            <span className="text-4xl">
+        <MastheadDetails>
+          <MastheadLayer spaceBetween>
+            <h1 className="text-3xl font-bold tracking-tight lg:text-4xl">
               {props.displayName || props.handle}
-            </span>
-            {props.isOwnProfile ?? (
-              <Button href="/settings/profile">Edit Profile</Button>
+            </h1>
+            {props.isOwnProfile && (
+              <Button variant="secondary" asChild>
+                <Link href="/settings/profile">Edit Profile</Link>
+              </Button>
             )}
-          </Masthead.Layer>
-          <Masthead.Layer>
-            <div className="flex gap-x-4">
-              <span className="text-lg">
-                {props.handle ? `@${props.handle}` : ""}
-              </span>
-              <span
-                className="text-lg"
-                onClick={() => toggleRelationsModal("followers")}
-              >
-                {props.followerCount} followers
-              </span>
-              <span
-                className="text-lg"
-                onClick={() => toggleRelationsModal("following")}
-              >
-                {props.followingCount} following
-              </span>
-            </div>
-          </Masthead.Layer>
-          <Masthead.Layer>{props.profileBio}</Masthead.Layer>
-        </Masthead.Details>
-      </Masthead.Wrapper>
-      <Masthead.Tabs baseURL={`/@${props.handle}/`} items={profileTabs} />
+          </MastheadLayer>
+          <MastheadLayer>
+            <span className="text-muted-foreground text-lg">
+              {props.handle ? `@${props.handle}` : ""}
+            </span>
+            <button
+              type="button"
+              onClick={() => toggleRelationsModal("followers")}
+              className="hover:text-foreground text-muted-foreground text-lg transition-colors"
+            >
+              <span className="text-foreground font-semibold">
+                {props.followerCount ?? 0}
+              </span>{" "}
+              followers
+            </button>
+            <button
+              type="button"
+              onClick={() => toggleRelationsModal("following")}
+              className="hover:text-foreground text-muted-foreground text-lg transition-colors"
+            >
+              <span className="text-foreground font-semibold">
+                {props.followingCount ?? 0}
+              </span>{" "}
+              following
+            </button>
+          </MastheadLayer>
+          {props.profileBio && (
+            <MastheadLayer>
+              <p className="text-muted-foreground">{props.profileBio}</p>
+            </MastheadLayer>
+          )}
+        </MastheadDetails>
+      </MastheadWrapper>
+      <MastheadTabs baseURL={`/@${props.handle}/`} items={profileTabs} />
       <RelationModal
         followers={[]}
         following={[]}
@@ -92,6 +101,6 @@ export function ProfileMasthead(props: Partial<ProfileMastheadProps>) {
         toggleRelationsModal={toggleRelationsModal}
         startingTab={startingRelationTab}
       />
-    </Masthead>
+    </div>
   )
 }

@@ -2,6 +2,7 @@ import AppLayout from "@/components/layouts/AppLayout/AppLayout"
 import { ProfileMasthead } from "@/components/layouts/Mastheads"
 import type { DefineRouteParams } from "@/types"
 import { fetchUser, fetchUserData } from "@/utils/api"
+import { USER_DEFAULT_AVATAR } from "@/utils/constants"
 
 type AsyncProps = DefineRouteParams<{ handle: string }>
 
@@ -18,7 +19,7 @@ export default async function MainProfileLayout(
       <ProfileMasthead
         handle={user?.handle}
         displayName={user?.displayName || user?.handle}
-        avatarUrl={user?.avatarUrl}
+        avatarUrl={user?.avatarUrl || USER_DEFAULT_AVATAR}
         followerCount={user.followers.length}
         followingCount={user.following.length}
         profileBio={user?.bio || ""}

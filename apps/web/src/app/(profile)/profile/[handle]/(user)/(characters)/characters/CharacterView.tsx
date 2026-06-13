@@ -7,7 +7,7 @@ import { SearchBox } from "@/components/layouts/Forms"
 import GridResponsive from "@/components/layouts/Layouts/GridResponsive"
 import type { CharacterResponse, Folder } from "@/types/characters"
 import { folderColors } from "@/utils/constants"
-import { Button } from "@mav/ui/components/buttons"
+import { Button } from "@/components/ui/button"
 import { useRouter } from "next/navigation"
 import { useState } from "react"
 import { LuFilter as FilterIcon, LuCog, LuPlus } from "react-icons/lu"
@@ -75,21 +75,26 @@ export default function CharacterView({
           <div className="max-w-full flex-grow">
             <SearchBox placeholder="Search for characters" />
           </div>
-          <Button icon={<FilterIcon size={20} />}>Filter</Button>
+          <Button className="gap-2">
+            <FilterIcon size={20} />
+            Filter
+          </Button>
           {owner && (
             <>
               <Button
+                className="gap-2"
                 onClick={() => router.push("/dashboard/characters")}
-                icon={<LuCog size={20} />}
               >
+                <LuCog size={20} />
                 Manage Character
               </Button>
               <Button
+                className="gap-2"
                 onClick={() =>
                   router.push("/dashboard/characters?createModal=true")
                 }
-                icon={<LuPlus size={20} />}
               >
+                <LuPlus size={20} />
                 Create Character
               </Button>
             </>

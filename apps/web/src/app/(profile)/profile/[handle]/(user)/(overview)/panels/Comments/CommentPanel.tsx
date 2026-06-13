@@ -3,9 +3,9 @@ import { type User } from "@/app/context/AuthContext"
 import type { Comments, UserType } from "@/types/users"
 import { postComment } from "@/utils/api"
 import { USER_DEFAULT_AVATAR } from "@/utils/constants"
-import { Button } from "@headlessui/react"
-import { UserCommentInput } from "@mav/ui/components/comments"
-import { Group } from "@mav/ui/components/layouts"
+import { Button } from "@/components/ui/button"
+import { Group } from "@/components/ui/group"
+import UserCommentInput from "@/components/comments/UserCommentInput"
 import CommentThread from "./Thread"
 
 export default function CommentPanel({
@@ -18,7 +18,14 @@ export default function CommentPanel({
   self?: User | null
 }) {
   return (
-    <Group title="Comments" potentialActions={<Button>Filter</Button>}>
+    <Group
+      title="Comments"
+      potentialActions={
+        <Button variant="ghost" size="sm">
+          Filter
+        </Button>
+      }
+    >
       {self && (
         <div className="my-5">
           <UserCommentInput
