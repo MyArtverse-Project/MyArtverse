@@ -21,7 +21,7 @@ export default function Avatar({
       <Image
         src={src}
         className="aspect-square object-cover"
-        alt={username ? `Avatar of ${username}"}` : ""}
+        alt={username ? `Avatar of ${username}` : ""}
         decoding="async"
         loading="eager"
         priority

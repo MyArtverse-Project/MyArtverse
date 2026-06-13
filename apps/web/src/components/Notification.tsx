@@ -1,7 +1,7 @@
 import { Artwork, Character } from "@/types/characters"
 import { Comments } from "@/types/users"
 import { USER_DEFAULT_AVATAR } from "@/utils/constants"
-import { Button } from "@mav/ui/components/buttons"
+import { Button } from "@/components/ui/button"
 import Image from "next/image"
 import { LuCheck } from "react-icons/lu"
 
@@ -60,14 +60,16 @@ export default function Notification({
         <div className="flex flex-col w-full gap-y-3">
           <span>{content.replace("%user%", senderHandle || "Someone")}</span>
           {comment && (
-            <div className="bg-100 border-400 border rounded-md w-full px-3 py-2">
+            <div className="bg-muted border-border w-full rounded-md border px-3 py-2">
               {comment.content}
             </div>
           )}
           <span>{diffString}</span>
         </div>
       </div>
-      <Button icon={<LuCheck size={20} />} variant="tritery" />
+      <Button variant="ghost" size="icon" aria-label="Mark as read">
+        <LuCheck size={20} />
+      </Button>
     </div>
   )
 }
