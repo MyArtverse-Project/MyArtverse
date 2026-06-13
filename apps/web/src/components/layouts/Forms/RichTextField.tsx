@@ -13,7 +13,7 @@ export default function RichTextField({
 }) {
   return (
     <div className="h-32 w-full space-y-2">
-      <span className="text-600 flex gap-x-0.5 font-bold uppercase">
+      <span className="text-muted-foreground flex gap-x-0.5 font-bold uppercase">
         {inputName}
       </span>
       <textarea
@@ -21,7 +21,7 @@ export default function RichTextField({
         id={inputName.toLowerCase()}
         value={value}
         className={cn(
-          "text-700 border-400 bg-100 h-32 w-full rounded-md border px-4 py-2",
+          "text-foreground border-border bg-background h-32 w-full rounded-md border px-4 py-2",
           code ? "whitespace-pre font-mono text-sm" : "text-base"
         )}
       />

@@ -8,7 +8,7 @@ export function MenuGroup({
   return (
     <div role="group">
       {heading && (
-        <h2 className="text-subtext text-md not-prose px-4 py-1 font-semibold uppercase">
+        <h2 className="text-muted-foreground text-md not-prose px-4 py-1 font-semibold uppercase">
           {heading}
         </h2>
       )}

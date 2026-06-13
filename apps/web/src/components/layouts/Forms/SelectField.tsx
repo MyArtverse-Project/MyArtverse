@@ -18,12 +18,12 @@ export default function SelectField({
   return (
     <div className={cn("flex w-full flex-col gap-y-1.5", className)}>
       {noLabel ? null : (
-        <label className="text-600 gap-x-0.5 font-bold uppercase">
+        <label className="text-muted-foreground gap-x-0.5 font-bold uppercase">
           {inputName}
         </label>
       )}
       <select
-        className="text-700 border-400 bg-100 rounded-md border px-4 py-2"
+        className="text-foreground border-border bg-background rounded-md border px-4 py-2"
         onChange={onChange}
       >
         <option value="none" disabled selected={!value}>
