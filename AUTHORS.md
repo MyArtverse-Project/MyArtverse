@@ -12,3 +12,4 @@
 - [Nebula Animations](https://twitter.com/nebulaanimation) - ui/ux design,
   branding
 - [Beta Folf](https://github.com/Beta-Folf) - frontend
+- [Tay März](https://taymaerz.de) - frontend, ui/ux design
