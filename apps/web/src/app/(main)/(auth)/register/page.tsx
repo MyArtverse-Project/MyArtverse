@@ -86,6 +86,7 @@ export default function Page() {
               id="username"
               name="username"
               type="text"
+              pattern="^[a-z0-9_.]+$"
               placeholder="Username"
             />
             <span className="text-muted-foreground text-sm">

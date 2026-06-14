@@ -23,6 +23,7 @@ export default async function MainProfileLayout(
         followerCount={user.followers.length}
         followingCount={user.following.length}
         profileBio={user?.bio || ""}
+        characterCount={user?.characters.length || 0}
         bannerUrl={user?.bannerUrl || undefined}
         isOwnProfile={self ? self.handle === user.handle : false}
       />

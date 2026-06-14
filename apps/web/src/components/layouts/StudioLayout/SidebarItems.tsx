@@ -1,5 +1,5 @@
 import { ReactNode } from "react"
-import { LuCat, LuFileQuestion, LuImage, LuKanbanSquare, LuLineChart, LuMessageCircle, LuPaintbrush, LuSettings, LuShield, LuShieldQuestion, LuZap } from "react-icons/lu"
+import { LuCat, LuFileQuestion, LuImage, LuKanbanSquare, LuLayers, LuLineChart, LuList, LuMessageCircle, LuPaintbrush, LuPencilLine, LuSettings, LuShield, LuShieldQuestion, LuZap } from "react-icons/lu"
 
 type SidebarItem = {
   icon: ReactNode
@@ -39,6 +39,26 @@ const generateGeneralSidebarItems = (): SidebarItem[] => {
       label: "Messages",
       href: "/studio/messages"
       // TODO: Add Message Count
+    }
+  ]
+}
+
+const generateCharacterEditSidebarItems = (uuid: string): SidebarItem[] => {
+  return [
+    {
+      icon: <LuPencilLine size={20} />,
+      label: "Basic Info",
+      href: `#`
+    },
+    {
+      icon: <LuList size={20} />,
+      label: "Properties",
+      href: `#properties`
+    },
+    {
+      icon: <LuLayers size={20} />,
+      label: "Ref Sheets",
+      href: `#references`
     }
   ]
 }
@@ -101,6 +121,13 @@ export const generateSidebarItems = (): SidebarItemsByCategory => {
     general: generateGeneralSidebarItems(),
     artists: generateArtistSidebarItems(),
     staff: generateStaffSidebarItems(),
+    settings: generateSettingsSidebarItems()
+  }
+}
+
+export const generateEditSidebarItems = (characterId: string) => {
+  return {
+    character: generateCharacterEditSidebarItems(characterId),
     settings: generateSettingsSidebarItems()
   }
 }

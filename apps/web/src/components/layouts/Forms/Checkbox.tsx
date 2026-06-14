@@ -1,4 +1,4 @@
-import cn from "@/utils/cn"
+import { cn } from "@/lib/utils"
 import { kebabCase } from "lodash"
 
 export default function Checkbox({
