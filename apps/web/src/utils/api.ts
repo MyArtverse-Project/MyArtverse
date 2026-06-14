@@ -184,6 +184,11 @@ export const fetchUserCharacters = async (handle: string) => {
   return data
 }
 
+
+export const updateCharacter = async (characterId: string, data: Partial<Character>) => {
+  return apiWithAuth("PUT", `/v1/character/update/${characterId}`, data)
+}
+
 export const fetchSelfCharacters = async () => {
   const characters = await apiWithAuth<Character[]>("GET", "/v1/character/")
   return characters
@@ -198,6 +203,11 @@ export const fetchSelfCharacter = async (characterName: string) => {
   return character
 }
 
+export const fetchUserGallery = async () => {
+  const gallery = await apiWithAuth<Artwork[]>("GET", "/v1/art/gallery")
+  return gallery
+}
+
 export const fetchCharacter = async (handle: string, characterName: string) => {
   const character = await apiWithoutAuth<Character>(
     "GET",
@@ -206,6 +216,37 @@ export const fetchCharacter = async (handle: string, characterName: string) => {
 
   return character
 }
+
+export const uploadArt = async (
+  characterId: string,
+  body: {
+    imageUrl: string
+    title: string
+    description: string
+    tags: string[]
+    userAsArtist: boolean
+    mainCharacterId: string
+    taggedCharacterIds: string[]
+  }
+) => {
+  const res = await apiWithAuth("POST", `/v1/art/upload/${characterId}`, body)
+
+  if (!res) {
+    throw new Error("Art upload failed")
+  }
+
+  return res
+}
+
+export const fetchCharacterById = async (id: string) => {
+  const character = await apiWithoutAuth<Character>(
+    "GET",
+    `/v1/character/id/${id}`
+  )
+
+  return character
+}
+
 
 export const fetchArtistRequests = async () => {
   const requests = await apiWithAuth<UserType[]>(
@@ -280,6 +321,16 @@ export const createFolder = async (body: {
   return apiWithAuth("POST", "/v1/folders/create", body)
 }
 
+export const createCharacter = async (body: {
+  name: string
+  nickname?: string
+  characterAvatar: string | null
+  visibility: "public" | "private"
+  mainCharacter: boolean
+}) => {
+  return apiWithAuth("POST", "/v1/character/create", body)
+}
+
 export const getFolders = async (folderId: string) => {
   return apiWithAuth("GET", `/v1/folders/${folderId}`)
 }
@@ -302,15 +353,48 @@ export const setPanel = async (body: {
   return apiWithAuth("POST", "/v1/dashboard/panels", body)
 }
 
-export const setHTMLPanel = async (body: { html: string }) => {
+export const setPanel = async (body: {
+  position: {
+    col: number
+    row: number
+  }
+  component: string
+}, characterName?: string) => {
+  console.log(body.position)
+  if (characterName) {
+    return apiWithAuth("POST", `/v1/dashboard/cpanels/${characterName}`, body)
+  }
+  return apiWithAuth("POST", "/v1/dashboard/panels", body)
+}
+
+
+export const setHTMLPanel = async (body: { html: string }, characterName: string) => {
+  if (characterName) {
+    return apiWithAuth("PUT", `/v1/dashboard/cpanels/${characterName}/html`, body)
+  }
   return apiWithAuth("PUT", "/v1/dashboard/panels/html", body)
 }
 
-export const getPanels = async (handle: string) => {
+export const getPanels = async (handle: string, characterName?: string) => {
+  if (characterName) {
+    return apiWithoutAuth<DashboardPanel[]>(
+      "GET",
+      `/v1/dashboard/cpanels/${characterName}`
+    )
+  }
   return apiWithoutAuth<DashboardPanel[]>(
     "GET",
     `/v1/dashboard/panels/${handle}`
   )
+}
+
+export const updateProfile = async (body: {
+  displayName: string
+  handle: string
+  pronouns: string
+  avatarLink: string
+}) => {
+  return apiWithAuth("PUT", "/v1/user/me", body)
 }
 
 export const postComment = async (
@@ -349,6 +433,7 @@ export const search = async (
       character: []
     }
   }
+  
 
   const data = await apiWithAuth<SearchResult>(
     "GET",
