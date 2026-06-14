@@ -1,7 +1,7 @@
 "use client"
 
 import Separator from "@/components/Separator"
-import { Button } from "@mav/ui/components/buttons"
+import { Button } from "@/components/ui/button"
 import { useEffect, useRef, useState } from "react"
 import {
   LuPanelLeftClose as PanelLeftClose,
@@ -30,10 +30,12 @@ export default function FolderShelf({
     const resizeArea = resizableRef.current
     const folderView = folderViewRef.current
 
+    if (resizeArea === null || folderView === null) return
+
     const handleShelfDrag = (e: MouseEvent) => {
       if (!isDragging) return
 
-      const rect = folderView!.getBoundingClientRect()
+      const rect = folderView.getBoundingClientRect()
       const calcMousePosition = e.x - rect.x + 13
 
       if (calcMousePosition < 250 || calcMousePosition > 600) return
@@ -87,11 +89,13 @@ export default function FolderShelf({
         <span className="flex flex-row-reverse items-center gap-2.5">
           <div>
             <Button
+              variant="ghost"
+              size="icon"
               aria-label={panelStateAria}
-              icon={<PanelIconDynamic size={21} />}
-              className="hover:bg-200 hover:text-500 rounded-md p-2 transition-colors"
               onClick={handleExpandDetails}
-            />
+            >
+              <PanelIconDynamic size={21} />
+            </Button>
           </div>
           <FolderItem name={defaultName} open />
         </span>
@@ -100,7 +104,7 @@ export default function FolderShelf({
       </aside>
       <span
         ref={resizableRef}
-        className="before:bg-separator mx-1 h-full px-2 before:block before:h-full before:w-0.5 before:opacity-25 before:transition-opacity hover:cursor-e-resize before:hover:opacity-100"
+        className="before:bg-border mx-1 h-full px-2 before:block before:h-full before:w-0.5 before:opacity-50 before:transition-opacity hover:cursor-e-resize before:hover:opacity-100"
       />
     </div>
   )

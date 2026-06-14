@@ -20,7 +20,7 @@ const SearchBox = forwardRef(
           ref={ref}
           type="search"
           name="Search"
-          className="bg-200 font-inter h-full w-full rounded-md border-none py-2 pl-10 pr-1 text-sm"
+          className="bg-muted font-inter h-full w-full rounded-md border-none py-2 pl-10 pr-1 text-sm"
           placeholder={placeholder}
         />
       </div>

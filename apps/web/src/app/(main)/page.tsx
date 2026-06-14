@@ -1,110 +1,61 @@
-import { Badge } from "@mav/ui/components/badges"
-import { Button } from "@mav/ui/components/buttons"
+import { Badge } from "@/components/ui/badge"
+import { Button } from "@/components/ui/button"
 import { LuShield } from "react-icons/lu"
 
 export default function Home() {
   return (
     <main className="flex min-h-screen flex-col items-center gap-y-5 p-24">
-      <h2 className="text-xl">Badges</h2>
+      <h2 className="text-xl font-semibold">Badges</h2>
       <div className="flex items-center gap-x-2">
-        <Badge size="small">small</Badge>
-        <Badge size="small" icon={LuShield}>
+        <Badge>Default</Badge>
+        <Badge>
+          <LuShield className="mr-1 size-3" />
           With icon
         </Badge>
-        <Badge size="medium">medium</Badge>
-        <Badge size="medium" icon={LuShield}>
-          With icon
-        </Badge>
-        <Badge size="big">big</Badge>
-        <Badge size="big" icon={LuShield} />
-        <Badge size="big" icon={LuShield}>
+        <Badge variant="secondary">Secondary</Badge>
+        <Badge variant="destructive">Destructive</Badge>
+        <Badge variant="outline">Outline</Badge>
+        <Badge variant="outline">
+          <LuShield className="mr-1 size-3" />
           With icon
         </Badge>
       </div>
+      <h2 className="text-xl font-semibold">Buttons</h2>
       <div className="flex items-center gap-x-2">
-        <Badge variant="primary">primary</Badge>
-        <Badge variant="secondary">secondary</Badge>
-        <Badge variant="alert">alert</Badge>
-        <Badge variant="alert" icon={LuShield}>
-          With icon
-        </Badge>
-        <Badge variant="info">info</Badge>
-        <Badge variant="info" icon={LuShield}>
-          With icon
-        </Badge>
-        <Badge variant="success">success</Badge>
-        <Badge variant="success" icon={LuShield}>
-          With icon
-        </Badge>
-        <Badge variant="warning">warning</Badge>
-        <Badge variant="warning" icon={LuShield}>
-          With icon
-        </Badge>
-      </div>
-      <h2 className="text-xl">Buttons</h2>
-      <div className="flex items-center gap-x-2">
-        <Button variant="primary" size="small">
-          Small
-        </Button>
-        <Button variant="primary" size="small" prefix={<LuShield size={18} />}>
+        <Button size="sm">Small</Button>
+        <Button size="sm">
+          <LuShield size={16} />
           With icon
         </Button>
-        <Button
-          variant="secondary"
-          prefix={<LuShield size={18} />}
-          suffix={
-            <Badge size="small" variant="primary">
-              123
-            </Badge>
-          }
-        >
+        <Button variant="secondary">
+          <LuShield size={16} />
           With icon + Badge
+          <Badge variant="secondary">123</Badge>
         </Button>
-        <Button variant="primary" size="big">
-          Big
-        </Button>
-        <Button variant="secondary" size="small">
+        <Button size="lg">Big</Button>
+        <Button variant="secondary" size="sm">
           Small Secondary
         </Button>
-        <Button variant="tritery" size="small">
-          Small Tritery
+        <Button variant="ghost" size="sm">
+          Small Ghost
         </Button>
       </div>
       <div className="flex gap-x-2">
-        <Button prefix={<div>Prefix</div>} suffix={<div>Suffix</div>}>
-          Button
-        </Button>
+        <Button>Button</Button>
         <Button variant="secondary">Secondary</Button>
-        <Button variant="tritery">Tritery</Button>
-        <Button variant="primary" disabled>
-          Disabled Primary
-        </Button>
+        <Button variant="ghost">Ghost</Button>
+        <Button disabled>Disabled</Button>
         <Button variant="secondary" disabled>
           Disabled Secondary
         </Button>
-        <Button variant="tritery" disabled>
-          Disabled Tritery
+        <Button variant="ghost" disabled>
+          Disabled Ghost
         </Button>
       </div>
       <div className="flex items-center gap-x-2">
-        <Button variant="alert">Alert</Button>
-        <Button variant="alert-secondary">Alert Secondary</Button>
-        <Button variant="warning">Warning</Button>
-        <Button variant="warning-secondary">Warning Secondary</Button>
-      </div>
-      <div className="flex items-center gap-x-2">
-        <Button size="small" variant="alert">
-          Small Alert
-        </Button>
-        <Button size="small" variant="alert-secondary">
-          Small Alert Secondary
-        </Button>
-        <Button size="small" variant="warning">
-          Small Warning
-        </Button>
-        <Button size="small" variant="warning-secondary">
-          Small Warning Secondary
-        </Button>
+        <Button variant="destructive">Destructive</Button>
+        <Button variant="outline">Outline</Button>
+        <Button variant="link">Link</Button>
       </div>
     </main>
   )

@@ -2,14 +2,11 @@
   <img alt="MyFursona cards" src="https://github.com/MyFursona-Project/MyFursona/assets/94678583/0cc5e73f-3197-4170-906b-30a64063569a">
 </div>
 
-<h1 align="center">MyFursona</h1>
+<h1 align="center">MyArtverse</h1>
 
 <div align="center">
   <a href="https://www.codefactor.io/repository/github/MyArtverse-Project/MyArtverse">
     <img alt="CodeFactor Grade" src="https://img.shields.io/codefactor/grade/github/MyArtverse-Project/MyArtverse">
-  </a>
-  <a href="https://stats.uptimerobot.com/rlVXRfwrKz">
-    <img alt="UptimeRobot status" src="https://img.shields.io/uptimerobot/status/m794028551-c8c7591f5785702785b52996">
   </a>
 </div>
 
@@ -20,47 +17,22 @@
 
 ## Overview
 
-This repository is a monorepo containing frontend code written in TypeScript.
-
-There are also `codemods` that are small and custom Node scripts to keep
-the codebase clean and maintainable.
+This repository is a monorepo containing frontend code written in TypeScript. The backend
+code is written separately, which is located in [here](https://github.com/MyArtverse-Project/API).
 
 ### Project structure
 
 - `apps`
-  - `website`: the Next.js frontend
-  - `desktop`: desktop client written in Tauri
-  - `widget`: used for embeds from other websites
-- `codemod`: scripts to keep the codebase clean
-- `packages`: shared configs and components
+  - [`desktop`](/apps/desktop/): desktop client written in Tauri
+  - [`web`](/apps/web/): the Next.js frontend
+- `packages`
+  - [`config`](/packages/config): Mostly for TSConfig and Tailwind CSS
+  - [`shared`](/packages/shared): Shared helper functions
+  - [`ui`](/packages/ui/): Shared React components
 
 ## Contributing
 
-### Prerequisites
-
-- Node.js (version 20 or higher)
-- Yarn
-
-### Setup and Installation
-
-Fork/clone the repository, install its dependencies and run the local dev server
-on the root directory:
-
-```console
-git clone https://github.com/MyArtverse-Project/MyArtverse.git
-cd MyArtverse
-yarn
-yarn dev
-```
-
-You can now access <http://localhost:3000> on your browser!
-
-## Commands
-
-- `yarn dev` - Serves a local web app
-- `yarn dev:w` - Serves a widget app
-- `yarn build` - Builds the web app
-- `yarn build:w` - Builds the widget app
+See [CONTRIBUTING.md](/CONTRIBUTING.md) for more
 
 ## License
 

@@ -1,18 +1,29 @@
-import { Button } from '@mav/ui/components/buttons'
-import React from 'react'
+import { Button } from "@/components/ui/button"
 import clsx from "clsx"
+import Link from "next/link"
+import type { ReactNode } from "react"
 
-export default function SidebarItem({ icon, label, href, isSidebarExpanded }: {
-  icon: React.ReactNode
+export default function SidebarItem({
+  icon,
+  label,
+  href,
+  isSidebarExpanded
+}: {
+  icon: ReactNode
   label: string
   href: string
   isSidebarExpanded: boolean
 }) {
   return (
     <Button
-      href={href}
-      variant="tritery"
-      prefix={
+      variant="ghost"
+      asChild
+      className={clsx(
+        "flex w-full items-center",
+        isSidebarExpanded ? "justify-start" : "justify-center px-0"
+      )}
+    >
+      <Link href={href}>
         <div
           className={clsx(
             "flex items-center justify-center",
@@ -21,14 +32,8 @@ export default function SidebarItem({ icon, label, href, isSidebarExpanded }: {
         >
           {icon}
         </div>
-      }
-      className={clsx(
-        "flex items-center",
-        isSidebarExpanded ? "justify-start" : "justify-center px-0"
-      )}
-    >
-      {isSidebarExpanded && <span>{label}</span>}
+        {isSidebarExpanded && <span>{label}</span>}
+      </Link>
     </Button>
   )
 }
-

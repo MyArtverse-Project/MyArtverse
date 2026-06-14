@@ -1,4 +1,4 @@
-import { Button } from "@mav/ui/components/buttons"
+import { Button } from "@/components/ui/button"
 import { FaFacebook, FaGoogle } from "react-icons/fa"
 
 const providers = [
@@ -15,13 +15,16 @@ export default function AuthThirdPartyProviders() {
       {providers.map(({ icon: Icon, label }, index) => (
         <Button
           key={index}
-          icon={<Icon size={21} />}
           variant="secondary"
-          className="w-full"
-          position="center"
-          href={`${process.env.NEXT_PUBLIC_BACKEND_URL}/v1/auth/${label.toLowerCase()}/link`} // Adjust the URL as needed
+          className="w-full gap-2"
+          asChild
         >
-          {`Continue with ${label}`}
+          <a
+            href={`${process.env.NEXT_PUBLIC_BACKEND_URL}/v1/auth/${label.toLowerCase()}/link`}
+          >
+            <Icon size={21} />
+            {`Continue with ${label}`}
+          </a>
         </Button>
       ))}
     </div>

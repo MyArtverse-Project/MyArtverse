@@ -1,5 +1,6 @@
 "use server"
 
+import { logError } from "@/utils"
 import { cookies } from "next/headers"
 import { redirect } from "next/navigation"
 
@@ -29,7 +30,23 @@ export const fetcher = async <T>(
       return null as unknown as T
     }
 
-    throw new Error(`Error: ${response.status}`)
+    let details: unknown
+    try {
+      details = await response.clone().json()
+    } catch {
+      details = await response.clone().text()
+    }
+
+    logError(`${options.method ?? "GET"} ${url}`, {
+      status: response.status,
+      statusText: response.statusText,
+      details
+    })
+
+    throw new Error(
+      `Request to ${url} failed with status ${response.status} ${response.statusText}`,
+      { cause: details }
+    )
   }
 
   return response.json()

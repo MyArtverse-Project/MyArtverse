@@ -9,7 +9,7 @@ export default async function Page({
 }) {
   const { uuid } = await params
   return (
-    <div className="bg-100 relative flex min-h-screen w-full items-start justify-center px-6 pt-36">
+    <div className="bg-background relative flex min-h-screen w-full items-start justify-center px-6 pt-36">
       <Image
         src="/Backdrop.png"
         alt="Backdrop"
@@ -17,9 +17,9 @@ export default async function Page({
         width={2000}
         className="absolute left-0 top-0 z-0 h-1/4 w-full object-cover"
       />
-      <div className="bg-100 border-200 relative z-10 flex w-full max-w-2xl flex-col items-center justify-center gap-y-6 rounded-lg border-2 p-12 shadow-md">
+      <div className="bg-card text-card-foreground border-border relative z-10 flex w-full max-w-2xl flex-col items-center justify-center gap-y-6 rounded-lg border p-12 shadow-md">
         <LuLock size={45} />
-        <h1 className="text-700 text-2xl">Recover Password</h1>
+        <h1 className="text-2xl font-semibold">Recover Password</h1>
         <RecoverForm uuid={uuid} />
       </div>
     </div>

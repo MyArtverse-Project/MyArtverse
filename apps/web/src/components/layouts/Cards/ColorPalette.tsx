@@ -26,9 +26,9 @@ export default function ColorPalette({
 
   return (
     <>
-      {copied && <span className="text-600 text-lg">Copied!</span>}
+      {copied && <span className="text-muted-foreground text-lg">Copied!</span>}
       <div
-        className={"border-400 flex  flex-row rounded border-2 border-solid"}
+        className={"border-border flex  flex-row rounded border-2 border-solid"}
         style={{ width, height }}
       >
         {palette

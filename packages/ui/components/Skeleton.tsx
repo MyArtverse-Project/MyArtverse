@@ -8,7 +8,7 @@ interface SkeletonProps {
 export function Skeleton(props: Partial<SkeletonProps>) {
   return (
     <>
-      {Array.from(Array(props.clones ?? 1)).forEach((_, i) => (
+      {Array.from(Array(props.clones ?? 1)).map((_, i) => (
         <div
           key={i}
           aria-hidden

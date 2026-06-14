@@ -34,7 +34,7 @@ export function ReferenceCard({
     <div
       className={cn(
         "mt-4 flex w-full flex-row space-y-3 rounded-lg",
-        data.active && "bg-400"
+        data.active && "bg-muted"
       )}
       onClick={clickables}
     >

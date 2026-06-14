@@ -6,7 +6,7 @@ import Modal from "../layouts/Modal"
 import Note from "../layouts/Note"
 import { InputField } from "@mav/ui/components/fields"
 import { Label, Radio, RadioGroup } from "@headlessui/react"
-import clsx from 'clsx'
+import clsx from "clsx"
 import DropZone from "./DropZone"
 import Checkbox from "../layouts/Forms/Checkbox"
 import { createCharacter } from "@/utils/api"

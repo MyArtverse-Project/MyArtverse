@@ -1,22 +1,25 @@
-import { type User } from "@/app/context/AuthContext"
 import Field from "@/components/layouts/Layouts/Field"
 import type { UserType } from "@/types/users"
-import { Button } from "@mav/ui/components/buttons"
-import { Group } from "@mav/ui/components/layouts"
+import { Button } from "@/components/ui/button"
+import { Group } from "@/components/ui/group"
+import Link from "next/link"
 
 // TODO: Make it reusable for Characters as well
 
 export default function InformationPanel({
   information,
   isOwner
-}: { information: UserType; isOwner?: boolean }) {
+}: {
+  information: UserType
+  isOwner?: boolean
+}) {
   return (
     <Group
       title={`About ${information.displayName ? information.displayName : information.handle}`}
       potentialActions={
         isOwner ? (
-          <Button size="small" href="/settings/profile">
-            Edit
+          <Button size="sm" variant="secondary" asChild>
+            <Link href="/settings/profile">Edit</Link>
           </Button>
         ) : undefined
       }
@@ -41,7 +44,6 @@ export default function InformationPanel({
         title="Nationality"
         content={information.nationality ? information.nationality : "Not Set"}
       />
-      {/* <Field title="Nationality" content="Murica" /> */}
     </Group>
   )
 }

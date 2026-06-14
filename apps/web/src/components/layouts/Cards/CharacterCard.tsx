@@ -5,8 +5,8 @@ import { cn } from "@mav/shared/utils"
 import Image from "next/image"
 import Link from "next/link"
 import { LuHeart as Heart } from "react-icons/lu"
-import ColorPalette from "./ColorPalette"
-import Status from "./Status"
+import { ColorPalette } from "./ColorPalette"
+import { Status } from "./Status"
 
 interface CharacterCardProps {
   name: string
@@ -40,13 +40,13 @@ export function CharacterCard({
       href={!href ? null : (href as Url)}
       aria-label={`Character item: ${name}, ${species}`}
       className={cn(
-        "hover:bg-mute flex flex-col gap-y-2 rounded-md p-4 transition-all",
+        "hover:bg-accent flex flex-col gap-y-2 rounded-md p-4 transition-all",
         href ? "cursor-pointer" : ""
       )}
       {...attributes}
     >
       <div className="relative h-0 w-full overflow-hidden rounded-md pb-[100%]">
-        {loading && <div className="bg-400 h-full w-full animate-pulse" />}
+        {loading && <div className="bg-muted h-full w-full animate-pulse" />}
         <Image
           src={img}
           alt={`Avatar of ${name}`}
@@ -74,9 +74,9 @@ export function CharacterCard({
       />
       {loading ? (
         <>
-          <div className="bg-400 h-8 w-full animate-pulse rounded-md" />
-          <div className="bg-400 h-6 w-full animate-pulse rounded-md" />
-          <div className="bg-400 h-4 w-full animate-pulse rounded-md" />
+          <div className="bg-muted h-8 w-full animate-pulse rounded-md" />
+          <div className="bg-muted h-6 w-full animate-pulse rounded-md" />
+          <div className="bg-muted h-4 w-full animate-pulse rounded-md" />
         </>
       ) : (
         <>

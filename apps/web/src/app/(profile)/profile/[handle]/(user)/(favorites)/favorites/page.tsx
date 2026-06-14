@@ -1,4 +1,4 @@
-import { FursonaCard } from "@/components/layouts/Cards"
+import { CharacterCard } from "@/components/layouts/Cards"
 import GridResponsive from "@/components/layouts/Layouts/GridResponsive"
 import MarginClamp from "@/components/layouts/Layouts/MarginClamp"
 import { getFavorites } from "@/utils/api"
@@ -31,7 +31,7 @@ export default async function Page({
       <Suspense fallback={<Loading />}>
         <GridResponsive breakpoint={250} className="gap-1.5" role="listbox">
           {favs.map((character, index) => (
-            <FursonaCard
+            <CharacterCard
               name={character.name}
               img={character.avatarUrl || "/UserProfile.png"}
               species={character.species}
@@ -41,7 +41,7 @@ export default async function Page({
                   ? character.refSheets[0].colors
                   : []
               }
-              href={`/@${character.owner.handle}/character/${character.slug}`}
+              href={`/@${character.owner.handle}/${character.slug}`}
             />
           ))}
         </GridResponsive>

@@ -1,5 +1,5 @@
+import { cn } from "@/lib/utils"
 import { kebabCase } from "lodash"
-import clsx from 'clsx'
 
 export default function Checkbox({
   inputName,
@@ -24,9 +24,9 @@ export default function Checkbox({
         checked={checked}
         onChange={onChange}
         disabled={disabled}
-        className="border-300 h-5 w-5 appearance-none rounded-sm border checked:border-transparent checked:bg-blue-600 focus:ring-blue-500"
+        className="border-border h-5 w-5 appearance-none rounded-sm border checked:border-transparent checked:bg-blue-600 focus:ring-blue-500"
       />
-      <label htmlFor={kebabCase(inputName)} className={clsx("text-700")}>
+      <label htmlFor={kebabCase(inputName)} className={cn("text-foreground")}>
         {label}
       </label>
     </div>

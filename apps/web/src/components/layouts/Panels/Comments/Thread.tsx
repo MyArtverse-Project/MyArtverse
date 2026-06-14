@@ -4,7 +4,7 @@ import { User } from "@/app/context/AuthContext"
 import type { Comments, UserType } from "@/types/users"
 import { postComment } from "@/utils/api"
 import { USER_DEFAULT_AVATAR } from "@/utils/constants"
-import { UserComment } from "@mav/ui/components/comments"
+import UserComment from "@/components/comments/UserComment"
 import { useState } from "react"
 
 export default function CommentThread({

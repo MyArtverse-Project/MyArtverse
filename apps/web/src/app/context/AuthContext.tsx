@@ -30,6 +30,7 @@ export type User = {
     avatarUrl: string
     slug: string
     species: string
+    slug: string
   }[]
 }
 

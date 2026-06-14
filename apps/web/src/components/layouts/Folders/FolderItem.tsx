@@ -3,7 +3,7 @@
 import { useScrollBounds } from "@/hooks"
 import type { MapElement } from "@/types/utils"
 import { cn } from "@mav/shared/utils"
-import { Button } from "@mav/ui/components/buttons"
+import { Button } from "@/components/ui/button"
 import { motion } from "framer-motion"
 import { Children, useEffect, useRef, useState } from "react"
 import {
@@ -88,6 +88,7 @@ export default function FolderItem({
     >
       <Button
         ref={toggleButtonRef}
+        variant="ghost"
         onClick={() => setIsExpand(!isExpand)}
         aria-label={
           !children
@@ -95,12 +96,12 @@ export default function FolderItem({
             : `Folder item: ${name}, folder contains ${childrenCount} items`
         }
         className={cn(
-          "flex w-full cursor-pointer flex-row items-center rounded-md px-3 py-2 font-semibold transition-all",
-          !open ? "hover:text-500 hover:bg-200" : "bg-500 text-active",
+          "flex w-full cursor-pointer flex-row items-center justify-start rounded-md px-3 py-2 font-semibold transition-all",
+          open && "bg-accent text-accent-foreground",
           !newItem ? "opacity-100" : "opacity-50 hover:opacity-100"
         )}
-        icon={<DynamicFolderIcon aria-hidden size={21} className="mr-2" />}
       >
+        <DynamicFolderIcon aria-hidden size={21} className="mr-2" />
         {newItem ? "New folder" : name}
       </Button>
       {/* Nested items go here */}

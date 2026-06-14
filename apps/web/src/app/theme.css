@@ -1,0 +1,98 @@
+/*
+ * MyArtverse global theme — shadcn/ui tokens promoted app-wide.
+ * --------------------------------------------------------------------------
+ * Light tokens live on :root, dark tokens on .dark. The `dark` class is driven
+ * by next-themes (see components/ThemeProvider.tsx), so the whole app — plus
+ * portalled Radix overlays on document.body — themes from a single class.
+ *
+ * The pastel-purple palette mirrors the original /ui-playground/shadcn.css.
+ */
+
+:root {
+  --background: 276 56% 99%;
+  --foreground: 265 40% 16%;
+
+  --card: 0 0% 100%;
+  --card-foreground: 265 40% 16%;
+
+  --popover: 0 0% 100%;
+  --popover-foreground: 265 40% 16%;
+
+  --primary: 266 84% 60%;
+  --primary-foreground: 280 100% 99%;
+
+  --secondary: 271 62% 96%;
+  --secondary-foreground: 266 45% 30%;
+
+  --muted: 270 50% 96%;
+  --muted-foreground: 263 16% 52%;
+
+  --accent: 322 72% 95%;
+  --accent-foreground: 322 52% 34%;
+
+  --destructive: 352 80% 60%;
+  --destructive-foreground: 0 0% 100%;
+
+  --success: 152 58% 44%;
+  --success-foreground: 0 0% 100%;
+
+  --warning: 38 92% 50%;
+  --warning-foreground: 40 96% 10%;
+
+  --info: 214 90% 56%;
+  --info-foreground: 0 0% 100%;
+
+  --border: 271 48% 91%;
+  --input: 271 48% 90%;
+  --ring: 266 84% 60%;
+
+  --radius: 0.9rem;
+}
+
+.dark {
+  --background: 265 42% 8%;
+  --foreground: 274 40% 96%;
+
+  --card: 265 38% 11%;
+  --card-foreground: 274 40% 96%;
+
+  --popover: 265 38% 11%;
+  --popover-foreground: 274 40% 96%;
+
+  --primary: 266 90% 68%;
+  --primary-foreground: 265 60% 10%;
+
+  --secondary: 266 30% 18%;
+  --secondary-foreground: 274 40% 94%;
+
+  --muted: 266 28% 17%;
+  --muted-foreground: 268 20% 70%;
+
+  --accent: 322 40% 22%;
+  --accent-foreground: 322 70% 90%;
+
+  --destructive: 352 70% 56%;
+  --destructive-foreground: 0 0% 100%;
+
+  --success: 152 52% 50%;
+  --success-foreground: 265 60% 10%;
+
+  --warning: 41 92% 58%;
+  --warning-foreground: 40 70% 8%;
+
+  --info: 213 90% 66%;
+  --info-foreground: 213 60% 10%;
+
+  --border: 266 28% 22%;
+  --input: 266 28% 24%;
+  --ring: 266 90% 68%;
+}
+
+* {
+  border-color: hsl(var(--border));
+}
+
+body {
+  background-color: hsl(var(--background));
+  color: hsl(var(--foreground));
+}

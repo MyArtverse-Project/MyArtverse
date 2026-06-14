@@ -1,10 +1,9 @@
-import GridResponsive from '@/components/layouts/Layouts/GridResponsive'
-import { fetchUserGallery } from '@/utils/api'
-import { Button } from '@mav/ui/components/buttons'
-import { Group, MarginGutter } from '@mav/ui/components/layouts'
-import Image from 'next/image'
-import React from 'react'
-import { LuUpload } from 'react-icons/lu'
+import GridResponsive from "@/components/layouts/Layouts/GridResponsive"
+import { fetchUserGallery } from "@/utils/api"
+import { Button } from "@mav/ui/components/buttons"
+import { Group, MarginGutter } from "@mav/ui/components/layouts"
+import Image from "next/image"
+import { LuUpload } from "react-icons/lu"
 
 export default async function Page() {
   const artworks = await fetchUserGallery()
@@ -26,11 +25,7 @@ export default async function Page() {
         }
       >
         {artworks.length > 0 ? (
-          <GridResponsive
-            breakpoint={250}
-            className="gap-4"
-            role="listbox"
-          >
+          <GridResponsive breakpoint={250} className="gap-4" role="listbox">
             {artworks.map((artwork) => {
               if (!artwork.artworkUrl) return null
 
@@ -41,13 +36,11 @@ export default async function Page() {
                 >
                   <Image
                     src={artwork.artworkUrl}
-                    alt={artwork.altText ?? 'Artwork'}
+                    alt={artwork.altText ?? "Artwork"}
                     width={500}
                     height={500}
                     className="object-cover w-full h-full transition-transform duration-300 group-hover:scale-105"
-                    
                   />
-                  eee
                 </div>
               )
             })}

@@ -10,6 +10,7 @@ type PickedTextareaProps = Pick<
   ReactHTMLElement<"textarea">,
   | "placeholder"
   | "required"
+  | "onChange"
   | "value"
   | "readOnly"
   | "onKeyDown"

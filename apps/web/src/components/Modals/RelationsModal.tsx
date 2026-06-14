@@ -29,7 +29,7 @@ export default function RelationModal({
         <div className="flex flex-row gap-x-4 ">
           <span
             className={cn(
-              tab == "follower" && "border border-b-2  border-500 text-500",
+              tab == "follower" && "border border-b-2  border-primary text-primary",
               " text-lg cursor-pointer"
             )}
             onClick={() => setTab("follower")}
@@ -38,7 +38,7 @@ export default function RelationModal({
           </span>
           <span
             className={cn(
-              tab == "following" && "border border-b-2 border-500 text-500",
+              tab == "following" && "border border-b-2 border-primary text-primary",
               "text-lg cursor-pointer"
             )}
             onClick={() => setTab("following")}

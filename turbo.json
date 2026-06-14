@@ -1,6 +1,5 @@
 {
   "$schema": "https://turbo.build/schema.json",
-  "globalDotEnv": [".env", ".env.local"],
   "globalEnv": [
     "NODE_ENV",
     "UMAMI_ID",
@@ -13,7 +12,6 @@
   ],
   "pipeline": {
     "dev": {
-      "dotEnv": [".env.development.local", ".env.development", ".env"],
       "cache": false,
       "persistent": true
     },
@@ -21,12 +19,10 @@
       "dependsOn": ["^lint"]
     },
     "build": {
-      "dotEnv": [".env.production.local", ".env.production", ".env"],
       "dependsOn": ["lint", "^build"],
       "outputs": [".next/**", "!.next/cache/**"]
     },
     "deploy": {
-      "dotEnv": [".env.production.local", ".env.production", ".env"],
       "dependsOn": ["lint", "build"]
     }
   }

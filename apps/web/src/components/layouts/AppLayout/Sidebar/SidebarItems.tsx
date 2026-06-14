@@ -90,7 +90,7 @@ export const SidebarItems = (user: User | null) => {
             ) : (
               <LuCat size={20} />
             ),
-            href: `/@${user.handle}/${ character.slug}`
+            href: `/@${user.handle}/${character.slug}`
           }))
         : []
     },

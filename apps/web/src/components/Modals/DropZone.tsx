@@ -3,10 +3,14 @@
 import type { MapElement } from "@/types/utils"
 import { BACKEND_URL } from "@/utils/constants"
 import { cn } from "@mav/shared/utils"
-import { useEffect, useRef, useState } from "react"
+import { type ComponentType, useEffect, useRef, useState } from "react"
 import { LuUpload } from "react-icons/lu"
-import Cropper from "react-easy-crop"
-import { Button } from "@mav/ui/components/buttons/Button"
+import EasyCrop, { type CropperProps } from "react-easy-crop"
+import { Button } from "@/components/ui/button"
+
+const Cropper = EasyCrop as ComponentType<
+  Partial<CropperProps> & Pick<CropperProps, "crop" | "onCropChange">
+>
 
 const allowedTypes = ["image/png", "image/jpeg", "image/jpg"]
 const maxFileSize = 10 * 1024 * 1024 // 10 MB

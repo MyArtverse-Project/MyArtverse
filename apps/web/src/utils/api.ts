@@ -11,12 +11,39 @@ import { SearchResult } from "@/types/utils"
 import type { ReadonlyRequestCookies } from "next/dist/server/web/spec-extension/adapters/request-cookies"
 import { cookies } from "next/headers"
 import { redirect } from "next/navigation"
+import { logError } from "."
 import { BACKEND_URL } from "./constants"
 import { ReferenceVariant } from "@/app/(studio)/studio/(general)/characters/[id]/Ref/ReferenceConfigForm"
 
 type APIMethods = "GET" | "POST" | "DELETE" | "PUT"
 
 const endpoint = BACKEND_URL
+
+/**
+ * Builds an Error from a failed Response, pulling the backend's error body when
+ * possible so the actual failure isn't masked. The real error is logged in
+ * development via {@link logError}.
+ */
+const errorFromResponse = async (
+  context: string,
+  res: Response
+): Promise<Error> => {
+  let details: unknown
+  try {
+    details = await res.clone().json()
+  } catch {
+    details = await res.clone().text()
+  }
+
+  const error = new Error(
+    `${context} failed with status ${res.status} ${res.statusText}`,
+    { cause: details }
+  )
+
+  logError(context, { status: res.status, statusText: res.statusText, details })
+
+  return error
+}
 
 export const getCookies = async () => {
   const cookiesHeaders = cookies()
@@ -46,27 +73,25 @@ export const apiWithAuth = async <Data>(
       cache: "no-cache",
       credentials: "include"
     }).catch((err) => {
-      throw new Error(`Unable to connect to the server: ${err}`)
+      logError(`${method} ${route} (connection)`, err)
+      throw new Error("Unable to connect to the server")
     })
   }
 
-  return makeRequest()
-    .then((res) => {
-      if (res.ok) return res.json()
-      if (res.status === 401) {
-        return refreshToken().then((refreshed) => {
-          if (!refreshed) throw new Error("Unauthorized")
+  const context = `${method} ${route}`
 
-          return makeRequest().then((res) => {
-            if (!res.ok) throw new Error("Unable to provide data")
-            return res.json()
-          })
-        })
-      }
-    })
-    .catch((err) => {
-      throw new Error(err)
-    })
+  let res = await makeRequest()
+
+  if (res.status === 401) {
+    const refreshed = await refreshToken()
+    if (!refreshed) throw await errorFromResponse(context, res)
+
+    res = await makeRequest()
+  }
+
+  if (!res.ok) throw await errorFromResponse(context, res)
+
+  return res.json() as Promise<Data>
 }
 
 export const apiWithoutAuth = async <Data>(
@@ -74,7 +99,9 @@ export const apiWithoutAuth = async <Data>(
   route: string,
   body?: object
 ): Promise<Data> => {
-  return fetch(`${endpoint}${route}`, {
+  const context = `${method} ${route}`
+
+  const res = await fetch(`${endpoint}${route}`, {
     method: method,
     headers: {
       "Content-Type": "application/json"
@@ -82,14 +109,14 @@ export const apiWithoutAuth = async <Data>(
     body: JSON.stringify(body),
     cache: "no-cache",
     credentials: "include"
+  }).catch((err) => {
+    logError(`${context} (connection)`, err)
+    throw new Error("Unable to connect to the server")
   })
-    .then((res) => {
-      if (res.ok) return res.json()
-      throw new Error(`Unable to provide data ${res.status}`)
-    })
-    .catch((err) => {
-      throw new Error(err)
-    })
+
+  if (!res.ok) throw await errorFromResponse(context, res)
+
+  return res.json() as Promise<Data>
 }
 
 export const refreshToken = async () => {
@@ -116,7 +143,8 @@ export const refreshToken = async () => {
 
       return true
     })
-    .catch(() => {
+    .catch((err) => {
+      logError("POST /v1/auth/refresh-token", err)
       return false
     })
 }
@@ -198,6 +226,27 @@ export const fetchCharacterById = async (id: string) => {
   return character
 }
 
+export const uploadArt = async (
+  characterId: string,
+  body: {
+    imageUrl: string
+    title: string
+    description: string
+    tags: string[]
+    userAsArtist: boolean
+    mainCharacterId: string
+    taggedCharacterIds: string[]
+  }
+) => {
+  const res = await apiWithAuth("POST", `/v1/art/upload/${characterId}`, body)
+
+  if (!res) {
+    throw new Error("Art upload failed")
+  }
+
+  return res
+}
+
 export const fetchArtistRequests = async () => {
   const requests = await apiWithAuth<UserType[]>(
     "GET",
@@ -242,28 +291,6 @@ export const getFavorites = async (handle: string) => {
 
   return characters
 }
-
-export const uploadArt = async (
-  characterId: string,
-  body: {
-    imageUrl: string
-    title: string
-    description: string
-    tags: string[]
-    userAsArtist: boolean
-    mainCharacterId: string
-    taggedCharacterIds: string[]
-  }
-) => {
-  const res = await apiWithAuth("POST", `/v1/art/upload/${characterId}`, body)
-
-  if (!res) {
-    throw new Error("Art upload failed")
-  }
-
-  return res
-}
-
 
 export const getArtwork = async (artworkId: string) => {
   const artwork = await apiWithoutAuth<Artwork>("GET", `/v1/art/${artworkId}`)
@@ -413,6 +440,7 @@ export const search = async (
       character: []
     }
   }
+  
 
   const data = await apiWithAuth<SearchResult>(
     "GET",

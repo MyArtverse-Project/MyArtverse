@@ -1,4 +1,4 @@
-import { Group, GroupContainer } from "@mav/ui/components/layouts"
+import { Group, GroupContainer } from "@/components/ui/group"
 
 export const metadata = {
   title: "Moderation"
