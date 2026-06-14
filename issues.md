@@ -93,3 +93,4 @@ Most of these render plain placeholder text and need real UI + data wiring:
 
 - Fix issues where during page load, theme flashes white -> dark theme
 - Upon logging into website, make sure that the user's profile icon loads
+- General Menu Drawer is transparent. (See teams)
