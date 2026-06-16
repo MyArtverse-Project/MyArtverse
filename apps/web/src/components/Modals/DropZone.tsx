@@ -2,6 +2,7 @@
 
 import type { MapElement } from "@/types/utils"
 import { BACKEND_URL } from "@/utils/constants"
+import { resolveImageUrl } from "@/utils/images"
 import { cn } from "@mav/shared/utils"
 import { type ComponentType, useEffect, useRef, useState } from "react"
 import { LuUpload } from "react-icons/lu"
@@ -91,7 +92,6 @@ export default function DropZone({
   const [uploading, setUploading] = useState(false)
   const [error, setError] = useState<string | null>(null)
   const [showCrop, setShowCrop] = useState(false)
-  const [showSaveButton, setShowSaveButton] = useState(false)
 
   const [crop, setCrop] = useState({ x: 0, y: 0 })
   const [zoom, setZoom] = useState(1)
@@ -100,8 +100,14 @@ export default function DropZone({
   const fileUploadRef = useRef<HTMLInputElement>(null)
 
   useEffect(() => {
+    setImageUrl(value)
+  }, [value])
+
+  useEffect(() => {
     if (fileUploadRef.current) fileUploadRef.current.value = ""
   }, [base64Src, imageUrl, croppedBase64])
+
+  const openFilePicker = () => fileUploadRef.current?.click()
 
   useEffect(() => {
     const handleDragOver = (e: DragEvent) => e.preventDefault()
@@ -145,21 +151,19 @@ export default function DropZone({
       setBase64Src(src)
       if (enableCrop) {
         setShowCrop(true)
-        setShowSaveButton(false)
       } else {
-        uploadFile(src)
+        uploadFile(uploadedFile)
       }
     }
     reader.readAsDataURL(uploadedFile)
   }
 
-  const uploadFile = async (base64Img: string) => {
+  const uploadFile = async (file: Blob, filename = "upload.png") => {
     setUploading(true)
     try {
       const formData = new FormData()
-      const res = await fetch(base64Img)
-      const blob = await res.blob()
-      formData.append("file", blob, "cropped.png")
+      const uploadName = file instanceof File ? file.name : filename
+      formData.append("file", file, uploadName)
       const resp = await fetch(`${BACKEND_URL}/v1/profile/upload`, {
         method: "POST",
         body: formData,
@@ -170,8 +174,9 @@ export default function DropZone({
           resp.status === 401 ? "Are you logged in?" : "Upload failed"
         )
       const data = await resp.json()
-      setData(data.url)
-      setImageUrl(data.url)
+      const url = resolveImageUrl(data.url)
+      setData(url)
+      setImageUrl(url)
       setCroppedBase64(null)
       setShowCrop(false)
     } catch (err) {
@@ -181,34 +186,34 @@ export default function DropZone({
     }
   }
 
-  const onCropComplete = async (_: any, croppedAreaPixelsValue: any) => {
-    setCroppedAreaPixels(croppedAreaPixelsValue)
-    if (enableCrop && base64Src && croppedAreaPixelsValue) {
-      try {
-        const aspect = aspectRatio ? parseFloat(aspectRatio) : 1
-        const { base64 } = await getCroppedImg(
-          base64Src,
-          croppedAreaPixelsValue,
-          zoom,
-          aspect
-        )
-        setCroppedBase64(base64)
-        setShowSaveButton(true)
-      } catch (err) {
-        setError("Cropping failed: " + (err as Error).message)
-      }
+  const handleCropAndSave = async () => {
+    if (!base64Src || !croppedAreaPixels) return
+
+    setError(null)
+    try {
+      const aspect = aspectRatio ? parseFloat(aspectRatio) : 1
+      const { blob } = await getCroppedImg(
+        base64Src,
+        croppedAreaPixels,
+        zoom,
+        aspect
+      )
+      setShowCrop(false)
+      setCroppedBase64(null)
+      setBase64Src(null)
+      await uploadFile(blob, "cropped.png")
+    } catch (err) {
+      setError("Cropping failed: " + (err as Error).message)
+      setShowCrop(true)
     }
   }
 
-  const handleCropAndSave = async () => {
-    if (!croppedBase64) return
-    setShowCrop(false)
-    setShowSaveButton(false)
-    await uploadFile(croppedBase64)
+  const displayImg = () => {
+    const img = croppedBase64 ? croppedBase64 : imageUrl || base64Src
+    if (!img) return null
+    if (img.startsWith("data:")) return img
+    return resolveImageUrl(img)
   }
-
-  const displayImg = () =>
-    croppedBase64 ? croppedBase64 : imageUrl || base64Src
 
   return (
     <div
@@ -241,7 +246,9 @@ export default function DropZone({
               showGrid={true}
               onCropChange={setCrop}
               onZoomChange={setZoom}
-              onCropComplete={onCropComplete}
+              onCropAreaChange={(_, croppedAreaPixelsValue) => {
+                setCroppedAreaPixels(croppedAreaPixelsValue)
+              }}
               style={{
                 containerStyle: { 
                   height: "100%", 
@@ -271,8 +278,9 @@ export default function DropZone({
             <div className="flex items-center gap-2">
               <Button
                 onClick={handleCropAndSave}
-                disabled={!croppedBase64 || uploading}
+                disabled={!croppedAreaPixels || uploading}
                 className="px-4 py-2"
+                type="button"
               >
                 {uploading ? "Saving..." : "Save Image"}
               </Button>
@@ -281,21 +289,23 @@ export default function DropZone({
                   setShowCrop(false)
                   setBase64Src(null)
                   setCroppedBase64(null)
-                  setShowSaveButton(false)
+                  setCroppedAreaPixels(null)
                 }}
                 variant="secondary"
                 className="px-4 py-2"
+                type="button"
               >
                 Cancel
               </Button>
             </div>
           </div>
-          
+
+          {error && <span className="mt-4 text-red-500">{error}</span>}
         </div>
       ) : uploading ? (
         <span className="text-lg font-bold">Uploading...</span>
       ) : displayImg() ? (
-        <div className="flex flex-col items-center">
+        <div className="flex flex-col items-center gap-4">
           <img
             src={displayImg() as string}
             alt="Uploaded"
@@ -305,12 +315,16 @@ export default function DropZone({
               objectFit: "contain",
             }}
           />
+          <Button onClick={openFilePicker} variant="secondary" type="button">
+            Change image
+          </Button>
+          {error && <span className="text-red-500">{error}</span>}
         </div>
       ) : (
         <div className="flex flex-col items-center">
           <button
             className="mb-6 flex items-center justify-center rounded-full bg-200 p-8"
-            onClick={() => fileUploadRef.current?.click()}
+            onClick={openFilePicker}
             type="button"
           >
             <LuUpload size={48} />

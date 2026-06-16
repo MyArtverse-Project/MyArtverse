@@ -1,21 +1,28 @@
 "use client"
 
 import { UserType } from "@/types/users"
-import { pronounOptions } from "@/utils/constants"
+import { pronounOptions, USER_DEFAULT_AVATAR } from "@/utils/constants"
 import { Button } from "@mav/ui/components/buttons"
 import { InputField } from "@mav/ui/components/fields"
 import { Group, GroupContainer } from "@mav/ui/components/layouts"
 import { SelectField } from "@/components/layouts/Forms"
 import { useEffect, useState } from "react"
+import { useRouter } from "next/navigation"
 import { updateProfile } from "@/utils/api"
 import DropZone from "@/components/Modals/DropZone"
 
+const isPlaceholderAvatar = (url: string) =>
+  !url || url === USER_DEFAULT_AVATAR
+
+const normalizeAvatar = (url: string) =>
+  isPlaceholderAvatar(url) ? "" : url
 
 export default function ProfileSettings({ user }: { user: UserType }) {
+  const router = useRouter()
   const [displayName, setDisplayName] = useState(user.displayName ?? "")
   const [handle, setHandle] = useState(user.handle)
   const [pronouns, setPronouns] = useState(user.pronouns ?? "")
-  const [avatarUrl, setAvatarUrl] = useState("")
+  const [avatarUrl, setAvatarUrl] = useState<string>(user.avatarUrl ?? "")
   const [isDirty, setIsDirty] = useState(false)
   const [isSaving, setIsSaving] = useState(false)
 
@@ -24,9 +31,9 @@ export default function ProfileSettings({ user }: { user: UserType }) {
       displayName !== (user.displayName ?? "") ||
       handle !== user.handle ||
       pronouns !== (user.pronouns ?? "") ||
-      avatarUrl !== (user.avatarUrl ?? "")
+      normalizeAvatar(avatarUrl) !== normalizeAvatar(user.avatarUrl ?? "")
     setIsDirty(changed)
-  }, [displayName, handle, pronouns, user])
+  }, [displayName, handle, pronouns, avatarUrl, user])
 
   const handleSave = async () => {
     setIsSaving(true)
@@ -38,6 +45,7 @@ export default function ProfileSettings({ user }: { user: UserType }) {
         avatarLink: avatarUrl
       })
       setIsDirty(false)
+      router.refresh()
     } catch (error) {
       console.error("Failed to save profile settings", error)
     } finally {
@@ -83,7 +91,11 @@ export default function ProfileSettings({ user }: { user: UserType }) {
               options={pronounOptions}
             />
           </div>
-          <DropZone setData={(url) => setAvatarUrl(url)} value={avatarUrl} enableCrop />
+          <DropZone
+            setData={(url) => setAvatarUrl(url)}
+            value={isPlaceholderAvatar(avatarUrl) ? null : avatarUrl}
+            enableCrop
+          />
         </div>
       </Group>
     </GroupContainer>
