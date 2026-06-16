@@ -1,8 +1,9 @@
 "use client"
 
 import RelationModal from "@/components/Modals/RelationsModal"
-import { Button } from "@mav/ui/components/buttons"
+import { Button } from "@/components/ui/button"
 import { Masthead, type MastheadTabItems } from "@mav/ui/components/layouts"
+import Link from "next/link"
 import { useState } from "react"
 import { LuCat, LuHeart, LuHome } from "react-icons/lu"
 
@@ -60,9 +61,9 @@ export function ProfileMasthead(props: Partial<ProfileMastheadProps>) {
               {props.displayName || props.handle}
             </span>
             {props.isOwnProfile ? (
-              <>
-                <Button href="/settings/profile">Edit Profile</Button>
-              </>
+              <Button asChild>
+                <Link href="/settings/profile">Edit Profile</Link>
+              </Button>
             ) : null}
           </Masthead.Layer>
           <Masthead.Layer>

@@ -5,8 +5,8 @@ import { cn } from "@mav/shared/utils"
 import Image from "next/image"
 import Link from "next/link"
 import { LuHeart as Heart } from "react-icons/lu"
-import { ColorPalette } from "./ColorPalette"
-import { Status } from "./Status"
+import ColorPalette from "./ColorPalette"
+import Status from "./Status"
 
 interface CharacterCardProps {
   name: string
@@ -68,7 +68,7 @@ export function CharacterCard({
                 "#4B0082",
                 "#EE82EE"
               ]
-            : []
+            : palette ?? []
         }
         height={"50px"}
       />
