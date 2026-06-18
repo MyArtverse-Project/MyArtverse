@@ -1,6 +1,7 @@
 "use client"
 
 import Avatar from "@/components/Avatar"
+import { MastheadScrollTitle } from "@/components/layouts/Mastheads/MastheadScrollTitle"
 import {
   MastheadAvatar,
   MastheadDetails,
@@ -78,7 +79,23 @@ export function CharacterMasthead(props: Partial<ProfileMastheadProps>) {
         <MastheadDetails>
           <MastheadLayer spaceBetween>
             <div className="flex flex-row items-center gap-x-4">
-              <span className="text-4xl font-semibold">{props.characterName}</span>
+              <MastheadScrollTitle
+                scrollTitle={{
+                  kind: "character",
+                  href: `/@${props.ownerHandle}/${props.characterSlug}`,
+                  label: `@${props.ownerHandle} / ${props.characterName}`,
+                  primary: props.characterName ?? "",
+                  secondary: props.ownerHandle,
+                  avatarUrl: props.avatarUrl,
+                  ownerAvatarUrl: props.ownerAvatarUrl,
+                  ownerHref: props.ownerHandle
+                    ? `/@${props.ownerHandle}`
+                    : undefined
+                }}
+                className="text-4xl font-semibold"
+              >
+                {props.characterName}
+              </MastheadScrollTitle>
               {props.visibility === "private" && (
                 <Badge
                   variant="outline"

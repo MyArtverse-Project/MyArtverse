@@ -13,10 +13,11 @@ import {
   type MastheadTabItem
 } from "@/components/layouts/Mastheads/MastheadTabs"
 import { Button } from "@/components/ui/button"
-import { Masthead } from "@mav/ui/components/layouts/Masthead/Masthead"
+import { MastheadScrollTitle } from "@/components/layouts/Mastheads/MastheadScrollTitle"
 import Link from "next/link"
 import { useState } from "react"
 import { LuCat, LuHeart, LuHome } from "react-icons/lu"
+import { Masthead } from "@mav/ui/components/layouts"
 
 interface ProfileMastheadProps {
   handle: string
@@ -71,9 +72,19 @@ export function ProfileMasthead(props: Partial<ProfileMastheadProps>) {
         />
         <MastheadDetails>
           <MastheadLayer spaceBetween>
-            <span className="text-4xl font-semibold">
+            <MastheadScrollTitle
+              scrollTitle={{
+                kind: "profile",
+                href: props.handle ? `/@${props.handle}` : "/",
+                label: props.displayName || props.handle || "Profile",
+                primary: props.displayName || props.handle || "",
+                secondary: props.handle ? `@${props.handle}` : undefined,
+                avatarUrl: props.avatarUrl
+              }}
+              className="text-4xl font-semibold"
+            >
               {props.displayName || props.handle}
-            </span>
+            </MastheadScrollTitle>
             {props.isOwnProfile ? (
               <Button asChild>
                 <Link href="/settings/profile">Edit Profile</Link>
