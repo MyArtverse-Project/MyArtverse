@@ -2,8 +2,7 @@
 
 import EditHTMLModal from "@/components/Modals/EditHTML"
 import EditPanelModal from "@/components/Modals/EditPanel"
-import type { DefineRouteParams } from "@/types"
-import { Button } from "@mav/ui/components/buttons"
+import { Button } from "@/components/ui/button"
 import { useState } from "react"
 
 // TODO: Using `@ts-expect-error` here is a temporary workaround until we can

@@ -1,8 +1,8 @@
 "use client"
 
 import { Character } from '@/types/characters'
-import { Button } from '@mav/ui/components/buttons'
-import { Group } from '@mav/ui/components/layouts'
+import { Button } from '@/components/ui/button'
+import { Group } from '@/components/ui/group'
 import { useEffect, useState } from 'react'
 import { FaEllipsisVertical } from 'react-icons/fa6'
 import CreateCharacterModal from '@/components/Modals/CreateCharacter'
@@ -37,7 +37,9 @@ export default function CharactersView({ characters }: { characters: Character[]
         potentialActions={
           <div className="flex items-center gap-x-2">
             <Button onClick={toggleCreateCharacterModal}>Create</Button>
-            <Button icon={<FaEllipsisVertical size={20} />} />
+            <Button variant="ghost" size="icon">
+              <FaEllipsisVertical size={20} />
+            </Button>
           </div>
         }
       >

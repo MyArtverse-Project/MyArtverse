@@ -1,6 +1,6 @@
-import { Button, MoreButton } from "@mav/ui/components/buttons"
-import { Group, MarginGutter } from "@mav/ui/components/layouts"
-import { LuMessageCircle } from "react-icons/lu"
+import { Button } from "@/components/ui/button"
+import { Group, MarginGutter } from "@/components/ui/group"
+import { LuMessageCircle, LuMoreVertical } from "react-icons/lu"
 
 export default function StudioOverviewPage() {
   return (
@@ -13,8 +13,11 @@ export default function StudioOverviewPage() {
           title="Recent messages"
           potentialActions={
             <div className="flex items-center gap-x-2">
-              <Button variant="secondary">See all messages</Button>
-              <Button prefix={<LuMessageCircle size={20} />}>Compose</Button>
+              <Button variant="outline">See all messages</Button>
+              <Button>
+                <LuMessageCircle size={20} />
+                Compose
+              </Button>
             </div>
           }
         >
@@ -23,7 +26,11 @@ export default function StudioOverviewPage() {
         <Group
           title="Quick access"
           description="Lorem ipsum stuff"
-          potentialActions={<MoreButton size="small" />}
+          potentialActions={
+            <Button variant="ghost" size="icon">
+              <LuMoreVertical size={21} />
+            </Button>
+          }
         >
           slot placeholder
         </Group>

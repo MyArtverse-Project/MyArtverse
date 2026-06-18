@@ -2,14 +2,15 @@
 
 import { useEffect, useState } from 'react'
 import Checkbox from '@/components/layouts/Forms/Checkbox'
-import MarginClamp from '@/components/layouts/Layouts/MarginClamp'
 import DropZone from '@/components/Modals/DropZone'
-import { Character } from '@/types/characters'
-import { Group, GroupContainer, MarginGutter } from '@mav/ui/components/layouts'
-import { InputField, Textarea } from '@mav/ui/components/fields'
 import { SelectField } from '@/components/layouts/Forms'
+import { Button } from '@/components/ui/button'
+import { Group, GroupContainer, MarginGutter } from '@/components/ui/group'
+import { Input } from '@/components/ui/input'
+import { Label } from '@/components/ui/label'
+import { Textarea } from '@/components/ui/textarea'
+import { Character } from '@/types/characters'
 import { furrySpeciesOptions, pronounOptions } from '@/utils/constants'
-import { Button } from '@mav/ui/components/buttons/Button'
 import { updateCharacter } from '@/utils/api'
 import { redirect } from 'next/navigation'
 import RefSheetModal from './Ref/RefSheetModal'
@@ -81,22 +82,28 @@ export default function EditCharacter({ character }: { character: Character }) {
           <Group title='Basic Information' description="A nickname field is optional. You can change the name and nickname of your character twice a week. Make sure the name and avatar you chose adheres to the Community Guidelines.">
             <div className="flex flex-col lg:flex-row justify-between gap-6">
               <div className="flex flex-col gap-y-4 w-full lg:w-2/3">
-                <InputField
-                  inputName="Name"
-                  value={displayName}
-                  onChange={(e) => setDisplayName(e.target.value)}
-                />
+                <div className="space-y-2">
+                  <Label htmlFor="character-name">Name</Label>
+                  <Input
+                    id="character-name"
+                    value={displayName}
+                    onChange={(e) => setDisplayName(e.target.value)}
+                  />
+                </div>
                 <Checkbox
                   inputName=""
                   label="Set this character as my current/main character"
                   checked={isMainCharacter}
                   onChange={() => setIsMainCharacter(!isMainCharacter)}
                 />
-                <InputField
-                  inputName="Nickname (optional)"
-                  value={nickname}
-                  onChange={(e) => setNickname(e.target.value)}
-                />
+                <div className="space-y-2">
+                  <Label htmlFor="character-nickname">Nickname (optional)</Label>
+                  <Input
+                    id="character-nickname"
+                    value={nickname}
+                    onChange={(e) => setNickname(e.target.value)}
+                  />
+                </div>
               </div>
               <DropZone
                 value={avatarUrl}
@@ -105,13 +112,17 @@ export default function EditCharacter({ character }: { character: Character }) {
               />
             </div>
           </Group>
-          <Group title='Character URL' description="This is a shareable URL of your character. It’s automatically generated based on the name and species you gave it but you can change it at will anytime or you can reset it.">
-            <InputField
-              inputName=""
-              value={characterUrl}
-              onChange={(e) => setCharacterUrl(e.target.value)}
-              prefix={`@${character.owner.handle}/`}
-            />
+          <Group title='Character URL' description="This is a shareable URL of your character. It's automatically generated based on the name and species you gave it but you can change it at will anytime or you can reset it.">
+            <div className="flex overflow-hidden rounded-md border border-input">
+              <div className="bg-muted flex select-none items-center px-3 text-sm">
+                @{character.owner.handle}/
+              </div>
+              <Input
+                value={characterUrl}
+                onChange={(e) => setCharacterUrl(e.target.value)}
+                className="border-0 shadow-none focus-visible:ring-0"
+              />
+            </div>
           </Group>
           <Group title='Properties' description="Add an attribute(s) that best represents your character.">
             <div className="flex flex-col gap-4">
@@ -129,31 +140,28 @@ export default function EditCharacter({ character }: { character: Character }) {
                   options={furrySpeciesOptions}
                 />
               </div>
-              <Textarea
-                inputName="Bio"
-                value={bio}
-                heightLimit={5}
-                onChange={(e) => setBio(e.target.value)}
-              />
+              <div className="space-y-2">
+                <Label htmlFor="character-bio">Bio</Label>
+                <Textarea
+                  id="character-bio"
+                  value={bio}
+                  rows={5}
+                  onChange={(e) => setBio(e.target.value)}
+                />
+              </div>
             </div>
           </Group>
-           <Group title='Reference sheets' description="Reference sheets will appear in the list if you have this character linked and be shown on the public profile. Learn more">
+          <Group title='Reference sheets' description="Reference sheets will appear in the list if you have this character linked and be shown on the public profile. Learn more">
             <div className='flex flex-col'>
-                {character.refSheets.map(refSheet => (
-                  <RefSheetThumbnail key={refSheet.id} refSheet={refSheet} />
-                ))}
-              </div>
+              {character.refSheets.map(refSheet => (
+                <RefSheetThumbnail key={refSheet.id} refSheet={refSheet} />
+              ))}
+            </div>
             <div className='flex flex-row gap-x-2'>
-              <Button
-                variant="primary"
-                onClick={() => setIsRefModalOpen(true)}
-              >
+              <Button onClick={() => setIsRefModalOpen(true)}>
                 Add Reference Sheet
               </Button>
-              <Button
-                variant="secondary"
-                onClick={() => {}}
-              >
+              <Button variant="outline" onClick={() => {}}>
                 Manage Reference Sheet
               </Button>
             </div>

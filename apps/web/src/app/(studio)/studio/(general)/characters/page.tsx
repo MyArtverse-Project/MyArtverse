@@ -1,8 +1,5 @@
+import { MarginGutter } from '@/components/ui/group'
 import { fetchSelfCharacters } from '@/utils/api'
-import { Button } from '@mav/ui/components/buttons'
-import { MarginGutter, Group } from '@mav/ui/components/layouts'
-import React from 'react'
-import { FaEllipsisVertical } from 'react-icons/fa6'
 import CharactersView from './CharactersView'
 
 export default async function Page() {
@@ -14,7 +11,5 @@ export default async function Page() {
     >
       <CharactersView characters={characters} />
     </MarginGutter>
-
-
   )
 }

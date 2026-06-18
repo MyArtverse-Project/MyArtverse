@@ -1,10 +1,10 @@
-import { User } from "@/app/context/AuthContext";
-import { renderPanel } from "@/components/layouts/Panels/RenderPanel";
-import { Character } from "@/types/characters";
-import { DashboardPanel } from "@/types/users";
-import { Button } from "@mav/ui/components/buttons/Button";
-import DOMPurify from "dompurify";
-
+import { User } from "@/app/context/AuthContext"
+import { renderPanel } from "@/components/layouts/Panels/RenderPanel"
+import { Button } from "@/components/ui/button"
+import { Character } from "@/types/characters"
+import { DashboardPanel } from "@/types/users"
+import DOMPurify from "dompurify"
+import Link from "next/link"
 
 export default function OverviewContent({ character, self, panels }: { character: Character; self: User | null; panels: DashboardPanel[] }) {
   const customHTMLPanel = panels.find((panel) => panel.type === "customHTML")
@@ -17,11 +17,13 @@ export default function OverviewContent({ character, self, panels }: { character
       <div className="bg-100 col-span-2 mb-4 flex w-full flex-col gap-4 rounded-lg ">
         {self?.id === character.owner.id && (
           <Button
-            variant="secondary"
+            variant="outline"
             className="mb-4 self-end"
-            href={`/@${self?.handle}/${character.slug}/edit`}
+            asChild
           >
-            Edit Panels
+            <Link href={`/@${self?.handle}/${character.slug}/edit`}>
+              Edit Panels
+            </Link>
           </Button>
         )}
         {htmlContent && (
@@ -31,7 +33,6 @@ export default function OverviewContent({ character, self, panels }: { character
           />
         )}
       </div>
-
 
       <div className="mb-4 grid w-full grid-cols-2 gap-4">
         {panels

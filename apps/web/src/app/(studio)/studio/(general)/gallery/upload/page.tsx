@@ -1,18 +1,16 @@
 "use client"
 
-import { useEffect, useState } from "react"
-import { BACKEND_URL } from "@/utils/constants"
 import DropZone from "@/components/Modals/DropZone"
 import Checkbox from "@/components/layouts/Forms/Checkbox"
-import { Button } from "@mav/ui/components/buttons"
-import { InputField } from "@mav/ui/components/fields"
-import { MarginGutter } from "@mav/ui/components/layouts"
-import { FaFolderPlus } from "react-icons/fa6"
-import { LuXCircle } from "react-icons/lu"
+import { Button } from "@/components/ui/button"
+import { Input } from "@/components/ui/input"
+import { Label } from "@/components/ui/label"
+import { MarginGutter } from "@/components/ui/group"
 import { useDebounce } from "@/hooks/useDebounce"
 import { search, uploadArt } from "@/utils/api"
 import { redirect } from "next/navigation"
-
+import { useEffect, useState } from "react"
+import { LuXCircle } from "react-icons/lu"
 
 interface Character {
   id: string
@@ -74,7 +72,6 @@ export default function UploadArtModal({
     fetchCharacters()
   }, [debouncedMainSearch])
 
-
   useEffect(() => {
     const fetchCharacters = async () => {
       if (!debouncedTaggedSearch) return setTaggedCharacterOptions([])
@@ -90,7 +87,6 @@ export default function UploadArtModal({
     }
     fetchCharacters()
   }, [debouncedTaggedSearch, mainCharacterId, taggedCharacterIds])
-
 
   const handleUpload = async () => {
     if (!artUrl || !title || !mainCharacterId) return
@@ -115,8 +111,6 @@ export default function UploadArtModal({
     }
   }
 
-
-
   const handleTagAdd = (e: React.KeyboardEvent<HTMLInputElement>) => {
     if (e.key === "Enter") {
       const value = e.currentTarget.value.trim()
@@ -135,11 +129,12 @@ export default function UploadArtModal({
           Upload Artwork
         </h2>
         <Button
-          size="small"
-          variant="tritery"
-          icon={<LuXCircle size={18} />}
+          variant="ghost"
+          size="icon"
           onClick={toggleUploadArtModal}
-        />
+        >
+          <LuXCircle size={18} />
+        </Button>
       </div>
 
       <section className="mt-6 flex flex-col lg:flex-row gap-6">
@@ -155,24 +150,33 @@ export default function UploadArtModal({
         </div>
 
         <div className="flex-1 space-y-4">
-          <InputField
-            inputName="Title"
-            placeholder="Enter a title"
-            onChange={(e) => setTitle(e.currentTarget.value)}
-            value={title}
-          />
-          <InputField
-            inputName="Description"
-            placeholder="Optional description"
-            onChange={(e) => setDescription(e.currentTarget.value)}
-            value={description}
-          />
+          <div className="space-y-2">
+            <Label htmlFor="art-title">Title</Label>
+            <Input
+              id="art-title"
+              placeholder="Enter a title"
+              onChange={(e) => setTitle(e.target.value)}
+              value={title}
+            />
+          </div>
+          <div className="space-y-2">
+            <Label htmlFor="art-description">Description</Label>
+            <Input
+              id="art-description"
+              placeholder="Optional description"
+              onChange={(e) => setDescription(e.target.value)}
+              value={description}
+            />
+          </div>
 
-          <InputField
-            inputName="Tags (Press Enter)"
-            placeholder="Add tags"
-            onKeyDown={handleTagAdd}
-          />
+          <div className="space-y-2">
+            <Label htmlFor="art-tags">Tags (Press Enter)</Label>
+            <Input
+              id="art-tags"
+              placeholder="Add tags"
+              onKeyDown={handleTagAdd}
+            />
+          </div>
           <div className="flex flex-wrap gap-2">
             {tags.map((tag) => (
               <span
@@ -192,12 +196,15 @@ export default function UploadArtModal({
             label="I am the artist of this artwork"
           />
 
-          <InputField
-            inputName="Main Character"
-            placeholder="Search main character..."
-            onChange={(e) => setMainSearch(e.currentTarget.value)}
-            value={mainSearch}
-          />
+          <div className="space-y-2">
+            <Label htmlFor="main-character">Main Character</Label>
+            <Input
+              id="main-character"
+              placeholder="Search main character..."
+              onChange={(e) => setMainSearch(e.target.value)}
+              value={mainSearch}
+            />
+          </div>
           {Array.isArray(mainCharacterOptions) && mainCharacterOptions.length > 0 && (
             <ul className="mt-2 rounded-md border bg-100 shadow-sm max-h-40 overflow-y-auto">
               {mainCharacterOptions.map((char) => (
@@ -216,12 +223,15 @@ export default function UploadArtModal({
             </ul>
           )}
 
-          <InputField
-            inputName="Tag Characters"
-            placeholder="Search and select characters..."
-            onChange={(e) => setTaggedSearch(e.currentTarget.value)}
-            value={taggedSearch}
-          />
+          <div className="space-y-2">
+            <Label htmlFor="tag-characters">Tag Characters</Label>
+            <Input
+              id="tag-characters"
+              placeholder="Search and select characters..."
+              onChange={(e) => setTaggedSearch(e.target.value)}
+              value={taggedSearch}
+            />
+          </div>
           {taggedCharacterOptions.length > 0 && (
             <ul className="mt-2 rounded-md border bg-100 shadow-sm max-h-40 overflow-y-auto">
               {taggedCharacterOptions.map((char) => (
@@ -255,7 +265,7 @@ export default function UploadArtModal({
 
       <div className="mt-6 flex justify-end gap-4">
         <Button
-          variant="secondary"
+          variant="outline"
           onClick={() => {
             setArtUrl("")
             setTitle("")

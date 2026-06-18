@@ -1,11 +1,11 @@
 import DropZone from "@/components/Modals/DropZone"
-import { useState } from "react"
-import { ReferenceConfigForm } from "./ReferenceConfigForm"
+import { Button } from "@/components/ui/button"
 import { Character } from "@/types/characters"
-import { Button } from "@mav/ui/components/buttons"
-import { LuArrowLeft } from "react-icons/lu"
 import { createRefSheet } from "@/utils/api"
-import { cn } from "@mav/shared/utils"
+import { cn } from "@/lib/utils"
+import { useState } from "react"
+import { LuArrowLeft } from "react-icons/lu"
+import { ReferenceConfigForm } from "./ReferenceConfigForm"
 
 type RefModalStep = "drop" | "config"
 
@@ -15,7 +15,6 @@ export default function RefSheetModal({ isOpen, onClose, character }: { isOpen: 
 
   const handleImageUpload = (url: string) => {
     setUploadedImage(url)
-    console.log(url)
     setStep("config")
   }
 
@@ -30,11 +29,12 @@ export default function RefSheetModal({ isOpen, onClose, character }: { isOpen: 
         <div className="flex w-full items-center justify-between p-6">
           <span className="font-inter flex items-center gap-x-2 text-xl font-bold">
             <Button
-              size="small"
-              variant="tritery"
-              icon={<LuArrowLeft size={18} />}
+              variant="ghost"
+              size="icon"
               onClick={onClose}
-            />
+            >
+              <LuArrowLeft size={18} />
+            </Button>
             New Reference Sheet
           </span>
         </div>

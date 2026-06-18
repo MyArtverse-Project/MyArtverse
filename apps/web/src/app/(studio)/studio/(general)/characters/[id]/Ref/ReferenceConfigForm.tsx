@@ -1,9 +1,10 @@
 import Checkbox from "@/components/layouts/Forms/Checkbox"
 import DropZone from "@/components/Modals/DropZone"
+import { Button } from "@/components/ui/button"
+import { Input } from "@/components/ui/input"
+import { Label } from "@/components/ui/label"
+import { Textarea } from "@/components/ui/textarea"
 import { Character } from "@/types/characters"
-import { createRefSheet } from "@/utils/api"
-import { Button } from "@mav/ui/components/buttons"
-import { InputField, Textarea } from "@mav/ui/components/fields"
 import Image from "next/image"
 import { useRef, useState } from "react"
 import { LuGripVertical, LuPlus } from "react-icons/lu"
@@ -52,7 +53,6 @@ export function ReferenceConfigForm({
   }
 
   const handleSubmit = async () => {
-
     onClose({
       characterId: linkedTo,
       refSheet: {
@@ -72,12 +72,6 @@ export function ReferenceConfigForm({
   const addColor = (index: number) => {
     const newVariants = [...referenceVariants]
     newVariants[index].colors.push("#cccccc")
-    setReferenceVariants(newVariants)
-  }
-
-  const removeColor = (index: number, colorIndex: number) => {
-    const newVariants = [...referenceVariants]
-    newVariants[index].colors.splice(colorIndex, 1)
     setReferenceVariants(newVariants)
   }
 
@@ -119,25 +113,37 @@ export function ReferenceConfigForm({
     <div className="p-6 flex flex-col gap-6">
       <div className="flex flex-col gap-4">
         <div className="flex flex-row gap-4">
-          <InputField inputName="Name" value={name} onChange={(e) => setName(e.target.value)} />
-          <InputField inputName="Linked to" value={linkedTo} onChange={(e) => setLinkedTo(e.target.value)} />
+          <div className="space-y-2 flex-1">
+            <Label htmlFor="ref-name">Name</Label>
+            <Input id="ref-name" value={name} onChange={(e) => setName(e.target.value)} />
+          </div>
+          <div className="space-y-2 flex-1">
+            <Label htmlFor="ref-linked-to">Linked to</Label>
+            <Input id="ref-linked-to" value={linkedTo} onChange={(e) => setLinkedTo(e.target.value)} />
+          </div>
         </div>
-        <Textarea
-          inputName="Description"
-          value={description}
-          onChange={(e) => setDescription(e.target.value)}
-        />
-        <InputField
-          inputName="Artist Credit (Url Link or User)"
-          value={artist}
-          onChange={(e) => setArtist(e.target.value)}
-        />
+        <div className="space-y-2">
+          <Label htmlFor="ref-description">Description</Label>
+          <Textarea
+            id="ref-description"
+            value={description}
+            onChange={(e) => setDescription(e.target.value)}
+          />
+        </div>
+        <div className="space-y-2">
+          <Label htmlFor="ref-artist">Artist Credit (Url Link or User)</Label>
+          <Input
+            id="ref-artist"
+            value={artist}
+            onChange={(e) => setArtist(e.target.value)}
+          />
+        </div>
         <Checkbox
-              inputName={`primary`}
-              label="Mark reference sheet as primary"
-              checked={primary}
-              onChange={() => setPrimary(!primary)}
-            />
+          inputName="primary"
+          label="Mark reference sheet as primary"
+          checked={primary}
+          onChange={() => setPrimary(!primary)}
+        />
       </div>
 
       {referenceVariants.map((variant, index) => (
@@ -166,18 +172,21 @@ export function ReferenceConfigForm({
                   accept="image/*"
                   className="hidden"
                 />
-                <Button variant="secondary" className="mt-2 w-80" onClick={handleButtonClick} position="center">
+                <Button variant="outline" className="mt-2 w-80" onClick={handleButtonClick}>
                   Replace Image
                 </Button>
               </div>
             </div>
           </div>
           <div className="flex-1 flex flex-col gap-3">
-            <InputField
-              inputName="Variant Title"
-              value={variant.title}
-              onChange={(e) => updateVariant(index, "title", e.target.value)}
-            />
+            <div className="space-y-2">
+              <Label htmlFor={`variant-title-${index}`}>Variant Title</Label>
+              <Input
+                id={`variant-title-${index}`}
+                value={variant.title}
+                onChange={(e) => updateVariant(index, "title", e.target.value)}
+              />
+            </div>
             <Checkbox
               inputName={`primary-${index}`}
               label="Set this reference image by default"
@@ -202,7 +211,9 @@ export function ReferenceConfigForm({
                     />
                   </div>
                 ))}
-                <Button variant="tritery" icon={<LuPlus />} onClick={() => addColor(index)} />
+                <Button variant="ghost" size="icon" onClick={() => addColor(index)}>
+                  <LuPlus />
+                </Button>
               </div>
             </div>
           </div>
@@ -210,7 +221,7 @@ export function ReferenceConfigForm({
       ))}
       <DropZone setData={addVariant} label="Add more by dropping images here" />
 
-      <Button variant="primary" className="self-end mt-4" onClick={handleSubmit}>
+      <Button className="self-end mt-4" onClick={handleSubmit}>
         Save Reference
       </Button>
     </div>
