@@ -1,10 +1,22 @@
 "use client"
 
 import Avatar from "@/components/Avatar"
+import {
+  MastheadAvatar,
+  MastheadDetails,
+  MastheadLayer,
+  MastheadWrapper
+} from "@/components/layouts/Mastheads/MastheadParts"
+import {
+  MastheadTabs,
+  type MastheadTabItem
+} from "@/components/layouts/Mastheads/MastheadTabs"
+import { Badge } from "@/components/ui/badge"
+import { Button } from "@/components/ui/button"
+import { cn } from "@/lib/utils"
 import type { Visibility } from "@/types/utils"
 import { USER_DEFAULT_AVATAR } from "@/utils/constants"
-import { Button } from "@mav/ui/components/buttons"
-import { Masthead, type MastheadTabItems } from "@mav/ui/components/layouts"
+import { displayPronouns, displaySpecies } from "@/utils/displayer"
 import Link from "next/link"
 import { FaCircle } from "react-icons/fa"
 import {
@@ -53,50 +65,73 @@ export function CharacterMasthead(props: Partial<ProfileMastheadProps>) {
       text: "Activity",
       link: "activity"
     }
-  ] satisfies MastheadTabItems
+  ] satisfies MastheadTabItem[]
 
   return (
-    <Masthead>
-      <Masthead.Wrapper>
-        <Masthead.Avatar src={props.avatarUrl} />
-        <Masthead.Details>
-          <Masthead.Layer spaceBetween>
+    <div className="contents">
+      <MastheadWrapper>
+        <MastheadAvatar
+          src={props.avatarUrl}
+          alt={props.characterName ?? "Character"}
+          rounded="xl"
+        />
+        <MastheadDetails>
+          <MastheadLayer spaceBetween>
             <div className="flex flex-row items-center gap-x-4">
-              <span className="text-4xl">{props.characterName}</span>
-              <span className="text-700">
-                {props.visibility === "private" && (
-                  <div className="border-1 border-400 flex items-center gap-x-2 rounded-full border px-6 py-1">
-                    <LuLock /> Visible for followers
-                  </div>
-                )}
-              </span>
+              <span className="text-4xl font-semibold">{props.characterName}</span>
+              {props.visibility === "private" && (
+                <Badge
+                  variant="outline"
+                  className="gap-2 rounded-full px-4 py-1 text-sm font-normal"
+                >
+                  <LuLock size={14} />
+                  Visible for followers
+                </Badge>
+              )}
             </div>
             <div className="flex gap-x-2">
-              <Button href="/settings/profile" icon={<LuHeart size={18} />}>
-                Favorite
+              <Button variant="outline" asChild>
+                <Link href="/settings/profile">
+                  <LuHeart size={18} />
+                  Favorite
+                </Link>
               </Button>
               {props.isOwner && (
-                <Button href={`/studio/characters/${props.characterId}`}>
-                  Edit
+                <Button variant="outline" asChild>
+                  <Link href={`/studio/characters/${props.characterId}`}>
+                    Edit
+                  </Link>
                 </Button>
               )}
-              <Button icon={<LuMoreVertical size={18} />} />
+              <Button variant="ghost" size="icon" aria-label="More options">
+                <LuMoreVertical size={18} />
+              </Button>
             </div>
-          </Masthead.Layer>
-          <Masthead.Layer>
-            <div className="relative flex items-center">
-              <span className="text-700 pr-3  text-lg capitalize">{props.species}</span>
+          </MastheadLayer>
+          <MastheadLayer>
+            <div className="text-muted-foreground relative flex items-center text-lg">
+              <span className="pr-3">
+                {props.species ? displaySpecies(props.species) : "Unknown"}
+              </span>
               <FaCircle size={6} />
-              <span className="text-700 pl-3 text-lg">{props.pronouns}</span>
+              <span className="pl-3">
+                {props.pronouns ? displayPronouns(props.pronouns) : "Unknown"}
+              </span>
             </div>
-          </Masthead.Layer>
-          <Masthead.Layer>
+          </MastheadLayer>
+          <MastheadLayer>
             <div className="relative flex items-center gap-x-3">
-              <span className="text-700 text-lg">Created by</span>
+              <span className="text-muted-foreground text-lg">Created by</span>
               {props.ownerHandle && (
                 <Link
                   href={`/@${props.ownerHandle}`}
-                  className="border-border bg-muted/50 hover:bg-muted inline-flex items-center gap-2 rounded-full border py-1 pl-1 pr-3 text-sm font-medium transition-colors"
+                  className={cn(
+                    "inline-flex items-center gap-2 rounded-full py-1 pl-1 pr-3 text-sm font-medium",
+                    "border border-border/25 bg-muted/20 text-foreground/90",
+                    "shadow-sm ring-1 ring-inset ring-white/[0.06]",
+                    "transition-all duration-200",
+                    "hover:border-primary/30 hover:bg-muted/50 hover:text-foreground hover:shadow-md hover:ring-primary/10"
+                  )}
                 >
                   <Avatar
                     src={props.ownerAvatarUrl || USER_DEFAULT_AVATAR}
@@ -107,13 +142,13 @@ export function CharacterMasthead(props: Partial<ProfileMastheadProps>) {
                 </Link>
               )}
             </div>
-          </Masthead.Layer>
-        </Masthead.Details>
-      </Masthead.Wrapper>
-      <Masthead.Tabs
+          </MastheadLayer>
+        </MastheadDetails>
+      </MastheadWrapper>
+      <MastheadTabs
         baseURL={`/@${props.ownerHandle}/${props.characterSlug}/`}
         items={profileTabs}
       />
-    </Masthead>
+    </div>
   )
 }
