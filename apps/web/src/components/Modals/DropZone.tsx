@@ -2,7 +2,6 @@
 
 import type { MapElement } from "@/types/utils"
 import { BACKEND_URL } from "@/utils/constants"
-import { resolveImageUrl } from "@/utils/images"
 import { cn } from "@mav/shared/utils"
 import { type ComponentType, useEffect, useRef, useState } from "react"
 import { LuUpload } from "react-icons/lu"
@@ -174,7 +173,7 @@ export default function DropZone({
           resp.status === 401 ? "Are you logged in?" : "Upload failed"
         )
       const data = await resp.json()
-      const url = resolveImageUrl(data.url)
+      const url = data.url as string
       setData(url)
       setImageUrl(url)
       setCroppedBase64(null)
@@ -211,8 +210,7 @@ export default function DropZone({
   const displayImg = () => {
     const img = croppedBase64 ? croppedBase64 : imageUrl || base64Src
     if (!img) return null
-    if (img.startsWith("data:")) return img
-    return resolveImageUrl(img)
+    return img
   }
 
   return (

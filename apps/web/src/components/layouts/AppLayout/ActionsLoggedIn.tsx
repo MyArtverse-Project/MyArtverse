@@ -2,6 +2,7 @@ import { User } from "@/app/context/AuthContext"
 import Avatar from "@/components/Avatar"
 import Notification from "@/components/Notification"
 import Separator from "@/components/Separator"
+import { USER_DEFAULT_AVATAR } from "@/utils/constants"
 import {
   generateCreateItems,
   generateSiteSettingItems
@@ -115,7 +116,7 @@ export function ActionsLoggedIn({
                     }
                     createdAt={notification.createdAt}
                     read={notification.read}
-                    userAvatar={user.avatarUrl || "/UserProfile.png"}
+                    userAvatar={user.avatarUrl || USER_DEFAULT_AVATAR}
                     senderAvatar={
                       notification.sender ? notification.sender.avatarUrl : null
                     }
@@ -142,7 +143,7 @@ export function ActionsLoggedIn({
             <Avatar
               username={user.handle}
               size={32}
-              src={user.avatarUrl || "/UserProfile.png"}
+              src={user.avatarUrl || USER_DEFAULT_AVATAR}
             />
           </Link>
         }
@@ -153,7 +154,7 @@ export function ActionsLoggedIn({
                 <Avatar
                   username={user.handle}
                   size={74}
-                  src={user.avatarUrl || "/UserProfile.png"}
+                  src={user.avatarUrl || USER_DEFAULT_AVATAR}
                 />
                 <div className="flex flex-col">
                   {/* TODO: Display Badges */}

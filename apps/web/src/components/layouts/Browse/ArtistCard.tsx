@@ -1,3 +1,4 @@
+import { USER_DEFAULT_AVATAR } from "@/utils/constants"
 import Avatar from "@/components/Avatar"
 import Link from "next/link"
 import React from "react"
@@ -26,7 +27,7 @@ export default function ArtistCard({
         {loading ? (
           <div className="bg-300 h-32 w-32 animate-pulse rounded-full" />
         ) : (
-          <Avatar src={artistAvatarURL} size={250} />
+          <Avatar src={artistAvatarURL || USER_DEFAULT_AVATAR} size={250} />
         )}
         {loading ? (
           <div>

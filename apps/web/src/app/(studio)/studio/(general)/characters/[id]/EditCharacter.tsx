@@ -36,9 +36,10 @@ export default function EditCharacter({ character }: { character: Character }) {
       characterUrl !== (character.slug ?? "") ||
       pronouns !== (character.attributes.pronouns ?? "") ||
       species !== (character.species ?? "") ||
-      bio !== (character.attributes.bio ?? "")
+      bio !== (character.attributes.bio ?? "") ||
+      avatarUrl !== (character.avatarUrl ?? "")
     setIsDirty(changed)
-  }, [displayName, nickname, isMainCharacter, characterUrl, pronouns, species, bio])
+  }, [displayName, nickname, isMainCharacter, characterUrl, pronouns, species, bio, avatarUrl, character])
 
   const handleSave = async () => {
     setIsSaving(true)
