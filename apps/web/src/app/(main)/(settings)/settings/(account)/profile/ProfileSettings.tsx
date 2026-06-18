@@ -1,5 +1,6 @@
 "use client"
 
+import { useAuth } from "@/app/context/AuthContext"
 import { UserType } from "@/types/users"
 import { pronounOptions, USER_DEFAULT_AVATAR } from "@/utils/constants"
 import { Button } from "@mav/ui/components/buttons"
@@ -19,6 +20,7 @@ const normalizeAvatar = (url: string) =>
 
 export default function ProfileSettings({ user }: { user: UserType }) {
   const router = useRouter()
+  const { refreshUser } = useAuth()
   const [displayName, setDisplayName] = useState(user.displayName ?? "")
   const [handle, setHandle] = useState(user.handle)
   const [pronouns, setPronouns] = useState(user.pronouns ?? "")
@@ -44,6 +46,7 @@ export default function ProfileSettings({ user }: { user: UserType }) {
         pronouns,
         avatarLink: avatarUrl
       })
+      await refreshUser()
       setIsDirty(false)
       router.refresh()
     } catch (error) {
