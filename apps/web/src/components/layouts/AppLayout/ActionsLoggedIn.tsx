@@ -8,7 +8,6 @@ import {
   generateSiteSettingItems
 } from "@/utils/generateItems"
 import { Button } from "@/components/ui/button"
-import Link from "next/link"
 import {
   LuBell,
   LuCheck,
@@ -139,13 +138,18 @@ export function ActionsLoggedIn({
 
       <Dropdown
         button={
-          <Link href={`/@${user.handle}`}>
+          <Button
+            variant="ghost"
+            size="icon"
+            className="rounded-full p-0"
+            aria-label="Account menu"
+          >
             <Avatar
               username={user.handle}
               size={32}
               src={user.avatarUrl || USER_DEFAULT_AVATAR}
             />
-          </Link>
+          </Button>
         }
         items={
           <>
@@ -159,7 +163,7 @@ export function ActionsLoggedIn({
                 <div className="flex flex-col">
                   {/* TODO: Display Badges */}
                   <span className="text-xl font-bold">
-                    {user.displayName || user.handle}{" "}
+                    {user.displayName || user.handle}
                   </span>
                   <span>@{user.handle}</span>
                 </div>
