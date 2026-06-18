@@ -1,9 +1,11 @@
 "use client"
 
+import Avatar from "@/components/Avatar"
 import type { Visibility } from "@/types/utils"
+import { USER_DEFAULT_AVATAR } from "@/utils/constants"
 import { Button } from "@mav/ui/components/buttons"
 import { Masthead, type MastheadTabItems } from "@mav/ui/components/layouts"
-import Image from "next/image"
+import Link from "next/link"
 import { FaCircle } from "react-icons/fa"
 import {
   LuBook,
@@ -24,6 +26,7 @@ interface ProfileMastheadProps {
   toyhouseMigrationLink?: string
   avatarUrl?: string
   ownerHandle?: string
+  ownerAvatarUrl?: string
   visibility?: Visibility
   isOwner?: boolean
 }
@@ -88,16 +91,21 @@ export function CharacterMasthead(props: Partial<ProfileMastheadProps>) {
             </div>
           </Masthead.Layer>
           <Masthead.Layer>
-            <div className="relative flex items-center">
-              <span className="text-700 pr-3  text-lg">Created by</span>
-              <Image
-                src="/UserProfile.png"
-                width={28}
-                height={28}
-                className="rounded-full"
-                alt={`${props.ownerHandle} avatar`}
-              />
-              <span className="text-700 pl-3 text-lg">{props.ownerHandle}</span>
+            <div className="relative flex items-center gap-x-3">
+              <span className="text-700 text-lg">Created by</span>
+              {props.ownerHandle && (
+                <Link
+                  href={`/@${props.ownerHandle}`}
+                  className="border-border bg-muted/50 hover:bg-muted inline-flex items-center gap-2 rounded-full border py-1 pl-1 pr-3 text-sm font-medium transition-colors"
+                >
+                  <Avatar
+                    src={props.ownerAvatarUrl || USER_DEFAULT_AVATAR}
+                    username={props.ownerHandle}
+                    size={24}
+                  />
+                  <span>@{props.ownerHandle}</span>
+                </Link>
+              )}
             </div>
           </Masthead.Layer>
         </Masthead.Details>

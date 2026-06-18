@@ -24,6 +24,7 @@ export default async function MainProfileLayout(
         visibility={character.visibility}
         species={character.species}
         ownerHandle={character.owner.handle}
+        ownerAvatarUrl={character.owner.avatarUrl ?? undefined}
         pronouns={character.attributes.pronouns ? character.attributes.pronouns : "Unknown"}
       />
       {props.children}
