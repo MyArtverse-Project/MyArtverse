@@ -5,8 +5,8 @@ import { search } from "@/utils/api"
 import { Dialog, Transition } from "@headlessui/react"
 import { Button } from "@/components/ui/button"
 import { Input } from "@/components/ui/input"
-import { redirect } from "next/navigation"
-import { useEffect, useRef, useState } from "react"
+import { useRouter } from "next/navigation"
+import { useCallback, useEffect, useRef, useState } from "react"
 import { LuSearch } from "react-icons/lu"
 import { SearchSection } from "./Section"
 
@@ -30,28 +30,40 @@ export function SearchBar({
 
   const [searchQuery, setSearchQuery] = useState("")
   const inputRef = useRef<HTMLInputElement>(null)
+  const router = useRouter()
 
   const searchQueryTrimmed = searchQuery.trim()
+
+  const goToSearch = useCallback(() => {
+    if (!searchQueryTrimmed) return
+    setIsOpen(false)
+    router.push(`/search?q=${encodeURIComponent(searchQueryTrimmed)}`)
+  }, [router, searchQueryTrimmed])
 
   useEffect(() => {
     const handleKeyDown = (event: KeyboardEvent) => {
       const key = event.key
+      const target = event.target
+      const isTyping =
+        target instanceof HTMLInputElement ||
+        target instanceof HTMLTextAreaElement ||
+        (target instanceof HTMLElement && target.isContentEditable)
 
-      if (key === "/" && !isOpen) {
+      if (key === "/" && !isOpen && !isTyping) {
         event.preventDefault()
         setIsOpen(true)
-      } else if (key === "Escape") {
-        redirect("/search/?q=" + encodeURIComponent(searchQueryTrimmed))
-      } else if (key === "Enter" && isOpen) {
+      } else if (key === "Escape" && isOpen) {
         setIsOpen(false)
-        redirect("/search/?q=" + encodeURIComponent(searchQueryTrimmed))
+      } else if (key === "Enter" && isOpen) {
+        event.preventDefault()
+        goToSearch()
       }
     }
 
     document.addEventListener("keydown", handleKeyDown)
 
     return () => document.removeEventListener("keydown", handleKeyDown)
-  }, [isOpen, searchQuery])
+  }, [goToSearch, isOpen])
 
   useEffect(() => {
     if (isOpen) {
@@ -116,8 +128,7 @@ export function SearchBar({
             <form
               onSubmit={(e) => {
                 e.preventDefault()
-                redirect("/search/?q=" + encodeURIComponent(searchQueryTrimmed))
-                setIsOpen(false)
+                goToSearch()
               }}
               className="flex items-center gap-x-2 w-full"
             >
