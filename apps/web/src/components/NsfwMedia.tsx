@@ -18,6 +18,8 @@ type NsfwMediaProps = {
   fill?: boolean
   unoptimized?: boolean
   compact?: boolean
+  /** When true, overlays do not capture clicks so a parent can open edit flows. */
+  editable?: boolean
 }
 
 export default function NsfwMedia({
@@ -31,6 +33,7 @@ export default function NsfwMedia({
   fill = false,
   unoptimized = true,
   compact = false,
+  editable = false,
 }: NsfwMediaProps) {
   const { preferences, isReady } = useNsfwPreferences()
   const [revealed, setRevealed] = useState(false)
@@ -55,9 +58,10 @@ export default function NsfwMedia({
         <div
           className={cn(
             "bg-muted text-muted-foreground flex h-full w-full items-center justify-center",
+            editable && "pointer-events-none",
             containerClassName
           )}
-          title="NSFW content"
+          title={editable ? "NSFW content — click to edit" : "NSFW content"}
         >
           <LuLock size={12} />
         </div>
@@ -68,22 +72,51 @@ export default function NsfwMedia({
       <div
         className={cn(
           "bg-muted/50 text-muted-foreground flex h-full w-full flex-col items-center justify-center gap-2 p-4 text-center",
+          editable && "pointer-events-none",
           containerClassName
         )}
       >
         <LuLock size={20} className="shrink-0" />
         <p className="text-sm font-medium">NSFW content</p>
-        <Link
-          href="/settings/appearance"
-          className="text-primary text-xs underline-offset-4 hover:underline"
-        >
-          Enable in settings
-        </Link>
+        {editable ? (
+          <p className="text-muted-foreground text-xs">Click to edit</p>
+        ) : (
+          <Link
+            href="/settings/appearance"
+            className="text-primary text-xs underline-offset-4 hover:underline"
+          >
+            Enable in settings
+          </Link>
+        )}
       </div>
     )
   }
 
   if (preferences.nsfwDisplayMode === "blur" && !revealed) {
+    if (editable) {
+      return (
+        <div
+          className={cn(
+            "pointer-events-none relative block h-full w-full overflow-hidden",
+            containerClassName
+          )}
+        >
+          <Image
+            src={src}
+            alt={alt}
+            width={width}
+            height={height}
+            fill={fill}
+            unoptimized={unoptimized}
+            className={cn("scale-105 blur-xl", className)}
+          />
+          <span className="bg-background/60 absolute inset-0 flex items-center justify-center text-xs font-medium backdrop-blur-sm">
+            Click to edit
+          </span>
+        </div>
+      )
+    }
+
     return (
       <button
         type="button"
