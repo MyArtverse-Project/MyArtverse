@@ -298,6 +298,34 @@ export const getArtwork = async (artworkId: string) => {
   return artwork
 }
 
+export const updateArtwork = async (
+  artworkId: string,
+  body: {
+    title: string
+    description: string
+    tags: string[]
+    nsfw?: boolean
+  }
+) => {
+  const res = await apiWithAuth("PUT", `/v1/art/${artworkId}`, body)
+
+  if (!res) {
+    throw new Error("Artwork update failed")
+  }
+
+  return res
+}
+
+export const deleteArtwork = async (artworkId: string) => {
+  const res = await apiWithAuth("DELETE", `/v1/art/${artworkId}`)
+
+  if (!res) {
+    throw new Error("Artwork deletion failed")
+  }
+
+  return res
+}
+
 export const setRefAsMain = async (refId: string) => {
   await apiWithAuth("PUT", `/v1/character/assign-ref/${refId}`)
   return
