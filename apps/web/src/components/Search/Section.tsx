@@ -1,3 +1,6 @@
+"use client"
+
+import NsfwMedia from "@/components/NsfwMedia"
 import { Artwork, Character } from "@/types/characters"
 import { UserType } from "@/types/users"
 import { SearchResult } from "@/types/utils"
@@ -9,8 +12,15 @@ interface SearchSectionProps {
   isCharacter?: boolean
 }
 
+type FormattedItem = {
+  name: string
+  image?: string
+  href: string
+  nsfw?: boolean
+}
+
 export function SearchSection({ title, items }: SearchSectionProps) {
-  let formattedItems: { name: string; image?: string; href: string }[] = []
+  let formattedItems: FormattedItem[] = []
 
   if (!items) {
     return null
@@ -19,11 +29,11 @@ export function SearchSection({ title, items }: SearchSectionProps) {
   if (Array.isArray(items)) {
     formattedItems = items.map((item) =>
       typeof item === "string"
-        ? { name: item }
+        ? { name: item, href: `/search?q=${item}` }
         : {
             name: item.name,
             image: (item as { image?: string }).image,
-            href: `/search?q=${item.name}`
+            href: `/search?q=${item.name}`,
           }
     )
   } else if (typeof items === "object") {
@@ -31,18 +41,19 @@ export function SearchSection({ title, items }: SearchSectionProps) {
       ...(items.user?.map((user: UserType) => ({
         name: user.displayName || user.handle,
         image: user.avatarUrl,
-        href: `/@${user.handle}`
+        href: `/@${user.handle}`,
       })) ?? []),
       ...(items.character?.map((char: Character) => ({
         name: char.name,
         image: char.avatarUrl,
-        href: `/@${char.owner.handle}/${char.name}`
+        href: `/@${char.owner.handle}/${char.name}`,
       })) ?? []),
       ...(items.artwork?.map((art: Artwork) => ({
         name: art.title || "Untitled Artwork",
         image: art.artworkUrl || art.watermarkUrl,
-        href: `/artworks/${art.id}`
-      })) ?? [])
+        href: `/artworks/${art.id}`,
+        nsfw: !!art.nsfw,
+      })) ?? []),
     ]
   }
 
@@ -57,11 +68,17 @@ export function SearchSection({ title, items }: SearchSectionProps) {
           >
             <Link href={item.href || "#"} className="flex items-center gap-2">
               {item.image && (
-                <img
-                  src={item.image}
-                  alt={item.name}
-                  className="w-6 h-6 rounded-full"
-                />
+                <span className="relative h-6 w-6 shrink-0 overflow-hidden rounded-full">
+                  <NsfwMedia
+                    src={item.image}
+                    alt={item.name}
+                    nsfw={item.nsfw}
+                    fill
+                    compact
+                    className="object-cover"
+                    containerClassName="h-6 w-6 rounded-full"
+                  />
+                </span>
               )}
               {item.name}
             </Link>

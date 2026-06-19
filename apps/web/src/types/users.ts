@@ -1,4 +1,5 @@
 import type { Artwork, Character, Folder } from "./characters"
+import type { ContentPreferences } from "./contentPreferences"
 import type { LinkedString } from "./utils"
 
 type NullableString = string | null
@@ -54,6 +55,7 @@ export interface UserType {
     images: string[]
   }
   birthday: Date
+  contentPreferences?: ContentPreferences
 }
 
 export interface Notification {

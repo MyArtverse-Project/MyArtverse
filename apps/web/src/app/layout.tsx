@@ -1,6 +1,7 @@
 import "@mav/shared/styles/index.scss"
 import "./theme.css"
 import { AuthProvider } from "@/app/context/AuthContext"
+import { NsfwPreferencesProvider } from "@/app/context/NsfwPreferencesContext"
 import { Analytics, NoJSMessage, SkipNav } from "@/components"
 import { ThemeProvider } from "@/components/ThemeProvider"
 import { Toaster } from "@/components/ui/sonner"
@@ -60,7 +61,9 @@ export default function RootLayout({ children }: React.PropsWithChildren) {
           <NoJSMessage />
           <ThemeProvider>
             <Provider>
-              <AuthProvider>{children}</AuthProvider>
+              <AuthProvider>
+                <NsfwPreferencesProvider>{children}</NsfwPreferencesProvider>
+              </AuthProvider>
             </Provider>
             <Toaster />
           </ThemeProvider>

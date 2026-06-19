@@ -15,7 +15,7 @@ import { logError } from "."
 import { BACKEND_URL } from "./constants"
 import { ReferenceVariant } from "@/app/(studio)/studio/(general)/characters/[id]/Ref/ReferenceConfigForm"
 
-type APIMethods = "GET" | "POST" | "DELETE" | "PUT"
+type APIMethods = "GET" | "POST" | "DELETE" | "PUT" | "PATCH"
 
 const endpoint = BACKEND_URL
 
@@ -411,6 +411,17 @@ export const updateProfile = async (body: {
   avatarLink: string
 }) => {
   return apiWithAuth("PUT", "/v1/user/me", body)
+}
+
+export const updateContentPreferences = async (body: {
+  showNsfw?: boolean
+  nsfwDisplayMode?: "blur" | "show"
+}) => {
+  return apiWithAuth<{ contentPreferences: { showNsfw: boolean; nsfwDisplayMode: "blur" | "show" } }>(
+    "PATCH",
+    "/v1/profile/content-preferences",
+    body
+  )
 }
 
 export const postComment = async (

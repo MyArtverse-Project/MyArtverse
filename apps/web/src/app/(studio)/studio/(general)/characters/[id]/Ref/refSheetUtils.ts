@@ -25,6 +25,12 @@ export function getMainVariantImage(refSheet: ReferenceSheet) {
   )
 }
 
+export function getMainVariantNsfw(refSheet: ReferenceSheet) {
+  const variants = refSheet.variants as ApiVariant[]
+  const main = variants.find((v) => v.main) ?? variants[0]
+  return !!main?.nsfw
+}
+
 export function mapVariantFromApi(
   variant: ApiVariant,
   fallbackArtist = ""

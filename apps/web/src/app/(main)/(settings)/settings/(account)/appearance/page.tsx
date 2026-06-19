@@ -1,7 +1,9 @@
+import AppearanceSettings from "./AppearanceSettings"
+
 export const metadata = {
-  title: "Appearance"
+  title: "Appearance",
 }
 
 export default function SettingsAppearancePage() {
-  return <>appearance page</>
+  return <AppearanceSettings />
 }

@@ -2,6 +2,7 @@
 
 import { fetcher } from "@/app/lib/fetcher"
 import { Notification } from "@/types/users"
+import type { ContentPreferences } from "@/types/contentPreferences"
 // Import the fetch helper
 import { BACKEND_URL } from "@/utils/constants"
 import { useRouter } from "next/navigation"
@@ -24,6 +25,7 @@ export type User = {
   pronouns: string
   nationality: string
   birthday: string
+  contentPreferences?: ContentPreferences
   characters: {
     id: string
     name: string

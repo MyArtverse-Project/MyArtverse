@@ -1,8 +1,8 @@
 import GridResponsive from "@/components/layouts/Layouts/GridResponsive"
+import ArtworkGrid from "@/components/ArtworkGrid"
 import { Button } from "@/components/ui/button"
 import { Group, MarginGutter } from "@/components/ui/group"
 import { fetchUserGallery } from "@/utils/api"
-import Image from "next/image"
 import Link from "next/link"
 import { LuUpload } from "react-icons/lu"
 
@@ -25,26 +25,7 @@ export default async function Page() {
         }
       >
         {artworks.length > 0 ? (
-          <GridResponsive breakpoint={250} className="gap-4" role="listbox">
-            {artworks.map((artwork) => {
-              if (!artwork.artworkUrl) return null
-
-              return (
-                <div
-                  key={artwork.id}
-                  className="overflow-hidden rounded-xl border aspect-square"
-                >
-                  <Image
-                    src={artwork.artworkUrl}
-                    alt={artwork.altText ?? "Artwork"}
-                    width={500}
-                    height={500}
-                    className="object-cover w-full h-full transition-transform duration-300 group-hover:scale-105"
-                  />
-                </div>
-              )
-            })}
-          </GridResponsive>
+          <ArtworkGrid artworks={artworks} />
         ) : (
           <div className="text-muted-foreground text-sm">No artworks found.</div>
         )}
