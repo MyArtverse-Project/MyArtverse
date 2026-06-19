@@ -91,7 +91,7 @@ export default function DropZone({
   aspectRatio?: string,
   label?: string
   enableCrop?: boolean
-  previewSize?: "default" | "large"
+  previewSize?: "default" | "large" | "compact"
 }) {
   const [isDragging, setIsDragging] = useState(false)
   const [imageUrl, setImageUrl] = useState<string | null>(value)
@@ -226,16 +226,23 @@ export default function DropZone({
 
   const hasPreview = !!(displayImg() && !showCrop && !uploading)
   const isLargePreview = previewSize === "large"
+  const isCompactPreview = previewSize === "compact"
 
   return (
     <div
       className={cn(
         "rounded-lg border text-center transition-colors",
+        isCompactPreview && !showCrop && "size-28 shrink-0",
         hasPreview
-          ? "border-border bg-card p-4"
+          ? cn(
+              "border-border bg-card",
+              isCompactPreview ? "overflow-hidden p-0" : "p-4"
+            )
           : cn(
-              "border-2 border-dashed",
-              isLargePreview ? "p-8" : "p-10",
+              "border-dashed",
+              isCompactPreview
+                ? "border-border/60 p-2"
+                : cn("border-2", isLargePreview ? "p-8" : "p-10"),
               isDragging ? "bg-muted/50" : "bg-muted/20"
             ),
         className
@@ -321,7 +328,14 @@ export default function DropZone({
           {error && <span className="mt-4 text-red-500">{error}</span>}
         </div>
       ) : uploading ? (
-        <span className="text-lg font-bold">Uploading...</span>
+        <span
+          className={cn(
+            "font-medium",
+            isCompactPreview ? "text-xs" : "text-lg font-bold"
+          )}
+        >
+          Uploading...
+        </span>
       ) : displayImg() ? (
         isLargePreview ? (
           <div className="flex w-full flex-col gap-3 text-left">
@@ -342,6 +356,22 @@ export default function DropZone({
             </Button>
             {error && <span className="text-destructive text-sm">{error}</span>}
           </div>
+        ) : isCompactPreview ? (
+          <button
+            type="button"
+            onClick={openFilePicker}
+            className="group relative size-full overflow-hidden rounded-lg"
+            aria-label="Change avatar"
+          >
+            <img
+              src={displayImg() as string}
+              alt="Avatar preview"
+              className="size-full object-cover"
+            />
+            <span className="bg-background/80 text-foreground absolute inset-x-0 bottom-0 py-1 text-xs opacity-0 transition-opacity group-hover:opacity-100">
+              Change
+            </span>
+          </button>
         ) : (
           <div className="flex flex-col items-center gap-4">
             <img
@@ -360,22 +390,47 @@ export default function DropZone({
           </div>
         )
       ) : (
-        <div className={cn("flex flex-col items-center", isLargePreview && "min-h-72 justify-center gap-4")}>
+        <div
+          className={cn(
+            "flex flex-col items-center",
+            isLargePreview && "min-h-72 justify-center gap-4",
+            isCompactPreview && "size-full justify-center gap-1"
+          )}
+        >
           <button
             className={cn(
-              "flex items-center justify-center rounded-full bg-muted",
-              isLargePreview ? "p-6" : "mb-6 p-8"
+              "flex items-center justify-center rounded-full bg-muted transition-colors hover:bg-muted/80",
+              isLargePreview ? "p-6" : isCompactPreview ? "p-2.5" : "mb-6 p-8"
             )}
             onClick={openFilePicker}
             type="button"
+            aria-label={label}
           >
-            <LuUpload size={isLargePreview ? 40 : 48} />
+            <LuUpload size={isLargePreview ? 40 : isCompactPreview ? 18 : 48} />
           </button>
-          <span className="text-lg font-semibold">{label}</span>
-          <span className="text-muted-foreground text-sm">
-            Max size: 10MB · .jpg, .png
-          </span>
-          {error && <span className="text-destructive text-sm">{error}</span>}
+          {!isCompactPreview && (
+            <>
+              <span className="text-lg font-semibold">{label}</span>
+              <span className="text-muted-foreground text-sm">
+                Max size: 10MB · .jpg, .png
+              </span>
+            </>
+          )}
+          {isCompactPreview && (
+            <span className="text-muted-foreground text-[11px] leading-tight">
+              Add photo
+            </span>
+          )}
+          {error && (
+            <span
+              className={cn(
+                "text-destructive",
+                isCompactPreview ? "text-[10px] leading-tight" : "text-sm"
+              )}
+            >
+              {error}
+            </span>
+          )}
         </div>
       )}
     </div>
