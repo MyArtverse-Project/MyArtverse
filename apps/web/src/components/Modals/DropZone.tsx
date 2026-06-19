@@ -15,6 +15,13 @@ const Cropper = EasyCrop as ComponentType<
 const allowedTypes = ["image/png", "image/jpeg", "image/jpg"]
 const maxFileSize = 10 * 1024 * 1024 // 10 MB
 
+const uniqueUploadName = (originalName?: string) => {
+  const ext = originalName?.includes(".")
+    ? originalName.slice(originalName.lastIndexOf("."))
+    : ".png"
+  return `${crypto.randomUUID()}${ext}`
+}
+
 const getCroppedImg = (imageSrc: string, crop: any, zoom: number, aspect: number): Promise<{base64: string, blob: Blob}> => {
   return new Promise((resolve, reject) => {
     const image = new window.Image();
@@ -161,7 +168,9 @@ export default function DropZone({
     setUploading(true)
     try {
       const formData = new FormData()
-      const uploadName = file instanceof File ? file.name : filename
+      const uploadName = uniqueUploadName(
+        file instanceof File ? file.name : filename
+      )
       formData.append("file", file, uploadName)
       const resp = await fetch(`${BACKEND_URL}/v1/profile/upload`, {
         method: "POST",

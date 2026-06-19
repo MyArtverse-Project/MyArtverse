@@ -1,6 +1,7 @@
 import { Url } from "url"
 import type { CharacterStatus as AdoptionStatus } from "@/types/characters"
 import type { MapElement } from "@/types/utils"
+import { isRemoteImageUrl } from "@/utils/constants"
 import { cn } from "@mav/shared/utils"
 import Image from "next/image"
 import Link from "next/link"
@@ -9,6 +10,7 @@ import ColorPalette from "./ColorPalette"
 import Status from "./Status"
 
 interface CharacterCardProps {
+  id?: string
   name: string
   img: string
   species: string
@@ -21,6 +23,7 @@ interface CharacterCardProps {
 }
 
 export function CharacterCard({
+  id,
   name,
   img = "/UserProfile.png",
   species,
@@ -48,11 +51,13 @@ export function CharacterCard({
       <div className="relative h-0 w-full overflow-hidden rounded-md pb-[100%]">
         {loading && <div className="bg-muted h-full w-full animate-pulse" />}
         <Image
+          key={id ? `${id}-${img}` : img}
           src={img}
           alt={`Avatar of ${name}`}
           className="absolute inset-0 h-full w-full object-cover transition-transform duration-300 ease-in-out hover:scale-105"
           width={640}
           height={640}
+          unoptimized={isRemoteImageUrl(img)}
         />
       </div>
 

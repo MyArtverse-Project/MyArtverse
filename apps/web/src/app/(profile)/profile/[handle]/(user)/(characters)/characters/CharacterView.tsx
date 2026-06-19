@@ -116,16 +116,17 @@ export default function CharacterView({
         )} */}
 
         <GridResponsive breakpoint={250} className="gap-1.5" role="listbox">
-          {characters.characters.map((character, index) => (
+          {characters.characters.map((character) => (
             <CharacterCard
-              key={index}
+              key={character.id}
+              id={character.id}
               img={character.avatarUrl || "/UserProfile.png"}
               name={character.name}
               species={character.species}
               palette={
-                characters.mainCharacter!.refSheets[index]
-                  ? characters.mainCharacter!.refSheets[index].colors
-                  : []
+                character.refSheets?.[0]?.variants?.[0]?.colors ??
+                characters.mainCharacter?.refSheets?.[0]?.colors ??
+                []
               }
               status="owned"
               href={`/@${handle}/${character.slug}`}

@@ -12,12 +12,13 @@ import { Textarea } from '@/components/ui/textarea'
 import { Character } from '@/types/characters'
 import { furrySpeciesOptions, pronounOptions } from '@/utils/constants'
 import { updateCharacter } from '@/utils/api'
-import { redirect } from 'next/navigation'
+import { useRouter } from 'next/navigation'
 import RefSheetModal from './Ref/RefSheetModal'
 import RefSheetThumbnail from './RefSheetThumbnail'
 
 export default function EditCharacter({ character }: { character: Character }) {
-  const [avatarUrl, setAvatarUrl] = useState<string>(character.avatarUrl)
+  const router = useRouter()
+  const [avatarUrl, setAvatarUrl] = useState<string>(character.avatarUrl ?? "")
   const [displayName, setDisplayName] = useState<string>(character.name)
   const [nickname, setNickname] = useState<string>(character.nickname ?? '')
   const [isMainCharacter, setIsMainCharacter] = useState<boolean>(character.mainCharacter)
@@ -28,6 +29,21 @@ export default function EditCharacter({ character }: { character: Character }) {
   const [isRefModalOpen, setIsRefModalOpen] = useState(false)
   const [isDirty, setIsDirty] = useState(false)
   const [isSaving, setIsSaving] = useState(false)
+  const [savedAvatarUrl, setSavedAvatarUrl] = useState<string>(
+    character.avatarUrl ?? ""
+  )
+
+  useEffect(() => {
+    setAvatarUrl(character.avatarUrl ?? "")
+    setSavedAvatarUrl(character.avatarUrl ?? "")
+    setDisplayName(character.name)
+    setNickname(character.nickname ?? "")
+    setIsMainCharacter(character.mainCharacter)
+    setCharacterUrl(character.slug ?? "")
+    setPronouns(character.attributes.pronouns ?? "")
+    setSpecies(character.species ?? "")
+    setBio(character.attributes.bio ?? "")
+  }, [character])
 
   useEffect(() => {
     const changed =
@@ -38,9 +54,20 @@ export default function EditCharacter({ character }: { character: Character }) {
       pronouns !== (character.attributes.pronouns ?? "") ||
       species !== (character.species ?? "") ||
       bio !== (character.attributes.bio ?? "") ||
-      avatarUrl !== (character.avatarUrl ?? "")
+      avatarUrl !== savedAvatarUrl
     setIsDirty(changed)
-  }, [displayName, nickname, isMainCharacter, characterUrl, pronouns, species, bio, avatarUrl, character])
+  }, [displayName, nickname, isMainCharacter, characterUrl, pronouns, species, bio, avatarUrl, savedAvatarUrl, character])
+
+  const handleAvatarUpload = async (url: string) => {
+    setAvatarUrl(url)
+    try {
+      await updateCharacter(character.id, { avatarUrl: url })
+      setSavedAvatarUrl(url)
+      router.refresh()
+    } catch (error) {
+      console.error("Failed to save avatar", error)
+    }
+  }
 
   const handleSave = async () => {
     setIsSaving(true)
@@ -62,7 +89,8 @@ export default function EditCharacter({ character }: { character: Character }) {
         avatarUrl
       })
       setIsDirty(false)
-      redirect('/studio/characters')
+      setSavedAvatarUrl(avatarUrl)
+      router.refresh()
     } catch (error) {
       console.error("Failed to save profile settings", error)
     } finally {
@@ -106,8 +134,9 @@ export default function EditCharacter({ character }: { character: Character }) {
                 </div>
               </div>
               <DropZone
-                value={avatarUrl}
-                setData={setAvatarUrl}
+                key={character.id}
+                value={avatarUrl || null}
+                setData={handleAvatarUpload}
                 className='w-full lg:w-1/3'
               />
             </div>
