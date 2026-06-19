@@ -8,12 +8,16 @@ import {
   SheetHeader,
   SheetTitle,
 } from "@/components/ui/sheet"
-import { Character, ReferenceSheet } from "@/types/characters"
+import { ReferenceSheet } from "@/types/characters"
 import { deleteRefSheet, setRefAsMain } from "@/utils/api"
-import Image from "next/image"
+import NsfwMedia from "@/components/NsfwMedia"
 import { useState } from "react"
 import { LuArrowLeft } from "react-icons/lu"
-import { getMainVariantImage, refSheetListImageClassName } from "./refSheetUtils"
+import {
+  getMainVariantImage,
+  getMainVariantNsfw,
+  refSheetListImageClassName,
+} from "./refSheetUtils"
 
 export default function ManageRefSheetModal({
   isOpen,
@@ -80,6 +84,7 @@ export default function ManageRefSheetModal({
             <div className="flex flex-col gap-3">
               {refSheets.map((refSheet) => {
                 const image = getMainVariantImage(refSheet)
+                const isNsfw = getMainVariantNsfw(refSheet)
                 const isLoading = loadingId === refSheet.id
 
                 return (
@@ -98,12 +103,13 @@ export default function ManageRefSheetModal({
                     className="border-border bg-card hover:bg-muted/30 focus-visible:ring-ring flex cursor-pointer overflow-hidden rounded-lg border transition-colors focus-visible:ring-2 focus-visible:outline-none"
                   >
                     <div className={refSheetListImageClassName}>
-                      <Image
+                      <NsfwMedia
                         src={image}
                         alt={refSheet.name}
+                        nsfw={isNsfw}
                         fill
+                        editable
                         className="object-cover"
-                        unoptimized
                       />
                     </div>
                     <div className="flex min-w-0 flex-1 flex-col justify-between gap-3 p-4">

@@ -96,7 +96,6 @@ export function NavbarScrollTitle({
           username={data.primary}
           size={24}
         />
-        <LuUser size={14} className="text-primary shrink-0" aria-hidden />
         <span className="flex min-w-0 flex-col leading-tight">
           <span className="truncate font-semibold">{data.primary}</span>
           {data.secondary && (

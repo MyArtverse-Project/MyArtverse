@@ -1,5 +1,4 @@
-import GridResponsive from "@/components/layouts/Layouts/GridResponsive"
-import ArtworkGrid from "@/components/ArtworkGrid"
+import StudioGallery from "./StudioGallery"
 import { Button } from "@/components/ui/button"
 import { Group, MarginGutter } from "@/components/ui/group"
 import { fetchUserGallery } from "@/utils/api"
@@ -24,11 +23,7 @@ export default async function Page() {
           </div>
         }
       >
-        {artworks.length > 0 ? (
-          <ArtworkGrid artworks={artworks} />
-        ) : (
-          <div className="text-muted-foreground text-sm">No artworks found.</div>
-        )}
+        <StudioGallery artworks={artworks} />
       </Group>
     </MarginGutter>
   )

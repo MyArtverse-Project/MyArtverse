@@ -49,6 +49,7 @@ export function ReferenceCard({
           alt={mainVariant?.name || ""}
           nsfw={!!mainVariant?.nsfw}
           fill
+          editable
           className="object-cover transition-transform duration-300 ease-in-out hover:scale-105"
         />
       </div>

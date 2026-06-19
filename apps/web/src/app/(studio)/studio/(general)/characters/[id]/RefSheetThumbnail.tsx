@@ -1,7 +1,7 @@
 import { ReferenceSheet } from '@/types/characters'
+import NsfwMedia from '@/components/NsfwMedia'
 import { cn } from '@mav/shared/utils'
-import Image from 'next/image'
-import { getMainVariantImage, refSheetListImageClassName } from "./Ref/refSheetUtils"
+import { getMainVariantImage, getMainVariantNsfw, refSheetListImageClassName } from "./Ref/refSheetUtils"
 
 export default function RefSheetThumbnail({
   refSheet,
@@ -11,16 +11,18 @@ export default function RefSheetThumbnail({
   onClick?: () => void
 }) {
   const image = getMainVariantImage(refSheet)
+  const isNsfw = getMainVariantNsfw(refSheet)
 
   const content = (
     <>
       <div className={refSheetListImageClassName}>
-        <Image
+        <NsfwMedia
           src={image}
           alt={refSheet.name}
+          nsfw={isNsfw}
           fill
+          editable={!!onClick}
           className="object-cover"
-          unoptimized
         />
       </div>
       <div className="flex flex-col gap-1 py-3 pr-4">
