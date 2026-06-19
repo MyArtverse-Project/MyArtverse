@@ -11,6 +11,7 @@ import Avatar from '@/components/Avatar'
 import Checkbox from '@/components/layouts/Forms/Checkbox'
 import { LuEye, LuLock } from 'react-icons/lu'
 import { useRouter, useSearchParams } from 'next/navigation'
+import { displaySpecies } from '@/utils/displayer'
 
 export default function CharactersView({ characters }: { characters: Character[] }) {
   const [isCreateModalOpen, setIsCreateModalOpen] = useState(false)
@@ -53,9 +54,9 @@ export default function CharactersView({ characters }: { characters: Character[]
           </div>
 
         ) : (
-          <table className="w-full text-left text-sm">
-            <thead className="border-b border-200 text-purple-600">
-              <tr>
+          <table className="border-border w-full border-collapse text-left text-sm">
+            <thead className="border-border border-b">
+              <tr className="text-muted-foreground">
                 <th className='w-10'></th>
                 <th className="py-3">Character</th>
                 <th className="py-3">Date</th>
@@ -65,7 +66,7 @@ export default function CharactersView({ characters }: { characters: Character[]
             </thead>
             <tbody>
               {characters.map((characters, index) => (
-                <tr key={characters.name} className="border-b border-100 hover:bg-200 cursor-pointer" onClick={() => window.location.href = `/studio/characters/${characters.id}`}>
+                <tr key={characters.id} className="border-border hover:bg-muted/50 cursor-pointer border-b" onClick={() => window.location.href = `/studio/characters/${characters.id}`}>
                   <td className="px-2">
                     <Checkbox
                       inputName={`character-select-${index}`}
@@ -87,7 +88,7 @@ export default function CharactersView({ characters }: { characters: Character[]
                         )}
                         {/* TODO: Toyhou.se Icon */}
                       </div>
-                      <div className="text-sm text-gray-500">{characters.species}</div>
+                      <div className="text-sm text-gray-500">{displaySpecies(characters.species ?? "")}</div>
                     </div>
                   </td>
                   <td className="py-4">
