@@ -234,6 +234,7 @@ export const uploadArt = async (
     description: string
     tags: string[]
     userAsArtist: boolean
+    nsfw: boolean
     mainCharacterId: string
     taggedCharacterIds: string[]
   }
@@ -311,18 +312,25 @@ export const getRefSheets = async (handle: string) => {
   return refSheets
 }
 
+export const deleteRefSheet = async (refId: string) => {
+  return apiWithAuth("DELETE", `/v1/character/delete-ref/${refId}`)
+}
+
 export const createRefSheet = async (body: {
   characterId: string
   refSheet: {
+    id?: string
     name: string
     description: string
     primary?: boolean
     variants: {
+      id?: string
       title: string
       artist: string
       description: string
       image: string
       primary: boolean
+      nsfw: boolean
       colors: string[]
     }[]
   }
