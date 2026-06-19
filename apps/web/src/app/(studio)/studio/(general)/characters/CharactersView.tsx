@@ -65,8 +65,8 @@ export default function CharactersView({ characters }: { characters: Character[]
               </tr>
             </thead>
             <tbody>
-              {characters.map((characters, index) => (
-                <tr key={characters.id} className="border-border hover:bg-muted/50 cursor-pointer border-b" onClick={() => window.location.href = `/studio/characters/${characters.id}`}>
+              {characters.map((character, index) => (
+                <tr key={character.id} className="border-border hover:bg-muted/50 cursor-pointer border-b" onClick={() => window.location.href = `/studio/characters/${character.id}`}>
                   <td className="px-2">
                     <Checkbox
                       inputName={`character-select-${index}`}
@@ -77,38 +77,44 @@ export default function CharactersView({ characters }: { characters: Character[]
                     />
                   </td>
                   <td className="flex items-center gap-3 py-4">
-                    <Avatar size={50} src={characters.avatarUrl} className='rounded-none' />
+                    <Avatar
+                      size={50}
+                      src={character.avatarUrl}
+                      username={character.name}
+                      imageKey={character.id}
+                      className='rounded-none'
+                    />
                     <div>
                       <div className="flex items-center gap-2">
-                        <span className="font-semibold text-lg">{characters.name}</span>
-                        {characters.mainCharacter && (
+                        <span className="font-semibold text-lg">{character.name}</span>
+                        {character.mainCharacter && (
                           <span className="text-xs px-2 py-0.5 bg-100 text-700 rounded-full border border-300">
                             Default
                           </span>
                         )}
                         {/* TODO: Toyhou.se Icon */}
                       </div>
-                      <div className="text-sm text-gray-500">{displaySpecies(characters.species ?? "")}</div>
+                      <div className="text-sm text-gray-500">{displaySpecies(character.species ?? "")}</div>
                     </div>
                   </td>
                   <td className="py-4">
-                    {characters.adoptionStatus ? (
+                    {character.adoptionStatus ? (
                       <div className="text-purple-600 text-sm">
-                        Adopted on {new Date(characters.adoptionStatus.adoptionDate).toLocaleDateString()}
+                        Adopted on {new Date(character.adoptionStatus.adoptionDate).toLocaleDateString()}
                       </div>
                     ) : (
                       <>
                         <div className="text-purple-600 text-sm">
                           Created
                         </div>
-                        <div className="font-medium">{new Date(characters.createdAt).toLocaleDateString()}</div>
+                        <div className="font-medium">{new Date(character.createdAt).toLocaleDateString()}</div>
                       </>
                     )}
 
                   </td>
-                  <td className="py-4 font-medium">{characters.owner.handle}</td>
+                  <td className="py-4 font-medium">{character.owner.handle}</td>
                   <td className="py-4">
-                    {characters.visibility === 'public' ? (
+                    {character.visibility === 'public' ? (
                       <div className="flex items-center gap-1 text-600">
                         <LuEye size={20} />
                         <span>Public</span>

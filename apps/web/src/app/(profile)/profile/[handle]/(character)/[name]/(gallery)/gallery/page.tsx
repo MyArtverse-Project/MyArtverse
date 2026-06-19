@@ -16,7 +16,7 @@ export async function generateMetadata(): Promise<Metadata> {
   }
 }
 
-export default async function Page({ params }: { params: { handle: string; name: string } }) {
+export default async function Page({ params }: { params: Promise<{ handle: string; name: string }> }) {
   const { handle, name } = await params
   const artworks = await getArtworks(handle, name)
   return (

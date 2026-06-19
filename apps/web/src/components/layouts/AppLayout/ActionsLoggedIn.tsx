@@ -148,6 +148,7 @@ export function ActionsLoggedIn({
               username={user.handle}
               size={32}
               src={user.avatarUrl || USER_DEFAULT_AVATAR}
+              imageKey={user.id}
             />
           </Button>
         }
@@ -159,6 +160,7 @@ export function ActionsLoggedIn({
                   username={user.handle}
                   size={74}
                   src={user.avatarUrl || USER_DEFAULT_AVATAR}
+                  imageKey={user.id}
                 />
                 <div className="flex flex-col">
                   {/* TODO: Display Badges */}

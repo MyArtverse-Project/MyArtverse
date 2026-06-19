@@ -312,10 +312,11 @@ export const getRefSheets = async (handle: string) => {
 }
 
 export const createRefSheet = async (body: {
-  characterId: string,
+  characterId: string
   refSheet: {
     name: string
     description: string
+    primary?: boolean
     variants: {
       title: string
       artist: string
