@@ -88,6 +88,7 @@ export interface Artwork {
   artistUrl?: string
   comments: Comments[]
   description?: string
+  nsfw?: boolean
   tags: string[]
   programUsed?: string
   title?: string

@@ -9,11 +9,12 @@ import { Group, GroupContainer, MarginGutter } from '@/components/ui/group'
 import { Input } from '@/components/ui/input'
 import { Label } from '@/components/ui/label'
 import { Textarea } from '@/components/ui/textarea'
-import { Character } from '@/types/characters'
+import { Character, ReferenceSheet } from '@/types/characters'
 import { furrySpeciesOptions, pronounOptions } from '@/utils/constants'
 import { updateCharacter } from '@/utils/api'
 import { useRouter } from 'next/navigation'
 import RefSheetModal from './Ref/RefSheetModal'
+import ManageRefSheetModal from './Ref/ManageRefSheetModal'
 import RefSheetThumbnail from './RefSheetThumbnail'
 
 export default function EditCharacter({ character }: { character: Character }) {
@@ -27,6 +28,9 @@ export default function EditCharacter({ character }: { character: Character }) {
   const [species, setSpecies] = useState<string>(character.species ?? '')
   const [bio, setBio] = useState<string>(character.attributes.bio ?? '')
   const [isRefModalOpen, setIsRefModalOpen] = useState(false)
+  const [isManageModalOpen, setIsManageModalOpen] = useState(false)
+  const [refModalMode, setRefModalMode] = useState<'create' | 'edit'>('create')
+  const [editingRefSheet, setEditingRefSheet] = useState<ReferenceSheet | null>(null)
   const [isDirty, setIsDirty] = useState(false)
   const [isSaving, setIsSaving] = useState(false)
   const [savedAvatarUrl, setSavedAvatarUrl] = useState<string>(
@@ -98,12 +102,46 @@ export default function EditCharacter({ character }: { character: Character }) {
     }
   }
 
+  const handleRefSheetSaved = () => {
+    setIsRefModalOpen(false)
+    setEditingRefSheet(null)
+    setRefModalMode('create')
+    router.refresh()
+  }
+
+  const openCreateRefSheet = () => {
+    setRefModalMode('create')
+    setEditingRefSheet(null)
+    setIsRefModalOpen(true)
+  }
+
+  const handleEditRefSheet = (refSheet: ReferenceSheet) => {
+    setIsManageModalOpen(false)
+    setRefModalMode('edit')
+    setEditingRefSheet(refSheet)
+    setIsRefModalOpen(true)
+  }
+
   return (
     <>
       <RefSheetModal
         isOpen={isRefModalOpen}
-        onClose={() => setIsRefModalOpen(false)}
+        onClose={() => {
+          setIsRefModalOpen(false)
+          setEditingRefSheet(null)
+          setRefModalMode('create')
+        }}
+        onSaved={handleRefSheetSaved}
         character={character}
+        mode={refModalMode}
+        initialRefSheet={editingRefSheet}
+      />
+      <ManageRefSheetModal
+        isOpen={isManageModalOpen}
+        onClose={() => setIsManageModalOpen(false)}
+        refSheets={character.refSheets}
+        onEdit={handleEditRefSheet}
+        onChanged={() => router.refresh()}
       />
       <MarginGutter screenSize="xl" className="px-6 py-5 *:mt-6 *:gap-6 first:*:mt-0">
         <GroupContainer>
@@ -181,16 +219,20 @@ export default function EditCharacter({ character }: { character: Character }) {
             </div>
           </Group>
           <Group title='Reference sheets' description="Reference sheets will appear in the list if you have this character linked and be shown on the public profile. Learn more">
-            <div className='flex flex-col'>
+            <div className='flex flex-col gap-3'>
               {character.refSheets.map(refSheet => (
-                <RefSheetThumbnail key={refSheet.id} refSheet={refSheet} />
+                <RefSheetThumbnail
+                  key={refSheet.id}
+                  refSheet={refSheet}
+                  onClick={() => handleEditRefSheet(refSheet)}
+                />
               ))}
             </div>
             <div className='flex flex-row gap-x-2'>
-              <Button onClick={() => setIsRefModalOpen(true)}>
+              <Button onClick={openCreateRefSheet}>
                 Add Reference Sheet
               </Button>
-              <Button variant="outline" onClick={() => {}}>
+              <Button variant="outline" onClick={() => setIsManageModalOpen(true)}>
                 Manage Reference Sheet
               </Button>
             </div>

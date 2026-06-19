@@ -2,62 +2,79 @@
 
 import DropZone from "@/components/Modals/DropZone"
 import Checkbox from "@/components/layouts/Forms/Checkbox"
+import { Badge } from "@/components/ui/badge"
 import { Button } from "@/components/ui/button"
 import { Input } from "@/components/ui/input"
 import { Label } from "@/components/ui/label"
 import { MarginGutter } from "@/components/ui/group"
+import { Textarea } from "@/components/ui/textarea"
 import { useDebounce } from "@/hooks/useDebounce"
 import { search, uploadArt } from "@/utils/api"
-import { redirect } from "next/navigation"
+import { useRouter } from "next/navigation"
 import { useEffect, useState } from "react"
-import { LuXCircle } from "react-icons/lu"
+import { LuArrowLeft } from "react-icons/lu"
 
 interface Character {
   id: string
   name: string
 }
 
-interface UploadArtModalProps {
-  toggleUploadArtModal: () => void
-  uploadArtModal: boolean
-  characterId: string
+interface UploadArtPageProps {
+  toggleUploadArtModal?: () => void
+  uploadArtModal?: boolean
+  characterId?: string
 }
 
-export default function UploadArtModal({
+export default function UploadArtPage({
   toggleUploadArtModal,
-  uploadArtModal,
-  characterId
-}: UploadArtModalProps) {
+  uploadArtModal = true,
+  characterId = "",
+}: UploadArtPageProps) {
+  const router = useRouter()
   const [artUrl, setArtUrl] = useState("")
   const [title, setTitle] = useState("")
   const [description, setDescription] = useState("")
   const [tags, setTags] = useState<string[]>([])
   const [userAsArtist, setUserAsArtist] = useState(false)
+  const [nsfw, setNsfw] = useState(false)
 
   const [mainCharacterId, setMainCharacterId] = useState("")
   const [taggedCharacterIds, setTaggedCharacterIds] = useState<string[]>([])
+  const [taggedCharacterNames, setTaggedCharacterNames] = useState<
+    Record<string, string>
+  >({})
 
   const [mainSearch, setMainSearch] = useState("")
   const [taggedSearch, setTaggedSearch] = useState("")
   const debouncedMainSearch = useDebounce(mainSearch, 300)
   const debouncedTaggedSearch = useDebounce(taggedSearch, 300)
 
-  const [mainCharacterOptions, setMainCharacterOptions] = useState<Character[]>([])
-  const [taggedCharacterOptions, setTaggedCharacterOptions] = useState<Character[]>([])
+  const [mainCharacterOptions, setMainCharacterOptions] = useState<Character[]>(
+    []
+  )
+  const [taggedCharacterOptions, setTaggedCharacterOptions] = useState<
+    Character[]
+  >([])
 
   const [loading, setLoading] = useState(false)
 
-  useEffect(() => {
+  const resetForm = () => {
     setArtUrl("")
     setTitle("")
     setDescription("")
     setTags([])
     setUserAsArtist(false)
+    setNsfw(false)
     setMainCharacterId(characterId)
     setTaggedCharacterIds([])
+    setTaggedCharacterNames({})
     setMainSearch("")
     setTaggedSearch("")
-  }, [uploadArtModal])
+  }
+
+  useEffect(() => {
+    resetForm()
+  }, [uploadArtModal, characterId])
 
   useEffect(() => {
     const fetchCharacters = async () => {
@@ -88,6 +105,14 @@ export default function UploadArtModal({
     fetchCharacters()
   }, [debouncedTaggedSearch, mainCharacterId, taggedCharacterIds])
 
+  const handleClose = () => {
+    if (toggleUploadArtModal) {
+      toggleUploadArtModal()
+    } else {
+      router.push("/studio/gallery")
+    }
+  }
+
   const handleUpload = async () => {
     if (!artUrl || !title || !mainCharacterId) return
 
@@ -100,10 +125,11 @@ export default function UploadArtModal({
         description,
         tags,
         userAsArtist,
+        nsfw,
         mainCharacterId,
-        taggedCharacterIds
+        taggedCharacterIds,
       })
-      redirect("/studio/gallery")
+      router.push("/studio/gallery")
     } catch (err) {
       console.error("Upload failed", err)
     } finally {
@@ -123,35 +149,39 @@ export default function UploadArtModal({
   }
 
   return (
-    <MarginGutter screenSize="xl" className="px-6 py-5">
-      <div className="flex items-center justify-between">
-        <h2 className="flex items-center gap-2 text-xl font-bold">
-          Upload Artwork
-        </h2>
-        <Button
-          variant="ghost"
-          size="icon"
-          onClick={toggleUploadArtModal}
-        >
-          <LuXCircle size={18} />
+    <MarginGutter screenSize="xl" className="px-6 py-6">
+      <div className="flex items-center gap-3">
+        <Button variant="ghost" size="icon" onClick={handleClose} type="button">
+          <LuArrowLeft size={18} />
         </Button>
+        <div>
+          <h1 className="text-xl font-semibold">Upload artwork</h1>
+          <p className="text-muted-foreground text-sm">
+            Add an image and fill in the details below.
+          </p>
+        </div>
       </div>
 
-      <section className="mt-6 flex flex-col lg:flex-row gap-6">
-        <div className="flex-1">
-          <DropZone aspectRatio="1" setData={setArtUrl} className="w-full" />
-          {artUrl && (
-            <img
-              src={artUrl}
-              alt="Uploaded Art Preview"
-              className="mt-4 w-full rounded-md border object-cover"
-            />
-          )}
+      <div className="mt-8 grid gap-8 lg:grid-cols-[minmax(0,1fr)_minmax(0,1.15fr)]">
+        <div className="space-y-2">
+          <Label className="text-muted-foreground text-xs font-bold uppercase tracking-wide">
+            Artwork
+          </Label>
+          <DropZone
+            value={artUrl}
+            setData={setArtUrl}
+            enableCrop={false}
+            previewSize="large"
+            label="Drop your artwork here"
+            className="w-full"
+          />
         </div>
 
-        <div className="flex-1 space-y-4">
+        <div className="border-border bg-card flex flex-col gap-5 rounded-lg border p-5 sm:p-6">
           <div className="space-y-2">
-            <Label htmlFor="art-title">Title</Label>
+            <Label htmlFor="art-title">
+              Title <span className="text-destructive">*</span>
+            </Label>
             <Input
               id="art-title"
               placeholder="Enter a title"
@@ -159,132 +189,150 @@ export default function UploadArtModal({
               value={title}
             />
           </div>
+
           <div className="space-y-2">
             <Label htmlFor="art-description">Description</Label>
-            <Input
+            <Textarea
               id="art-description"
               placeholder="Optional description"
+              rows={3}
               onChange={(e) => setDescription(e.target.value)}
               value={description}
             />
           </div>
 
           <div className="space-y-2">
-            <Label htmlFor="art-tags">Tags (Press Enter)</Label>
+            <Label htmlFor="art-tags">Tags</Label>
             <Input
               id="art-tags"
-              placeholder="Add tags"
+              placeholder="Press Enter to add a tag"
               onKeyDown={handleTagAdd}
             />
-          </div>
-          <div className="flex flex-wrap gap-2">
-            {tags.map((tag) => (
-              <span
-                key={tag}
-                className="rounded-full bg-blue-600 px-3 py-1 text-sm text-white hover:bg-red-600 cursor-pointer transition"
-                onClick={() => setTags(tags.filter((t) => t !== tag))}
-              >
-                #{tag}
-              </span>
-            ))}
+            {tags.length > 0 && (
+              <div className="flex flex-wrap gap-2 pt-1">
+                {tags.map((tag) => (
+                  <Badge
+                    key={tag}
+                    variant="secondary"
+                    className="cursor-pointer hover:bg-destructive/20"
+                    onClick={() => setTags(tags.filter((t) => t !== tag))}
+                  >
+                    #{tag}
+                  </Badge>
+                ))}
+              </div>
+            )}
           </div>
 
-          <Checkbox
-            inputName="artist"
-            onChange={() => setUserAsArtist(!userAsArtist)}
-            checked={userAsArtist}
-            label="I am the artist of this artwork"
-          />
+          <div className="border-border flex flex-col gap-3 rounded-md border p-4">
+            <Checkbox
+              inputName="artist"
+              onChange={() => setUserAsArtist(!userAsArtist)}
+              checked={userAsArtist}
+              label="I am the artist of this artwork"
+            />
+            <Checkbox
+              inputName="nsfw"
+              onChange={() => setNsfw(!nsfw)}
+              checked={nsfw}
+              label="Mark this artwork as NSFW"
+            />
+          </div>
 
           <div className="space-y-2">
-            <Label htmlFor="main-character">Main Character</Label>
+            <Label htmlFor="main-character">
+              Main character <span className="text-destructive">*</span>
+            </Label>
             <Input
               id="main-character"
               placeholder="Search main character..."
               onChange={(e) => setMainSearch(e.target.value)}
               value={mainSearch}
             />
+            {mainCharacterOptions.length > 0 && (
+              <ul className="border-border bg-popover max-h-40 overflow-y-auto rounded-md border shadow-sm">
+                {mainCharacterOptions.map((char) => (
+                  <li
+                    key={char.id}
+                    className="hover:bg-muted cursor-pointer px-3 py-2 text-sm"
+                    onClick={() => {
+                      setMainCharacterId(char.id)
+                      setMainSearch(char.name)
+                      setMainCharacterOptions([])
+                    }}
+                  >
+                    {char.name}
+                  </li>
+                ))}
+              </ul>
+            )}
           </div>
-          {Array.isArray(mainCharacterOptions) && mainCharacterOptions.length > 0 && (
-            <ul className="mt-2 rounded-md border bg-100 shadow-sm max-h-40 overflow-y-auto">
-              {mainCharacterOptions.map((char) => (
-                <li
-                  key={char.id}
-                  className="cursor-pointer px-3 py-2 hover:bg-100"
-                  onClick={() => {
-                    setMainCharacterId(char.id)
-                    setMainSearch(char.name)
-                    setMainCharacterOptions([])
-                  }}
-                >
-                  {char.name}
-                </li>
-              ))}
-            </ul>
-          )}
 
           <div className="space-y-2">
-            <Label htmlFor="tag-characters">Tag Characters</Label>
+            <Label htmlFor="tag-characters">Tag characters</Label>
             <Input
               id="tag-characters"
               placeholder="Search and select characters..."
               onChange={(e) => setTaggedSearch(e.target.value)}
               value={taggedSearch}
             />
-          </div>
-          {taggedCharacterOptions.length > 0 && (
-            <ul className="mt-2 rounded-md border bg-100 shadow-sm max-h-40 overflow-y-auto">
-              {taggedCharacterOptions.map((char) => (
-                <li
-                  key={char.id}
-                  className="cursor-pointer px-3 py-2 hover:bg-100"
-                  onClick={() => {
-                    setTaggedCharacterIds((prev) => [...prev, char.id])
-                    setTaggedSearch("")
-                    setTaggedCharacterOptions([])
-                  }}
-                >
-                  {char.name}
-                </li>
-              ))}
-            </ul>
-          )}
-          <div className="flex flex-wrap gap-2 mt-2">
-            {taggedCharacterIds.map((id) => (
-              <span
-                key={id}
-                className="rounded-full bg-purple-600 px-3 py-1 text-sm text-white hover:bg-red-600 cursor-pointer transition"
-                onClick={() => setTaggedCharacterIds(taggedCharacterIds.filter((x) => x !== id))}
-              >
-                {id}
-              </span>
-            ))}
+            {taggedCharacterOptions.length > 0 && (
+              <ul className="border-border bg-popover max-h-40 overflow-y-auto rounded-md border shadow-sm">
+                {taggedCharacterOptions.map((char) => (
+                  <li
+                    key={char.id}
+                    className="hover:bg-muted cursor-pointer px-3 py-2 text-sm"
+                    onClick={() => {
+                      setTaggedCharacterIds((prev) => [...prev, char.id])
+                      setTaggedCharacterNames((prev) => ({
+                        ...prev,
+                        [char.id]: char.name,
+                      }))
+                      setTaggedSearch("")
+                      setTaggedCharacterOptions([])
+                    }}
+                  >
+                    {char.name}
+                  </li>
+                ))}
+              </ul>
+            )}
+            {taggedCharacterIds.length > 0 && (
+              <div className="flex flex-wrap gap-2 pt-1">
+                {taggedCharacterIds.map((id) => (
+                  <Badge
+                    key={id}
+                    variant="outline"
+                    className="cursor-pointer hover:bg-destructive/20"
+                    onClick={() => {
+                      setTaggedCharacterIds(
+                        taggedCharacterIds.filter((x) => x !== id)
+                      )
+                      setTaggedCharacterNames((prev) => {
+                        const next = { ...prev }
+                        delete next[id]
+                        return next
+                      })
+                    }}
+                  >
+                    {taggedCharacterNames[id] ?? id}
+                  </Badge>
+                ))}
+              </div>
+            )}
           </div>
         </div>
-      </section>
+      </div>
 
-      <div className="mt-6 flex justify-end gap-4">
-        <Button
-          variant="outline"
-          onClick={() => {
-            setArtUrl("")
-            setTitle("")
-            setDescription("")
-            setTags([])
-            setUserAsArtist(false)
-            setMainCharacterId("")
-            setTaggedCharacterIds([])
-            setMainSearch("")
-            setTaggedSearch("")
-          }}
-        >
+      <div className="border-border mt-8 flex justify-end gap-3 border-t pt-6">
+        <Button variant="outline" onClick={resetForm} type="button">
           Clear
         </Button>
         <Button
           onClick={handleUpload}
           disabled={loading || !artUrl || !title || !mainCharacterId}
         >
-          {loading ? "Uploading..." : "Upload Art"}
+          {loading ? "Uploading..." : "Upload artwork"}
         </Button>
       </div>
     </MarginGutter>

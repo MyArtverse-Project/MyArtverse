@@ -1,229 +1,474 @@
+"use client"
+
 import Checkbox from "@/components/layouts/Forms/Checkbox"
 import DropZone from "@/components/Modals/DropZone"
+import { Badge } from "@/components/ui/badge"
 import { Button } from "@/components/ui/button"
 import { Input } from "@/components/ui/input"
 import { Label } from "@/components/ui/label"
 import { Textarea } from "@/components/ui/textarea"
-import { Character } from "@/types/characters"
+import {
+  Tooltip,
+  TooltipContent,
+  TooltipProvider,
+  TooltipTrigger,
+} from "@/components/ui/tooltip"
+import { Character, ReferenceSheet } from "@/types/characters"
+import { createRefSheet } from "@/utils/api"
+import { extractImageColors } from "@/utils/extractImageColors"
+import { uploadImageFile } from "@/utils/uploadImage"
 import Image from "next/image"
-import { useRef, useState } from "react"
-import { LuGripVertical, LuPlus } from "react-icons/lu"
+import { useCallback, useEffect, useRef, useState } from "react"
+import {
+  LuHelpCircle,
+  LuCopy,
+  LuGripVertical,
+  LuPlus,
+  LuTrash2,
+} from "react-icons/lu"
+import LinkedCharacterSelect, {
+  type LinkedCharacter,
+} from "./LinkedCharacterSelect"
+import { mapVariantFromApi, refSheetVariantPreviewClassName } from "./refSheetUtils"
+
+export type RefSheetFormData = Parameters<typeof createRefSheet>[0]
 
 export interface ReferenceVariant {
+  id?: string
   title: string
-  artist: string
   description: string
+  artist: string
   image: string
   primary: boolean
+  nsfw: boolean
   colors: string[]
+}
+
+type ApiVariant = ReferenceSheet["variants"][number] & {
+  id?: string
+  title?: string
+  description?: string
+  artistExternal?: string
+  colors?: string[]
 }
 
 export function ReferenceConfigForm({
   image,
   character,
+  characters,
+  initialRefSheet,
   onClose,
+  formId = "ref-sheet-form",
 }: {
   image: string
   character: Character
-  onClose: (formData: any) => void
+  characters: LinkedCharacter[]
+  initialRefSheet?: ReferenceSheet
+  onClose: (formData: RefSheetFormData) => void
+  formId?: string
 }) {
-  const [name, setName] = useState("")
-  const [description, setDescription] = useState("")
-  const [artist, setArtist] = useState("")
-  const [primary, setPrimary] = useState(false)
-  const [linkedTo, setLinkedTo] = useState(character.id)
-  const fileInputRef = useRef<HTMLInputElement | null>(null)
-  const [referenceVariants, setReferenceVariants] = useState<ReferenceVariant[]>([
-    {
-      title: "",
-      artist: "",
-      description: "",
-      image,
-      primary: true,
-      colors: ["#000000", "#ffffff"],
-    },
-  ])
+  const isEditing = !!initialRefSheet
 
-  const updateVariant = (index: number, key: keyof ReferenceVariant, value: any) => {
+  const [name, setName] = useState(initialRefSheet?.name ?? "")
+  const [linkedTo, setLinkedTo] = useState(character.id)
+  const [referenceVariants, setReferenceVariants] = useState<ReferenceVariant[]>(
+    () => {
+      if (initialRefSheet?.variants?.length) {
+        return (initialRefSheet.variants as ApiVariant[]).map((v) =>
+          mapVariantFromApi(v, initialRefSheet.artist)
+        )
+      }
+      return [
+        {
+          title: "",
+          description: "",
+          artist: "",
+          image,
+          primary: true,
+          nsfw: false,
+          colors: [],
+        },
+      ]
+    }
+  )
+
+  const applyColorsToVariant = useCallback(
+    async (index: number, imageUrl: string) => {
+      try {
+        const colors = await extractImageColors(imageUrl)
+        setReferenceVariants((prev) => {
+          const next = [...prev]
+          if (next[index]) next[index] = { ...next[index], colors }
+          return next
+        })
+      } catch {
+        // Keep existing palette if extraction fails (e.g. CORS).
+      }
+    },
+    []
+  )
+
+  useEffect(() => {
+    if (!isEditing) {
+      applyColorsToVariant(0, image)
+    }
+  }, [image, applyColorsToVariant, isEditing])
+
+  const updateVariant = (
+    index: number,
+    key: keyof ReferenceVariant,
+    value: ReferenceVariant[keyof ReferenceVariant]
+  ) => {
     setReferenceVariants((prev) => {
-      const newVariants = [...prev]
-      newVariants[index] = { ...newVariants[index], [key]: value }
-      return newVariants
+      const next = [...prev]
+      next[index] = { ...next[index], [key]: value }
+      return next
     })
   }
 
-  const handleSubmit = async () => {
+  const handleSubmit = () => {
+    if (!name.trim()) return
+
     onClose({
       characterId: linkedTo,
       refSheet: {
-        name,
-        description,
-        variants: referenceVariants
-      }
+        ...(initialRefSheet?.id ? { id: initialRefSheet.id } : {}),
+        name: name.trim(),
+        description: referenceVariants[0]?.description ?? "",
+        primary: referenceVariants.some((variant) => variant.primary),
+        variants: referenceVariants.map((variant) => ({
+          ...(variant.id ? { id: variant.id } : {}),
+          title: variant.title,
+          description: variant.description,
+          artist: variant.artist,
+          image: variant.image,
+          primary: variant.primary,
+          nsfw: variant.nsfw,
+          colors: variant.colors,
+        })),
+      },
     })
   }
 
-  const updateColor = (index: number, colorIndex: number, value: string) => {
-    const newVariants = [...referenceVariants]
-    newVariants[index].colors[colorIndex] = value
-    setReferenceVariants(newVariants)
-  }
-
-  const addColor = (index: number) => {
-    const newVariants = [...referenceVariants]
-    newVariants[index].colors.push("#cccccc")
-    setReferenceVariants(newVariants)
-  }
-
-  const handleButtonClick = () => {
-    fileInputRef.current?.click()
-  }
-
-  const handleFileChange = (e: React.ChangeEvent<HTMLInputElement>) => {
-    const file = e.target.files?.[0]
-    if (file) {
-      const reader = new FileReader()
-      reader.onload = (event) => {
-        const url = event.target?.result as string
-        setReferenceVariants((prev) => {
-          const newVariants = [...prev]
-          newVariants[0].image = url
-          return newVariants
-        })
-      }
-      reader.readAsDataURL(file)
-    }
-  }
-
   const addVariant = (url: string) => {
-    setReferenceVariants((prev) => [
-      ...prev,
-      {
-        title: "",
-        artist: "",
-        description: "",
-        image: url,
-        primary: false,
-        colors: [],
-      },
-    ])
+    setReferenceVariants((prev) => {
+      const nextIndex = prev.length
+      void applyColorsToVariant(nextIndex, url)
+      return [
+        ...prev,
+        {
+          title: "",
+          description: "",
+          artist: "",
+          image: url,
+          primary: false,
+          nsfw: false,
+          colors: [] as string[],
+        },
+      ]
+    })
+  }
+
+  const removeVariant = (index: number) => {
+    setReferenceVariants((prev) => {
+      if (prev.length <= 1) return prev
+      const next = prev.filter((_, i) => i !== index)
+      if (!next.some((variant) => variant.primary)) {
+        next[0] = { ...next[0], primary: true }
+      }
+      return next
+    })
+  }
+
+  const setDefaultVariant = (index: number) => {
+    setReferenceVariants((prev) =>
+      prev.map((variant, i) => ({ ...variant, primary: i === index }))
+    )
+  }
+
+  const copyPalette = async (colors: string[]) => {
+    if (!colors.length) return
+    await navigator.clipboard.writeText(colors.join(", "))
   }
 
   return (
-    <div className="p-6 flex flex-col gap-6">
-      <div className="flex flex-col gap-4">
-        <div className="flex flex-row gap-4">
-          <div className="space-y-2 flex-1">
-            <Label htmlFor="ref-name">Name</Label>
-            <Input id="ref-name" value={name} onChange={(e) => setName(e.target.value)} />
+    <TooltipProvider>
+      <form
+        id={formId}
+        onSubmit={(e) => {
+          e.preventDefault()
+          handleSubmit()
+        }}
+        className="flex min-w-0 flex-col gap-6"
+      >
+        <p className="text-muted-foreground text-sm">
+          Upload reference images, add details for each variant, and link the
+          sheet to a character.
+        </p>
+
+        <div className="grid gap-4 sm:grid-cols-2">
+          <div className="space-y-2">
+            <Label htmlFor="ref-name">
+              Name <span className="text-destructive">*</span>
+            </Label>
+            <Input
+              id="ref-name"
+              value={name}
+              onChange={(e) => setName(e.target.value)}
+              required
+            />
           </div>
-          <div className="space-y-2 flex-1">
-            <Label htmlFor="ref-linked-to">Linked to</Label>
-            <Input id="ref-linked-to" value={linkedTo} onChange={(e) => setLinkedTo(e.target.value)} />
-          </div>
-        </div>
-        <div className="space-y-2">
-          <Label htmlFor="ref-description">Description</Label>
-          <Textarea
-            id="ref-description"
-            value={description}
-            onChange={(e) => setDescription(e.target.value)}
+          <LinkedCharacterSelect
+            characters={characters}
+            value={linkedTo}
+            onChange={setLinkedTo}
           />
         </div>
-        <div className="space-y-2">
-          <Label htmlFor="ref-artist">Artist Credit (Url Link or User)</Label>
-          <Input
-            id="ref-artist"
-            value={artist}
-            onChange={(e) => setArtist(e.target.value)}
-          />
+
+        <div className="space-y-3">
+          <Label className="text-muted-foreground text-xs font-bold uppercase tracking-wide">
+            Reference image(s)
+          </Label>
+
+          <div className="flex flex-col gap-4">
+            {referenceVariants.map((variant, index) => (
+              <ReferenceVariantCard
+                key={variant.id ?? `${variant.image}-${index}`}
+                variant={variant}
+                index={index}
+                canDelete={referenceVariants.length > 1}
+                onUpdate={updateVariant}
+                onRemove={() => removeVariant(index)}
+                onSetDefault={() => setDefaultVariant(index)}
+                onReplaceImage={async (url) => {
+                  updateVariant(index, "image", url)
+                  await applyColorsToVariant(index, url)
+                }}
+                onCopyPalette={() => copyPalette(variant.colors)}
+                onAddColor={() =>
+                  updateVariant(index, "colors", [...variant.colors, "#cccccc"])
+                }
+              />
+            ))}
+          </div>
         </div>
-        <Checkbox
-          inputName="primary"
-          label="Mark reference sheet as primary"
-          checked={primary}
-          onChange={() => setPrimary(!primary)}
+
+        <DropZone
+          setData={addVariant}
+          label="Add more by dropping images here"
+          enableCrop={false}
+          className="border-border w-full max-w-full"
         />
+      </form>
+    </TooltipProvider>
+  )
+}
+
+function ReferenceVariantCard({
+  variant,
+  index,
+  canDelete,
+  onUpdate,
+  onRemove,
+  onSetDefault,
+  onReplaceImage,
+  onCopyPalette,
+  onAddColor,
+}: {
+  variant: ReferenceVariant
+  index: number
+  canDelete: boolean
+  onUpdate: (
+    index: number,
+    key: keyof ReferenceVariant,
+    value: ReferenceVariant[keyof ReferenceVariant]
+  ) => void
+  onRemove: () => void
+  onSetDefault: () => void
+  onReplaceImage: (url: string) => Promise<void>
+  onCopyPalette: () => void
+  onAddColor: () => void
+}) {
+  const fileInputRef = useRef<HTMLInputElement>(null)
+  const [isReplacing, setIsReplacing] = useState(false)
+
+  const handleReplace = async (e: React.ChangeEvent<HTMLInputElement>) => {
+    const file = e.target.files?.[0]
+    if (!file) return
+
+    setIsReplacing(true)
+    try {
+      const url = await uploadImageFile(file)
+      await onReplaceImage(url)
+    } finally {
+      setIsReplacing(false)
+      e.target.value = ""
+    }
+  }
+
+  return (
+    <div className="flex min-w-0 gap-3">
+      <div className="text-muted-foreground flex shrink-0 items-start pt-8">
+        <LuGripVertical size={20} className="cursor-move" />
       </div>
 
-      {referenceVariants.map((variant, index) => (
-        <div
-          key={index}
-          className="flex flex-row gap-6 border border-400 px-4 py-12 rounded-lg bg-100"
-        >
-          <div className="flex flex-row items-center">
-            <LuGripVertical
-              size={20}
-              className="text-700 cursor-move z-10 mr-4"
+      <div className="border-border bg-card flex min-w-0 flex-1 flex-col overflow-hidden rounded-lg border lg:flex-row lg:items-stretch">
+        <div className="flex w-full shrink-0 flex-col gap-3 p-4 lg:w-72 lg:self-stretch">
+          <div className={refSheetVariantPreviewClassName}>
+            <Image
+              src={variant.image}
+              alt={variant.title || "Reference preview"}
+              fill
+              className="object-cover object-center"
+              unoptimized
             />
-            <div className="w-80 h-64 flex flex-col">
-              <Image
-                width={320}
-                height={256}
-                src={variant.image}
-                alt="Reference Preview"
-                className="w-80 h-64 rounded object-contain"
-              />
-              <div className="flex items-start justify-start">
-                <input
-                  type="file"
-                  ref={fileInputRef}
-                  onChange={handleFileChange}
-                  accept="image/*"
-                  className="hidden"
-                />
-                <Button variant="outline" className="mt-2 w-80" onClick={handleButtonClick}>
-                  Replace Image
-                </Button>
-              </div>
-            </div>
           </div>
-          <div className="flex-1 flex flex-col gap-3">
-            <div className="space-y-2">
-              <Label htmlFor={`variant-title-${index}`}>Variant Title</Label>
+          <input
+            ref={fileInputRef}
+            type="file"
+            accept="image/png,image/jpeg,image/jpg"
+            className="hidden"
+            onChange={handleReplace}
+          />
+          <Button
+            type="button"
+            variant="outline"
+            className="w-full shrink-0"
+            disabled={isReplacing}
+            onClick={() => fileInputRef.current?.click()}
+          >
+            {isReplacing ? "Uploading..." : "Replace image"}
+          </Button>
+        </div>
+
+        <div className="flex min-w-0 flex-1 flex-col gap-4 p-4">
+          <div className="flex items-start gap-2">
+            <div className="min-w-0 flex-1 space-y-2">
+              <Label htmlFor={`variant-title-${index}`}>Title</Label>
               <Input
                 id={`variant-title-${index}`}
                 value={variant.title}
-                onChange={(e) => updateVariant(index, "title", e.target.value)}
+                onChange={(e) => onUpdate(index, "title", e.target.value)}
               />
             </div>
-            <Checkbox
-              inputName={`primary-${index}`}
-              label="Set this reference image by default"
-              checked={variant.primary}
-              onChange={() =>
-                setReferenceVariants((prev) =>
-                  prev.map((v, i) => ({ ...v, primary: i === index }))
-                )
-              }
-            />
+            {canDelete && (
+              <Button
+                type="button"
+                variant="ghost"
+                size="icon"
+                className="mt-7 shrink-0"
+                onClick={onRemove}
+                aria-label="Remove reference image"
+              >
+                <LuTrash2 size={18} />
+              </Button>
+            )}
+          </div>
 
-            <div>
-              <p className="text-sm font-medium text-700 mb-1">Color Palette</p>
-              <div className="flex flex-wrap gap-2 items-center">
-                {variant.colors.map((color, cIndex) => (
-                  <div key={cIndex} className="flex items-center gap-1">
-                    <input
-                      type="color"
-                      value={color}
-                      onChange={(e) => updateColor(index, cIndex, e.target.value)}
-                      className="w-6 h-6 rounded-full border"
-                    />
-                  </div>
-                ))}
-                <Button variant="ghost" size="icon" onClick={() => addColor(index)}>
-                  <LuPlus />
+          <div className="flex flex-col gap-2">
+            <div className="flex items-center gap-2">
+              <Checkbox
+                inputName={`primary-${index}`}
+                label="Set this reference image by default"
+                checked={variant.primary}
+                onChange={onSetDefault}
+              />
+              <Tooltip>
+                <TooltipTrigger asChild>
+                  <button type="button" className="text-muted-foreground">
+                    <LuHelpCircle size={16} />
+                  </button>
+                </TooltipTrigger>
+                <TooltipContent>
+                  The default image is shown first on your character profile.
+                </TooltipContent>
+              </Tooltip>
+            </div>
+            <Checkbox
+              inputName={`nsfw-${index}`}
+              label="Mark this reference as NSFW"
+              checked={variant.nsfw}
+              onChange={() => onUpdate(index, "nsfw", !variant.nsfw)}
+            />
+          </div>
+
+          <div className="space-y-2">
+            <Label htmlFor={`variant-description-${index}`}>
+              Description <span className="text-destructive">*</span>
+            </Label>
+            <Textarea
+              id={`variant-description-${index}`}
+              value={variant.description}
+              rows={4}
+              onChange={(e) => onUpdate(index, "description", e.target.value)}
+            />
+          </div>
+
+          <div className="space-y-2">
+            <Label
+              htmlFor={`variant-artist-${index}`}
+              className="text-muted-foreground text-xs font-bold uppercase tracking-wide"
+            >
+              Artist credit
+            </Label>
+            <Input
+              id={`variant-artist-${index}`}
+              value={variant.artist}
+              placeholder="@handle or URL"
+              onChange={(e) => onUpdate(index, "artist", e.target.value)}
+            />
+          </div>
+
+          <div className="space-y-2">
+            <div className="flex flex-wrap items-center gap-2">
+              <Label className="text-muted-foreground text-xs font-bold uppercase tracking-wide">
+                Color palette
+              </Label>
+              <Badge variant="outline">Auto-generated</Badge>
+              <div className="ml-auto flex items-center gap-1">
+                <Button
+                  type="button"
+                  variant="ghost"
+                  size="icon"
+                  onClick={onAddColor}
+                  aria-label="Add color"
+                >
+                  <LuPlus size={16} />
+                </Button>
+                <Button
+                  type="button"
+                  variant="ghost"
+                  size="icon"
+                  onClick={onCopyPalette}
+                  aria-label="Copy palette"
+                >
+                  <LuCopy size={16} />
                 </Button>
               </div>
             </div>
+            <div className="flex flex-wrap items-center gap-2">
+              {variant.colors.map((color, colorIndex) => (
+                <label
+                  key={`${color}-${colorIndex}`}
+                  className="border-border relative size-8 overflow-hidden rounded-full border"
+                  style={{ backgroundColor: color }}
+                >
+                  <input
+                    type="color"
+                    value={color}
+                    onChange={(e) => {
+                      const next = [...variant.colors]
+                      next[colorIndex] = e.target.value
+                      onUpdate(index, "colors", next)
+                    }}
+                    className="absolute inset-0 cursor-pointer opacity-0"
+                  />
+                </label>
+              ))}
+            </div>
           </div>
         </div>
-      ))}
-      <DropZone setData={addVariant} label="Add more by dropping images here" />
-
-      <Button className="self-end mt-4" onClick={handleSubmit}>
-        Save Reference
-      </Button>
+      </div>
     </div>
   )
 }

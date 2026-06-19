@@ -83,6 +83,7 @@ export default function DropZone({
   aspectRatio = "1",
   label = "Drag and drop files here",
   enableCrop = true,
+  previewSize = "default",
 }: {
   setData: (url: string) => void
   className?: string
@@ -90,6 +91,7 @@ export default function DropZone({
   aspectRatio?: string,
   label?: string
   enableCrop?: boolean
+  previewSize?: "default" | "large"
 }) {
   const [isDragging, setIsDragging] = useState(false)
   const [imageUrl, setImageUrl] = useState<string | null>(value)
@@ -222,11 +224,20 @@ export default function DropZone({
     return img
   }
 
+  const hasPreview = !!(displayImg() && !showCrop && !uploading)
+  const isLargePreview = previewSize === "large"
+
   return (
     <div
       className={cn(
-        "rounded-md border-2 border-dashed p-10 text-center transition-colors",
-        isDragging ? "bg-300" : "bg-100",
+        "rounded-lg border text-center transition-colors",
+        hasPreview
+          ? "border-border bg-card p-4"
+          : cn(
+              "border-2 border-dashed",
+              isLargePreview ? "p-8" : "p-10",
+              isDragging ? "bg-muted/50" : "bg-muted/20"
+            ),
         className
       )}
       onDragEnter={handleDrag}
@@ -312,35 +323,59 @@ export default function DropZone({
       ) : uploading ? (
         <span className="text-lg font-bold">Uploading...</span>
       ) : displayImg() ? (
-        <div className="flex flex-col items-center gap-4">
-          <img
-            src={displayImg() as string}
-            alt="Uploaded"
-            style={{
-              maxWidth: 240,
-              maxHeight: 240,
-              objectFit: "contain",
-            }}
-          />
-          <Button onClick={openFilePicker} variant="secondary" type="button">
-            Change image
-          </Button>
-          {error && <span className="text-red-500">{error}</span>}
-        </div>
+        isLargePreview ? (
+          <div className="flex w-full flex-col gap-3 text-left">
+            <div className="flex min-h-72 w-full items-center justify-center overflow-hidden rounded-md sm:min-h-80">
+              <img
+                src={displayImg() as string}
+                alt="Uploaded"
+                className="max-h-[min(28rem,55vh)] w-full object-contain object-center"
+              />
+            </div>
+            <Button
+              onClick={openFilePicker}
+              variant="outline"
+              className="w-full shrink-0"
+              type="button"
+            >
+              Replace image
+            </Button>
+            {error && <span className="text-destructive text-sm">{error}</span>}
+          </div>
+        ) : (
+          <div className="flex flex-col items-center gap-4">
+            <img
+              src={displayImg() as string}
+              alt="Uploaded"
+              style={{
+                maxWidth: 240,
+                maxHeight: 240,
+                objectFit: "contain",
+              }}
+            />
+            <Button onClick={openFilePicker} variant="secondary" type="button">
+              Change image
+            </Button>
+            {error && <span className="text-destructive text-sm">{error}</span>}
+          </div>
+        )
       ) : (
-        <div className="flex flex-col items-center">
+        <div className={cn("flex flex-col items-center", isLargePreview && "min-h-72 justify-center gap-4")}>
           <button
-            className="mb-6 flex items-center justify-center rounded-full bg-200 p-8"
+            className={cn(
+              "flex items-center justify-center rounded-full bg-muted",
+              isLargePreview ? "p-6" : "mb-6 p-8"
+            )}
             onClick={openFilePicker}
             type="button"
           >
-            <LuUpload size={48} />
+            <LuUpload size={isLargePreview ? 40 : 48} />
           </button>
-          <span className="text-lg font-bold">{label}</span>
-          <span className="mt-4">
-            Max size: 10MB, Supported formats: .jpg, .png
+          <span className="text-lg font-semibold">{label}</span>
+          <span className="text-muted-foreground text-sm">
+            Max size: 10MB · .jpg, .png
           </span>
-          {error && <span className="text-red-500">{error}</span>}
+          {error && <span className="text-destructive text-sm">{error}</span>}
         </div>
       )}
     </div>
