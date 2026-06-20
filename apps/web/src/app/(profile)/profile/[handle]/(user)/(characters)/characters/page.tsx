@@ -23,12 +23,21 @@ export default async function Page({ params }: AsyncProps) {
   const characters = await fetchUserCharacters(handle)
   const { folders, id } = await fetchUser(handle)
   const self = await fetchUserData().catch(() => null)
+  const isCharacterFolder = (folder: { contentType?: string }) =>
+    !folder.contentType || folder.contentType === "characters"
+  const characterFolders = folders
+    .filter(isCharacterFolder)
+    .map((folder) => ({
+      ...folder,
+      children: folder.children?.filter(isCharacterFolder),
+    }))
+
   return (
     <MarginClamp>
       <CharacterView
         handle={handle}
         characters={characters}
-        folders={folders}
+        folders={characterFolders}
         owner={self ? self.id === id : false}
       />
     </MarginClamp>

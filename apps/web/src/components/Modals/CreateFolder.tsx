@@ -14,7 +14,8 @@ export default function CreateFolderModal({
   setSelectedIndex,
   parentId = null,
   category,
-  colors
+  colors,
+  characterId,
 }: {
   createFolderModal: boolean
   toggleCreateFolderModal: () => void
@@ -23,29 +24,36 @@ export default function CreateFolderModal({
   setSelectedIndex: (index: number) => void
   parentId: string | null
   category: "artworks" | "characters"
+  characterId?: string
 }) {
   const [folderName, setFolderName] = useState<string>("")
+
   const onSubmit = async () => {
     if (!folderName) {
       return alert("Please enter a folder name")
     }
 
-    const data = await createFolder({
-      name: folderName,
-      contentType: category,
-      parentId,
-      color: colors[selectedIndex],
-    })
+    try {
+      const data = await createFolder({
+        name: folderName,
+        contentType: category,
+        parentId,
+        color: colors[selectedIndex],
+        characterId,
+      })
 
-    if (data) {
-      toggleCreateFolderModal()
-      alert("Folder created")
-      // TODO: Update the folder list
-      window.location.reload()
+      if (data) {
+        toggleCreateFolderModal()
+        setFolderName("")
+        window.location.reload()
+        return
+      }
+
+      alert("Folder creation failed")
+    } catch (error) {
+      console.error("Folder creation failed", error)
+      alert("Folder creation failed")
     }
-
-    alert("Folder successfully failed")
-    return
   }
 
   return (

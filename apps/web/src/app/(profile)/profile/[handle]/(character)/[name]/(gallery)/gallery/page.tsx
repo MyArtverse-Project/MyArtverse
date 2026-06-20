@@ -1,6 +1,11 @@
-import ArtworkGrid from "@/components/ArtworkGrid"
+import GalleryView from "./GalleryView"
 import MarginClamp from "@/components/layouts/Layouts/MarginClamp"
-import { getArtworks } from "@/utils/api"
+import {
+  fetchCharacter,
+  fetchCharacterGalleryFolders,
+  fetchUserData,
+  getArtworks,
+} from "@/utils/api"
 import { BRAND } from "@mav/shared"
 import type { Metadata } from "next"
 
@@ -8,8 +13,8 @@ export async function generateMetadata(): Promise<Metadata> {
   const userPlaceholder = "User"
 
   return {
-    title: `${userPlaceholder}'s characters`,
-    description: `See ${userPlaceholder}'s characters and others on ${BRAND} by creating an account!`,
+    title: `${userPlaceholder}'s gallery`,
+    description: `See ${userPlaceholder}'s gallery on ${BRAND} by creating an account!`,
   }
 }
 
@@ -19,15 +24,23 @@ export default async function Page({
   params: Promise<{ handle: string; name: string }>
 }) {
   const { handle, name } = await params
-  const artworks = await getArtworks(handle, name)
+  const [character, artworks, self] = await Promise.all([
+    fetchCharacter(handle, name),
+    getArtworks(handle, name),
+    fetchUserData().catch(() => null),
+  ])
+
+  const folders = await fetchCharacterGalleryFolders(character.id).catch(() => [])
+  const isOwner = self?.handle === character.owner.handle
 
   return (
     <MarginClamp>
-      {artworks.length > 0 ? (
-        <ArtworkGrid artworks={artworks} className="gap-1.5" />
-      ) : (
-        <div>No artworks found</div>
-      )}
+      <GalleryView
+        characterId={character.id}
+        artworks={artworks}
+        folders={folders}
+        owner={isOwner}
+      />
     </MarginClamp>
   )
 }

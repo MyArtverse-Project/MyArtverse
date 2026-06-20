@@ -1,10 +1,12 @@
 "use client"
 
 import GridResponsive from "@/components/layouts/Layouts/GridResponsive"
+import MoveArtworkMenu from "@/components/MoveArtworkMenu"
 import NsfwMedia from "@/components/NsfwMedia"
 import { Button } from "@/components/ui/button"
-import type { Artwork } from "@/types/characters"
+import type { Artwork, Folder } from "@/types/characters"
 import { cn } from "@/lib/utils"
+import { setFolderDragData } from "@/utils/folderDrag"
 import Link from "next/link"
 import { LuTrash2 } from "react-icons/lu"
 
@@ -13,13 +15,19 @@ export default function ArtworkGrid({
   className,
   tileClassName,
   editable = false,
+  manageable = false,
+  folders = [],
   onDelete,
+  onMoved,
 }: {
   artworks: Artwork[]
   className?: string
   tileClassName?: string
   editable?: boolean
+  manageable?: boolean
+  folders?: Folder[]
   onDelete?: (artwork: Artwork) => void
+  onMoved?: (artworkId: string, folderId: string | null) => void
 }) {
   const items = artworks.filter((artwork) => artwork.artworkUrl)
 
@@ -32,7 +40,7 @@ export default function ArtworkGrid({
       {items.map((artwork) => {
         const tileClass = cn(
           "border-border relative aspect-square overflow-hidden rounded-xl border",
-          editable &&
+          (editable || manageable) &&
             "hover:ring-primary/40 focus-visible:ring-primary transition-shadow hover:ring-2 focus-visible:ring-2 focus-visible:outline-none",
           tileClassName
         )
@@ -43,7 +51,7 @@ export default function ArtworkGrid({
             alt={artwork.altText ?? artwork.title ?? "Artwork"}
             nsfw={!!artwork.nsfw}
             fill
-            editable={editable}
+            editable={editable || manageable}
             className="object-cover transition-transform duration-300 group-hover:scale-105"
             containerClassName="rounded-xl"
           />
@@ -75,6 +83,26 @@ export default function ArtworkGrid({
                   <LuTrash2 size={16} />
                 </Button>
               ) : null}
+            </div>
+          )
+        }
+
+        if (manageable) {
+          return (
+            <div
+              key={artwork.id}
+              className={cn(tileClass, "group cursor-grab active:cursor-grabbing")}
+              draggable
+              onDragStart={(event) => {
+                setFolderDragData(event, { kind: "artwork", id: artwork.id })
+              }}
+            >
+              {media}
+              <MoveArtworkMenu
+                artwork={artwork}
+                folders={folders}
+                onMoved={onMoved}
+              />
             </div>
           )
         }

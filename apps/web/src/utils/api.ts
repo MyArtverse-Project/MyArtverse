@@ -4,6 +4,7 @@ import type {
   Artwork,
   Character,
   CharacterResponse,
+  Folder,
   ReferenceSheet
 } from "@/types/characters"
 import type { DashboardPanel, UserType } from "@/types/users"
@@ -371,8 +372,36 @@ export const createFolder = async (body: {
   contentType: "characters" | "artworks"
   parentId: string | null
   color: string
+  characterId?: string
 }) => {
-  return apiWithAuth("POST", "/v1/folders/create", body)
+  return apiWithAuth("POST", "/v1/folders/create", {
+    ...body,
+    contentType: body.contentType === "artworks" ? "art" : body.contentType,
+  })
+}
+
+export const fetchCharacterGalleryFolders = async (characterId: string) => {
+  return apiWithoutAuth<Folder[]>("GET", `/v1/folders/character/${characterId}`)
+}
+
+export const assignArtworkToFolder = async (
+  artworkId: string,
+  folderId: string | null
+) => {
+  return apiWithAuth(
+    "PUT",
+    `/v1/art/${artworkId}/folder/${folderId ?? "root"}`
+  )
+}
+
+export const assignCharacterToFolder = async (
+  characterId: string,
+  folderId: string | null
+) => {
+  return apiWithAuth(
+    "PUT",
+    `/v1/character/${characterId}/folder/${folderId ?? "root"}`
+  )
 }
 
 export const createCharacter = async (body: {

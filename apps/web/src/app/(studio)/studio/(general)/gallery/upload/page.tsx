@@ -9,8 +9,8 @@ import { Label } from "@/components/ui/label"
 import { MarginGutter } from "@/components/ui/group"
 import { Textarea } from "@/components/ui/textarea"
 import { useDebounce } from "@/hooks/useDebounce"
-import { search, uploadArt } from "@/utils/api"
-import { useRouter } from "next/navigation"
+import { fetchCharacterById, search, uploadArt } from "@/utils/api"
+import { useRouter, useSearchParams } from "next/navigation"
 import { useEffect, useState } from "react"
 import { LuArrowLeft } from "react-icons/lu"
 
@@ -31,6 +31,9 @@ export default function UploadArtPage({
   characterId = "",
 }: UploadArtPageProps) {
   const router = useRouter()
+  const searchParams = useSearchParams()
+  const queryCharacterId = searchParams.get("characterId") ?? ""
+  const resolvedCharacterId = characterId || queryCharacterId
   const [artUrl, setArtUrl] = useState("")
   const [title, setTitle] = useState("")
   const [description, setDescription] = useState("")
@@ -65,7 +68,7 @@ export default function UploadArtPage({
     setTags([])
     setUserAsArtist(false)
     setNsfw(false)
-    setMainCharacterId(characterId)
+    setMainCharacterId(resolvedCharacterId)
     setTaggedCharacterIds([])
     setTaggedCharacterNames({})
     setMainSearch("")
@@ -74,7 +77,20 @@ export default function UploadArtPage({
 
   useEffect(() => {
     resetForm()
-  }, [uploadArtModal, characterId])
+  }, [uploadArtModal, resolvedCharacterId])
+
+  useEffect(() => {
+    if (!resolvedCharacterId) return
+
+    fetchCharacterById(resolvedCharacterId)
+      .then((character) => {
+        setMainCharacterId(character.id)
+        setMainSearch(character.name)
+      })
+      .catch((error) => {
+        console.error("Failed to prefill character", error)
+      })
+  }, [resolvedCharacterId])
 
   useEffect(() => {
     const fetchCharacters = async () => {

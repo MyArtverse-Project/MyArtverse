@@ -73,6 +73,7 @@ export interface Character {
     adoptee: UserType
   }
   favoritedBy: UserType[]
+  folder?: Folder | null
 }
 
 export interface Artwork {
@@ -94,6 +95,8 @@ export interface Artwork {
   title?: string
   favoritedBy: UserType[]
   owner: UserType
+  folder?: Folder | null
+  folderId?: string | null
 }
 
 export interface Variant {
@@ -119,6 +122,7 @@ export type Folder = {
   id: string
   name: string
   color?: string
+  contentType?: "characters" | "art" | "artworks"
   children?: Folder[]
   parentId?: string
   characters?: Character[]
