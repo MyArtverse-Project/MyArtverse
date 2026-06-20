@@ -1,6 +1,7 @@
 "use client"
 
 import { fetcher } from "@/app/lib/fetcher"
+import { logoutAction } from "@/app/actions/logout"
 import { Notification } from "@/types/users"
 import type { ContentPreferences } from "@/types/contentPreferences"
 // Import the fetch helper
@@ -78,12 +79,13 @@ export const AuthProvider = ({ children }: { children: React.ReactNode }) => {
 
   const logout = async () => {
     try {
-      await fetcher("/api/auth/logout", { method: "POST" })
-      setUser(null)
-      router.push("/login")
+      await logoutAction()
     } catch (_err) {
-      throw new Error("Logout failed")
+      // Still clear local session if the server action fails.
     }
+
+    setUser(null)
+    router.push("/login")
   }
 
   const refreshUser = async () => {

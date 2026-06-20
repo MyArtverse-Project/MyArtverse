@@ -100,7 +100,7 @@ export default function GalleryView({
       </FolderView.Shelf>
 
       <FolderView.Contents>
-        <div className="mb-4 flex w-full flex-wrap gap-2">
+        <div className="mb-4 flex w-full flex-wrap gap-2 justify-end">
           {owner ? (
             <Button className="gap-2" asChild>
               <Link href={`/studio/gallery/upload?characterId=${characterId}`}>
