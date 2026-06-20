@@ -19,6 +19,7 @@ export default function ArtworkGrid({
   folders = [],
   onDelete,
   onMoved,
+  viewHref,
 }: {
   artworks: Artwork[]
   className?: string
@@ -28,6 +29,7 @@ export default function ArtworkGrid({
   folders?: Folder[]
   onDelete?: (artwork: Artwork) => void
   onMoved?: (artworkId: string, folderId: string | null) => void
+  viewHref?: (artwork: Artwork) => string
 }) {
   const items = artworks.filter((artwork) => artwork.artworkUrl)
 
@@ -88,6 +90,8 @@ export default function ArtworkGrid({
         }
 
         if (manageable) {
+          const href = viewHref?.(artwork)
+
           return (
             <div
               key={artwork.id}
@@ -97,7 +101,18 @@ export default function ArtworkGrid({
                 setFolderDragData(event, { kind: "artwork", id: artwork.id })
               }}
             >
-              {media}
+              {href ? (
+                <Link
+                  href={href}
+                  className="block h-full w-full"
+                  aria-label={`View ${artwork.title ?? "artwork"}`}
+                  draggable={false}
+                >
+                  {media}
+                </Link>
+              ) : (
+                media
+              )}
               <MoveArtworkMenu
                 artwork={artwork}
                 folders={folders}
@@ -109,7 +124,17 @@ export default function ArtworkGrid({
 
         return (
           <div key={artwork.id} className={tileClass}>
-            {media}
+            {viewHref ? (
+              <Link
+                href={viewHref(artwork)}
+                className="block h-full w-full"
+                aria-label={`View ${artwork.title ?? "artwork"}`}
+              >
+                {media}
+              </Link>
+            ) : (
+              media
+            )}
           </div>
         )
       })}

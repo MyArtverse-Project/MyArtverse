@@ -9,8 +9,17 @@ import { useState } from "react"
 
 export default function CommentThread({
   comment,
-  user
-}: { comment: Comments; user: User | null }) {
+  user,
+  commentContext,
+}: {
+  comment: Comments
+  user: User | null
+  commentContext?: {
+    commentType: string
+    redirectRoute: string
+    artworkId?: string
+  }
+}) {
   const [viewReplies, setViewReplies] = useState(false)
   const toggleViewReplies = () => setViewReplies((prev) => !prev)
   return (
@@ -27,6 +36,7 @@ export default function CommentThread({
         avatar={comment.author.avatarUrl || USER_DEFAULT_AVATAR}
         handle={comment.author.handle}
         isOP={comment.author.id === user?.id}
+        commentContext={commentContext}
       >
         {comment.content}
       </UserComment>
@@ -35,7 +45,12 @@ export default function CommentThread({
         <div className="ml-8 pl-4 space-y-4">
           {viewReplies &&
             comment.replies.map((reply) => (
-              <CommentThread key={reply.id} comment={reply} user={user} />
+              <CommentThread
+                key={reply.id}
+                comment={reply}
+                user={user}
+                commentContext={commentContext}
+              />
             ))}
         </div>
       )}

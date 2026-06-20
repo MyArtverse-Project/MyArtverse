@@ -19,6 +19,11 @@ interface CommentProps extends React.ComponentProps<typeof CommentBase> {
   toggleViewReplies?: () => void
   viewReplies?: boolean
   date?: string
+  commentContext?: {
+    commentType: string
+    redirectRoute: string
+    artworkId?: string
+  }
   onReply: (
     commentType: string,
     content: string,
@@ -65,8 +70,11 @@ export default function UserComment(
                 imgTag={<img />}
                 avatar={props.avatar}
                 parentId={props.commentId}
-                commentType="user"
-                redirectRoute={`/@${props.handle}`}
+                commentType={props.commentContext?.commentType ?? "user"}
+                redirectRoute={
+                  props.commentContext?.redirectRoute ?? `/@${props.handle}`
+                }
+                artworkId={props.commentContext?.artworkId}
                 username={props.handle}
                 toggleReply={toggleReplyInput}
                 postComment={props.onReply}

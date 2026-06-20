@@ -17,11 +17,15 @@ import { LuPlus, LuUpload } from "react-icons/lu"
 
 export default function GalleryView({
   characterId,
+  ownerHandle,
+  characterSlug,
   artworks: initialArtworks,
   folders,
   owner,
 }: {
   characterId: string
+  ownerHandle: string
+  characterSlug: string
   artworks: Artwork[]
   folders: Folder[]
   owner: boolean
@@ -128,6 +132,9 @@ export default function GalleryView({
             manageable={owner}
             folders={folders}
             onMoved={handleMoved}
+            viewHref={(artwork) =>
+              `/@${ownerHandle}/${characterSlug}/gallery/${artwork.id}`
+            }
           />
         ) : (
           <div className="text-muted-foreground text-sm">
