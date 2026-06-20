@@ -1,5 +1,7 @@
 import MarginClamp from "@/components/layouts/Layouts/MarginClamp"
-import { fetchCharacter, fetchSelfCharacter, fetchUserData, getPanels } from "@/utils/api"
+import { buildCharacterOverviewMetadata } from "@/utils/artworkMetadata"
+import { fetchCharacter, fetchUserData, getPanels } from "@/utils/api"
+import { buildPageMetadata } from "@/utils/metadata"
 import { BRAND } from "@mav/shared"
 import type { Metadata } from "next"
 import OverviewContent from "./OverviewContent"
@@ -8,14 +10,27 @@ import { User } from "@/app/context/AuthContext"
 
 type AsyncProps = DefineRouteParams<{ handle: string; name: string }>
 
-export async function generateMetadata(): Promise<Metadata> {
-  // TODO add a simple check if their name ends with an "s"; for example "Dennis"
-  // TODO it should display: "Dennis' characters", etc
-  const userPlaceholder = "User"
+export async function generateMetadata({
+  params,
+}: AsyncProps): Promise<Metadata> {
+  const { handle, name } = await params
 
-  return {
-    title: `${userPlaceholder}'s characters`,
-    description: `See ${userPlaceholder}'s characters and others on ${BRAND} by creating an account!`
+  try {
+    const character = await fetchCharacter(handle, name)
+
+    return buildCharacterOverviewMetadata({
+      characterName: character.name,
+      handle,
+      characterSlug: name,
+      bio: character.attributes?.bio,
+      avatarUrl: character.avatarUrl,
+    })
+  } catch {
+    return buildPageMetadata({
+      title: "Character",
+      description: `View a character profile on ${BRAND}.`,
+      path: `/@${handle}/${name}`,
+    })
   }
 }
 

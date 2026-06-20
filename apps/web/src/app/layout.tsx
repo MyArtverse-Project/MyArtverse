@@ -5,6 +5,8 @@ import { NsfwPreferencesProvider } from "@/app/context/NsfwPreferencesContext"
 import { Analytics, NoJSMessage, SkipNav } from "@/components"
 import { ThemeProvider } from "@/components/ThemeProvider"
 import { Toaster } from "@/components/ui/sonner"
+import { config } from "@/utils/constants"
+import { getSiteUrl } from "@/utils/metadata"
 import { BRAND } from "@mav/shared"
 import { Provider } from "jotai"
 import type { Metadata, Viewport } from "next"
@@ -23,14 +25,24 @@ const inter = Inter({
 })
 
 export const metadata: Metadata = {
+  metadataBase: getSiteUrl(),
   title: {
     template: `%s - ${BRAND}`,
     default: BRAND
   },
+  description: config.description,
   formatDetection: { telephone: false, address: false },
   openGraph: {
     type: "website",
-    siteName: BRAND
+    siteName: BRAND,
+    title: BRAND,
+    description: config.description,
+    locale: "en_US",
+  },
+  twitter: {
+    card: "summary_large_image",
+    title: BRAND,
+    description: config.description,
   },
   other: {
     "apple-mobile-web-app-status-bar": "#9e00ff"

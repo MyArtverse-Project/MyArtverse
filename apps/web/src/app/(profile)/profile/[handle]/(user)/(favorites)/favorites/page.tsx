@@ -1,20 +1,37 @@
 import { CharacterCard } from "@/components/layouts/Cards"
 import GridResponsive from "@/components/layouts/Layouts/GridResponsive"
 import MarginClamp from "@/components/layouts/Layouts/MarginClamp"
-import { getFavorites } from "@/utils/api"
+import { buildPageMetadata, possessiveName } from "@/utils/metadata"
+import { fetchUser, getFavorites } from "@/utils/api"
 import { BRAND } from "@mav/shared"
-import { Metadata } from "next"
+import type { Metadata } from "next"
 import { Suspense } from "react"
 import Loading from "./loading"
 
-export async function generateMetadata(): Promise<Metadata> {
-  // TODO add a simple check if their name ends with an "s"; for example "Dennis"
-  // TODO it should display: "Dennis' characters", etc
-  const userPlaceholder = "User"
+export async function generateMetadata({
+  params,
+}: {
+  params: Promise<{ handle: string }>
+}): Promise<Metadata> {
+  const { handle } = await params
 
-  return {
-    title: `${userPlaceholder}'s characters`,
-    description: `See ${userPlaceholder}'s characters and others on ${BRAND} by creating an account!`
+  try {
+    const user = await fetchUser(handle)
+    const displayName = user.displayName ?? handle
+
+    return buildPageMetadata({
+      title: `${possessiveName(displayName)} Favorites`,
+      description: `See characters favorited by @${handle} on ${BRAND}.`,
+      path: `/@${handle}/favorites`,
+      image: user.avatarUrl ?? null,
+      imageAlt: `${displayName}'s favorites`,
+    })
+  } catch {
+    return buildPageMetadata({
+      title: "Favorites",
+      description: `View favorites on ${BRAND}.`,
+      path: `/@${handle}/favorites`,
+    })
   }
 }
 
