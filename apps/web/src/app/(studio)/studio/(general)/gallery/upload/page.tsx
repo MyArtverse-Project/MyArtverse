@@ -1,6 +1,7 @@
 "use client"
 
 import DropZone from "@/components/Modals/DropZone"
+import { useAuth } from "@/app/context/AuthContext"
 import Checkbox from "@/components/layouts/Forms/Checkbox"
 import { Badge } from "@/components/ui/badge"
 import { Button } from "@/components/ui/button"
@@ -13,10 +14,22 @@ import { fetchCharacterById, search, uploadArt } from "@/utils/api"
 import { useRouter, useSearchParams } from "next/navigation"
 import { useEffect, useState } from "react"
 import { LuArrowLeft } from "react-icons/lu"
+import { toast } from "sonner"
 
 interface Character {
   id: string
   name: string
+  slug?: string
+  owner?: { handle?: string }
+}
+
+function getCharacterGalleryPath(
+  character: Character,
+  fallbackHandle?: string | null
+) {
+  const handle = character.owner?.handle ?? fallbackHandle
+  if (!handle || !character.slug) return null
+  return `/@${handle}/${character.slug}/gallery`
 }
 
 interface UploadArtPageProps {
@@ -31,6 +44,7 @@ export default function UploadArtPage({
   characterId = "",
 }: UploadArtPageProps) {
   const router = useRouter()
+  const { user } = useAuth()
   const searchParams = useSearchParams()
   const queryCharacterId = searchParams.get("characterId") ?? ""
   const resolvedCharacterId = characterId || queryCharacterId
@@ -145,9 +159,25 @@ export default function UploadArtPage({
         mainCharacterId,
         taggedCharacterIds,
       })
-      router.push("/studio/gallery")
+
+      toast.success("Artwork uploaded", {
+        description: `"${title}" was added to your gallery.`,
+      })
+
+      const character = await fetchCharacterById(mainCharacterId)
+      const galleryPath =
+        getCharacterGalleryPath(character, user?.handle) ?? "/studio/gallery"
+
+      if (toggleUploadArtModal) {
+        toggleUploadArtModal()
+      } else {
+        router.push(galleryPath)
+      }
     } catch (err) {
       console.error("Upload failed", err)
+      toast.error("Upload failed", {
+        description: "Something went wrong. Please try again.",
+      })
     } finally {
       setLoading(false)
     }
