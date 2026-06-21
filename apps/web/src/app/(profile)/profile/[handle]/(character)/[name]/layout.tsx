@@ -1,16 +1,17 @@
 import AppLayout from "@/components/layouts/AppLayout/AppLayout"
 import { CharacterMasthead } from "@/components/layouts/Mastheads"
-import type { DefineRouteParams } from "@/types"
 import { fetchCharacter, fetchUserData } from "@/utils/api"
 
-type AsyncProps = DefineRouteParams<{ handle: string; name: string }>
+export default async function MainProfileLayout({
+  children,
+  params,
+}: {
+  children: React.ReactNode
+  params: Promise<{ handle: string; name: string }>
+}) {
+  const { handle, name } = await params
 
-export default async function MainProfileLayout(
-  props: React.PropsWithChildren & AsyncProps
-) {
-  const { handle, name } = await props.params
-
-  const self = await fetchUserData()
+  const self = await fetchUserData().catch(() => null)
   const character = await fetchCharacter(handle, name)
 
   return (
@@ -25,9 +26,13 @@ export default async function MainProfileLayout(
         species={character.species}
         ownerHandle={character.owner.handle}
         ownerAvatarUrl={character.owner.avatarUrl ?? undefined}
-        pronouns={character.attributes.pronouns ? character.attributes.pronouns : "Unknown"}
+        pronouns={
+          character.attributes.pronouns
+            ? character.attributes.pronouns
+            : "Unknown"
+        }
       />
-      {props.children}
+      {children}
     </AppLayout>
   )
 }

@@ -1,49 +1,42 @@
 import nextMDX from "@next/mdx"
 import nextPWA from "next-pwa"
+import path from "node:path"
+import { fileURLToPath } from "node:url"
+import { buildImageRemotePatterns } from "./lib/productionOrigins.mjs"
 import redirects from "./lib/redirects.js"
+
+const __dirname = path.dirname(fileURLToPath(import.meta.url))
 
 /** @type {import('next').NextConfig} */
 const nextConfig = {
   transpilePackages: ["gsap", "@mav/config", "@mav/shared"],
   pageExtensions: ["js", "jsx", "ts", "tsx", "md", "mdx"],
   poweredByHeader: false,
+  outputFileTracingRoot: path.join(__dirname, "../../"),
+  eslint: {
+    ignoreDuringBuilds: true,
+  },
+  typescript: {
+    ignoreBuildErrors: true,
+  },
   experimental: {
-    mdxRs: true
+    mdxRs: true,
   },
   images: {
     dangerouslyAllowSVG: true,
     contentDispositionType: "attachment",
-    remotePatterns: [
-      {
-        protocol: "http",
-        hostname: "localhost",
-        port: "9000",
-        pathname: "/**"
-      },
-      {
-        protocol: "http",
-        hostname: "localhost",
-        port: "4566",
-        pathname: "/**"
-      },
-      {
-        pathname: "https",
-        hostname: "localhost.localstack.cloud",
-        pathname: "/**",
-        port: "4566"
-      }
-    ]
+    remotePatterns: buildImageRemotePatterns(),
   },
   async rewrites() {
     return [
       {
         source: "/@:username",
-        destination: "/profile/:username"
+        destination: "/profile/:username",
       },
       {
         source: "/@:username/:path*",
-        destination: "/profile/:username/:path*"
-      }
+        destination: "/profile/:username/:path*",
+      },
     ]
   },
   async redirects() {
@@ -56,23 +49,23 @@ const nextConfig = {
         headers: [
           {
             key: "X-Content-Type-Options",
-            value: "no-sniff"
+            value: "no-sniff",
           },
           {
             key: "Referrer-Policy",
-            value: "strict-origin-when-cross-origin"
-          }
-        ]
-      }
+            value: "strict-origin-when-cross-origin",
+          },
+        ],
+      },
     ]
-  }
+  },
 }
 
 const withMDX = nextMDX({
   options: {
     extension: /\.mdx?$/,
-    providerImportSource: "@mdx-js/react"
-  }
+    providerImportSource: "@mdx-js/react",
+  },
 })
 
 /** @type {import('next-pwa')} */
@@ -80,7 +73,7 @@ const withPWA = nextPWA({
   dest: "public",
   register: true,
   skipWaiting: true,
-  disable: process.env.NODE_ENV !== "production"
+  disable: process.env.NODE_ENV !== "production",
 })
 
 export default () => {

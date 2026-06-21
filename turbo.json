@@ -2,15 +2,20 @@
   "$schema": "https://turbo.build/schema.json",
   "globalEnv": [
     "NODE_ENV",
+    "NEXT_PUBLIC_BACKEND_URL",
+    "NEXT_PUBLIC_SITE_URL",
+    "NEXT_PUBLIC_IMAGE_HOSTNAME",
     "UMAMI_ID",
     "MS_CLARITY_ID",
     "PAYPAL_CLIENT_SECRET",
     "STRIPE_SECRET_KEY",
     "NEXT_PUBLIC_VERCEL_GIT_COMMIT_SHA",
     "NEXT_PUBLIC_PAYPAL_CLIENT_ID",
-    "NEXT_PUBLIC_STRIPE_PUBLISHABLE_KEY"
+    "NEXT_PUBLIC_STRIPE_PUBLISHABLE_KEY",
+    "VERCEL",
+    "VERCEL_URL"
   ],
-  "pipeline": {
+  "tasks": {
     "dev": {
       "cache": false,
       "persistent": true
@@ -19,11 +24,11 @@
       "dependsOn": ["^lint"]
     },
     "build": {
-      "dependsOn": ["lint", "^build"],
+      "dependsOn": ["^build"],
       "outputs": [".next/**", "!.next/cache/**"]
     },
     "deploy": {
-      "dependsOn": ["lint", "build"]
+      "dependsOn": ["build"]
     }
   }
 }

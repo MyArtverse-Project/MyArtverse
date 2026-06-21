@@ -10,10 +10,12 @@
     "packages/*"
   ],
   "scripts": {
-    "dev": "dotenv -- turbo dev --filter=web-client --no-daemon",
+    "dev": "dotenv -- turbo dev --filter=@mav/web-client --no-daemon",
     "dev:desktop": "cd ./apps/desktop && tauri dev",
-    "build": "turbo build --filter=web",
+    "build": "turbo run build --filter=@mav/web-client",
+    "build:web": "turbo run build --filter=@mav/web-client",
     "build:all": "turbo build --concurrency 2",
+    "start:web": "npm run start --workspace=@mav/web-client",
     "format": "biome format",
     "format:write": "biome format --write",
     "lint": "biome check",
@@ -27,8 +29,13 @@
     "knip": "^5.16.0",
     "turbo": "^2.9.16"
   },
+  "overrides": {
+    "@types/react": "19.0.10",
+    "@types/react-dom": "19.0.4",
+    "react": "19.0.0",
+    "react-dom": "19.0.0"
+  },
   "dependencies": {
-    "next": "15.5.19",
     "swiper": "12.2.0"
   }
 }
