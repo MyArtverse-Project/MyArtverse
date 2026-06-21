@@ -1,7 +1,7 @@
 "use server"
 import { RegisterFormSchema } from "@/app/lib/definition"
 import { logError } from "@/utils"
-import { BACKEND_URL } from "@/utils/constants"
+import { getServerApiUrl } from "@/utils/apiUrl"
 import { removeSuffixes } from "@/utils/removeSuffix"
 
 export async function registerAction(formData: FormData) {
@@ -41,7 +41,7 @@ export async function registerAction(formData: FormData) {
   }
 
   try {
-    const res = await fetch(`${BACKEND_URL}/v1/auth/register`, {
+    const res = await fetch(`${getServerApiUrl()}/v1/auth/register`, {
       method: "POST",
       headers: {
         "Content-Type": "application/json"

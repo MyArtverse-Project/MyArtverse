@@ -1,5 +1,5 @@
 import { fetcher } from "@/app/lib/fetcher"
-import { BACKEND_URL } from "@/utils/constants"
+import { getServerApiUrl } from "@/utils/apiUrl"
 import { cookies } from "next/headers"
 import { redirect, useRouter } from "next/navigation"
 import { useEffect, useState } from "react"
@@ -34,7 +34,7 @@ export const serverAuthRedirect = async () => {
   }
 
   try {
-    const user = await fetcher<User>(`${BACKEND_URL}/v1/auth/whoami`)
+    const user = await fetcher<User>(`${getServerApiUrl()}/v1/auth/whoami`)
     return user
   } catch (_error) {
     redirect("/login")

@@ -1,4 +1,27 @@
-import { uploadImageAction } from "@/app/actions/uploadImage"
+async function uploadViaProxy(formData: FormData): Promise<string> {
+  const res = await fetch("/api/upload", {
+    method: "POST",
+    body: formData,
+    credentials: "include",
+  })
+
+  let payload: { url?: string; error?: string } = {}
+  try {
+    payload = await res.json()
+  } catch {
+    payload = {}
+  }
+
+  if (!res.ok) {
+    throw new Error(payload.error ?? "Upload failed")
+  }
+
+  if (!payload.url) {
+    throw new Error("Upload failed")
+  }
+
+  return payload.url
+}
 
 export async function uploadImageFile(file: File): Promise<string> {
   const ext = file.name.includes(".")
@@ -7,7 +30,7 @@ export async function uploadImageFile(file: File): Promise<string> {
   const formData = new FormData()
   formData.append("file", file, `${crypto.randomUUID()}${ext}`)
 
-  return uploadImageAction(formData)
+  return uploadViaProxy(formData)
 }
 
 export async function uploadImageBlob(
@@ -17,5 +40,5 @@ export async function uploadImageBlob(
   const formData = new FormData()
   formData.append("file", blob, filename)
 
-  return uploadImageAction(formData)
+  return uploadViaProxy(formData)
 }

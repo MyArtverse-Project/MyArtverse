@@ -1,7 +1,7 @@
 "use server"
 
 import { logError } from "@/utils"
-import { BACKEND_URL } from "@/utils/constants"
+import { getServerApiUrl } from "@/utils/apiUrl"
 import { cookies } from "next/headers"
 
 export async function logoutAction() {
@@ -10,7 +10,7 @@ export async function logoutAction() {
   const refreshToken = cookieStore.get("refreshToken")?.value ?? ""
 
   try {
-    await fetch(`${BACKEND_URL}/v1/auth/logout`, {
+    await fetch(`${getServerApiUrl()}/v1/auth/logout`, {
       method: "POST",
       headers: {
         Cookie: `accessToken=${accessToken};refreshToken=${refreshToken}`,

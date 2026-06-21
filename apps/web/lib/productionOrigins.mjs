@@ -1,6 +1,9 @@
 /** @param {string | undefined} url */
 export function getBackendOrigin(
-  url = process.env.NEXT_PUBLIC_API_URL ?? process.env.NEXT_PUBLIC_BACKEND_URL
+  url =
+    process.env.API_URL ??
+    process.env.NEXT_PUBLIC_API_URL ??
+    process.env.NEXT_PUBLIC_BACKEND_URL
 ) {
   const raw = url?.trim()
   if (!raw) return null

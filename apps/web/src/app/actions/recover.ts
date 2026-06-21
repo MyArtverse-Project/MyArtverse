@@ -1,7 +1,7 @@
 "use server"
 import { ForgotFormSchema, RecoverFormSchema } from "@/app/lib/definition"
 import { logError } from "@/utils"
-import { BACKEND_URL } from "@/utils/constants"
+import { getServerApiUrl } from "@/utils/apiUrl"
 import { removeSuffixes } from "@/utils/removeSuffix"
 
 export async function forgotAction(formData: FormData) {
@@ -23,7 +23,7 @@ export async function forgotAction(formData: FormData) {
   }
 
   try {
-    const res = await fetch(`${BACKEND_URL}/v1/auth/forgot`, {
+    const res = await fetch(`${getServerApiUrl()}/v1/auth/forgot`, {
       method: "POST",
       headers: {
         "Content-Type": "application/json"
@@ -92,7 +92,7 @@ export async function recoverAction(formData: FormData, uuid: string) {
   }
 
   try {
-    const res = await fetch(`${BACKEND_URL}/v1/auth/recover`, {
+    const res = await fetch(`${getServerApiUrl()}/v1/auth/recover`, {
       method: "POST",
       headers: {
         "Content-Type": "application/json"

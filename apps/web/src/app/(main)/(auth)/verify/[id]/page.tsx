@@ -1,4 +1,4 @@
-import { BACKEND_URL } from "@/utils/constants"
+import { getServerApiUrl } from "@/utils/apiUrl"
 import { logError } from "@/utils"
 import Image from "next/image"
 import { redirect } from "next/navigation"
@@ -6,7 +6,7 @@ import { LuXOctagon } from "react-icons/lu"
 
 async function verifyEmail(id: string): Promise<boolean> {
   try {
-    const res = await fetch(`${BACKEND_URL}/v1/auth/verify/${id}`, {
+    const res = await fetch(`${getServerApiUrl()}/v1/auth/verify/${id}`, {
       method: "POST",
       credentials: "include"
     })

@@ -13,12 +13,12 @@ import type { ReadonlyRequestCookies } from "next/dist/server/web/spec-extension
 import { cookies } from "next/headers"
 import { redirect } from "next/navigation"
 import { logError } from "."
-import { BACKEND_URL } from "./constants"
+import { getServerApiUrl } from "./apiUrl"
 import { ReferenceVariant } from "@/app/(studio)/studio/(general)/characters/[id]/Ref/ReferenceConfigForm"
 
 type APIMethods = "GET" | "POST" | "DELETE" | "PUT" | "PATCH"
 
-const endpoint = BACKEND_URL
+const endpoint = () => getServerApiUrl()
 
 /**
  * Builds an Error from a failed Response, pulling the backend's error body when
@@ -64,7 +64,7 @@ export const apiWithAuth = async <Data>(
     const accessToken = cookiesHeaders.get("accessToken")?.value
     const refreshToken = cookiesHeaders.get("refreshToken")?.value
 
-    return fetch(`${endpoint}${route}`, {
+    return fetch(`${endpoint()}${route}`, {
       method: method,
       headers: {
         "Content-Type": "application/json",
@@ -102,7 +102,7 @@ export const apiWithoutAuth = async <Data>(
 ): Promise<Data> => {
   const context = `${method} ${route}`
 
-  const res = await fetch(`${endpoint}${route}`, {
+  const res = await fetch(`${endpoint()}${route}`, {
     method: method,
     headers: {
       "Content-Type": "application/json"
@@ -127,7 +127,7 @@ export const refreshToken = async () => {
   }
 
   const refreshToken = cookiesHeaders.get("refreshToken")!.value
-  return fetch(`${endpoint}/v1/auth/refresh-token`, {
+  return fetch(`${endpoint()}/v1/auth/refresh-token`, {
     method: "POST",
     headers: {
       "Content-Type": "application/json",

@@ -22,6 +22,9 @@ const nextConfig = {
   },
   experimental: {
     mdxRs: true,
+    serverActions: {
+      bodySizeLimit: "10mb",
+    },
     outputFileTracingIncludes: {
       "/*": [
         "../../packages/shared/**/*",
