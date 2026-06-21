@@ -20,7 +20,7 @@ export default function AuthThirdPartyProviders() {
           asChild
         >
           <a
-            href={`${process.env.NEXT_PUBLIC_BACKEND_URL}/v1/auth/${label.toLowerCase()}/link`}
+            href={`${process.env.NEXT_PUBLIC_API_URL ?? process.env.NEXT_PUBLIC_BACKEND_URL}/v1/auth/${label.toLowerCase()}/link`}
           >
             <Icon size={21} />
             {`Continue with ${label}`}

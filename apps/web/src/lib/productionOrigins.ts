@@ -1,4 +1,6 @@
-export function getBackendOrigin(url = process.env.NEXT_PUBLIC_BACKEND_URL) {
+export function getBackendOrigin(
+  url = process.env.NEXT_PUBLIC_API_URL ?? process.env.NEXT_PUBLIC_BACKEND_URL
+) {
   const raw = url?.trim()
   if (!raw) return null
 
