@@ -10,6 +10,7 @@ import {
   fetchUserData,
   getArtworks,
 } from "@/utils/api"
+import { loadCharacter } from "@/utils/loadCharacter"
 import { buildPageMetadata } from "@/utils/metadata"
 import { BRAND } from "@mav/shared"
 import type { Metadata } from "next"
@@ -24,7 +25,7 @@ export async function generateMetadata({
   try {
     const [character, artworks] = await Promise.all([
       fetchCharacter(handle, name),
-      getArtworks(handle, name),
+      getArtworks(handle, name).catch(() => []),
     ])
 
     return buildCharacterGalleryMetadata({
@@ -49,14 +50,17 @@ export default async function Page({
   params: Promise<{ handle: string; name: string }>
 }) {
   const { handle, name } = await params
+
   const [character, artworks, self] = await Promise.all([
-    fetchCharacter(handle, name),
-    getArtworks(handle, name),
+    loadCharacter(handle, name),
+    getArtworks(handle, name).catch(() => []),
     fetchUserData().catch(() => null),
   ])
 
-  const folders = await fetchCharacterGalleryFolders(character.id).catch(() => [])
-  const isOwner = self?.handle === character.owner.handle
+  const folders = await fetchCharacterGalleryFolders(character.id).catch(
+    () => []
+  )
+  const isOwner = self?.handle === character.owner?.handle
 
   return (
     <MarginClamp>

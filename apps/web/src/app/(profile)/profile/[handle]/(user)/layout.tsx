@@ -2,6 +2,7 @@ import AppLayout from "@/components/layouts/AppLayout/AppLayout"
 import { ProfileMasthead } from "@/components/layouts/Mastheads"
 import { fetchUser, fetchUserData } from "@/utils/api"
 import { USER_DEFAULT_AVATAR } from "@/utils/constants"
+import { notFound } from "next/navigation"
 
 export default async function MainProfileLayout({
   children,
@@ -13,7 +14,13 @@ export default async function MainProfileLayout({
   const { handle } = await params
 
   const self = await fetchUserData().catch(() => null)
-  const user = await fetchUser(handle)
+
+  let user
+  try {
+    user = await fetchUser(handle)
+  } catch {
+    notFound()
+  }
 
   return (
     <AppLayout>
