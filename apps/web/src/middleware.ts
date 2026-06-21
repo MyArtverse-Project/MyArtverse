@@ -2,7 +2,7 @@ import {
   getBackendOrigin,
   getImageOrigins,
   isDevEnvironment,
-} from "../lib/productionOrigins.mjs"
+} from "@/lib/productionOrigins"
 import { type NextRequest, NextResponse } from "next/server"
 import { generateCSP } from "./utils"
 
@@ -57,7 +57,6 @@ export function middleware(request: NextRequest) {
   })
 
   res.headers.set("Content-Security-Policy", csp)
-  res.headers.append("X-Powered-By", "Hardwork, Love, and Passion :3")
 
   return res
 }

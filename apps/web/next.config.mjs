@@ -6,13 +6,14 @@ import { buildImageRemotePatterns } from "./lib/productionOrigins.mjs"
 import redirects from "./lib/redirects.js"
 
 const __dirname = path.dirname(fileURLToPath(import.meta.url))
+const monorepoRoot = path.join(__dirname, "../../")
 
 /** @type {import('next').NextConfig} */
 const nextConfig = {
   transpilePackages: ["gsap", "@mav/config", "@mav/shared"],
   pageExtensions: ["js", "jsx", "ts", "tsx", "md", "mdx"],
   poweredByHeader: false,
-  outputFileTracingRoot: path.join(__dirname, "../../"),
+  outputFileTracingRoot: monorepoRoot,
   eslint: {
     ignoreDuringBuilds: true,
   },
@@ -21,6 +22,12 @@ const nextConfig = {
   },
   experimental: {
     mdxRs: true,
+    outputFileTracingIncludes: {
+      "/*": [
+        "../../packages/shared/**/*",
+        "../../packages/config/**/*",
+      ],
+    },
   },
   images: {
     dangerouslyAllowSVG: true,
@@ -73,7 +80,8 @@ const withPWA = nextPWA({
   dest: "public",
   register: true,
   skipWaiting: true,
-  disable: process.env.NODE_ENV !== "production",
+  // next-pwa can break Vercel serverless trace/deploy; keep PWA off on Vercel
+  disable: process.env.VERCEL === "1" || process.env.NODE_ENV !== "production",
 })
 
 export default () => {
