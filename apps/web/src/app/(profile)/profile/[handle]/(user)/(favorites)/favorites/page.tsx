@@ -49,15 +49,11 @@ export default async function Page({
         <GridResponsive breakpoint={250} className="gap-1.5" role="listbox">
           {favs.map((character, index) => (
             <CharacterCard
+              character={character}
               name={character.name}
               img={character.avatarUrl || "/UserProfile.png"}
               species={character.species}
               key={index}
-              palette={
-                character.refSheets.length > 0
-                  ? character.refSheets[0].colors
-                  : []
-              }
               href={`/@${character.owner.handle}/${character.slug}`}
             />
           ))}

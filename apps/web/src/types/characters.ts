@@ -100,13 +100,15 @@ export interface Artwork {
 }
 
 export interface Variant {
+  id?: string
   name: string
   url: string
   nsfw: boolean
   main?: boolean
-  onChangeCheck: (e: React.ChangeEvent<HTMLInputElement>) => void
-  onChangeName: (e: React.ChangeEvent<HTMLInputElement>) => void
-  deleteVariant: (e: React.MouseEvent<HTMLDivElement>) => void
+  colors?: string[]
+  onChangeCheck?: (e: React.ChangeEvent<HTMLInputElement>) => void
+  onChangeName?: (e: React.ChangeEvent<HTMLInputElement>) => void
+  deleteVariant?: (e: React.MouseEvent<HTMLDivElement>) => void
 }
 
 export interface ReferenceSheet {

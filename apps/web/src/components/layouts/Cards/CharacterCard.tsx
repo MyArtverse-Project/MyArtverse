@@ -1,7 +1,8 @@
 import { Url } from "url"
-import type { CharacterStatus as AdoptionStatus } from "@/types/characters"
+import type { CharacterStatus as AdoptionStatus, Character } from "@/types/characters"
 import type { MapElement } from "@/types/utils"
 import { isRemoteImageUrl } from "@/utils/constants"
+import { getCharacterPalette } from "@/utils/characterPalette"
 import { cn } from "@mav/shared/utils"
 import Image from "next/image"
 import Link from "next/link"
@@ -17,9 +18,10 @@ interface CharacterCardProps {
   isHybrid: boolean
   status: AdoptionStatus
   loading: boolean
-  palette: string[]
-  likes: number
-  href: string
+  palette?: string[]
+  likes?: number
+  href?: string
+  character?: Pick<Character, "refSheets">
 }
 
 export function CharacterCard({
@@ -30,6 +32,7 @@ export function CharacterCard({
   loading,
   isHybrid,
   palette,
+  character,
   href,
   likes,
   status = "owned",
@@ -37,6 +40,9 @@ export function CharacterCard({
 }: Partial<CharacterCardProps> &
   Pick<React.HTMLAttributes<MapElement<"div">>, "role">) {
   const DynamicElement = !href ? "div" : Link
+  const resolvedPalette =
+    palette ??
+    (character ? getCharacterPalette(character) : [])
 
   return (
     <DynamicElement
@@ -71,11 +77,11 @@ export function CharacterCard({
                 "#008000",
                 "#0000FF",
                 "#4B0082",
-                "#EE82EE"
+                "#EE82EE",
               ]
-            : palette ?? []
+            : resolvedPalette
         }
-        height={"50px"}
+        height="2.75rem"
       />
       {loading ? (
         <>

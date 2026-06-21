@@ -148,14 +148,10 @@ export default function CharacterView({
             >
               <CharacterCard
                 id={character.id}
+                character={character}
                 img={character.avatarUrl || "/UserProfile.png"}
                 name={character.name}
                 species={character.species}
-                palette={
-                  character.refSheets?.[0]?.variants?.[0]?.colors ??
-                  characters.mainCharacter?.refSheets?.[0]?.colors ??
-                  []
-                }
                 status="owned"
                 href={`/@${handle}/${character.slug}`}
               />

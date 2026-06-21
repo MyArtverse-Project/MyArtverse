@@ -20,13 +20,11 @@ export default async function Browse() {
         <ShelfSection icon={<Heart size={20} />} title={"Featured Characters"}>
           {featuredCharacters.map((character, index) => (
             <CharacterCard
+              character={character}
               name={character.name}
               img={character.avatarUrl || "/UserProfile.png"}
               species={character.species}
-              palette={
-                character.refSheets.length > 0 ? character.refSheets[0].colors : []
-              }
-              href={`/@${character.owner.handle}/${character.name}`}
+              href={`/@${character.owner.handle}/${character.slug}`}
               likes={character.favoritedBy.length}
               key={index}
             />
@@ -35,13 +33,11 @@ export default async function Browse() {
         <ShelfSection icon={<Sparkles size={20} />} title={"Recently created characters"}>
           {newCharacters.map((character, index) => (
             <CharacterCard
+              character={character}
               name={character.name}
               img={character.avatarUrl || "/UserProfile.png"}
               species={character.species}
-              palette={
-                character.refSheets.length > 0 ? character.refSheets[0].colors : []
-              }
-              href={`/@${character.owner.handle}/${character.name}`}
+              href={`/@${character.owner.handle}/${character.slug}`}
               likes={character.favoritedBy.length}
               key={index}
             />
