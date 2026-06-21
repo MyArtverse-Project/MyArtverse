@@ -1,7 +1,7 @@
 "use client"
 
 import type { MapElement } from "@/types/utils"
-import { BACKEND_URL } from "@/utils/constants"
+import { uploadImageBlob } from "@/utils/uploadImage"
 import { cn } from "@mav/shared/utils"
 import { type ComponentType, useEffect, useRef, useState } from "react"
 import { LuUpload } from "react-icons/lu"
@@ -169,22 +169,10 @@ export default function DropZone({
   const uploadFile = async (file: Blob, filename = "upload.png") => {
     setUploading(true)
     try {
-      const formData = new FormData()
       const uploadName = uniqueUploadName(
         file instanceof File ? file.name : filename
       )
-      formData.append("file", file, uploadName)
-      const resp = await fetch(`${BACKEND_URL}/v1/profile/upload`, {
-        method: "POST",
-        body: formData,
-        credentials: "include"
-      })
-      if (!resp.ok)
-        throw new Error(
-          resp.status === 401 ? "Are you logged in?" : "Upload failed"
-        )
-      const data = await resp.json()
-      const url = data.url as string
+      const url = await uploadImageBlob(file, uploadName)
       setData(url)
       setImageUrl(url)
       setCroppedBase64(null)

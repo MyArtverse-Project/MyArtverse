@@ -1,4 +1,4 @@
-import { BACKEND_URL } from "@/utils/constants"
+import { uploadImageAction } from "@/app/actions/uploadImage"
 
 export async function uploadImageFile(file: File): Promise<string> {
   const ext = file.name.includes(".")
@@ -7,16 +7,15 @@ export async function uploadImageFile(file: File): Promise<string> {
   const formData = new FormData()
   formData.append("file", file, `${crypto.randomUUID()}${ext}`)
 
-  const resp = await fetch(`${BACKEND_URL}/v1/profile/upload`, {
-    method: "POST",
-    body: formData,
-    credentials: "include",
-  })
+  return uploadImageAction(formData)
+}
 
-  if (!resp.ok) {
-    throw new Error(resp.status === 401 ? "Are you logged in?" : "Upload failed")
-  }
+export async function uploadImageBlob(
+  blob: Blob,
+  filename = "upload.png"
+): Promise<string> {
+  const formData = new FormData()
+  formData.append("file", blob, filename)
 
-  const data = await resp.json()
-  return data.url as string
+  return uploadImageAction(formData)
 }
