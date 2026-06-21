@@ -4,7 +4,7 @@
   "private": true,
   "type": "module",
   "engines": {
-    "node": "20.x"
+    "node": ">=20"
   },
   "scripts": {
     "dev": "next dev",
@@ -78,9 +78,5 @@
     "tailwind-merge": "3.3.1",
     "tailwindcss": "3.4.17",
     "typescript": "^5"
-  },
-  "resolutions": {
-    "@types/react": "19.0.10",
-    "@types/react-dom": "19.0.4"
   }
 }

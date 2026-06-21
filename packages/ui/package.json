@@ -4,9 +4,6 @@
   "license": "Apache-2.0",
   "main": "./index.tsx",
   "private": true,
-  "workspaces": {
-    "nohoist": ["react", "react-dom"]
-  },
   "devDependencies": {
     "@types/react": "19.0.10",
     "@types/react-dom": "19.0.4",
