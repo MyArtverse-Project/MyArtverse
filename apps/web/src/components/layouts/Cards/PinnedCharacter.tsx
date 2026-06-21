@@ -1,5 +1,6 @@
 import { displaySpecies } from "@/utils/displayer"
 import { Button } from "@/components/ui/button"
+import NsfwMedia from "@/components/NsfwMedia"
 import Image from "next/image"
 import { LuCat as CatIcon, LuPin, LuPalette as Palette } from "react-icons/lu"
 import ColorPalette from "./ColorPalette"
@@ -11,6 +12,7 @@ interface PinnedCharacterProps {
   colors: string[]
   artist: string
   refSheetImg: string
+  refSheetNsfw?: boolean
 }
 
 export function PinnedCharacter({
@@ -19,7 +21,8 @@ export function PinnedCharacter({
   species,
   colors,
   artist,
-  refSheetImg
+  refSheetImg,
+  refSheetNsfw = false,
 }: PinnedCharacterProps) {
   return (
     <section className="border-border mb-5 flex flex-row justify-between rounded-lg border p-4">
@@ -60,12 +63,13 @@ export function PinnedCharacter({
           <span>{artist}</span>
         </div>
       </div>
-      <div className=" w-full">
-        <Image
-          width={640}
-          height={360}
+      <div className="relative h-64 w-full max-w-xl overflow-hidden">
+        <NsfwMedia
           src={refSheetImg}
           alt={`${name}'s ref sheet`}
+          nsfw={refSheetNsfw}
+          fill
+          className="object-contain object-center"
         />
       </div>
     </section>

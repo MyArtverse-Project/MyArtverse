@@ -52,6 +52,7 @@ export default function Sidebar({ user }: { user: User }) {
                   username={user.handle}
                   size={isSidebarExpanded ? 40 : 30}
                   src={user.avatarUrl || "/UserProfile.png"}
+                  imageKey={user.id}
                 />
                 {isSidebarExpanded && (
                   <div className="flex flex-col justify-center ml-2">

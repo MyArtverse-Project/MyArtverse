@@ -19,7 +19,8 @@ export function middleware(request: NextRequest) {
       "data:",
       "unsafe-eval",
       "https://images.ctfassets.net",
-      "http://localhost:9000"
+      "http://localhost:9000",
+      "http://localhost:4566"
     ],
     "connect-src": [
       "self",

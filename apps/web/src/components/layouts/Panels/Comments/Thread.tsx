@@ -1,0 +1,59 @@
+"use client"
+
+import { User } from "@/app/context/AuthContext"
+import type { Comments, UserType } from "@/types/users"
+import { postComment } from "@/utils/api"
+import { USER_DEFAULT_AVATAR } from "@/utils/constants"
+import UserComment from "@/components/comments/UserComment"
+import { useState } from "react"
+
+export default function CommentThread({
+  comment,
+  user,
+  commentContext,
+}: {
+  comment: Comments
+  user: User | null
+  commentContext?: {
+    commentType: string
+    redirectRoute: string
+    artworkId?: string
+  }
+}) {
+  const [viewReplies, setViewReplies] = useState(false)
+  const toggleViewReplies = () => setViewReplies((prev) => !prev)
+  return (
+    <div className="space-y-4">
+      <UserComment
+        key={comment.id}
+        imgTag={<img />}
+        date={comment.createdAt}
+        replies={comment.replies ? comment.replies.length : 0}
+        viewReplies={viewReplies}
+        onReply={postComment}
+        toggleViewReplies={toggleViewReplies}
+        commentId={comment.id}
+        avatar={comment.author.avatarUrl || USER_DEFAULT_AVATAR}
+        handle={comment.author.handle}
+        isOP={comment.author.id === user?.id}
+        commentContext={commentContext}
+      >
+        {comment.content}
+      </UserComment>
+
+      {comment.replies && comment.replies.length > 0 && (
+        <div className="ml-8 pl-4 space-y-4">
+          {viewReplies &&
+            comment.replies.map((reply) => (
+              <CommentThread
+                key={reply.id}
+                comment={reply}
+                user={user}
+                commentContext={commentContext}
+              />
+            ))}
+        </div>
+      )}
+    </div>
+  )
+}

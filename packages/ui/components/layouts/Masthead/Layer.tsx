@@ -17,7 +17,7 @@ export function MastheadLayer(
   return (
     <div
       data-mh-layer=""
-      className={cn(props.spaceBetween && "justify-between")}
+      className={cn("flex flex-wrap items-center gap-x-4 gap-y-1", props.spaceBetween && "justify-between")}
     >
       {props.children}
     </div>

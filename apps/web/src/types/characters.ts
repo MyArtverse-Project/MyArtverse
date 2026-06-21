@@ -1,4 +1,4 @@
-import type { Comments, UserType } from "./users"
+import type { Comments, DashboardPanel, UserType } from "./users"
 import type { StatusIndicator, Visibility } from "./utils"
 
 export type CharacterStatus =
@@ -48,7 +48,8 @@ export interface Character {
   comments: Comments[]
   avatarUrl: string
   refSheets: ReferenceSheet[]
-  attributes: CharacterAttributes
+  attributes: CharacterAttributes,
+  dashboards: DashboardPanel[]
   migration: {
     url: string
     migrateDate: Date
@@ -72,6 +73,7 @@ export interface Character {
     adoptee: UserType
   }
   favoritedBy: UserType[]
+  folder?: Folder | null
 }
 
 export interface Artwork {
@@ -83,34 +85,38 @@ export interface Artwork {
   watermarkUrl?: string
   charactersFeatured?: Character[]
   publishedCharacter?: Character
-  artist?: UserType | null
+  artist?: UserType
   artistUrl?: string
   comments: Comments[]
   description?: string
+  nsfw?: boolean
   tags: string[]
   programUsed?: string
   title?: string
   favoritedBy: UserType[]
   owner: UserType
+  folder?: Folder | null
+  folderId?: string | null
 }
 
 export interface Variant {
+  id?: string
   name: string
   url: string
   nsfw: boolean
   main?: boolean
-  onChangeCheck: (e: React.ChangeEvent<HTMLInputElement>) => void
-  onChangeName: (e: React.ChangeEvent<HTMLInputElement>) => void
-  deleteVariant: (e: React.MouseEvent<HTMLDivElement>) => void
+  colors?: string[]
+  onChangeCheck?: (e: React.ChangeEvent<HTMLInputElement>) => void
+  onChangeName?: (e: React.ChangeEvent<HTMLInputElement>) => void
+  deleteVariant?: (e: React.MouseEvent<HTMLDivElement>) => void
 }
 
 export interface ReferenceSheet {
   id: string
-  refSheetName: string
+  name: string
   active: boolean
   artist: string
   character?: Character
-  colors: string[]
   variants: Variant[]
 }
 
@@ -118,6 +124,7 @@ export type Folder = {
   id: string
   name: string
   color?: string
+  contentType?: "characters" | "art" | "artworks"
   children?: Folder[]
   parentId?: string
   characters?: Character[]

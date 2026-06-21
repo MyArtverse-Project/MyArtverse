@@ -15,6 +15,7 @@ type PickedTextareaProps = Pick<
   | "readOnly"
   | "onKeyDown"
   | "onClick"
+  | "onChange"
   | "onBlur"
   | "className"
   | "spellCheck"
@@ -42,6 +43,7 @@ export function Textarea({
     readOnly,
     className,
     spellCheck,
+    onChange,
     ...eventHandlers
   } = props
 
@@ -74,6 +76,7 @@ export function Textarea({
           readOnly={readOnly}
           spellCheck={spellCheck}
           title=""
+          onChange={onChange}
           {...eventHandlers}
         />
       </DynamicElement>

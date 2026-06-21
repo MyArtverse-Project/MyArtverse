@@ -25,7 +25,7 @@ export default function Page() {
   const router = useRouter()
 
   const [errors, setErrors] = useState<FormState>()
-  const { user, isLoading } = useAuth()
+  const { user, isLoading, refreshUser } = useAuth()
 
   // TODO: Figure out how to handle this in the action file
   async function handleSubmit(event: React.FormEvent<HTMLFormElement>) {
@@ -34,6 +34,7 @@ export default function Page() {
     const res = await loginAction(formData)
 
     if (res.success) {
+      await refreshUser()
       router.push(`/`)
     } else {
       setErrors({

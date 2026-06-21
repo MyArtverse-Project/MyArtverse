@@ -25,6 +25,7 @@ export default async function MainProfileLayout(
         profileBio={user?.bio || ""}
         characterCount={user?.characters.length || 0}
         bannerUrl={user?.bannerUrl || undefined}
+        characterCount={user?.characters.length || 0}
         isOwnProfile={self ? self.handle === user.handle : false}
       />
       {props.children}

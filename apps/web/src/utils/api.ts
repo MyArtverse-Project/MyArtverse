@@ -4,6 +4,7 @@ import type {
   Artwork,
   Character,
   CharacterResponse,
+  Folder,
   ReferenceSheet
 } from "@/types/characters"
 import type { DashboardPanel, UserType } from "@/types/users"
@@ -13,8 +14,9 @@ import { cookies } from "next/headers"
 import { redirect } from "next/navigation"
 import { logError } from "."
 import { BACKEND_URL } from "./constants"
+import { ReferenceVariant } from "@/app/(studio)/studio/(general)/characters/[id]/Ref/ReferenceConfigForm"
 
-type APIMethods = "GET" | "POST" | "DELETE" | "PUT"
+type APIMethods = "GET" | "POST" | "DELETE" | "PUT" | "PATCH"
 
 const endpoint = BACKEND_URL
 
@@ -184,7 +186,6 @@ export const fetchUserCharacters = async (handle: string) => {
   return data
 }
 
-
 export const updateCharacter = async (characterId: string, data: Partial<Character>) => {
   return apiWithAuth("PUT", `/v1/character/update/${characterId}`, data)
 }
@@ -217,6 +218,15 @@ export const fetchCharacter = async (handle: string, characterName: string) => {
   return character
 }
 
+export const fetchCharacterById = async (id: string) => {
+  const character = await apiWithoutAuth<Character>(
+    "GET",
+    `/v1/character/id/${id}`
+  )
+
+  return character
+}
+
 export const uploadArt = async (
   characterId: string,
   body: {
@@ -225,6 +235,7 @@ export const uploadArt = async (
     description: string
     tags: string[]
     userAsArtist: boolean
+    nsfw: boolean
     mainCharacterId: string
     taggedCharacterIds: string[]
   }
@@ -237,16 +248,6 @@ export const uploadArt = async (
 
   return res
 }
-
-export const fetchCharacterById = async (id: string) => {
-  const character = await apiWithoutAuth<Character>(
-    "GET",
-    `/v1/character/id/${id}`
-  )
-
-  return character
-}
-
 
 export const fetchArtistRequests = async () => {
   const requests = await apiWithAuth<UserType[]>(
@@ -298,6 +299,34 @@ export const getArtwork = async (artworkId: string) => {
   return artwork
 }
 
+export const updateArtwork = async (
+  artworkId: string,
+  body: {
+    title: string
+    description: string
+    tags: string[]
+    nsfw?: boolean
+  }
+) => {
+  const res = await apiWithAuth("PUT", `/v1/art/${artworkId}`, body)
+
+  if (!res) {
+    throw new Error("Artwork update failed")
+  }
+
+  return res
+}
+
+export const deleteArtwork = async (artworkId: string) => {
+  const res = await apiWithAuth("DELETE", `/v1/art/${artworkId}`)
+
+  if (!res) {
+    throw new Error("Artwork deletion failed")
+  }
+
+  return res
+}
+
 export const setRefAsMain = async (refId: string) => {
   await apiWithAuth("PUT", `/v1/character/assign-ref/${refId}`)
   return
@@ -312,13 +341,67 @@ export const getRefSheets = async (handle: string) => {
   return refSheets
 }
 
+export const deleteRefSheet = async (refId: string) => {
+  return apiWithAuth("DELETE", `/v1/character/delete-ref/${refId}`)
+}
+
+export const createRefSheet = async (body: {
+  characterId: string
+  refSheet: {
+    id?: string
+    name: string
+    description: string
+    primary?: boolean
+    variants: {
+      id?: string
+      title: string
+      artist: string
+      description: string
+      image: string
+      primary: boolean
+      nsfw: boolean
+      colors: string[]
+    }[]
+  }
+}) => {
+  return apiWithAuth("POST", "/v1/character/upload-ref", body)
+}
+
 export const createFolder = async (body: {
   name: string
   contentType: "characters" | "artworks"
   parentId: string | null
   color: string
+  characterId?: string
 }) => {
-  return apiWithAuth("POST", "/v1/folders/create", body)
+  return apiWithAuth("POST", "/v1/folders/create", {
+    ...body,
+    contentType: body.contentType === "artworks" ? "art" : body.contentType,
+  })
+}
+
+export const fetchCharacterGalleryFolders = async (characterId: string) => {
+  return apiWithoutAuth<Folder[]>("GET", `/v1/folders/character/${characterId}`)
+}
+
+export const assignArtworkToFolder = async (
+  artworkId: string,
+  folderId: string | null
+) => {
+  return apiWithAuth(
+    "PUT",
+    `/v1/art/${artworkId}/folder/${folderId ?? "root"}`
+  )
+}
+
+export const assignCharacterToFolder = async (
+  characterId: string,
+  folderId: string | null
+) => {
+  return apiWithAuth(
+    "PUT",
+    `/v1/character/${characterId}/folder/${folderId ?? "root"}`
+  )
 }
 
 export const createCharacter = async (body: {
@@ -341,16 +424,6 @@ export const getFolderByHandle = async (handle: string) => {
 
 export const getFoldersRecursively = async (folderId: string) => {
   return apiWithAuth("GET", `/v1/folders/${folderId}/recursive`)
-}
-
-export const setPanel = async (body: {
-  position: {
-    col: number
-    row: number
-  }
-  component: string
-}) => {
-  return apiWithAuth("POST", "/v1/dashboard/panels", body)
 }
 
 export const setPanel = async (body: {
@@ -395,6 +468,17 @@ export const updateProfile = async (body: {
   avatarLink: string
 }) => {
   return apiWithAuth("PUT", "/v1/user/me", body)
+}
+
+export const updateContentPreferences = async (body: {
+  showNsfw?: boolean
+  nsfwDisplayMode?: "blur" | "show"
+}) => {
+  return apiWithAuth<{ contentPreferences: { showNsfw: boolean; nsfwDisplayMode: "blur" | "show" } }>(
+    "PATCH",
+    "/v1/profile/content-preferences",
+    body
+  )
 }
 
 export const postComment = async (

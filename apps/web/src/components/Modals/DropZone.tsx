@@ -15,6 +15,13 @@ const Cropper = EasyCrop as ComponentType<
 const allowedTypes = ["image/png", "image/jpeg", "image/jpg"]
 const maxFileSize = 10 * 1024 * 1024 // 10 MB
 
+const uniqueUploadName = (originalName?: string) => {
+  const ext = originalName?.includes(".")
+    ? originalName.slice(originalName.lastIndexOf("."))
+    : ".png"
+  return `${crypto.randomUUID()}${ext}`
+}
+
 const getCroppedImg = (imageSrc: string, crop: any, zoom: number, aspect: number): Promise<{base64: string, blob: Blob}> => {
   return new Promise((resolve, reject) => {
     const image = new window.Image();
@@ -76,6 +83,7 @@ export default function DropZone({
   aspectRatio = "1",
   label = "Drag and drop files here",
   enableCrop = true,
+  previewSize = "default",
 }: {
   setData: (url: string) => void
   className?: string
@@ -83,6 +91,7 @@ export default function DropZone({
   aspectRatio?: string,
   label?: string
   enableCrop?: boolean
+  previewSize?: "default" | "large" | "compact"
 }) {
   const [isDragging, setIsDragging] = useState(false)
   const [imageUrl, setImageUrl] = useState<string | null>(value)
@@ -91,7 +100,6 @@ export default function DropZone({
   const [uploading, setUploading] = useState(false)
   const [error, setError] = useState<string | null>(null)
   const [showCrop, setShowCrop] = useState(false)
-  const [showSaveButton, setShowSaveButton] = useState(false)
 
   const [crop, setCrop] = useState({ x: 0, y: 0 })
   const [zoom, setZoom] = useState(1)
@@ -100,8 +108,14 @@ export default function DropZone({
   const fileUploadRef = useRef<HTMLInputElement>(null)
 
   useEffect(() => {
+    setImageUrl(value)
+  }, [value])
+
+  useEffect(() => {
     if (fileUploadRef.current) fileUploadRef.current.value = ""
   }, [base64Src, imageUrl, croppedBase64])
+
+  const openFilePicker = () => fileUploadRef.current?.click()
 
   useEffect(() => {
     const handleDragOver = (e: DragEvent) => e.preventDefault()
@@ -145,21 +159,21 @@ export default function DropZone({
       setBase64Src(src)
       if (enableCrop) {
         setShowCrop(true)
-        setShowSaveButton(false)
       } else {
-        uploadFile(src)
+        uploadFile(uploadedFile)
       }
     }
     reader.readAsDataURL(uploadedFile)
   }
 
-  const uploadFile = async (base64Img: string) => {
+  const uploadFile = async (file: Blob, filename = "upload.png") => {
     setUploading(true)
     try {
       const formData = new FormData()
-      const res = await fetch(base64Img)
-      const blob = await res.blob()
-      formData.append("file", blob, "cropped.png")
+      const uploadName = uniqueUploadName(
+        file instanceof File ? file.name : filename
+      )
+      formData.append("file", file, uploadName)
       const resp = await fetch(`${BACKEND_URL}/v1/profile/upload`, {
         method: "POST",
         body: formData,
@@ -170,8 +184,9 @@ export default function DropZone({
           resp.status === 401 ? "Are you logged in?" : "Upload failed"
         )
       const data = await resp.json()
-      setData(data.url)
-      setImageUrl(data.url)
+      const url = data.url as string
+      setData(url)
+      setImageUrl(url)
       setCroppedBase64(null)
       setShowCrop(false)
     } catch (err) {
@@ -181,40 +196,55 @@ export default function DropZone({
     }
   }
 
-  const onCropComplete = async (_: any, croppedAreaPixelsValue: any) => {
-    setCroppedAreaPixels(croppedAreaPixelsValue)
-    if (enableCrop && base64Src && croppedAreaPixelsValue) {
-      try {
-        const aspect = aspectRatio ? parseFloat(aspectRatio) : 1
-        const { base64 } = await getCroppedImg(
-          base64Src,
-          croppedAreaPixelsValue,
-          zoom,
-          aspect
-        )
-        setCroppedBase64(base64)
-        setShowSaveButton(true)
-      } catch (err) {
-        setError("Cropping failed: " + (err as Error).message)
-      }
+  const handleCropAndSave = async () => {
+    if (!base64Src || !croppedAreaPixels) return
+
+    setError(null)
+    try {
+      const aspect = aspectRatio ? parseFloat(aspectRatio) : 1
+      const { blob } = await getCroppedImg(
+        base64Src,
+        croppedAreaPixels,
+        zoom,
+        aspect
+      )
+      setShowCrop(false)
+      setCroppedBase64(null)
+      setBase64Src(null)
+      await uploadFile(blob, "cropped.png")
+    } catch (err) {
+      setError("Cropping failed: " + (err as Error).message)
+      setShowCrop(true)
     }
   }
 
-  const handleCropAndSave = async () => {
-    if (!croppedBase64) return
-    setShowCrop(false)
-    setShowSaveButton(false)
-    await uploadFile(croppedBase64)
+  const displayImg = () => {
+    const img = croppedBase64 ? croppedBase64 : imageUrl || base64Src
+    if (!img) return null
+    return img
   }
 
-  const displayImg = () =>
-    croppedBase64 ? croppedBase64 : imageUrl || base64Src
+  const hasPreview = !!(displayImg() && !showCrop && !uploading)
+  const isLargePreview = previewSize === "large"
+  const isCompactPreview = previewSize === "compact"
 
   return (
     <div
       className={cn(
-        "rounded-md border-2 border-dashed p-10 text-center transition-colors",
-        isDragging ? "bg-300" : "bg-100",
+        "rounded-lg border text-center transition-colors",
+        isCompactPreview && !showCrop && "size-28 shrink-0",
+        hasPreview
+          ? cn(
+              "border-border bg-card",
+              isCompactPreview ? "overflow-hidden p-0" : "p-4"
+            )
+          : cn(
+              "border-dashed",
+              isCompactPreview
+                ? "border-border/60 p-2"
+                : cn("border-2", isLargePreview ? "p-8" : "p-10"),
+              isDragging ? "bg-muted/50" : "bg-muted/20"
+            ),
         className
       )}
       onDragEnter={handleDrag}
@@ -241,7 +271,9 @@ export default function DropZone({
               showGrid={true}
               onCropChange={setCrop}
               onZoomChange={setZoom}
-              onCropComplete={onCropComplete}
+              onCropAreaChange={(_, croppedAreaPixelsValue) => {
+                setCroppedAreaPixels(croppedAreaPixelsValue)
+              }}
               style={{
                 containerStyle: { 
                   height: "100%", 
@@ -271,8 +303,9 @@ export default function DropZone({
             <div className="flex items-center gap-2">
               <Button
                 onClick={handleCropAndSave}
-                disabled={!croppedBase64 || uploading}
+                disabled={!croppedAreaPixels || uploading}
                 className="px-4 py-2"
+                type="button"
               >
                 {uploading ? "Saving..." : "Save Image"}
               </Button>
@@ -281,45 +314,123 @@ export default function DropZone({
                   setShowCrop(false)
                   setBase64Src(null)
                   setCroppedBase64(null)
-                  setShowSaveButton(false)
+                  setCroppedAreaPixels(null)
                 }}
                 variant="secondary"
                 className="px-4 py-2"
+                type="button"
               >
                 Cancel
               </Button>
             </div>
           </div>
-          
+
+          {error && <span className="mt-4 text-red-500">{error}</span>}
         </div>
       ) : uploading ? (
-        <span className="text-lg font-bold">Uploading...</span>
+        <span
+          className={cn(
+            "font-medium",
+            isCompactPreview ? "text-xs" : "text-lg font-bold"
+          )}
+        >
+          Uploading...
+        </span>
       ) : displayImg() ? (
-        <div className="flex flex-col items-center">
-          <img
-            src={displayImg() as string}
-            alt="Uploaded"
-            style={{
-              maxWidth: 240,
-              maxHeight: 240,
-              objectFit: "contain",
-            }}
-          />
-        </div>
-      ) : (
-        <div className="flex flex-col items-center">
+        isLargePreview ? (
+          <div className="flex w-full flex-col gap-3 text-left">
+            <div className="flex min-h-72 w-full items-center justify-center overflow-hidden rounded-md sm:min-h-80">
+              <img
+                src={displayImg() as string}
+                alt="Uploaded"
+                className="max-h-[min(28rem,55vh)] w-full object-contain object-center"
+              />
+            </div>
+            <Button
+              onClick={openFilePicker}
+              variant="outline"
+              className="w-full shrink-0"
+              type="button"
+            >
+              Replace image
+            </Button>
+            {error && <span className="text-destructive text-sm">{error}</span>}
+          </div>
+        ) : isCompactPreview ? (
           <button
-            className="mb-6 flex items-center justify-center rounded-full bg-200 p-8"
-            onClick={() => fileUploadRef.current?.click()}
             type="button"
+            onClick={openFilePicker}
+            className="group relative size-full overflow-hidden rounded-lg"
+            aria-label="Change avatar"
           >
-            <LuUpload size={48} />
+            <img
+              src={displayImg() as string}
+              alt="Avatar preview"
+              className="size-full object-cover"
+            />
+            <span className="bg-background/80 text-foreground absolute inset-x-0 bottom-0 py-1 text-xs opacity-0 transition-opacity group-hover:opacity-100">
+              Change
+            </span>
           </button>
-          <span className="text-lg font-bold">{label}</span>
-          <span className="mt-4">
-            Max size: 10MB, Supported formats: .jpg, .png
-          </span>
-          {error && <span className="text-red-500">{error}</span>}
+        ) : (
+          <div className="flex flex-col items-center gap-4">
+            <img
+              src={displayImg() as string}
+              alt="Uploaded"
+              style={{
+                maxWidth: 240,
+                maxHeight: 240,
+                objectFit: "contain",
+              }}
+            />
+            <Button onClick={openFilePicker} variant="secondary" type="button">
+              Change image
+            </Button>
+            {error && <span className="text-destructive text-sm">{error}</span>}
+          </div>
+        )
+      ) : (
+        <div
+          className={cn(
+            "flex flex-col items-center",
+            isLargePreview && "min-h-72 justify-center gap-4",
+            isCompactPreview && "size-full justify-center gap-1"
+          )}
+        >
+          <button
+            className={cn(
+              "flex items-center justify-center rounded-full bg-muted transition-colors hover:bg-muted/80",
+              isLargePreview ? "p-6" : isCompactPreview ? "p-2.5" : "mb-6 p-8"
+            )}
+            onClick={openFilePicker}
+            type="button"
+            aria-label={label}
+          >
+            <LuUpload size={isLargePreview ? 40 : isCompactPreview ? 18 : 48} />
+          </button>
+          {!isCompactPreview && (
+            <>
+              <span className="text-lg font-semibold">{label}</span>
+              <span className="text-muted-foreground text-sm">
+                Max size: 10MB · .jpg, .png
+              </span>
+            </>
+          )}
+          {isCompactPreview && (
+            <span className="text-muted-foreground text-[11px] leading-tight">
+              Add photo
+            </span>
+          )}
+          {error && (
+            <span
+              className={cn(
+                "text-destructive",
+                isCompactPreview ? "text-[10px] leading-tight" : "text-sm"
+              )}
+            >
+              {error}
+            </span>
+          )}
         </div>
       )}
     </div>

@@ -1,0 +1,191 @@
+import Avatar from "@/components/Avatar"
+import NsfwMedia from "@/components/NsfwMedia"
+import { Badge } from "@/components/ui/badge"
+import { Button } from "@/components/ui/button"
+import type { User } from "@/app/context/AuthContext"
+import type { Artwork, Character } from "@/types/characters"
+import type { Comments } from "@/types/users"
+import { USER_DEFAULT_AVATAR } from "@/utils/constants"
+import Link from "next/link"
+import {
+  LuHeart,
+  LuMoreVertical,
+  LuShare2,
+} from "react-icons/lu"
+import ArtworkComments from "./ArtworkComments"
+
+function CharacterTag({
+  character,
+  ownerHandle,
+}: {
+  character: Character
+  ownerHandle: string
+}) {
+  const handle = character.owner?.handle ?? ownerHandle
+  const slug = character.slug
+
+  if (!slug) {
+    return (
+      <div className="border-border flex items-center gap-2 rounded-md border px-3 py-2">
+        <Avatar
+          src={character.avatarUrl || USER_DEFAULT_AVATAR}
+          username={character.name}
+          size={28}
+        />
+        <span className="truncate text-sm font-medium">{character.name}</span>
+      </div>
+    )
+  }
+
+  return (
+    <Link
+      href={`/@${handle}/${slug}`}
+      className="border-border hover:bg-muted/50 flex items-center gap-2 rounded-md border px-3 py-2 transition-colors"
+    >
+      <Avatar
+        src={character.avatarUrl || USER_DEFAULT_AVATAR}
+        username={character.name}
+        size={28}
+      />
+      <span className="truncate text-sm font-medium">{character.name}</span>
+    </Link>
+  )
+}
+
+export default function ArtworkView({
+  artwork,
+  ownerHandle,
+  characterSlug,
+  self,
+}: {
+  artwork: Artwork
+  ownerHandle: string
+  characterSlug: string
+  self: User | null
+}) {
+  const artist = artwork.artist ?? artwork.owner
+  const redirectPath = `/@${ownerHandle}/${characterSlug}/gallery/${artwork.id}`
+  const featuredCharacters = artwork.charactersFeatured ?? []
+  const comments = (artwork.comments ?? []) as Comments[]
+
+  return (
+    <div className="pb-12">
+      <div className="grid gap-6 lg:grid-cols-[minmax(0,1fr)_17.5rem] lg:items-start">
+        <div className="bg-muted/20 border-border flex min-h-[28rem] items-center justify-center overflow-hidden rounded-lg border p-4">
+          {artwork.artworkUrl ? (
+            <div className="relative h-full min-h-[24rem] w-full">
+              <NsfwMedia
+                src={artwork.artworkUrl}
+                alt={artwork.altText ?? artwork.title ?? "Artwork"}
+                nsfw={!!artwork.nsfw}
+                fill
+                className="object-contain"
+                containerClassName="relative h-full min-h-[24rem] w-full"
+              />
+            </div>
+          ) : (
+            <p className="text-muted-foreground text-sm">No artwork image.</p>
+          )}
+        </div>
+
+        <aside className="flex flex-col gap-4">
+          <section className="border-border rounded-lg border p-4">
+            <h2 className="mb-3 text-sm font-semibold">Tools</h2>
+            <div className="space-y-1">
+              <p className="text-muted-foreground text-xs font-medium uppercase tracking-wide">
+                Program
+              </p>
+              <p className="text-sm">
+                {artwork.programUsed?.trim() || "Not specified"}
+              </p>
+            </div>
+          </section>
+
+          <section className="border-border rounded-lg border p-4">
+            <h2 className="mb-3 text-sm font-semibold">Characters</h2>
+            {featuredCharacters.length > 0 ? (
+              <div className="flex flex-col gap-2">
+                {featuredCharacters.map((character) => (
+                  <CharacterTag
+                    key={character.id}
+                    character={character}
+                    ownerHandle={ownerHandle}
+                  />
+                ))}
+              </div>
+            ) : (
+              <p className="text-muted-foreground text-sm">No tagged characters.</p>
+            )}
+          </section>
+        </aside>
+      </div>
+
+      <header className="mt-8 flex flex-wrap items-start justify-between gap-4">
+        <div className="flex min-w-0 items-start gap-3">
+          <Avatar
+            src={artist?.avatarUrl || USER_DEFAULT_AVATAR}
+            username={artist?.handle}
+            size={44}
+          />
+          <div className="min-w-0 space-y-1">
+            <h1 className="text-2xl font-semibold leading-tight">
+              {artwork.title ?? "Untitled artwork"}
+            </h1>
+            <div className="text-muted-foreground flex flex-wrap items-center gap-2 text-sm">
+              {artist?.handle ? (
+                <Link
+                  href={`/@${artist.handle}`}
+                  className="hover:text-foreground transition-colors"
+                >
+                  by @{artist.handle}
+                </Link>
+              ) : (
+                <span>by Unknown artist</span>
+              )}
+              <Button variant="outline" size="sm" type="button">
+                Follow
+              </Button>
+            </div>
+          </div>
+        </div>
+
+        <div className="flex items-center gap-1">
+          <Button variant="ghost" size="icon" type="button" aria-label="Favorite">
+            <LuHeart size={18} />
+          </Button>
+          <Button variant="ghost" size="icon" type="button" aria-label="Share">
+            <LuShare2 size={18} />
+          </Button>
+          <Button variant="ghost" size="icon" type="button" aria-label="More options">
+            <LuMoreVertical size={18} />
+          </Button>
+        </div>
+      </header>
+
+      {artwork.description ? (
+        <section className="mt-6">
+          <p className="text-sm leading-relaxed whitespace-pre-wrap">
+            {artwork.description}
+          </p>
+        </section>
+      ) : null}
+
+      {artwork.tags?.length ? (
+        <div className="mt-4 flex flex-wrap gap-2">
+          {artwork.tags.map((tag) => (
+            <Badge key={tag} variant="secondary">
+              #{tag}
+            </Badge>
+          ))}
+        </div>
+      ) : null}
+
+      <ArtworkComments
+        artworkId={artwork.id}
+        comments={comments}
+        self={self}
+        redirectPath={redirectPath}
+      />
+    </div>
+  )
+}

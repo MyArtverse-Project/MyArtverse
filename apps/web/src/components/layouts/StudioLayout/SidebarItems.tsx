@@ -11,8 +11,8 @@ type SidebarItem = {
 type SidebarItemsByCategory = {
   pinned: SidebarItem[]
   general: SidebarItem[]
-  artists: SidebarItem[],
-  staff: SidebarItem[],
+  artists: SidebarItem[]
+  staff: SidebarItem[]
   settings: SidebarItem[]
 }
 
@@ -43,7 +43,7 @@ const generateGeneralSidebarItems = (): SidebarItem[] => {
   ]
 }
 
-const generateCharacterEditSidebarItems = (uuid: string): SidebarItem[] => {
+const generateCharacterEditSidebarItems = (_uuid: string): SidebarItem[] => {
   return [
     {
       icon: <LuPencilLine size={20} />,
@@ -85,7 +85,7 @@ const generateArtistSidebarItems = (): SidebarItem[] => {
       icon: <LuLineChart size={20} />,
       label: "Analytics",
       href: "/studio/analytics"
-    },
+    }
   ]
 }
 
@@ -96,7 +96,7 @@ const generateStaffSidebarItems = (): SidebarItem[] => {
       icon: <LuShield size={20} />,
       label: "Artist Requests",
       href: "/studio/staff/requests"
-    },
+    }
   ]
 }
 

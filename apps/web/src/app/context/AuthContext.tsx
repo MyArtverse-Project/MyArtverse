@@ -1,7 +1,9 @@
 "use client"
 
 import { fetcher } from "@/app/lib/fetcher"
+import { logoutAction } from "@/app/actions/logout"
 import { Notification } from "@/types/users"
+import type { ContentPreferences } from "@/types/contentPreferences"
 // Import the fetch helper
 import { BACKEND_URL } from "@/utils/constants"
 import { useRouter } from "next/navigation"
@@ -24,10 +26,12 @@ export type User = {
   pronouns: string
   nationality: string
   birthday: string
+  contentPreferences?: ContentPreferences
   characters: {
     id: string
     name: string
     avatarUrl: string
+    slug: string
     species: string
     slug: string
   }[]
@@ -37,12 +41,14 @@ type AuthContextType = {
   user: User | null
   isLoading: boolean
   logout: () => void
+  refreshUser: () => Promise<void>
 }
 
 const AuthContext = createContext<AuthContextType>({
   user: null,
   isLoading: true,
-  logout: () => null
+  logout: () => null,
+  refreshUser: () => Promise.resolve()
 })
 
 export const useAuth = () => useContext(AuthContext)
@@ -73,16 +79,30 @@ export const AuthProvider = ({ children }: { children: React.ReactNode }) => {
 
   const logout = async () => {
     try {
-      await fetcher("/api/auth/logout", { method: "POST" })
-      setUser(null)
-      router.push("/login")
+      await logoutAction()
     } catch (_err) {
-      throw new Error("Logout failed")
+      // Still clear local session if the server action fails.
+    }
+
+    setUser(null)
+    router.push("/login")
+  }
+
+  const refreshUser = async () => {
+    try {
+      const data = await fetcher<User>(
+        `${BACKEND_URL}/v1/auth/whoami`,
+        {},
+        false
+      )
+      setUser(data)
+    } catch (_err) {
+      throw new Error("Refresh user failed")
     }
   }
 
   return (
-    <AuthContext.Provider value={{ user, isLoading, logout }}>
+    <AuthContext.Provider value={{ user, isLoading, logout, refreshUser }}>
       {children}
     </AuthContext.Provider>
   )

@@ -1,21 +1,31 @@
 "use client"
 
-import { UserType } from "@/types/users"
-import { pronounOptions } from "@/utils/constants"
-import { Button } from "@mav/ui/components/buttons"
-import { InputField } from "@mav/ui/components/fields"
-import { Group, GroupContainer } from "@mav/ui/components/layouts"
-import { SelectField } from "@/components/layouts/Forms"
-import { useEffect, useState } from "react"
-import { updateProfile } from "@/utils/api"
+import { useAuth } from "@/app/context/AuthContext"
 import DropZone from "@/components/Modals/DropZone"
+import { SelectField } from "@/components/layouts/Forms"
+import { Button } from "@/components/ui/button"
+import { Group, GroupContainer } from "@/components/ui/group"
+import { Input } from "@/components/ui/input"
+import { Label } from "@/components/ui/label"
+import { UserType } from "@/types/users"
+import { updateProfile } from "@/utils/api"
+import { pronounOptions, USER_DEFAULT_AVATAR } from "@/utils/constants"
+import { useRouter } from "next/navigation"
+import { useEffect, useState } from "react"
 
+const isPlaceholderAvatar = (url: string) =>
+  !url || url === USER_DEFAULT_AVATAR
+
+const normalizeAvatar = (url: string) =>
+  isPlaceholderAvatar(url) ? "" : url
 
 export default function ProfileSettings({ user }: { user: UserType }) {
+  const router = useRouter()
+  const { refreshUser } = useAuth()
   const [displayName, setDisplayName] = useState(user.displayName ?? "")
   const [handle, setHandle] = useState(user.handle)
   const [pronouns, setPronouns] = useState(user.pronouns ?? "")
-  const [avatarUrl, setAvatarUrl] = useState("")
+  const [avatarUrl, setAvatarUrl] = useState<string>(user.avatarUrl ?? "")
   const [isDirty, setIsDirty] = useState(false)
   const [isSaving, setIsSaving] = useState(false)
 
@@ -24,9 +34,9 @@ export default function ProfileSettings({ user }: { user: UserType }) {
       displayName !== (user.displayName ?? "") ||
       handle !== user.handle ||
       pronouns !== (user.pronouns ?? "") ||
-      avatarUrl !== (user.avatarUrl ?? "")
+      normalizeAvatar(avatarUrl) !== normalizeAvatar(user.avatarUrl ?? "")
     setIsDirty(changed)
-  }, [displayName, handle, pronouns, user])
+  }, [displayName, handle, pronouns, avatarUrl, user])
 
   const handleSave = async () => {
     setIsSaving(true)
@@ -37,7 +47,9 @@ export default function ProfileSettings({ user }: { user: UserType }) {
         pronouns,
         avatarLink: avatarUrl
       })
+      await refreshUser()
       setIsDirty(false)
+      router.refresh()
     } catch (error) {
       console.error("Failed to save profile settings", error)
     } finally {
@@ -54,7 +66,6 @@ export default function ProfileSettings({ user }: { user: UserType }) {
             <Button
               onClick={handleSave}
               disabled={isSaving}
-              variant="primary"
             >
               {isSaving ? "Saving..." : "Save Changes"}
             </Button>
@@ -65,17 +76,23 @@ export default function ProfileSettings({ user }: { user: UserType }) {
       >
         <div className="flex flex-row gap-6 justify-between">
           <div className="w-full flex flex-col gap-y-4">
-            <InputField
-              inputName="Name"
-              value={displayName}
-              placeholder="Enter your display name"
-              onChange={(e) => setDisplayName(e.target.value)}
-            />
-            <InputField
-              inputName="Handle"
-              value={handle}
-              onChange={(e) => setHandle(e.target.value)}
-            />
+            <div className="space-y-2">
+              <Label htmlFor="display-name">Name</Label>
+              <Input
+                id="display-name"
+                value={displayName}
+                placeholder="Enter your display name"
+                onChange={(e) => setDisplayName(e.target.value)}
+              />
+            </div>
+            <div className="space-y-2">
+              <Label htmlFor="handle">Handle</Label>
+              <Input
+                id="handle"
+                value={handle}
+                onChange={(e) => setHandle(e.target.value)}
+              />
+            </div>
             <SelectField
               inputName="Pronouns"
               value={pronouns}
@@ -83,7 +100,11 @@ export default function ProfileSettings({ user }: { user: UserType }) {
               options={pronounOptions}
             />
           </div>
-          <DropZone setData={(url) => setAvatarUrl(url)} value={avatarUrl} />
+          <DropZone
+            setData={(url) => setAvatarUrl(url)}
+            value={isPlaceholderAvatar(avatarUrl) ? null : avatarUrl}
+            enableCrop
+          />
         </div>
       </Group>
     </GroupContainer>

@@ -1,22 +1,73 @@
+import GalleryView from "./GalleryView"
 import MarginClamp from "@/components/layouts/Layouts/MarginClamp"
+import {
+  buildCharacterGalleryMetadata,
+  pickGalleryPreviewImage,
+} from "@/utils/artworkMetadata"
+import {
+  fetchCharacter,
+  fetchCharacterGalleryFolders,
+  fetchUserData,
+  getArtworks,
+} from "@/utils/api"
+import { buildPageMetadata } from "@/utils/metadata"
 import { BRAND } from "@mav/shared"
 import type { Metadata } from "next"
 
-export async function generateMetadata(): Promise<Metadata> {
-  // TODO add a simple check if their name ends with an "s"; for example "Dennis"
-  // TODO it should display: "Dennis' characters", etc
-  const userPlaceholder = "User"
+export async function generateMetadata({
+  params,
+}: {
+  params: Promise<{ handle: string; name: string }>
+}): Promise<Metadata> {
+  const { handle, name } = await params
 
-  return {
-    title: `${userPlaceholder}'s characters`,
-    description: `See ${userPlaceholder}'s characters and others on ${BRAND} by creating an account!`
+  try {
+    const [character, artworks] = await Promise.all([
+      fetchCharacter(handle, name),
+      getArtworks(handle, name),
+    ])
+
+    return buildCharacterGalleryMetadata({
+      characterName: character.name,
+      handle,
+      characterSlug: name,
+      previewImage:
+        pickGalleryPreviewImage(artworks) ?? character.avatarUrl ?? null,
+    })
+  } catch {
+    return buildPageMetadata({
+      title: "Gallery",
+      description: `View a character gallery on ${BRAND}.`,
+      path: `/@${handle}/${name}/gallery`,
+    })
   }
 }
 
-export default async function Page() {
+export default async function Page({
+  params,
+}: {
+  params: Promise<{ handle: string; name: string }>
+}) {
+  const { handle, name } = await params
+  const [character, artworks, self] = await Promise.all([
+    fetchCharacter(handle, name),
+    getArtworks(handle, name),
+    fetchUserData().catch(() => null),
+  ])
+
+  const folders = await fetchCharacterGalleryFolders(character.id).catch(() => [])
+  const isOwner = self?.handle === character.owner.handle
+
   return (
     <MarginClamp>
-      <div>e</div>
+      <GalleryView
+        characterId={character.id}
+        ownerHandle={handle}
+        characterSlug={name}
+        artworks={artworks}
+        folders={folders}
+        owner={isOwner}
+      />
     </MarginClamp>
   )
 }

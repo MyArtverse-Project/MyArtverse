@@ -30,16 +30,24 @@ export default function SettingsPrivacyPage() {
         </form>
       </Group>
       <Group
-        title="Linked accounts"
-        description="Manage your login from third-party authenticators"
+        title="Danger zone"
+        description={
+          <>
+            Deleting an account is irreversable and cannot be undone! Once you
+            delete your account—your characters, images, and account history
+            will be completely wiped from our servers to comply with GDPR
+            standards. If you are certain that you'll delete your account,
+            it's important to export your data first before proceeding.
+          </>
+        }
+        learnMoreLink="/lmao"
       >
-        <div className="flex flex-col items-start gap-y-2">
-          <Button variant="secondary">Link account via Google</Button>
-          <Button variant="secondary">Link account via X</Button>
-          <Button variant="secondary">Link account via Apple ID</Button>
+        <div className="flex gap-x-2">
+          <Button>Export data</Button>
+          <Button variant="destructive">Deactivate account</Button>
+          <Button variant="destructive">Delete account</Button>
         </div>
       </Group>
-      <Group title="Two-factor authentication">content</Group>
     </GroupContainer>
   )
 }

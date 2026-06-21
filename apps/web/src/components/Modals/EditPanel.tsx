@@ -6,18 +6,20 @@ import { Button } from "@/components/ui/button"
 import Image from "next/image"
 import { useState } from "react"
 import { FaCode, FaComment, FaInfoCircle } from "react-icons/fa"
-import { LuXCircle } from "react-icons/lu"
+import { LuCat, LuGalleryHorizontal, LuSheet, LuXCircle } from "react-icons/lu"
 import Modal from "../layouts/Modal"
 import Note from "../layouts/Note"
 
 export default function EditPanelModal({
   toggleEditPanel,
   editPanelModalShown,
-  position
+  position,
+  characterName
 }: {
   toggleEditPanel: (position: { row: number; col: number } | null) => void
   editPanelModalShown: boolean
   position: { row: number; col: number } | null
+  characterName?: string
 }) {
   const [errors, setErrors] = useState<string>()
   const [choosenComponent, setChoosenComponent] = useState<string>("comments")
@@ -30,9 +32,27 @@ export default function EditPanelModal({
     },
     {
       label: "Information",
-      description: `Add information to your panel. Information including when you joined ${BRAND}, your birthday, nationality, and more.`,
+      description: `List of information`,
       value: "information",
       icon: <FaInfoCircle size={18} />
+    },
+    {
+      label: "Featured Gallery",
+      description: `List of featured images`,
+      value: "featured_gallery",
+      icon: <LuGalleryHorizontal size={18} />
+    },
+    {
+      label: "Featured artwork",
+      description: `A artwork featured`,
+      value: "featured_artwork",
+      icon: <LuCat size={18} />
+    },
+    {
+      label: "Reference Sheet",
+      description: `A reference sheet for the character`,
+      value: "reference_sheet",
+      icon: <LuSheet size={18} />
     }
   ]
 
@@ -42,7 +62,7 @@ export default function EditPanelModal({
       return
     }
 
-    const data = await setPanel({ component: choosenComponent, position })
+    const data = await setPanel({ component: choosenComponent, position }, characterName)
     if (!data) {
       setErrors("Unable to save panel")
       return
