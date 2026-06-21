@@ -4,6 +4,9 @@ export const BACKEND_URL = process.env.NEXT_PUBLIC_BACKEND_URL
 
 export const USER_DEFAULT_AVATAR = "/UserProfile.png"
 
+export const isRemoteImageUrl = (url: string) =>
+  url.startsWith("http://") || url.startsWith("https://")
+
 export const emailRegex =
   /^[^@#$%^&*()_+=\[{\\};:<>|\s,\/?]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,3}$/
 
@@ -72,13 +75,13 @@ export const genderOptions = [
 ]
 
 export const folderColors = [
-  "bg-gray-400",
-  "bg-red-400",
-  "bg-orange-400",
-  "bg-yellow-400",
-  "bg-green-400",
-  "bg-blue-400",
-  "bg-violet-400",
-  "bg-purple-400",
-  "bg-pink-400"
-]
+  "#9ca3af",
+  "#f87171",
+  "#fb923c",
+  "#facc15",
+  "#4ade80",
+  "#60a5fa",
+  "#a78bfa",
+  "#c084fc",
+  "#f472b6",
+] as const

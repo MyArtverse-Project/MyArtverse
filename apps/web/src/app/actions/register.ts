@@ -1,5 +1,6 @@
 "use server"
 import { RegisterFormSchema } from "@/app/lib/definition"
+import { logError } from "@/utils"
 import { BACKEND_URL } from "@/utils/constants"
 import { removeSuffixes } from "@/utils/removeSuffix"
 
@@ -69,7 +70,9 @@ export async function registerAction(formData: FormData) {
         error: "Something went wrong. Please try again later."
       }
     }
-  } catch (_error) {
+  } catch (error) {
+    logError("registerAction", error)
+
     return {
       success: false,
       message: {

@@ -29,7 +29,7 @@ export default function DropdownItem({
           href={link ? link : "#"}
           className={cn(
             "w-full rounded-md transition-colors",
-            active && "bg-400 text-700",
+            active && "bg-accent text-accent-foreground",
             special &&
               "w-full bg-gradient-to-b from-[#FFE5D2] to-[#DDB5FD] text-black"
           )}

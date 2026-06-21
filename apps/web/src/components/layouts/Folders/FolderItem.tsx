@@ -2,44 +2,64 @@
 
 import { useScrollBounds } from "@/hooks"
 import type { MapElement } from "@/types/utils"
+import {
+  acceptsFolderDrag,
+  FOLDER_DRAG_MIME,
+  readFolderDragData,
+  type FolderDragKind,
+  type FolderDragPayload,
+} from "@/utils/folderDrag"
 import { cn } from "@mav/shared/utils"
-import { Button } from "@mav/ui/components/buttons"
+import { Button } from "@/components/ui/button"
 import { motion } from "framer-motion"
 import { Children, useEffect, useRef, useState } from "react"
 import {
+  LuChevronRight,
   LuFolder as Folder,
   LuFolderClosed as FolderClosed,
   LuFolderOpen as FolderOpen,
-  LuFolderPlus as FolderPlus
+  LuFolderPlus as FolderPlus,
 } from "react-icons/lu"
 
 export default function FolderItem({
   children,
   name,
+  folderId,
   open = false,
   expanded = false,
   nestedItem,
   newItem,
+  selected = false,
+  onSelect,
+  color,
+  acceptKinds,
+  onDropItem,
   ...attributes
 }: {
   children?: React.ReactNode
   name?: string
+  folderId?: string
   open?: boolean
   expanded?: boolean
   nestedItem?: boolean
   newItem?: boolean
-  /** WIP */
+  selected?: boolean
+  onSelect?: () => void
   color?: string
+  acceptKinds?: FolderDragKind[]
+  onDropItem?: (folderId: string | null, payload: FolderDragPayload) => void
 } & Pick<React.HTMLAttributes<MapElement<"div">>, "onClick">) {
   const childrenCount = Children.count(children)
+  const hasNestedFolders = childrenCount > 0
 
   const [isExpand, setIsExpand] = useState(expanded)
   const [expandedHeight, setExpandedHeight] = useState(0)
+  const [isDragOver, setIsDragOver] = useState(false)
 
   const collapsibleRef = useRef<React.ElementRef<"div">>(null)
-  const toggleButtonRef = useRef<React.ElementRef<"button">>(null)
+  const canDrop = !newItem && !!onDropItem
 
-  const DynamicFolderIcon = children
+  const DynamicFolderIcon = hasNestedFolders
     ? !isExpand
       ? FolderClosed
       : FolderOpen
@@ -59,62 +79,114 @@ export default function FolderItem({
     )
   }
 
-  const { height: collapsibleHeight } = useScrollBounds(collapsibleRef)
+  const { height: collapsibleHeight } = useScrollBounds(
+    collapsibleRef,
+    hasNestedFolders && isExpand
+  )
 
   useEffect(() => {
-    const toggleButton = toggleButtonRef.current
+    setExpandedHeight(collapsibleHeight)
+  }, [children, isExpand, collapsibleHeight])
 
-    const handleCollapseState = () => {
-      if (!children) return
-
-      setExpandedHeight(collapsibleHeight)
+  const handleSelect = () => {
+    if (newItem) {
+      attributes.onClick?.({} as React.MouseEvent<HTMLDivElement>)
       return
     }
+    onSelect?.()
+  }
 
-    handleCollapseState()
-    toggleButton.addEventListener("click", handleCollapseState)
+  const handleDragOver = (event: React.DragEvent<HTMLDivElement>) => {
+    if (!canDrop || !event.dataTransfer.types.includes(FOLDER_DRAG_MIME)) return
 
-    return () => {
-      toggleButton.removeEventListener("click", handleCollapseState)
-    }
-  }, [children, isExpand, collapsibleHeight])
+    event.preventDefault()
+    event.dataTransfer.dropEffect = "move"
+    setIsDragOver(true)
+  }
+
+  const handleDrop = (event: React.DragEvent<HTMLDivElement>) => {
+    if (!canDrop) return
+
+    event.preventDefault()
+    setIsDragOver(false)
+
+    const payload = readFolderDragData(event)
+    if (!payload || !acceptsFolderDrag(payload, acceptKinds)) return
+
+    onDropItem?.(folderId ?? null, payload)
+  }
 
   return (
     <div
       className={cn(!nestedItem ? "w-full" : "relative w-full")}
-      aria-expanded={!children ? undefined : isExpand}
-      // Data attribute for debugging purposes in production
+      aria-expanded={hasNestedFolders ? isExpand : undefined}
       {...attributes}
     >
-      <Button
-        ref={toggleButtonRef}
-        onClick={() => setIsExpand(!isExpand)}
-        aria-label={
-          !children
-            ? `Folder item: ${name}`
-            : `Folder item: ${name}, folder contains ${childrenCount} items`
-        }
+      <div
         className={cn(
-          "flex w-full cursor-pointer flex-row items-center rounded-md px-3 py-2 font-semibold transition-all",
-          !open ? "hover:text-500 hover:bg-200" : "bg-500 text-active",
-          !newItem ? "opacity-100" : "opacity-50 hover:opacity-100"
+          "flex w-full items-center gap-1 rounded-md px-1 py-1 transition-all",
+          (selected || open) && "bg-accent text-accent-foreground",
+          isDragOver && "bg-primary/10 ring-primary ring-2"
         )}
-        icon={<DynamicFolderIcon aria-hidden size={21} className="mr-2" />}
+        onDragOver={handleDragOver}
+        onDragEnter={handleDragOver}
+        onDragLeave={() => setIsDragOver(false)}
+        onDrop={handleDrop}
       >
-        {newItem ? "New folder" : name}
-      </Button>
-      {/* Nested items go here */}
-      <motion.div
-        ref={collapsibleRef}
-        initial={{ height: 0 }}
-        animate={{
-          height: !isExpand ? 0 : expandedHeight
-        }}
-        // @ts-expect-error: Motion div errors with className prop
-        className={cn(children ? "relative overflow-hidden pl-6" : "")}
-      >
-        {children}
-      </motion.div>
+        {hasNestedFolders ? (
+          <Button
+            type="button"
+            variant="ghost"
+            size="icon"
+            className="size-7 shrink-0"
+            aria-label={isExpand ? "Collapse folder" : "Expand folder"}
+            onClick={(e) => {
+              e.stopPropagation()
+              setIsExpand(!isExpand)
+            }}
+          >
+            <LuChevronRight
+              size={16}
+              className={cn("transition-transform", isExpand && "rotate-90")}
+            />
+          </Button>
+        ) : (
+          <span className="size-7 shrink-0" />
+        )}
+
+        <button
+          type="button"
+          onClick={handleSelect}
+          aria-label={newItem ? "Create new folder" : `Folder item: ${name}`}
+          className={cn(
+            "hover:bg-muted/60 flex min-w-0 flex-1 items-center rounded-md px-2 py-1.5 text-left font-semibold transition-colors",
+            newItem && "opacity-50 hover:opacity-100"
+          )}
+        >
+          {color ? (
+            <span
+              className="mr-2 size-3 shrink-0 rounded-full border border-border/50"
+              style={{ backgroundColor: color }}
+              aria-hidden
+            />
+          ) : null}
+          <DynamicFolderIcon aria-hidden size={18} className="mr-2 shrink-0" />
+          <span className="truncate">{newItem ? "New folder" : name}</span>
+        </button>
+      </div>
+
+      {hasNestedFolders ? (
+        <motion.div
+          ref={collapsibleRef}
+          initial={{ height: 0 }}
+          animate={{
+            height: !isExpand ? 0 : expandedHeight,
+          }}
+          className="relative overflow-hidden pl-6"
+        >
+          {children}
+        </motion.div>
+      ) : null}
     </div>
   )
 }

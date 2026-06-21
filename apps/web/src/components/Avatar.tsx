@@ -1,16 +1,29 @@
+"use client"
+
+import { isRemoteImageUrl, USER_DEFAULT_AVATAR } from "@/utils/constants"
 import Image from "next/image"
+import { useEffect, useState } from "react"
 
 export default function Avatar({
   className,
   username,
   src,
-  size = 36
+  size = 36,
+  imageKey,
 }: {
   className?: string
   username?: string
-  src: string
+  src?: string
   size?: number
+  imageKey?: string
 }) {
+  const resolvedSrc = src || USER_DEFAULT_AVATAR
+  const [imgSrc, setImgSrc] = useState(resolvedSrc)
+
+  useEffect(() => {
+    setImgSrc(resolvedSrc)
+  }, [resolvedSrc])
+
   return (
     <div
       data-avatar=""
@@ -19,9 +32,10 @@ export default function Avatar({
       className={className ?? "overflow-hidden rounded-full"}
     >
       <Image
-        src={src}
+        key={imageKey ? `${imageKey}:${imgSrc}` : imgSrc}
+        src={imgSrc}
         className="aspect-square object-cover"
-        alt={username ? `Avatar of ${username}"}` : ""}
+        alt={username ? `Avatar of ${username}` : ""}
         decoding="async"
         loading="eager"
         priority
@@ -29,6 +43,12 @@ export default function Avatar({
         width={size}
         height={size}
         draggable={false}
+        unoptimized={isRemoteImageUrl(imgSrc)}
+        onError={() => {
+          if (imgSrc !== USER_DEFAULT_AVATAR) {
+            setImgSrc(USER_DEFAULT_AVATAR)
+          }
+        }}
       />
     </div>
   )

@@ -41,8 +41,8 @@ export default function Note({
     },
     error: {
       icon: LuXCircle,
-      css: "border-error",
-      iconColor: "text-error"
+      css: "border-destructive",
+      iconColor: "text-destructive"
     },
     success: {
       icon: LuCheckCircle2,

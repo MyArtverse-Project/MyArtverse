@@ -1,8 +1,13 @@
 import "@mav/shared/styles/index.scss"
+import "./theme.css"
 import { AuthProvider } from "@/app/context/AuthContext"
+import { NsfwPreferencesProvider } from "@/app/context/NsfwPreferencesContext"
 import { Analytics, NoJSMessage, SkipNav } from "@/components"
+import { ThemeProvider } from "@/components/ThemeProvider"
+import { Toaster } from "@/components/ui/sonner"
+import { config } from "@/utils/constants"
+import { getSiteUrl } from "@/utils/metadata"
 import { BRAND } from "@mav/shared"
-import { cn } from "@mav/shared/utils"
 import { Provider } from "jotai"
 import type { Metadata, Viewport } from "next"
 import dynamic from "next/dynamic"
@@ -20,14 +25,24 @@ const inter = Inter({
 })
 
 export const metadata: Metadata = {
+  metadataBase: getSiteUrl(),
   title: {
     template: `%s - ${BRAND}`,
     default: BRAND
   },
+  description: config.description,
   formatDetection: { telephone: false, address: false },
   openGraph: {
     type: "website",
-    siteName: BRAND
+    siteName: BRAND,
+    title: BRAND,
+    description: config.description,
+    locale: "en_US",
+  },
+  twitter: {
+    card: "summary_large_image",
+    title: BRAND,
+    description: config.description,
   },
   other: {
     "apple-mobile-web-app-status-bar": "#9e00ff"
@@ -40,20 +55,30 @@ export const viewport: Viewport = {
 
 export default function RootLayout({ children }: React.PropsWithChildren) {
   return (
-    <html lang="en" dir="ltr" className={cn(inter.variable, "theme-system")}>
+    <html
+      lang="en"
+      dir="ltr"
+      className={inter.variable}
+      suppressHydrationWarning
+    >
       <head>
         <link rel="mask-icon" href="./safari-pinned-tab.svg" color="9e00ff" />
       </head>
-      <body className="bg-100 text-700 bg-background prose-headings:font-bold font-inter !overflow-x-hidden text-sm font-medium">
+      <body className="bg-background text-foreground prose-headings:font-bold font-inter !overflow-x-hidden text-sm font-medium">
         <Analytics />
         <PreconnectResources />
         <CheckLocalSettings />
         <div data-mav-root-layout-slot="" className="contents">
           <SkipNav />
           <NoJSMessage />
-          <Provider>
-            <AuthProvider>{children}</AuthProvider>
-          </Provider>
+          <ThemeProvider>
+            <Provider>
+              <AuthProvider>
+                <NsfwPreferencesProvider>{children}</NsfwPreferencesProvider>
+              </AuthProvider>
+            </Provider>
+            <Toaster />
+          </ThemeProvider>
         </div>
       </body>
     </html>

@@ -4,7 +4,7 @@ import redirects from "./lib/redirects.js"
 
 /** @type {import('next').NextConfig} */
 const nextConfig = {
-  transpilePackages: ["gsap", "@mav/config", "@mav/ui", "@mav/shared"],
+  transpilePackages: ["gsap", "@mav/config", "@mav/shared"],
   pageExtensions: ["js", "jsx", "ts", "tsx", "md", "mdx"],
   poweredByHeader: false,
   experimental: {
@@ -19,6 +19,18 @@ const nextConfig = {
         hostname: "localhost",
         port: "9000",
         pathname: "/**"
+      },
+      {
+        protocol: "http",
+        hostname: "localhost",
+        port: "4566",
+        pathname: "/**"
+      },
+      {
+        pathname: "https",
+        hostname: "localhost.localstack.cloud",
+        pathname: "/**",
+        port: "4566"
       }
     ]
   },

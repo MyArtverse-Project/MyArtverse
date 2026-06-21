@@ -1,6 +1,6 @@
 import type { Variant } from "@/types/characters"
 import { cn } from "@mav/shared/utils"
-import { InputField } from "@mav/ui/components/fields"
+import { Input } from "@/components/ui/input"
 import Image from "next/image"
 import Checkbox from "../layouts/Forms/Checkbox"
 
@@ -19,8 +19,7 @@ export default function ModalRefVariant({
     >
       <Image src={url} alt="Ref Sheet" width={200} height={100} />
       <div className="mx-10 w-3/5">
-        <InputField
-          noLabel
+        <Input
           placeholder="Variant Name"
           required
           value={name}

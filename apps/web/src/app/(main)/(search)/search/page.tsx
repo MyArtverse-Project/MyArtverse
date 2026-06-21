@@ -1,6 +1,6 @@
 "use client"
 
-import { Button } from "@mav/ui/components/buttons"
+import { Button } from "@/components/ui/button"
 import { useState } from "react"
 import {
   LuCat,
@@ -20,37 +20,42 @@ export default function Search() {
         <div className="gap-y-3 flex flex-col text-base">
           <Button
             onClick={() => setSearchType("all")}
-            variant={searchType === "all" ? "primary" : "secondary"}
-            icon={<LuScan size={18} />}
+            variant={searchType === "all" ? "default" : "secondary"}
+            className="justify-start gap-2"
           >
+            <LuScan size={18} />
             All
           </Button>
           <Button
             onClick={() => setSearchType("users")}
-            variant={searchType === "users" ? "primary" : "secondary"}
-            icon={<LuUser size={18} />}
+            variant={searchType === "users" ? "default" : "secondary"}
+            className="justify-start gap-2"
           >
+            <LuUser size={18} />
             Users & Artist
           </Button>
           <Button
             onClick={() => setSearchType("artworks")}
-            variant={searchType === "artworks" ? "primary" : "secondary"}
-            icon={<LuGalleryThumbnails size={18} />}
+            variant={searchType === "artworks" ? "default" : "secondary"}
+            className="justify-start gap-2"
           >
+            <LuGalleryThumbnails size={18} />
             Artworks
           </Button>
           <Button
             onClick={() => setSearchType("listings")}
-            variant={searchType === "listings" ? "primary" : "secondary"}
-            icon={<LuListOrdered size={18} />}
+            variant={searchType === "listings" ? "default" : "secondary"}
+            className="justify-start gap-2"
           >
+            <LuListOrdered size={18} />
             Listing
           </Button>
           <Button
             onClick={() => setSearchType("adopts")}
-            variant={searchType === "adopts" ? "primary" : "secondary"}
-            icon={<LuCat size={18} />}
+            variant={searchType === "adopts" ? "default" : "secondary"}
+            className="justify-start gap-2"
           >
+            <LuCat size={18} />
             Adopts
           </Button>
         </div>

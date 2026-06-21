@@ -41,7 +41,7 @@ export default function Modal({
         }}
         // @ts-expect-error: Motion div errors with className prop
         className={cn(
-          "border-300 bg-200 fixed left-1/2 top-1/2 overflow-hidden rounded-md border",
+          "border-border bg-card fixed left-1/2 top-1/2 overflow-hidden rounded-md border",
           className
         )}
       >

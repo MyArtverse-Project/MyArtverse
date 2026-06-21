@@ -1,8 +1,9 @@
 import { displaySpecies } from "@/utils/displayer"
-import { Button } from "@mav/ui/components/buttons"
+import { Button } from "@/components/ui/button"
+import NsfwMedia from "@/components/NsfwMedia"
 import Image from "next/image"
 import { LuCat as CatIcon, LuPin, LuPalette as Palette } from "react-icons/lu"
-import { ColorPalette } from "./ColorPalette"
+import ColorPalette from "./ColorPalette"
 
 interface PinnedCharacterProps {
   avatar: string
@@ -11,6 +12,7 @@ interface PinnedCharacterProps {
   colors: string[]
   artist: string
   refSheetImg: string
+  refSheetNsfw?: boolean
 }
 
 export function PinnedCharacter({
@@ -19,10 +21,11 @@ export function PinnedCharacter({
   species,
   colors,
   artist,
-  refSheetImg
+  refSheetImg,
+  refSheetNsfw = false,
 }: PinnedCharacterProps) {
   return (
-    <section className="border-300 mb-5 flex flex-row justify-between rounded border-4 border-solid p-4">
+    <section className="border-border mb-5 flex flex-row justify-between rounded-lg border p-4">
       <div className="flex w-full flex-col">
         <span className="mb-2 flex flex-row items-center">
           <LuPin className={"mr-2"} size={18} />
@@ -43,25 +46,30 @@ export function PinnedCharacter({
             </div>
           </div>
           <div className="mt-4 flex flex-row space-x-3">
-            <Button variant="primary" icon={<CatIcon size={19} />}>
+            <Button>
+              <CatIcon size={19} />
               View character details
             </Button>
-            <Button variant="primary" icon={<Palette size={19} />}>
+            <Button>
+              <Palette size={19} />
               Export ref sheet
             </Button>
           </div>
         </div>
         <div className="mt-auto">
-          <h4 className="not-prose text-subtext text-sm">ARTIST CREDIT</h4>
+          <h4 className="not-prose text-muted-foreground text-sm">
+            ARTIST CREDIT
+          </h4>
           <span>{artist}</span>
         </div>
       </div>
-      <div className=" w-full">
-        <Image
-          width={640}
-          height={360}
+      <div className="relative h-64 w-full max-w-xl overflow-hidden">
+        <NsfwMedia
           src={refSheetImg}
           alt={`${name}'s ref sheet`}
+          nsfw={refSheetNsfw}
+          fill
+          className="object-contain object-center"
         />
       </div>
     </section>

@@ -1,5 +1,6 @@
 "use server"
 import { ForgotFormSchema, RecoverFormSchema } from "@/app/lib/definition"
+import { logError } from "@/utils"
 import { BACKEND_URL } from "@/utils/constants"
 import { removeSuffixes } from "@/utils/removeSuffix"
 
@@ -48,7 +49,9 @@ export async function forgotAction(formData: FormData) {
         error: "Something went wrong. Please try again later."
       }
     }
-  } catch (_error) {
+  } catch (error) {
+    logError("forgotAction", error)
+
     return {
       success: false,
       message: {
@@ -115,7 +118,9 @@ export async function recoverAction(formData: FormData, uuid: string) {
         error: "Something went wrong. Please try again later."
       }
     }
-  } catch (_error) {
+  } catch (error) {
+    logError("recoverAction", error)
+
     return {
       success: false,
       message: {

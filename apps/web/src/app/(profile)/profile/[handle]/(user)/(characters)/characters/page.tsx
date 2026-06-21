@@ -1,20 +1,33 @@
 import MarginClamp from "@/components/layouts/Layouts/MarginClamp"
 import type { DefineRouteParams } from "@/types"
+import { buildUserCharactersMetadata } from "@/utils/artworkMetadata"
 import { fetchUser, fetchUserCharacters, fetchUserData } from "@/utils/api"
+import { buildPageMetadata } from "@/utils/metadata"
 import { BRAND } from "@mav/shared"
 import type { Metadata } from "next"
 import CharacterView from "./CharacterView"
 
 type AsyncProps = DefineRouteParams<{ handle: string }>
 
-export async function generateMetadata(): Promise<Metadata> {
-  // TODO add a simple check if their name ends with an "s"; for example "Dennis"
-  // TODO it should display: "Dennis' characters", etc
-  const userPlaceholder = "User"
+export async function generateMetadata({
+  params,
+}: AsyncProps): Promise<Metadata> {
+  const { handle } = await params
 
-  return {
-    title: `${userPlaceholder}'s characters`,
-    description: `See ${userPlaceholder}'s characters and others on ${BRAND} by creating an account!`
+  try {
+    const user = await fetchUser(handle)
+
+    return buildUserCharactersMetadata({
+      displayName: user.displayName ?? handle,
+      handle,
+      avatarUrl: user.avatarUrl ?? null,
+    })
+  } catch {
+    return buildPageMetadata({
+      title: "Characters",
+      description: `Browse characters on ${BRAND}.`,
+      path: `/@${handle}/characters`,
+    })
   }
 }
 
@@ -23,12 +36,21 @@ export default async function Page({ params }: AsyncProps) {
   const characters = await fetchUserCharacters(handle)
   const { folders, id } = await fetchUser(handle)
   const self = await fetchUserData().catch(() => null)
+  const isCharacterFolder = (folder: { contentType?: string }) =>
+    !folder.contentType || folder.contentType === "characters"
+  const characterFolders = folders
+    .filter(isCharacterFolder)
+    .map((folder) => ({
+      ...folder,
+      children: folder.children?.filter(isCharacterFolder),
+    }))
+
   return (
     <MarginClamp>
       <CharacterView
         handle={handle}
         characters={characters}
-        folders={folders}
+        folders={characterFolders}
         owner={self ? self.id === id : false}
       />
     </MarginClamp>

@@ -1,14 +1,15 @@
 "use client"
 
 import { recoverAction } from "@/app/actions/recover"
-import { Button } from "@mav/ui/components/buttons"
-import { Form, type FormState, InputField } from "@mav/ui/components/fields"
+import { Button } from "@/components/ui/button"
+import { Input } from "@/components/ui/input"
+import { Label } from "@/components/ui/label"
 import { useRouter } from "next/navigation"
 import { useState } from "react"
 
 export default function RecoverForm({ uuid }: { uuid: string }) {
   const router = useRouter()
-  const [errors, setErrors] = useState<FormState>()
+  const [message, setMessage] = useState<string>()
 
   async function handleSubmit(event: React.FormEvent<HTMLFormElement>) {
     event.preventDefault()
@@ -18,35 +19,36 @@ export default function RecoverForm({ uuid }: { uuid: string }) {
     if (res.success) {
       router.push(`/login`)
     } else {
-      setErrors({
-        message: res.message.error || "Something went wrong. Please try again.",
-        errors: {}
-      })
+      setMessage(
+        res.message.error || "Something went wrong. Please try again."
+      )
     }
   }
 
   return (
-    <Form onSubmit={handleSubmit} className="flex w-full flex-col gap-y-4">
-      {errors && <p className="text-center text-red-500">{errors.message}</p>}
-      <InputField
-        type="password"
-        inputName="Password"
-        placeholder="Password"
-        error={errors?.errors.password}
-      />
-      <InputField
-        type="password"
-        inputName="Confirm"
-        placeholder="Confirm Password"
-        error={errors?.errors.confirm}
-      />
-      <Button
-        position="center"
-        type="submit"
-        className="mt-4 w-full text-center"
-      >
+    <form onSubmit={handleSubmit} className="flex w-full flex-col gap-y-4">
+      {message && <p className="text-destructive text-center">{message}</p>}
+      <div className="space-y-2">
+        <Label htmlFor="password">Password</Label>
+        <Input
+          id="password"
+          name="password"
+          type="password"
+          placeholder="Password"
+        />
+      </div>
+      <div className="space-y-2">
+        <Label htmlFor="confirm">Confirm Password</Label>
+        <Input
+          id="confirm"
+          name="confirm"
+          type="password"
+          placeholder="Confirm Password"
+        />
+      </div>
+      <Button type="submit" className="mt-4 w-full">
         Reset Password
       </Button>
-    </Form>
+    </form>
   )
 }

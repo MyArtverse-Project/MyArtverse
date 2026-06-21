@@ -1,6 +1,7 @@
 "use client"
 import { setHTMLPanel } from "@/utils/api"
-import { Button } from "@mav/ui/components/buttons"
+import { Button } from "@/components/ui/button"
+import { Textarea } from "@/components/ui/textarea"
 import DOMPurify from "isomorphic-dompurify"
 import { useState } from "react"
 import { FaCode } from "react-icons/fa"
@@ -44,11 +45,13 @@ export default function EditHTMLModal({
             HTML Editor
           </span>
           <Button
-            size="small"
-            variant="tritery"
-            icon={<LuXCircle size={18} />}
+            size="icon"
+            variant="ghost"
+            aria-label="Close"
             onClick={toggleEditHTMLModal}
-          />
+          >
+            <LuXCircle size={18} />
+          </Button>
         </div>
       </Modal.Title>
       {errors && (
@@ -57,14 +60,14 @@ export default function EditHTMLModal({
         </div>
       )}
       <div className="flex flex-row gap-4 p-4">
-        <textarea
-          className="bg-200 h-40 w-1/2 border p-2 font-mono"
+        <Textarea
+          className="h-40 w-1/2 font-mono"
           placeholder="Enter HTML here..."
           value={htmlContent}
           onChange={(e) => setHtmlContent(e.target.value)}
         />
         <div
-          className="h-40 w-1/2 overflow-auto border p-2"
+          className="border-border h-40 w-1/2 overflow-auto rounded-md border p-2"
           dangerouslySetInnerHTML={{ __html: DOMPurify.sanitize(htmlContent) }}
         />
       </div>

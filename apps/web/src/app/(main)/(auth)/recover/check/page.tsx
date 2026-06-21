@@ -1,7 +1,7 @@
 "use client"
 
 import { useAuth } from "@/app/context/AuthContext"
-import { Button } from "@mav/ui/components/buttons"
+import { Button } from "@/components/ui/button"
 import Image from "next/image"
 import { useRouter } from "next/navigation"
 import { useEffect } from "react"
@@ -18,7 +18,7 @@ export default function Page() {
   }, [user, isLoading, router])
 
   return (
-    <div className="bg-100 relative flex min-h-screen w-full items-start justify-center px-6 pt-36">
+    <div className="bg-background relative flex min-h-screen w-full items-start justify-center px-6 pt-36">
       <Image
         src="/Backdrop.png"
         alt="Backdrop"
@@ -26,16 +26,15 @@ export default function Page() {
         width={2000}
         className="absolute left-0 top-0 z-0 h-1/4 w-full object-cover"
       />
-      <div className="bg-100 border-200 relative z-10 flex w-full max-w-2xl flex-col items-center justify-center gap-y-6 rounded-lg border-2 p-12 shadow-md">
+      <div className="bg-card text-card-foreground border-border relative z-10 flex w-full max-w-2xl flex-col items-center justify-center gap-y-6 rounded-lg border p-12 shadow-md">
         <LuMail size={45} />
-        <h1 className="text-700 text-2xl">Check your email!</h1>
+        <h1 className="text-2xl font-semibold">Check your email!</h1>
         <p className="text-center">
           You should get an email with a link to recover your account. If you
           don't see it, check your spam folder.
         </p>
         <Button
-          position="center"
-          className="mt-4 w-full text-center"
+          className="mt-4 w-full"
           onClick={() => router.push("/login")}
         >
           Sign in

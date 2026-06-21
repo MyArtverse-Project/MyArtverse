@@ -9,7 +9,7 @@ export type PartialRecord<K extends PropertyKey, T = string> = Partial<
 >
 export type PartialArray<T> = Partial<T>[]
 
-export type LinkedString = `/${string}` | `https://${string}`
+export type LinkedString = `/${string}` | `http://${string}` | `https://${string}`
 
 type SearchParams = { [key: string]: string | string[] | undefined }
 

@@ -1,7 +1,7 @@
 import { COPYRIGHT_ALL_RIGHTS_RESERVED } from "@mav/shared"
 import { cn } from "@mav/shared/utils"
-import { Button } from "@mav/ui/components/buttons"
-import { MyArtverseIcon } from "@mav/ui/icons"
+import { Button } from "@/components/ui/button"
+import { MyArtverseIcon } from "@/components/icons/MyArtverse"
 import Link from "next/link"
 import { FaCircle } from "react-icons/fa"
 
@@ -51,7 +51,7 @@ export function Footer({
   operationStatus?: "Operational" | "Maintenance" | "Outage"
 }) {
   return (
-    <div className="border-t-400 border-t py-8">
+    <div className="border-border border-t py-8">
       <footer className="font-inter mx-auto flex max-w-screen-xl flex-col gap-y-10 px-8">
         <div className="flex items-start gap-x-3.5">
           <section className="flex flex-col items-start gap-y-4">
@@ -61,31 +61,27 @@ export function Footer({
             >
               <MyArtverseIcon size={1.4} logoOnly />
             </Link>
-            <Button
-              variant="secondary"
-              size="small"
-              prefix={<span>{"Status: "}</span>}
-            >
-              <div
+            <Button variant="secondary" size="sm">
+              <span>{"Status: "}</span>
+              <span
                 className={cn(
-                  "inline-flex items-center gap-x-1.5 p-0.5",
+                  "inline-flex items-center gap-x-1.5",
                   operationStatus == "Operational"
                     ? "text-success"
                     : operationStatus == "Maintenance"
                       ? "text-warning"
-                      : "text-alert"
+                      : "text-destructive"
                 )}
               >
                 <FaCircle />
-                {/* TODO: design, bad contrast ratio when switched to light mode */}
                 <span>{operationStatus}</span>
-              </div>
+              </span>
             </Button>
           </section>
           <section className="flex flex-1 items-start justify-evenly">
             {footerLinks.map((item, index) => (
               <ul key={index} className="flex flex-col gap-y-4">
-                <li className="text-600 font-semibold opacity-50">
+                <li className="text-muted-foreground font-semibold">
                   {item.heading}
                 </li>
                 <li className="flex flex-col gap-y-4">
@@ -93,7 +89,7 @@ export function Footer({
                     <Link
                       key={linkIndex}
                       href={link.link}
-                      className="text-700 hover:text-600"
+                      className="text-foreground/80 hover:text-foreground transition-colors"
                     >
                       {link.text}
                     </Link>
@@ -103,7 +99,7 @@ export function Footer({
             ))}
           </section>
         </div>
-        <div className="text-subtext flex gap-x-4 opacity-75">
+        <div className="text-muted-foreground flex gap-x-4">
           <div className="w-full">{COPYRIGHT_ALL_RIGHTS_RESERVED}</div>
           {!commitHashEnv ? (
             <span className="cursor-help underline decoration-dashed">
@@ -111,7 +107,7 @@ export function Footer({
             </span>
           ) : (
             <Link
-              className="text-subtext underline hover:text-blue-400"
+              className="text-muted-foreground hover:text-foreground underline transition-colors"
               href={`https://github.com/MyArtverse-Project/MyArtverse/commit/${commitHash}`}
             >
               {commitHash}

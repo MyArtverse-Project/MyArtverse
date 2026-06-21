@@ -2,12 +2,12 @@ import { User } from "@/app/context/AuthContext"
 import Avatar from "@/components/Avatar"
 import Notification from "@/components/Notification"
 import Separator from "@/components/Separator"
+import { USER_DEFAULT_AVATAR } from "@/utils/constants"
 import {
   generateCreateItems,
   generateSiteSettingItems
 } from "@/utils/generateItems"
-import { Button } from "@mav/ui/components/buttons"
-import Link from "next/link"
+import { Button } from "@/components/ui/button"
 import {
   LuBell,
   LuCheck,
@@ -23,7 +23,6 @@ const ICON = (
     <LuChevronDown size={20} />
   </>
 )
-
 export function ActionsLoggedIn({
   user,
   isRegistered
@@ -43,7 +42,14 @@ export function ActionsLoggedIn({
       <Separator dir="vertical" size={28} />
       <Dropdown
         button={
-          <Button icon={ICON} aria-label="Site options" variant="tritery" />
+          <Button
+            variant="ghost"
+            size="icon"
+            className="w-auto px-2"
+            aria-label="Site options"
+          >
+            {ICON}
+          </Button>
         }
         items={
           <>
@@ -68,30 +74,33 @@ export function ActionsLoggedIn({
       />
       <Dropdown
         button={
-          <Button
-            prefix={
-              <div className="relative">
-                <LuBell size={22} />
-                {user.notifications.length > 0 &&
-                  !user.notifications.some((n) => n.read) && (
-                    <span className="absolute -top-1 -right-1 inline-block w-2 h-2 bg-500 rounded-full animate-pulse" />
-                  )}
-              </div>
-            }
-            variant="tritery"
-          />
+          <Button variant="ghost" size="icon" aria-label="Notifications">
+            <div className="relative">
+              <LuBell size={22} />
+              {user.notifications.length > 0 &&
+                !user.notifications.some((n) => n.read) && (
+                  <span className="bg-primary absolute -top-1 -right-1 inline-block h-2 w-2 animate-pulse rounded-full" />
+                )}
+            </div>
+          </Button>
         }
         items={
           <div className="flex flex-col items-center px-4 w-[500px]">
             <div className="flex flex-row items-center justify-between w-full">
               <span className="text-xl">Notifications</span>
               <div className="flex flex-row">
-                <Button variant="tritery" icon={<LuMinusCircle size={20} />} />
-                <Button variant="tritery" icon={<LuCheck size={20} />} />
+                <Button variant="ghost" size="icon" aria-label="Dismiss all">
+                  <LuMinusCircle size={20} />
+                </Button>
+                <Button variant="ghost" size="icon" aria-label="Mark all read">
+                  <LuCheck size={20} />
+                </Button>
               </div>
             </div>
             {user.notifications.length === 0 ? (
-              <span className="text-500 text-sm">No new notifications</span>
+              <span className="text-muted-foreground text-sm">
+                No new notifications
+              </span>
             ) : (
               user.notifications
                 .slice(0, 5)
@@ -106,7 +115,7 @@ export function ActionsLoggedIn({
                     }
                     createdAt={notification.createdAt}
                     read={notification.read}
-                    userAvatar={user.avatarUrl || "/UserProfile.png"}
+                    userAvatar={user.avatarUrl || USER_DEFAULT_AVATAR}
                     senderAvatar={
                       notification.sender ? notification.sender.avatarUrl : null
                     }
@@ -129,13 +138,19 @@ export function ActionsLoggedIn({
 
       <Dropdown
         button={
-          <Link href={`/@${user.handle}`}>
+          <Button
+            variant="ghost"
+            size="icon"
+            className="rounded-full p-0"
+            aria-label="Account menu"
+          >
             <Avatar
               username={user.handle}
               size={32}
-              src={user.avatarUrl || "/UserProfile.png"}
+              src={user.avatarUrl || USER_DEFAULT_AVATAR}
+              imageKey={user.id}
             />
-          </Link>
+          </Button>
         }
         items={
           <>
@@ -144,12 +159,13 @@ export function ActionsLoggedIn({
                 <Avatar
                   username={user.handle}
                   size={74}
-                  src={user.avatarUrl || "/UserProfile.png"}
+                  src={user.avatarUrl || USER_DEFAULT_AVATAR}
+                  imageKey={user.id}
                 />
                 <div className="flex flex-col">
                   {/* TODO: Display Badges */}
                   <span className="text-xl font-bold">
-                    {user.displayName || user.handle}{" "}
+                    {user.displayName || user.handle}
                   </span>
                   <span>@{user.handle}</span>
                 </div>

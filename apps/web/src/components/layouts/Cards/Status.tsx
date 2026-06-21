@@ -11,7 +11,7 @@ interface CharacterStatusProps {
   status: CharacterStatus
 }
 
-export function Status({ status }: CharacterStatusProps) {
+export default function Status({ status }: CharacterStatusProps) {
   const base = "flex flex-row items-center text-md font-semibold my-1"
 
   const statusObj: Record<
@@ -20,22 +20,22 @@ export function Status({ status }: CharacterStatusProps) {
   > = {
     adopted: {
       label: "Adopted",
-      className: "text-500",
+      className: "text-primary",
       icon: SparklesIcon
     },
     upForAdopt: {
       label: "Up for adoption",
-      className: "text-500",
+      className: "text-primary",
       icon: SparklesIcon
     },
     main: {
       label: "Main character",
-      className: "text-500",
+      className: "text-primary",
       icon: StarIcon
     },
     hidden: {
       label: "Only visible to you",
-      className: "text-subtext",
+      className: "text-muted-foreground",
       icon: LockIcon
     },
     owned: {
