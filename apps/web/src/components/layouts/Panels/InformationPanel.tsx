@@ -1,21 +1,48 @@
 import Field from "@/components/layouts/Layouts/Field"
+import type { Character } from "@/types/characters"
 import type { UserType } from "@/types/users"
 import { Button } from "@/components/ui/button"
 import { Group } from "@/components/ui/group"
 import Link from "next/link"
 
-// TODO: Make it reusable for Characters as well
-
 export default function InformationPanel({
-  information,
-  isOwner
+  target,
+  type,
+  isOwner,
 }: {
-  information: UserType
+  target: UserType | Character
+  type: "user" | "character"
   isOwner?: boolean
 }) {
+  if (type === "character") {
+    const character = target as Character
+    const attrs = character.attributes
+
+    return (
+      <Group
+        title={`About ${character.name}`}
+        potentialActions={
+          isOwner ? (
+            <Button size="sm" variant="secondary" asChild>
+              <Link href={`/studio/characters/${character.id}`}>Edit</Link>
+            </Button>
+          ) : undefined
+        }
+        containerStyle="border-padding"
+      >
+        <Field title="Species" content={character.species || "Not set"} />
+        <Field title="Pronouns" content={attrs?.pronouns || "Not set"} />
+        <Field title="Gender" content={attrs?.gender || "Not set"} />
+        {attrs?.bio ? <Field title="Bio" content={attrs.bio} /> : null}
+      </Group>
+    )
+  }
+
+  const user = target as UserType
+
   return (
     <Group
-      title={`About ${information.displayName ? information.displayName : information.handle}`}
+      title={`About ${user.displayName ? user.displayName : user.handle}`}
       potentialActions={
         isOwner ? (
           <Button size="sm" variant="secondary" asChild>
@@ -27,22 +54,18 @@ export default function InformationPanel({
     >
       <Field
         title="Date joined"
-        content={new Date(information.dateRegistered).toDateString()}
+        content={new Date(user.dateRegistered).toDateString()}
       />
-      {/* TODO: Custom attributes for Backend */}
       <Field
         title="Birthday"
         content={
-          information.birthday ? new Date(information.birthday).toDateString() : "Not Set"
+          user.birthday ? new Date(user.birthday).toDateString() : "Not set"
         }
       />
-      <Field
-        title="Pronouns"
-        content={information.pronouns ? information.pronouns : "Not Set"}
-      />
+      <Field title="Pronouns" content={user.pronouns ? user.pronouns : "Not set"} />
       <Field
         title="Nationality"
-        content={information.nationality ? information.nationality : "Not Set"}
+        content={user.nationality ? user.nationality : "Not set"}
       />
     </Group>
   )

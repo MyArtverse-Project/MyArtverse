@@ -1,7 +1,8 @@
 "use client"
 
-import { type User, useAuth } from "@/app/context/AuthContext"
-import { renderPanel } from "@/components/layouts/Panels/RenderPanel"
+import { useAuth } from "@/app/context/AuthContext"
+import PanelGrid from "@/components/layouts/Panels/PanelGrid"
+import type { Artwork } from "@/types/characters"
 import type { DashboardPanel, UserType } from "@/types/users"
 import { Button } from "@/components/ui/button"
 import DOMPurify from "isomorphic-dompurify"
@@ -10,11 +11,13 @@ import Link from "next/link"
 export default function OverviewContent({
   handle,
   panels,
-  userData
+  userData,
+  artworks = [],
 }: {
   handle: string
   panels: DashboardPanel[]
   userData: UserType
+  artworks?: Artwork[]
 }) {
   const { user: self } = useAuth()
   const customHTMLPanel = panels.find((panel) => panel.type === "customHTML")
@@ -30,33 +33,21 @@ export default function OverviewContent({
             <Link href={`/@${handle}/edit`}>Edit Panels</Link>
           </Button>
         )}
-        {htmlContent && (
+        {htmlContent ? (
           <div
             dangerouslySetInnerHTML={{ __html: htmlContent }}
             className="w-full"
           />
-        )}
+        ) : null}
       </div>
 
-      <div className="mb-4 grid w-full grid-cols-2 gap-4">
-        {panels
-          .filter((panel) => panel.position.row === 2)
-          .map((panel, index) => (
-            <div key={index} className="p-4">
-              {renderPanel(panel, "user", userData, self)}
-            </div>
-          ))}
-      </div>
-
-      <div className="grid w-full grid-cols-3 gap-4">
-        {panels
-          .filter((panel) => panel.position.row === 3)
-          .map((panel, index) => (
-            <div key={index} className="p-4">
-              {renderPanel(panel, "user", userData, self)}
-            </div>
-          ))}
-      </div>
+      <PanelGrid
+        panels={panels}
+        type="user"
+        target={userData}
+        self={self}
+        artworks={artworks}
+      />
     </div>
   )
 }

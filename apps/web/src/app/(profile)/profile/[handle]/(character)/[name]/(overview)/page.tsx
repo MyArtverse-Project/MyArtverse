@@ -2,6 +2,7 @@ import MarginClamp from "@/components/layouts/Layouts/MarginClamp"
 import { buildCharacterOverviewMetadata } from "@/utils/artworkMetadata"
 import { fetchCharacter, fetchUserData, getPanels } from "@/utils/api"
 import { loadCharacter } from "@/utils/loadCharacter"
+import { loadOverviewArtworks } from "@/utils/loadOverviewArtworks"
 import { buildPageMetadata } from "@/utils/metadata"
 import { BRAND } from "@mav/shared"
 import type { Metadata } from "next"
@@ -45,10 +46,18 @@ export default async function Page({
     loadCharacter(handle, name),
     getPanels(handle, name).catch(() => []),
   ])
+  const artworks = await loadOverviewArtworks(handle, {
+    characterSlug: name,
+  })
 
   return (
     <MarginClamp>
-      <OverviewContent character={character} self={self} panels={panels} />
+      <OverviewContent
+        character={character}
+        self={self}
+        panels={panels}
+        artworks={artworks}
+      />
     </MarginClamp>
   )
 }

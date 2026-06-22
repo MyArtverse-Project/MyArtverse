@@ -1,5 +1,4 @@
 "use client"
-import { type User } from "@/app/context/AuthContext"
 import type { Comments, UserType } from "@/types/users"
 import { postComment } from "@/utils/api"
 import { USER_DEFAULT_AVATAR } from "@/utils/constants"
@@ -16,7 +15,7 @@ export default function CommentPanel({
   characterName
 }: {
   comments: Comments[]
-  self: User | null
+  self: UserType | null
   type: "user" | "character"
   characterName?: string
 }) {

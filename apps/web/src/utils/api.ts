@@ -426,22 +426,27 @@ export const getFoldersRecursively = async (folderId: string) => {
   return apiWithAuth("GET", `/v1/folders/${folderId}/recursive`)
 }
 
-export const setPanel = async (body: {
-  position: {
-    col: number
-    row: number
-  }
-  component: string
-}, characterName?: string) => {
-  console.log(body.position)
+export const setPanel = async (
+  body: {
+    position: {
+      col: number
+      row: number
+    }
+    component: string
+    settings?: Record<string, string>
+  },
+  characterName?: string
+) => {
   if (characterName) {
     return apiWithAuth("POST", `/v1/dashboard/cpanels/${characterName}`, body)
   }
   return apiWithAuth("POST", "/v1/dashboard/panels", body)
 }
 
-
-export const setHTMLPanel = async (body: { html: string }, characterName: string) => {
+export const setHTMLPanel = async (
+  body: { html: string },
+  characterName?: string
+) => {
   if (characterName) {
     return apiWithAuth("PUT", `/v1/dashboard/cpanels/${characterName}/html`, body)
   }

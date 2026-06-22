@@ -85,7 +85,25 @@ export interface Comments {
 }
 
 export interface DashboardPanel {
-  type: string
+  id?: string
+  type: PanelType
   position: { row: number; col: number }
-  settings?: { [key: string]: string }
+  settings?: PanelSettings
+}
+
+export type PanelType =
+  | "comments"
+  | "information"
+  | "featured_gallery"
+  | "featured_artwork"
+  | "reference_sheet"
+  | "customHTML"
+
+export type PanelSettings = {
+  html?: string
+  artworkId?: string
+  artworkIds?: string
+  characterSlug?: string
+  refSheetId?: string
+  folderId?: string
 }

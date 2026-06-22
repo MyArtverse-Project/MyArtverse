@@ -1,6 +1,7 @@
 import type { DefineRouteParams } from "@/types"
 import { buildUserProfileMetadata } from "@/utils/artworkMetadata"
 import { fetchUser, getPanels } from "@/utils/api"
+import { loadOverviewArtworks } from "@/utils/loadOverviewArtworks"
 import { buildPageMetadata } from "@/utils/metadata"
 import { BRAND } from "@mav/shared"
 import type { Metadata } from "next"
@@ -34,6 +35,18 @@ export async function generateMetadata({
 export default async function ProfilePage({ params }: AsyncProps) {
   const { handle } = await params
   const userData = await fetchUser(handle)
-  const panels = await getPanels(handle)
-  return <OverviewContent handle={handle} panels={panels} userData={userData} />
+  const panels = await getPanels(handle).catch(() => [])
+  const artworks = await loadOverviewArtworks(handle, {
+    user: userData,
+    panels,
+  })
+
+  return (
+    <OverviewContent
+      handle={handle}
+      panels={panels}
+      userData={userData}
+      artworks={artworks}
+    />
+  )
 }
