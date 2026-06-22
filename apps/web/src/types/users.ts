@@ -97,6 +97,16 @@ export type PanelType =
   | "featured_gallery"
   | "featured_artwork"
   | "reference_sheet"
+  | "featured_character"
+  | "popular_character"
+  | "multiple_characters"
+  | "recent_artworks"
+  | "multiple_artworks"
+  | "popular_artwork"
+  | "multiple_galleries"
+  | "featured_listing"
+  | "recent_listings"
+  | "commission_queue"
   | "customHTML"
 
 export type PanelSettings = {
@@ -104,6 +114,9 @@ export type PanelSettings = {
   artworkId?: string
   artworkIds?: string
   characterSlug?: string
+  characterSlugs?: string
   refSheetId?: string
   folderId?: string
+  customTitle?: string
+  limit?: string
 }

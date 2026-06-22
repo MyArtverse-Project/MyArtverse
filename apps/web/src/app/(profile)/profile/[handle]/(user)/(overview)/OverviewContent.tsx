@@ -47,6 +47,7 @@ export default function OverviewContent({
         target={userData}
         self={self}
         artworks={artworks}
+        characters={userData.characters ?? []}
       />
     </div>
   )

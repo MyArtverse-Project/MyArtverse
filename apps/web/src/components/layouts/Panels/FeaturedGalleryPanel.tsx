@@ -1,6 +1,7 @@
 import ArtworkGrid from "@/components/ArtworkGrid"
 import type { Artwork } from "@/types/characters"
-import { Group } from "@/components/ui/group"
+import { LuGalleryHorizontal } from "react-icons/lu"
+import { PanelCard, PanelEmptyState } from "./PanelCard"
 
 export default function FeaturedGalleryPanel({
   artworks,
@@ -12,16 +13,15 @@ export default function FeaturedGalleryPanel({
   isOwner?: boolean
 }) {
   return (
-    <Group title={title} containerStyle="border-padding">
+    <PanelCard title={title} icon={<LuGalleryHorizontal />}>
       {artworks.length > 0 ? (
-        <ArtworkGrid artworks={artworks} />
+        <ArtworkGrid artworks={artworks} className="gap-3" />
       ) : (
-        <p className="text-muted-foreground text-sm">
-          {isOwner
-            ? "No artworks selected. Edit this panel to choose a data source."
-            : "No artworks to display yet."}
-        </p>
+        <PanelEmptyState
+          isOwner={isOwner}
+          ownerHint="Edit this panel to choose a gallery source."
+        />
       )}
-    </Group>
+    </PanelCard>
   )
 }

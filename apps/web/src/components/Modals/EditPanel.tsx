@@ -4,11 +4,14 @@ import { setPanel } from "@/utils/api"
 import type { Artwork, Character, ReferenceSheet } from "@/types/characters"
 import type { DashboardPanel, PanelSettings, PanelType } from "@/types/users"
 import {
-  CHARACTER_PANEL_OPTIONS,
+  CHARACTER_PANEL_CATEGORIES,
   getPanelAt,
-  USER_PANEL_OPTIONS,
+  panelNeedsArtworks,
+  panelNeedsCharacters,
+  USER_PANEL_CATEGORIES,
 } from "@/utils/panels"
 import { Button } from "@/components/ui/button"
+import { Input } from "@/components/ui/input"
 import { Label } from "@/components/ui/label"
 import {
   Select,
@@ -17,48 +20,92 @@ import {
   SelectTrigger,
   SelectValue,
 } from "@/components/ui/select"
-import Image from "next/image"
-import { useEffect, useMemo, useState, type ReactNode } from "react"
-import { FaCode, FaComment, FaInfoCircle } from "react-icons/fa"
-import { LuCat, LuGalleryHorizontal, LuSheet, LuXCircle } from "react-icons/lu"
+import { cn } from "@/lib/utils"
+import { useEffect, useMemo, useRef, useState } from "react"
+import { LuXCircle } from "react-icons/lu"
+
+const SELECT_CONTENT_CLASS = "z-[110]"
 import Modal from "../layouts/Modal"
 import Note from "../layouts/Note"
 
-const PANEL_META: Record<
-  PanelType,
-  { label: string; description: string; icon: ReactNode }
-> = {
+const PANEL_META: Record<PanelType, { label: string; description: string }> = {
   comments: {
-    label: "Comments",
+    label: "Profile comments",
     description: "Show the comment thread for this profile.",
-    icon: <FaComment size={18} />,
   },
   information: {
-    label: "Information",
-    description: "Show profile or character details.",
-    icon: <FaInfoCircle size={18} />,
+    label: "About",
+    description: "Show profile or character details in a summary card.",
   },
   featured_gallery: {
     label: "Featured gallery",
     description: "Show a grid of artworks from a selected source.",
-    icon: <LuGalleryHorizontal size={18} />,
   },
   featured_artwork: {
     label: "Featured artwork",
-    description: "Highlight a single artwork.",
-    icon: <LuCat size={18} />,
+    description: "Highlight a single artwork with artist attribution.",
   },
   reference_sheet: {
     label: "Reference sheet",
     description: "Display a character reference sheet.",
-    icon: <LuSheet size={18} />,
+  },
+  featured_character: {
+    label: "Featured character",
+    description: "Spotlight one of your characters.",
+  },
+  popular_character: {
+    label: "Popular character",
+    description: "Show the character with the most favorites.",
+  },
+  multiple_characters: {
+    label: "Multiple characters",
+    description: "Show a grid of selected characters.",
+  },
+  recent_artworks: {
+    label: "Recent artworks",
+    description: "Show the newest uploads from a gallery source.",
+  },
+  multiple_artworks: {
+    label: "Multiple artworks",
+    description: "Show a curated grid of artworks.",
+  },
+  popular_artwork: {
+    label: "Popular artwork",
+    description: "Highlight artwork with the most favorites.",
+  },
+  multiple_galleries: {
+    label: "Multiple galleries",
+    description: "Show previews from multiple character galleries.",
+  },
+  featured_listing: {
+    label: "Featured listing",
+    description: "Highlight a shop listing (coming soon).",
+  },
+  recent_listings: {
+    label: "Recent listings",
+    description: "Show your latest shop listings (coming soon).",
+  },
+  commission_queue: {
+    label: "Commission queue",
+    description: "Show commission, request, and trade status.",
   },
   customHTML: {
     label: "Custom HTML",
     description: "Custom HTML block.",
-    icon: <FaCode size={18} />,
   },
 }
+
+const MULTI_LIMIT_TYPES = new Set<PanelType>([
+  "multiple_characters",
+  "multiple_artworks",
+  "multiple_galleries",
+  "recent_artworks",
+])
+
+const SINGLE_ARTWORK_TYPES = new Set<PanelType>([
+  "featured_artwork",
+  "popular_artwork",
+])
 
 export default function EditPanelModal({
   toggleEditPanel,
@@ -81,38 +128,66 @@ export default function EditPanelModal({
   artworks?: Artwork[]
   refSheets?: ReferenceSheet[]
 }) {
-  const options =
-    context === "character" ? CHARACTER_PANEL_OPTIONS : USER_PANEL_OPTIONS
+  const categories =
+    context === "character" ? CHARACTER_PANEL_CATEGORIES : USER_PANEL_CATEGORIES
+  const allOptions = useMemo(
+    () => categories.flatMap((category) => category.options),
+    [categories]
+  )
 
   const existingPanel = position ? getPanelAt(panels, position) : undefined
+  const initializedFor = useRef<string | null>(null)
 
   const [errors, setErrors] = useState<string>()
   const [chosenComponent, setChosenComponent] = useState<PanelType>("comments")
+  const [customTitle, setCustomTitle] = useState("")
+  const [limit, setLimit] = useState("6")
   const [characterSlug, setCharacterSlug] = useState("")
+  const [selectedCharacterSlugs, setSelectedCharacterSlugs] = useState<string[]>(
+    []
+  )
   const [artworkId, setArtworkId] = useState("")
   const [refSheetId, setRefSheetId] = useState("")
   const [selectedArtworkIds, setSelectedArtworkIds] = useState<string[]>([])
 
   useEffect(() => {
-    if (!editPanelModalShown || !position) return
+    if (!editPanelModalShown || !position) {
+      initializedFor.current = null
+      return
+    }
+
+    const slotKey = `${position.row}-${position.col}`
+    if (initializedFor.current === slotKey) return
+    initializedFor.current = slotKey
 
     const panel = getPanelAt(panels, position)
-    const type = (panel?.type as PanelType | undefined) ?? "comments"
-    setChosenComponent(options.includes(type) ? type : options[0])
+    const type = (panel?.type as PanelType | undefined) ?? allOptions[0]
+    setChosenComponent(allOptions.includes(type) ? type : allOptions[0])
+    setCustomTitle(panel?.settings?.customTitle ?? "")
+    setLimit(panel?.settings?.limit ?? "6")
     setCharacterSlug(panel?.settings?.characterSlug ?? characters[0]?.slug ?? "")
+    setSelectedCharacterSlugs(
+      panel?.settings?.characterSlugs
+        ?.split(",")
+        .map((slug) => slug.trim())
+        .filter(Boolean) ?? []
+    )
     setArtworkId(panel?.settings?.artworkId ?? "")
     setRefSheetId(panel?.settings?.refSheetId ?? refSheets[0]?.id ?? "")
     setSelectedArtworkIds(
-      panel?.settings?.artworkIds?.split(",").map((id) => id.trim()).filter(Boolean) ?? []
+      panel?.settings?.artworkIds
+        ?.split(",")
+        .map((id) => id.trim())
+        .filter(Boolean) ?? []
     )
     setErrors(undefined)
-  }, [editPanelModalShown, position, panels, options, characters, refSheets])
+  }, [editPanelModalShown, position, panels, allOptions, characters, refSheets])
 
   const galleryArtworks = useMemo(() => {
     if (context === "character") return artworks
 
     const slug = characterSlug || characters[0]?.slug
-    if (!slug) return []
+    if (!slug) return artworks
 
     return artworks.filter(
       (artwork) =>
@@ -124,16 +199,31 @@ export default function EditPanelModal({
   const buildSettings = (): PanelSettings => {
     const settings: PanelSettings = {}
 
-    if (chosenComponent === "featured_gallery") {
+    if (customTitle.trim()) settings.customTitle = customTitle.trim()
+    if (MULTI_LIMIT_TYPES.has(chosenComponent)) settings.limit = limit
+
+    if (
+      chosenComponent === "featured_gallery" ||
+      (context === "user" && panelNeedsArtworks(chosenComponent))
+    ) {
       if (context === "user" && characterSlug) {
         settings.characterSlug = characterSlug
       }
-      if (selectedArtworkIds.length > 0) {
-        settings.artworkIds = selectedArtworkIds.join(",")
-      }
     }
 
-    if (chosenComponent === "featured_artwork" && artworkId) {
+    if (chosenComponent === "featured_character" && characterSlug) {
+      settings.characterSlug = characterSlug
+    }
+
+    if (panelNeedsCharacters(chosenComponent) && selectedCharacterSlugs.length) {
+      settings.characterSlugs = selectedCharacterSlugs.join(",")
+    }
+
+    if (selectedArtworkIds.length > 0) {
+      settings.artworkIds = selectedArtworkIds.join(",")
+    }
+
+    if (SINGLE_ARTWORK_TYPES.has(chosenComponent) && artworkId) {
       settings.artworkId = artworkId
     }
 
@@ -150,7 +240,7 @@ export default function EditPanelModal({
       return
     }
 
-    if (chosenComponent === "featured_artwork" && !artworkId) {
+    if (SINGLE_ARTWORK_TYPES.has(chosenComponent) && !artworkId) {
       setErrors("Select an artwork for this panel")
       return
     }
@@ -167,6 +257,15 @@ export default function EditPanelModal({
       characters.length > 0
     ) {
       setErrors("Select which character's gallery to show")
+      return
+    }
+
+    if (
+      chosenComponent === "featured_character" &&
+      !characterSlug &&
+      characters.length > 0
+    ) {
+      setErrors("Select a featured character")
       return
     }
 
@@ -194,16 +293,33 @@ export default function EditPanelModal({
     )
   }
 
+  const toggleCharacterSelection = (slug: string) => {
+    setSelectedCharacterSlugs((current) =>
+      current.includes(slug)
+        ? current.filter((item) => item !== slug)
+        : [...current, slug]
+    )
+  }
+
+  const showCharacterSource =
+    context === "user" &&
+    (chosenComponent === "featured_gallery" ||
+      panelNeedsArtworks(chosenComponent))
+
+  const showCharacterPicker =
+    chosenComponent === "featured_character" ||
+    chosenComponent === "multiple_characters" ||
+    chosenComponent === "multiple_galleries"
+
   return (
     <Modal
-      className="w-full max-w-2xl px-4"
+      className="w-full max-w-3xl px-4"
       toggler={() => toggleEditPanel(null)}
       state={editPanelModalShown}
     >
       <Modal.Title>
         <div className="flex w-full items-center justify-between">
-          <span className="font-inter flex items-center gap-x-2 text-xl font-bold">
-            <FaCode />
+          <span className="font-inter text-xl font-bold">
             Edit panel
             {position ? ` (row ${position.row}, col ${position.col})` : ""}
           </span>
@@ -224,128 +340,216 @@ export default function EditPanelModal({
         </div>
       ) : null}
 
-      <div className="flex flex-col gap-6 p-4">
-        <Image
-          src={`/modals/panels/${chosenComponent}.svg`}
-          alt={PANEL_META[chosenComponent].label}
-          width={250}
-          height={250}
-          className="border-border mx-auto max-h-56 max-w-full rounded-lg border bg-white p-2 shadow-md"
-        />
+      <div className="grid gap-6 p-4 md:grid-cols-[220px_minmax(0,1fr)]">
+        <div className="space-y-4">
+          {categories.map((category) => (
+            <div key={category.id} className="space-y-1">
+              <p className="text-muted-foreground px-2 text-xs font-semibold uppercase tracking-wide">
+                {category.label}
+              </p>
+              <div className="space-y-0.5">
+                {category.options.map((value) => (
+                  <button
+                    key={value}
+                    type="button"
+                    onClick={() => setChosenComponent(value)}
+                    className={cn(
+                      "w-full rounded-lg px-2 py-2 text-left text-sm transition-colors",
+                      chosenComponent === value
+                        ? "bg-primary/15 text-primary font-semibold"
+                        : "hover:bg-muted/60"
+                    )}
+                  >
+                    {PANEL_META[value].label}
+                  </button>
+                ))}
+              </div>
+            </div>
+          ))}
+        </div>
 
-        <div className="space-y-3">
-          <Label>Panel type</Label>
-          <div className="flex flex-wrap gap-2">
-            {options.map((value) => (
-              <Button
-                key={value}
-                variant={chosenComponent === value ? "default" : "secondary"}
-                size="icon"
-                aria-label={PANEL_META[value].label}
-                onClick={() => setChosenComponent(value)}
-              >
-                {PANEL_META[value].icon}
-              </Button>
-            ))}
-          </div>
-          <div>
-            <h2 className="text-lg font-semibold">
-              {PANEL_META[chosenComponent].label}
-            </h2>
-            <p className="text-muted-foreground text-sm">
+        <div className="space-y-5">
+          <div className="bg-primary/[0.06] rounded-2xl border border-primary/10 p-4">
+            <h2 className="text-lg font-bold">{PANEL_META[chosenComponent].label}</h2>
+            <p className="text-muted-foreground mt-1 text-sm">
               {PANEL_META[chosenComponent].description}
             </p>
             {existingPanel ? (
-              <p className="text-muted-foreground mt-1 text-xs">
-                Replacing: {PANEL_META[existingPanel.type as PanelType]?.label ?? existingPanel.type}
+              <p className="text-muted-foreground mt-2 text-xs">
+                Replacing:{" "}
+                {PANEL_META[existingPanel.type as PanelType]?.label ??
+                  existingPanel.type}
               </p>
             ) : null}
           </div>
-        </div>
 
-        {chosenComponent === "featured_gallery" && context === "user" ? (
           <div className="space-y-2">
-            <Label>Character gallery source</Label>
-            <Select value={characterSlug} onValueChange={setCharacterSlug}>
-              <SelectTrigger>
-                <SelectValue placeholder="Select a character" />
-              </SelectTrigger>
-              <SelectContent>
-                {characters.map((character) => (
-                  <SelectItem key={character.id} value={character.slug}>
-                    {character.name}
-                  </SelectItem>
-                ))}
-              </SelectContent>
-            </Select>
+            <Label htmlFor="panel-custom-title">Custom title (optional)</Label>
+            <Input
+              id="panel-custom-title"
+              value={customTitle}
+              onChange={(event) => setCustomTitle(event.target.value)}
+              placeholder={PANEL_META[chosenComponent].label}
+            />
           </div>
-        ) : null}
 
-        {chosenComponent === "featured_gallery" ? (
-          <div className="space-y-2">
-            <Label>Artworks to include (optional)</Label>
-            <p className="text-muted-foreground text-xs">
-              Leave empty to show all artworks from the selected source.
-            </p>
-            <div className="max-h-40 space-y-2 overflow-y-auto rounded-md border p-3">
-              {galleryArtworks.length > 0 ? (
-                galleryArtworks.map((artwork) => (
-                  <label
-                    key={artwork.id}
-                    className="flex cursor-pointer items-center gap-2 text-sm"
-                  >
-                    <input
-                      type="checkbox"
-                      checked={selectedArtworkIds.includes(artwork.id)}
-                      onChange={() => toggleArtworkSelection(artwork.id)}
-                    />
-                    <span>{artwork.title || "Untitled artwork"}</span>
-                  </label>
-                ))
+          {MULTI_LIMIT_TYPES.has(chosenComponent) ? (
+            <div className="space-y-2">
+              <Label htmlFor="panel-limit">Item limit</Label>
+              <Input
+                id="panel-limit"
+                type="number"
+                min={1}
+                max={24}
+                value={limit}
+                onChange={(event) => setLimit(event.target.value)}
+              />
+            </div>
+          ) : null}
+
+          {showCharacterSource ? (
+            <div className="space-y-2">
+              <Label>Gallery source</Label>
+              <Select
+                value={characterSlug || undefined}
+                onValueChange={setCharacterSlug}
+              >
+                <SelectTrigger>
+                  <SelectValue placeholder="Select a character" />
+                </SelectTrigger>
+                <SelectContent className={SELECT_CONTENT_CLASS}>
+                  {characters.map((character) => (
+                    <SelectItem key={character.id} value={character.slug}>
+                      {character.name}
+                    </SelectItem>
+                  ))}
+                </SelectContent>
+              </Select>
+            </div>
+          ) : null}
+
+          {showCharacterPicker && context === "user" ? (
+            <div className="space-y-2">
+              <Label>
+                {chosenComponent === "featured_character"
+                  ? "Featured character"
+                  : "Characters"}
+              </Label>
+              {chosenComponent === "featured_character" ? (
+                <Select
+                value={characterSlug || undefined}
+                onValueChange={setCharacterSlug}
+              >
+                  <SelectTrigger>
+                    <SelectValue placeholder="Select a character" />
+                  </SelectTrigger>
+                  <SelectContent className={SELECT_CONTENT_CLASS}>
+                    {characters.map((character) => (
+                      <SelectItem key={character.id} value={character.slug}>
+                        {character.name}
+                      </SelectItem>
+                    ))}
+                  </SelectContent>
+                </Select>
               ) : (
-                <p className="text-muted-foreground text-sm">
-                  No artworks available for this source yet.
-                </p>
+                <div className="max-h-40 space-y-2 overflow-y-auto rounded-md border p-3">
+                  {characters.length > 0 ? (
+                    characters.map((character) => (
+                      <label
+                        key={character.id}
+                        className="flex cursor-pointer items-center gap-2 text-sm"
+                      >
+                        <input
+                          type="checkbox"
+                          checked={selectedCharacterSlugs.includes(character.slug)}
+                          onChange={() => toggleCharacterSelection(character.slug)}
+                        />
+                        <span>{character.name}</span>
+                      </label>
+                    ))
+                  ) : (
+                    <p className="text-muted-foreground text-sm">
+                      No characters available yet.
+                    </p>
+                  )}
+                </div>
               )}
             </div>
-          </div>
-        ) : null}
+          ) : null}
 
-        {chosenComponent === "featured_artwork" ? (
-          <div className="space-y-2">
-            <Label>Featured artwork</Label>
-            <Select value={artworkId} onValueChange={setArtworkId}>
-              <SelectTrigger>
-                <SelectValue placeholder="Select an artwork" />
-              </SelectTrigger>
-              <SelectContent>
-                {galleryArtworks.map((artwork) => (
-                  <SelectItem key={artwork.id} value={artwork.id}>
-                    {artwork.title || "Untitled artwork"}
-                  </SelectItem>
-                ))}
-              </SelectContent>
-            </Select>
-          </div>
-        ) : null}
+          {chosenComponent === "featured_gallery" ||
+          chosenComponent === "multiple_artworks" ? (
+            <div className="space-y-2">
+              <Label>Artworks to include (optional)</Label>
+              <p className="text-muted-foreground text-xs">
+                Leave empty to show all artworks from the selected source.
+              </p>
+              <div className="max-h-40 space-y-2 overflow-y-auto rounded-md border p-3">
+                {galleryArtworks.length > 0 ? (
+                  galleryArtworks.map((artwork) => (
+                    <label
+                      key={artwork.id}
+                      className="flex cursor-pointer items-center gap-2 text-sm"
+                    >
+                      <input
+                        type="checkbox"
+                        checked={selectedArtworkIds.includes(artwork.id)}
+                        onChange={() => toggleArtworkSelection(artwork.id)}
+                      />
+                      <span>{artwork.title || "Untitled artwork"}</span>
+                    </label>
+                  ))
+                ) : (
+                  <p className="text-muted-foreground text-sm">
+                    No artworks available for this source yet.
+                  </p>
+                )}
+              </div>
+            </div>
+          ) : null}
 
-        {chosenComponent === "reference_sheet" ? (
-          <div className="space-y-2">
-            <Label>Reference sheet</Label>
-            <Select value={refSheetId} onValueChange={setRefSheetId}>
-              <SelectTrigger>
-                <SelectValue placeholder="Select a reference sheet" />
-              </SelectTrigger>
-              <SelectContent>
-                {refSheets.map((sheet) => (
-                  <SelectItem key={sheet.id} value={sheet.id}>
-                    {sheet.name}
-                  </SelectItem>
-                ))}
-              </SelectContent>
-            </Select>
-          </div>
-        ) : null}
+          {SINGLE_ARTWORK_TYPES.has(chosenComponent) ? (
+            <div className="space-y-2">
+              <Label>Artwork</Label>
+              <Select
+                value={artworkId || undefined}
+                onValueChange={setArtworkId}
+              >
+                <SelectTrigger>
+                  <SelectValue placeholder="Select an artwork" />
+                </SelectTrigger>
+                <SelectContent className={SELECT_CONTENT_CLASS}>
+                  {galleryArtworks.map((artwork) => (
+                    <SelectItem key={artwork.id} value={artwork.id}>
+                      {artwork.title || "Untitled artwork"}
+                    </SelectItem>
+                  ))}
+                </SelectContent>
+              </Select>
+            </div>
+          ) : null}
+
+          {chosenComponent === "reference_sheet" ? (
+            <div className="space-y-2">
+              <Label>Reference sheet</Label>
+              <Select
+                value={refSheetId || undefined}
+                onValueChange={setRefSheetId}
+              >
+                <SelectTrigger>
+                  <SelectValue placeholder="Select a reference sheet" />
+                </SelectTrigger>
+                <SelectContent className={SELECT_CONTENT_CLASS}>
+                  {refSheets.map((sheet) => (
+                    <SelectItem key={sheet.id} value={sheet.id}>
+                      {sheet.name}
+                    </SelectItem>
+                  ))}
+                </SelectContent>
+              </Select>
+            </div>
+          ) : null}
+        </div>
       </div>
 
       <div className="flex flex-row items-center justify-end gap-2 p-4">

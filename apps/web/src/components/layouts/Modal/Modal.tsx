@@ -26,8 +26,9 @@ export default function Modal({
 
   const modalActive = {
     opacity: 1,
+    pointerEvents: "auto" as const,
     y: "-50%",
-    x: "-50%"
+    x: "-50%",
   }
 
   return (
@@ -41,9 +42,10 @@ export default function Modal({
         }}
         // @ts-expect-error: Motion div errors with className prop
         className={cn(
-          "border-border bg-card fixed left-1/2 top-1/2 overflow-hidden rounded-md border",
+          "border-border bg-card fixed left-1/2 top-1/2 max-h-[90vh] overflow-y-auto rounded-md border",
           className
         )}
+        onClick={(event) => event.stopPropagation()}
       >
         <div>{children}</div>
       </motion.div>
