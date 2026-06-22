@@ -1,4 +1,5 @@
 import nextMDX from "@next/mdx"
+import { withSentryConfig } from "@sentry/nextjs"
 import nextPWA from "next-pwa"
 import path from "node:path"
 import { fileURLToPath } from "node:url"
@@ -87,8 +88,21 @@ const withPWA = nextPWA({
   disable: process.env.VERCEL === "1" || process.env.NODE_ENV !== "production",
 })
 
-export default () => {
+function buildNextConfig() {
   const extPlugins = [withMDX, withPWA]
-
   return extPlugins.reduce((acc, next) => next(acc), nextConfig)
 }
+
+const sentryBuildOptions = {
+  org: process.env.SENTRY_ORG,
+  project: process.env.SENTRY_PROJECT,
+  authToken: process.env.SENTRY_AUTH_TOKEN,
+  silent: !process.env.CI,
+  disableSourceMapUpload: !process.env.SENTRY_AUTH_TOKEN,
+  // Route browser events through the app to reduce ad-blocker drops
+  tunnelRoute: "/monitoring",
+  widenClientFileUpload: true,
+  hideSourceMaps: true,
+}
+
+export default withSentryConfig(buildNextConfig(), sentryBuildOptions)
