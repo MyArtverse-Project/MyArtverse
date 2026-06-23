@@ -1,7 +1,35 @@
 import { NextResponse } from "next/server"
 
+export const dynamic = "force-dynamic"
+
+const USER_AGENT = "MyArtverse/1.0 (artist-search)"
+
 function normalizeHandle(value: string) {
   return value.trim().replace(/^@+/, "")
+}
+
+type FxTwitterUser = {
+  screen_name?: string
+  name?: string
+  avatar_url?: string
+}
+
+async function fetchFxTwitterUser(handle: string) {
+  const response = await fetch(
+    `https://api.fxtwitter.com/${encodeURIComponent(handle)}`,
+    {
+      cache: "no-store",
+      headers: {
+        Accept: "application/json",
+        "User-Agent": USER_AGENT,
+      },
+    }
+  )
+
+  if (!response.ok) return null
+
+  const data = (await response.json()) as { user?: FxTwitterUser }
+  return data.user ?? null
 }
 
 export async function GET(request: Request) {
@@ -13,23 +41,8 @@ export async function GET(request: Request) {
   }
 
   try {
-    const response = await fetch(`https://api.fxtwitter.com/${encodeURIComponent(query)}`, {
-      next: { revalidate: 300 },
-    })
+    const user = await fetchFxTwitterUser(query)
 
-    if (!response.ok) {
-      return NextResponse.json({ users: [] })
-    }
-
-    const data = (await response.json()) as {
-      user?: {
-        screen_name?: string
-        name?: string
-        avatar_url?: string
-      }
-    }
-
-    const user = data.user
     if (!user?.screen_name) {
       return NextResponse.json({ users: [] })
     }

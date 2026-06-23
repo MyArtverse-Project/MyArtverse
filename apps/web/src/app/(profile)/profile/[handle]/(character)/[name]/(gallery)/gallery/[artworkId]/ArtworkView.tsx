@@ -142,43 +142,61 @@ export default function ArtworkView({
         </aside>
       </div>
 
-      <header className="mt-8 flex flex-wrap items-start justify-between gap-4">
-        <div className="flex min-w-0 items-start gap-3">
+      <header className="mt-8 flex flex-wrap items-center justify-between gap-3">
+        <div className="flex min-w-0 items-center gap-2.5">
           {resolvedArtist?.avatarUrl ? (
             <Avatar
               src={resolvedArtist.avatarUrl || USER_DEFAULT_AVATAR}
               username={resolvedArtist.label}
               size={44}
+              className="shrink-0"
             />
           ) : resolvedArtist ? (
             <ArtistPlatformIcon
               platform={resolvedArtist.platform}
               size="lg"
+              className="shrink-0"
             />
           ) : (
             <Avatar
               src={USER_DEFAULT_AVATAR}
               username="Unknown artist"
               size={44}
+              className="shrink-0"
             />
           )}
-          <div className="min-w-0 space-y-1">
-            <h1 className="text-2xl font-semibold leading-tight">
+          <div className="min-w-0">
+            <h1 className="text-2xl font-semibold leading-none tracking-tight">
               {artwork.title ?? "Untitled artwork"}
             </h1>
-            <div className="text-muted-foreground flex flex-wrap items-center gap-2 text-sm">
+            <div className="text-muted-foreground mt-1.5 flex flex-wrap items-center gap-1.5 text-sm leading-none">
               {resolvedArtist ? (
-                <ArtistCreditDisplay credit={resolvedArtist} prefix="by " />
+                <ArtistCreditDisplay
+                  credit={resolvedArtist}
+                  prefix="by "
+                  showIcon={false}
+                  linkClassName="text-muted-foreground hover:text-foreground"
+                />
               ) : (
                 <span>by Unknown artist</span>
               )}
               {resolvedArtist ? (
                 resolvedArtist.isInternal ? (
-                  <Button variant="outline" size="sm" asChild>
+                  <Button
+                    variant="outline"
+                    size="sm"
+                    className="h-7 rounded-full px-3 text-xs"
+                    asChild
+                  >
                     <Link href={resolvedArtist.href}>Visit</Link>
                   </Button>
                 ) : (
-                  <Button variant="outline" size="sm" asChild>
+                  <Button
+                    variant="outline"
+                    size="sm"
+                    className="h-7 rounded-full px-3 text-xs"
+                    asChild
+                  >
                     <a
                       href={resolvedArtist.href}
                       target="_blank"

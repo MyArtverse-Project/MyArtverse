@@ -23,26 +23,32 @@ export default function ArtistCreditDisplay({
   credit,
   prefix = "",
   iconSize = "sm",
+  showIcon = true,
   className,
   linkClassName,
 }: {
   credit: ArtistCreditDisplayValue
   prefix?: string
   iconSize?: "sm" | "md" | "lg"
+  showIcon?: boolean
   className?: string
   linkClassName?: string
 }) {
   const avatarSize = AVATAR_SIZES[iconSize]
 
-  const icon = credit.avatarUrl ? (
-    <Avatar
-      src={credit.avatarUrl || USER_DEFAULT_AVATAR}
-      username={credit.label}
-      size={avatarSize}
-    />
-  ) : (
-    <ArtistPlatformIcon platform={credit.platform} size={iconSize} />
-  )
+  const icon = showIcon
+    ? credit.avatarUrl
+      ? (
+          <Avatar
+            src={credit.avatarUrl || USER_DEFAULT_AVATAR}
+            username={credit.label}
+            size={avatarSize}
+          />
+        )
+      : (
+          <ArtistPlatformIcon platform={credit.platform} size={iconSize} />
+        )
+    : null
 
   const content = (
     <>
@@ -54,9 +60,14 @@ export default function ArtistCreditDisplay({
     </>
   )
 
-  const rowClass = cn("inline-flex min-w-0 items-center gap-2", className)
+  const rowClass = cn(
+    "inline-flex min-w-0 items-center",
+    showIcon ? "gap-2" : "gap-0",
+    className
+  )
   const anchorClass = cn(
-    "hover:text-foreground inline-flex min-w-0 items-center gap-2 transition-colors",
+    "hover:text-foreground inline-flex min-w-0 items-center transition-colors",
+    showIcon ? "gap-2" : "gap-0",
     linkClassName
   )
 

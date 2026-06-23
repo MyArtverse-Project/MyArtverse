@@ -30,6 +30,7 @@ const nextConfig = {
       "/*": [
         "../../packages/shared/**/*",
         "../../packages/config/**/*",
+        "./content/CHANGELOG.md",
       ],
     },
   },

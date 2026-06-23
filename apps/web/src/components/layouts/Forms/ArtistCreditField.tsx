@@ -219,7 +219,7 @@ export default function ArtistCreditField({
                     mode: "other",
                     platform: "bluesky",
                     handle: next,
-                    avatarUrl: null,
+                    avatarUrl: undefined,
                   })
                 }}
                 onSelect={(option) => {
@@ -233,7 +233,9 @@ export default function ArtistCreditField({
                 }}
                 search={searchBluesky}
                 selectedOption={
-                  value.platform === "bluesky" && value.handle
+                  value.platform === "bluesky" &&
+                  value.handle &&
+                  value.avatarUrl
                     ? {
                         handle: value.handle,
                         displayName: null,
@@ -257,7 +259,7 @@ export default function ArtistCreditField({
                     mode: "other",
                     platform: "x",
                     handle: next,
-                    avatarUrl: null,
+                    avatarUrl: undefined,
                   })
                 }}
                 onSelect={(option) => {
@@ -271,7 +273,7 @@ export default function ArtistCreditField({
                 }}
                 search={searchX}
                 selectedOption={
-                  value.platform === "x" && value.handle
+                  value.platform === "x" && value.handle && value.avatarUrl
                     ? {
                         handle: value.handle,
                         displayName: null,

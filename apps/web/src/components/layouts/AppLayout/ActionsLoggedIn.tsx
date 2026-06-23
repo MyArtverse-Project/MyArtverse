@@ -1,7 +1,11 @@
+"use client"
+
 import { User } from "@/app/context/AuthContext"
 import Avatar from "@/components/Avatar"
+import ChangelogNotificationItem from "@/components/ChangelogNotificationItem"
 import Notification from "@/components/Notification"
 import Separator from "@/components/Separator"
+import { useChangelogUpdates } from "@/hooks/useChangelogUpdates"
 import { USER_DEFAULT_AVATAR } from "@/utils/constants"
 import {
   generateCreateItems,
@@ -30,12 +34,19 @@ export function ActionsLoggedIn({
   user: User | null
   isRegistered: boolean
 }) {
+  const { hasUpdates: hasChangelogUpdates, markSeen, title: changelogTitle } =
+    useChangelogUpdates()
+
   if (!user) return null
   const createNewItems = generateCreateItems()
   const siteSettingsItems = generateSiteSettingItems(
     isRegistered,
     user ? user.handle : null
   )
+
+  const hasUnreadNotifications =
+    user.notifications.some((notification) => !notification.read) ||
+    hasChangelogUpdates
 
   return (
     <div className="flex flex-row items-center gap-x-2">
@@ -77,16 +88,15 @@ export function ActionsLoggedIn({
           <Button variant="ghost" size="icon" aria-label="Notifications">
             <div className="relative">
               <LuBell size={22} />
-              {user.notifications.length > 0 &&
-                !user.notifications.some((n) => n.read) && (
-                  <span className="bg-primary absolute -top-1 -right-1 inline-block h-2 w-2 animate-pulse rounded-full" />
-                )}
+              {hasUnreadNotifications && (
+                <span className="bg-primary absolute -top-1 -right-1 inline-block h-2 w-2 animate-pulse rounded-full" />
+              )}
             </div>
           </Button>
         }
         items={
-          <div className="flex flex-col items-center px-4 w-[500px]">
-            <div className="flex flex-row items-center justify-between w-full">
+          <div className="flex w-[500px] flex-col items-center px-4">
+            <div className="flex w-full flex-row items-center justify-between">
               <span className="text-xl">Notifications</span>
               <div className="flex flex-row">
                 <Button variant="ghost" size="icon" aria-label="Dismiss all">
@@ -97,8 +107,15 @@ export function ActionsLoggedIn({
                 </Button>
               </div>
             </div>
-            {user.notifications.length === 0 ? (
-              <span className="text-muted-foreground text-sm">
+            {hasChangelogUpdates ? (
+              <ChangelogNotificationItem
+                title={changelogTitle}
+                onNavigate={markSeen}
+                className="border-primary/15 bg-primary/[0.04] mt-2 border"
+              />
+            ) : null}
+            {user.notifications.length === 0 && !hasChangelogUpdates ? (
+              <span className="text-muted-foreground py-4 text-sm">
                 No new notifications
               </span>
             ) : (
