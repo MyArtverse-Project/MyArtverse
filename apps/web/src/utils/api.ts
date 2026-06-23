@@ -258,6 +258,15 @@ export const fetchArtistRequests = async () => {
   return requests
 }
 
+export const setUserUploadLimit = async (
+  userId: string,
+  uploadLimitBytes: number | null
+) => {
+  return apiWithAuth("PUT", `/v1/staff/users/${userId}/upload-limit`, {
+    uploadLimitBytes,
+  })
+}
+
 export const getArtworks = async (profile: string, character: string) => {
   const artworks = await apiWithoutAuth<Artwork[]>(
     "GET",
@@ -424,6 +433,10 @@ export const getFolderByHandle = async (handle: string) => {
 
 export const getFoldersRecursively = async (folderId: string) => {
   return apiWithAuth("GET", `/v1/folders/${folderId}/recursive`)
+}
+
+export const deleteFolder = async (folderId: string) => {
+  return apiWithAuth("DELETE", `/v1/folders/${folderId}`)
 }
 
 export const setPanel = async (

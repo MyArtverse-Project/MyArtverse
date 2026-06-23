@@ -19,6 +19,7 @@ import {
   LuFolderClosed as FolderClosed,
   LuFolderOpen as FolderOpen,
   LuFolderPlus as FolderPlus,
+  LuTrash2,
 } from "react-icons/lu"
 
 export default function FolderItem({
@@ -34,6 +35,7 @@ export default function FolderItem({
   color,
   acceptKinds,
   onDropItem,
+  onDelete,
   ...attributes
 }: {
   children?: React.ReactNode
@@ -48,6 +50,7 @@ export default function FolderItem({
   color?: string
   acceptKinds?: FolderDragKind[]
   onDropItem?: (folderId: string | null, payload: FolderDragPayload) => void
+  onDelete?: (folderId: string) => void
 } & Pick<React.HTMLAttributes<MapElement<"div">>, "onClick">) {
   const childrenCount = Children.count(children)
   const hasNestedFolders = childrenCount > 0
@@ -124,7 +127,7 @@ export default function FolderItem({
     >
       <div
         className={cn(
-          "flex w-full items-center gap-1 rounded-md px-1 py-1 transition-all",
+          "group/folder flex w-full items-center gap-1 rounded-md px-1 py-1 transition-all",
           (selected || open) && "bg-accent text-accent-foreground",
           isDragOver && "bg-primary/10 ring-primary ring-2"
         )}
@@ -173,6 +176,22 @@ export default function FolderItem({
           <DynamicFolderIcon aria-hidden size={18} className="mr-2 shrink-0" />
           <span className="truncate">{newItem ? "New folder" : name}</span>
         </button>
+
+        {!newItem && folderId && onDelete ? (
+          <Button
+            type="button"
+            size="icon"
+            variant="ghost"
+            className="size-7 shrink-0 opacity-0 transition-opacity group-hover/folder:opacity-100"
+            aria-label={`Delete folder ${name}`}
+            onClick={(event) => {
+              event.stopPropagation()
+              onDelete(folderId)
+            }}
+          >
+            <LuTrash2 size={15} />
+          </Button>
+        ) : null}
       </div>
 
       {hasNestedFolders ? (

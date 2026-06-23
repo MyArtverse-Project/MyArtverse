@@ -41,6 +41,9 @@ export default async function ArtworkPage({
     notFound()
   }
 
+  const isOwner =
+    self?.handle === handle || self?.id === artwork.owner?.id
+
   return (
     <MarginClamp>
       <ArtworkView
@@ -48,6 +51,7 @@ export default async function ArtworkPage({
         ownerHandle={handle}
         characterSlug={name}
         self={self}
+        isOwner={!!isOwner}
       />
     </MarginClamp>
   )

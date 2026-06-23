@@ -10,6 +10,7 @@ export function renderFolderTree({
   onSelectFolder,
   owner,
   onCreateNested,
+  onDeleteFolder,
   acceptKinds,
   onDropItem,
 }: {
@@ -18,6 +19,7 @@ export function renderFolderTree({
   onSelectFolder: (folderId: string | null) => void
   owner: boolean
   onCreateNested: (parentId: string) => void
+  onDeleteFolder?: (folderId: string) => void
   acceptKinds?: FolderDragKind[]
   onDropItem?: (folderId: string | null, payload: FolderDragPayload) => void
 }) {
@@ -29,6 +31,7 @@ export function renderFolderTree({
       color={folder.color}
       selected={selectedFolderId === folder.id}
       onSelect={() => onSelectFolder(folder.id)}
+      onDelete={owner ? onDeleteFolder : undefined}
       acceptKinds={acceptKinds}
       onDropItem={onDropItem}
     >
@@ -41,6 +44,7 @@ export function renderFolderTree({
           nestedItem
           selected={selectedFolderId === child.id}
           onSelect={() => onSelectFolder(child.id)}
+          onDelete={owner ? onDeleteFolder : undefined}
           acceptKinds={acceptKinds}
           onDropItem={onDropItem}
         />

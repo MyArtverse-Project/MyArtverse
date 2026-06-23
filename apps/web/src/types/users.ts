@@ -33,6 +33,8 @@ export interface UserType {
   dateRegistered: Date
   dateUpdated: Date
   role: UserRole
+  uploadLimitBytes?: number | null
+  effectiveUploadLimitBytes?: number
   hasArtistAccess: boolean
   hasBetaAccess: boolean
   links: Link[]
