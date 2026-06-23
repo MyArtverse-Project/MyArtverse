@@ -66,8 +66,13 @@ export function NsfwPreferencesProvider({
       const serverPrefs = parseContentPreferences(user.contentPreferences)
       setPreferencesState(serverPrefs)
       writeStoredPreferences(serverPrefs)
+      return
     }
-  }, [user?.contentPreferences, authLoading])
+    if (!user) {
+      setPreferencesState(DEFAULT_CONTENT_PREFERENCES)
+      writeStoredPreferences(DEFAULT_CONTENT_PREFERENCES)
+    }
+  }, [user, user?.contentPreferences, authLoading])
 
   const setPreferences = useCallback(
     async (next: Partial<ContentPreferences>) => {

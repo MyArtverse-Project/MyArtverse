@@ -1,5 +1,6 @@
 "use client"
 
+import { useAuth } from "@/app/context/AuthContext"
 import { useNsfwPreferences } from "@/app/context/NsfwPreferencesContext"
 import { cn } from "@/lib/utils"
 import Image from "next/image"
@@ -22,6 +23,60 @@ type NsfwMediaProps = {
   editable?: boolean
 }
 
+function NsfwBlocked({
+  compact,
+  editable,
+  containerClassName,
+  isLoggedOut = false,
+}: Pick<NsfwMediaProps, "compact" | "editable" | "containerClassName"> & {
+  isLoggedOut?: boolean
+}) {
+  if (compact) {
+    return (
+      <div
+        className={cn(
+          "bg-muted text-muted-foreground flex h-full w-full items-center justify-center",
+          editable && "pointer-events-none",
+          containerClassName
+        )}
+        title={editable ? "NSFW content — click to edit" : "NSFW content"}
+      >
+        <LuLock size={12} />
+      </div>
+    )
+  }
+
+  return (
+    <div
+      className={cn(
+        "bg-muted/50 text-muted-foreground flex h-full w-full flex-col items-center justify-center gap-2 p-4 text-center",
+        editable && "pointer-events-none",
+        containerClassName
+      )}
+    >
+      <LuLock size={20} className="shrink-0" />
+      <p className="text-sm font-medium">NSFW content</p>
+      {editable ? (
+        <p className="text-muted-foreground text-xs">Click to edit</p>
+      ) : isLoggedOut ? (
+        <Link
+          href="/login"
+          className="text-primary text-xs underline-offset-4 hover:underline"
+        >
+          Log in to view
+        </Link>
+      ) : (
+        <Link
+          href="/settings/appearance"
+          className="text-primary text-xs underline-offset-4 hover:underline"
+        >
+          Enable in settings
+        </Link>
+      )}
+    </div>
+  )
+}
+
 export default function NsfwMedia({
   src,
   alt,
@@ -35,10 +90,15 @@ export default function NsfwMedia({
   compact = false,
   editable = false,
 }: NsfwMediaProps) {
+  const { user, isLoading: authLoading } = useAuth()
   const { preferences, isReady } = useNsfwPreferences()
   const [revealed, setRevealed] = useState(false)
 
-  if (!nsfw || !isReady) {
+  const isLoggedOut = !authLoading && !user
+  const shouldBlock =
+    nsfw && (isLoggedOut || (isReady && !preferences.showNsfw))
+
+  if (!nsfw) {
     return (
       <Image
         src={src}
@@ -52,43 +112,24 @@ export default function NsfwMedia({
     )
   }
 
-  if (!preferences.showNsfw) {
-    if (compact) {
-      return (
-        <div
-          className={cn(
-            "bg-muted text-muted-foreground flex h-full w-full items-center justify-center",
-            editable && "pointer-events-none",
-            containerClassName
-          )}
-          title={editable ? "NSFW content — click to edit" : "NSFW content"}
-        >
-          <LuLock size={12} />
-        </div>
-      )
-    }
-
+  if (nsfw && (!isReady || authLoading)) {
     return (
-      <div
-        className={cn(
-          "bg-muted/50 text-muted-foreground flex h-full w-full flex-col items-center justify-center gap-2 p-4 text-center",
-          editable && "pointer-events-none",
-          containerClassName
-        )}
-      >
-        <LuLock size={20} className="shrink-0" />
-        <p className="text-sm font-medium">NSFW content</p>
-        {editable ? (
-          <p className="text-muted-foreground text-xs">Click to edit</p>
-        ) : (
-          <Link
-            href="/settings/appearance"
-            className="text-primary text-xs underline-offset-4 hover:underline"
-          >
-            Enable in settings
-          </Link>
-        )}
-      </div>
+      <NsfwBlocked
+        compact={compact}
+        editable={editable}
+        containerClassName={containerClassName}
+      />
+    )
+  }
+
+  if (shouldBlock) {
+    return (
+      <NsfwBlocked
+        compact={compact}
+        editable={editable}
+        containerClassName={containerClassName}
+        isLoggedOut={isLoggedOut}
+      />
     )
   }
 
