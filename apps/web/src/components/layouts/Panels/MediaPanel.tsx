@@ -13,6 +13,7 @@ export default function MediaPanel({
   imageAlt,
   nsfw = false,
   artistHandle,
+  artistUrl,
   artistLabel,
   downloadUrl,
   isOwner,
@@ -23,6 +24,7 @@ export default function MediaPanel({
   imageAlt: string
   nsfw?: boolean
   artistHandle?: string
+  artistUrl?: string
   artistLabel?: string
   downloadUrl?: string
   isOwner?: boolean
@@ -79,6 +81,15 @@ export default function MediaPanel({
               >
                 @{artistHandle}
               </Link>
+            ) : artistUrl?.trim() ? (
+              <a
+                href={artistUrl.trim()}
+                target="_blank"
+                rel="noreferrer"
+                className="text-primary text-sm font-semibold hover:underline"
+              >
+                {artistUrl.trim()}
+              </a>
             ) : (
               <p className="text-muted-foreground text-sm">Unknown</p>
             )}

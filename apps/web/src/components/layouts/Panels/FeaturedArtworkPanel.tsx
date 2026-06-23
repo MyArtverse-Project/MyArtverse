@@ -16,7 +16,8 @@ export default function FeaturedArtworkPanel({
       imageUrl={artwork?.artworkUrl}
       imageAlt={artwork?.title || "Featured artwork"}
       nsfw={!!artwork?.nsfw}
-      artistHandle={artwork?.artist?.handle ?? artwork?.owner?.handle}
+      artistHandle={artwork?.artist?.handle}
+      artistUrl={artwork?.artistUrl}
       downloadUrl={artwork?.artworkUrl}
       isOwner={isOwner}
       emptyHint="Edit this panel to pick a featured artwork."

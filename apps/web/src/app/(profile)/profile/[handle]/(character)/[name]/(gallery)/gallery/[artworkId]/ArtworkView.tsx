@@ -66,7 +66,8 @@ export default function ArtworkView({
   self: User | null
   isOwner: boolean
 }) {
-  const artist = artwork.artist ?? artwork.owner
+  const artist = artwork.artist
+  const artistUrl = artwork.artistUrl?.trim()
   const redirectPath = `/@${ownerHandle}/${characterSlug}/gallery/${artwork.id}`
   const featuredCharacters = artwork.charactersFeatured ?? []
   const comments = (artwork.comments ?? []) as Comments[]
@@ -158,6 +159,15 @@ export default function ArtworkView({
                 >
                   by @{artist.handle}
                 </Link>
+              ) : artistUrl ? (
+                <a
+                  href={artistUrl}
+                  target="_blank"
+                  rel="noreferrer"
+                  className="hover:text-foreground transition-colors"
+                >
+                  by {artistUrl}
+                </a>
               ) : (
                 <span>by Unknown artist</span>
               )}
