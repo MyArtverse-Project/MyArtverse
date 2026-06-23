@@ -4,15 +4,13 @@ import { Input } from "@/components/ui/input"
 import { Label } from "@/components/ui/label"
 import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs"
 import { ToggleGroup, ToggleGroupItem } from "@/components/ui/toggle-group"
-import ArtistSearchInput, {
-  type ArtistSearchOption,
-} from "@/components/layouts/Forms/ArtistSearchInput"
+import ArtistSearchInput from "@/components/layouts/Forms/ArtistSearchInput"
 import type { ArtistCreditFormValue } from "@/utils/artistCreditForm"
-import { search } from "@/utils/api"
 import {
   searchBlueskyArtists,
+  searchMavArtists,
   searchXArtists,
-} from "@/utils/externalArtistSearch"
+} from "@/utils/artistSearch"
 import {
   ARTIST_PLATFORM_LABELS,
   ARTIST_PLATFORM_PLACEHOLDERS,
@@ -39,17 +37,10 @@ export default function ArtistCreditField({
     value.platform === "x" ? (value.handle ?? "") : ""
   )
 
-  const searchMav = useCallback(async (query: string) => {
-    const data = await search(query, "user")
-    return (data.user ?? []).map(
-      (user): ArtistSearchOption => ({
-        id: user.id,
-        handle: user.handle,
-        displayName: user.displayName,
-        avatarUrl: user.avatarUrl,
-      })
-    )
-  }, [])
+  const searchMav = useCallback(
+    async (query: string) => searchMavArtists(query),
+    []
+  )
 
   const searchBluesky = useCallback(
     async (query: string) => searchBlueskyArtists(query),
