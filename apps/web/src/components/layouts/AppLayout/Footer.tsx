@@ -2,11 +2,46 @@ import { COPYRIGHT_ALL_RIGHTS_RESERVED } from "@mav/shared"
 import { cn } from "@mav/shared/utils"
 import { Button } from "@/components/ui/button"
 import { MyArtverseIcon } from "@/components/icons/MyArtverse"
+import {
+  getFrontendCommit,
+  shortCommit,
+} from "@/utils/buildInfo"
 import Link from "next/link"
 import { FaCircle } from "react-icons/fa"
 
-const commitHashEnv = process.env.NEXT_PUBLIC_VERCEL_GIT_COMMIT_SHA || ""
-const commitHash = commitHashEnv.slice(0, 7)
+const frontendCommit = getFrontendCommit()
+
+const FRONTEND_REPO = "https://github.com/MyArtverse-Project/MyArtverse/commit"
+const API_REPO = "https://github.com/MyArtverse-Project/API/commit"
+
+function CommitLink({
+  label,
+  commit,
+  repoUrl,
+}: {
+  label: string
+  commit: string | null
+  repoUrl: string
+}) {
+  if (!commit) {
+    return (
+      <span className="cursor-help underline decoration-dashed">
+        {label}: Development
+      </span>
+    )
+  }
+
+  const short = shortCommit(commit)
+
+  return (
+    <Link
+      className="text-muted-foreground hover:text-foreground underline transition-colors"
+      href={`${repoUrl}/${commit}`}
+    >
+      {label}: {short}
+    </Link>
+  )
+}
 
 // TODO use a shortened version of the footer for certain routes and for logged in users
 const footerLinks = [
@@ -46,9 +81,11 @@ const footerLinks = [
 
 // TODO: Pass the operation status as a prop to the Footer component
 export function Footer({
-  operationStatus = "Operational"
+  operationStatus = "Operational",
+  apiCommit = null,
 }: {
   operationStatus?: "Operational" | "Maintenance" | "Outage"
+  apiCommit?: string | null
 }) {
   return (
     <div className="border-border border-t py-8">
@@ -99,20 +136,23 @@ export function Footer({
             ))}
           </section>
         </div>
-        <div className="text-muted-foreground flex gap-x-4">
-          <div className="w-full">{COPYRIGHT_ALL_RIGHTS_RESERVED}</div>
-          {!commitHashEnv ? (
-            <span className="cursor-help underline decoration-dashed">
-              Development
+        <div className="text-muted-foreground flex flex-wrap items-center justify-between gap-x-4 gap-y-2">
+          <div>{COPYRIGHT_ALL_RIGHTS_RESERVED}</div>
+          <div className="flex flex-wrap items-center gap-x-4 gap-y-1">
+            <CommitLink
+              label="Frontend"
+              commit={frontendCommit}
+              repoUrl={FRONTEND_REPO}
+            />
+            <span aria-hidden className="text-border">
+              ·
             </span>
-          ) : (
-            <Link
-              className="text-muted-foreground hover:text-foreground underline transition-colors"
-              href={`https://github.com/MyArtverse-Project/MyArtverse/commit/${commitHash}`}
-            >
-              {commitHash}
-            </Link>
-          )}
+            <CommitLink
+              label="API"
+              commit={apiCommit}
+              repoUrl={API_REPO}
+            />
+          </div>
         </div>
       </footer>
     </div>
