@@ -90,7 +90,7 @@ export default function ProfileSettings({ user }: { user: UserType }) {
               <Input
                 id="handle"
                 value={handle}
-                onChange={(e) => setHandle(e.target.value)}
+                onChange={(e) => setHandle(e.target.value.toLowerCase())}
               />
             </div>
             <SelectField
