@@ -2,6 +2,7 @@
 
 import Image from "next/image"
 import DeleteArtworkDialog from "@/components/DeleteArtworkDialog"
+import ArtistCreditField from "@/components/layouts/Forms/ArtistCreditField"
 import Checkbox from "@/components/layouts/Forms/Checkbox"
 import { Badge } from "@/components/ui/badge"
 import { Button } from "@/components/ui/button"
@@ -11,18 +12,35 @@ import { MarginGutter } from "@/components/ui/group"
 import { Textarea } from "@/components/ui/textarea"
 import type { Artwork } from "@/types/characters"
 import { updateArtwork } from "@/utils/api"
+import {
+  fromArtworkArtist,
+  isArtistCreditComplete,
+  toArtistCreditRequest,
+  type ArtistCreditFormValue,
+} from "@/utils/artistCreditForm"
+import { useAuth } from "@/app/context/AuthContext"
 import { useRouter } from "next/navigation"
-import { useState } from "react"
+import { useEffect, useState } from "react"
 import { LuArrowLeft, LuTrash2 } from "react-icons/lu"
 
 export default function EditArtworkForm({ artwork }: { artwork: Artwork }) {
   const router = useRouter()
+  const { user } = useAuth()
   const [title, setTitle] = useState(artwork.title ?? "")
   const [description, setDescription] = useState(artwork.description ?? "")
   const [tags, setTags] = useState<string[]>(artwork.tags ?? [])
   const [nsfw, setNsfw] = useState(!!artwork.nsfw)
+  const [artistCredit, setArtistCredit] = useState<ArtistCreditFormValue>(() =>
+    fromArtworkArtist(artwork, user?.id)
+  )
   const [loading, setLoading] = useState(false)
   const [deleteOpen, setDeleteOpen] = useState(false)
+
+  useEffect(() => {
+    if (user?.id) {
+      setArtistCredit(fromArtworkArtist(artwork, user.id))
+    }
+  }, [artwork, user?.id])
 
   const handleTagAdd = (e: React.KeyboardEvent<HTMLInputElement>) => {
     if (e.key === "Enter") {
@@ -36,16 +54,19 @@ export default function EditArtworkForm({ artwork }: { artwork: Artwork }) {
   }
 
   const handleSave = async () => {
-    if (!title.trim()) return
+    if (!title.trim() || !isArtistCreditComplete(artistCredit)) return
 
     setLoading(true)
 
     try {
+      const artistRequest = toArtistCreditRequest(artistCredit)
       await updateArtwork(artwork.id, {
         title: title.trim(),
         description: description.trim(),
         tags,
         nsfw,
+        userAsArtist: artistRequest.userAsArtist,
+        artistCredit: artistRequest.artistCredit,
       })
       router.push("/studio/gallery")
       router.refresh()
@@ -134,7 +155,12 @@ export default function EditArtworkForm({ artwork }: { artwork: Artwork }) {
             )}
           </div>
 
-          <div className="border-border rounded-md border p-4">
+          <div className="border-border space-y-4 rounded-md border p-4">
+            <ArtistCreditField
+              value={artistCredit}
+              onChange={setArtistCredit}
+              disabled={loading}
+            />
             <Checkbox
               inputName="nsfw"
               onChange={() => setNsfw(!nsfw)}
@@ -163,7 +189,7 @@ export default function EditArtworkForm({ artwork }: { artwork: Artwork }) {
           >
             Cancel
           </Button>
-          <Button onClick={handleSave} disabled={loading || !title.trim()}>
+          <Button onClick={handleSave} disabled={loading || !title.trim() || !isArtistCreditComplete(artistCredit)}>
             {loading ? "Saving..." : "Save changes"}
           </Button>
         </div>

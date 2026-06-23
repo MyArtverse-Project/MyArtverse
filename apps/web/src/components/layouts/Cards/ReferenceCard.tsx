@@ -3,6 +3,7 @@
 import type { ReferenceSheet } from "@/types/characters"
 import { BACKEND_URL } from "@/utils/constants"
 import { cn } from "@mav/shared/utils"
+import { resolveArtistCredit } from "@mav/shared"
 import NsfwMedia from "@/components/NsfwMedia"
 
 interface ReferenceCardProps {
@@ -18,6 +19,7 @@ export function ReferenceCard({
 }: ReferenceCardProps) {
   const mainVariant =
     data.variants.find((v) => v.main) ?? data.variants[0]
+  const artistCredit = resolveArtistCredit(data)
 
   const clickables = (e: React.MouseEvent<HTMLDivElement, MouseEvent>) => {
     e.stopPropagation()
@@ -55,7 +57,9 @@ export function ReferenceCard({
       </div>
       <div className="ml-4 flex flex-col justify-center">
         <h2 className="text-xl">{data.name}</h2>
-        <span className="text-sm">{data.artist}</span>
+        <span className="text-sm">
+          {artistCredit ? artistCredit.label : "No artist credited"}
+        </span>
         <span className="text-sm">
           Contains {data.variants.length} variant(s)
         </span>

@@ -6,10 +6,10 @@ import Link from "next/link"
 import { LuUpload } from "react-icons/lu"
 
 export default async function Page() {
-  const artworks = await fetchUserGallery()
+  const artworks = await fetchUserGallery().catch(() => [])
 
   return (
-    <MarginGutter screenSize="xl" className="px-6 py-8 space-y-6">
+    <MarginGutter screenSize="xl" className="space-y-6 px-6 py-8">
       <Group
         title="Gallery"
         potentialActions={

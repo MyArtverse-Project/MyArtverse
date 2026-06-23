@@ -1,8 +1,10 @@
 "use client"
 
 import NsfwMedia from "@/components/NsfwMedia"
+import ArtistCreditDisplay, {
+  type ArtistCreditDisplayValue,
+} from "@/components/ArtistCreditDisplay"
 import { Button } from "@/components/ui/button"
-import Link from "next/link"
 import { useState } from "react"
 import { LuDownload, LuExpand, LuStar } from "react-icons/lu"
 import { PanelCard } from "./PanelCard"
@@ -13,6 +15,8 @@ export default function MediaPanel({
   imageAlt,
   nsfw = false,
   artistHandle,
+  artistUrl,
+  artistCredit,
   artistLabel,
   downloadUrl,
   isOwner,
@@ -23,12 +27,31 @@ export default function MediaPanel({
   imageAlt: string
   nsfw?: boolean
   artistHandle?: string
+  artistUrl?: string
+  artistCredit?: ArtistCreditDisplayValue | null
   artistLabel?: string
   downloadUrl?: string
   isOwner?: boolean
   emptyHint?: string
 }) {
   const [expanded, setExpanded] = useState(false)
+  const resolvedArtist: ArtistCreditDisplayValue | null =
+    artistCredit ??
+    (artistHandle
+      ? {
+          label: `@${artistHandle}`,
+          href: `/@${artistHandle}`,
+          isInternal: true,
+          platform: "mav",
+        }
+      : artistUrl?.trim()
+        ? {
+            label: artistUrl.trim(),
+            href: artistUrl.trim(),
+            isInternal: false,
+            platform: "url",
+          }
+        : null)
 
   if (!imageUrl) {
     return (
@@ -72,13 +95,11 @@ export default function MediaPanel({
             <p className="text-muted-foreground text-[0.7rem] font-semibold uppercase tracking-wide">
               {artistLabel ?? "Artist"}
             </p>
-            {artistHandle ? (
-              <Link
-                href={`/@${artistHandle}`}
-                className="text-primary text-sm font-semibold hover:underline"
-              >
-                @{artistHandle}
-              </Link>
+            {resolvedArtist ? (
+              <ArtistCreditDisplay
+                credit={resolvedArtist}
+                linkClassName="text-primary text-sm font-semibold hover:underline"
+              />
             ) : (
               <p className="text-muted-foreground text-sm">Unknown</p>
             )}

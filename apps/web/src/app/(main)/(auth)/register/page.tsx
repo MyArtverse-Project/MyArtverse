@@ -88,10 +88,10 @@ export default function Page() {
               type="text"
               pattern="^[a-z0-9_.]+$"
               placeholder="Username"
+              onChange={(e) => {
+                e.target.value = e.target.value.toLowerCase()
+              }}
             />
-            <span className="text-muted-foreground text-sm">
-              Username must contain [A-Z][a-z][0-9], underscore, and periods.
-            </span>
             {errors?.errors?.username?.map((err) => (
               <p key={err} className="text-destructive text-sm">
                 {err}

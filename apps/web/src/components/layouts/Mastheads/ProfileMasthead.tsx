@@ -16,7 +16,7 @@ import { Button } from "@/components/ui/button"
 import { MastheadScrollTitle } from "@/components/layouts/Mastheads/MastheadScrollTitle"
 import Link from "next/link"
 import { useState } from "react"
-import { LuCat, LuHeart, LuHome } from "react-icons/lu"
+import { LuCat, LuGalleryThumbnails, LuHeart, LuHome } from "react-icons/lu"
 import { Masthead } from "@mav/ui/components/layouts"
 
 interface ProfileMastheadProps {
@@ -43,6 +43,11 @@ const generateProfileTabs = (characterCount: number = 0) =>
       text: "Characters",
       link: "characters",
       countIndicator: characterCount
+    },
+    {
+      icon: LuGalleryThumbnails,
+      text: "Gallery",
+      link: "gallery"
     },
     {
       icon: LuHeart,

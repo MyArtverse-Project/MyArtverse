@@ -12,7 +12,6 @@ type ApiVariant = ReferenceSheet["variants"][number] & {
   id?: string
   title?: string
   description?: string
-  artistExternal?: string
   colors?: string[]
 }
 
@@ -31,15 +30,11 @@ export function getMainVariantNsfw(refSheet: ReferenceSheet) {
   return !!main?.nsfw
 }
 
-export function mapVariantFromApi(
-  variant: ApiVariant,
-  fallbackArtist = ""
-) {
+export function mapVariantFromApi(variant: ApiVariant) {
   return {
     id: variant.id,
     title: variant.title ?? variant.name ?? "",
     description: variant.description ?? "",
-    artist: variant.artistExternal ?? fallbackArtist,
     image: variant.url,
     primary: !!variant.main,
     nsfw: !!variant.nsfw,

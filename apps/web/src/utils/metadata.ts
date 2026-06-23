@@ -31,6 +31,7 @@ type BuildPageMetadataOptions = {
   image?: string | null
   imageAlt?: string
   type?: "website" | "article"
+  authors?: { name: string; url?: string }[]
 }
 
 export function buildPageMetadata({
@@ -40,6 +41,7 @@ export function buildPageMetadata({
   image,
   imageAlt,
   type = "website",
+  authors,
 }: BuildPageMetadataOptions): Metadata {
   const url = path ? toAbsoluteUrl(path) : undefined
   const imageUrl = image ? toAbsoluteUrl(image) : null
@@ -47,6 +49,7 @@ export function buildPageMetadata({
   return {
     title,
     description,
+    authors,
     alternates: url ? { canonical: url } : undefined,
     openGraph: {
       title,

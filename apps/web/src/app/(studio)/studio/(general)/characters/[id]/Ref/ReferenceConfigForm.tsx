@@ -1,8 +1,8 @@
 "use client"
 
 import Checkbox from "@/components/layouts/Forms/Checkbox"
+import ArtistCreditField from "@/components/layouts/Forms/ArtistCreditField"
 import DropZone from "@/components/Modals/DropZone"
-import { Badge } from "@/components/ui/badge"
 import { Button } from "@/components/ui/button"
 import { Input } from "@/components/ui/input"
 import { Label } from "@/components/ui/label"
@@ -15,10 +15,16 @@ import {
 } from "@/components/ui/tooltip"
 import { Character, ReferenceSheet } from "@/types/characters"
 import { createRefSheet } from "@/utils/api"
-import { extractImageColors } from "@/utils/extractImageColors"
+import {
+  fromRefSheetArtist,
+  isArtistCreditComplete,
+  toArtistCreditRequest,
+  type ArtistCreditFormValue,
+} from "@/utils/artistCreditForm"
+import { useAuth } from "@/app/context/AuthContext"
 import { uploadImageFile } from "@/utils/uploadImage"
 import Image from "next/image"
-import { useCallback, useEffect, useRef, useState } from "react"
+import { useEffect, useRef, useState } from "react"
 import {
   LuHelpCircle,
   LuCopy,
@@ -37,7 +43,6 @@ export interface ReferenceVariant {
   id?: string
   title: string
   description: string
-  artist: string
   image: string
   primary: boolean
   nsfw: boolean
@@ -48,7 +53,6 @@ type ApiVariant = ReferenceSheet["variants"][number] & {
   id?: string
   title?: string
   description?: string
-  artistExternal?: string
   colors?: string[]
 }
 
@@ -67,22 +71,33 @@ export function ReferenceConfigForm({
   onClose: (formData: RefSheetFormData) => void
   formId?: string
 }) {
+  const { user } = useAuth()
   const isEditing = !!initialRefSheet
 
   const [name, setName] = useState(initialRefSheet?.name ?? "")
   const [linkedTo, setLinkedTo] = useState(character.id)
+  const [artistCredit, setArtistCredit] = useState<ArtistCreditFormValue>({
+    mode: "none",
+  })
+  useEffect(() => {
+    if (!isEditing || !initialRefSheet) {
+      setArtistCredit({ mode: "none" })
+      return
+    }
+    setArtistCredit(fromRefSheetArtist(initialRefSheet, user?.id))
+  }, [initialRefSheet, isEditing, user?.id])
+
   const [referenceVariants, setReferenceVariants] = useState<ReferenceVariant[]>(
     () => {
       if (initialRefSheet?.variants?.length) {
         return (initialRefSheet.variants as ApiVariant[]).map((v) =>
-          mapVariantFromApi(v, initialRefSheet.artist)
+          mapVariantFromApi(v)
         )
       }
       return [
         {
           title: "",
           description: "",
-          artist: "",
           image,
           primary: true,
           nsfw: false,
@@ -91,28 +106,6 @@ export function ReferenceConfigForm({
       ]
     }
   )
-
-  const applyColorsToVariant = useCallback(
-    async (index: number, imageUrl: string) => {
-      try {
-        const colors = await extractImageColors(imageUrl)
-        setReferenceVariants((prev) => {
-          const next = [...prev]
-          if (next[index]) next[index] = { ...next[index], colors }
-          return next
-        })
-      } catch {
-        // Keep existing palette if extraction fails (e.g. CORS).
-      }
-    },
-    []
-  )
-
-  useEffect(() => {
-    if (!isEditing) {
-      applyColorsToVariant(0, image)
-    }
-  }, [image, applyColorsToVariant, isEditing])
 
   const updateVariant = (
     index: number,
@@ -127,7 +120,9 @@ export function ReferenceConfigForm({
   }
 
   const handleSubmit = () => {
-    if (!name.trim()) return
+    if (!name.trim() || !isArtistCreditComplete(artistCredit)) return
+
+    const artistRequest = toArtistCreditRequest(artistCredit)
 
     onClose({
       characterId: linkedTo,
@@ -136,11 +131,12 @@ export function ReferenceConfigForm({
         name: name.trim(),
         description: referenceVariants[0]?.description ?? "",
         primary: referenceVariants.some((variant) => variant.primary),
+        userAsArtist: artistRequest.userAsArtist,
+        artistCredit: artistRequest.artistCredit,
         variants: referenceVariants.map((variant) => ({
           ...(variant.id ? { id: variant.id } : {}),
           title: variant.title,
           description: variant.description,
-          artist: variant.artist,
           image: variant.image,
           primary: variant.primary,
           nsfw: variant.nsfw,
@@ -151,22 +147,17 @@ export function ReferenceConfigForm({
   }
 
   const addVariant = (url: string) => {
-    setReferenceVariants((prev) => {
-      const nextIndex = prev.length
-      void applyColorsToVariant(nextIndex, url)
-      return [
-        ...prev,
-        {
-          title: "",
-          description: "",
-          artist: "",
-          image: url,
-          primary: false,
-          nsfw: false,
-          colors: [] as string[],
-        },
-      ]
-    })
+    setReferenceVariants((prev) => [
+      ...prev,
+      {
+        title: "",
+        description: "",
+        image: url,
+        primary: false,
+        nsfw: false,
+        colors: [] as string[],
+      },
+    ])
   }
 
   const removeVariant = (index: number) => {
@@ -225,6 +216,11 @@ export function ReferenceConfigForm({
           />
         </div>
 
+        <ArtistCreditField
+          value={artistCredit}
+          onChange={setArtistCredit}
+        />
+
         <div className="space-y-3">
           <Label className="text-muted-foreground text-xs font-bold uppercase tracking-wide">
             Reference image(s)
@@ -242,7 +238,6 @@ export function ReferenceConfigForm({
                 onSetDefault={() => setDefaultVariant(index)}
                 onReplaceImage={async (url) => {
                   updateVariant(index, "image", url)
-                  await applyColorsToVariant(index, url)
                 }}
                 onCopyPalette={() => copyPalette(variant.colors)}
                 onAddColor={() =>
@@ -405,26 +400,10 @@ function ReferenceVariantCard({
           </div>
 
           <div className="space-y-2">
-            <Label
-              htmlFor={`variant-artist-${index}`}
-              className="text-muted-foreground text-xs font-bold uppercase tracking-wide"
-            >
-              Artist credit
-            </Label>
-            <Input
-              id={`variant-artist-${index}`}
-              value={variant.artist}
-              placeholder="@handle or URL"
-              onChange={(e) => onUpdate(index, "artist", e.target.value)}
-            />
-          </div>
-
-          <div className="space-y-2">
             <div className="flex flex-wrap items-center gap-2">
               <Label className="text-muted-foreground text-xs font-bold uppercase tracking-wide">
                 Color palette
               </Label>
-              <Badge variant="outline">Auto-generated</Badge>
               <div className="ml-auto flex items-center gap-1">
                 <Button
                   type="button"

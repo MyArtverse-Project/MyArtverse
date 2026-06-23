@@ -1,4 +1,6 @@
 import Avatar from "@/components/Avatar"
+import ArtistCreditDisplay from "@/components/ArtistCreditDisplay"
+import ArtistPlatformIcon from "@/components/ArtistPlatformIcon"
 import NsfwMedia from "@/components/NsfwMedia"
 import { Badge } from "@/components/ui/badge"
 import { Button } from "@/components/ui/button"
@@ -6,6 +8,7 @@ import type { User } from "@/app/context/AuthContext"
 import type { Artwork, Character } from "@/types/characters"
 import type { Comments } from "@/types/users"
 import { USER_DEFAULT_AVATAR } from "@/utils/constants"
+import { resolveArtistCredit } from "@mav/shared"
 import Link from "next/link"
 import {
   LuHeart,
@@ -66,7 +69,7 @@ export default function ArtworkView({
   self: User | null
   isOwner: boolean
 }) {
-  const artist = artwork.artist ?? artwork.owner
+  const resolvedArtist = resolveArtistCredit(artwork)
   const redirectPath = `/@${ownerHandle}/${characterSlug}/gallery/${artwork.id}`
   const featuredCharacters = artwork.charactersFeatured ?? []
   const comments = (artwork.comments ?? []) as Comments[]
@@ -139,31 +142,71 @@ export default function ArtworkView({
         </aside>
       </div>
 
-      <header className="mt-8 flex flex-wrap items-start justify-between gap-4">
-        <div className="flex min-w-0 items-start gap-3">
-          <Avatar
-            src={artist?.avatarUrl || USER_DEFAULT_AVATAR}
-            username={artist?.handle}
-            size={44}
-          />
-          <div className="min-w-0 space-y-1">
-            <h1 className="text-2xl font-semibold leading-tight">
+      <header className="mt-8 flex flex-wrap items-center justify-between gap-3">
+        <div className="flex min-w-0 items-center gap-2.5">
+          {resolvedArtist?.avatarUrl ? (
+            <Avatar
+              src={resolvedArtist.avatarUrl || USER_DEFAULT_AVATAR}
+              username={resolvedArtist.label}
+              size={44}
+              className="shrink-0"
+            />
+          ) : resolvedArtist ? (
+            <ArtistPlatformIcon
+              platform={resolvedArtist.platform}
+              size="lg"
+              className="shrink-0"
+            />
+          ) : (
+            <Avatar
+              src={USER_DEFAULT_AVATAR}
+              username="Unknown artist"
+              size={44}
+              className="shrink-0"
+            />
+          )}
+          <div className="min-w-0">
+            <h1 className="text-2xl font-semibold leading-none tracking-tight">
               {artwork.title ?? "Untitled artwork"}
             </h1>
-            <div className="text-muted-foreground flex flex-wrap items-center gap-2 text-sm">
-              {artist?.handle ? (
-                <Link
-                  href={`/@${artist.handle}`}
-                  className="hover:text-foreground transition-colors"
-                >
-                  by @{artist.handle}
-                </Link>
+            <div className="text-muted-foreground mt-1.5 flex flex-wrap items-center gap-1.5 text-sm leading-none">
+              {resolvedArtist ? (
+                <ArtistCreditDisplay
+                  credit={resolvedArtist}
+                  prefix="by "
+                  showIcon={false}
+                  linkClassName="text-muted-foreground hover:text-foreground"
+                />
               ) : (
                 <span>by Unknown artist</span>
               )}
-              <Button variant="outline" size="sm" type="button">
-                Follow
-              </Button>
+              {resolvedArtist ? (
+                resolvedArtist.isInternal ? (
+                  <Button
+                    variant="outline"
+                    size="sm"
+                    className="h-7 rounded-full px-3 text-xs"
+                    asChild
+                  >
+                    <Link href={resolvedArtist.href}>Visit</Link>
+                  </Button>
+                ) : (
+                  <Button
+                    variant="outline"
+                    size="sm"
+                    className="h-7 rounded-full px-3 text-xs"
+                    asChild
+                  >
+                    <a
+                      href={resolvedArtist.href}
+                      target="_blank"
+                      rel="noreferrer"
+                    >
+                      Visit
+                    </a>
+                  </Button>
+                )
+              ) : null}
             </div>
           </div>
         </div>

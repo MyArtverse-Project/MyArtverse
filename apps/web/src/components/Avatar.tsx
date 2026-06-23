@@ -1,6 +1,7 @@
 "use client"
 
 import { isRemoteImageUrl, USER_DEFAULT_AVATAR } from "@/utils/constants"
+import { cn } from "@/lib/utils"
 import Image from "next/image"
 import { useEffect, useState } from "react"
 
@@ -29,7 +30,7 @@ export default function Avatar({
       data-avatar=""
       aria-label={username}
       style={{ height: `${size}px`, width: `${size}px` }}
-      className={className ?? "overflow-hidden rounded-full"}
+      className={cn("overflow-hidden rounded-full", className)}
     >
       <Image
         key={imageKey ? `${imageKey}:${imgSrc}` : imgSrc}

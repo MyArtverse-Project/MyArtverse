@@ -1,6 +1,18 @@
 import type { Artwork } from "@/types/characters"
-import { BRAND } from "@mav/shared"
-import { buildPageMetadata, possessiveName, truncateDescription } from "./metadata"
+import { BRAND, resolveArtistCredit } from "@mav/shared"
+import { buildPageMetadata, possessiveName, toAbsoluteUrl, truncateDescription } from "./metadata"
+
+export function getArtworkArtistCredit(artwork: Artwork): string | null {
+  return resolveArtistCredit(artwork)?.label ?? null
+}
+
+export function getArtworkFeaturedCharacterName(artwork: Artwork): string | null {
+  return (
+    artwork.publishedCharacter?.name?.trim() ||
+    artwork.charactersFeatured?.[0]?.name?.trim() ||
+    null
+  )
+}
 
 export function buildArtworkMetadata({
   artwork,
@@ -12,7 +24,8 @@ export function buildArtworkMetadata({
   characterSlug: string
 }) {
   const title = artwork.title?.trim() || "Untitled artwork"
-  const artistHandle = artwork.artist?.handle ?? artwork.owner?.handle
+  const artistCredit = getArtworkArtistCredit(artwork)
+  const featuredCharacter = getArtworkFeaturedCharacterName(artwork)
   const tagLine =
     artwork.tags?.length > 0
       ? artwork.tags
@@ -22,7 +35,11 @@ export function buildArtworkMetadata({
       : null
 
   const descriptionParts = [
-    artistHandle ? `Art by @${artistHandle}` : null,
+    artistCredit
+      ? `Art by ${artistCredit}`
+      : featuredCharacter
+        ? `Featuring ${featuredCharacter}`
+        : null,
     artwork.nsfw ? "NSFW" : null,
     artwork.description?.trim()
       ? truncateDescription(artwork.description)
@@ -32,6 +49,9 @@ export function buildArtworkMetadata({
   const description =
     descriptionParts.join(" · ") || `View ${title} on ${BRAND}.`
 
+  const artistHandle = artwork.artist?.handle
+  const resolvedArtist = resolveArtistCredit(artwork)
+
   return buildPageMetadata({
     title,
     description,
@@ -39,6 +59,16 @@ export function buildArtworkMetadata({
     image: artwork.artworkUrl ?? null,
     imageAlt: artwork.altText ?? title,
     type: "article",
+    authors: artistHandle
+      ? [
+          {
+            name: `@${artistHandle}`,
+            url: toAbsoluteUrl(`/@${artistHandle}`),
+          },
+        ]
+      : resolvedArtist && !resolvedArtist.isInternal
+        ? [{ name: resolvedArtist.label, url: resolvedArtist.href }]
+        : undefined,
   })
 }
 
@@ -83,6 +113,26 @@ export function buildCharacterOverviewMetadata({
     path: `/@${handle}/${characterSlug}`,
     image: avatarUrl,
     imageAlt: `${characterName}'s avatar`,
+  })
+}
+
+export function buildUserGalleryMetadata({
+  displayName,
+  handle,
+  avatarUrl,
+  previewImage,
+}: {
+  displayName: string
+  handle: string
+  avatarUrl?: string | null
+  previewImage?: string | null
+}) {
+  return buildPageMetadata({
+    title: `${possessiveName(displayName)} Gallery`,
+    description: `Browse artwork uploaded by @${handle} on ${BRAND}.`,
+    path: `/@${handle}/gallery`,
+    image: previewImage ?? avatarUrl ?? null,
+    imageAlt: `${displayName}'s gallery`,
   })
 }
 

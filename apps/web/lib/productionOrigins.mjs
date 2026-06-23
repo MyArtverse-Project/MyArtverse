@@ -31,6 +31,15 @@ export function getImageOrigins() {
   return getImageHostnames().map((hostname) => `https://${hostname}`)
 }
 
+/** @returns {string[]} HTTPS origins allowed for external profile photos */
+export function getSocialAvatarOrigins() {
+  return [
+    "https://cdn.bsky.app",
+    "https://pbs.twimg.com",
+    "https://abs.twimg.com",
+  ]
+}
+
 /** @returns {import('next/dist/shared/lib/image-config').RemotePattern[]} */
 export function buildImageRemotePatterns() {
   const patterns = [
@@ -65,6 +74,15 @@ export function buildImageRemotePatterns() {
   const backendOrigin = getBackendOrigin()
   if (backendOrigin) {
     const { hostname, protocol } = new URL(backendOrigin)
+    patterns.push({
+      protocol: protocol.replace(":", ""),
+      hostname,
+      pathname: "/**",
+    })
+  }
+
+  for (const origin of getSocialAvatarOrigins()) {
+    const { hostname, protocol } = new URL(origin)
     patterns.push({
       protocol: protocol.replace(":", ""),
       hostname,

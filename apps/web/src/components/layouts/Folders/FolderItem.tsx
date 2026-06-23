@@ -36,6 +36,7 @@ export default function FolderItem({
   acceptKinds,
   onDropItem,
   onDelete,
+  galleryRoot = false,
   ...attributes
 }: {
   children?: React.ReactNode
@@ -51,6 +52,7 @@ export default function FolderItem({
   acceptKinds?: FolderDragKind[]
   onDropItem?: (folderId: string | null, payload: FolderDragPayload) => void
   onDelete?: (folderId: string) => void
+  galleryRoot?: boolean
 } & Pick<React.HTMLAttributes<MapElement<"div">>, "onClick">) {
   const childrenCount = Children.count(children)
   const hasNestedFolders = childrenCount > 0
@@ -99,7 +101,7 @@ export default function FolderItem({
     onSelect?.()
   }
 
-  const handleDragOver = (event: React.DragEvent<HTMLDivElement>) => {
+  const handleDragOver = (event: React.DragEvent<HTMLElement>) => {
     if (!canDrop || !event.dataTransfer.types.includes(FOLDER_DRAG_MIME)) return
 
     event.preventDefault()
@@ -107,7 +109,7 @@ export default function FolderItem({
     setIsDragOver(true)
   }
 
-  const handleDrop = (event: React.DragEvent<HTMLDivElement>) => {
+  const handleDrop = (event: React.DragEvent<HTMLElement>) => {
     if (!canDrop) return
 
     event.preventDefault()
@@ -117,6 +119,30 @@ export default function FolderItem({
     if (!payload || !acceptsFolderDrag(payload, acceptKinds)) return
 
     onDropItem?.(folderId ?? null, payload)
+  }
+
+  if (galleryRoot && !newItem && name) {
+    return (
+      <button
+        type="button"
+        onClick={handleSelect}
+        aria-label={`Folder item: ${name}`}
+        className={cn(
+          "flex w-full items-center gap-2 rounded-xl px-3 py-2.5 text-left text-sm font-semibold transition-colors",
+          selected
+            ? "bg-primary text-primary-foreground shadow-sm"
+            : "bg-primary/[0.06] text-foreground hover:bg-primary/10",
+          isDragOver && "ring-primary ring-2"
+        )}
+        onDragOver={canDrop ? handleDragOver : undefined}
+        onDragEnter={canDrop ? handleDragOver : undefined}
+        onDragLeave={canDrop ? () => setIsDragOver(false) : undefined}
+        onDrop={canDrop ? handleDrop : undefined}
+      >
+        <DynamicFolderIcon aria-hidden size={18} className="shrink-0" />
+        <span className="truncate">{name}</span>
+      </button>
+    )
   }
 
   return (
@@ -166,14 +192,12 @@ export default function FolderItem({
             newItem && "opacity-50 hover:opacity-100"
           )}
         >
-          {color ? (
-            <span
-              className="mr-2 size-3 shrink-0 rounded-full border border-border/50"
-              style={{ backgroundColor: color }}
-              aria-hidden
-            />
-          ) : null}
-          <DynamicFolderIcon aria-hidden size={18} className="mr-2 shrink-0" />
+          <DynamicFolderIcon
+            aria-hidden
+            size={18}
+            className="mr-2 shrink-0"
+            style={color ? { color } : undefined}
+          />
           <span className="truncate">{newItem ? "New folder" : name}</span>
         </button>
 

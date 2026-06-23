@@ -68,6 +68,8 @@ export default async function Page({
         characterId={character.id}
         ownerHandle={handle}
         characterSlug={name}
+        characterName={character.name}
+        characterAvatarUrl={character.avatarUrl}
         artworks={artworks}
         folders={folders}
         owner={isOwner}

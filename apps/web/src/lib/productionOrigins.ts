@@ -25,6 +25,14 @@ export function getImageOrigins() {
     .map((hostname) => `https://${hostname}`)
 }
 
+export function getSocialAvatarOrigins() {
+  return [
+    "https://cdn.bsky.app",
+    "https://pbs.twimg.com",
+    "https://abs.twimg.com",
+  ]
+}
+
 export function isDevEnvironment() {
   return process.env.NODE_ENV !== "production"
 }
