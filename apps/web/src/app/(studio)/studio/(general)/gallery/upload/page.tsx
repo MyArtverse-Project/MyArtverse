@@ -2,6 +2,7 @@
 
 import DropZone from "@/components/Modals/DropZone"
 import { useAuth } from "@/app/context/AuthContext"
+import ArtistCreditField from "@/components/layouts/Forms/ArtistCreditField"
 import Checkbox from "@/components/layouts/Forms/Checkbox"
 import { Badge } from "@/components/ui/badge"
 import { Button } from "@/components/ui/button"
@@ -11,6 +12,11 @@ import { MarginGutter } from "@/components/ui/group"
 import { Textarea } from "@/components/ui/textarea"
 import { useDebounce } from "@/hooks/useDebounce"
 import { fetchCharacterById, search, uploadArt } from "@/utils/api"
+import {
+  isArtistCreditComplete,
+  toArtistCreditRequest,
+  type ArtistCreditFormValue,
+} from "@/utils/artistCreditForm"
 import { useRouter, useSearchParams } from "next/navigation"
 import { useEffect, useState } from "react"
 import { LuArrowLeft } from "react-icons/lu"
@@ -41,7 +47,9 @@ export default function UploadArtPage() {
   const [title, setTitle] = useState("")
   const [description, setDescription] = useState("")
   const [tags, setTags] = useState<string[]>([])
-  const [userAsArtist, setUserAsArtist] = useState(false)
+  const [artistCredit, setArtistCredit] = useState<ArtistCreditFormValue>({
+    mode: "none",
+  })
   const [nsfw, setNsfw] = useState(false)
 
   const [mainCharacterId, setMainCharacterId] = useState("")
@@ -69,7 +77,7 @@ export default function UploadArtPage() {
     setTitle("")
     setDescription("")
     setTags([])
-    setUserAsArtist(false)
+    setArtistCredit({ mode: "none" })
     setNsfw(false)
     setMainCharacterId(resolvedCharacterId)
     setTaggedCharacterIds([])
@@ -129,17 +137,19 @@ export default function UploadArtPage() {
   }
 
   const handleUpload = async () => {
-    if (!artUrl || !title || !mainCharacterId) return
+    if (!artUrl || !title || !mainCharacterId || !isArtistCreditComplete(artistCredit)) return
 
     setLoading(true)
 
     try {
+      const artistRequest = toArtistCreditRequest(artistCredit)
       await uploadArt(mainCharacterId, {
         imageUrl: artUrl,
         title,
         description,
         tags,
-        userAsArtist,
+        userAsArtist: artistRequest.userAsArtist,
+        artistCredit: artistRequest.artistCredit,
         nsfw,
         mainCharacterId,
         taggedCharacterIds,
@@ -251,12 +261,11 @@ export default function UploadArtPage() {
             )}
           </div>
 
-          <div className="border-border flex flex-col gap-3 rounded-md border p-4">
-            <Checkbox
-              inputName="artist"
-              onChange={() => setUserAsArtist(!userAsArtist)}
-              checked={userAsArtist}
-              label="I am the artist of this artwork"
+          <div className="border-border flex flex-col gap-4 rounded-md border p-4">
+            <ArtistCreditField
+              value={artistCredit}
+              onChange={setArtistCredit}
+              disabled={loading}
             />
             <Checkbox
               inputName="nsfw"
@@ -357,7 +366,7 @@ export default function UploadArtPage() {
         </Button>
         <Button
           onClick={handleUpload}
-          disabled={loading || !artUrl || !title || !mainCharacterId}
+          disabled={loading || !artUrl || !title || !mainCharacterId || !isArtistCreditComplete(artistCredit)}
         >
           {loading ? "Uploading..." : "Upload artwork"}
         </Button>

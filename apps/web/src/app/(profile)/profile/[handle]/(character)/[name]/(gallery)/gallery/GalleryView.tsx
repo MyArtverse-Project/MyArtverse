@@ -1,10 +1,12 @@
 "use client"
 
 import ArtworkGrid from "@/components/ArtworkGrid"
+import GalleryToolbar from "@/components/gallery/GalleryToolbar"
 import CreateFolderModal from "@/components/Modals/CreateFolder"
 import DeleteFolderDialog from "@/components/DeleteFolderDialog"
 import FolderView from "@/components/layouts/Folders"
 import { renderFolderTree } from "@/components/layouts/Folders/FolderTree"
+import NsfwMedia from "@/components/NsfwMedia"
 import type { Artwork, Folder } from "@/types/characters"
 import { folderColors } from "@/utils/constants"
 import {
@@ -14,6 +16,13 @@ import {
   removeFolderFromTree,
 } from "@/utils/folderUtils"
 import type { FolderDragPayload } from "@/utils/folderDrag"
+import {
+  filterNsfwArtworks,
+  searchArtworks,
+  sortArtworks,
+  type GallerySort,
+  type GalleryViewMode,
+} from "@/utils/galleryUtils"
 import { assignArtworkToFolder } from "@/utils/api"
 import { Button } from "@/components/ui/button"
 import Link from "next/link"
@@ -25,6 +34,8 @@ export default function GalleryView({
   characterId,
   ownerHandle,
   characterSlug,
+  characterName,
+  characterAvatarUrl,
   artworks: initialArtworks,
   folders,
   owner,
@@ -32,6 +43,8 @@ export default function GalleryView({
   characterId: string
   ownerHandle: string
   characterSlug: string
+  characterName: string
+  characterAvatarUrl?: string
   artworks: Artwork[]
   folders: Folder[]
   owner: boolean
@@ -44,14 +57,32 @@ export default function GalleryView({
   const [folderToDelete, setFolderToDelete] = useState<Folder | null>(null)
   const [selectedIndex, setSelectedIndex] = useState(0)
   const [parentFolderId, setParentFolderId] = useState<string | null>(null)
+  const [search, setSearch] = useState("")
+  const [sort, setSort] = useState<GallerySort>("newest")
+  const [hideNsfw, setHideNsfw] = useState(false)
+  const [layout, setLayout] = useState<GalleryViewMode>("grid")
 
   useEffect(() => {
     setFolderList(folders)
   }, [folders])
 
-  const filteredArtworks = useMemo(
-    () => filterByFolder(artworks, selectedFolderId),
-    [artworks, selectedFolderId]
+  useEffect(() => {
+    setArtworks(initialArtworks)
+  }, [initialArtworks])
+
+  const filteredArtworks = useMemo(() => {
+    const inFolder = filterByFolder(artworks, selectedFolderId)
+    const searched = searchArtworks(inFolder, search)
+    const nsfwFiltered = filterNsfwArtworks(searched, hideNsfw)
+    return sortArtworks(nsfwFiltered, sort)
+  }, [artworks, selectedFolderId, search, hideNsfw, sort])
+
+  const characterMeta = useMemo(
+    () => ({
+      name: characterName,
+      avatarUrl: characterAvatarUrl,
+    }),
+    [characterName, characterAvatarUrl]
   )
 
   const openCreateFolder = (parentId: string | null = null) => {
@@ -118,6 +149,9 @@ export default function GalleryView({
     }
   }
 
+  const artworkHref = (artwork: Artwork) =>
+    `/@${ownerHandle}/${characterSlug}/gallery/${artwork.id}`
+
   return (
     <FolderView>
       <FolderView.Shelf
@@ -126,6 +160,7 @@ export default function GalleryView({
         onSelectFolder={setSelectedFolderId}
         acceptKinds={owner ? ["artwork"] : undefined}
         onDropItem={owner ? handleDropToFolder : undefined}
+        galleryStyle
       >
         {renderFolderTree({
           folders: folderList,
@@ -141,43 +176,80 @@ export default function GalleryView({
       </FolderView.Shelf>
 
       <FolderView.Contents>
-        <div className="mb-4 flex w-full flex-wrap gap-2 justify-end">
-          {owner ? (
+        {owner ? (
+          <div className="mb-4 flex w-full flex-wrap justify-end gap-2">
             <Button className="gap-2" asChild>
               <Link href={`/studio/gallery/upload?characterId=${characterId}`}>
                 <LuUpload size={18} />
                 Upload Artwork
               </Link>
             </Button>
-          ) : null}
-          {owner ? (
-            <Button
-              variant="outline"
-              className="gap-2"
-              onClick={() => openCreateFolder(null)}
-            >
-              <LuPlus size={18} />
-              New folder
-            </Button>
-          ) : null}
-        </div>
+          </div>
+        ) : null}
+        <GalleryToolbar
+          search={search}
+          onSearchChange={setSearch}
+          sort={sort}
+          onSortChange={setSort}
+          hideNsfw={hideNsfw}
+          onHideNsfwChange={setHideNsfw}
+          showViewToggle
+          view={layout}
+          onViewChange={setLayout}
+        />
+
+        
 
         {filteredArtworks.length > 0 ? (
-          <ArtworkGrid
-            artworks={filteredArtworks}
-            className="gap-1.5"
-            manageable={owner}
-            folders={folderList}
-            onMoved={handleMoved}
-            viewHref={(artwork) =>
-              `/@${ownerHandle}/${characterSlug}/gallery/${artwork.id}`
-            }
-          />
+          layout === "grid" ? (
+            <ArtworkGrid
+              artworks={filteredArtworks}
+              className="gap-5"
+              manageable={owner}
+              folders={folderList}
+              onMoved={handleMoved}
+              viewHref={artworkHref}
+              showMetadata
+              characterMeta={characterMeta}
+            />
+          ) : (
+            <ul className="divide-border divide-y">
+              {filteredArtworks.map((artwork) => (
+                <li key={artwork.id}>
+                  <Link
+                    href={artworkHref(artwork)}
+                    className="hover:bg-muted/40 flex items-center gap-4 rounded-lg px-2 py-3 transition-colors"
+                  >
+                    <div className="relative size-16 shrink-0 overflow-hidden rounded-xl">
+                      <NsfwMedia
+                        src={artwork.artworkUrl!}
+                        alt={artwork.altText ?? artwork.title ?? "Artwork"}
+                        nsfw={!!artwork.nsfw}
+                        fill
+                        className="object-cover"
+                        containerClassName="rounded-xl"
+                      />
+                    </div>
+                    <div className="min-w-0 flex-1">
+                      <p className="truncate font-semibold">
+                        {artwork.title ?? "Untitled"}
+                      </p>
+                      <p className="text-muted-foreground truncate text-sm">
+                        {characterName}
+                      </p>
+                    </div>
+                  </Link>
+                </li>
+              ))}
+            </ul>
+          )
         ) : (
           <div className="text-muted-foreground text-sm">
             {selectedFolderId
               ? "No artworks in this folder."
-              : "No artworks found."}
+              : search.trim()
+                ? `No artworks match "${search.trim()}".`
+                : "No artworks found."}
           </div>
         )}
       </FolderView.Contents>

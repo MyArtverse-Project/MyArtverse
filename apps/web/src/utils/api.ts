@@ -277,6 +277,13 @@ export const uploadArt = async (
     nsfw: boolean
     mainCharacterId: string
     taggedCharacterIds: string[]
+    artistCredit?: {
+      platform: string
+      handle?: string
+      url?: string
+      mavUserId?: string
+      avatarUrl?: string | null
+    } | null
   }
 ) => {
   const res = await apiWithAuth("POST", `/v1/art/upload/${characterId}`, body)
@@ -310,6 +317,15 @@ export const getArtworks = async (profile: string, character: string) => {
   const artworks = await apiWithOptionalAuth<Artwork[]>(
     "GET",
     `/v1/art/characters/${profile}/${character}`
+  )
+
+  return artworks
+}
+
+export const getUserGallery = async (handle: string) => {
+  const artworks = await apiWithOptionalAuth<Artwork[]>(
+    "GET",
+    `/v1/art/profile/${handle}`
   )
 
   return artworks
@@ -354,6 +370,14 @@ export const updateArtwork = async (
     description: string
     tags: string[]
     nsfw?: boolean
+    userAsArtist?: boolean
+    artistCredit?: {
+      platform: string
+      handle?: string
+      url?: string
+      mavUserId?: string
+      avatarUrl?: string | null
+    } | null
   }
 ) => {
   const res = await apiWithAuth("PUT", `/v1/art/${artworkId}`, body)
@@ -400,10 +424,17 @@ export const createRefSheet = async (body: {
     name: string
     description: string
     primary?: boolean
+    userAsArtist?: boolean
+    artistCredit?: {
+      platform: string
+      handle?: string
+      url?: string
+      mavUserId?: string
+      avatarUrl?: string | null
+    } | null
     variants: {
       id?: string
       title: string
-      artist: string
       description: string
       image: string
       primary: boolean

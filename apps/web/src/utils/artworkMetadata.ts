@@ -1,18 +1,9 @@
 import type { Artwork } from "@/types/characters"
-import { BRAND } from "@mav/shared"
+import { BRAND, resolveArtistCredit } from "@mav/shared"
 import { buildPageMetadata, possessiveName, toAbsoluteUrl, truncateDescription } from "./metadata"
 
 export function getArtworkArtistCredit(artwork: Artwork): string | null {
-  if (artwork.artist?.handle) {
-    return `@${artwork.artist.handle}`
-  }
-
-  const artistUrl = artwork.artistUrl?.trim()
-  if (artistUrl) {
-    return artistUrl
-  }
-
-  return null
+  return resolveArtistCredit(artwork)?.label ?? null
 }
 
 export function getArtworkFeaturedCharacterName(artwork: Artwork): string | null {
@@ -59,6 +50,7 @@ export function buildArtworkMetadata({
     descriptionParts.join(" · ") || `View ${title} on ${BRAND}.`
 
   const artistHandle = artwork.artist?.handle
+  const resolvedArtist = resolveArtistCredit(artwork)
 
   return buildPageMetadata({
     title,
@@ -74,7 +66,9 @@ export function buildArtworkMetadata({
             url: toAbsoluteUrl(`/@${artistHandle}`),
           },
         ]
-      : undefined,
+      : resolvedArtist && !resolvedArtist.isInternal
+        ? [{ name: resolvedArtist.label, url: resolvedArtist.href }]
+        : undefined,
   })
 }
 
@@ -119,6 +113,26 @@ export function buildCharacterOverviewMetadata({
     path: `/@${handle}/${characterSlug}`,
     image: avatarUrl,
     imageAlt: `${characterName}'s avatar`,
+  })
+}
+
+export function buildUserGalleryMetadata({
+  displayName,
+  handle,
+  avatarUrl,
+  previewImage,
+}: {
+  displayName: string
+  handle: string
+  avatarUrl?: string | null
+  previewImage?: string | null
+}) {
+  return buildPageMetadata({
+    title: `${possessiveName(displayName)} Gallery`,
+    description: `Browse artwork uploaded by @${handle} on ${BRAND}.`,
+    path: `/@${handle}/gallery`,
+    image: previewImage ?? avatarUrl ?? null,
+    imageAlt: `${displayName}'s gallery`,
   })
 }
 

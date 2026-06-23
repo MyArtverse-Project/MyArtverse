@@ -1,4 +1,6 @@
 import Avatar from "@/components/Avatar"
+import ArtistCreditDisplay from "@/components/ArtistCreditDisplay"
+import ArtistPlatformIcon from "@/components/ArtistPlatformIcon"
 import NsfwMedia from "@/components/NsfwMedia"
 import { Badge } from "@/components/ui/badge"
 import { Button } from "@/components/ui/button"
@@ -6,6 +8,7 @@ import type { User } from "@/app/context/AuthContext"
 import type { Artwork, Character } from "@/types/characters"
 import type { Comments } from "@/types/users"
 import { USER_DEFAULT_AVATAR } from "@/utils/constants"
+import { resolveArtistCredit } from "@mav/shared"
 import Link from "next/link"
 import {
   LuHeart,
@@ -66,8 +69,7 @@ export default function ArtworkView({
   self: User | null
   isOwner: boolean
 }) {
-  const artist = artwork.artist
-  const artistUrl = artwork.artistUrl?.trim()
+  const resolvedArtist = resolveArtistCredit(artwork)
   const redirectPath = `/@${ownerHandle}/${characterSlug}/gallery/${artwork.id}`
   const featuredCharacters = artwork.charactersFeatured ?? []
   const comments = (artwork.comments ?? []) as Comments[]
@@ -142,38 +144,51 @@ export default function ArtworkView({
 
       <header className="mt-8 flex flex-wrap items-start justify-between gap-4">
         <div className="flex min-w-0 items-start gap-3">
-          <Avatar
-            src={artist?.avatarUrl || USER_DEFAULT_AVATAR}
-            username={artist?.handle}
-            size={44}
-          />
+          {resolvedArtist?.avatarUrl ? (
+            <Avatar
+              src={resolvedArtist.avatarUrl || USER_DEFAULT_AVATAR}
+              username={resolvedArtist.label}
+              size={44}
+            />
+          ) : resolvedArtist ? (
+            <ArtistPlatformIcon
+              platform={resolvedArtist.platform}
+              size="lg"
+            />
+          ) : (
+            <Avatar
+              src={USER_DEFAULT_AVATAR}
+              username="Unknown artist"
+              size={44}
+            />
+          )}
           <div className="min-w-0 space-y-1">
             <h1 className="text-2xl font-semibold leading-tight">
               {artwork.title ?? "Untitled artwork"}
             </h1>
             <div className="text-muted-foreground flex flex-wrap items-center gap-2 text-sm">
-              {artist?.handle ? (
-                <Link
-                  href={`/@${artist.handle}`}
-                  className="hover:text-foreground transition-colors"
-                >
-                  by @{artist.handle}
-                </Link>
-              ) : artistUrl ? (
-                <a
-                  href={artistUrl}
-                  target="_blank"
-                  rel="noreferrer"
-                  className="hover:text-foreground transition-colors"
-                >
-                  by {artistUrl}
-                </a>
+              {resolvedArtist ? (
+                <ArtistCreditDisplay credit={resolvedArtist} prefix="by " />
               ) : (
                 <span>by Unknown artist</span>
               )}
-              <Button variant="outline" size="sm" type="button">
-                Follow
-              </Button>
+              {resolvedArtist ? (
+                resolvedArtist.isInternal ? (
+                  <Button variant="outline" size="sm" asChild>
+                    <Link href={resolvedArtist.href}>Visit</Link>
+                  </Button>
+                ) : (
+                  <Button variant="outline" size="sm" asChild>
+                    <a
+                      href={resolvedArtist.href}
+                      target="_blank"
+                      rel="noreferrer"
+                    >
+                      Visit
+                    </a>
+                  </Button>
+                )
+              ) : null}
             </div>
           </div>
         </div>

@@ -1,6 +1,7 @@
 import {
   getBackendOrigin,
   getImageOrigins,
+  getSocialAvatarOrigins,
   isDevEnvironment,
 } from "@/lib/productionOrigins"
 import { type NextRequest, NextResponse } from "next/server"
@@ -27,6 +28,7 @@ export function middleware(request: NextRequest) {
       "data:",
       "https://images.ctfassets.net",
       ...imageOrigins,
+      ...getSocialAvatarOrigins(),
       ...(backendOrigin ? [backendOrigin] : []),
       ...(isDev ? ["http://localhost:9000", "http://localhost:4566"] : []),
     ],

@@ -86,6 +86,9 @@ export interface Artwork {
   charactersFeatured?: Character[]
   publishedCharacter?: Character
   artist?: UserType
+  artistPlatform?: string
+  artistExternalHandle?: string
+  artistExternalAvatarUrl?: string | null
   artistUrl?: string
   comments: Comments[]
   description?: string
@@ -115,7 +118,13 @@ export interface ReferenceSheet {
   id: string
   name: string
   active: boolean
-  artist: string
+  artist?: string
+  artistUser?: UserType
+  artistPlatform?: string
+  artistExternalHandle?: string
+  artistExternalAvatarUrl?: string | null
+  artistUrl?: string
+  artistExternal?: string | null
   character?: Character
   variants: Variant[]
 }

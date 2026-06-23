@@ -6,14 +6,8 @@ import { removeSuffixes } from "@/utils/removeSuffix"
 
 export async function registerAction(formData: FormData) {
   const processedData = removeSuffixes(formData)
-  const { email, username, password, confirm } = processedData
 
-  const validatedFields = RegisterFormSchema.safeParse({
-    email,
-    password,
-    username,
-    confirm
-  })
+  const validatedFields = RegisterFormSchema.safeParse(processedData)
 
   if (!validatedFields.success) {
     return {
@@ -28,7 +22,10 @@ export async function registerAction(formData: FormData) {
     }
   }
 
-  if (password !== confirm) {
+  const { email: validatedEmail, username: validatedUsername, password: validatedPassword, confirm: validatedConfirm } =
+    validatedFields.data
+
+  if (validatedPassword !== validatedConfirm) {
     return {
       success: false,
       message: {
@@ -46,7 +43,11 @@ export async function registerAction(formData: FormData) {
       headers: {
         "Content-Type": "application/json"
       },
-      body: JSON.stringify({ email, password, username })
+      body: JSON.stringify({
+        email: validatedEmail,
+        password: validatedPassword,
+        username: validatedUsername
+      })
     })
 
     const data = await res.json()

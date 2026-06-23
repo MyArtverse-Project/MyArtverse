@@ -18,6 +18,7 @@ export default function FolderShelf({
   onSelectFolder,
   acceptKinds,
   onDropItem,
+  galleryStyle = false,
 }: {
   children: React.ReactNode
   defaultName?: string
@@ -25,6 +26,7 @@ export default function FolderShelf({
   onSelectFolder?: (folderId: string | null) => void
   acceptKinds?: FolderDragKind[]
   onDropItem?: (folderId: string | null, payload: FolderDragPayload) => void
+  galleryStyle?: boolean
 }) {
   const { folderWidth, setFolderWidth } = useFolderViewContext()
 
@@ -95,27 +97,44 @@ export default function FolderShelf({
       style={{ width: folderWidth }}
     >
       <aside className="sticky top-32 grid h-fit w-full gap-y-1.5">
-        <span className="flex flex-row-reverse items-center gap-2.5">
-          <div>
-            <Button
-              variant="ghost"
-              size="icon"
-              aria-label={panelStateAria}
-              onClick={handleExpandDetails}
-            >
-              <PanelIconDynamic size={21} />
-            </Button>
-          </div>
-          <FolderItem
-            name={defaultName}
-            selected={selectedFolderId === null}
-            onSelect={() => onSelectFolder?.(null)}
-            acceptKinds={acceptKinds}
-            onDropItem={onDropItem}
-          />
-        </span>
-        <Separator dir="horizontal" padding="0.25rem" />
-        {children}
+        {galleryStyle ? (
+          <>
+            <FolderItem
+              name={defaultName}
+              selected={selectedFolderId === null}
+              onSelect={() => onSelectFolder?.(null)}
+              acceptKinds={acceptKinds}
+              onDropItem={onDropItem}
+              galleryRoot
+            />
+            <Separator dir="horizontal" padding="0.25rem" />
+            {children}
+          </>
+        ) : (
+          <>
+            <span className="flex flex-row-reverse items-center gap-2.5">
+              <div>
+                <Button
+                  variant="ghost"
+                  size="icon"
+                  aria-label={panelStateAria}
+                  onClick={handleExpandDetails}
+                >
+                  <PanelIconDynamic size={21} />
+                </Button>
+              </div>
+              <FolderItem
+                name={defaultName}
+                selected={selectedFolderId === null}
+                onSelect={() => onSelectFolder?.(null)}
+                acceptKinds={acceptKinds}
+                onDropItem={onDropItem}
+              />
+            </span>
+            <Separator dir="horizontal" padding="0.25rem" />
+            {children}
+          </>
+        )}
       </aside>
       <span
         ref={resizableRef}
