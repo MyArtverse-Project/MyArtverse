@@ -3,6 +3,9 @@
   "version": "0.1.0",
   "private": true,
   "type": "module",
+  "engines": {
+    "node": ">=20"
+  },
   "scripts": {
     "dev": "next dev",
     "build": "next build",
@@ -35,6 +38,7 @@
     "@radix-ui/react-toggle": "^1.1.10",
     "@radix-ui/react-toggle-group": "^1.1.11",
     "@radix-ui/react-tooltip": "^1.2.8",
+    "@sentry/nextjs": "^10.59.0",
     "@types/react-dom": "^19.0.0",
     "autoprefixer": "^10.4.19",
     "class-variance-authority": "^0.7.0",
@@ -45,7 +49,7 @@
     "jotai": "^2.8.0",
     "lodash": "^4.17.21",
     "lucide-react": "^1.17.0",
-    "next": "15.2.3",
+    "next": "15.2.8",
     "next-pwa": "^5.6.0",
     "next-themes": "^0.4.6",
     "react": "19.0.0",
@@ -75,9 +79,5 @@
     "tailwind-merge": "3.3.1",
     "tailwindcss": "3.4.17",
     "typescript": "^5"
-  },
-  "resolutions": {
-    "@types/react": "19.0.10",
-    "@types/react-dom": "19.0.4"
   }
 }

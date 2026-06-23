@@ -1,18 +1,27 @@
-import { type User } from "@/app/context/AuthContext"
-import Field from "@/components/layouts/Layouts/Field"
-import type { UserType } from "@/types/users"
-import { Group } from "@mav/ui/components/layouts"
+import ArtworkGrid from "@/components/ArtworkGrid"
+import type { Artwork } from "@/types/characters"
+import { LuGalleryHorizontal } from "react-icons/lu"
+import { PanelCard, PanelEmptyState } from "./PanelCard"
 
 export default function FeaturedGalleryPanel({
-  user,
-  isOwner
-}: { user: UserType; isOwner?: boolean }) {
+  artworks,
+  title = "Featured gallery",
+  isOwner,
+}: {
+  artworks: Artwork[]
+  title?: string
+  isOwner?: boolean
+}) {
   return (
-    <Group
-      title={`Featured Gallery`}
-      containerStyle="border-padding"
-    >
-      {/* TODO: Implement Featured Gallery */}
-    </Group>
+    <PanelCard title={title} icon={<LuGalleryHorizontal />}>
+      {artworks.length > 0 ? (
+        <ArtworkGrid artworks={artworks} className="gap-3" />
+      ) : (
+        <PanelEmptyState
+          isOwner={isOwner}
+          ownerHint="Edit this panel to choose a gallery source."
+        />
+      )}
+    </PanelCard>
   )
 }

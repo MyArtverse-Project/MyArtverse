@@ -1,18 +1,25 @@
-import { type User } from "@/app/context/AuthContext"
-import Field from "@/components/layouts/Layouts/Field"
-import type { UserType } from "@/types/users"
-import { Group } from "@mav/ui/components/layouts"
+import type { Artwork } from "@/types/characters"
+import MediaPanel from "./MediaPanel"
 
 export default function FeaturedArtworkPanel({
-  user,
-  isOwner
-}: { user: UserType; isOwner?: boolean }) {
+  artwork,
+  title = "Featured artwork",
+  isOwner,
+}: {
+  artwork: Artwork | null
+  title?: string
+  isOwner?: boolean
+}) {
   return (
-    <Group
-      title={`Featured Artwork`}
-      containerStyle="border-padding"
-    >
-      {/* TODO: Implement Featured Gallery */}
-    </Group>
+    <MediaPanel
+      title={title}
+      imageUrl={artwork?.artworkUrl}
+      imageAlt={artwork?.title || "Featured artwork"}
+      nsfw={!!artwork?.nsfw}
+      artistHandle={artwork?.artist?.handle ?? artwork?.owner?.handle}
+      downloadUrl={artwork?.artworkUrl}
+      isOwner={isOwner}
+      emptyHint="Edit this panel to pick a featured artwork."
+    />
   )
 }

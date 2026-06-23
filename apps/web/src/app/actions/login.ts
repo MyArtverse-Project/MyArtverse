@@ -2,7 +2,7 @@
 
 import { LoginFormSchema } from "@/app/lib/definition"
 import { logError } from "@/utils"
-import { BACKEND_URL } from "@/utils/constants"
+import { getServerApiUrl } from "@/utils/apiUrl"
 import { removeSuffixes } from "@/utils/removeSuffix"
 import { cookies } from "next/headers"
 
@@ -27,7 +27,7 @@ export async function loginAction(formData: FormData) {
   }
 
   try {
-    const res = await fetch(`${BACKEND_URL}/v1/auth/login`, {
+    const res = await fetch(`${getServerApiUrl()}/v1/auth/login`, {
       method: "POST",
       headers: {
         "Content-Type": "application/json"

@@ -33,6 +33,8 @@ export interface UserType {
   dateRegistered: Date
   dateUpdated: Date
   role: UserRole
+  uploadLimitBytes?: number | null
+  effectiveUploadLimitBytes?: number
   hasArtistAccess: boolean
   hasBetaAccess: boolean
   links: Link[]
@@ -85,7 +87,38 @@ export interface Comments {
 }
 
 export interface DashboardPanel {
-  type: string
+  id?: string
+  type: PanelType
   position: { row: number; col: number }
-  settings?: { [key: string]: string }
+  settings?: PanelSettings
+}
+
+export type PanelType =
+  | "comments"
+  | "information"
+  | "featured_gallery"
+  | "featured_artwork"
+  | "reference_sheet"
+  | "featured_character"
+  | "popular_character"
+  | "multiple_characters"
+  | "recent_artworks"
+  | "multiple_artworks"
+  | "popular_artwork"
+  | "multiple_galleries"
+  | "featured_listing"
+  | "recent_listings"
+  | "commission_queue"
+  | "customHTML"
+
+export type PanelSettings = {
+  html?: string
+  artworkId?: string
+  artworkIds?: string
+  characterSlug?: string
+  characterSlugs?: string
+  refSheetId?: string
+  folderId?: string
+  customTitle?: string
+  limit?: string
 }

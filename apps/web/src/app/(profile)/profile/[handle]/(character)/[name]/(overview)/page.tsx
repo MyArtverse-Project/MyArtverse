@@ -1,18 +1,18 @@
 import MarginClamp from "@/components/layouts/Layouts/MarginClamp"
 import { buildCharacterOverviewMetadata } from "@/utils/artworkMetadata"
 import { fetchCharacter, fetchUserData, getPanels } from "@/utils/api"
+import { loadCharacter } from "@/utils/loadCharacter"
+import { loadOverviewArtworks } from "@/utils/loadOverviewArtworks"
 import { buildPageMetadata } from "@/utils/metadata"
 import { BRAND } from "@mav/shared"
 import type { Metadata } from "next"
 import OverviewContent from "./OverviewContent"
-import { DefineRouteParams } from "@/types"
-import { User } from "@/app/context/AuthContext"
-
-type AsyncProps = DefineRouteParams<{ handle: string; name: string }>
 
 export async function generateMetadata({
   params,
-}: AsyncProps): Promise<Metadata> {
+}: {
+  params: Promise<{ handle: string; name: string }>
+}): Promise<Metadata> {
   const { handle, name } = await params
 
   try {
@@ -34,15 +34,30 @@ export async function generateMetadata({
   }
 }
 
-export default async function Page({ params }: AsyncProps) {
+export default async function Page({
+  params,
+}: {
+  params: Promise<{ handle: string; name: string }>
+}) {
   const { handle, name } = await params
-  const self = await fetchUserData() as unknown as User | null
-  const character = await fetchCharacter(handle, name)
-  const panels = await getPanels(handle, name)
+
+  const [self, character, panels] = await Promise.all([
+    fetchUserData().catch(() => null),
+    loadCharacter(handle, name),
+    getPanels(handle, name).catch(() => []),
+  ])
+  const artworks = await loadOverviewArtworks(handle, {
+    characterSlug: name,
+  })
 
   return (
     <MarginClamp>
-      <OverviewContent character={character} self={self} panels={panels} />
+      <OverviewContent
+        character={character}
+        self={self}
+        panels={panels}
+        artworks={artworks}
+      />
     </MarginClamp>
   )
 }

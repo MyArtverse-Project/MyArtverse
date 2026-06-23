@@ -40,7 +40,6 @@ export default function SettingsPrivacyPage() {
             it's important to export your data first before proceeding.
           </>
         }
-        learnMoreLink="/lmao"
       >
         <div className="flex gap-x-2">
           <Button>Export data</Button>

@@ -32,22 +32,11 @@ function getCharacterGalleryPath(
   return `/@${handle}/${character.slug}/gallery`
 }
 
-interface UploadArtPageProps {
-  toggleUploadArtModal?: () => void
-  uploadArtModal?: boolean
-  characterId?: string
-}
-
-export default function UploadArtPage({
-  toggleUploadArtModal,
-  uploadArtModal = true,
-  characterId = "",
-}: UploadArtPageProps) {
+export default function UploadArtPage() {
   const router = useRouter()
   const { user } = useAuth()
   const searchParams = useSearchParams()
-  const queryCharacterId = searchParams.get("characterId") ?? ""
-  const resolvedCharacterId = characterId || queryCharacterId
+  const resolvedCharacterId = searchParams.get("characterId") ?? ""
   const [artUrl, setArtUrl] = useState("")
   const [title, setTitle] = useState("")
   const [description, setDescription] = useState("")
@@ -91,7 +80,7 @@ export default function UploadArtPage({
 
   useEffect(() => {
     resetForm()
-  }, [uploadArtModal, resolvedCharacterId])
+  }, [resolvedCharacterId])
 
   useEffect(() => {
     if (!resolvedCharacterId) return
@@ -136,11 +125,7 @@ export default function UploadArtPage({
   }, [debouncedTaggedSearch, mainCharacterId, taggedCharacterIds])
 
   const handleClose = () => {
-    if (toggleUploadArtModal) {
-      toggleUploadArtModal()
-    } else {
-      router.push("/studio/gallery")
-    }
+    router.push("/studio/gallery")
   }
 
   const handleUpload = async () => {
@@ -168,11 +153,7 @@ export default function UploadArtPage({
       const galleryPath =
         getCharacterGalleryPath(character, user?.handle) ?? "/studio/gallery"
 
-      if (toggleUploadArtModal) {
-        toggleUploadArtModal()
-      } else {
-        router.push(galleryPath)
-      }
+      router.push(galleryPath)
     } catch (err) {
       console.error("Upload failed", err)
       toast.error("Upload failed", {

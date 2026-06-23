@@ -29,13 +29,13 @@ export default function Overlay({
   return (
     <Portal>
       <div
-        onClick={toggler as () => any}
+        onClick={state ? toggler : undefined}
         className={cn(
           "fixed inset-0 z-[99] bg-black/60 transition-all duration-[350ms]",
           state ? "opacity-100" : "pointer-events-none opacity-0"
         )}
       />
-      <div className="fixed z-[100]">{children}</div>
+      <div className="pointer-events-none fixed inset-0 z-[100]">{children}</div>
     </Portal>
   )
 }

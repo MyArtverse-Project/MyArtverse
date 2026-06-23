@@ -2,17 +2,23 @@
 
 import ArtworkGrid from "@/components/ArtworkGrid"
 import CreateFolderModal from "@/components/Modals/CreateFolder"
+import DeleteFolderDialog from "@/components/DeleteFolderDialog"
 import FolderView from "@/components/layouts/Folders"
 import { renderFolderTree } from "@/components/layouts/Folders/FolderTree"
 import type { Artwork, Folder } from "@/types/characters"
 import { folderColors } from "@/utils/constants"
-import { filterByFolder } from "@/utils/folderUtils"
+import {
+  filterByFolder,
+  collectDescendantIds,
+  findFolderById,
+  removeFolderFromTree,
+} from "@/utils/folderUtils"
 import type { FolderDragPayload } from "@/utils/folderDrag"
 import { assignArtworkToFolder } from "@/utils/api"
 import { Button } from "@/components/ui/button"
 import Link from "next/link"
 import { useRouter } from "next/navigation"
-import { useMemo, useState } from "react"
+import { useMemo, useState, useEffect } from "react"
 import { LuPlus, LuUpload } from "react-icons/lu"
 
 export default function GalleryView({
@@ -32,10 +38,16 @@ export default function GalleryView({
 }) {
   const router = useRouter()
   const [artworks, setArtworks] = useState(initialArtworks)
+  const [folderList, setFolderList] = useState(folders)
   const [selectedFolderId, setSelectedFolderId] = useState<string | null>(null)
   const [createFolderModal, setCreateFolderModal] = useState(false)
+  const [folderToDelete, setFolderToDelete] = useState<Folder | null>(null)
   const [selectedIndex, setSelectedIndex] = useState(0)
   const [parentFolderId, setParentFolderId] = useState<string | null>(null)
+
+  useEffect(() => {
+    setFolderList(folders)
+  }, [folders])
 
   const filteredArtworks = useMemo(
     () => filterByFolder(artworks, selectedFolderId),
@@ -45,6 +57,30 @@ export default function GalleryView({
   const openCreateFolder = (parentId: string | null = null) => {
     setParentFolderId(parentId)
     setCreateFolderModal(true)
+  }
+
+  const requestDeleteFolder = (folderId: string) => {
+    const folder = findFolderById(folderList, folderId)
+    if (folder) setFolderToDelete(folder)
+  }
+
+  const handleFolderDeleted = () => {
+    if (!folderToDelete) return
+
+    const deletedIds = new Set(collectDescendantIds(folderToDelete))
+    setFolderList((current) => removeFolderFromTree(current, folderToDelete.id))
+    setArtworks((current) =>
+      current.map((artwork) => {
+        const artworkFolderId = artwork.folderId ?? artwork.folder?.id ?? null
+        if (!artworkFolderId || !deletedIds.has(artworkFolderId)) return artwork
+        return { ...artwork, folderId: null, folder: null }
+      })
+    )
+    if (selectedFolderId && deletedIds.has(selectedFolderId)) {
+      setSelectedFolderId(null)
+    }
+    setFolderToDelete(null)
+    router.refresh()
   }
 
   const handleMoved = (artworkId: string, folderId: string | null) => {
@@ -92,11 +128,12 @@ export default function GalleryView({
         onDropItem={owner ? handleDropToFolder : undefined}
       >
         {renderFolderTree({
-          folders,
+          folders: folderList,
           selectedFolderId,
           onSelectFolder: setSelectedFolderId,
           owner,
           onCreateNested: (parentId) => openCreateFolder(parentId),
+          onDeleteFolder: requestDeleteFolder,
           acceptKinds: owner ? ["artwork"] : undefined,
           onDropItem: owner ? handleDropToFolder : undefined,
         })}
@@ -130,7 +167,7 @@ export default function GalleryView({
             artworks={filteredArtworks}
             className="gap-1.5"
             manageable={owner}
-            folders={folders}
+            folders={folderList}
             onMoved={handleMoved}
             viewHref={(artwork) =>
               `/@${ownerHandle}/${characterSlug}/gallery/${artwork.id}`
@@ -160,6 +197,13 @@ export default function GalleryView({
           setSelectedIndex={setSelectedIndex}
         />
       ) : null}
+
+      <DeleteFolderDialog
+        folder={folderToDelete}
+        open={!!folderToDelete}
+        onOpenChange={(open) => !open && setFolderToDelete(null)}
+        onDeleted={handleFolderDeleted}
+      />
     </FolderView>
   )
 }

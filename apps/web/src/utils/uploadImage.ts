@@ -1,4 +1,27 @@
-import { BACKEND_URL } from "@/utils/constants"
+async function uploadViaProxy(formData: FormData): Promise<string> {
+  const res = await fetch("/api/upload", {
+    method: "POST",
+    body: formData,
+    credentials: "include",
+  })
+
+  let payload: { url?: string; error?: string } = {}
+  try {
+    payload = await res.json()
+  } catch {
+    payload = {}
+  }
+
+  if (!res.ok) {
+    throw new Error(payload.error ?? "Upload failed")
+  }
+
+  if (!payload.url) {
+    throw new Error("Upload failed")
+  }
+
+  return payload.url
+}
 
 export async function uploadImageFile(file: File): Promise<string> {
   const ext = file.name.includes(".")
@@ -7,16 +30,15 @@ export async function uploadImageFile(file: File): Promise<string> {
   const formData = new FormData()
   formData.append("file", file, `${crypto.randomUUID()}${ext}`)
 
-  const resp = await fetch(`${BACKEND_URL}/v1/profile/upload`, {
-    method: "POST",
-    body: formData,
-    credentials: "include",
-  })
+  return uploadViaProxy(formData)
+}
 
-  if (!resp.ok) {
-    throw new Error(resp.status === 401 ? "Are you logged in?" : "Upload failed")
-  }
+export async function uploadImageBlob(
+  blob: Blob,
+  filename = "upload.png"
+): Promise<string> {
+  const formData = new FormData()
+  formData.append("file", blob, filename)
 
-  const data = await resp.json()
-  return data.url as string
+  return uploadViaProxy(formData)
 }

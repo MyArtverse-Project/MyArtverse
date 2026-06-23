@@ -1,7 +1,12 @@
 "use client"
 
+import { useAuth } from "@/app/context/AuthContext"
 import type { MapElement } from "@/types/utils"
-import { BACKEND_URL } from "@/utils/constants"
+import { uploadImageBlob } from "@/utils/uploadImage"
+import {
+  formatUploadLimit,
+  resolveUploadLimitBytes,
+} from "@/utils/uploadLimits"
 import { cn } from "@mav/shared/utils"
 import { type ComponentType, useEffect, useRef, useState } from "react"
 import { LuUpload } from "react-icons/lu"
@@ -13,7 +18,6 @@ const Cropper = EasyCrop as ComponentType<
 >
 
 const allowedTypes = ["image/png", "image/jpeg", "image/jpg"]
-const maxFileSize = 10 * 1024 * 1024 // 10 MB
 
 const uniqueUploadName = (originalName?: string) => {
   const ext = originalName?.includes(".")
@@ -84,6 +88,7 @@ export default function DropZone({
   label = "Drag and drop files here",
   enableCrop = true,
   previewSize = "default",
+  maxFileSizeBytes,
 }: {
   setData: (url: string) => void
   className?: string
@@ -92,7 +97,13 @@ export default function DropZone({
   label?: string
   enableCrop?: boolean
   previewSize?: "default" | "large" | "compact"
+  maxFileSizeBytes?: number
 }) {
+  const { user } = useAuth()
+  const maxFileSize = resolveUploadLimitBytes(
+    maxFileSizeBytes ?? user?.effectiveUploadLimitBytes
+  )
+  const maxFileSizeLabel = formatUploadLimit(maxFileSize)
   const [isDragging, setIsDragging] = useState(false)
   const [imageUrl, setImageUrl] = useState<string | null>(value)
   const [base64Src, setBase64Src] = useState<string | null>(null)
@@ -145,7 +156,7 @@ export default function DropZone({
       return setError("Invalid file type.")
     }
     if (uploadedFile.size > maxFileSize) {
-      return setError("File must not exceed 10MB!")
+      return setError(`File must not exceed ${maxFileSizeLabel}!`)
     }
     setError(null)
     setCrop({ x: 0, y: 0 })
@@ -169,22 +180,10 @@ export default function DropZone({
   const uploadFile = async (file: Blob, filename = "upload.png") => {
     setUploading(true)
     try {
-      const formData = new FormData()
       const uploadName = uniqueUploadName(
         file instanceof File ? file.name : filename
       )
-      formData.append("file", file, uploadName)
-      const resp = await fetch(`${BACKEND_URL}/v1/profile/upload`, {
-        method: "POST",
-        body: formData,
-        credentials: "include"
-      })
-      if (!resp.ok)
-        throw new Error(
-          resp.status === 401 ? "Are you logged in?" : "Upload failed"
-        )
-      const data = await resp.json()
-      const url = data.url as string
+      const url = await uploadImageBlob(file, uploadName)
       setData(url)
       setImageUrl(url)
       setCroppedBase64(null)
@@ -412,7 +411,7 @@ export default function DropZone({
             <>
               <span className="text-lg font-semibold">{label}</span>
               <span className="text-muted-foreground text-sm">
-                Max size: 10MB · .jpg, .png
+                Max size: {maxFileSizeLabel} · .jpg, .png
               </span>
             </>
           )}

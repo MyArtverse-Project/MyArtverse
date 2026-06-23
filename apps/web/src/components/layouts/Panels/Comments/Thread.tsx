@@ -13,7 +13,7 @@ export default function CommentThread({
   commentContext,
 }: {
   comment: Comments
-  user: User | null
+  user: User | UserType | null
   commentContext?: {
     commentType: string
     redirectRoute: string

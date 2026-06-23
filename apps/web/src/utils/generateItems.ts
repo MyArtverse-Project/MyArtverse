@@ -65,13 +65,13 @@ export const generateCreateItems = () => [
   {
     icon: LuCat,
     name: "New Character",
-    link: "/dashboard/characters?createModal=true"
+    link: "/studio/characters?createModal=true"
   },
   { icon: LuBrush, name: "New YCH Listing", link: "/" },
   { icon: LuBrush, name: "New Comission Slot", link: "/" },
   { icon: LuCat, name: "New Adopotable", link: "/" },
   {},
-  { icon: LuShare, name: "Upload image(s)", link: "/art/upload" },
+  { icon: LuShare, name: "Upload image(s)", link: "/studio/gallery/upload" },
   {},
   { icon: LuAlbum, name: "New collection", link: "/" },
   { icon: LuFileLock, name: "New private note", link: "/" }

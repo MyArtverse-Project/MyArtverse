@@ -10,6 +10,7 @@ import Link from "next/link"
 import {
   LuHeart,
   LuMoreVertical,
+  LuPencil,
   LuShare2,
 } from "react-icons/lu"
 import ArtworkComments from "./ArtworkComments"
@@ -57,11 +58,13 @@ export default function ArtworkView({
   ownerHandle,
   characterSlug,
   self,
+  isOwner,
 }: {
   artwork: Artwork
   ownerHandle: string
   characterSlug: string
   self: User | null
+  isOwner: boolean
 }) {
   const artist = artwork.artist ?? artwork.owner
   const redirectPath = `/@${ownerHandle}/${characterSlug}/gallery/${artwork.id}`
@@ -89,6 +92,22 @@ export default function ArtworkView({
         </div>
 
         <aside className="flex flex-col gap-4">
+          {isOwner ? (
+            <section className="border-primary/20 bg-primary/5 rounded-lg border p-4">
+              <h2 className="mb-2 text-sm font-semibold">Edit artwork</h2>
+              <p className="text-muted-foreground mb-3 text-xs leading-relaxed">
+                Update the title, description, tags, NSFW flag, and other details
+                for this piece.
+              </p>
+              <Button asChild className="w-full gap-2" variant="secondary">
+                <Link href={`/studio/gallery/${artwork.id}/edit`}>
+                  <LuPencil size={16} />
+                  Open editor
+                </Link>
+              </Button>
+            </section>
+          ) : null}
+
           <section className="border-border rounded-lg border p-4">
             <h2 className="mb-3 text-sm font-semibold">Tools</h2>
             <div className="space-y-1">

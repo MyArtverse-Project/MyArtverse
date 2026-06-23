@@ -20,8 +20,11 @@ export type User = {
   bannerUrl: string
   dateRegistered: string
   dateUpdated: string
+  role?: "user" | "moderator" | "admin" | "developer"
   hasArtistAccess: boolean
   hasBetaAccess: boolean
+  uploadLimitBytes?: number | null
+  effectiveUploadLimitBytes?: number
   links: { url: string; label: string }[]
   pronouns: string
   nationality: string
@@ -33,7 +36,6 @@ export type User = {
     avatarUrl: string
     slug: string
     species: string
-    slug: string
   }[]
 }
 
