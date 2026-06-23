@@ -3,7 +3,6 @@
 import Checkbox from "@/components/layouts/Forms/Checkbox"
 import ArtistCreditField from "@/components/layouts/Forms/ArtistCreditField"
 import DropZone from "@/components/Modals/DropZone"
-import { Badge } from "@/components/ui/badge"
 import { Button } from "@/components/ui/button"
 import { Input } from "@/components/ui/input"
 import { Label } from "@/components/ui/label"
@@ -23,10 +22,9 @@ import {
   type ArtistCreditFormValue,
 } from "@/utils/artistCreditForm"
 import { useAuth } from "@/app/context/AuthContext"
-import { extractImageColors } from "@/utils/extractImageColors"
 import { uploadImageFile } from "@/utils/uploadImage"
 import Image from "next/image"
-import { useCallback, useEffect, useRef, useState } from "react"
+import { useEffect, useRef, useState } from "react"
 import {
   LuHelpCircle,
   LuCopy,
@@ -109,28 +107,6 @@ export function ReferenceConfigForm({
     }
   )
 
-  const applyColorsToVariant = useCallback(
-    async (index: number, imageUrl: string) => {
-      try {
-        const colors = await extractImageColors(imageUrl)
-        setReferenceVariants((prev) => {
-          const next = [...prev]
-          if (next[index]) next[index] = { ...next[index], colors }
-          return next
-        })
-      } catch {
-        // Keep existing palette if extraction fails.
-      }
-    },
-    []
-  )
-
-  useEffect(() => {
-    if (!isEditing) {
-      applyColorsToVariant(0, image)
-    }
-  }, [image, applyColorsToVariant, isEditing])
-
   const updateVariant = (
     index: number,
     key: keyof ReferenceVariant,
@@ -171,21 +147,17 @@ export function ReferenceConfigForm({
   }
 
   const addVariant = (url: string) => {
-    setReferenceVariants((prev) => {
-      const nextIndex = prev.length
-      void applyColorsToVariant(nextIndex, url)
-      return [
-        ...prev,
-        {
-          title: "",
-          description: "",
-          image: url,
-          primary: false,
-          nsfw: false,
-          colors: [] as string[],
-        },
-      ]
-    })
+    setReferenceVariants((prev) => [
+      ...prev,
+      {
+        title: "",
+        description: "",
+        image: url,
+        primary: false,
+        nsfw: false,
+        colors: [] as string[],
+      },
+    ])
   }
 
   const removeVariant = (index: number) => {
@@ -266,7 +238,6 @@ export function ReferenceConfigForm({
                 onSetDefault={() => setDefaultVariant(index)}
                 onReplaceImage={async (url) => {
                   updateVariant(index, "image", url)
-                  await applyColorsToVariant(index, url)
                 }}
                 onCopyPalette={() => copyPalette(variant.colors)}
                 onAddColor={() =>
@@ -433,7 +404,6 @@ function ReferenceVariantCard({
               <Label className="text-muted-foreground text-xs font-bold uppercase tracking-wide">
                 Color palette
               </Label>
-              <Badge variant="outline">Auto-generated</Badge>
               <div className="ml-auto flex items-center gap-1">
                 <Button
                   type="button"
