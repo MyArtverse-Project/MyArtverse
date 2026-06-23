@@ -23,6 +23,6 @@ title: "June 2026"
 
 ## Characters
 
-![Character Studio Cards](/changelogs/062026/06232026-ArtistCreditTwo.png)
+![Character Studio Cards](/changelogs/062026/06232026-StudioCharacters.png)
 
 - Studio character cards use a cleaner grid design with filter bar and view toggles.
