@@ -5,11 +5,14 @@ import type { Artwork, Character, ReferenceSheet } from "@/types/characters"
 import type { DashboardPanel, PanelSettings, PanelType } from "@/types/users"
 import {
   CHARACTER_PANEL_CATEGORIES,
+  getFirstEnabledPanelOption,
   getPanelAt,
+  isPanelComingSoon,
   panelNeedsArtworks,
   panelNeedsCharacters,
   USER_PANEL_CATEGORIES,
 } from "@/utils/panels"
+import { Badge } from "@/components/ui/badge"
 import { Button } from "@/components/ui/button"
 import { Input } from "@/components/ui/input"
 import { Label } from "@/components/ui/label"
@@ -79,11 +82,11 @@ const PANEL_META: Record<PanelType, { label: string; description: string }> = {
   },
   featured_listing: {
     label: "Featured listing",
-    description: "Highlight a shop listing (coming soon).",
+    description: "Highlight a shop listing.",
   },
   recent_listings: {
     label: "Recent listings",
-    description: "Show your latest shop listings (coming soon).",
+    description: "Show your latest shop listings.",
   },
   commission_queue: {
     label: "Commission queue",
@@ -161,8 +164,12 @@ export default function EditPanelModal({
     initializedFor.current = slotKey
 
     const panel = getPanelAt(panels, position)
-    const type = (panel?.type as PanelType | undefined) ?? allOptions[0]
-    setChosenComponent(allOptions.includes(type) ? type : allOptions[0])
+    const type = (panel?.type as PanelType | undefined) ?? getFirstEnabledPanelOption(allOptions)
+    setChosenComponent(
+      allOptions.includes(type) && !isPanelComingSoon(type)
+        ? type
+        : getFirstEnabledPanelOption(allOptions)
+    )
     setCustomTitle(panel?.settings?.customTitle ?? "")
     setLimit(panel?.settings?.limit ?? "6")
     setCharacterSlug(panel?.settings?.characterSlug ?? characters[0]?.slug ?? "")
@@ -237,6 +244,11 @@ export default function EditPanelModal({
   const updatePanel = async () => {
     if (!position) {
       setErrors("Unable to save panel")
+      return
+    }
+
+    if (isPanelComingSoon(chosenComponent)) {
+      setErrors("This panel type is not available yet")
       return
     }
 
@@ -348,21 +360,36 @@ export default function EditPanelModal({
                 {category.label}
               </p>
               <div className="space-y-0.5">
-                {category.options.map((value) => (
-                  <button
-                    key={value}
-                    type="button"
-                    onClick={() => setChosenComponent(value)}
-                    className={cn(
-                      "w-full rounded-lg px-2 py-2 text-left text-sm transition-colors",
-                      chosenComponent === value
-                        ? "bg-primary/15 text-primary font-semibold"
-                        : "hover:bg-muted/60"
-                    )}
-                  >
-                    {PANEL_META[value].label}
-                  </button>
-                ))}
+                {category.options.map((value) => {
+                  const comingSoon = isPanelComingSoon(value)
+
+                  return (
+                    <button
+                      key={value}
+                      type="button"
+                      disabled={comingSoon}
+                      onClick={() => setChosenComponent(value)}
+                      className={cn(
+                        "flex w-full items-center justify-between gap-2 rounded-lg px-2 py-2 text-left text-sm transition-colors",
+                        comingSoon &&
+                          "text-muted-foreground cursor-not-allowed opacity-50",
+                        chosenComponent === value && !comingSoon
+                          ? "bg-primary/15 text-primary font-semibold"
+                          : !comingSoon && "hover:bg-muted/60"
+                      )}
+                    >
+                      <span>{PANEL_META[value].label}</span>
+                      {comingSoon ? (
+                        <Badge
+                          variant="secondary"
+                          className="shrink-0 px-1.5 py-0 text-[10px] font-medium"
+                        >
+                          Coming soon
+                        </Badge>
+                      ) : null}
+                    </button>
+                  )
+                })}
               </div>
             </div>
           ))}
@@ -556,7 +583,12 @@ export default function EditPanelModal({
         <Button variant="outline" onClick={() => toggleEditPanel(null)}>
           Cancel
         </Button>
-        <Button onClick={updatePanel}>Save panel</Button>
+        <Button
+          onClick={updatePanel}
+          disabled={isPanelComingSoon(chosenComponent)}
+        >
+          Save panel
+        </Button>
       </div>
     </Modal>
   )
