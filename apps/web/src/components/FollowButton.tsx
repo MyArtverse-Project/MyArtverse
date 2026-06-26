@@ -1,6 +1,7 @@
 "use client"
 
 import { Button } from "@/components/ui/button"
+import { cn } from "@/lib/utils"
 import { followUser, unfollowUser } from "@/utils/api"
 import { useRouter } from "next/navigation"
 import { useState } from "react"
@@ -8,9 +9,11 @@ import { useState } from "react"
 export default function FollowButton({
   profileId,
   initialIsFollowing,
+  soft = false,
 }: {
   profileId: string
   initialIsFollowing: boolean
+  soft?: boolean
 }) {
   const router = useRouter()
   const [isFollowing, setIsFollowing] = useState(initialIsFollowing)
@@ -37,11 +40,17 @@ export default function FollowButton({
   return (
     <Button
       type="button"
-      variant={isFollowing ? "outline" : "default"}
+      variant={soft ? "secondary" : isFollowing ? "outline" : "default"}
+      size={soft ? "sm" : "default"}
       onClick={toggleFollow}
       disabled={isLoading}
+      className={cn(
+        soft &&
+          "shrink-0 rounded-full border-0 bg-primary/10 px-4 text-primary shadow-none hover:bg-primary/15",
+        soft && isFollowing && "bg-muted text-muted-foreground hover:bg-muted"
+      )}
     >
-      {isFollowing ? "Unfollow" : "Follow"}
+      {isFollowing ? (soft ? "Following" : "Unfollow") : "Follow"}
     </Button>
   )
 }

@@ -36,6 +36,9 @@ interface ProfileMastheadProps {
   following?: UserType[]
   isOwnProfile?: boolean
   isFollowing?: boolean
+  viewerId?: string
+  viewerFollowers?: UserType[]
+  viewerFollowing?: UserType[]
 }
 
 const generateProfileTabs = (characterCount: number = 0) =>
@@ -140,6 +143,9 @@ export function ProfileMasthead(props: Partial<ProfileMastheadProps>) {
         displayRelationsModal={displayRelationsModal}
         toggleRelationsModal={toggleRelationsModal}
         startingTab={startingRelationTab}
+        viewerId={props.viewerId}
+        viewerFollowers={props.viewerFollowers}
+        viewerFollowing={props.viewerFollowing}
       />
     </Masthead>
   )

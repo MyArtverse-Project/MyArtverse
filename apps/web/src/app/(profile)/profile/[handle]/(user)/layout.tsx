@@ -39,6 +39,9 @@ export default async function MainProfileLayout({
         bannerUrl={user?.bannerUrl || undefined}
         isOwnProfile={self ? self.handle === user.handle : false}
         isFollowing={self ? isFollowingUser(self.following, user.id) : false}
+        viewerId={self?.id}
+        viewerFollowers={self ? mapFollowers(self.followers) : []}
+        viewerFollowing={self ? mapFollowing(self.following) : []}
       />
       {children}
     </AppLayout>

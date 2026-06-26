@@ -1,94 +1,189 @@
-import { UserType } from "@/types/users"
+"use client"
+
+import CommentAuthorBadges from "@/components/comments/CommentAuthorBadges"
+import FollowButton from "@/components/FollowButton"
+import Modal from "@/components/layouts/Modal"
+import { Badge } from "@/components/ui/badge"
+import type { UserType } from "@/types/users"
 import { USER_DEFAULT_AVATAR } from "@/utils/constants"
+import { formatCompactCount } from "@/utils/formatCompactCount"
 import { cn } from "@mav/shared/utils"
 import Image from "next/image"
 import Link from "next/link"
-import { useState } from "react"
-import Modal from "../layouts/Modal"
+import { useEffect, useState } from "react"
+import { LuBook, LuX } from "react-icons/lu"
+
+type RelationTab = "follower" | "following"
+
+function RelationTabButton({
+  active,
+  label,
+  onClick,
+}: {
+  active: boolean
+  label: string
+  onClick: () => void
+}) {
+  return (
+    <button
+      type="button"
+      onClick={onClick}
+      className={cn(
+        "relative flex items-center gap-2 px-1 pb-3 text-base font-medium transition-colors",
+        "after:absolute after:inset-x-0 after:bottom-0 after:h-0.5 after:rounded-full after:transition-colors",
+        active
+          ? "text-primary after:bg-primary"
+          : "text-muted-foreground after:bg-transparent hover:text-foreground"
+      )}
+    >
+      <LuBook size={18} aria-hidden className={active ? "text-primary" : undefined} />
+      <span>{label}</span>
+    </button>
+  )
+}
+
+function RelationUserRow({
+  user,
+  followsViewer,
+  viewerFollowsUser,
+  showFollowButton,
+}: {
+  user: UserType
+  followsViewer: boolean
+  viewerFollowsUser: boolean
+  showFollowButton: boolean
+}) {
+  const followerCount = user.followers?.length ?? 0
+  const followingCount = user.following?.length ?? 0
+
+  return (
+    <div className="flex items-center gap-3 py-4">
+      <Link
+        href={`/@${user.handle}`}
+        className="shrink-0"
+      >
+        <Image
+          src={user.avatarUrl || USER_DEFAULT_AVATAR}
+          alt={user.displayName || user.handle}
+          width={48}
+          height={48}
+          className="size-12 rounded-full object-cover"
+        />
+      </Link>
+
+      <div className="min-w-0 flex-1">
+        <div className="flex flex-wrap items-center gap-1.5">
+          <Link
+            href={`/@${user.handle}`}
+            className="truncate font-semibold text-foreground hover:underline"
+          >
+            {user.displayName || user.handle}
+          </Link>
+          {followsViewer ? (
+            <Badge
+              variant="secondary"
+              className="rounded-full border-0 bg-primary/10 px-2 py-0 text-xs font-medium text-primary hover:bg-primary/10"
+            >
+              Follows you
+            </Badge>
+          ) : null}
+          <CommentAuthorBadges author={user} />
+        </div>
+        <p className="text-muted-foreground mt-0.5 text-sm">
+          {formatCompactCount(followerCount)} followers{"  "}
+          {formatCompactCount(followingCount)} following
+        </p>
+      </div>
+
+      {showFollowButton ? (
+        <FollowButton
+          profileId={user.id}
+          initialIsFollowing={viewerFollowsUser}
+          soft
+        />
+      ) : null}
+    </div>
+  )
+}
 
 export default function RelationModal({
   followers,
   following,
   displayRelationsModal,
   toggleRelationsModal,
-  startingTab
+  startingTab,
+  viewerId,
+  viewerFollowers = [],
+  viewerFollowing = [],
 }: {
   followers: UserType[]
   following: UserType[]
   displayRelationsModal: boolean
   toggleRelationsModal: (type?: string) => void
   startingTab: string
+  viewerId?: string
+  viewerFollowers?: UserType[]
+  viewerFollowing?: UserType[]
 }) {
-  const [tab, setTab] = useState(startingTab)
+  const [tab, setTab] = useState<RelationTab>(
+    startingTab === "following" ? "following" : "follower"
+  )
+
+  useEffect(() => {
+    if (displayRelationsModal) {
+      setTab(startingTab === "following" ? "following" : "follower")
+    }
+  }, [displayRelationsModal, startingTab])
+
+  const viewerFollowerIds = new Set(viewerFollowers.map((user) => user.id))
+  const viewerFollowingIds = new Set(viewerFollowing.map((user) => user.id))
+  const users = tab === "follower" ? followers : following
+
   return (
     <Modal
       state={displayRelationsModal}
-      toggler={toggleRelationsModal}
-      className="w-full md:w-[600px] h-full md:h-[500px] p-5"
+      toggler={() => toggleRelationsModal()}
+      className="w-full max-w-lg rounded-xl border-0 p-0 shadow-xl md:w-[480px]"
     >
-      <Modal.Body>
-        <div className="flex flex-row gap-x-4 ">
-          <span
-            className={cn(
-              tab == "follower" && "border border-b-2  border-primary text-primary",
-              " text-lg cursor-pointer"
-            )}
+      <div className="flex items-start justify-between gap-4 px-6 pt-6">
+        <div className="flex gap-6">
+          <RelationTabButton
+            active={tab === "follower"}
+            label="Followers"
             onClick={() => setTab("follower")}
-          >
-            Followers
-          </span>
-          <span
-            className={cn(
-              tab == "following" && "border border-b-2 border-primary text-primary",
-              "text-lg cursor-pointer"
-            )}
+          />
+          <RelationTabButton
+            active={tab === "following"}
+            label="Following"
             onClick={() => setTab("following")}
-          >
-            Following
-          </span>
+          />
         </div>
-        <div className="flex flex-col gap-y-2 mt-5">
-          {tab == "follower" && (
-            <div className="flex flex-col gap-y-2">
-              {followers.map((follower) => (
-                <Link
-                  key={follower.id}
-                  href={`/@${follower.handle}`}
-                  className="hover:bg-muted/40 flex flex-row items-center gap-x-2 rounded-md p-1"
-                >
-                  <Image
-                    src={follower.avatarUrl || USER_DEFAULT_AVATAR}
-                    alt={follower.handle}
-                    width={40}
-                    height={40}
-                    className="rounded-full"
-                  />
-                  <span>{follower.displayName || follower.handle}</span>
-                </Link>
-              ))}
-            </div>
-          )}
-          {tab == "following" && (
-            <div className="flex flex-col gap-y-2">
-              {following.map((followee) => (
-                <Link
-                  key={followee.id}
-                  href={`/@${followee.handle}`}
-                  className="hover:bg-muted/40 flex flex-row items-center gap-x-2 rounded-md p-1"
-                >
-                  <Image
-                    src={followee.avatarUrl || USER_DEFAULT_AVATAR}
-                    alt={followee.handle}
-                    width={40}
-                    height={40}
-                    className="rounded-full"
-                  />
-                  <span>{followee.displayName || followee.handle}</span>
-                </Link>
-              ))}
-            </div>
-          )}
-        </div>
+        <button
+          type="button"
+          onClick={() => toggleRelationsModal()}
+          className="text-muted-foreground hover:text-foreground -mr-1 rounded-sm p-1 transition-colors"
+          aria-label="Close"
+        >
+          <LuX size={20} />
+        </button>
+      </div>
+
+      <Modal.Body className="max-h-[60vh] overflow-y-auto px-6 pb-6 pt-2">
+        {users.length === 0 ? (
+          <p className="text-muted-foreground py-8 text-center text-sm">
+            {tab === "follower" ? "No followers yet." : "Not following anyone yet."}
+          </p>
+        ) : (
+          users.map((user) => (
+            <RelationUserRow
+              key={user.id}
+              user={user}
+              followsViewer={viewerFollowerIds.has(user.id)}
+              viewerFollowsUser={viewerFollowingIds.has(user.id)}
+              showFollowButton={Boolean(viewerId && viewerId !== user.id)}
+            />
+          ))
+        )}
       </Modal.Body>
     </Modal>
   )
