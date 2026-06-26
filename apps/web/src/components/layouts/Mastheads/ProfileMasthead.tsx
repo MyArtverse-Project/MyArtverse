@@ -20,6 +20,7 @@ import Link from "next/link"
 import { useState } from "react"
 import { LuCat, LuGalleryThumbnails, LuHeart, LuHome } from "react-icons/lu"
 import { Masthead } from "@mav/ui/components/layouts"
+import { ImageIcon } from "lucide-react"
 
 interface ProfileMastheadProps {
   profileId?: string
@@ -51,7 +52,7 @@ const generateProfileTabs = (characterCount: number = 0) =>
       countIndicator: characterCount
     },
     {
-      icon: LuGalleryThumbnails,
+      icon: ImageIcon,
       text: "Gallery",
       link: "gallery"
     },

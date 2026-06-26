@@ -29,6 +29,7 @@ import {
   LuHome,
   LuMoreVertical
 } from "react-icons/lu"
+import { ImageIcon } from "lucide-react"
 
 interface ProfileMastheadProps {
   characterName: string
@@ -54,7 +55,7 @@ export function CharacterMasthead(props: Partial<ProfileMastheadProps>) {
       link: ""
     },
     {
-      icon: LuGalleryThumbnails,
+      icon: ImageIcon,
       text: "Gallery",
       link: "gallery"
     },
