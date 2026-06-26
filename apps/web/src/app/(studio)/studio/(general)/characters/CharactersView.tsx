@@ -7,6 +7,7 @@ import GridResponsive from "@/components/layouts/Layouts/GridResponsive"
 import type { Character } from "@/types/characters"
 import { isRemoteImageUrl, USER_DEFAULT_AVATAR } from "@/utils/constants"
 import { displaySpecies } from "@/utils/displayer"
+import { getVisibilityOwnerLabel, isRestrictedVisibility } from "@/utils/visibility"
 import { Button } from "@/components/ui/button"
 import { Group } from "@/components/ui/group"
 import { ToggleGroup, ToggleGroupItem } from "@/components/ui/toggle-group"
@@ -16,7 +17,6 @@ import Link from "next/link"
 import { useRouter, useSearchParams } from "next/navigation"
 import { useEffect, useMemo, useState } from "react"
 import {
-  LuEye,
   LuLayoutGrid,
   LuList,
   LuLock,
@@ -91,11 +91,11 @@ function StudioCharacterCard({
             <h3 className="text-foreground text-base font-bold leading-tight">
               {character.name}
             </h3>
-            {character.visibility === "private" ? (
+            {isRestrictedVisibility(character.visibility) ? (
               <LuLock
                 size={14}
                 className="text-primary shrink-0"
-                aria-label="Private"
+                aria-label={getVisibilityOwnerLabel(character.visibility).label}
               />
             ) : null}
           </div>
@@ -349,17 +349,18 @@ export default function CharactersView({
                       router.push(`/studio/characters/${character.id}`)
                     }
                   >
-                    {character.visibility === "public" ? (
-                      <div className="text-600 flex items-center gap-1">
-                        <LuEye size={20} />
-                        <span>Public</span>
-                      </div>
-                    ) : (
-                      <div className="text-600 flex items-center gap-1">
-                        <LuLock size={20} />
-                        <span>Private</span>
-                      </div>
-                    )}
+                    {(() => {
+                      const visibility = getVisibilityOwnerLabel(
+                        character.visibility
+                      )
+                      const VisibilityIcon = visibility.icon
+                      return (
+                        <div className="text-600 flex items-center gap-1">
+                          <VisibilityIcon size={20} />
+                          <span>{visibility.label}</span>
+                        </div>
+                      )
+                    })()}
                   </td>
                   <td className="py-4">
                     <Button

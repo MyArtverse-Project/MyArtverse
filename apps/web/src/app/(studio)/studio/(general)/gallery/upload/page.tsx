@@ -4,6 +4,11 @@ import DropZone from "@/components/Modals/DropZone"
 import { useAuth } from "@/app/context/AuthContext"
 import ArtistCreditField from "@/components/layouts/Forms/ArtistCreditField"
 import Checkbox from "@/components/layouts/Forms/Checkbox"
+import VisibilityField from "@/components/layouts/Forms/VisibilityField"
+import {
+  type ContentVisibility,
+  normalizeContentVisibility,
+} from "@/utils/visibility"
 import { Badge } from "@/components/ui/badge"
 import { Button } from "@/components/ui/button"
 import { Input } from "@/components/ui/input"
@@ -51,6 +56,7 @@ export default function UploadArtPage() {
     mode: "none",
   })
   const [nsfw, setNsfw] = useState(false)
+  const [visibility, setVisibility] = useState<ContentVisibility>("public")
 
   const [mainCharacterId, setMainCharacterId] = useState("")
   const [taggedCharacterIds, setTaggedCharacterIds] = useState<string[]>([])
@@ -79,6 +85,7 @@ export default function UploadArtPage() {
     setTags([])
     setArtistCredit({ mode: "none" })
     setNsfw(false)
+    setVisibility("public")
     setMainCharacterId(resolvedCharacterId)
     setTaggedCharacterIds([])
     setTaggedCharacterNames({})
@@ -151,6 +158,7 @@ export default function UploadArtPage() {
         userAsArtist: artistRequest.userAsArtist,
         artistCredit: artistRequest.artistCredit,
         nsfw,
+        visibility,
         mainCharacterId,
         taggedCharacterIds,
       })
@@ -272,6 +280,11 @@ export default function UploadArtPage() {
               onChange={() => setNsfw(!nsfw)}
               checked={nsfw}
               label="Mark this artwork as NSFW"
+            />
+            <VisibilityField
+              value={visibility}
+              onChange={setVisibility}
+              idPrefix="artwork-visibility"
             />
           </div>
 

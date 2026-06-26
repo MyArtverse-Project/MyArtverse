@@ -1,62 +1,27 @@
-import { Badge } from "@/components/ui/badge"
-import { Button } from "@/components/ui/button"
-import { LuShield } from "react-icons/lu"
+import { cookies } from "next/headers"
+import { redirect } from "next/navigation"
 
-export default function Home() {
+export default async function Home() {
+  const cookieStore = await cookies()
+  const isLoggedIn =
+    cookieStore.has("accessToken") || cookieStore.has("refreshToken")
+
+  if (isLoggedIn) {
+    redirect("/browse")
+  }
+
   return (
-    <main className="flex min-h-screen flex-col items-center gap-y-5 p-24">
-      <h2 className="text-xl font-semibold">Badges</h2>
-      <div className="flex items-center gap-x-2">
-        <Badge>Default</Badge>
-        <Badge>
-          <LuShield className="mr-1 size-3" />
-          With icon
-        </Badge>
-        <Badge variant="secondary">Secondary</Badge>
-        <Badge variant="destructive">Destructive</Badge>
-        <Badge variant="outline">Outline</Badge>
-        <Badge variant="outline">
-          <LuShield className="mr-1 size-3" />
-          With icon
-        </Badge>
+    <section className="flex min-h-[min(70vh,36rem)] items-center justify-center px-6 py-20">
+      <div className="mx-auto flex w-full max-w-3xl flex-col items-center gap-8 text-center">
+        <h1 className="text-foreground text-3xl font-bold tracking-tight sm:text-5xl md:text-6xl">
+          Where everyone belongs
+        </h1>
+
+        <p className="text-foreground text-lg leading-relaxed sm:text-xl md:text-2xl">
+          MyArtverse is an open source platform that allows users to track their
+          characters, commissions, and adoptable reference sheets!
+        </p>
       </div>
-      <h2 className="text-xl font-semibold">Buttons</h2>
-      <div className="flex items-center gap-x-2">
-        <Button size="sm">Small</Button>
-        <Button size="sm">
-          <LuShield size={16} />
-          With icon
-        </Button>
-        <Button variant="secondary">
-          <LuShield size={16} />
-          With icon + Badge
-          <Badge variant="secondary">123</Badge>
-        </Button>
-        <Button size="lg">Big</Button>
-        <Button variant="secondary" size="sm">
-          Small Secondary
-        </Button>
-        <Button variant="ghost" size="sm">
-          Small Ghost
-        </Button>
-      </div>
-      <div className="flex gap-x-2">
-        <Button>Button</Button>
-        <Button variant="secondary">Secondary</Button>
-        <Button variant="ghost">Ghost</Button>
-        <Button disabled>Disabled</Button>
-        <Button variant="secondary" disabled>
-          Disabled Secondary
-        </Button>
-        <Button variant="ghost" disabled>
-          Disabled Ghost
-        </Button>
-      </div>
-      <div className="flex items-center gap-x-2">
-        <Button variant="destructive">Destructive</Button>
-        <Button variant="outline">Outline</Button>
-        <Button variant="link">Link</Button>
-      </div>
-    </main>
+    </section>
   )
 }

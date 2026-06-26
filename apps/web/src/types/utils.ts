@@ -42,7 +42,7 @@ export type Variants =
   | "error"
   | "info"
 
-export type Visibility = "public" | "private" | "secret" | "unlisted"
+export type Visibility = "public" | "private" | "unlisted" | "followers"
 export type StatusIndicator =
   | "blocked"
   | "failed"

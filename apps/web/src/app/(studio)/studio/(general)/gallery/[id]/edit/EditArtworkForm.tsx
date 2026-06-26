@@ -4,6 +4,11 @@ import Image from "next/image"
 import DeleteArtworkDialog from "@/components/DeleteArtworkDialog"
 import ArtistCreditField from "@/components/layouts/Forms/ArtistCreditField"
 import Checkbox from "@/components/layouts/Forms/Checkbox"
+import VisibilityField from "@/components/layouts/Forms/VisibilityField"
+import {
+  type ContentVisibility,
+  normalizeContentVisibility,
+} from "@/utils/visibility"
 import { Badge } from "@/components/ui/badge"
 import { Button } from "@/components/ui/button"
 import { Input } from "@/components/ui/input"
@@ -30,6 +35,9 @@ export default function EditArtworkForm({ artwork }: { artwork: Artwork }) {
   const [description, setDescription] = useState(artwork.description ?? "")
   const [tags, setTags] = useState<string[]>(artwork.tags ?? [])
   const [nsfw, setNsfw] = useState(!!artwork.nsfw)
+  const [visibility, setVisibility] = useState<ContentVisibility>(
+    normalizeContentVisibility(artwork.visibility)
+  )
   const [artistCredit, setArtistCredit] = useState<ArtistCreditFormValue>(() =>
     fromArtworkArtist(artwork, user?.id)
   )
@@ -65,6 +73,7 @@ export default function EditArtworkForm({ artwork }: { artwork: Artwork }) {
         description: description.trim(),
         tags,
         nsfw,
+        visibility,
         userAsArtist: artistRequest.userAsArtist,
         artistCredit: artistRequest.artistCredit,
       })
@@ -166,6 +175,11 @@ export default function EditArtworkForm({ artwork }: { artwork: Artwork }) {
               onChange={() => setNsfw(!nsfw)}
               checked={nsfw}
               label="Mark this artwork as NSFW"
+            />
+            <VisibilityField
+              value={visibility}
+              onChange={setVisibility}
+              idPrefix="edit-artwork-visibility"
             />
           </div>
         </div>

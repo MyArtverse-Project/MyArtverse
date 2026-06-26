@@ -1,7 +1,10 @@
 import Avatar from "@/components/Avatar"
 import ArtistCreditDisplay from "@/components/ArtistCreditDisplay"
 import ArtistPlatformIcon from "@/components/ArtistPlatformIcon"
+import CopyUrlButton from "@/components/CopyUrlButton"
+import FavoriteButton from "@/components/FavoriteButton"
 import NsfwMedia from "@/components/NsfwMedia"
+import VisibilityOwnerBadge from "@/components/VisibilityOwnerBadge"
 import { Badge } from "@/components/ui/badge"
 import { Button } from "@/components/ui/button"
 import type { User } from "@/app/context/AuthContext"
@@ -11,10 +14,8 @@ import { USER_DEFAULT_AVATAR } from "@/utils/constants"
 import { resolveArtistCredit } from "@mav/shared"
 import Link from "next/link"
 import {
-  LuHeart,
   LuMoreVertical,
   LuPencil,
-  LuShare2,
 } from "react-icons/lu"
 import ArtworkComments from "./ArtworkComments"
 
@@ -62,12 +63,14 @@ export default function ArtworkView({
   characterSlug,
   self,
   isOwner,
+  isFavorited = false,
 }: {
   artwork: Artwork
   ownerHandle: string
   characterSlug: string
   self: User | null
   isOwner: boolean
+  isFavorited?: boolean
 }) {
   const resolvedArtist = resolveArtistCredit(artwork)
   const redirectPath = `/@${ownerHandle}/${characterSlug}/gallery/${artwork.id}`
@@ -76,6 +79,98 @@ export default function ArtworkView({
 
   return (
     <div className="pb-12">
+      <header className="mb-6 flex flex-wrap items-center justify-between gap-3">
+        <div className="flex min-w-0 items-center gap-2.5">
+          {resolvedArtist?.avatarUrl ? (
+            <Avatar
+              src={resolvedArtist.avatarUrl || USER_DEFAULT_AVATAR}
+              username={resolvedArtist.label}
+              size={44}
+              className="shrink-0"
+            />
+          ) : resolvedArtist ? (
+            <ArtistPlatformIcon
+              platform={resolvedArtist.platform}
+              size="lg"
+              className="shrink-0"
+            />
+          ) : (
+            <Avatar
+              src={USER_DEFAULT_AVATAR}
+              username="Unknown artist"
+              size={44}
+              className="shrink-0"
+            />
+          )}
+          <div className="min-w-0">
+            <h1 className="text-2xl font-semibold leading-none tracking-tight">
+              {artwork.title ?? "Untitled artwork"}
+            </h1>
+            {isOwner ? (
+              <VisibilityOwnerBadge
+                visibility={artwork.visibility}
+                className="border-primary/30 bg-primary/5 text-primary mt-2 gap-1 rounded-full px-2.5 py-0.5 text-xs font-medium"
+              />
+            ) : null}
+            <div className="text-muted-foreground mt-1.5 flex flex-wrap items-center gap-1.5 text-sm leading-none">
+              {resolvedArtist ? (
+                <ArtistCreditDisplay
+                  credit={resolvedArtist}
+                  prefix="by "
+                  showIcon={false}
+                  linkClassName="text-muted-foreground hover:text-foreground"
+                />
+              ) : (
+                <span>by Unknown artist</span>
+              )}
+              {resolvedArtist ? (
+                resolvedArtist.isInternal ? (
+                  <Button
+                    variant="outline"
+                    size="sm"
+                    className="h-7 rounded-full px-3 text-xs"
+                    asChild
+                  >
+                    <Link href={resolvedArtist.href}>Visit</Link>
+                  </Button>
+                ) : (
+                  <Button
+                    variant="outline"
+                    size="sm"
+                    className="h-7 rounded-full px-3 text-xs"
+                    asChild
+                  >
+                    <a
+                      href={resolvedArtist.href}
+                      target="_blank"
+                      rel="noreferrer"
+                    >
+                      Visit
+                    </a>
+                  </Button>
+                )
+              ) : null}
+            </div>
+          </div>
+        </div>
+
+        <div className="flex flex-wrap items-center gap-2">
+          {self ? (
+            <FavoriteButton
+              targetId={artwork.id}
+              targetType="artwork"
+              isFavorited={isFavorited}
+              showLabel
+            />
+          ) : null}
+          <CopyUrlButton path={redirectPath} />
+          <Button variant="outline" type="button" aria-label="More options">
+            <LuMoreVertical size={18} />
+            More
+          </Button>
+        </div>
+      </header>
+
       <div className="grid gap-6 lg:grid-cols-[minmax(0,1fr)_17.5rem] lg:items-start">
         <div className="bg-muted/20 border-border flex min-h-[28rem] items-center justify-center overflow-hidden rounded-lg border p-4">
           {artwork.artworkUrl ? (
@@ -141,88 +236,6 @@ export default function ArtworkView({
           </section>
         </aside>
       </div>
-
-      <header className="mt-8 flex flex-wrap items-center justify-between gap-3">
-        <div className="flex min-w-0 items-center gap-2.5">
-          {resolvedArtist?.avatarUrl ? (
-            <Avatar
-              src={resolvedArtist.avatarUrl || USER_DEFAULT_AVATAR}
-              username={resolvedArtist.label}
-              size={44}
-              className="shrink-0"
-            />
-          ) : resolvedArtist ? (
-            <ArtistPlatformIcon
-              platform={resolvedArtist.platform}
-              size="lg"
-              className="shrink-0"
-            />
-          ) : (
-            <Avatar
-              src={USER_DEFAULT_AVATAR}
-              username="Unknown artist"
-              size={44}
-              className="shrink-0"
-            />
-          )}
-          <div className="min-w-0">
-            <h1 className="text-2xl font-semibold leading-none tracking-tight">
-              {artwork.title ?? "Untitled artwork"}
-            </h1>
-            <div className="text-muted-foreground mt-1.5 flex flex-wrap items-center gap-1.5 text-sm leading-none">
-              {resolvedArtist ? (
-                <ArtistCreditDisplay
-                  credit={resolvedArtist}
-                  prefix="by "
-                  showIcon={false}
-                  linkClassName="text-muted-foreground hover:text-foreground"
-                />
-              ) : (
-                <span>by Unknown artist</span>
-              )}
-              {resolvedArtist ? (
-                resolvedArtist.isInternal ? (
-                  <Button
-                    variant="outline"
-                    size="sm"
-                    className="h-7 rounded-full px-3 text-xs"
-                    asChild
-                  >
-                    <Link href={resolvedArtist.href}>Visit</Link>
-                  </Button>
-                ) : (
-                  <Button
-                    variant="outline"
-                    size="sm"
-                    className="h-7 rounded-full px-3 text-xs"
-                    asChild
-                  >
-                    <a
-                      href={resolvedArtist.href}
-                      target="_blank"
-                      rel="noreferrer"
-                    >
-                      Visit
-                    </a>
-                  </Button>
-                )
-              ) : null}
-            </div>
-          </div>
-        </div>
-
-        <div className="flex items-center gap-1">
-          <Button variant="ghost" size="icon" type="button" aria-label="Favorite">
-            <LuHeart size={18} />
-          </Button>
-          <Button variant="ghost" size="icon" type="button" aria-label="Share">
-            <LuShare2 size={18} />
-          </Button>
-          <Button variant="ghost" size="icon" type="button" aria-label="More options">
-            <LuMoreVertical size={18} />
-          </Button>
-        </div>
-      </header>
 
       {artwork.description ? (
         <section className="mt-6">

@@ -1,16 +1,17 @@
 "use client"
 
 import { User } from "@/app/context/AuthContext"
+import Avatar from "@/components/Avatar"
+import UserComment from "@/components/comments/UserComment"
 import type { Comments, UserType } from "@/types/users"
 import { postComment } from "@/utils/api"
 import { USER_DEFAULT_AVATAR } from "@/utils/constants"
-import UserComment from "@/components/comments/UserComment"
-import { useState } from "react"
 
 export default function CommentThread({
   comment,
   user,
   commentContext,
+  isNested = false,
 }: {
   comment: Comments
   user: User | UserType | null
@@ -19,41 +20,46 @@ export default function CommentThread({
     redirectRoute: string
     artworkId?: string
   }
+  isNested?: boolean
 }) {
-  const [viewReplies, setViewReplies] = useState(false)
-  const toggleViewReplies = () => setViewReplies((prev) => !prev)
   return (
-    <div className="space-y-4">
+    <div className="space-y-0">
       <UserComment
         key={comment.id}
-        imgTag={<img />}
+        imgTag={
+          <Avatar
+            src={comment.author.avatarUrl || USER_DEFAULT_AVATAR}
+            username={comment.author.handle}
+            size={40}
+          />
+        }
         date={comment.createdAt}
-        replies={comment.replies ? comment.replies.length : 0}
-        viewReplies={viewReplies}
         onReply={postComment}
-        toggleViewReplies={toggleViewReplies}
         commentId={comment.id}
         avatar={comment.author.avatarUrl || USER_DEFAULT_AVATAR}
         handle={comment.author.handle}
-        isOP={comment.author.id === user?.id}
+        author={comment.author}
+        isPinned={comment.isPinned ? true : undefined}
         commentContext={commentContext}
+        currentUser={user}
+        isNested={isNested}
       >
         {comment.content}
       </UserComment>
 
-      {comment.replies && comment.replies.length > 0 && (
-        <div className="ml-8 pl-4 space-y-4">
-          {viewReplies &&
-            comment.replies.map((reply) => (
-              <CommentThread
-                key={reply.id}
-                comment={reply}
-                user={user}
-                commentContext={commentContext}
-              />
-            ))}
+      {comment.replies?.length ? (
+        <div className="space-y-3">
+          {comment.replies.map((reply) => (
+            <CommentThread
+              key={reply.id}
+              comment={reply}
+              user={user}
+              commentContext={commentContext}
+              isNested
+            />
+          ))}
         </div>
-      )}
+      ) : null}
     </div>
   )
 }

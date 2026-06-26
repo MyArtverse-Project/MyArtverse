@@ -13,7 +13,7 @@ import {
 import UserCommentInput from "@/components/comments/UserCommentInput"
 import CommentThread from "./Thread"
 import Avatar from "@/components/Avatar"
-import { LuFilter } from "react-icons/lu"
+import { LuChevronDown, LuFilter } from "react-icons/lu"
 import { useMemo, useState } from "react"
 import { PanelCard, PanelEmptyState } from "../PanelCard"
 
@@ -42,15 +42,18 @@ export default function CommentPanel({
     return list
   }, [comments, sort])
 
+  const redirectRoute = `/@${self?.handle ?? "user"}${characterName ? `/${characterName}` : ""}`
+
   return (
     <PanelCard
-      title="Profile comments"
+      title="Comments"
       actions={
         <DropdownMenu>
           <DropdownMenuTrigger asChild>
-            <Button variant="outline" size="sm" className="gap-2">
-              <LuFilter className="size-4" />
+            <Button variant="ghost" size="sm" className="text-muted-foreground gap-1.5">
+              <LuFilter className="size-3.5" />
               Sort
+              <LuChevronDown className="size-3.5 opacity-60" />
             </Button>
           </DropdownMenuTrigger>
           <DropdownMenuContent align="end">
@@ -65,32 +68,37 @@ export default function CommentPanel({
       }
     >
       {self ? (
-        <div className="bg-background/80 rounded-xl border border-primary/15 p-3">
+        <div className="mb-5">
           <UserCommentInput
             postComment={postComment}
             imgTag={
               <Avatar
                 src={self.avatarUrl ? self.avatarUrl : USER_DEFAULT_AVATAR}
+                username={self.handle}
+                size={44}
               />
             }
             avatar={self.avatarUrl ? self.avatarUrl : USER_DEFAULT_AVATAR}
             commentType={type}
-            redirectRoute={`/@${self.handle}${characterName ? `/${characterName}` : ""}`}
+            redirectRoute={redirectRoute}
             username={self.handle}
             characterName={characterName}
           />
         </div>
       ) : null}
 
-      <div className="flex flex-col gap-4">
+      <div className="flex flex-col gap-5">
         {sortedComments.length > 0 ? (
           sortedComments.map((comment) => (
-            <div
+            <CommentThread
               key={comment.id}
-              className="bg-background rounded-xl border border-primary/20 p-4 shadow-sm"
-            >
-              <CommentThread comment={comment} user={self} />
-            </div>
+              comment={comment}
+              user={self}
+              commentContext={{
+                commentType: type,
+                redirectRoute,
+              }}
+            />
           ))
         ) : (
           <PanelEmptyState ownerHint="Be the first to leave a comment.">

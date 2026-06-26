@@ -1,32 +1,20 @@
 "use client"
 
 import { createCharacter } from "@/utils/api"
-import { cn } from "@mav/shared/utils"
 import { Button } from "@/components/ui/button"
 import { Checkbox } from "@/components/ui/checkbox"
 import { Input } from "@/components/ui/input"
 import { Label } from "@/components/ui/label"
-import { RadioGroup, RadioGroupItem } from "@/components/ui/radio-group"
+import VisibilityField from "@/components/layouts/Forms/VisibilityField"
+import {
+  type ContentVisibility,
+  normalizeContentVisibility,
+} from "@/utils/visibility"
 import { useState } from "react"
-import { LuCat, LuGlobe, LuLock, LuXCircle } from "react-icons/lu"
+import { LuCat, LuXCircle } from "react-icons/lu"
 import Modal from "../layouts/Modal"
 import Note from "../layouts/Note"
 import DropZone from "./DropZone"
-
-const visibilityOptions = [
-  {
-    value: "public" as const,
-    label: "Public",
-    description: "Visible to everyone",
-    icon: LuGlobe,
-  },
-  {
-    value: "private" as const,
-    label: "Private",
-    description: "Only you",
-    icon: LuLock,
-  },
-]
 
 export default function CreateCharacterModal({
   toggleCreateCharacterModal,
@@ -38,9 +26,8 @@ export default function CreateCharacterModal({
   const [errors, setErrors] = useState<string>()
   const [characterName, setCharacterName] = useState("")
   const [characterNickname, setCharacterNickname] = useState("")
-  const [characterVisibility, setCharacterVisibility] = useState<
-    "public" | "private"
-  >("public")
+  const [characterVisibility, setCharacterVisibility] =
+    useState<ContentVisibility>("public")
   const [characterAvatar, setCharacterAvatar] = useState<string | null>(null)
   const [isDefault, setIsDefault] = useState(false)
   const [isSubmitting, setIsSubmitting] = useState(false)
@@ -133,55 +120,10 @@ export default function CreateCharacterModal({
             </div>
           </div>
 
-          <fieldset className="space-y-2">
-            <legend className="text-sm font-medium">Visibility</legend>
-            <RadioGroup
-              value={characterVisibility}
-              onValueChange={(value) =>
-                setCharacterVisibility(value as "public" | "private")
-              }
-              className="grid grid-cols-2 gap-2"
-            >
-              {visibilityOptions.map((option) => {
-                const Icon = option.icon
-                const isSelected = characterVisibility === option.value
-
-                return (
-                  <Label
-                    key={option.value}
-                    htmlFor={`visibility-${option.value}`}
-                    className={cn(
-                      "flex cursor-pointer items-center gap-2.5 rounded-md border px-3 py-2.5 transition-colors",
-                      isSelected
-                        ? "border-primary bg-primary/10"
-                        : "border-border hover:bg-muted/40"
-                    )}
-                  >
-                    <RadioGroupItem
-                      value={option.value}
-                      id={`visibility-${option.value}`}
-                      className="sr-only"
-                    />
-                    <Icon
-                      className={cn(
-                        "size-4 shrink-0",
-                        isSelected ? "text-primary" : "text-muted-foreground"
-                      )}
-                      aria-hidden
-                    />
-                    <div className="min-w-0">
-                      <p className="text-sm font-medium leading-none">
-                        {option.label}
-                      </p>
-                      <p className="text-muted-foreground mt-1 text-xs">
-                        {option.description}
-                      </p>
-                    </div>
-                  </Label>
-                )
-              })}
-            </RadioGroup>
-          </fieldset>
+          <VisibilityField
+            value={characterVisibility}
+            onChange={setCharacterVisibility}
+          />
 
           <div className="flex items-start gap-2.5">
             <Checkbox

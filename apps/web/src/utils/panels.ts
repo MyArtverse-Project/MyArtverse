@@ -88,6 +88,22 @@ export const USER_PANEL_OPTIONS: PanelType[] = USER_PANEL_CATEGORIES.flatMap(
 export const CHARACTER_PANEL_OPTIONS: PanelType[] =
   CHARACTER_PANEL_CATEGORIES.flatMap((category) => category.options)
 
+export const COMING_SOON_PANEL_TYPES: ReadonlySet<PanelType> = new Set([
+  "featured_listing",
+  "recent_listings",
+  "multiple_galleries",
+  "popular_character",
+  "popular_artwork",
+])
+
+export function isPanelComingSoon(type: PanelType): boolean {
+  return COMING_SOON_PANEL_TYPES.has(type)
+}
+
+export function getFirstEnabledPanelOption(options: PanelType[]): PanelType {
+  return options.find((type) => !isPanelComingSoon(type)) ?? options[0]
+}
+
 export function getPanelAt(
   panels: DashboardPanel[],
   position: { row: number; col: number }

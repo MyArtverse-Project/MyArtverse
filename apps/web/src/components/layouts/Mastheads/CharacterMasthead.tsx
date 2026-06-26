@@ -1,6 +1,7 @@
 "use client"
 
 import Avatar from "@/components/Avatar"
+import FavoriteButton from "@/components/FavoriteButton"
 import { MastheadScrollTitle } from "@/components/layouts/Mastheads/MastheadScrollTitle"
 import {
   MastheadAvatar,
@@ -12,10 +13,11 @@ import {
   MastheadTabs,
   type MastheadTabItem
 } from "@/components/layouts/Mastheads/MastheadTabs"
-import { Badge } from "@/components/ui/badge"
 import { Button } from "@/components/ui/button"
+import VisibilityOwnerBadge from "@/components/VisibilityOwnerBadge"
 import { cn } from "@/lib/utils"
 import type { Visibility } from "@/types/utils"
+import { isRestrictedVisibility } from "@/utils/visibility"
 import { USER_DEFAULT_AVATAR } from "@/utils/constants"
 import { displayPronouns, displaySpecies } from "@/utils/displayer"
 import Link from "next/link"
@@ -24,11 +26,10 @@ import {
   LuBook,
   LuClock,
   LuGalleryThumbnails,
-  LuHeart,
   LuHome,
-  LuLock,
   LuMoreVertical
 } from "react-icons/lu"
+import { ImageIcon } from "lucide-react"
 
 interface ProfileMastheadProps {
   characterName: string
@@ -42,6 +43,8 @@ interface ProfileMastheadProps {
   ownerAvatarUrl?: string
   visibility?: Visibility
   isOwner?: boolean
+  isFavorited?: boolean
+  showFavorite?: boolean
 }
 
 export function CharacterMasthead(props: Partial<ProfileMastheadProps>) {
@@ -52,7 +55,7 @@ export function CharacterMasthead(props: Partial<ProfileMastheadProps>) {
       link: ""
     },
     {
-      icon: LuGalleryThumbnails,
+      icon: ImageIcon,
       text: "Gallery",
       link: "gallery"
     },
@@ -96,23 +99,19 @@ export function CharacterMasthead(props: Partial<ProfileMastheadProps>) {
               >
                 {props.characterName}
               </MastheadScrollTitle>
-              {props.visibility === "private" && (
-                <Badge
-                  variant="outline"
-                  className="gap-2 rounded-full px-4 py-1 text-sm font-normal"
-                >
-                  <LuLock size={14} />
-                  Visible for followers
-                </Badge>
-              )}
+              {props.isOwner && isRestrictedVisibility(props.visibility) ? (
+                <VisibilityOwnerBadge visibility={props.visibility} />
+              ) : null}
             </div>
             <div className="flex gap-x-2">
-              <Button variant="outline" asChild>
-                <Link href="/settings/profile">
-                  <LuHeart size={18} />
-                  Favorite
-                </Link>
-              </Button>
+              {props.showFavorite && props.characterId ? (
+                <FavoriteButton
+                  targetId={props.characterId}
+                  targetType="character"
+                  isFavorited={props.isFavorited ?? false}
+                  showLabel
+                />
+              ) : null}
               {props.isOwner && (
                 <Button variant="outline" asChild>
                   <Link href={`/studio/characters/${props.characterId}`}>

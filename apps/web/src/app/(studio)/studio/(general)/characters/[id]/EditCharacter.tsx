@@ -9,6 +9,11 @@ import { Group, GroupContainer, MarginGutter } from '@/components/ui/group'
 import { Input } from '@/components/ui/input'
 import { Label } from '@/components/ui/label'
 import { Textarea } from '@/components/ui/textarea'
+import VisibilityField from '@/components/layouts/Forms/VisibilityField'
+import {
+  type ContentVisibility,
+  normalizeContentVisibility,
+} from '@/utils/visibility'
 import { Character, ReferenceSheet } from '@/types/characters'
 import { furrySpeciesOptions, pronounOptions } from '@/utils/constants'
 import { updateCharacter } from '@/utils/api'
@@ -23,6 +28,9 @@ export default function EditCharacter({ character }: { character: Character }) {
   const [displayName, setDisplayName] = useState<string>(character.name)
   const [nickname, setNickname] = useState<string>(character.nickname ?? '')
   const [isMainCharacter, setIsMainCharacter] = useState<boolean>(character.mainCharacter)
+  const [visibility, setVisibility] = useState<ContentVisibility>(
+    normalizeContentVisibility(character.visibility)
+  )
   const [characterUrl, setCharacterUrl] = useState<string>(character.slug ?? '')
   const [pronouns, setPronouns] = useState<string>(character.attributes.pronouns ?? '')
   const [species, setSpecies] = useState<string>(character.species ?? '')
@@ -43,6 +51,7 @@ export default function EditCharacter({ character }: { character: Character }) {
     setDisplayName(character.name)
     setNickname(character.nickname ?? "")
     setIsMainCharacter(character.mainCharacter)
+    setVisibility(normalizeContentVisibility(character.visibility))
     setCharacterUrl(character.slug ?? "")
     setPronouns(character.attributes.pronouns ?? "")
     setSpecies(character.species ?? "")
@@ -54,13 +63,14 @@ export default function EditCharacter({ character }: { character: Character }) {
       displayName !== (character.name ?? "") ||
       nickname !== (character.nickname ?? "") ||
       isMainCharacter !== character.mainCharacter ||
+      visibility !== normalizeContentVisibility(character.visibility) ||
       characterUrl !== (character.slug ?? "") ||
       pronouns !== (character.attributes.pronouns ?? "") ||
       species !== (character.species ?? "") ||
       bio !== (character.attributes.bio ?? "") ||
       avatarUrl !== savedAvatarUrl
     setIsDirty(changed)
-  }, [displayName, nickname, isMainCharacter, characterUrl, pronouns, species, bio, avatarUrl, savedAvatarUrl, character])
+  }, [displayName, nickname, isMainCharacter, visibility, characterUrl, pronouns, species, bio, avatarUrl, savedAvatarUrl, character])
 
   const handleAvatarUpload = async (url: string) => {
     setAvatarUrl(url)
@@ -87,6 +97,7 @@ export default function EditCharacter({ character }: { character: Character }) {
         name: displayName,
         nickname,
         mainCharacter: isMainCharacter,
+        visibility,
         slug: characterUrl,
         attributes,
         species,
@@ -161,6 +172,11 @@ export default function EditCharacter({ character }: { character: Character }) {
                   label="Set this character as my current/main character"
                   checked={isMainCharacter}
                   onChange={() => setIsMainCharacter(!isMainCharacter)}
+                />
+                <VisibilityField
+                  value={visibility}
+                  onChange={setVisibility}
+                  idPrefix="character-visibility"
                 />
                 <div className="space-y-2">
                   <Label htmlFor="character-nickname">Nickname (optional)</Label>
