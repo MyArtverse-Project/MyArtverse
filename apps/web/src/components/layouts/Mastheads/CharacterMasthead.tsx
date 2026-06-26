@@ -12,10 +12,11 @@ import {
   MastheadTabs,
   type MastheadTabItem
 } from "@/components/layouts/Mastheads/MastheadTabs"
-import { Badge } from "@/components/ui/badge"
 import { Button } from "@/components/ui/button"
+import VisibilityOwnerBadge from "@/components/VisibilityOwnerBadge"
 import { cn } from "@/lib/utils"
 import type { Visibility } from "@/types/utils"
+import { isRestrictedVisibility } from "@/utils/visibility"
 import { USER_DEFAULT_AVATAR } from "@/utils/constants"
 import { displayPronouns, displaySpecies } from "@/utils/displayer"
 import Link from "next/link"
@@ -26,7 +27,6 @@ import {
   LuGalleryThumbnails,
   LuHeart,
   LuHome,
-  LuLock,
   LuMoreVertical
 } from "react-icons/lu"
 
@@ -96,15 +96,9 @@ export function CharacterMasthead(props: Partial<ProfileMastheadProps>) {
               >
                 {props.characterName}
               </MastheadScrollTitle>
-              {props.visibility === "private" && (
-                <Badge
-                  variant="outline"
-                  className="gap-2 rounded-full px-4 py-1 text-sm font-normal"
-                >
-                  <LuLock size={14} />
-                  Visible for followers
-                </Badge>
-              )}
+              {props.isOwner && isRestrictedVisibility(props.visibility) ? (
+                <VisibilityOwnerBadge visibility={props.visibility} />
+              ) : null}
             </div>
             <div className="flex gap-x-2">
               <Button variant="outline" asChild>

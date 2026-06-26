@@ -1,5 +1,6 @@
 "use client"
 
+import FollowButton from "@/components/FollowButton"
 import RelationModal from "@/components/Modals/RelationsModal"
 import {
   MastheadAvatar,
@@ -14,12 +15,14 @@ import {
 } from "@/components/layouts/Mastheads/MastheadTabs"
 import { Button } from "@/components/ui/button"
 import { MastheadScrollTitle } from "@/components/layouts/Mastheads/MastheadScrollTitle"
+import type { UserType } from "@/types/users"
 import Link from "next/link"
 import { useState } from "react"
 import { LuCat, LuGalleryThumbnails, LuHeart, LuHome } from "react-icons/lu"
 import { Masthead } from "@mav/ui/components/layouts"
 
 interface ProfileMastheadProps {
+  profileId?: string
   handle: string
   displayName: string
   bannerUrl: string
@@ -28,7 +31,10 @@ interface ProfileMastheadProps {
   followerCount: number
   characterCount: number
   followingCount: number
+  followers?: UserType[]
+  following?: UserType[]
   isOwnProfile?: boolean
+  isFollowing?: boolean
 }
 
 const generateProfileTabs = (characterCount: number = 0) =>
@@ -94,6 +100,11 @@ export function ProfileMasthead(props: Partial<ProfileMastheadProps>) {
               <Button asChild>
                 <Link href="/settings/profile">Edit Profile</Link>
               </Button>
+            ) : props.profileId ? (
+              <FollowButton
+                profileId={props.profileId}
+                initialIsFollowing={props.isFollowing ?? false}
+              />
             ) : null}
           </MastheadLayer>
           <MastheadLayer>
@@ -102,7 +113,7 @@ export function ProfileMasthead(props: Partial<ProfileMastheadProps>) {
               <button
                 type="button"
                 className="hover:text-foreground transition-colors"
-                onClick={() => toggleRelationsModal("followers")}
+                onClick={() => toggleRelationsModal("follower")}
               >
                 {props.followerCount} followers
               </button>
@@ -123,8 +134,8 @@ export function ProfileMasthead(props: Partial<ProfileMastheadProps>) {
         items={generateProfileTabs(props.characterCount)}
       />
       <RelationModal
-        followers={[]}
-        following={[]}
+        followers={props.followers ?? []}
+        following={props.following ?? []}
         displayRelationsModal={displayRelationsModal}
         toggleRelationsModal={toggleRelationsModal}
         startingTab={startingRelationTab}

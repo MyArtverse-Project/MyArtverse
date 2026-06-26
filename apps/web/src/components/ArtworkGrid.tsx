@@ -12,9 +12,10 @@ import {
   getArtworkCharacterMeta,
   isReferenceArtwork,
 } from "@/utils/galleryUtils"
+import { getVisibilityOwnerLabel, isRestrictedVisibility } from "@/utils/visibility"
 import { setFolderDragData } from "@/utils/folderDrag"
 import Link from "next/link"
-import { LuTrash2 } from "react-icons/lu"
+import { LuLock, LuTrash2 } from "react-icons/lu"
 
 export default function ArtworkGrid({
   artworks,
@@ -71,6 +72,13 @@ export default function ArtworkGrid({
           >
             Reference
           </Badge>
+        ) : null}
+        {editable && isRestrictedVisibility(artwork.visibility) ? (
+          <LuLock
+            size={14}
+            className="text-primary shrink-0"
+            aria-label={getVisibilityOwnerLabel(artwork.visibility).label}
+          />
         ) : null}
       </div>
     )
@@ -173,22 +181,36 @@ export default function ArtworkGrid({
             <div key={artwork.id} className="relative">
               {renderTile(artwork, renderMedia(artwork), {
                 href: `/studio/gallery/${artwork.id}/edit`,
-                imageOverlay: onDelete ? (
-                  <Button
-                    type="button"
-                    variant="destructive"
-                    size="icon"
-                    className="absolute right-2 top-2 z-10 size-8 opacity-0 shadow-sm transition-opacity group-hover:opacity-100 group-focus-within:opacity-100"
-                    aria-label={`Delete ${artwork.title ?? "artwork"}`}
-                    onClick={(event) => {
-                      event.preventDefault()
-                      event.stopPropagation()
-                      onDelete(artwork)
-                    }}
-                  >
-                    <LuTrash2 size={16} />
-                  </Button>
-                ) : null,
+                imageOverlay: (
+                  <>
+                    {isRestrictedVisibility(artwork.visibility) ? (
+                      <span className="bg-background/90 text-primary absolute left-2 top-2 z-10 inline-flex size-8 items-center justify-center rounded-full shadow-sm">
+                        <LuLock
+                          size={14}
+                          aria-label={
+                            getVisibilityOwnerLabel(artwork.visibility).label
+                          }
+                        />
+                      </span>
+                    ) : null}
+                    {onDelete ? (
+                      <Button
+                        type="button"
+                        variant="destructive"
+                        size="icon"
+                        className="absolute right-2 top-2 z-10 size-8 opacity-0 shadow-sm transition-opacity group-hover:opacity-100 group-focus-within:opacity-100"
+                        aria-label={`Delete ${artwork.title ?? "artwork"}`}
+                        onClick={(event) => {
+                          event.preventDefault()
+                          event.stopPropagation()
+                          onDelete(artwork)
+                        }}
+                      >
+                        <LuTrash2 size={16} />
+                      </Button>
+                    ) : null}
+                  </>
+                ),
               })}
             </div>
           )

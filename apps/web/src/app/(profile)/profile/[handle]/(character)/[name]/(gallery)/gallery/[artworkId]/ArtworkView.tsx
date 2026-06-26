@@ -2,6 +2,7 @@ import Avatar from "@/components/Avatar"
 import ArtistCreditDisplay from "@/components/ArtistCreditDisplay"
 import ArtistPlatformIcon from "@/components/ArtistPlatformIcon"
 import NsfwMedia from "@/components/NsfwMedia"
+import VisibilityOwnerBadge from "@/components/VisibilityOwnerBadge"
 import { Badge } from "@/components/ui/badge"
 import { Button } from "@/components/ui/button"
 import type { User } from "@/app/context/AuthContext"
@@ -169,6 +170,12 @@ export default function ArtworkView({
             <h1 className="text-2xl font-semibold leading-none tracking-tight">
               {artwork.title ?? "Untitled artwork"}
             </h1>
+            {isOwner ? (
+              <VisibilityOwnerBadge
+                visibility={artwork.visibility}
+                className="border-primary/30 bg-primary/5 text-primary mt-2 gap-1 rounded-full px-2.5 py-0.5 text-xs font-medium"
+              />
+            ) : null}
             <div className="text-muted-foreground mt-1.5 flex flex-wrap items-center gap-1.5 text-sm leading-none">
               {resolvedArtist ? (
                 <ArtistCreditDisplay

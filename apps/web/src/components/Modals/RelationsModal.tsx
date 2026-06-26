@@ -2,6 +2,7 @@ import { UserType } from "@/types/users"
 import { USER_DEFAULT_AVATAR } from "@/utils/constants"
 import { cn } from "@mav/shared/utils"
 import Image from "next/image"
+import Link from "next/link"
 import { useState } from "react"
 import Modal from "../layouts/Modal"
 
@@ -49,8 +50,12 @@ export default function RelationModal({
         <div className="flex flex-col gap-y-2 mt-5">
           {tab == "follower" && (
             <div className="flex flex-col gap-y-2">
-              {followers.map((follower, index) => (
-                <div key={index} className="flex flex-row items-center gap-x-2">
+              {followers.map((follower) => (
+                <Link
+                  key={follower.id}
+                  href={`/@${follower.handle}`}
+                  className="hover:bg-muted/40 flex flex-row items-center gap-x-2 rounded-md p-1"
+                >
                   <Image
                     src={follower.avatarUrl || USER_DEFAULT_AVATAR}
                     alt={follower.handle}
@@ -58,15 +63,19 @@ export default function RelationModal({
                     height={40}
                     className="rounded-full"
                   />
-                  <span>{follower.displayName}</span>
-                </div>
+                  <span>{follower.displayName || follower.handle}</span>
+                </Link>
               ))}
             </div>
           )}
           {tab == "following" && (
             <div className="flex flex-col gap-y-2">
-              {following.map((followee, index) => (
-                <div key={index} className="flex flex-row items-center gap-x-2">
+              {following.map((followee) => (
+                <Link
+                  key={followee.id}
+                  href={`/@${followee.handle}`}
+                  className="hover:bg-muted/40 flex flex-row items-center gap-x-2 rounded-md p-1"
+                >
                   <Image
                     src={followee.avatarUrl || USER_DEFAULT_AVATAR}
                     alt={followee.handle}
@@ -74,8 +83,8 @@ export default function RelationModal({
                     height={40}
                     className="rounded-full"
                   />
-                  <span>{followee.displayName}</span>
-                </div>
+                  <span>{followee.displayName || followee.handle}</span>
+                </Link>
               ))}
             </div>
           )}

@@ -8,7 +8,7 @@ import type {
   ReferenceSheet
 } from "@/types/characters"
 import type { DashboardPanel, UserType } from "@/types/users"
-import { SearchResult } from "@/types/utils"
+import { SearchResult, type Visibility } from "@/types/utils"
 import type { ReadonlyRequestCookies } from "next/dist/server/web/spec-extension/adapters/request-cookies"
 import { cookies } from "next/headers"
 import { redirect } from "next/navigation"
@@ -200,8 +200,16 @@ export const getArtistOpenComissions = async () => {
 }
 
 export const fetchUser = async (handle: string) => {
-  const data = await apiWithoutAuth<UserType>("GET", `/v1/profile/${handle}`)
+  const data = await apiWithOptionalAuth<UserType>("GET", `/v1/profile/${handle}`)
   return data
+}
+
+export const followUser = async (userId: string) => {
+  return apiWithAuth("POST", `/v1/relationship/follow/${userId}`)
+}
+
+export const unfollowUser = async (userId: string) => {
+  return apiWithAuth("POST", `/v1/relationship/unfollow/${userId}`)
 }
 
 export const getNotifications = async () => {
@@ -275,6 +283,7 @@ export const uploadArt = async (
     tags: string[]
     userAsArtist: boolean
     nsfw: boolean
+    visibility?: Visibility
     mainCharacterId: string
     taggedCharacterIds: string[]
     artistCredit?: {
@@ -370,6 +379,7 @@ export const updateArtwork = async (
     description: string
     tags: string[]
     nsfw?: boolean
+    visibility?: Visibility
     userAsArtist?: boolean
     artistCredit?: {
       platform: string
@@ -487,7 +497,7 @@ export const createCharacter = async (body: {
   name: string
   nickname?: string
   characterAvatar: string | null
-  visibility: "public" | "private"
+  visibility: Visibility
   mainCharacter: boolean
 }) => {
   return apiWithAuth("POST", "/v1/character/create", body)

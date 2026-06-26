@@ -96,6 +96,7 @@ export interface Artwork {
   tags: string[]
   programUsed?: string
   title?: string
+  visibility?: Visibility
   favoritedBy: UserType[]
   owner: UserType
   folder?: Folder | null
