@@ -2,6 +2,7 @@ import ArtworkView from "./ArtworkView"
 import MarginClamp from "@/components/layouts/Layouts/MarginClamp"
 import { buildArtworkMetadata } from "@/utils/artworkMetadata"
 import { fetchUserData, getArtwork } from "@/utils/api"
+import { isFavoritedArtwork } from "@/utils/favorites"
 import { buildPageMetadata } from "@/utils/metadata"
 import { BRAND } from "@mav/shared"
 import type { Metadata } from "next"
@@ -52,6 +53,9 @@ export default async function ArtworkPage({
         characterSlug={name}
         self={self}
         isOwner={!!isOwner}
+        isFavorited={
+          self ? isFavoritedArtwork(self.favoriteArtworks, artwork.id) : false
+        }
       />
     </MarginClamp>
   )

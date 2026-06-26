@@ -1,41 +1,100 @@
 import { cn } from "@/lib/utils"
 import React from "react"
 
+type CommentBaseVariant = "composer" | "message"
+
 interface CommentBaseProps {
   imgTag: React.ReactNode
-  parentId?: string
-  commentId?: string
   avatar: string
   outerContainer?: React.ReactNode
+  isNested?: boolean
+  variant?: CommentBaseVariant
+  alignAvatar?: "start" | "center"
+  composerExpanded?: boolean
+  className?: string
+  bubbleClassName?: string
 }
 
+const bubbleSurface = {
+  message: "bg-muted/30",
+  composer: "bg-muted/35",
+} as const
+
 /** @internal Shared comment layout primitive */
-export default function CommentBase(
-  props: React.PropsWithChildren<CommentBaseProps>
-) {
+export default function CommentBase({
+  children,
+  imgTag,
+  outerContainer,
+  isNested,
+  variant = "message",
+  alignAvatar = "start",
+  composerExpanded = true,
+  className,
+  bubbleClassName,
+}: React.PropsWithChildren<CommentBaseProps>) {
+  const isComposer = variant === "composer"
+  const surface = bubbleSurface[variant]
+  const showComposerTail = isComposer && composerExpanded
+
   return (
     <div
       className={cn(
-        "flex items-start gap-x-4 rounded-md",
-        props.parentId && "ml-14 mt-2"
+        "flex gap-3",
+        alignAvatar === "center" ? "items-center" : "items-start",
+        isNested && "ml-11 mt-3",
+        className
       )}
     >
-      <span className="flex-shrink-0">
-        {React.cloneElement(props.imgTag as React.ReactElement<any>, {
-          src: props.avatar,
-          alt: "Avatar",
-          className: "h-10 w-10 rounded-full object-cover"
-        })}
+      <span
+        className={cn(
+          "shrink-0",
+          alignAvatar === "start" && "mt-0.5"
+        )}
+      >
+        {imgTag}
       </span>
-      <div className="relative flex-1">
-        <span
-          className="bg-card border-border absolute -left-1.5 top-[1.05rem] z-10 block size-3 rotate-45 border border-r-0 border-t-0"
-          aria-hidden
-        />
-        <div className="border-border bg-card min-h-12 rounded-md border">
-          {props.children}
+
+      <div className="min-w-0 flex-1">
+        <div
+          className={cn(
+            "group/bubble relative",
+            isComposer &&
+              composerExpanded &&
+              "rounded-2xl focus-within:ring-2 focus-within:ring-primary/20"
+          )}
+        >
+          {showComposerTail ? (
+            <span
+              className={cn(
+                "absolute z-10 block size-2.5 rotate-45",
+                surface,
+                "-left-[5px] top-1/2 -translate-y-1/2"
+              )}
+              aria-hidden
+            />
+          ) : !isComposer ? (
+            <span
+              className={cn(
+                "absolute z-10 block size-2.5 rotate-45",
+                surface,
+                "-left-[5px] top-5"
+              )}
+              aria-hidden
+            />
+          ) : null}
+          <div
+            className={cn(
+              "overflow-hidden transition-colors",
+              isComposer && !composerExpanded
+                ? "bg-muted/15 hover:bg-muted/25 rounded-full"
+                : cn(surface, isComposer ? "rounded-2xl" : "rounded-xl"),
+              bubbleClassName
+            )}
+          >
+            {children}
+          </div>
         </div>
-        {props.outerContainer}
+        {outerContainer}
       </div>
     </div>
   )
