@@ -29,6 +29,7 @@ export interface UserType {
   followers: UserType[]
   folders: Folder[]
   favoriteCharacters: Character[]
+  favoriteArtworks: Artwork[]
   characters: Character[]
   dateRegistered: Date
   dateUpdated: Date

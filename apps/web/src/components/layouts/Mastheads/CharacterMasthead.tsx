@@ -1,6 +1,7 @@
 "use client"
 
 import Avatar from "@/components/Avatar"
+import FavoriteButton from "@/components/FavoriteButton"
 import { MastheadScrollTitle } from "@/components/layouts/Mastheads/MastheadScrollTitle"
 import {
   MastheadAvatar,
@@ -25,7 +26,6 @@ import {
   LuBook,
   LuClock,
   LuGalleryThumbnails,
-  LuHeart,
   LuHome,
   LuMoreVertical
 } from "react-icons/lu"
@@ -42,6 +42,8 @@ interface ProfileMastheadProps {
   ownerAvatarUrl?: string
   visibility?: Visibility
   isOwner?: boolean
+  isFavorited?: boolean
+  showFavorite?: boolean
 }
 
 export function CharacterMasthead(props: Partial<ProfileMastheadProps>) {
@@ -101,12 +103,14 @@ export function CharacterMasthead(props: Partial<ProfileMastheadProps>) {
               ) : null}
             </div>
             <div className="flex gap-x-2">
-              <Button variant="outline" asChild>
-                <Link href="/settings/profile">
-                  <LuHeart size={18} />
-                  Favorite
-                </Link>
-              </Button>
+              {props.showFavorite && props.characterId ? (
+                <FavoriteButton
+                  targetId={props.characterId}
+                  targetType="character"
+                  isFavorited={props.isFavorited ?? false}
+                  showLabel
+                />
+              ) : null}
               {props.isOwner && (
                 <Button variant="outline" asChild>
                   <Link href={`/studio/characters/${props.characterId}`}>

@@ -367,6 +367,14 @@ export const getFavorites = async (handle: string) => {
   return characters
 }
 
+export const favoriteCharacter = async (characterId: string) => {
+  return apiWithAuth("POST", `/v1/character/favorite/${characterId}`)
+}
+
+export const favoriteArtwork = async (artworkId: string) => {
+  return apiWithAuth("POST", `/v1/art/${artworkId}/favorite`)
+}
+
 export const getArtwork = async (artworkId: string) => {
   const artwork = await apiWithOptionalAuth<Artwork>("GET", `/v1/art/${artworkId}`)
   return artwork
