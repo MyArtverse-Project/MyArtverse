@@ -190,6 +190,19 @@ export const fetchUserData = async () => {
   return data
 }
 
+export const fetchUserDataOptional = async (): Promise<UserType | null> => {
+  const cookiesHeaders = (await getCookies()) as ReadonlyRequestCookies
+  const hasSession =
+    cookiesHeaders.has("accessToken") || cookiesHeaders.has("refreshToken")
+  if (!hasSession) return null
+
+  try {
+    return await fetchUserData()
+  } catch {
+    return null
+  }
+}
+
 export const getArtistOpenComissions = async () => {
   const comissions = await apiWithoutAuth<UserType[]>(
     "GET",
@@ -612,23 +625,34 @@ export const postComment = async (
   return redirect(redirectRoute)
 }
 
-export const search = async (
-  query: string,
-  type?: "character" | "user" | "artwork"
-) => {
+export type SearchType =
+  | "character"
+  | "characters"
+  | "user"
+  | "users"
+  | "artwork"
+  | "artworks"
+
+export const search = async (query: string, type?: SearchType) => {
   if (!query.trim()) {
     return {
       user: [],
       artwork: [],
-      character: []
+      character: [],
     }
   }
-  
 
-  const data = await apiWithAuth<SearchResult>(
+  const params = new URLSearchParams({ query: query.trim() })
+  if (type) params.set("type", type)
+
+  const data = await apiWithOptionalAuth<Partial<SearchResult>>(
     "GET",
-    `/v1/search?query=${encodeURIComponent(query)}&type=${type}`
+    `/v1/search?${params.toString()}`
   )
 
-  return data
+  return {
+    user: data.user ?? [],
+    artwork: data.artwork ?? [],
+    character: data.character ?? [],
+  }
 }

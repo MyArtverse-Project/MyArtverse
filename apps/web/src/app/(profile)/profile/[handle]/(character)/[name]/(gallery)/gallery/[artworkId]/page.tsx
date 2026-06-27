@@ -1,7 +1,7 @@
 import ArtworkView from "./ArtworkView"
 import MarginClamp from "@/components/layouts/Layouts/MarginClamp"
 import { buildArtworkMetadata } from "@/utils/artworkMetadata"
-import { fetchUserData, getArtwork } from "@/utils/api"
+import { fetchUserDataOptional, getArtwork } from "@/utils/api"
 import { isFavoritedArtwork } from "@/utils/favorites"
 import { buildPageMetadata } from "@/utils/metadata"
 import { BRAND } from "@mav/shared"
@@ -35,7 +35,7 @@ export default async function ArtworkPage({
   const { handle, name, artworkId } = await params
   const [artwork, self] = await Promise.all([
     getArtwork(artworkId).catch(() => null),
-    fetchUserData().catch(() => null),
+    fetchUserDataOptional(),
   ])
 
   if (!artwork?.id) {

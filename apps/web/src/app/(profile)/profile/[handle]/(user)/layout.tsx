@@ -1,6 +1,6 @@
 import AppLayout from "@/components/layouts/AppLayout/AppLayout"
 import { ProfileMasthead } from "@/components/layouts/Mastheads"
-import { fetchUser, fetchUserData } from "@/utils/api"
+import { fetchUser, fetchUserDataOptional } from "@/utils/api"
 import { USER_DEFAULT_AVATAR } from "@/utils/constants"
 import { isFollowingUser, mapFollowers, mapFollowing } from "@/utils/follows"
 import { notFound } from "next/navigation"
@@ -14,7 +14,7 @@ export default async function MainProfileLayout({
 }) {
   const { handle } = await params
 
-  const self = await fetchUserData().catch(() => null)
+  const self = await fetchUserDataOptional()
 
   let user
   try {

@@ -7,7 +7,7 @@ import {
 import {
   fetchCharacterGalleryFolders,
   fetchUser,
-  fetchUserData,
+  fetchUserDataOptional,
   getUserGallery,
 } from "@/utils/api"
 import type { Folder } from "@/types/characters"
@@ -66,7 +66,7 @@ export default async function Page({
   const [user, artworks, self] = await Promise.all([
     fetchUser(handle),
     getUserGallery(handle).catch(() => []),
-    fetchUserData().catch(() => null),
+    fetchUserDataOptional(),
   ])
 
   const characterIds = user.characters?.map((character) => character.id) ?? []

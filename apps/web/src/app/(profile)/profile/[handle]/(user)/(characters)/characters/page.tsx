@@ -1,7 +1,7 @@
 import MarginClamp from "@/components/layouts/Layouts/MarginClamp"
 import type { DefineRouteParams } from "@/types"
 import { buildUserCharactersMetadata } from "@/utils/artworkMetadata"
-import { fetchUser, fetchUserCharacters, fetchUserData } from "@/utils/api"
+import { fetchUser, fetchUserCharacters, fetchUserDataOptional } from "@/utils/api"
 import { buildPageMetadata } from "@/utils/metadata"
 import { BRAND } from "@mav/shared"
 import type { Metadata } from "next"
@@ -35,7 +35,7 @@ export default async function Page({ params }: AsyncProps) {
   const { handle } = await params
   const characters = await fetchUserCharacters(handle)
   const { folders, id } = await fetchUser(handle)
-  const self = await fetchUserData().catch(() => null)
+  const self = await fetchUserDataOptional()
   const isCharacterFolder = (folder: { contentType?: string }) =>
     !folder.contentType || folder.contentType === "characters"
   const characterFolders = folders
