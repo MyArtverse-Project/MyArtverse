@@ -1,6 +1,6 @@
 import MarginClamp from "@/components/layouts/Layouts/MarginClamp"
 import { buildCharacterOverviewMetadata } from "@/utils/artworkMetadata"
-import { fetchCharacter, fetchUserData, getPanels } from "@/utils/api"
+import { fetchCharacter, fetchUserDataOptional, getPanels } from "@/utils/api"
 import { loadCharacter } from "@/utils/loadCharacter"
 import { loadOverviewArtworks } from "@/utils/loadOverviewArtworks"
 import { buildPageMetadata } from "@/utils/metadata"
@@ -42,7 +42,7 @@ export default async function Page({
   const { handle, name } = await params
 
   const [self, character, panels] = await Promise.all([
-    fetchUserData().catch(() => null),
+    fetchUserDataOptional(),
     loadCharacter(handle, name),
     getPanels(handle, name).catch(() => []),
   ])

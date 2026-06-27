@@ -1,6 +1,6 @@
 import AppLayout from "@/components/layouts/AppLayout/AppLayout"
 import { CharacterMasthead } from "@/components/layouts/Mastheads"
-import { fetchUserData } from "@/utils/api"
+import { fetchUserDataOptional } from "@/utils/api"
 import { isFavoritedCharacter } from "@/utils/favorites"
 import { loadCharacter } from "@/utils/loadCharacter"
 
@@ -14,7 +14,7 @@ export default async function MainProfileLayout({
   const { handle, name } = await params
 
   const [self, character] = await Promise.all([
-    fetchUserData().catch(() => null),
+    fetchUserDataOptional(),
     loadCharacter(handle, name),
   ])
 

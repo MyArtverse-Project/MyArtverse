@@ -11,23 +11,23 @@ import { LuSearch } from "react-icons/lu"
 import { SearchSection } from "./Section"
 
 interface SearchBarProps {
-  // TODO store `recentSearches` from localStorage
   recentSearches?: string[]
   characters?: { name: string; image: string }[]
 }
 
+const emptyResults: SearchResult = {
+  user: [],
+  artwork: [],
+  character: [],
+}
+
 export function SearchBar({
   recentSearches = [],
-  characters = []
+  characters = [],
 }: SearchBarProps) {
   const [isOpen, setIsOpen] = useState(false)
   const [loading, setLoading] = useState(false)
-  const [results, setResults] = useState<SearchResult>({
-    user: [],
-    artwork: [],
-    character: []
-  })
-
+  const [results, setResults] = useState<SearchResult>(emptyResults)
   const [searchQuery, setSearchQuery] = useState("")
   const inputRef = useRef<HTMLInputElement>(null)
   const router = useRouter()
@@ -72,12 +72,17 @@ export function SearchBar({
   }, [isOpen])
 
   useEffect(() => {
+    if (!searchQueryTrimmed) {
+      setResults(emptyResults)
+      setLoading(false)
+      return
+    }
+
     setLoading(true)
-    if (!searchQueryTrimmed) return
 
     const delay = setTimeout(async () => {
       try {
-        const newResults = await search(searchQuery)
+        const newResults = await search(searchQueryTrimmed)
         setResults(newResults)
       } finally {
         setLoading(false)
@@ -85,11 +90,12 @@ export function SearchBar({
     }, 500)
 
     return () => clearTimeout(delay)
-  }, [searchQuery])
+  }, [searchQueryTrimmed])
 
-  const hasNoSearchResults = Object.values(results).some(
-    (item) => item.length === 0
-  )
+  const hasNoSearchResults =
+    (results.user?.length ?? 0) === 0 &&
+    (results.artwork?.length ?? 0) === 0 &&
+    (results.character?.length ?? 0) === 0
 
   return (
     <div className="top-full relative">
@@ -122,7 +128,7 @@ export function SearchBar({
         <Dialog
           open={isOpen}
           onClose={() => setIsOpen(false)}
-          className="bg-popover text-popover-foreground border-border fixed inset-0 top-3.5 z-50 mx-auto h-fit w-2/3 items-start justify-center overflow-y-auto rounded-lg border p-4 shadow-lg"
+          className="bg-popover text-popover-foreground border-border fixed inset-0 top-3.5 z-50 mx-auto h-fit max-h-[80vh] w-2/3 items-start justify-center overflow-y-auto rounded-lg border p-4 shadow-lg"
         >
           <div className="flex items-center justify-center w-full gap-y-4">
             <form
@@ -137,7 +143,7 @@ export function SearchBar({
                 type="text"
                 value={searchQuery}
                 onChange={(e) => setSearchQuery(e.target.value)}
-                placeholder="Search Character, Artist, Artwork, User..."
+                placeholder="Search characters, artists, artworks..."
               />
             </form>
           </div>
@@ -148,30 +154,41 @@ export function SearchBar({
               </div>
             )}
             {!loading && (results.user ?? []).length > 0 && (
-              <SearchSection title="USER RESULTS" items={results} />
-            )}
-            {!loading && (results.artwork ?? []).length > 0 && (
-              <SearchSection title="ARTWORK RESULTS" items={results} />
+              <SearchSection
+                title="USERS"
+                items={results}
+                category="user"
+              />
             )}
             {!loading && (results.character ?? []).length > 0 && (
               <SearchSection
-                title="CHARACTER RESULTS"
+                title="CHARACTERS"
                 items={results}
-                isCharacter
+                category="character"
+              />
+            )}
+            {!loading && (results.artwork ?? []).length > 0 && (
+              <SearchSection
+                title="ARTWORKS"
+                items={results}
+                category="artwork"
               />
             )}
             {!loading && searchQueryTrimmed && hasNoSearchResults && (
               <>
                 <div className="text-muted-foreground py-4 text-center">
-                  No results found for "<strong>{searchQuery}</strong>"
+                  No results found for &ldquo;{searchQueryTrimmed}&rdquo;
                 </div>
-                <SearchSection title="RECENT SEARCHES" items={recentSearches} />
-                <SearchSection
-                  title="CHARACTERS"
-                  items={characters}
-                  isCharacter
-                />
+                {recentSearches.length > 0 && (
+                  <SearchSection title="RECENT SEARCHES" items={recentSearches} />
+                )}
+                {characters.length > 0 && (
+                  <SearchSection title="YOUR CHARACTERS" items={characters} />
+                )}
               </>
+            )}
+            {!loading && !searchQueryTrimmed && recentSearches.length > 0 && (
+              <SearchSection title="RECENT SEARCHES" items={recentSearches} />
             )}
           </div>
         </Dialog>
